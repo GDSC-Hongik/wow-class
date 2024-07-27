@@ -6,4 +6,5 @@ module.exports = {
     tailwindcss: {},
     autoprefixer: {},
   },
+  mode: 'jit',
 };
