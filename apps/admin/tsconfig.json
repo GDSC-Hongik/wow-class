@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/nextjs.json",
+  "extends": "@wow-class/shared-config/typescript/next.json",
   "compilerOptions": {
     "plugins": [
       {

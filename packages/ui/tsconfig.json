@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/typescript-config/react-library.json",
+  "extends": "@wow-class/shared-config/typescript/basic.json",
   "compilerOptions": {
     "outDir": "dist"
   },

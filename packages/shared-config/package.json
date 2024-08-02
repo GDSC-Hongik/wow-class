@@ -1,11 +1,12 @@
 {
-  "name": "@repo/eslint-config",
-  "version": "0.0.0",
+  "name": "@wow-class/shared-config",
+  "version": "0.0.1",
   "private": true,
   "files": [
-    "library.js",
-    "next.js",
-    "react-internal.js"
+    "eslint/basic.js",
+    "eslint/next.js",
+    "typescript/basic.json",
+    "typescript/next.json"
   ],
   "devDependencies": {
     "@vercel/style-guide": "^5.2.0",
