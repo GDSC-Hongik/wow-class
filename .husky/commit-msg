@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/h"
+
+message="$(cat $1)"
+requiredPattern="^(feat|fix|refactor|chore|docs|design):.*$"
+if ! [[ $message =~ $requiredPattern ]];
+then
+  echo "=========================================================================="
+  echo "=================   🚨 커밋 메시지를 수정해 주세요 🚨   =================="
+  echo "=========================================================================="
+  echo "== Format should be => [header]: [What was done for Why]                =="
+  echo "== Allowed Headers: feat, fix, refactor, chore, design, docs            =="
+  echo "== EXAMPLE => feat: Google login                                        =="
+  echo "=========================================================================="
+  echo "== Your commit message was =>" $message 
+  echo "=========================================================================="
+  exit 1
+fi
