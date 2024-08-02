@@ -5,10 +5,18 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --cache --fix",
+      "prettier --cache --write"
+    ]
   },
   "devDependencies": {
     "husky": "^9.1.4",
+    "lint-staged": "^15.2.7",
     "prettier": "^3.2.5",
     "turbo": "^2.0.11",
     "typescript": "^5.4.5"
