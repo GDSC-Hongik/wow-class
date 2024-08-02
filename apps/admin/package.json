@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "admin",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
     "next": "15.0.0-rc.0"
   },
   "devDependencies": {
+    "@wow-class/eslint-config": "workspace:*",
     "@wow-class/shared-config": "workspace:*",
     "typescript": "^5",
     "@types/node": "^20",

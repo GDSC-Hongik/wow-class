@@ -1,9 +1,9 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
   root: true,
-  extends: ["@wow-class/shared-config/eslint/basic.js"],
+  extends: ["@wow-class/eslint-config/basic.js"],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: "./tsconfig.json",
+    project: true,
   },
 };
