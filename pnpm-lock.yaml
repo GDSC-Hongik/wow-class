@@ -15,6 +15,9 @@ importers:
       '@pandacss/dev':
         specifier: ^0.44.0
         version: 0.44.0(typescript@5.4.5)
+      '@wow-class/panda-config':
+        specifier: workspace:*
+        version: link:packages/panda-config
       husky:
         specifier: ^9.1.4
         version: 9.1.4
@@ -155,6 +158,8 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.4.5
+
+  packages/panda-config: {}
 
   packages/shared-config: {}
 

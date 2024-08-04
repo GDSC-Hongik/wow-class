@@ -1,14 +1,7 @@
 import { defineConfig } from "@pandacss/dev";
+import commonConfig from "@wow-class/panda-config/common-config";
 
 export default defineConfig({
-  //TODO: wowds-theme 의 preset 추가
-  preflight: true,
-  minify: true,
-  watch: true,
-  outExtension: "js",
-  polyfill: true,
-  jsxFramework: "react",
+  ...commonConfig,
   include: ["./app/**/*.{ts,tsx,js,jsx}"],
-  exclude: [],
-  outdir: "styled-system",
 });
