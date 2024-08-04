@@ -1,4 +1,5 @@
 import "./global.css";
+import "@wow-class/ui/styles.css";
 
 import type { Metadata } from "next";
 import localFont from "next/font/local";

@@ -9,8 +9,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["app/*"],
-      "@styled-system/*": ["./styled-system/*"],
-      "@theme/*": ["./theme/*"]
+      "@styled-system/*": ["./styled-system/*"]
     }
   },
   "include": [
