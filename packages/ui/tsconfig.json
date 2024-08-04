@@ -1,7 +1,12 @@
 {
   "extends": "@wow-class/shared-config/typescript/basic.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@styled-system/*": ["./styled-system/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

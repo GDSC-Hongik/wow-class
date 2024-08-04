@@ -25,5 +25,8 @@
   "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "wowds-ui": "^0.1.8"
   }
 }
