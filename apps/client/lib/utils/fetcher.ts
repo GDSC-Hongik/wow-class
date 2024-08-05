@@ -55,10 +55,13 @@ class Fetcher {
   }
 
   private async parseJsonResponse(response: Response): Promise<any> {
-    if (response.headers.get("Content-Type")?.includes("application/json")) {
+    const contentType = response.headers.get("Content-Type") || "";
+
+    if (contentType.includes("application/json")) {
       return response.json();
     }
-    return response;
+
+    return response.text();
   }
 
   async request(url: string, options: RequestInit = {}): Promise<any> {
