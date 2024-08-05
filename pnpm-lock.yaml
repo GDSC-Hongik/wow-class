@@ -33,6 +33,9 @@ importers:
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
+      wowds-theme:
+        specifier: ^0.1.1
+        version: 0.1.1
 
   apps/admin:
     dependencies:
@@ -11431,6 +11434,10 @@ packages:
   /wowds-icons@0.1.1:
     resolution: {integrity: sha512-aOiGOoMAScWVPj5Z5tq2z9l5al/pOUs4AKTCHFhjqvCvp96Gy98vI4TL/Nhzj1E5LBUwIzBPM8pTtNY/neRjiw==}
     dev: false
+
+  /wowds-theme@0.1.1:
+    resolution: {integrity: sha512-mKm/4xqAgtxW4Q25AbbSk0X2D1kxyIYEnCI4AN+Ki6aoA1KaqB7LJM+wyNp4xul5zeiufQat29i0JCB/CFfUXQ==}
+    dev: true
 
   /wowds-ui@0.1.8(next@14.2.5)(react-dom@18.3.1)(react@18.2.0):
     resolution: {integrity: sha512-a6DSdxoQxZPRMkFodbY1GKYWxzuzCpSAir5WAKU0lPO3cmTmK1ILLXqlI+lANfI9fRAzCZDY9RoX5vdBl9yz7A==}

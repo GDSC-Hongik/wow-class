@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "codegen:build": "pnpm ui:codegen && pnpm admin:codegen && pnpm client:codegen && pnpm styled-system:format && pnpm build",
+    "codegen:build": "pnpm ui:codegen && pnpm admin:codegen && pnpm client:codegen && pnpm styled-system:format",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -21,12 +21,13 @@
   },
   "devDependencies": {
     "@pandacss/dev": "^0.44.0",
+    "@wow-class/panda-config": "workspace:*",
     "husky": "^9.1.4",
     "lint-staged": "^15.2.7",
     "prettier": "^3.2.5",
     "turbo": "^2.0.11",
     "typescript": "^5.4.5",
-    "@wow-class/panda-config": "workspace:*"
+    "wowds-theme": "^0.1.1"
   },
   "packageManager": "pnpm@8.15.6",
   "engines": {

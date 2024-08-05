@@ -9,7 +9,6 @@
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component",
-    "generate:css": "panda cssgen --outfile dist/styles.css --watch",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

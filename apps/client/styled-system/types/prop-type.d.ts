@@ -4,7 +4,7 @@ import type { CssProperties } from "./system-types";
 import type { Tokens } from "../tokens/index";
 
 export interface UtilityValues {
-  aspectRatio: Tokens["aspectRatios"];
+  zIndex: Tokens["zIndex"];
   top: Tokens["spacing"];
   left: Tokens["spacing"];
   inset: "auto" | Tokens["spacing"];
@@ -135,9 +135,11 @@ export interface UtilityValues {
   marginInlineStart: "auto" | Tokens["spacing"];
   spaceX: "auto" | Tokens["spacing"] | CssProperties["marginInlineStart"];
   spaceY: "auto" | Tokens["spacing"] | CssProperties["marginBlockStart"];
+  outlineWidth: Tokens["borderWidths"];
   outlineColor: Tokens["colors"];
-  outline: Tokens["borders"];
   outlineOffset: Tokens["spacing"];
+  divideX: Tokens["borderWidths"];
+  divideY: Tokens["borderWidths"];
   divideColor: Tokens["colors"];
   divideStyle: CssProperties["borderStyle"];
   width:
@@ -453,12 +455,7 @@ export interface UtilityValues {
     | "4/6"
     | "5/6";
   color: Tokens["colors"];
-  fontFamily: Tokens["fonts"];
-  fontSize: Tokens["fontSizes"];
-  fontWeight: Tokens["fontWeights"];
   fontSmoothing: "antialiased" | "subpixel-antialiased";
-  letterSpacing: Tokens["letterSpacings"];
-  lineHeight: Tokens["lineHeights"];
   textDecorationColor: Tokens["colors"];
   textEmphasisColor: Tokens["colors"];
   textIndent: Tokens["spacing"];
@@ -469,6 +466,7 @@ export interface UtilityValues {
   background: Tokens["colors"];
   backgroundColor: Tokens["colors"];
   backgroundGradient:
+    | Tokens["gradients"]
     | "to-t"
     | "to-tr"
     | "to-r"
@@ -478,6 +476,7 @@ export interface UtilityValues {
     | "to-l"
     | "to-tl";
   textGradient:
+    | Tokens["gradients"]
     | "to-t"
     | "to-tr"
     | "to-r"
@@ -504,40 +503,33 @@ export interface UtilityValues {
   borderEndStartRadius: Tokens["radii"];
   borderEndEndRadius: Tokens["radii"];
   borderEndRadius: Tokens["radii"] | CssProperties["borderRadius"];
-  border: Tokens["borders"];
+  borderWidth: Tokens["borderWidths"];
+  borderTopWidth: Tokens["borderWidths"];
+  borderLeftWidth: Tokens["borderWidths"];
+  borderRightWidth: Tokens["borderWidths"];
+  borderBottomWidth: Tokens["borderWidths"];
   borderColor: Tokens["colors"];
-  borderInline: Tokens["borders"];
+  borderInlineWidth: Tokens["borderWidths"];
   borderInlineColor: Tokens["colors"];
-  borderBlock: Tokens["borders"];
+  borderBlockWidth: Tokens["borderWidths"];
   borderBlockColor: Tokens["colors"];
-  borderLeft: Tokens["borders"];
   borderLeftColor: Tokens["colors"];
-  borderInlineStart: Tokens["borders"];
+  borderInlineStartWidth: Tokens["borderWidths"];
   borderInlineStartColor: Tokens["colors"];
-  borderRight: Tokens["borders"];
   borderRightColor: Tokens["colors"];
-  borderInlineEnd: Tokens["borders"];
+  borderInlineEndWidth: Tokens["borderWidths"];
   borderInlineEndColor: Tokens["colors"];
-  borderTop: Tokens["borders"];
   borderTopColor: Tokens["colors"];
-  borderBottom: Tokens["borders"];
   borderBottomColor: Tokens["colors"];
-  borderBlockEnd: Tokens["borders"];
   borderBlockEndColor: Tokens["colors"];
-  borderBlockStart: Tokens["borders"];
   borderBlockStartColor: Tokens["colors"];
   boxShadow: Tokens["shadows"];
   boxShadowColor: Tokens["colors"];
   filter: "auto";
-  blur: Tokens["blurs"];
   backdropFilter: "auto";
-  backdropBlur: Tokens["blurs"];
   borderSpacing: Tokens["spacing"] | "auto";
   borderSpacingX: Tokens["spacing"];
   borderSpacingY: Tokens["spacing"];
-  transitionTimingFunction: Tokens["easings"];
-  transitionDelay: Tokens["durations"];
-  transitionDuration: Tokens["durations"];
   transition:
     | "all"
     | "common"
@@ -546,11 +538,6 @@ export interface UtilityValues {
     | "opacity"
     | "shadow"
     | "transform";
-  animation: Tokens["animations"];
-  animationName: "spin" | "ping" | "pulse" | "bounce";
-  animationTimingFunction: Tokens["easings"];
-  animationDuration: Tokens["durations"];
-  animationDelay: Tokens["durations"];
   rotate: "auto" | "auto-3d" | CssProperties["rotate"];
   rotateX: CssProperties["rotate"];
   rotateY: CssProperties["rotate"];
@@ -642,50 +629,53 @@ export interface UtilityValues {
   scrollSnapMarginRight: Tokens["spacing"];
   fill: Tokens["colors"];
   stroke: Tokens["colors"];
+  strokeWidth: Tokens["borderWidths"];
   srOnly: boolean;
   debug: boolean;
   containerName: CssProperties["containerName"];
   colorPalette:
-    | "current"
-    | "black"
-    | "white"
-    | "transparent"
-    | "rose"
-    | "pink"
-    | "fuchsia"
-    | "purple"
-    | "violet"
-    | "indigo"
-    | "blue"
-    | "sky"
-    | "cyan"
-    | "teal"
-    | "emerald"
-    | "green"
-    | "lime"
-    | "yellow"
-    | "amber"
-    | "orange"
     | "red"
-    | "neutral"
-    | "stone"
-    | "zinc"
-    | "gray"
-    | "slate";
+    | "blue"
+    | "yellow"
+    | "green"
+    | "mono"
+    | "white"
+    | "black"
+    | "primary"
+    | "success"
+    | "error"
+    | "backgroundNormal"
+    | "backgroundAlternative"
+    | "backgroundDimmer"
+    | "sub"
+    | "outline"
+    | "textBlack"
+    | "textWhite"
+    | "darkDisabled"
+    | "lightDisabled"
+    | "blueHover"
+    | "monoHover"
+    | "elevatedHover"
+    | "bluePressed"
+    | "blueBackgroundPressed"
+    | "monoBackgroundPressed"
+    | "shadowSmall"
+    | "shadowMedium"
+    | "blueShadow"
+    | "discord"
+    | "github";
   textStyle:
-    | "xs"
-    | "sm"
-    | "md"
-    | "lg"
-    | "xl"
-    | "2xl"
-    | "3xl"
-    | "4xl"
-    | "5xl"
-    | "6xl"
-    | "7xl"
-    | "8xl"
-    | "9xl";
+    | "display1"
+    | "display2"
+    | "h1"
+    | "h2"
+    | "h3"
+    | "body1"
+    | "body2"
+    | "body3"
+    | "label1"
+    | "label2"
+    | "label3";
 }
 
 type WithColorOpacityModifier<T> = T extends string ? `${T}/${string}` : T;
