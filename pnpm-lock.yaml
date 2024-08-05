@@ -72,6 +72,9 @@ importers:
       '@wow-class/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      jotai:
+        specifier: ^2.9.1
+        version: 2.9.1(@types/react@18.2.61)(react@19.0.0-rc-f994737d14-20240522)
       next:
         specifier: 15.0.0-rc.0
         version: 15.0.0-rc.0(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
