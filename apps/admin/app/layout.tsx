@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
-import { JotaiProvider } from "../components/jotaiProvider";
+import { JotaiProvider } from "../components/jotai-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
