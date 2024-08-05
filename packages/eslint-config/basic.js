@@ -102,6 +102,7 @@ module.exports = {
     ],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "turbo/no-undeclared-env-vars": "off",
   },
 
   settings: {
