@@ -1,10 +1,10 @@
-import { Button } from "@wow-class/ui/button";
+import Modal from "@wow-class/ui/Modal";
 
 const Home = () => {
   return (
     <div>
       Home
-      <Button appName="client">버튼</Button>
+      <Modal />
     </div>
   );
 };
