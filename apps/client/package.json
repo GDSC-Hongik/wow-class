@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@wow-class/ui": "workspace:*",
-    "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522",
-    "next": "15.0.0-rc.0"
+    "react": "latest",
+    "react-dom": "latest",
+    "next": "latest"
   },
   "devDependencies": {
     "@wow-class/eslint-config": "workspace:*",
@@ -22,6 +22,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "15.0.0-rc.0"
+    "eslint-config-next": "latest"
   }
 }
