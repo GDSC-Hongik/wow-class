@@ -51,9 +51,9 @@ importers:
       '@wow-class/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@wow-class/shared-config':
+      '@wow-class/typescript-config':
         specifier: workspace:*
-        version: link:../../packages/shared-config
+        version: link:../../packages/typescript-config
       eslint:
         specifier: ^8
         version: 8.57.0
@@ -91,9 +91,9 @@ importers:
       '@wow-class/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@wow-class/shared-config':
+      '@wow-class/typescript-config':
         specifier: workspace:*
-        version: link:../../packages/shared-config
+        version: link:../../packages/typescript-config
       eslint:
         specifier: ^8
         version: 8.57.0
@@ -149,7 +149,7 @@ importers:
         specifier: ^5.3.3
         version: 5.4.5
 
-  packages/shared-config: {}
+  packages/typescript-config: {}
 
   packages/ui:
     dependencies:
@@ -175,9 +175,9 @@ importers:
       '@wow-class/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@wow-class/shared-config':
+      '@wow-class/typescript-config':
         specifier: workspace:*
-        version: link:../shared-config
+        version: link:../typescript-config
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
