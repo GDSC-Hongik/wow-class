@@ -12,7 +12,7 @@ type CssPropKey = keyof JsxStyleProps;
 type OmittedCssProps<T> = Pretty<DistributiveOmit<T, CssPropKey>>;
 
 declare const splitCssProps: <T>(
-  props: T,
+  props: T
 ) => [JsxStyleProps, OmittedCssProps<T>];
 
 export { isCssProperty, splitCssProps };

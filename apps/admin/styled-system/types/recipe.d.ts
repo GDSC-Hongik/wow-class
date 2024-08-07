@@ -18,7 +18,7 @@ export type RecipeSelection<T extends RecipeVariantRecord> =
       };
 
 export type RecipeVariantFn<T extends RecipeVariantRecord> = (
-  props?: RecipeSelection<T>,
+  props?: RecipeSelection<T>
 ) => string;
 
 /**
@@ -56,7 +56,7 @@ export interface RecipeRuntimeFn<T extends RecipeVariantRecord>
   raw: (props?: RecipeSelection<T>) => SystemStyleObject;
   config: RecipeConfig<T>;
   splitVariantProps<Props extends RecipeSelection<T>>(
-    props: Props,
+    props: Props
   ): [RecipeSelection<T>, Pretty<DistributiveOmit<Props, keyof T>>];
   getVariantProps: (props?: RecipeSelection<T>) => RecipeSelection<T>;
 }
@@ -99,7 +99,7 @@ export interface RecipeDefinition<
 }
 
 export type RecipeCreatorFn = <T extends RecipeVariantRecord>(
-  config: RecipeDefinition<T>,
+  config: RecipeDefinition<T>
 ) => RecipeRuntimeFn<T>;
 
 interface RecipeConfigMeta {
@@ -153,7 +153,7 @@ export interface SlotRecipeRuntimeFn<
   variantKeys: (keyof T)[];
   variantMap: RecipeVariantMap<T>;
   splitVariantProps<Props extends RecipeSelection<T>>(
-    props: Props,
+    props: Props
   ): [RecipeSelection<T>, Pretty<DistributiveOmit<Props, keyof T>>];
   getVariantProps: (props?: RecipeSelection<T>) => RecipeSelection<T>;
 }
@@ -202,7 +202,7 @@ export type SlotRecipeCreatorFn = <
   S extends string,
   T extends SlotRecipeVariantRecord<S>,
 >(
-  config: SlotRecipeDefinition<S, T>,
+  config: SlotRecipeDefinition<S, T>
 ) => SlotRecipeRuntimeFn<S, T>;
 
 export type SlotRecipeConfig<

@@ -6,7 +6,7 @@ const slotClass = (className, slot) => className + "__" + slot;
 
 export function sva(config) {
   const slots = Object.entries(getSlotRecipes(config)).map(
-    ([slot, slotCva]) => [slot, cva(slotCva)],
+    ([slot, slotCva]) => [slot, cva(slotCva)]
   );
   const defaultVariants = config.defaultVariants ?? {};
 
@@ -35,7 +35,7 @@ export function sva(config) {
   });
 
   const variantMap = Object.fromEntries(
-    Object.entries(variants).map(([key, value]) => [key, Object.keys(value)]),
+    Object.entries(variants).map(([key, value]) => [key, Object.keys(value)])
   );
 
   return Object.assign(memo(svaFn), {

@@ -6,7 +6,7 @@ function isObject(value) {
 // src/compact.ts
 function compact(value) {
   return Object.fromEntries(
-    Object.entries(value ?? {}).filter(([_, value2]) => value2 !== void 0),
+    Object.entries(value ?? {}).filter(([_, value2]) => value2 !== void 0)
   );
 }
 
@@ -137,7 +137,7 @@ function normalizeStyleObject(styles, context, shorthand = true) {
       getKey: shorthand
         ? (prop) => (hasShorthand ? resolveShorthand(prop) : prop)
         : void 0,
-    },
+    }
   );
 }
 
@@ -178,7 +178,7 @@ function createCss(context) {
       const conditions = filterBaseConditions(allConditions);
       const transformed = utility.transform(
         prop,
-        withoutImportant(sanitize(value)),
+        withoutImportant(sanitize(value))
       );
       let className = hashFn(conditions, transformed.className);
       if (important) className = `${className}!`;
@@ -191,7 +191,7 @@ function compactStyles(...styles) {
   return styles
     .flat()
     .filter(
-      (style) => isObject(style) && Object.keys(compact(style)).length > 0,
+      (style) => isObject(style) && Object.keys(compact(style)).length > 0
     );
 }
 function createMergeCss(context) {
@@ -230,7 +230,7 @@ var lengthUnits =
   "cm,mm,Q,in,pc,pt,px,em,ex,ch,rem,lh,rlh,vw,vh,vmin,vmax,vb,vi,svw,svh,lvw,lvh,dvw,dvh,cqw,cqh,cqi,cqb,cqmin,cqmax,%";
 var lengthUnitsPattern = `(?:${lengthUnits.split(",").join("|")})`;
 var lengthRegExp = new RegExp(
-  `^[+-]?[0-9]*.?[0-9]+(?:[eE][+-]?[0-9]+)?${lengthUnitsPattern}$`,
+  `^[+-]?[0-9]*.?[0-9]+(?:[eE][+-]?[0-9]+)?${lengthUnitsPattern}$`
 );
 var isCssUnit = (v) => typeof v === "string" && lengthRegExp.test(v);
 
@@ -267,7 +267,7 @@ var getSlotRecipes = (recipe = {}) => {
   const slots = recipe.slots ?? [];
   const recipeParts = slots.map((slot) => [slot, init(slot)]);
   for (const [variantsKey, variantsSpec] of Object.entries(
-    recipe.variants ?? {},
+    recipe.variants ?? {}
   )) {
     for (const [variantKey, variantSpec] of Object.entries(variantsSpec)) {
       recipeParts.forEach(([slot, slotRecipe]) => {
@@ -311,7 +311,7 @@ var uniq = (...items) =>
     .filter(Boolean)
     .reduce(
       (acc, item) => Array.from(/* @__PURE__ */ new Set([...acc, ...item])),
-      [],
+      []
     );
 export {
   compact,
@@ -342,7 +342,7 @@ function convert(key) {
 }
 function normalizeHTMLProps(props) {
   return Object.fromEntries(
-    Object.entries(props).map(([key, value]) => [convert(key), value]),
+    Object.entries(props).map(([key, value]) => [convert(key), value])
   );
 }
 normalizeHTMLProps.keys = htmlProps;
@@ -354,6 +354,6 @@ export function __spreadValues(a, b) {
 
 export function __objRest(source, exclude) {
   return Object.fromEntries(
-    Object.entries(source).filter(([key]) => !exclude.includes(key)),
+    Object.entries(source).filter(([key]) => !exclude.includes(key))
   );
 }

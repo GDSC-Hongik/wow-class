@@ -12,5 +12,5 @@ export const VisuallyHidden = /* @__PURE__ */ forwardRef(
     const mergedProps = { ref, ...styleProps, ...restProps };
 
     return createElement(styled.div, mergedProps);
-  },
+  }
 );

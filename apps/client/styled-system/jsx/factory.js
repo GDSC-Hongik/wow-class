@@ -22,13 +22,13 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
     options.dataAttr && configOrCva.__name__
       ? { "data-recipe": configOrCva.__name__ }
       : {},
-    options.defaultProps,
+    options.defaultProps
   );
 
   const __cvaFn__ = composeCvaFn(Dynamic.__cva__, cvaFn);
   const __shouldForwardProps__ = composeShouldForwardProps(
     Dynamic,
-    shouldForwardProp,
+    shouldForwardProp
   );
   const __base__ = Dynamic.__base__ || Dynamic;
 
@@ -38,7 +38,7 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
 
       const combinedProps = useMemo(
         () => Object.assign({}, defaultProps, restProps),
-        [restProps],
+        [restProps]
       );
 
       const [
@@ -53,7 +53,7 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
           normalizeHTMLProps.keys,
           __shouldForwardProps__,
           __cvaFn__.variantKeys,
-          isCssProperty,
+          isCssProperty
         );
       }, [combinedProps]);
 
@@ -64,7 +64,7 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
         return cx(
           __cvaFn__(variantProps, false),
           css(compoundVariantStyles, propStyles, cssStyles),
-          combinedProps.className,
+          combinedProps.className
         );
       }
 
@@ -73,7 +73,7 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
         const cvaStyles = __cvaFn__.raw(variantProps);
         return cx(
           css(cvaStyles, propStyles, cssStyles),
-          combinedProps.className,
+          combinedProps.className
         );
       }
 
@@ -88,9 +88,9 @@ function styledFn(Dynamic, configOrCva = {}, options = {}) {
           ...normalizeHTMLProps(htmlProps),
           className: classes(),
         },
-        combinedProps.children ?? children,
+        combinedProps.children ?? children
       );
-    },
+    }
   );
 
   const name = getDisplayName(__base__);

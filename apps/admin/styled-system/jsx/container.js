@@ -12,5 +12,5 @@ export const Container = /* @__PURE__ */ forwardRef(
     const mergedProps = { ref, ...styleProps, ...restProps };
 
     return createElement(styled.div, mergedProps);
-  },
+  }
 );

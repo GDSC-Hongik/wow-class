@@ -29,7 +29,7 @@ type InferProps<T> = Record<LiteralUnion<keyof T>, any>;
 export type PatternDefaultValue<T> = Partial<InferProps<T>>;
 
 export type PatternDefaultValueFn<T> = (
-  props: InferProps<T>,
+  props: InferProps<T>
 ) => PatternDefaultValue<T>;
 
 export interface PatternConfig<
@@ -57,7 +57,7 @@ export interface PatternConfig<
    */
   transform?: (
     props: InferProps<T>,
-    helpers: PatternHelpers,
+    helpers: PatternHelpers
   ) => SystemStyleObject;
   /**
    * Whether the pattern is deprecated.

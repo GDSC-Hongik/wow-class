@@ -13,7 +13,7 @@ const gridConfig = {
           : minChildWidth != null
             ? map(
                 minChildWidth,
-                (v) => `repeat(auto-fit, minmax(${getValue(v)}, 1fr))`,
+                (v) => `repeat(auto-fit, minmax(${getValue(v)}, 1fr))`
               )
             : void 0,
       gap,

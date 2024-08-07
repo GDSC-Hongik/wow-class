@@ -27,7 +27,7 @@ export function cva(config) {
     }
     const compoundVariantCss = getCompoundVariantCss(
       compoundVariants,
-      computedVariants,
+      computedVariants
     );
     return mergeCss(variantCss, compoundVariantCss);
   }
@@ -41,7 +41,7 @@ export function cva(config) {
         variantKeys.map((key) => [
           key,
           mergeCss(variants[key], override.variants[key]),
-        ]),
+        ])
       ),
       defaultVariants: mergeProps(defaultVariants, override.defaultVariants),
       compoundVariants: [...compoundVariants, ...override.compoundVariants],
@@ -59,7 +59,7 @@ export function cva(config) {
   }
 
   const variantMap = Object.fromEntries(
-    Object.entries(variants).map(([key, value]) => [key, Object.keys(value)]),
+    Object.entries(variants).map(([key, value]) => [key, Object.keys(value)])
   );
 
   return Object.assign(memo(cvaFn), {
@@ -95,7 +95,7 @@ export function getCompoundVariantCss(compoundVariants, variantMap) {
 export function assertCompoundVariant(name, compoundVariants, variants, prop) {
   if (compoundVariants.length > 0 && typeof variants?.[prop] === "object") {
     throw new Error(
-      `[recipe:${name}:${prop}] Conditions are not supported when using compound variants.`,
+      `[recipe:${name}:${prop}] Conditions are not supported when using compound variants.`
     );
   }
 }

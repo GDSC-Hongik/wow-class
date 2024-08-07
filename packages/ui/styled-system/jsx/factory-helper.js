@@ -15,7 +15,7 @@ export const composeCvaFn = (cvaA, cvaB) => {
   if ((cvaA.__cva__ && cvaB.__cva__) || (cvaA.__recipe__ && cvaB.__recipe__))
     return cvaA.merge(cvaB);
   const error = new TypeError(
-    "Cannot merge cva with recipe. Please use either cva or recipe.",
+    "Cannot merge cva with recipe. Please use either cva or recipe."
   );
   TypeError.captureStackTrace?.(error);
   throw error;

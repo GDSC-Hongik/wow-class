@@ -12,5 +12,5 @@ export const LinkOverlay = /* @__PURE__ */ forwardRef(
     const mergedProps = { ref, ...styleProps, ...restProps };
 
     return createElement(styled.a, mergedProps);
-  },
+  }
 );

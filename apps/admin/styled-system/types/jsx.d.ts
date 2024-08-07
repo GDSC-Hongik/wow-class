@@ -33,7 +33,7 @@ export type ComponentProps<T extends ElementType> = DistributiveOmit<
 
 export interface StyledComponent<T extends ElementType, P extends Dict = {}> {
   (
-    props: JsxHTMLProps<ComponentProps<T>, Assign<JsxStyleProps, P>>,
+    props: JsxHTMLProps<ComponentProps<T>, Assign<JsxStyleProps, P>>
   ): JSX.Element;
   displayName?: string;
 }
@@ -63,12 +63,12 @@ export interface JsxFactory {
   <T extends ElementType, P extends RecipeVariantRecord>(
     component: T,
     recipe: RecipeDefinition<P>,
-    options?: JsxFactoryOptions<JsxRecipeProps<T, RecipeSelection<P>>>,
+    options?: JsxFactoryOptions<JsxRecipeProps<T, RecipeSelection<P>>>
   ): JsxElement<T, RecipeSelection<P>>;
   <T extends ElementType, P extends RecipeFn>(
     component: T,
     recipeFn: P,
-    options?: JsxFactoryOptions<JsxRecipeProps<T, P["__type"]>>,
+    options?: JsxFactoryOptions<JsxRecipeProps<T, P["__type"]>>
   ): JsxElement<T, P["__type"]>;
 }
 
