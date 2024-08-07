@@ -23,6 +23,11 @@
       "prettier --write"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "pnpm codegen:build"
+    }
+  },
   "devDependencies": {
     "@pandacss/dev": "^0.44.0",
     "@wow-class/panda-config": "workspace:*",
