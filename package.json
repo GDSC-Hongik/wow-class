@@ -14,7 +14,8 @@
     "ui:codegen": "cd packages/ui && pnpm panda codegen",
     "admin:codegen": "cd apps/admin && pnpm panda codegen",
     "client:codegen": "cd apps/client && pnpm panda codegen",
-    "styled-system:format": "prettier --write packages/ui/styled-system/** apps/admin/styled-system/** apps/client/styled-system/**"
+    "styled-system:format": "prettier --write packages/ui/styled-system/** apps/admin/styled-system/** apps/client/styled-system/**",
+    "storybook": "cd packages/ui && pnpm storybook"
   },
   "lint-staged": {
     "**/*.{jsx,ts,tsx}": [

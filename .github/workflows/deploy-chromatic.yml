@@ -34,12 +34,9 @@ jobs:
           version: 8
           run_install: false
 
-      - name: Install Dependency
+      - name: Install Dependencies
         run: pnpm install --no-frozen-lockfile
         working-directory: packages/ui
-
-      - name: Build packages
-        run: pnpm build
 
       - name: Publish Chromatic
         id: chromatic
