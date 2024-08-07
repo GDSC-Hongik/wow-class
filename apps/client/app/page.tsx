@@ -1,5 +1,5 @@
 import { styled } from "@styled-system/jsx";
-import { Button } from "@wow-class/ui/components";
+import { Button } from "@wow-class/ui";
 
 const Home = () => {
   return (
