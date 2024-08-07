@@ -1,4 +1,5 @@
 import type { PlopTypes } from "@turbo/gen";
+import { execSync } from "child_process";
 
 // Learn more about Turborepo Generators at https://turbo.build/repo/docs/core-concepts/monorepos/code-generation
 
@@ -23,6 +24,22 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         type: "add",
         path: "src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx",
         templateFile: "templates/storybook.hbs",
+      },
+      {
+        type: "append",
+        path: "src/components/index.ts",
+        template: 'export * from "./{{pascalCase name}}";',
+      },
+      function eslintFile() {
+        try {
+          execSync("pnpm exec eslint --fix src/components/index.ts", {
+            stdio: "inherit",
+          });
+          console.log("Eslint format applied");
+        } catch (err) {
+          console.error("Error running Eslint", err);
+        }
+        return "Eslint format applied";
       },
     ],
   });
