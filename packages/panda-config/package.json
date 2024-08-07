@@ -1,5 +1,8 @@
 {
   "name": "@wow-class/panda-config",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "wowds-theme": "^0.1.1"
+  }
 }

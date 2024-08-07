@@ -33,9 +33,6 @@ importers:
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
-      wowds-theme:
-        specifier: ^0.1.1
-        version: 0.1.2
 
   apps/admin:
     dependencies:
@@ -162,7 +159,11 @@ importers:
         specifier: ^5.3.3
         version: 5.4.5
 
-  packages/panda-config: {}
+  packages/panda-config:
+    devDependencies:
+      wowds-theme:
+        specifier: ^0.1.1
+        version: 0.1.2
 
   packages/typescript-config: {}
 
