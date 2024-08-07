@@ -19,8 +19,6 @@ const config: StorybookConfig = {
     options: {},
   },
 
-  docs: {},
-
   async webpackFinal(config) {
     if (config?.resolve?.alias) {
       config.resolve.alias = {
