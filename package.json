@@ -1,0 +1,31 @@
+{
+  "name": "wow-class",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "ui:build": "turbo run build --filter=@wow-class/ui",
+    "admin:build": "turbo run build --filter=admin",
+    "client:build": "turbo run build --filter=client",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*.{jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.2.5",
+    "turbo": "^2.0.11",
+    "typescript": "^5.4.5"
+  },
+  "packageManager": "pnpm@8.15.6",
+  "engines": {
+    "node": ">=18"
+  }
+}
