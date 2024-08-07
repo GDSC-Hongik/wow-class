@@ -4,6 +4,9 @@
   "scripts": {
     "build": "turbo build",
     "codegen:build": "pnpm ui:codegen && pnpm admin:codegen && pnpm client:codegen && pnpm styled-system:format",
+    "ui:build": "turbo run build --filter=@wow-class/ui",
+    "admin:build": "turbo run build --filter=admin",
+    "client:build": "turbo run build --filter=client",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -14,7 +17,7 @@
     "styled-system:format": "prettier --write packages/ui/styled-system/** apps/admin/styled-system/** apps/client/styled-system/**"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
+    "**/*.{jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ]

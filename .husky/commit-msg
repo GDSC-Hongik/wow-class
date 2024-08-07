@@ -1,12 +1,12 @@
 message="$(cat $1)"
-requiredPattern="^(feat|fix|refactor|chore|docs|design):.*$"
+requiredPattern="^(feat|fix|refactor|rename|chore|docs|design):.*$"
 if ! [[ $message =~ $requiredPattern ]];
 then
   echo "=========================================================================="
   echo "=================   🚨 커밋 메시지를 수정해 주세요 🚨   =================="
   echo "=========================================================================="
   echo "== 커밋 컨벤션 ⏩ [prefix]: [작업 내용]                                 =="
-  echo "== 허용되는 접두사 ⏩ feat, fix, refactor, chore, design, docs          =="
+  echo "== 허용되는 접두사 ⏩ feat, fix, refactor, chore, rename, design, docs  =="
   echo "== 예시 ⏩ feat: Google login                                           =="
   echo "=========================================================================="
   echo "=========================================================================="
