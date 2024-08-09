@@ -18,11 +18,11 @@ const NavItem = ({ href, imageUrl, alt, name }: NavItemProps) => {
   return (
     <Link
       href={href}
+      style={{ padding: href === "my-homework" ? "11px 36px" : "11px 20px" }}
       className={cx(
         navItemStyle({
           type: segment === href ? "active" : "inactive",
-        }),
-        href === "my-homework" && myHomeworkNavItemStyle
+        })
       )}
     >
       <Image
@@ -41,7 +41,6 @@ export default NavItem;
 
 const navItemStyle = cva({
   base: {
-    padding: "11px 20px",
     display: "flex",
     gap: "12px",
     marginRight: "8px",
@@ -63,8 +62,4 @@ const navItemTextStyle = css({
   fontWeight: 500,
   lineHeight: "160%",
   letterSpacing: "-0.16px",
-});
-
-const myHomeworkNavItemStyle = css({
-  padding: "11px 36px",
 });
