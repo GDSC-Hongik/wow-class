@@ -1,6 +1,7 @@
 import "./global.css";
 import "wowds-ui/styles.css";
 
+import { Navbar } from "@wow-class/ui/admin";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,8 +15,11 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="ko">
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 };
