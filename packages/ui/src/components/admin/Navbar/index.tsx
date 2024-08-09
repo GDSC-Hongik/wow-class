@@ -29,7 +29,7 @@ const Navbar = () => {
         />
       </Flex>
       <nav className={navContainerStyle}>
-        <div>
+        <ul>
           {adminNavMenu.map((menu) => (
             <NavItem
               alt={menu.alt}
@@ -40,7 +40,7 @@ const Navbar = () => {
               name={menu.name}
             />
           ))}
-        </div>
+        </ul>
         <NavItem
           alt="administrator-icon"
           href=""
