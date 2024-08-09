@@ -14,14 +14,17 @@ import logoImageUrl from "../../../assets/logo.svg";
 const Navbar = () => {
   return (
     <div className={navbarContainerStyle}>
-      <Flex gap={8} padding="6px 0px 7px 20px">
+      <Flex align="center" gap={8} padding="6px 0px 7px 20px">
         <div className={logoTextStyle}>와우클래스</div>
         <Image
           alt="logo"
-          className={css({ width: "42px", height: "20.5px" })}
           height={20.5}
           src={logoImageUrl}
           width={42}
+          className={css({
+            width: "42px",
+            height: "20.5px",
+          })}
         />
       </Flex>
       <nav className={navContainerStyle}>
