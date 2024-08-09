@@ -1,6 +1,7 @@
 "use client";
 
 import { css, cva } from "@styled-system/css";
+import { styled } from "@styled-system/jsx";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
@@ -35,7 +36,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
   };
 
   return (
-    <li>
+    <styled.li listStyle="none">
       <Link
         href={`/${href}`}
         className={navItemStyle({
@@ -86,7 +87,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
             <div className={navItemTextStyle}>{item.name}</div>
           </Link>
         ))}
-    </li>
+    </styled.li>
   );
 };
 
