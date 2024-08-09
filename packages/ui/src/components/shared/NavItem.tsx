@@ -3,37 +3,89 @@
 import { css, cva, cx } from "@styled-system/css";
 import Image from "next/image";
 import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { useSelectedLayoutSegments } from "next/navigation";
+import { useState } from "react";
+
+import arrowImageUrl from "../../assets/arrow.svg";
 
 interface NavItemProps {
   href: string;
   imageUrl: string;
   alt: string;
   name: string;
+  items?: {
+    href: string;
+    imageUrl: string;
+    alt: string;
+    name: string;
+  }[];
 }
 
-const NavItem = ({ href, imageUrl, alt, name }: NavItemProps) => {
-  const segment = useSelectedLayoutSegment();
+const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
+  const [expanded, setExpanded] = useState(items?.length! <= 1 ? true : false);
+
+  const segment = useSelectedLayoutSegments();
+
+  const handleClickNavItem = () => {
+    if (items?.length !== 1) {
+      setExpanded((prev) => !prev);
+    }
+  };
 
   return (
-    <Link
-      href={href}
-      style={{ padding: href === "my-homework" ? "11px 36px" : "11px 20px" }}
-      className={cx(
-        navItemStyle({
-          type: segment === href ? "active" : "inactive",
-        })
-      )}
-    >
-      <Image
-        alt={alt}
-        className={css({ width: "20px", height: "20px" })}
-        height={20}
-        src={imageUrl}
-        width={20}
-      />
-      <div className={navItemTextStyle}>{name}</div>
-    </Link>
+    <div>
+      <Link
+        href={`/${href}`}
+        className={navItemStyle({
+          type: !segment[1] && segment[0] === href ? "active" : "inactive",
+        })}
+        onClick={handleClickNavItem}
+      >
+        <Image
+          alt={alt}
+          className={css({ width: "20px", height: "20px" })}
+          height={20}
+          src={imageUrl}
+          width={20}
+        />
+        <div className={navItemTextStyle}>{name}</div>
+        {items?.length && items?.length > 1 && (
+          <Image
+            alt="arrow-icon"
+            height={20}
+            src={arrowImageUrl}
+            style={{ transform: expanded ? "rotate(0deg)" : "rotate(180deg)" }}
+            width={20}
+            className={css({
+              width: "20px",
+              height: "20px",
+              marginLeft: "auto",
+            })}
+          />
+        )}
+      </Link>
+      {expanded &&
+        items?.map((item) => (
+          <Link
+            href={`/${href}/${item.href}`}
+            style={{ padding: "11px 36px" }}
+            className={cx(
+              navItemStyle({
+                type: segment[1] === item.href ? "active" : "inactive",
+              })
+            )}
+          >
+            <Image
+              alt={item.alt}
+              className={css({ width: "20px", height: "20px" })}
+              height={20}
+              src={item.imageUrl}
+              width={20}
+            />
+            <div className={navItemTextStyle}>{item.name}</div>
+          </Link>
+        ))}
+    </div>
   );
 };
 
@@ -44,6 +96,8 @@ const navItemStyle = cva({
     display: "flex",
     gap: "12px",
     marginRight: "8px",
+    alignItems: "center",
+    padding: "11px 18px 11px 20px",
   },
   variants: {
     type: {
