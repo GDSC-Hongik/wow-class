@@ -1,0 +1,61 @@
+import { css } from "@styled-system/css";
+import { Flex } from "@styled-system/jsx";
+import Image from "next/image";
+
+import NavItem from "@/components/shared/NavItem";
+import { navMenu } from "@/constants/navMenu";
+
+import logoImageUrl from "../../../assets/logo.svg";
+
+/**
+ * @description
+ */
+
+const Navbar = () => {
+  return (
+    <div className={navbarContainerStyle}>
+      <Flex gap={8} padding="6px 0px 7px 20px">
+        <div className={logoTextStyle}>와우클래스</div>
+        <Image
+          alt="logo"
+          className={css({ width: "42px", height: "20.5px" })}
+          height={20.5}
+          src={logoImageUrl}
+          width={42}
+        />
+      </Flex>
+      <nav className={navContainerStyle}>
+        {navMenu.map((menu) => (
+          <NavItem
+            alt={menu.alt}
+            href={menu.href}
+            imageUrl={menu.imageUrl}
+            key={menu.name}
+            name={menu.name}
+          />
+        ))}
+      </nav>
+    </div>
+  );
+};
+
+export default Navbar;
+
+const navbarContainerStyle = css({
+  width: "250px",
+  minHeight: "100vh",
+  paddingTop: "54px",
+  borderRightWidth: "arrow",
+  borderColor: "mono.400",
+});
+
+const logoTextStyle = css({
+  fontSize: "24px",
+  fontWeight: 700,
+  lineHeight: "130%",
+  letterSpacing: "-0.24px",
+});
+
+const navContainerStyle = css({
+  padding: "8px 0px",
+});
