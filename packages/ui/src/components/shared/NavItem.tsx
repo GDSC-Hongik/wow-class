@@ -1,6 +1,6 @@
 "use client";
 
-import { css, cva, cx } from "@styled-system/css";
+import { css, cva } from "@styled-system/css";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
@@ -22,7 +22,9 @@ interface NavItemProps {
 }
 
 const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
-  const [expanded, setExpanded] = useState(items?.length! <= 1 ? true : false);
+  const [expanded, setExpanded] = useState(
+    Boolean(items?.length && items?.length <= 1)
+  );
 
   const segment = useSelectedLayoutSegments();
 
@@ -33,7 +35,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
   };
 
   return (
-    <div>
+    <li>
       <Link
         href={`/${href}`}
         className={navItemStyle({
@@ -68,12 +70,11 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
         items?.map((item) => (
           <Link
             href={`/${href}/${item.href}`}
+            key={item.name}
             style={{ padding: "11px 36px" }}
-            className={cx(
-              navItemStyle({
-                type: segment[1] === item.href ? "active" : "inactive",
-              })
-            )}
+            className={navItemStyle({
+              type: segment[1] === item.href ? "active" : "inactive",
+            })}
           >
             <Image
               alt={item.alt}
@@ -85,7 +86,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
             <div className={navItemTextStyle}>{item.name}</div>
           </Link>
         ))}
-    </div>
+    </li>
   );
 };
 
