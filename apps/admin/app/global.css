@@ -1,4 +1,5 @@
 @layer reset, base, tokens, recipes, utilities;
+@import url("@wow-class/ui/styles.css");
 
 @font-face {
   font-family: "SUIT";
@@ -50,4 +51,6 @@
 
 body {
   font-family: "SUIT" !important;
+  display: flex;
+  flex-direction: row;
 }
