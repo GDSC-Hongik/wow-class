@@ -3,8 +3,9 @@ import { Flex } from "@styled-system/jsx";
 import Image from "next/image";
 
 import NavItem from "@/components/shared/NavItem";
-import { navMenu } from "@/constants/navMenu";
+import { clientNavMenu } from "@/constants/navMenu";
 
+import adminImageUrl from "../../../assets/administrator.svg";
 import logoImageUrl from "../../../assets/logo.svg";
 
 /**
@@ -28,15 +29,24 @@ const Navbar = () => {
         />
       </Flex>
       <nav className={navContainerStyle}>
-        {navMenu.map((menu) => (
-          <NavItem
-            alt={menu.alt}
-            href={menu.href}
-            imageUrl={menu.imageUrl}
-            key={menu.name}
-            name={menu.name}
-          />
-        ))}
+        <div>
+          {clientNavMenu.map((menu) => (
+            <NavItem
+              alt={menu.alt}
+              href={menu.href}
+              imageUrl={menu.imageUrl}
+              items={menu.items}
+              key={menu.name}
+              name={menu.name}
+            />
+          ))}
+        </div>
+        <NavItem
+          alt="administrator-icon"
+          href=""
+          imageUrl={adminImageUrl}
+          name="멘토 페이지로 전환"
+        />
       </nav>
     </div>
   );
@@ -61,4 +71,8 @@ const logoTextStyle = css({
 
 const navContainerStyle = css({
   padding: "8px 0px",
+  display: "flex",
+  flexDirection: "column",
+  minHeight: "calc(100vh - 98px)",
+  justifyContent: "space-between",
 });
