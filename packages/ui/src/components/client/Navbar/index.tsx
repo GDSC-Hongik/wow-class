@@ -2,11 +2,10 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import Image from "next/image";
 
-import NavItem from "@/components/shared/NavItem";
-import { clientNavMenu } from "@/constants/navMenu";
-
 import adminImageUrl from "../../../assets/administrator.svg";
 import logoImageUrl from "../../../assets/logo.svg";
+import { clientNavMenu } from "../../../constants/navMenu";
+import NavItem from "../../shared/NavItem";
 
 /**
  * @description
