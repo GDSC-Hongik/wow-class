@@ -1,7 +1,10 @@
 import "./global.css";
 import "wowds-ui/styles.css";
 
+import { Navbar } from "@wow-class/ui/admin";
 import type { Metadata } from "next";
+
+import { JotaiProvider } from "../components/JotaiProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +18,12 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <JotaiProvider>
+          <Navbar />
+          {children}
+        </JotaiProvider>
+      </body>
     </html>
   );
 };

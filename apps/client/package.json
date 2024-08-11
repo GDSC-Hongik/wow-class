@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@wow-class/ui": "workspace:*",
+    "jotai": "^2.9.2",
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
@@ -19,9 +21,8 @@
     "@types/react-dom": "^18",
     "@wow-class/eslint-config": "workspace:*",
     "@wow-class/typescript-config": "workspace:*",
-    "@wow-class/ui": "workspace:*",
     "eslint": "^8",
-    "eslint-config-next": "latest",
+    "eslint-config-next": "^14.2.5",
     "typescript": "^5"
   }
 }
