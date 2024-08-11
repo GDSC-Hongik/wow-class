@@ -1,3 +1,6 @@
+import "./global.css";
+import "wowds-ui/styles.css";
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 

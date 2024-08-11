@@ -1,8 +1,16 @@
-export const {{ pascalCase name }} = ({ children }: { children: React.ReactNode }) => {
+/**
+ * @description {{ pascalCase name }} 컴포넌트의 속성을 정의합니다.
+ *
+ */
+
+export interface {{ pascalCase name }}Props {}
+
+const {{ pascalCase name }} = ({}: {{ pascalCase name }}Props) => {
   return (
     <div>
       <h1>{{ pascalCase name }} Component</h1>
-      {children}
     </div>
   );
 };
+
+export default {{ pascalCase name }};

@@ -3,18 +3,34 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "codegen:build": "pnpm ui:codegen && pnpm admin:codegen && pnpm client:codegen && pnpm styled-system:format",
+    "ui:build": "turbo run build --filter=@wow-class/ui",
+    "admin:build": "turbo run build --filter=admin",
+    "client:build": "turbo run build --filter=client",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "ui:codegen": "cd packages/ui && pnpm panda codegen",
+    "admin:codegen": "cd apps/admin && pnpm panda codegen",
+    "client:codegen": "cd apps/client && pnpm panda codegen",
+    "styled-system:format": "prettier --write packages/ui/styled-system/** apps/admin/styled-system/** apps/client/styled-system/**",
+    "storybook": "cd packages/ui && pnpm storybook"
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx}": [
+    "**/*.{jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "pnpm codegen:build"
+    }
+  },
   "devDependencies": {
+    "@pandacss/dev": "^0.44.0",
+    "@wow-class/panda-config": "workspace:*",
     "husky": "^9.1.4",
     "lint-staged": "^15.2.7",
     "prettier": "^3.2.5",
@@ -24,5 +40,8 @@
   "packageManager": "pnpm@8.15.6",
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "wowds-ui": "^0.1.8"
   }
 }
