@@ -4,7 +4,7 @@ import "wowds-ui/styles.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
-import { JotaiProvider } from "../components/jotai-provider";
+import { JotaiProvider } from "../components/JotaiProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
