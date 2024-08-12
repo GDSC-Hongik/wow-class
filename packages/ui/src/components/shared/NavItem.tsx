@@ -9,6 +9,16 @@ import { useState } from "react";
 
 import arrowImageUrl from "../../assets/arrow.svg";
 
+/**
+ * @description 내비게이션 바에서 사용하는 내비게이션 아이템 컴포넌트입니다.
+ *
+ * @param {string} href - 내비게이션 아이템의 링크 주소
+ * @param {string} imageUrl - 내비게이션 아이템의 아이콘 이미지 URL
+ * @param {string} alt - 내비게이션 아이템 아이콘 이미지의 대체 텍스트
+ * @param {string} name - 내비게이션 아이템의 이름
+ * @param {Array<{href: string, imageUrl: string, alt: string, name: string}>} [items] - 서브 내비게이션 아이템 배열
+ * @returns {JSX.Element} 내비게이션 아이템 컴포넌트
+ */
 interface NavItemProps {
   href: string;
   imageUrl: string;

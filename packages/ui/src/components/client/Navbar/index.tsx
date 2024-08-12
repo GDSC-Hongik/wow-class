@@ -8,7 +8,7 @@ import { clientNavMenu } from "../../../constants/navMenu";
 import NavItem from "../../shared/NavItem";
 
 /**
- * @description
+ * @description client 내비게이션 바 컴포넌트입니다.
  */
 
 const Navbar = () => {
