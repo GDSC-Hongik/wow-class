@@ -1,1 +1,1 @@
-export { default as NavItem } from ".";
+export { default as NavItem } from "./NavItem";
