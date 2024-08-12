@@ -68,24 +68,36 @@ class Fetcher {
     return response.text();
   }
 
+  private handleError(response: Response) {
+    if (!response.ok) {
+      return response.text().then((text) => {
+        const error = new Error(
+          `HTTP Error: ${response.status} ${response.statusText}`
+        );
+        (error as any).response = response;
+        (error as any).responseText = text;
+
+        throw error;
+      });
+    }
+  }
+
   async request<T = any>(
     url: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    try {
-      options = await this.interceptRequest(options);
+    options = await this.interceptRequest(options);
 
-      const fullUrl = this.baseUrl + url;
+    const fullUrl = this.baseUrl + url;
 
-      let response: ApiResponse = await fetch(fullUrl, options);
-      response = await this.interceptResponse(response);
-      response.data = await this.parseJsonResponse(response);
+    let response: ApiResponse = await fetch(fullUrl, options);
 
-      return response;
-    } catch (error) {
-      // 에러 처리 방식 추가 필요
-      throw error;
-    }
+    this.handleError(response);
+
+    response = await this.interceptResponse(response);
+    response.data = await this.parseJsonResponse(response);
+
+    return response;
   }
 
   get<T = any>(
