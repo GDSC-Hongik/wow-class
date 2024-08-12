@@ -6,7 +6,7 @@ const AuthPage = () => {
   return (
     <main className={mainContentStyle}>
       <section className={leftColStyle}>
-        <div className={loginTextStyle}>로그인</div>
+        <h1 className={loginTextStyle}>로그인</h1>
         <div className={descriptionTextContainerStyle}>
           <Image
             alt="check-icon"
@@ -14,9 +14,9 @@ const AuthPage = () => {
             src="/images/check.svg"
             width={20}
           />
-          <div className={descriptionTextStyle}>
+          <p className={descriptionTextStyle}>
             와우클래스는 GDSC Hongik 정회원만 이용 가능해요.
-          </div>
+          </p>
         </div>
         <div
           className={descriptionTextContainerStyle}
@@ -28,9 +28,9 @@ const AuthPage = () => {
             src="/images/check.svg"
             width={20}
           />
-          <div className={descriptionTextStyle}>
+          <p className={descriptionTextStyle}>
             GDSC Hongik 가입을 위해선 GitHub 계정이 필요해요.
-          </div>
+          </p>
         </div>
         <Button>GitHub 로그인</Button>
       </section>
