@@ -95,7 +95,7 @@ describe("Fetcher", () => {
     expect(jsonData).toEqual({ success: true });
   });
 
-  it("should handle non-JSON responses", async () => {
+  it("should handle plain text responses", async () => {
     fetchMock.mockResponseOnce("plain text response", {
       headers: { "Content-Type": "text/plain" },
     });
@@ -103,5 +103,24 @@ describe("Fetcher", () => {
 
     const response = await fetcher.get("/test-endpoint");
     expect(response.data).toBe("plain text response");
+  });
+
+  it("should handle HTTP errors correctly", async () => {
+    fetchMock.mockResponseOnce("Not Found", { status: 404 });
+    fetcher.setBaseUrl("https://api.example.com");
+    fetcher.setDefaultHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer test-token",
+    });
+
+    try {
+      await fetcher.get("/test-endpoint");
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect((error as any).response).toBeInstanceOf(Response);
+      expect((error as any).response.status).toBe(404);
+      expect((error as any).responseText).toBe("Not Found");
+      expect((error as any).message).toBe("HTTP Error: 404 Not Found");
+    }
   });
 });
