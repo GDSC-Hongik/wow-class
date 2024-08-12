@@ -15,17 +15,21 @@ interface TextProps extends PropsWithChildren {
 }
 
 export const Text = ({
-  typo = "body0",
-  color = "blue.100",
+  typo = "body1",
+  color = "textBlack",
   children,
+  className,
   ...rest
 }: TextProps) => {
   return (
     <styled.p
-      className={css({
-        textStyle: typo,
-        color: color,
-      })}
+      className={
+        (css({
+          textStyle: typo,
+          color: color,
+        }),
+        className)
+      }
       {...rest}
     >
       {children}
