@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: "/my-study",
+        destination: "/auth",
         permanent: false,
         statusCode: 301,
       },
