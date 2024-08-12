@@ -123,6 +123,9 @@ class Fetcher {
 }
 
 export const fetcher = new Fetcher({
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+  baseUrl:
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_PROD_BASE_URL
+      : process.env.NEXT_PUBLIC_DEV_BASE_URL,
   defaultHeaders: { "Content-Type": "application/json" },
 });
