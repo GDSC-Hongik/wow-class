@@ -65,15 +65,20 @@ class Fetcher {
   }
 
   async request(url: string, options: RequestInit = {}): Promise<any> {
-    options = await this.interceptRequest(options);
+    try {
+      options = await this.interceptRequest(options);
 
-    const fullUrl = this.baseUrl + url;
+      const fullUrl = this.baseUrl + url;
 
-    let response: ApiResponse = await fetch(fullUrl, options);
-    response = await this.interceptResponse(response);
-    response.data = await this.parseJsonResponse(response);
+      let response: ApiResponse = await fetch(fullUrl, options);
+      response = await this.interceptResponse(response);
+      response.data = await this.parseJsonResponse(response);
 
-    return response;
+      return response;
+    } catch (error) {
+      // 에러 처리 방식 추가 필요
+      throw error;
+    }
   }
 
   get(url: string, options: RequestInit = {}): Promise<ApiResponse> {

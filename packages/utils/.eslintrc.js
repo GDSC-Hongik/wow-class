@@ -8,4 +8,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: "module",
   },
+  rules: {
+    "no-useless-catch": "off",
+  },
 };
