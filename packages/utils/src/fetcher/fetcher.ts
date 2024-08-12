@@ -68,17 +68,16 @@ class Fetcher {
     return response.text();
   }
 
-  private handleError(response: Response) {
+  private async handleError(response: Response) {
     if (!response.ok) {
-      return response.text().then((text) => {
-        const error = new Error(
-          `HTTP Error: ${response.status} ${response.statusText}`
-        );
-        (error as any).response = response;
-        (error as any).responseText = text;
+      const text = await response.text();
+      const error = new Error(
+        `HTTP Error: ${response.status} ${response.statusText}`
+      );
+      (error as any).response = response;
+      (error as any).responseText = text;
 
-        throw error;
-      });
+      throw error;
     }
   }
 
@@ -92,7 +91,7 @@ class Fetcher {
 
     let response: ApiResponse = await fetch(fullUrl, options);
 
-    this.handleError(response);
+    await this.handleError(response);
 
     response = await this.interceptResponse(response);
     response.data = await this.parseJsonResponse(response);
