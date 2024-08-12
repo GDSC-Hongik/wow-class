@@ -9,7 +9,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["app/*"],
-      "@styled-system/*": ["./styled-system/*"],
+      "@styled-system/*": ["./styled-system/*"]
     }
   },
   "include": [
@@ -18,6 +18,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "jest.config.cjs"  ],
+  ],
   "exclude": ["node_modules"]
 }
