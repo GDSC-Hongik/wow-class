@@ -2,8 +2,8 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import Image from "next/image";
 
-import adminImageUrl from "../../../assets/administrator.svg";
-import logoImageUrl from "../../../assets/logo.svg";
+import adminImageUrl from "../../../assets/images/administrator.svg";
+import logoImageUrl from "../../../assets/images/logo.svg";
 import { clientNavMenu } from "../../../constants/navMenu";
 import NavItem from "../../shared/NavItem";
 

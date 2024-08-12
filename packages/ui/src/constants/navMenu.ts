@@ -1,8 +1,8 @@
-import folderImageUrl from "../assets/folder.svg";
-import homeImageUrl from "../assets/home.svg";
-import participantImageUrl from "../assets/particpant.svg";
-import personImageUrl from "../assets/person.svg";
-import scheduleImageUrl from "../assets/schedule.svg";
+import folderImageUrl from "../assets/images/folder.svg";
+import homeImageUrl from "../assets/images/home.svg";
+import participantImageUrl from "../assets/images/particpant.svg";
+import personImageUrl from "../assets/images/person.svg";
+import scheduleImageUrl from "../assets/images/schedule.svg";
 
 export const clientNavMenu = [
   {
