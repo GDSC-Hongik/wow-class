@@ -1,11 +1,11 @@
-type ApiResponse = Response & { data?: any };
+type ApiResponse<T = any> = Response & { data?: T };
 
 type RequestInterceptor = (
   options: RequestInit
 ) => RequestInit | Promise<RequestInit>;
-type ResponseInterceptor = (
+type ResponseInterceptor<T = any> = (
   response: ApiResponse
-) => ApiResponse | Promise<ApiResponse>;
+) => ApiResponse<T> | Promise<ApiResponse<T>>;
 
 class Fetcher {
   private baseUrl: string;
@@ -32,7 +32,7 @@ class Fetcher {
     this.requestInterceptors.push(interceptor);
   }
 
-  addResponseInterceptor(interceptor: ResponseInterceptor) {
+  addResponseInterceptor<T = any>(interceptor: ResponseInterceptor<T>) {
     this.responseInterceptors.push(interceptor);
   }
 
@@ -46,7 +46,9 @@ class Fetcher {
     return options;
   }
 
-  private async interceptResponse(response: Response): Promise<Response> {
+  private async interceptResponse<T = any>(
+    response: Response
+  ): Promise<ApiResponse<T>> {
     for (const interceptor of this.responseInterceptors) {
       response = (await interceptor(response)) || response;
     }
@@ -66,7 +68,10 @@ class Fetcher {
     return response.text();
   }
 
-  async request(url: string, options: RequestInit = {}): Promise<any> {
+  async request<T = any>(
+    url: string,
+    options: RequestInit = {}
+  ): Promise<ApiResponse<T>> {
     try {
       options = await this.interceptRequest(options);
 
@@ -83,11 +88,11 @@ class Fetcher {
     }
   }
 
-  get(
+  get<T = any>(
     url: string,
     options: RequestInit = {},
     params: Record<string, any> = {}
-  ): Promise<ApiResponse> {
+  ): Promise<ApiResponse<T>> {
     const queryString =
       params && Object.keys(params).length > 0
         ? `?${new URLSearchParams(params).toString()}`
@@ -97,11 +102,11 @@ class Fetcher {
     return this.request(fullUrl, { ...options, method: "GET" });
   }
 
-  post(
+  post<T = any>(
     url: string,
     body: any,
     options: RequestInit = {}
-  ): Promise<ApiResponse> {
+  ): Promise<ApiResponse<T>> {
     return this.request(url, {
       ...options,
       method: "POST",
@@ -109,7 +114,11 @@ class Fetcher {
     });
   }
 
-  put(url: string, body: any, options: RequestInit = {}): Promise<ApiResponse> {
+  put<T = any>(
+    url: string,
+    body: any,
+    options: RequestInit = {}
+  ): Promise<ApiResponse<T>> {
     return this.request(url, {
       ...options,
       method: "PUT",
@@ -117,11 +126,11 @@ class Fetcher {
     });
   }
 
-  patch(
+  patch<T = any>(
     url: string,
     body: any,
     options: RequestInit = {}
-  ): Promise<ApiResponse> {
+  ): Promise<ApiResponse<T>> {
     return this.request(url, {
       ...options,
       method: "PATCH",
@@ -129,7 +138,10 @@ class Fetcher {
     });
   }
 
-  delete(url: string, options: RequestInit = {}): Promise<ApiResponse> {
+  delete<T = any>(
+    url: string,
+    options: RequestInit = {}
+  ): Promise<ApiResponse<T>> {
     return this.request(url, { ...options, method: "DELETE" });
   }
 }
