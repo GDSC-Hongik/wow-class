@@ -45,6 +45,31 @@ describe("Fetcher", () => {
     expect(jsonData).toEqual({ success: true });
   });
 
+  it("should make a GET request with query parameters", async () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ success: true }));
+    fetcher.setBaseUrl("https://api.example.com");
+    fetcher.setDefaultHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer test-token",
+    });
+
+    const params = { key1: "value1", key2: "value2" };
+    const response = await fetcher.get("/test-endpoint", {}, params);
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "https://api.example.com/test-endpoint?key1=value1&key2=value2",
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer test-token",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const jsonData = JSON.parse(response.data);
+    expect(jsonData).toEqual({ success: true });
+  });
+
   it("should make a POST request with the correct headers and URL and body", async () => {
     fetchMock.mockResponseOnce(JSON.stringify({ success: true }));
     fetcher.setBaseUrl("https://api.example.com");
