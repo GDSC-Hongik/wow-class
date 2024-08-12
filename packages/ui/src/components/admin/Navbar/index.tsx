@@ -13,7 +13,7 @@ import { NavItem } from "../../shared";
 
 const Navbar = () => {
   return (
-    <div className={navbarContainerStyle}>
+    <aside aria-label="admin navigation bar" className={navbarContainerStyle}>
       <Flex align="center" gap={8} padding="6px 0px 7px 20px">
         <div className={logoTextStyle}>와우클래스 멘토</div>
         <Image
@@ -27,7 +27,11 @@ const Navbar = () => {
           })}
         />
       </Flex>
-      <nav className={navContainerStyle}>
+      <nav
+        aria-label="admin nav menu"
+        className={navContainerStyle}
+        role="navigation"
+      >
         <ul>
           {adminNavMenu.map((menu) => (
             <NavItem
@@ -47,7 +51,7 @@ const Navbar = () => {
           name="멘티 페이지로 전환"
         />
       </nav>
-    </div>
+    </aside>
   );
 };
 

@@ -46,9 +46,14 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
   };
 
   return (
-    <styled.li listStyle="none">
+    <styled.li listStyle="none" role="presentation">
       <Link
+        aria-controls={items ? `${name}-submenu` : undefined}
+        aria-expanded={expanded ? "true" : "false"}
+        aria-haspopup={items?.length && items.length > 1 ? "true" : undefined}
         href={`/${href}`}
+        role="menuitem"
+        tabIndex={0}
         className={navItemStyle({
           type: !segment[1] && segment[0] === href ? "active" : "inactive",
         })}
@@ -64,7 +69,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
         <div className={navItemTextStyle}>{name}</div>
         {items?.length && items?.length > 1 && (
           <Image
-            alt="arrow-icon"
+            alt="toggle-icon"
             height={20}
             src={arrowImageUrl}
             style={{ transform: expanded ? "rotate(0deg)" : "rotate(180deg)" }}
@@ -77,26 +82,32 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
           />
         )}
       </Link>
-      {expanded &&
-        items?.map((item) => (
-          <Link
-            href={`/${href}/${item.href}`}
-            key={item.name}
-            style={{ padding: "11px 36px" }}
-            className={navItemStyle({
-              type: segment[1] === item.href ? "active" : "inactive",
-            })}
-          >
-            <Image
-              alt={item.alt}
-              className={css({ width: "20px", height: "20px" })}
-              height={20}
-              src={item.imageUrl}
-              width={20}
-            />
-            <div className={navItemTextStyle}>{item.name}</div>
-          </Link>
-        ))}
+      {expanded && items && (
+        <ul aria-labelledby={name} id={`${name}-submenu`} role="menu">
+          {items.map((item) => (
+            <li key={item.name} role="none">
+              <Link
+                aria-label={item.name}
+                href={`/${href}/${item.href}`}
+                role="menuitem"
+                style={{ padding: "11px 36px" }}
+                className={navItemStyle({
+                  type: segment[1] === item.href ? "active" : "inactive",
+                })}
+              >
+                <Image
+                  alt={item.alt}
+                  className={css({ width: "20px", height: "20px" })}
+                  height={20}
+                  src={item.imageUrl}
+                  width={20}
+                />
+                <div className={navItemTextStyle}>{item.name}</div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </styled.li>
   );
 };
