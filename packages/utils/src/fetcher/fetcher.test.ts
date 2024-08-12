@@ -1,6 +1,6 @@
 import fetchMock from "jest-fetch-mock";
 
-import { fetcher } from "../lib/utils/fetcher";
+import { fetcher } from "./fetcher";
 
 describe("Fetcher", () => {
   beforeEach(() => {
@@ -39,7 +39,7 @@ describe("Fetcher", () => {
           Authorization: "Bearer test-token",
           "Content-Type": "application/json",
         },
-      },
+      }
     );
     const jsonData = JSON.parse(response.data);
     expect(jsonData).toEqual({ success: true });
@@ -64,7 +64,7 @@ describe("Fetcher", () => {
           Authorization: "Bearer test-token",
         },
         body: JSON.stringify({ foo: "bar" }),
-      },
+      }
     );
     const jsonData = JSON.parse(response.data);
     expect(jsonData).toEqual({ success: true });

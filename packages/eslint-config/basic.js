@@ -114,7 +114,6 @@ module.exports = {
       version: "detect",
     },
   },
-
   ignorePatterns: [
     ".*.js",
     "node_modules/",

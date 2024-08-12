@@ -1,10 +1,10 @@
 type ApiResponse = Response & { data?: any };
 
 type RequestInterceptor = (
-  options: RequestInit,
+  options: RequestInit
 ) => RequestInit | Promise<RequestInit>;
 type ResponseInterceptor = (
-  response: ApiResponse,
+  response: ApiResponse
 ) => ApiResponse | Promise<ApiResponse>;
 
 class Fetcher {
@@ -83,7 +83,7 @@ class Fetcher {
   post(
     url: string,
     body: any,
-    options: RequestInit = {},
+    options: RequestInit = {}
   ): Promise<ApiResponse> {
     return this.request(url, {
       ...options,
@@ -103,7 +103,7 @@ class Fetcher {
   patch(
     url: string,
     body: any,
-    options: RequestInit = {},
+    options: RequestInit = {}
   ): Promise<ApiResponse> {
     return this.request(url, {
       ...options,

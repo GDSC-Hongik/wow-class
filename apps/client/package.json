@@ -6,8 +6,7 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test": "jest"
+    "lint": "next lint"
   },
   "dependencies": {
     "@wow-class/ui": "workspace:*",
@@ -24,7 +23,6 @@
     "@wow-class/typescript-config": "workspace:*",
     "eslint": "^8",
     "eslint-config-next": "^14.2.5",
-    "jest-fetch-mock": "^3.0.3",
     "typescript": "^5"
   }
 }
