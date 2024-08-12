@@ -49,6 +49,18 @@
   src: url("/fonts/SUIT-Heavy.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Product Sans";
+  font-weight: 400;
+  src: url("/fonts/ProductSans-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Product Sans";
+  font-weight: 700;
+  src: url("/fonts/ProductSans-Bold.ttf") format("truetype");
+}
+
 body {
   font-family: "SUIT" !important;
   display: flex;
