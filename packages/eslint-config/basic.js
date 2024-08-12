@@ -102,6 +102,7 @@ module.exports = {
     ],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
+    "turbo/no-undeclared-env-vars": "off",
   },
 
   settings: {
@@ -113,7 +114,6 @@ module.exports = {
       version: "detect",
     },
   },
-
   ignorePatterns: [
     ".*.js",
     "node_modules/",
