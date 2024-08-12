@@ -9,4 +9,7 @@ module.exports = {
   parserOptions: {
     project: true,
   },
+  rules: {
+    "import/export": "off",
+  },
 };
