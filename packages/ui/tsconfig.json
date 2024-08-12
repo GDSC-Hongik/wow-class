@@ -1,8 +1,13 @@
 {
-  "extends": "@wow-class/shared-config/typescript/basic.json",
+  "extends": "@wow-class/typescript-config/basic.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@styled-system/*": ["./styled-system/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "turbo/generators/config.ts"],
   "exclude": ["node_modules", "dist"]
 }

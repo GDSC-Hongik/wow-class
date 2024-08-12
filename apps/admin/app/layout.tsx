@@ -1,5 +1,10 @@
+import "./global.css";
+import "wowds-ui/styles.css";
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+
+import { JotaiProvider } from "../components/JotaiProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,7 +28,7 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <JotaiProvider>{children}</JotaiProvider>
       </body>
     </html>
   );

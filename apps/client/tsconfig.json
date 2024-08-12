@@ -1,11 +1,16 @@
 {
-  "extends": "@wow-class/shared-config/typescript/next.json",
+  "extends": "@wow-class/typescript-config/next.json",
   "compilerOptions": {
     "plugins": [
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["app/*"],
+      "@styled-system/*": ["./styled-system/*"],
+    }
   },
   "include": [
     "next-env.d.ts",
