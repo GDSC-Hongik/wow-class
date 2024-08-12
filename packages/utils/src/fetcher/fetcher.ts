@@ -59,6 +59,8 @@ class Fetcher {
 
     if (contentType.includes("application/json")) {
       return response.json();
+    } else if (contentType.startsWith("image/")) {
+      return response.blob();
     }
 
     return response.text();
