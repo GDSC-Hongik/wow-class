@@ -16,14 +16,14 @@ const LandingPage = () => {
     <div className={containerStyle}>
       <Header />
       <main className={mainContentStyle}>
-        <div className={taglineStyle}>
+        <h1 className={taglineStyle}>
           와우클래스와 함께 <br />
           GDSC에서 스터디해요!
-        </div>
-        <div className={descriptionStyle}>
+        </h1>
+        <p className={descriptionStyle}>
           GDSC Hongik은 홍익대학교의 학생 개발자들을 위해 <br />
           개발에 쉽게 입문할 수 있는 기회를 제공해요.
-        </div>
+        </p>
         <Button size="lg" onClick={handleClickLogin}>
           로그인
         </Button>
