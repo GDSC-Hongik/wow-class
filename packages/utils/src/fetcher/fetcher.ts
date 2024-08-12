@@ -83,8 +83,18 @@ class Fetcher {
     }
   }
 
-  get(url: string, options: RequestInit = {}): Promise<ApiResponse> {
-    return this.request(url, { ...options, method: "GET" });
+  get(
+    url: string,
+    options: RequestInit = {},
+    params: Record<string, any> = {}
+  ): Promise<ApiResponse> {
+    const queryString =
+      params && Object.keys(params).length > 0
+        ? `?${new URLSearchParams(params).toString()}`
+        : "";
+    const fullUrl = `${url}${queryString}`;
+
+    return this.request(fullUrl, { ...options, method: "GET" });
   }
 
   post(
