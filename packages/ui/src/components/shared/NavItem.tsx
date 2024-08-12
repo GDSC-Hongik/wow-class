@@ -37,7 +37,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
     Boolean(items?.length && items?.length <= 1)
   );
 
-  const segment = useSelectedLayoutSegments();
+  const segment = useSelectedLayoutSegments() || [];
 
   const handleClickNavItem = () => {
     if (items?.length !== 1) {
