@@ -67,6 +67,9 @@ importers:
       '@wow-class/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@wow-class/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       eslint:
         specifier: ^8
         version: 8.57.0
@@ -110,6 +113,9 @@ importers:
       '@wow-class/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
+      '@wow-class/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       eslint:
         specifier: ^8
         version: 8.57.0
