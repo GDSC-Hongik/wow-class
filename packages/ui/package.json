@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./admin": "./src/components/admin/index.ts",
-    "./client": "./src/components/client/index.ts",
-    "./shared": "./src/components/shared/index.ts",
+    ".": "./src/components/index.ts",
     "./styles.css": "./src/styles.css"
   },
   "scripts": {

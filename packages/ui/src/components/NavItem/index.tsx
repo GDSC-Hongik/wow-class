@@ -19,7 +19,7 @@ import arrowImageUrl from "../../assets/arrow.svg";
  * @param {Array<{href: string, imageUrl: string, alt: string, name: string}>} [items] - 서브 내비게이션 아이템 배열
  * @returns {JSX.Element} 내비게이션 아이템 컴포넌트
  */
-interface NavItemProps {
+export interface NavItemProps {
   href: string;
   imageUrl: string;
   alt: string;

@@ -5,7 +5,8 @@ const nextConfig = {
       {
         source: "/",
         destination: "/my-study",
-        permanent: true,
+        permanent: false,
+        statusCode: 301,
       },
     ];
   },

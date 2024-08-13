@@ -1,21 +1,21 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
+import { NavItem } from "@wow-class/ui";
 import Image from "next/image";
 
-import adminImageUrl from "../../../assets/administrator.svg";
-import logoImageUrl from "../../../assets/logo.svg";
-import { clientNavMenu } from "../../../constants/navMenu";
-import NavItem from "../../shared/NavItem";
+import { navMenu } from "../constants/navMenu";
+import adminImageUrl from "../public/images/administrator.svg";
+import logoImageUrl from "../public/images/logo.svg";
 
 /**
- * @description client 내비게이션 바 컴포넌트입니다.
+ * @description admin 내비게이션 바 컴포넌트입니다.
  */
 
 const Navbar = () => {
   return (
-    <aside aria-label="client navigation bar" className={navbarContainerStyle}>
+    <aside aria-label="admin navigation bar" className={navbarContainerStyle}>
       <Flex align="center" gap={8} padding="6px 0px 7px 20px">
-        <div className={logoTextStyle}>와우클래스</div>
+        <div className={logoTextStyle}>와우클래스 멘토</div>
         <Image
           alt="logo"
           height={20.5}
@@ -28,12 +28,12 @@ const Navbar = () => {
         />
       </Flex>
       <nav
-        aria-label="client nav menu"
+        aria-label="admin nav menu"
         className={navContainerStyle}
         role="navigation"
       >
         <ul>
-          {clientNavMenu.map((menu) => (
+          {navMenu.map((menu) => (
             <NavItem
               alt={menu.alt}
               href={menu.href}
@@ -48,7 +48,7 @@ const Navbar = () => {
           alt="administrator-icon"
           href=""
           imageUrl={adminImageUrl}
-          name="멘토 페이지로 전환"
+          name="멘티 페이지로 전환"
         />
       </nav>
     </aside>
