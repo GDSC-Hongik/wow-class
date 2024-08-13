@@ -1,7 +1,6 @@
 import "./global.css";
 import "wowds-ui/styles.css";
 
-import Navbar from "components/Navbar";
 import type { Metadata } from "next";
 
 import { JotaiProvider } from "../components/JotaiProvider";
