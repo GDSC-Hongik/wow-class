@@ -1,6 +1,6 @@
 import { css } from "@styled-system/css";
+import LoginButton from "components/LoginButton";
 import Image from "next/image";
-import Button from "wowds-ui/Button";
 
 const AuthPage = () => {
   return (
@@ -32,12 +32,12 @@ const AuthPage = () => {
             GDSC Hongik 가입을 위해선 GitHub 계정이 필요해요.
           </p>
         </div>
-        <Button>GitHub 로그인</Button>
+        <LoginButton />
       </section>
       <section>
         <Image
           alt="auth-background-image"
-          className={css({ width: "100%", height: "auto" })}
+          className={authImageStyle}
           height={0}
           sizes="100vw"
           src="/images/auth-background.svg"
@@ -80,4 +80,9 @@ const descriptionTextContainerStyle = css({
 const descriptionTextStyle = css({
   color: "sub",
   textStyle: "body1",
+});
+
+const authImageStyle = css({
+  width: "100%",
+  height: "auto",
 });
