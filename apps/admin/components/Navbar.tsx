@@ -18,13 +18,10 @@ const Navbar = () => {
         <div className={logoTextStyle}>와우클래스 멘토</div>
         <Image
           alt="logo"
+          className={logoImageStyle}
           height={20.5}
           src={logoImageUrl}
           width={42}
-          className={css({
-            width: "42px",
-            height: "20.5px",
-          })}
         />
       </Flex>
       <nav
@@ -71,6 +68,11 @@ const logoTextStyle = css({
   fontWeight: 700,
   lineHeight: "130%",
   letterSpacing: "-0.24px",
+});
+
+const logoImageStyle = css({
+  width: "42px",
+  height: "20.5px",
 });
 
 const navContainerStyle = css({

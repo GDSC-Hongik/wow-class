@@ -1,3 +1,5 @@
+import { cookies } from "next/headers";
+
 type ApiResponse<T = any> = Response & { data?: T };
 
 type RequestInterceptor = (
@@ -157,10 +159,26 @@ class Fetcher {
   }
 }
 
-export const fetcher = new Fetcher({
+const fetcher = new Fetcher({
   baseUrl:
     process.env.NODE_ENV === "production"
       ? process.env.NEXT_PUBLIC_PROD_BASE_URL
       : process.env.NEXT_PUBLIC_DEV_BASE_URL,
   defaultHeaders: { "Content-Type": "application/json" },
 });
+
+fetcher.addRequestInterceptor(async (options) => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  if (accessToken) {
+    options.headers = {
+      ...options.headers,
+      Authorization: `Bearer ${accessToken}`,
+    };
+  }
+
+  return options;
+});
+
+export default fetcher;

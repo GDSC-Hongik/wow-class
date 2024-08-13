@@ -21,6 +21,7 @@
     "@types/react-dom": "^18",
     "@wow-class/eslint-config": "workspace:*",
     "@wow-class/typescript-config": "workspace:*",
+    "@wow-class/fonts": "workspace:*",
     "@wow-class/utils": "workspace:*",
     "eslint": "^8",
     "eslint-config-next": "^14.2.5",

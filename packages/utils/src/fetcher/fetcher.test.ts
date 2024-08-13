@@ -1,6 +1,6 @@
 import fetchMock from "jest-fetch-mock";
 
-import { fetcher } from "./fetcher";
+import fetcher from ".";
 
 describe("Fetcher", () => {
   beforeEach(() => {

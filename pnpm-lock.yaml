@@ -64,6 +64,9 @@ importers:
       '@wow-class/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@wow-class/fonts':
+        specifier: workspace:*
+        version: link:../../packages/fonts
       '@wow-class/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -97,6 +100,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      wowds-tokens:
+        specifier: ^0.1.1
+        version: 0.1.1
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -110,6 +116,9 @@ importers:
       '@wow-class/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
+      '@wow-class/fonts':
+        specifier: workspace:*
+        version: link:../../packages/fonts
       '@wow-class/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -171,6 +180,8 @@ importers:
         specifier: ^5.3.3
         version: 5.4.5
 
+  packages/fonts: {}
+
   packages/panda-config:
     devDependencies:
       wowds-theme:
@@ -221,6 +232,9 @@ importers:
       '@wow-class/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@wow-class/fonts':
+        specifier: workspace:*
+        version: link:../fonts
       '@wow-class/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -238,6 +252,10 @@ importers:
         version: 5.4.5
 
   packages/utils:
+    dependencies:
+      next:
+        specifier: ^14.2.5
+        version: 14.2.5(@babel/core@7.25.2)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
     devDependencies:
       '@types/jest':
         specifier: ^29.5.12
