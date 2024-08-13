@@ -1,6 +1,11 @@
-import { styled } from "@styled-system/jsx";
+import { css } from "@styled-system/css";
+
 const CreateStudy = () => {
-  return <styled.h1>개설된 스터디</styled.h1>;
+  return (
+    <>
+      <p className={css({ textStyle: "h1" })}>개설된 스터디</p>
+    </>
+  );
 };
 
 export default CreateStudy;
