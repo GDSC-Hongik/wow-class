@@ -1,6 +1,7 @@
 "use client";
 
 import { css } from "@styled-system/css";
+import { routePath } from "constants/routePath";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Button from "wowds-ui/Button";
@@ -9,7 +10,7 @@ const AuthErrorAfterRecruitmentPage = () => {
   const router = useRouter();
 
   const handleClickNavigateHome = () => {
-    router.push("/landing");
+    router.push(routePath.landing);
   };
 
   return (

@@ -2,6 +2,7 @@
 
 import { css } from "@styled-system/css";
 import { Header } from "@wow-class/ui";
+import { routePath } from "constants/routePath";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Button from "wowds-ui/Button";
@@ -10,7 +11,7 @@ const LandingPage = () => {
   const router = useRouter();
 
   const handleClickLogin = () => {
-    router.push("/auth");
+    router.push(routePath.auth);
   };
 
   return (

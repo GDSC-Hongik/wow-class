@@ -1,21 +1,26 @@
 import { fetcher } from "@wow-class/utils";
+import { routePath } from "constants/routePath";
 import { redirect } from "next/navigation";
 import type { DashboardApiResponseDto } from "types/dtos/auth";
 
 const AuthServerRedirectPage = async () => {
   const response = await fetcher.get<DashboardApiResponseDto>(
-    "/onboarding/members/me/dashboard"
+    "/onboarding/members/me/dashboard",
+    {
+      next: { tags: ["dashboard"] },
+    }
   );
+
   const memberRole = response.data?.member.role;
   const currentRecruitmentOpen =
     response.data?.currentRecruitmentRound.period.open;
 
   if (memberRole === "REGULAR") {
-    redirect("/my-study");
+    redirect(routePath["my-study"]);
   } else if (currentRecruitmentOpen) {
-    redirect("/auth-error-during-recruitment");
+    redirect(routePath["auth-error-during-recruitment"]);
   } else {
-    redirect("/auth-error-after-recruitment");
+    redirect(routePath["auth-error-after-recruitment"]);
   }
 };
 
