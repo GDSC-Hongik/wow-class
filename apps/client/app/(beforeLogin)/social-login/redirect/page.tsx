@@ -11,7 +11,6 @@ const AuthServerRedirectPage = async () => {
     response.data?.currentRecruitmentRound.period.open;
 
   if (memberRole === "REGULAR") {
-    sessionStorage.setItem("isLogin", "true");
     redirect("/my-study");
   } else if (currentRecruitmentOpen) {
     redirect("/auth-error-during-recruitment");
