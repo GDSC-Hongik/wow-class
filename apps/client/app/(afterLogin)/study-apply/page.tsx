@@ -1,5 +1,18 @@
+import { styled } from "@styled-system/jsx";
+import { Table } from "components/study-apply/Table";
+
 const StudyApply = () => {
-  return <div>StudyApply</div>;
+  return (
+    <>
+      <styled.p color="textBlack" textStyle="h1">
+        신청 가능한 스터디
+      </styled.p>
+      <div style={{ height: "1.19rem" }} />
+      <Table />
+      <Table />
+      <Table />
+    </>
+  );
 };
 
 export default StudyApply;
