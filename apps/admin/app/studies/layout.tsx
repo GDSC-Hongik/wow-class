@@ -1,5 +1,5 @@
 import { Flex, styled } from "@styled-system/jsx";
-const CreateStudyLayout = ({
+const StudiesLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -13,4 +13,4 @@ const CreateStudyLayout = ({
   );
 };
 
-export default CreateStudyLayout;
+export default StudiesLayout;
