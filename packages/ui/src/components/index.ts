@@ -1,2 +1,1 @@
-export * from "./Button";
-export * from "./Modal";
+export { default as NavItem } from "./NavItem";

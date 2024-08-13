@@ -2,18 +2,8 @@ import "./global.css";
 import "wowds-ui/styles.css";
 
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 
 import { JotaiProvider } from "../components/JotaiProvider";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,8 +16,8 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="ko">
+      <body>
         <JotaiProvider>{children}</JotaiProvider>
       </body>
     </html>
