@@ -135,8 +135,5 @@ const navItemStyle = cva({
 });
 
 const navItemTextStyle = css({
-  fontSize: "16px",
-  fontWeight: 500,
-  lineHeight: "160%",
-  letterSpacing: "-0.16px",
+  textStyle: "body1",
 });
