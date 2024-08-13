@@ -1,13 +1,15 @@
 import { fetcher } from "@wow-class/utils";
+import { apiPath } from "constants/apiPath";
 import { routePath } from "constants/routePath";
+import { tags } from "constants/tags";
 import { redirect } from "next/navigation";
 import type { DashboardApiResponseDto } from "types/dtos/auth";
 
 const AuthServerRedirectPage = async () => {
   const response = await fetcher.get<DashboardApiResponseDto>(
-    "/onboarding/members/me/dashboard",
+    apiPath.dashboard,
     {
-      next: { tags: ["dashboard"] },
+      next: { tags: [tags.dashboard] },
     }
   );
 
