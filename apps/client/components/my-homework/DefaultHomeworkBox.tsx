@@ -1,8 +1,11 @@
 import { Flex, styled } from "@styled-system/jsx";
+import Image from "next/image";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
+
+import dotImageUrl from "../../public/images/dot.svg";
 
 export const DefaultHomeworkBox = () => {
   return (
@@ -31,6 +34,7 @@ export const DefaultHomeworkBox = () => {
               <styled.div>제출한 과제 : </styled.div>
               <styled.div color="textBlack"> 2024-1-Web-Study/Week4</styled.div>
             </styled.div>
+            <Image alt="dot" src={dotImageUrl} />
             <styled.div color="primary" textStyle="body1">
               글자수 충족
             </styled.div>
