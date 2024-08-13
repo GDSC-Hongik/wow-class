@@ -12,7 +12,7 @@ export const DefaultHomeworkBox = () => {
           <styled.p color="primary" textStyle="label2">
             4주차
           </styled.p>
-          <div style={{ height: "1rem" }} />
+          <div style={{ height: "16px" }} />
           <Flex gap="xs">
             <styled.p color="textBlack" textStyle="h2">
               HTTP 통신 코드 작성하기
@@ -22,7 +22,7 @@ export const DefaultHomeworkBox = () => {
             </Tag>
           </Flex>
           <TextButton style={{ paddingLeft: "0px" }} text="과제 명세 확인" />
-          <div style={{ height: "0.5rem" }} />
+          <div style={{ height: "8px" }} />
           <styled.p color="sub" textStyle="body1">
             종료 일시 : 2024년 5월 23일 23:59
           </styled.p>
@@ -35,11 +35,11 @@ export const DefaultHomeworkBox = () => {
               글자수 충족
             </styled.div>
           </Flex>
-          <div style={{ height: "1.63rem" }} />
+          <div style={{ height: "26px" }} />
           <Button style={{ maxWidth: "100%" }} variant="outline">
             제출하러 가기
           </Button>
-          <div style={{ height: "0.5rem" }} />
+          <div style={{ height: "8px" }} />
           <Button style={{ maxWidth: "100%" }}>제출 완료</Button>
         </>
       }

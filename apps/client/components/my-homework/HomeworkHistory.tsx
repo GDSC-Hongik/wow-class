@@ -9,7 +9,7 @@ export const HomeworkHistory = () => {
       <styled.div color="sub" textStyle="body1">
         지난 과제의 제출 내역을 확인해요.
       </styled.div>
-      <div style={{ height: "1.5rem" }} />
+      <div style={{ height: "24px" }} />
       <Table />
       <Table />
       <Table />

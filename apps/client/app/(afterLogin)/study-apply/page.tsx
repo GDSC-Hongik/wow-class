@@ -7,7 +7,7 @@ const StudyApply = () => {
       <styled.p color="textBlack" textStyle="h1">
         신청 가능한 스터디
       </styled.p>
-      <div style={{ height: "1.19rem" }} />
+      <div style={{ height: "19px" }} />
       <Table />
       <Table />
       <Table />

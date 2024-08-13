@@ -5,7 +5,7 @@ import Tag from "wowds-ui/Tag";
 
 export const Table = () => {
   return (
-    <Flex height="5rem" justifyContent="flex-start">
+    <Flex height="80px" justifyContent="flex-start">
       <Flex direction="column" gap="xs" justifyContent="center">
         <Flex gap="xs">
           <styled.p color="textBlack" textStyle="h3">
@@ -23,7 +23,7 @@ export const Table = () => {
       <styled.p className={textCellStyle}>화 18:00-19:00</styled.p>
       <styled.p className={textCellStyle}>4주 코스</styled.p>
       <styled.p className={textCellStyle}>06.18 개강</styled.p>
-      <styled.div paddingX="1.51rem" paddingY="1.3rem">
+      <styled.div paddingX="24px" paddingY="20px">
         <Button size="sm" variant="solid">
           수강 신청
         </Button>
@@ -36,6 +36,6 @@ const textCellStyle = css({
   display: "flex",
   alignItems: "center",
   color: "textBlack",
-  paddingX: "1.75rem",
+  paddingX: "28px",
   textStyle: "body1",
 });

@@ -9,6 +9,7 @@ import TextField from "wowds-ui/TextField";
 
 export const TextFieldHomeworkBox = () => {
   const [value, setValue] = useState("");
+  //TODO: 모달을 통해 제출 확인하는 부분 추가
   const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (value: string) => {
