@@ -10,9 +10,12 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
+    "@wow-class/typescript-config": "workspace:*",
     "jest": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
-    "ts-jest": "^29.2.4",
-    "@wow-class/typescript-config": "workspace:*"
+    "ts-jest": "^29.2.4"
+  },
+  "dependencies": {
+    "next": "^14.2.5"
   }
 }

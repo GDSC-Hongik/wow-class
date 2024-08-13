@@ -252,6 +252,10 @@ importers:
         version: 5.3.3
 
   packages/utils:
+    dependencies:
+      next:
+        specifier: ^14.2.5
+        version: 14.2.5(@babel/core@7.25.2)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
     devDependencies:
       '@types/jest':
         specifier: ^29.5.12
@@ -11911,6 +11915,24 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
+  eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0):
+    dependencies:
+      debug: 4.3.4
+      enhanced-resolve: 5.15.0
+      eslint: 8.57.0
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
+      fast-glob: 3.3.1
+      get-tsconfig: 4.7.2
+      is-core-module: 2.13.1
+      is-glob: 4.0.3
+    transitivePeerDependencies:
+      - '@typescript-eslint/parser'
+      - eslint-import-resolver-node
+      - eslint-import-resolver-webpack
+      - supports-color
+    optional: true
+
   eslint-module-utils@2.8.0(@typescript-eslint/parser@6.17.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.17.0(eslint@8.57.0)(typescript@5.4.5))(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0):
     dependencies:
       debug: 3.2.7
@@ -11930,6 +11952,17 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  eslint-module-utils@2.8.0(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0):
+    dependencies:
+      debug: 3.2.7
+    optionalDependencies:
+      '@typescript-eslint/parser': 7.1.0(eslint@8.57.0)(typescript@5.4.5)
+      eslint: 8.57.0
+      eslint-import-resolver-node: 0.3.9
+      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -12003,7 +12036,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.8.0(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.1.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1)(eslint@8.57.0))(eslint@8.57.0)
       hasown: 2.0.2
       is-core-module: 2.13.1
       is-glob: 4.0.3
@@ -13993,6 +14026,31 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
+  next@14.2.5(@babel/core@7.25.2)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522):
+    dependencies:
+      '@next/env': 14.2.5
+      '@swc/helpers': 0.5.5
+      busboy: 1.6.0
+      caniuse-lite: 1.0.30001593
+      graceful-fs: 4.2.11
+      postcss: 8.4.31
+      react: 19.0.0-rc-f994737d14-20240522
+      react-dom: 19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522)
+      styled-jsx: 5.1.1(@babel/core@7.25.2)(react@19.0.0-rc-f994737d14-20240522)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 14.2.5
+      '@next/swc-darwin-x64': 14.2.5
+      '@next/swc-linux-arm64-gnu': 14.2.5
+      '@next/swc-linux-arm64-musl': 14.2.5
+      '@next/swc-linux-x64-gnu': 14.2.5
+      '@next/swc-linux-x64-musl': 14.2.5
+      '@next/swc-win32-arm64-msvc': 14.2.5
+      '@next/swc-win32-ia32-msvc': 14.2.5
+      '@next/swc-win32-x64-msvc': 14.2.5
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+
   next@15.0.0-rc.0(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522):
     dependencies:
       '@next/env': 15.0.0-rc.0
@@ -15460,6 +15518,13 @@ snapshots:
     dependencies:
       client-only: 0.0.1
       react: 18.3.1
+    optionalDependencies:
+      '@babel/core': 7.25.2
+
+  styled-jsx@5.1.1(@babel/core@7.25.2)(react@19.0.0-rc-f994737d14-20240522):
+    dependencies:
+      client-only: 0.0.1
+      react: 19.0.0-rc-f994737d14-20240522
     optionalDependencies:
       '@babel/core': 7.25.2
 
