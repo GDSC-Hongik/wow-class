@@ -1,65 +1,6 @@
 @layer reset, base, tokens, recipes, utilities;
 @import url("@wow-class/ui/styles.css");
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 200;
-  src: url("/fonts/SUIT-Thin.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 300;
-  src: url("/fonts/SUIT-ExtraLight.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 400;
-  src: url("/fonts/SUIT-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 500;
-  src: url("/fonts/SUIT-Medium.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 600;
-  src: url("/fonts/SUIT-SemiBold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 700;
-  src: url("/fonts/SUIT-Bold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 800;
-  src: url("/fonts/SUIT-ExtraBold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 900;
-  src: url("/fonts/SUIT-Heavy.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Product Sans";
-  font-weight: 400;
-  src: url("/fonts/ProductSans-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Product Sans";
-  font-weight: 700;
-  src: url("/fonts/ProductSans-Bold.ttf") format("truetype");
-}
+@import url("@wow-class/fonts/index.css");
 
 body {
   font-family: "SUIT" !important;
