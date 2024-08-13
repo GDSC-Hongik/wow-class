@@ -7,9 +7,9 @@ export const Table = () => {
   return (
     <Flex height="80px" justifyContent="flex-start" marginBottom="12px">
       <styled.div paddingRight="50px" paddingY="27px">
-        <styled.p color="textBlack" textStyle="h3">
+        <styled.h3 color="textBlack" textStyle="h3">
           1주차
-        </styled.p>
+        </styled.h3>
       </styled.div>
       <Flex direction="column" gap="xs" justifyContent="center" width="430px">
         <styled.p color="textBlack" textStyle="h3">

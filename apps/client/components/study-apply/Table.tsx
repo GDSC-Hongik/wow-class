@@ -8,9 +8,9 @@ export const Table = () => {
     <Flex height="80px" justifyContent="flex-start">
       <Flex direction="column" gap="xs" justifyContent="center">
         <Flex gap="xs">
-          <styled.p color="textBlack" textStyle="h3">
+          <styled.h3 color="textBlack" textStyle="h3">
             기초 웹 스터디
-          </styled.p>
+          </styled.h3>
           <Tag color="yellow" variant="solid1">
             신규
           </Tag>

@@ -1,3 +1,4 @@
+import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import Image from "next/image";
 import Box from "wowds-ui/Box";
@@ -26,18 +27,18 @@ export const DefaultHomeworkBox = () => {
           </Flex>
           <TextButton style={{ paddingLeft: "0px" }} text="과제 명세 확인" />
           <div style={{ height: "8px" }} />
-          <styled.p color="sub" textStyle="body1">
+          <div className={descriptionStyle}>
             종료 일시 : 2024년 5월 23일 23:59
-          </styled.p>
-          <Flex gap="xs">
-            <styled.div color="sub" display="flex" textStyle="body1">
-              <styled.div>제출한 과제 : </styled.div>
-              <styled.div color="textBlack"> 2024-1-Web-Study/Week4</styled.div>
-            </styled.div>
+          </div>
+          <Flex className={descriptionStyle} gap="xs">
+            <div>
+              제출한 과제 :
+              <styled.span color="textBlack">
+                2024-1-Web-Study/Week4
+              </styled.span>
+            </div>
             <Image alt="dot" src={dotImageUrl} />
-            <styled.div color="primary" textStyle="body1">
-              글자수 충족
-            </styled.div>
+            <styled.div color="primary">글자수 충족</styled.div>
           </Flex>
           <div style={{ height: "26px" }} />
           <Button style={{ maxWidth: "100%" }} variant="outline">
@@ -50,3 +51,8 @@ export const DefaultHomeworkBox = () => {
     />
   );
 };
+
+const descriptionStyle = css({
+  color: "sub",
+  textStyle: "body1",
+});

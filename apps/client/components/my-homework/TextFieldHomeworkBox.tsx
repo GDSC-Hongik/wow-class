@@ -25,9 +25,9 @@ export const TextFieldHomeworkBox = () => {
           </styled.p>
           <div style={{ height: "1rem" }} />
           <Flex gap="xs">
-            <styled.p color="textBlack" textStyle="h2">
+            <styled.h2 color="textBlack" textStyle="h2">
               과제 제출을 위한 레포지토리 URL 입력하기
-            </styled.p>
+            </styled.h2>
             <Tag color="blue" variant="solid2">
               제출 완료
             </Tag>
