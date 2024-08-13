@@ -1,10 +1,15 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import Link from "next/link";
+import isAdmin from "utils/isAdmin";
 
-const CreateStudyButton = () => {
+const CreateStudyButton = async () => {
+  const adminStatus = await isAdmin();
+
+  if (!adminStatus) return null;
+
   return (
-    <Link href="/studies/create-study">
+    <Link href="studies/create-study">
       <button className={createStudyButtonStyle}>
         <Flex gap="xs">
           <p className={css({ textStyle: "label1", color: "sub" })}>
