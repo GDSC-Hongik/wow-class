@@ -1,22 +1,19 @@
-"use client";
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const CreateStudyButton = () => {
-  const router = useRouter();
   return (
-    <button
-      className={createStudyButtonStyle}
-      onClick={() => router.push("studies/createStudy")}
-    >
-      <Flex gap="xs">
-        <p className={css({ textStyle: "label1", color: "sub" })}>
-          새로운 스터디 개설하기
-        </p>
-        <div className={PlusIconStyle}>+</div>
-      </Flex>
-    </button>
+    <Link href="/studies/create-study">
+      <button className={createStudyButtonStyle}>
+        <Flex gap="xs">
+          <p className={css({ textStyle: "label1", color: "sub" })}>
+            새로운 스터디 개설하기
+          </p>
+          <div className={PlusIconStyle}>+</div>
+        </Flex>
+      </button>
+    </Link>
   );
 };
 

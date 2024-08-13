@@ -1,11 +1,13 @@
 import { fetcher } from "@wow-class/utils";
 import { apiPath } from "constants/apiPath";
-import type { User } from "types/user";
+import type { DashboardApiResponseDto } from "types/dto/auth";
 
 const isAdmin = async () => {
-  const { data } = await fetcher.get<User>(apiPath.dashboard);
+  const { data } = await fetcher.get<DashboardApiResponseDto>(
+    apiPath.dashboard
+  );
 
-  return data?.manageRole === "ADMIN";
+  return data?.member.manageRole === "ADMIN";
 };
 
 export default isAdmin;

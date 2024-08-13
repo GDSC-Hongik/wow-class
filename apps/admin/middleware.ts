@@ -8,7 +8,7 @@ export const config = {
 
 export function middleware(req: NextRequest) {
   const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
+  const accessToken = cookieStore.get("accessToken");
 
   if (!accessToken) {
     return NextResponse.redirect(new URL("/not-found", req.url));

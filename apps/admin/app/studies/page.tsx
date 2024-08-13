@@ -3,7 +3,7 @@ import { Flex } from "@styled-system/jsx";
 import CreateStudyButton from "components/createStudy/CreateStudyButton";
 import SelectStudySemester from "components/createStudy/SelectStudySemester";
 
-const Studies = () => {
+const StudiesPage = () => {
   return (
     <>
       <Flex align="center" justifyContent="space-between">
@@ -15,4 +15,4 @@ const Studies = () => {
   );
 };
 
-export default Studies;
+export default StudiesPage;
