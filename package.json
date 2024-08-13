@@ -42,6 +42,6 @@
     "node": ">=18"
   },
   "dependencies": {
-    "wowds-ui": "^0.1.8"
+    "wowds-ui": "^0.1.10"
   }
 }

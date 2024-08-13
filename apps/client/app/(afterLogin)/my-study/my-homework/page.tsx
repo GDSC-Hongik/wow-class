@@ -1,7 +1,9 @@
-import { styled } from "@styled-system/jsx";
-import Box from "wowds-ui/Box";
-import Button from "wowds-ui/Button";
-import TextButton from "wowds-ui/TextButton";
+import { Flex, styled } from "@styled-system/jsx";
+import {
+  DefaultHomeworkBox,
+  HomeworkHistory,
+  TextFieldHomeworkBox,
+} from "components/my-homework";
 
 const MyHomework = () => {
   return (
@@ -17,31 +19,12 @@ const MyHomework = () => {
         제출로 인정해요.
       </styled.div>
       <div style={{ height: "3rem" }} />
-      <Box
-        style={{ paddingTop: "1.5rem" }}
-        text={
-          <>
-            <styled.p color="primary" textStyle="label2">
-              4주차
-            </styled.p>
-            <div style={{ height: "1rem" }} />
-            <styled.p color="textBlack" textStyle="h2">
-              HTTP 통신 코드 작성하기
-            </styled.p>
-            <TextButton style={{ paddingLeft: "0px" }} text="과제 명세 확인" />
-            <div style={{ height: "0.5rem" }} />
-            <styled.p color="sub" textStyle="body1">
-              종료 일시 : 2024년 5월 23일 23:59
-            </styled.p>
-            <div style={{ height: "1.63rem" }} />
-            <Button style={{ maxWidth: "100%" }} variant="outline">
-              제출하러 가기
-            </Button>
-            <div style={{ height: "0.5rem" }} />
-            <Button style={{ maxWidth: "100%" }}>제출 완료</Button>
-          </>
-        }
-      />
+      <Flex gap="lg">
+        <TextFieldHomeworkBox />
+        <DefaultHomeworkBox />
+      </Flex>
+      <div style={{ height: "4rem" }} />
+      <HomeworkHistory />
     </>
   );
 };
