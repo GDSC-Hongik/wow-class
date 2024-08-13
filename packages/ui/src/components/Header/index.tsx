@@ -66,5 +66,5 @@ const subTitleStyle = css({
   fontWeight: 400,
   fontSize: "14px",
   lineHeight: "130%",
-  color: "#368FF7",
+  color: "primary",
 });
