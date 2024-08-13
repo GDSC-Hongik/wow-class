@@ -252,10 +252,6 @@ importers:
         version: 5.4.5
 
   packages/utils:
-    dependencies:
-      next:
-        specifier: ^14.2.5
-        version: 14.2.5(@babel/core@7.25.2)(react-dom@19.0.0-rc-f994737d14-20240522(react@19.0.0-rc-f994737d14-20240522))(react@19.0.0-rc-f994737d14-20240522)
     devDependencies:
       '@types/jest':
         specifier: ^29.5.12
@@ -13781,6 +13777,10 @@ packages:
   /wowds-theme@0.1.1:
     resolution: {integrity: sha512-mKm/4xqAgtxW4Q25AbbSk0X2D1kxyIYEnCI4AN+Ki6aoA1KaqB7LJM+wyNp4xul5zeiufQat29i0JCB/CFfUXQ==}
     dev: true
+
+  /wowds-tokens@0.1.1:
+    resolution: {integrity: sha512-aHUaS2KawRly4Y0kSd2t0qpDf/s9kUmg0X4bwRqpHnXnqI2eqPKVnfyRVln/npy0jrtVJ+Tt82GRX+2e1H7yJg==}
+    dev: false
 
   /wowds-ui@0.1.8(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-a6DSdxoQxZPRMkFodbY1GKYWxzuzCpSAir5WAKU0lPO3cmTmK1ILLXqlI+lANfI9fRAzCZDY9RoX5vdBl9yz7A==}

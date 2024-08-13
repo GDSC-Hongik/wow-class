@@ -1,14 +1,11 @@
 import { fetcher } from "@wow-class/utils";
+import { apiPath } from "constants/apiPath";
 import type { User } from "types/user";
 
 const isMentor = async () => {
-  const response = await fetcher
-    .get<User>("/onboarding/members/me/dashboard", {
-      credentials: "include",
-    })
-    .then((response) => {
-      console.log(response.data?.studyRole);
-    });
+  await fetcher.get<User>(apiPath.dashboard, {
+    credentials: "include",
+  });
 };
 
 export default isMentor;
