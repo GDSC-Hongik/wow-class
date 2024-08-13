@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import Image from "next/image";
 
-import logoImageUrl from "../../../assets/images/logo.svg";
+import logoImageUrl from "../../assets/images/logo.svg";
 
 /**
  * @description client 헤더 컴포넌트입니다.
