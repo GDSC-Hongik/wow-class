@@ -1,8 +1,33 @@
 import { css } from "@styled-system/css";
+import { fetcher } from "@wow-class/utils";
 import LoginButton from "components/LoginButton";
+import { apiPath } from "constants/apiPath";
+import { tags } from "constants/tags";
+import { cookies } from "next/headers";
 import Image from "next/image";
+import type { DashboardApiResponseDto } from "types/dtos/auth";
 
-const AuthPage = () => {
+const AuthPage = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  const response = await fetcher.get<DashboardApiResponseDto>(
+    apiPath.dashboard,
+    {
+      next: { tags: [tags.dashboard] },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
+  const memberRole = response.data?.member.role;
+  const currentRecruitmentOpen =
+    response.data?.currentRecruitmentRound.period.open;
+
+  console.log(memberRole, currentRecruitmentOpen);
+
   return (
     <main className={mainContentStyle}>
       <section className={leftColStyle}>
