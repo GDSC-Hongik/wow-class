@@ -13,6 +13,5 @@ export function middleware(req: NextRequest) {
   if (!accessToken) {
     return NextResponse.redirect(new URL("/not-found", req.url));
   }
-
   return NextResponse.next();
 }

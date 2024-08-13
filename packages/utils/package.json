@@ -2,6 +2,9 @@
   "name": "@wow-class/utils",
   "version": "0.0.0",
   "private": true,
+  "exports": {
+    ".": "./src/index.tsx"
+  },
   "scripts": {
     "test": "jest"
   },
