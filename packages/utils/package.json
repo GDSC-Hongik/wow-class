@@ -1,0 +1,16 @@
+{
+  "name": "@wow-class/utils",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "jest-fetch-mock": "^3.0.3",
+    "ts-jest": "^29.2.4",
+    "@wow-class/eslint-config": "workspace:*",
+    "@wow-class/typescript-config": "workspace:*"
+  }
+}

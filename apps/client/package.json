@@ -10,18 +10,20 @@
   },
   "dependencies": {
     "@wow-class/ui": "workspace:*",
-    "react": "latest",
-    "react-dom": "latest",
-    "next": "latest"
+    "jotai": "^2.9.2",
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@wow-class/eslint-config": "workspace:*",
-    "@wow-class/typescript-config": "workspace:*",
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@wow-class/eslint-config": "workspace:*",
+    "@wow-class/typescript-config": "workspace:*",
+    "@wow-class/utils": "workspace:*",
     "eslint": "^8",
-    "eslint-config-next": "latest"
+    "eslint-config-next": "^14.2.5",
+    "typescript": "^5"
   }
 }

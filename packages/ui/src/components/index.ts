@@ -1,3 +1,2 @@
-export * from "./Button";
-export * from "./Modal";
-export * from "./Text";
+export { default as NavItem } from "./NavItem";
+export { default as Text } from "./Text";

@@ -3,5 +3,5 @@ import commonConfig from "@wow-class/panda-config/common-config";
 
 export default defineConfig({
   ...commonConfig,
-  include: ["./app/**/*.{ts,tsx,js,jsx}"],
+  include: ["./app/**/*.{ts,tsx,js,jsx}", "./components/**/*.{ts,tsx,js,jsx}"],
 });

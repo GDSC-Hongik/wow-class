@@ -14,7 +14,7 @@ interface TextProps extends PropsWithChildren {
   className?: string;
 }
 
-export const Text = ({
+const Text = ({
   typo = "body1",
   color = "textBlack",
   children,
@@ -36,3 +36,5 @@ export const Text = ({
     </styled.p>
   );
 };
+
+export default Text;
