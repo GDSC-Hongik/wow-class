@@ -19,10 +19,7 @@ const RootLayout = ({
   return (
     <html lang="ko">
       <body>
-        <JotaiProvider>
-          <Navbar />
-          {children}
-        </JotaiProvider>
+        <JotaiProvider>{children}</JotaiProvider>
       </body>
     </html>
   );
