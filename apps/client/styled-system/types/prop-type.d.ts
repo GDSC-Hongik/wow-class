@@ -670,7 +670,6 @@ export interface UtilityValues {
     | "h1"
     | "h2"
     | "h3"
-    | "body0"
     | "body1"
     | "body2"
     | "body3"
