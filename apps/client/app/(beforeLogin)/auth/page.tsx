@@ -34,14 +34,12 @@ const AuthPage = () => {
         </div>
         <LoginButton />
       </section>
-      <section>
+      <section className={imageContainerStyle}>
         <Image
+          fill
           alt="auth-background-image"
           className={authImageStyle}
-          height={0}
-          sizes="100vw"
           src="/images/auth-background.svg"
-          width={0}
         />
       </section>
     </main>
@@ -82,7 +80,14 @@ const descriptionTextStyle = css({
   textStyle: "body1",
 });
 
-const authImageStyle = css({
+const imageContainerStyle = css({
+  position: "relative",
   width: "100%",
-  height: "auto",
+  height: "100%",
+});
+
+const authImageStyle = css({
+  objectFit: "cover",
+  height: "100%",
+  width: "100%",
 });
