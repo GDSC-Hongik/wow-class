@@ -2,30 +2,25 @@
 
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
-import { useRouter } from "next/navigation";
 import type { MouseEventHandler, ReactNode } from "react";
 import { useCallback, useRef } from "react";
 
 export interface ModalProps {
   title: ReactNode;
-  children: ReactNode;
+  children?: ReactNode;
+  closeModal: () => void;
 }
 
-const Modal = ({ title, children }: ModalProps) => {
-  const router = useRouter();
+const Modal = ({ title, children, closeModal }: ModalProps) => {
   const overlay = useRef<HTMLDivElement>(null);
-
-  const onDismiss = useCallback(() => {
-    router.back();
-  }, [router]);
 
   const onClick: MouseEventHandler = useCallback(
     (e) => {
       if (e.target === overlay.current) {
-        if (onDismiss) onDismiss();
+        if (closeModal) closeModal();
       }
     },
-    [onDismiss, overlay]
+    [closeModal, overlay]
   );
 
   return (
@@ -37,7 +32,7 @@ const Modal = ({ title, children }: ModalProps) => {
       onClick={onClick}
     >
       <styled.dialog className={dialogStyle}>
-        <button className={closeButtonStyle} onClick={onDismiss}>
+        <button className={closeButtonStyle} onClick={closeModal}>
           X
         </button>
         <h1 className={css({ textStyle: "h1", textAlign: "center" })}>
