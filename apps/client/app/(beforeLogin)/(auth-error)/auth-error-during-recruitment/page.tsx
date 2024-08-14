@@ -1,6 +1,7 @@
 "use client";
 
 import { css } from "@styled-system/css";
+import { Text } from "@wow-class/ui";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -26,7 +27,9 @@ const AuthErrorDuringRecruitmentPage = () => {
         src="/images/avatar.svg"
         width={200}
       />
-      <h1 className={headingStyle}>GDSC Hongik 정회원만 이용 가능해요.</h1>
+      <Text as="h1" className={headingStyle} typo="display2">
+        GDSC Hongik 정회원만 이용 가능해요.
+      </Text>
       <p className={descriptionStyle}>
         이번 학기 GDSC Hongik 정회원 모집 중이에요.
         <br />
@@ -67,7 +70,6 @@ const avatarImageStyle = css({
 });
 
 const headingStyle = css({
-  textStyle: "display2",
   marginBottom: "16px",
 });
 
