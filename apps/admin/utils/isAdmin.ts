@@ -1,13 +1,8 @@
-import { fetcher } from "@wow-class/utils";
-import { apiPath } from "constants/apiPath";
-import type { DashboardApiResponseDto } from "types/dto/auth";
+import { dashboardApi } from "apis/auth/dashboardApi";
 
 const isAdmin = async (): Promise<boolean> => {
-  const { data } = await fetcher.get<DashboardApiResponseDto>(
-    apiPath.dashboard
-  );
-  if (data) return data?.member.manageRole === "ADMIN";
-  else return false;
+  const { manageRole } = await dashboardApi.getDashboardInfo();
+  return manageRole === "ADMIN";
 };
 
 export default isAdmin;

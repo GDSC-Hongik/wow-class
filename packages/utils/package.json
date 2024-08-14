@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    ".": "./src/index.tsx"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "test": "jest"
