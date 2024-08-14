@@ -25,6 +25,7 @@
     "@types/react-dom": "^18.2.19",
     "@wow-class/eslint-config": "workspace:*",
     "@wow-class/typescript-config": "workspace:*",
+    "@wow-class/fonts": "workspace:*",
     "eslint": "^8.57.0",
     "eslint-plugin-storybook": "^0.8.0",
     "storybook": "^8.2.7",

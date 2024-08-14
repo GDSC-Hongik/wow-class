@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useSelectedLayoutSegments } from "next/navigation";
 import { useState } from "react";
 
-import arrowImageUrl from "../../assets/arrow.svg";
+import arrowImageUrl from "../../assets/images/arrow.svg";
 import Text from "../Text";
 
 /**
