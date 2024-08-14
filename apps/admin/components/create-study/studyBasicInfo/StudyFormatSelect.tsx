@@ -1,15 +1,11 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { type Control, Controller } from "react-hook-form";
-import type { CreateStudyFormType } from "types/entities/study";
+import { Controller, useFormContext } from "react-hook-form";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-const StudyFormatSelect = ({
-  control,
-}: {
-  control: Control<CreateStudyFormType>;
-}) => {
+const StudyFormatSelect = () => {
+  const { control } = useFormContext();
   return (
     <Controller
       control={control}
@@ -26,7 +22,7 @@ const StudyFormatSelect = ({
           <DropDownOption
             value="ASSIGNMENT"
             text={
-              <Flex gap="md">
+              <Flex alignItems="center" gap="md">
                 <Text typo="body1">오프라인 세션</Text>
                 <Text color="sub" typo="body2">
                   오프라인으로 진행해요.
@@ -37,7 +33,7 @@ const StudyFormatSelect = ({
           <DropDownOption
             value="ONLINE"
             text={
-              <Flex gap="md">
+              <Flex alignItems="center" gap="md">
                 <Text typo="body1">온라인 세션</Text>
                 <Text color="sub" typo="body2">
                   온라인으로 진행해요.
@@ -48,7 +44,7 @@ const StudyFormatSelect = ({
           <DropDownOption
             value="OFFLINE"
             text={
-              <Flex gap="md">
+              <Flex alignItems="center" gap="md">
                 <Text typo="body1">과제 스터디</Text>
                 <Text color="sub" typo="body2">
                   별도 강의 없이 과제만 진행해요.
@@ -58,6 +54,9 @@ const StudyFormatSelect = ({
           />
         </DropDown>
       )}
+      rules={{
+        required: true,
+      }}
     />
   );
 };

@@ -26,12 +26,12 @@ const CreateStudyPage = () => {
   return (
     <FormProvider {...methods}>
       <Flex direction="column" justifyContent="flex-start" width="100%">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <StudyNameTextField control={control} />
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <StudyNameTextField />
           <styled.div height="48px" />
           <StudyMentorSelect />
           <styled.div height="64px" />
-          <StudyBasicInfo control={control} />
+          <StudyBasicInfo />
           <button type="submit">제출때려</button>
         </form>
       </Flex>

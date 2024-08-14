@@ -1,14 +1,11 @@
-import type { Control } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
-import type { CreateStudyFormType } from "types/entities/study";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
 const StudySemesterSelect = () => {
-  const { register, control } = useFormContext();
+  const { control } = useFormContext();
   return (
     <Controller
-      {...register("studyYearSemester")}
       control={control}
       name="studyYearSemester"
       render={({ field }) => (

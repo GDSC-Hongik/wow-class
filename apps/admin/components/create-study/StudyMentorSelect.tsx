@@ -1,15 +1,13 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { type Control, Controller, useFormContext } from "react-hook-form";
-import type { CreateStudyFormType } from "types/entities/study";
+import { Controller, useFormContext } from "react-hook-form";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
 const StudyMentorSelect = () => {
-  const { register, control } = useFormContext();
+  const { control } = useFormContext();
   return (
     <Controller
-      {...register("mentorId")}
       control={control}
       defaultValue={0}
       name="mentorId"

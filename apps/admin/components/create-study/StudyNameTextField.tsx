@@ -1,14 +1,10 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { type Control, Controller } from "react-hook-form";
-import type { CreateStudyFormType } from "types/entities/study";
+import { Controller, useFormContext } from "react-hook-form";
 
-const StudyNameTextField = ({
-  control,
-}: {
-  control: Control<CreateStudyFormType>;
-}) => {
+const StudyNameTextField = () => {
+  const { control } = useFormContext();
   return (
     <Controller
       control={control}
