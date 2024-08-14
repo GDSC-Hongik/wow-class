@@ -1,9 +1,41 @@
-import { Text } from "@wow-class/ui";
+"use client";
+import { Flex, styled } from "@styled-system/jsx";
+import StudyBasicInfo from "components/create-study/studyBasicInfo";
+import StudyMentorSelect from "components/create-study/StudyMentorSelect";
+import StudyNameTextField from "components/create-study/StudyNameTextField";
+import { useFormState } from "react-dom";
+import { Form, FormProvider, useForm } from "react-hook-form";
+import type { CreateStudyFormType } from "types/entities/study";
+import RadioButton from "wowds-ui/RadioButton";
+
 const CreateStudyPage = () => {
+  const methods = useForm<CreateStudyFormType>({ mode: "onChange" });
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+    register,
+  } = useForm<CreateStudyFormType>({
+    mode: "onChange",
+  });
+
+  const onSubmit = async (data: CreateStudyFormType) => {
+    console.log(data);
+  };
+
   return (
-    <Text color="sub" typo="h3">
-      새로 개설할 스터디 정보를 입력해주세요
-    </Text>
+    <FormProvider {...methods}>
+      <Flex direction="column" justifyContent="flex-start" width="100%">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <StudyNameTextField control={control} />
+          <styled.div height="48px" />
+          <StudyMentorSelect />
+          <styled.div height="64px" />
+          <StudyBasicInfo control={control} />
+          <button type="submit">제출때려</button>
+        </form>
+      </Flex>
+    </FormProvider>
   );
 };
 
