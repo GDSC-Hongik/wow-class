@@ -1,5 +1,6 @@
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
+import { Text } from "@wow-class/ui";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
@@ -7,11 +8,15 @@ const Assignments = ({ params }: { params: { id: string } }) => {
   return (
     <>
       <styled.header className={headerStyle}>
-        <Flex direction="column">
-          <styled.span>과제 정보를 입력해주세요</styled.span>
-          <h1>{params.id}주차 과제</h1>
+        <Flex direction="column" gap="0.75rem">
+          <Text color="sub" typo="h3">
+            과제 정보를 입력해주세요
+          </Text>
+          <Text as="h1" typo="h1">
+            {params.id}주차 과제
+          </Text>
         </Flex>
-        <Button disabled size="sm">
+        <Button disabled size="sm" style={{ height: "fit-content" }}>
           저장하기
         </Button>
       </styled.header>
