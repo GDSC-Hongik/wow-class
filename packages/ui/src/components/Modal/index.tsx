@@ -7,10 +7,17 @@ import { useCallback, useRef } from "react";
 
 export interface ModalProps {
   title: ReactNode;
-  children?: ReactNode;
   closeModal: () => void;
+  children?: ReactNode;
 }
 
+/**
+ * @description 모달 컴포넌트입니다.
+ *
+ * @param {ReactNode} title - 모달 컴포넌트의 제목.
+ * @param {() => void} closeModal - 모달 컴포넌트를 닫기 위한 함수.
+ * @param {ReactNode} [children] - 모달 컴포넌트에 들어갈 자식 요소.
+ */
 const Modal = ({ title, children, closeModal }: ModalProps) => {
   const overlay = useRef<HTMLDivElement>(null);
 
@@ -35,9 +42,9 @@ const Modal = ({ title, children, closeModal }: ModalProps) => {
         <button className={closeButtonStyle} onClick={closeModal}>
           X
         </button>
-        <h1 className={css({ textStyle: "h1", textAlign: "center" })}>
+        <styled.h1 className={css({ textStyle: "h1", textAlign: "center" })}>
           {title}
-        </h1>
+        </styled.h1>
         {children}
       </styled.dialog>
     </Flex>
