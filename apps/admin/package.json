@@ -17,7 +17,7 @@
     "react-clock": "^5.0.0",
     "react-day-picker": "^9.0.8",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.52.2"
+    "react-hook-form": "^7.53.0"
   },
   "devDependencies": {
     "@types/node": "^20",
