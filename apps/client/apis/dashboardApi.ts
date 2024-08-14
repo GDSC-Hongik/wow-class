@@ -9,6 +9,7 @@ export const dashboardApi = {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
 
+    // NOTE: middleware에서 호출하기 위해서 별도로 헤더 주입
     const response = await fetcher.get<DashboardApiResponseDto>(
       apiPath.dashboard,
       {
