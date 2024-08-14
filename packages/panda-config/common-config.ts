@@ -5,9 +5,23 @@ import {
   removeUnusedCssVars,
   removeUnusedKeyframes,
 } from "wowds-theme";
+import { typography } from "wowds-tokens";
 
 const commonConfig: Config = {
   presets: [pandaPreset],
+  //TODO: wowds-theme의 preset에서 staticCss 를 정의하도록 수정
+  staticCss: {
+    css: [
+      {
+        properties: {
+          ...(pandaPreset?.staticCss?.css?.[0]?.properties?.color && {
+            color: pandaPreset.staticCss.css[0].properties.color,
+          }),
+          textStyle: Object.keys(typography),
+        },
+      },
+    ],
+  },
   preflight: true,
   minify: true,
   watch: true,
