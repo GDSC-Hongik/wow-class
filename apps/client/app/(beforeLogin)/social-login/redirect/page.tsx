@@ -2,7 +2,7 @@ import { dashboardApi } from "apis/dashboardApi";
 import { routePath } from "constants/routePath";
 import { redirect } from "next/navigation";
 
-const AuthServerRedirectPage = async () => {
+const SocialLoginRedirectPage = async () => {
   const { memberRole, currentRecruitmentOpen } =
     await dashboardApi.getDashboardInfo();
 
@@ -15,4 +15,4 @@ const AuthServerRedirectPage = async () => {
   }
 };
 
-export default AuthServerRedirectPage;
+export default SocialLoginRedirectPage;

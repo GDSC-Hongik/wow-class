@@ -1,5 +1,5 @@
-const MyHomework = () => {
+const MyHomeworkPage = () => {
   return <div>MyHomework</div>;
 };
 
-export default MyHomework;
+export default MyHomeworkPage;
