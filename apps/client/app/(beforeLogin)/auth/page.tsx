@@ -1,7 +1,8 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
-import LoginButton from "components/LoginButton";
 import Image from "next/image";
+
+import LoginButton from "./_components/LoginButton";
 
 const AuthPage = async () => {
   return (
