@@ -1,4 +1,12 @@
-const AssignmentLayout = ({ create, view }) => {
+import type { ReactNode } from "react";
+
+const AssignmentLayout = ({
+  create,
+  view,
+}: Readonly<{
+  create: ReactNode;
+  view: ReactNode;
+}>) => {
   // TODO: 스터디 과제 상세 조회
   const isRegistered = true;
 
