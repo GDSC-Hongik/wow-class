@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { color } from "wowds-tokens";
 import Button from "wowds-ui/Button";
@@ -18,6 +19,7 @@ const LoginButton = () => {
 
   return (
     <Button
+      icon={githubLogoIcon}
       style={{ backgroundColor: `${color.github}` }}
       onClick={handleClickLogin}
     >
@@ -27,3 +29,12 @@ const LoginButton = () => {
 };
 
 export default LoginButton;
+
+const githubLogoIcon = (
+  <Image
+    alt="github-logo"
+    height={18}
+    src="/images/github-logo.svg"
+    width={18}
+  />
+);
