@@ -1,6 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
+import Link from "next/link";
 import Button from "wowds-ui/Button";
 
 const Assignments = ({ params }: { params: { id: string } }) => {
@@ -14,9 +15,11 @@ const Assignments = ({ params }: { params: { id: string } }) => {
           <Button size="sm" variant="outline">
             과제 휴강처리
           </Button>
-          <Button size="sm" variant="outline">
-            수정
-          </Button>
+          <Link href={`${params.id}/edit`}>
+            <Button size="sm" variant="outline">
+              수정
+            </Button>
+          </Link>
         </Flex>
       </styled.header>
       <Flex direction="column" gap="4rem">
