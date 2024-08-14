@@ -13,6 +13,7 @@
     "@wow-class/typescript-config": "workspace:*",
     "jest": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
-    "ts-jest": "^29.2.4"
+    "ts-jest": "^29.2.4",
+    "@wow-class/eslint-config": "workspace:*"
   }
 }

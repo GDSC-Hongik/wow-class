@@ -8,6 +8,7 @@ import { useSelectedLayoutSegments } from "next/navigation";
 import { useState } from "react";
 
 import arrowImageUrl from "../../assets/images/arrow.svg";
+import Text from "../Text";
 
 /**
  * @description 내비게이션 바에서 사용하는 내비게이션 아이템 컴포넌트입니다.
@@ -66,7 +67,9 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
           src={imageUrl}
           width={20}
         />
-        <div className={navItemTextStyle}>{name}</div>
+        <Text as="div" typo="body1">
+          {name}
+        </Text>
         {items?.length && items?.length > 1 && (
           <Image
             alt="toggle-icon"
@@ -102,7 +105,9 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
                   src={item.imageUrl}
                   width={20}
                 />
-                <div className={navItemTextStyle}>{item.name}</div>
+                <Text as="div" typo="body1">
+                  {item.name}
+                </Text>
               </Link>
             </li>
           ))}
@@ -132,8 +137,4 @@ const navItemStyle = cva({
       },
     },
   },
-});
-
-const navItemTextStyle = css({
-  textStyle: "body1",
 });
