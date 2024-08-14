@@ -1,5 +1,6 @@
 "use client";
 
+import { baseUrl } from "constants/environment";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { color } from "wowds-tokens";
@@ -9,11 +10,6 @@ const LoginButton = () => {
   const router = useRouter();
 
   const handleClickLogin = () => {
-    const baseUrl =
-      process.env.NODE_ENV === "production"
-        ? process.env.NEXT_PUBLIC_PROD_BASE_URL
-        : process.env.NEXT_PUBLIC_DEV_BASE_URL;
-
     router.push(`${baseUrl}/oauth2/authorization/github`);
   };
 
