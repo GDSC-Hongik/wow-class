@@ -1,6 +1,6 @@
 import { css } from "@styled-system/css";
 import { styled } from "@styled-system/jsx";
-import { Space, Table } from "@wow-class/ui";
+import { Space, Table, Text } from "@wow-class/ui";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
@@ -8,9 +8,9 @@ const StudyApplyPage = () => {
   const array = [0, 1, 2];
   return (
     <>
-      <styled.h1 color="textBlack" textStyle="h1">
+      <Text as="h1" typo="h1">
         신청 가능한 스터디
-      </styled.h1>
+      </Text>
       <Space height={19} />
       {array.map(() => (
         <Table
