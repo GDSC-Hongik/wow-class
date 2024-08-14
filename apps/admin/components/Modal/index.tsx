@@ -1,11 +1,10 @@
+"use client";
+
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
-import type { ReactNode } from "react";
-
-/**
- * @description Modal 컴포넌트의 속성을 정의합니다.
- *
- */
+import { useRouter } from "next/navigation";
+import type { MouseEventHandler, ReactNode } from "react";
+import { useCallback, useRef } from "react";
 
 export interface ModalProps {
   title: ReactNode;
@@ -13,10 +12,34 @@ export interface ModalProps {
 }
 
 const Modal = ({ title, children }: ModalProps) => {
+  const router = useRouter();
+  const overlay = useRef<HTMLDivElement>(null);
+
+  const onDismiss = useCallback(() => {
+    router.back();
+  }, [router]);
+
+  const onClick: MouseEventHandler = useCallback(
+    (e) => {
+      if (e.target === overlay.current) {
+        if (onDismiss) onDismiss();
+      }
+    },
+    [onDismiss, overlay]
+  );
+
   return (
-    <Flex alignItems="center" className={backDropStyle} justifyContent="center">
+    <Flex
+      alignItems="center"
+      className={backDropStyle}
+      justifyContent="center"
+      ref={overlay}
+      onClick={onClick}
+    >
       <styled.dialog className={dialogStyle}>
-        <button className={closeButtonStyle}>X</button>
+        <button className={closeButtonStyle} onClick={onClick}>
+          X
+        </button>
         <h1 className={css({ textStyle: "h1" })}>{title}</h1>
         {children}
       </styled.dialog>
