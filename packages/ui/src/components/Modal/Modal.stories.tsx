@@ -20,7 +20,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     title: "상세 정보가 등록되었어요.",
-    closeModal: () => {},
+    closeModal: () => {
+      console.log("모달 닫기");
+    },
   },
 };
 
