@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
-import CreateStudyButton from "components/create-study/CreateStudyButton";
-import SelectStudySemester from "components/create-study/SelectStudySemester";
+import CreateStudyButton from "components/studies/CreateStudyButton";
+import SelectStudySemester from "components/studies/SelectStudySemester";
 
 const StudiesPage = () => {
   return (
