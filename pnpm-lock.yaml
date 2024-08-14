@@ -15,8 +15,8 @@ importers:
         specifier: ^0.1.1
         version: 0.1.2
       wowds-ui:
-        specifier: ^0.1.8
-        version: 0.1.8(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.1.12
+        version: 0.1.12(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@pandacss/dev':
         specifier: ^0.44.0
@@ -6988,8 +6988,8 @@ packages:
   wordwrap@1.0.0:
     resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
 
-  wowds-icons@0.1.1:
-    resolution: {integrity: sha512-aOiGOoMAScWVPj5Z5tq2z9l5al/pOUs4AKTCHFhjqvCvp96Gy98vI4TL/Nhzj1E5LBUwIzBPM8pTtNY/neRjiw==}
+  wowds-icons@0.1.2:
+    resolution: {integrity: sha512-gq8ebAc832G7/3Rl7W37yBIulcE192oIcp+HognAjAEhNWaXRla+b7svNPWEu37pIAHmE+C1OaFZzMzFlRNQUw==}
 
   wowds-theme@0.1.2:
     resolution: {integrity: sha512-YyjVG+JwjAe4YFw/mhnj1peFzlux326jxrNkr3V8kyo/sOVWTDW0LkWMlscETPSNVSY8TSYgcSYSELrON5uikg==}
@@ -7000,8 +7000,8 @@ packages:
   wowds-tokens@0.1.2:
     resolution: {integrity: sha512-rVKpxNtNMYp68RdsVcXDUMoVZfnD51vrLz8bKXkgh0buRKhjCa8A3qzXvU1RK1h+jEdpLV5oEbabLtwtq1Xkgg==}
 
-  wowds-ui@0.1.8:
-    resolution: {integrity: sha512-a6DSdxoQxZPRMkFodbY1GKYWxzuzCpSAir5WAKU0lPO3cmTmK1ILLXqlI+lANfI9fRAzCZDY9RoX5vdBl9yz7A==}
+  wowds-ui@0.1.12:
+    resolution: {integrity: sha512-l3cTOg64IrcndZNs6B/W8bKd/z+1CNF87mJn6VCrRnB3UQhXCmWETFc22o3tSPFNkm1o59PrhhW8bMgIP2dGYw==}
     peerDependencies:
       next: ^14.1.1
       react: ^18.2.0
@@ -15439,7 +15439,7 @@ snapshots:
 
   wordwrap@1.0.0: {}
 
-  wowds-icons@0.1.1: {}
+  wowds-icons@0.1.2: {}
 
   wowds-theme@0.1.2: {}
 
@@ -15447,12 +15447,13 @@ snapshots:
 
   wowds-tokens@0.1.2: {}
 
-  wowds-ui@0.1.8(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  wowds-ui@0.1.12(next@14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
+      clsx: 2.1.1
       lottie-react: 2.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next: 14.2.5(@babel/core@7.25.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
-      wowds-icons: 0.1.1
+      wowds-icons: 0.1.2
     transitivePeerDependencies:
       - react-dom
 
