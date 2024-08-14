@@ -17,7 +17,7 @@ const middleware = async (req: NextRequest) => {
 
   const { studyRole, manageRole } = await dashboardApi.getDashboardInfo();
 
-  if (studyRole !== "MENTOR" || manageRole !== "ADMIN") {
+  if (studyRole === "STUDENT" && manageRole === "NONE") {
     const url =
       process.env.NODE_ENV === "production"
         ? process.env.CLIENT_PROD_URL
