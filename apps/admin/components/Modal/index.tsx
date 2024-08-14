@@ -37,10 +37,12 @@ const Modal = ({ title, children }: ModalProps) => {
       onClick={onClick}
     >
       <styled.dialog className={dialogStyle}>
-        <button className={closeButtonStyle} onClick={onClick}>
+        <button className={closeButtonStyle} onClick={onDismiss}>
           X
         </button>
-        <h1 className={css({ textStyle: "h1" })}>{title}</h1>
+        <h1 className={css({ textStyle: "h1", textAlign: "center" })}>
+          {title}
+        </h1>
         {children}
       </styled.dialog>
     </Flex>
