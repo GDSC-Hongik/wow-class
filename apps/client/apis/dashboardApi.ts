@@ -21,7 +21,7 @@ export const dashboardApi = {
 
     const memberRole = response.data?.member.role;
     const currentRecruitmentOpen =
-      response.data?.currentRecruitmentRound.period.open;
+      response.data?.currentRecruitmentRound?.period.open || false;
 
     return { memberRole, currentRecruitmentOpen };
   },
