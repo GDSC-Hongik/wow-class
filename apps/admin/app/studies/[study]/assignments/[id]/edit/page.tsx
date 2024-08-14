@@ -56,6 +56,7 @@ const Assignments = ({ params }: { params: { id: string } }) => {
 const headerStyle = css({
   width: "100%",
   display: "flex",
+  alignItems: "top",
   justifyContent: "space-between",
 });
 
