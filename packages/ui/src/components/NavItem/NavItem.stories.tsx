@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import folderImageUrl from "../../assets/folder.svg";
-import homeImageUrl from "../../assets/home.svg";
+import folderImageUrl from "../../assets/images/folder.svg";
+import homeImageUrl from "../../assets/images/home.svg";
 import Navbar from ".";
 
 const meta = {
