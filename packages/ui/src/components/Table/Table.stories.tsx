@@ -5,7 +5,7 @@ import Text from "../Text";
 import Table from ".";
 
 const meta: Meta<typeof Table> = {
-  title: "UI/Table",
+  title: "Shared/Table",
   component: Table,
   tags: ["autodocs"],
   parameters: {

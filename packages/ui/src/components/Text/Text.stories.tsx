@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Text from ".";
 
 const meta: Meta<typeof Text> = {
-  title: "UI/Text",
+  title: "Shared/Text",
   component: Text,
   tags: ["autodocs"],
   parameters: {
