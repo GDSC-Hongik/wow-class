@@ -1,7 +1,7 @@
 import { space as wowSpace } from "wowds-tokens";
 
-type SpaceKey = keyof typeof wowSpace;
-type SpaceType = number | string | SpaceKey;
+type WowSpaceKeyType = keyof typeof wowSpace;
+type SpaceType = number | string | WowSpaceKeyType;
 
 /**
  * @description Space 컴포넌트
@@ -17,7 +17,7 @@ const getSpace = (space?: SpaceType) => {
   if (typeof space === "number") {
     return `${space}px`;
   } else if (typeof space === "string" && space in wowSpace) {
-    return wowSpace[space as SpaceKey];
+    return wowSpace[space as WowSpaceKeyType];
   }
   return space || "";
 };
