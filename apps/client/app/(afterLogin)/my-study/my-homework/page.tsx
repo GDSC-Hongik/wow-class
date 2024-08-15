@@ -1,11 +1,12 @@
 import { Flex, styled } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
-import {
-  DefaultHomeworkBox,
-  HomeworkHistory,
-  TextFieldHomeworkBox,
-} from "components/my-homework";
 import Image from "next/image";
+
+import {
+  HomeworkHistory,
+  HomeworkOverviewBox,
+  HomeworkSubmissionBox,
+} from "@/(afterLogin)/my-study/my-homework/_components";
 
 const MyHomeworkPage = () => {
   return (
@@ -25,8 +26,8 @@ const MyHomeworkPage = () => {
       </div>
       <Space height={48} />
       <Flex gap="lg">
-        <TextFieldHomeworkBox />
-        <DefaultHomeworkBox />
+        <HomeworkSubmissionBox />
+        <HomeworkOverviewBox />
       </Flex>
       <Space height={64} />
       <HomeworkHistory />

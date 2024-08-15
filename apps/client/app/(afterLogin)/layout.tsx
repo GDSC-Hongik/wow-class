@@ -5,9 +5,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
-      <styled.section paddingTop="3.375rem" paddingX="6.31rem" width="100vw">
+      <styled.main paddingTop="3.375rem" paddingX="6.31rem" width="100vw">
         {children}
-      </styled.section>
+      </styled.main>
     </>
   );
 };

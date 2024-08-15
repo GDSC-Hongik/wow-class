@@ -7,7 +7,7 @@ import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
-export const DefaultHomeworkBox = () => {
+export const HomeworkOverviewBox = () => {
   return (
     <Box
       text={

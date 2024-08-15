@@ -8,7 +8,7 @@ import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextField from "wowds-ui/TextField";
 
-export const TextFieldHomeworkBox = () => {
+export const HomeworkSubmissionBox = () => {
   const [value, setValue] = useState("");
   //TODO: 모달을 통해 제출 확인하는 부분 추가
   const [isSubmit, setIsSubmit] = useState(false);
