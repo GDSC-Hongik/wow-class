@@ -239,6 +239,8 @@ progress {
   --colors-mono-950: #121212;
   --colors-white: #ffffff;
   --colors-black: #000000;
+  --spacing-xxs: 0.25rem;
+  --spacing-xs: 0.5rem;
   --colors-primary: #368ff7;
   --colors-success: #2a8642;
   --colors-error: #bb362a;
@@ -262,6 +264,12 @@ progress {
   --colors-blue-shadow: rgba(16, 43, 74, 0.2);
   --colors-discord: #5566fb;
   --colors-github: #000000;
+  --colors-secondary-yellow: #f9ab00;
+  --colors-secondary-green: #34a853;
+  --colors-secondary-red: #ea4335;
+  --colors-error-background: #fbd9d7;
+  --colors-blue-disabled: #d7e9fd;
+  --colors-text-blue-disabled: #afd2fc;
 }
 .textStyle_body1:not(#\#):not(#\#):not(#\#):not(#\#) {
   letter-spacing: -0.01rem;
@@ -346,9 +354,6 @@ progress {
 .h_20px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   height: 20px;
 }
-.ls_-0\.16px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  letter-spacing: -0.16px;
-}
 .d_flex:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   display: flex;
 }
@@ -363,6 +368,21 @@ progress {
 }
 .bg_white:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   background: var(--colors-white);
+}
+.h_80px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 80px;
+}
+.gap_xxs:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  gap: var(--spacing-xxs);
+}
+.gap_xs:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  gap: var(--spacing-xs);
+}
+.c_sub:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-sub);
+}
+.c_blue:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: blue;
 }
 .c_textBlack:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-text-black);
@@ -610,8 +630,8 @@ progress {
 .c_backgroundDimmer:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-background-dimmer);
 }
-.c_sub:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  color: var(--colors-sub);
+.c_errorBackground:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-error-background);
 }
 .c_outline:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-outline);
@@ -624,6 +644,12 @@ progress {
 }
 .c_lightDisabled:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-light-disabled);
+}
+.c_blueDisabled:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-blue-disabled);
+}
+.c_textBlueDisabled:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-text-blue-disabled);
 }
 .c_blueHover:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-blue-hover);
@@ -658,6 +684,15 @@ progress {
 .c_github:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-github);
 }
+.c_secondaryYellow:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-secondary-yellow);
+}
+.c_secondaryGreen:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-secondary-green);
+}
+.c_secondaryRed:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-secondary-red);
+}
 .c_blueGradientDark:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: blueGradientDark;
 }
@@ -685,18 +720,27 @@ progress {
 .ml_auto:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   margin-left: auto;
 }
-.fs_16px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  font-size: 16px;
-}
-.fw_500:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  font-weight: 500;
-}
-.lh_160\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  line-height: 160%;
-}
 .mr_8px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   margin-right: 8px;
 }
 .ai_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   align-items: center;
+}
+.jc_space-between:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  justify-content: space-between;
+}
+.mb_12px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  margin-bottom: 12px;
+}
+.jc_flex-start:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  justify-content: flex-start;
+}
+.jc_flex-end:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  justify-content: flex-end;
+}
+.flex-d_column:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  flex-direction: column;
+}
+.jc_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  justify-content: center;
 }

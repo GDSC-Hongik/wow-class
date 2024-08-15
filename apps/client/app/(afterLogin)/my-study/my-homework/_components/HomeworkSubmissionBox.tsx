@@ -9,14 +9,21 @@ import Tag from "wowds-ui/Tag";
 import TextField from "wowds-ui/TextField";
 
 export const HomeworkSubmissionBox = () => {
-  const [value, setValue] = useState("");
-  //TODO: 모달을 통해 제출 확인하는 부분 추가
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [url, setUrl] = useState("");
+  //TODO: 모달 여는 부분 추가
+  const [isEditing, setIsEditing] = useState(true);
 
   const handleChange = (value: string) => {
-    setValue(value);
+    setUrl(value);
   };
 
+  const handleEditButtonClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleSubmitButtonClick = () => {
+    setIsEditing(false);
+  };
   return (
     <Box
       text={
@@ -38,15 +45,15 @@ export const HomeworkSubmissionBox = () => {
             입력하지 않으면 앞으로의 과제를 제출할 수 없어요.
           </Text>
           <Space height={26} />
-          {!isSubmit && (
+          {isEditing && (
             <TextField
               label=""
               placeholder="URL 을 입력하세요"
-              value={value}
+              value={url}
               onChange={handleChange}
             />
           )}
-          {isSubmit && (
+          {!isEditing && (
             <Flex
               backgroundColor="backgroundAlternative"
               borderRadius="5px"
@@ -55,22 +62,14 @@ export const HomeworkSubmissionBox = () => {
               paddingY="18px"
               textStyle="h2"
             >
-              {value}
-              <button
-                onClick={() => {
-                  setIsSubmit(false);
-                }}
-              >
-                수정버튼
-              </button>
+              {url}
+              <button onClick={handleEditButtonClick}>수정버튼</button>
             </Flex>
           )}
           <Space height={62} />
           <Button
             style={{ maxWidth: "100%" }}
-            onClick={() => {
-              setIsSubmit(true);
-            }}
+            onClick={handleSubmitButtonClick}
           >
             입력하기
           </Button>
