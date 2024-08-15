@@ -5,7 +5,7 @@ import homeImageUrl from "../../assets/images/home.svg";
 import Navbar from ".";
 
 const meta = {
-  title: "UI/Navbar",
+  title: "Shared/Navbar",
   component: Navbar,
   tags: ["autodocs"],
   parameters: {
