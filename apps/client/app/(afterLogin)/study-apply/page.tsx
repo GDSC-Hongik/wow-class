@@ -13,30 +13,26 @@ const StudyApplyPage = () => {
       </Text>
       <Space height={19} />
       {array.map(() => (
-        <Table
-          center={
-            <>
-              <Table.Content
-                subText="(스터디 한 줄 소개-스터디 상세 설명 노션 링크로 연결)"
-                text="기초 웹 스터디"
-                textRight={
-                  <Tag color="yellow" variant="solid1">
-                    신규
-                  </Tag>
-                }
-              />
-              <Text className={textCellStyle}>강가은 멘토</Text>
-              <Text className={textCellStyle}>화 18:00-19:00</Text>
-              <Text className={textCellStyle}>4주 코스</Text>
-              <Text className={textCellStyle}>06.18 개강</Text>
-              <styled.div paddingX="24px">
-                <Button size="sm" variant="solid">
-                  수강 신청
-                </Button>
-              </styled.div>
-            </>
-          }
-        />
+        <Table>
+          <Table.Content
+            subText="(스터디 한 줄 소개-스터디 상세 설명 노션 링크로 연결)"
+            text="기초 웹 스터디"
+            rightContent={
+              <Tag color="yellow" variant="solid1">
+                신규
+              </Tag>
+            }
+          />
+          <Text className={textCellStyle}>강가은 멘토</Text>
+          <Text className={textCellStyle}>화 18:00-19:00</Text>
+          <Text className={textCellStyle}>4주 코스</Text>
+          <Text className={textCellStyle}>06.18 개강</Text>
+          <styled.div paddingX="24px">
+            <Button size="sm" variant="solid">
+              수강 신청
+            </Button>
+          </styled.div>
+        </Table>
       ))}
     </>
   );
