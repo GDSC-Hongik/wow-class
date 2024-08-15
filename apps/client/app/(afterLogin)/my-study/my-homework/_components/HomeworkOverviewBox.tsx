@@ -1,6 +1,7 @@
 import { Flex, styled } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import Image from "next/image";
+import { Link, Reload } from "wowds-icons";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
@@ -37,11 +38,17 @@ export const HomeworkOverviewBox = () => {
             <styled.div color="primary">글자수 충족</styled.div>
           </Flex>
           <Space height={26} />
-          <Button style={{ maxWidth: "100%" }} variant="outline">
+          <Button
+            icon={<Link stroke="primary" />}
+            style={{ maxWidth: "100%" }}
+            variant="outline"
+          >
             제출하러 가기
           </Button>
           <Space height={8} />
-          <Button style={{ maxWidth: "100%" }}>제출 완료</Button>
+          <Button icon={<Reload />} style={{ maxWidth: "100%" }}>
+            제출 완료
+          </Button>
         </>
       }
     />

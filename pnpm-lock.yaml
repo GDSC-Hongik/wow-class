@@ -18,8 +18,8 @@ importers:
         specifier: ^0.1.1
         version: 0.1.3
       wowds-ui:
-        specifier: ^0.1.10
-        version: 0.1.10(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.1.13
+        version: 0.1.13(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@pandacss/dev':
         specifier: ^0.44.0
@@ -13845,8 +13845,8 @@ packages:
     resolution: {integrity: sha512-Pej6MuUec/i6A04gWELi4bb/T2I8gf/57L9rX8G7ElVeMc7/03ELoM0nBFWKybtpYExXhhlQPp0Lg7iqATpy6Q==}
     dev: false
 
-  /wowds-ui@0.1.10(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-sUW9jsztraWPX5x8Q2TSD/UJuDVTvNk/kO/bKusFLQPYDHeKrNYQe9M3/8Sz70nuq/bLwpeADcy/PIiNH7B+VQ==}
+  /wowds-ui@0.1.13(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-u8axgvn1vknrkQhTwg1zRwDPyzv+NAMK7soxe1UjNrAnUBncnlSBD4OIVzVk9+2hgC26faZcilq4pij9HSrG6g==}
     peerDependencies:
       next: ^14.1.1
       react: ^18.2.0
