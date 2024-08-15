@@ -5,7 +5,7 @@ import Image from "next/image";
 import {
   HomeworkHistory,
   HomeworkOverviewBox,
-  HomeworkSubmissionBox,
+  RepositorySubmissionBox,
 } from "@/(afterLogin)/my-study/my-homework/_components";
 
 const MyHomeworkPage = () => {
@@ -26,7 +26,7 @@ const MyHomeworkPage = () => {
       </div>
       <Space height={48} />
       <Flex gap="lg">
-        <HomeworkSubmissionBox />
+        <RepositorySubmissionBox />
         <HomeworkOverviewBox />
       </Flex>
       <Space height={64} />

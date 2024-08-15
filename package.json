@@ -43,8 +43,9 @@
     "node": ">=18"
   },
   "dependencies": {
-    "wowds-ui": "^0.1.10",
     "clsx": "^2.1.1",
-    "wowds-tokens": "^0.1.1"
+    "wowds-icons": "^0.1.3",
+    "wowds-tokens": "^0.1.1",
+    "wowds-ui": "^0.1.10"
   }
 }

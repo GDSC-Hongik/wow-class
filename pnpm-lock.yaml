@@ -11,6 +11,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      wowds-icons:
+        specifier: ^0.1.3
+        version: 0.1.3
       wowds-tokens:
         specifier: ^0.1.1
         version: 0.1.3
@@ -13830,8 +13833,8 @@ packages:
     resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
     dev: true
 
-  /wowds-icons@0.1.1:
-    resolution: {integrity: sha512-aOiGOoMAScWVPj5Z5tq2z9l5al/pOUs4AKTCHFhjqvCvp96Gy98vI4TL/Nhzj1E5LBUwIzBPM8pTtNY/neRjiw==}
+  /wowds-icons@0.1.3:
+    resolution: {integrity: sha512-PQAbzPhrvUcMPhYz3lXbl5NXxJMS9TE5F09Q/LphI+P/FlRSNhZS0v5sqDpNpYxB4rQZXnUOCJfmOEzmoDPZvw==}
     dev: false
 
   /wowds-theme@0.1.3:
@@ -13852,7 +13855,7 @@ packages:
       lottie-react: 2.4.0(react-dom@18.3.1)(react@18.3.1)
       next: 14.2.5(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
-      wowds-icons: 0.1.1
+      wowds-icons: 0.1.3
     transitivePeerDependencies:
       - react-dom
     dev: false
