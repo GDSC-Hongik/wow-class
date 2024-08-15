@@ -241,6 +241,7 @@ progress {
   --colors-black: #000000;
   --spacing-xxs: 0.25rem;
   --spacing-xs: 0.5rem;
+  --border-widths-button: 1px;
   --colors-primary: #368ff7;
   --colors-success: #2a8642;
   --colors-error: #bb362a;
@@ -341,6 +342,36 @@ progress {
   line-height: 100%;
   font-weight: 600;
 }
+.h_24:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 24px;
+}
+.w_49:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 49px;
+}
+.w_100vw:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 100vw;
+}
+.h_54px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 54px;
+}
+.d_flex:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  display: flex;
+}
+.gap_8px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  gap: 8px;
+}
+.w_fit-content:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: fit-content;
+}
+.w_49px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 49px;
+}
+.h_24px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 24px;
+}
+.c_primary:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-primary);
+}
 .li-s_none:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   list-style: none;
 }
@@ -353,9 +384,6 @@ progress {
 }
 .h_20px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   height: 20px;
-}
-.d_flex:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  display: flex;
 }
 .gap_12px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   gap: 12px;
@@ -612,9 +640,6 @@ progress {
 .c_blackOpacity\.80:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: blackOpacity.80;
 }
-.c_primary:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  color: var(--colors-primary);
-}
 .c_success:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-success);
 }
@@ -717,14 +742,44 @@ progress {
 .c_yellowGradientLight:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: yellowGradientLight;
 }
+.bd-b-w_button:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-bottom-width: var(--border-widths-button);
+}
+.bd-b-c_mono\.400:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-bottom-color: var(--colors-mono-400);
+}
+.border-bottom-style_solid:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  border-bottom-style: solid;
+}
+.ai_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  align-items: center;
+}
+.ml_225px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  margin-left: 225px;
+}
+.ff_Product_Sans:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  font-family: Product Sans;
+}
+.fw_700:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  font-weight: 700;
+}
+.fs_20px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  font-size: 20px;
+}
+.lh_130\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  line-height: 130%;
+}
+.fw_400:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  font-weight: 400;
+}
+.fs_14px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  font-size: 14px;
+}
 .ml_auto:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   margin-left: auto;
 }
 .mr_8px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   margin-right: 8px;
-}
-.ai_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  align-items: center;
 }
 .jc_space-between:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   justify-content: space-between;
