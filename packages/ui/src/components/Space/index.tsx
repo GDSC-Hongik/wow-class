@@ -25,7 +25,13 @@ const getSpace = (space?: SpaceType) => {
 const Space = ({ width, height }: SpaceProps) => {
   return (
     <>
-      <div style={{ width: getSpace(width), height: getSpace(height) }} />
+      <hr
+        style={{
+          width: getSpace(width),
+          height: getSpace(height),
+          border: "none",
+        }}
+      />
     </>
   );
 };

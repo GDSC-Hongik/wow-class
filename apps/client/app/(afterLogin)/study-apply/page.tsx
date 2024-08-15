@@ -25,10 +25,10 @@ const StudyApplyPage = () => {
                   </Tag>
                 }
               />
-              <p className={textCellStyle}>강가은 멘토</p>
-              <p className={textCellStyle}>화 18:00-19:00</p>
-              <p className={textCellStyle}>4주 코스</p>
-              <p className={textCellStyle}>06.18 개강</p>
+              <Text className={textCellStyle}>강가은 멘토</Text>
+              <Text className={textCellStyle}>화 18:00-19:00</Text>
+              <Text className={textCellStyle}>4주 코스</Text>
+              <Text className={textCellStyle}>06.18 개강</Text>
               <styled.div paddingX="24px">
                 <Button size="sm" variant="solid">
                   수강 신청
@@ -45,7 +45,5 @@ const StudyApplyPage = () => {
 export default StudyApplyPage;
 
 const textCellStyle = css({
-  color: "textBlack",
   paddingX: "28px",
-  textStyle: "body1",
 });

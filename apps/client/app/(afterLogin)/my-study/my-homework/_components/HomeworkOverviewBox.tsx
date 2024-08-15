@@ -1,4 +1,3 @@
-import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import Image from "next/image";
@@ -26,16 +25,14 @@ export const HomeworkOverviewBox = () => {
           </Flex>
           <TextButton style={{ paddingLeft: "0px" }} text="과제 명세 확인" />
           <Space height="xs" />
-          <div className={descriptionStyle}>
-            종료 일시 : 2024년 5월 23일 23:59
-          </div>
-          <Flex className={descriptionStyle} gap="xs">
-            <div>
+          <Text color="sub">종료 일시 : 2024년 5월 23일 23:59</Text>
+          <Flex gap="xs">
+            <Text as="div" color="sub">
               제출한 과제 :
-              <styled.span color="textBlack">
+              <Text as="span" color="textBlack">
                 2024-1-Web-Study/Week4
-              </styled.span>
-            </div>
+              </Text>
+            </Text>
             <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
             <styled.div color="primary">글자수 충족</styled.div>
           </Flex>
@@ -50,8 +47,3 @@ export const HomeworkOverviewBox = () => {
     />
   );
 };
-
-const descriptionStyle = css({
-  color: "sub",
-  textStyle: "body1",
-});
