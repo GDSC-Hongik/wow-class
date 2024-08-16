@@ -1,11 +1,9 @@
 "use client";
 import { Flex, styled } from "@styled-system/jsx";
-import { useEffect } from "react";
-import { useFormState } from "react-dom";
-import { Form, FormProvider, useForm } from "react-hook-form";
+import { createStudyApi } from "apis/form/createStudyApi";
+import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import Button from "wowds-ui/Button";
-import RadioButton from "wowds-ui/RadioButton";
 
 import StudyBasicInfo from "@/studies/create-study/_components/studyBasicInfo";
 import StudyNameTextField from "@/studies/create-study/_components/StudyNameTextField";
@@ -16,7 +14,7 @@ const CreateStudyPage = () => {
   const methods = useForm<CreateStudyApiRequestDto>({ mode: "onChange" });
 
   const onSubmit = async (data: CreateStudyApiRequestDto) => {
-    console.log(data);
+    createStudyApi.postCreateStudy(data);
   };
 
   return (

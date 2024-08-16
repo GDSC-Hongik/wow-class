@@ -27,7 +27,7 @@ const StudyApplyDatePick = () => {
     if (studyDate.fromValue) {
       setInputValue(`${studyDate.fromValue} ~ ${studyDate.toValue}`);
       setValue("applicationStartDate", studyDate.fromValue);
-      setValue("applicationEndDate", studyDate.fromValue);
+      setValue("applicationEndDate", studyDate.toValue);
     } else {
       setInputValue("");
     }
