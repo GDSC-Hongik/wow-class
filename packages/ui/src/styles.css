@@ -397,8 +397,14 @@ progress {
 .bg_white:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   background: var(--colors-white);
 }
+.c_blue:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: blue;
+}
 .h_80px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   height: 80px;
+}
+.w_100\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 100%;
 }
 .gap_xxs:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   gap: var(--spacing-xxs);
@@ -408,9 +414,6 @@ progress {
 }
 .c_sub:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-sub);
-}
-.c_blue:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  color: blue;
 }
 .c_textBlack:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-text-black);
