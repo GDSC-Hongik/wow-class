@@ -1,12 +1,16 @@
 import { css } from "@styled-system/css";
-import LoginButton from "components/LoginButton";
+import { Text } from "@wow-class/ui";
 import Image from "next/image";
+
+import LoginButton from "./_components/LoginButton";
 
 const AuthPage = async () => {
   return (
     <main className={mainContentStyle}>
       <section className={leftColStyle}>
-        <h1 className={loginTextStyle}>로그인</h1>
+        <Text as="h1" className={loginTextStyle} typo="display1">
+          로그인
+        </Text>
         <div className={descriptionTextContainerStyle}>
           <Image
             alt="check-icon"
@@ -14,9 +18,9 @@ const AuthPage = async () => {
             src="/images/check.svg"
             width={20}
           />
-          <p className={descriptionTextStyle}>
+          <Text as="p" color="sub" typo="body1">
             와우클래스는 GDSC Hongik 정회원만 이용 가능해요.
-          </p>
+          </Text>
         </div>
         <div
           className={descriptionTextContainerStyle}
@@ -28,9 +32,9 @@ const AuthPage = async () => {
             src="/images/check.svg"
             width={20}
           />
-          <p className={descriptionTextStyle}>
+          <Text as="p" color="sub" typo="body1">
             GDSC Hongik 가입을 위해선 GitHub 계정이 필요해요.
-          </p>
+          </Text>
         </div>
         <LoginButton />
       </section>
@@ -65,7 +69,6 @@ const leftColStyle = css({
 });
 
 const loginTextStyle = css({
-  textStyle: "display1",
   marginBottom: "16px",
 });
 
@@ -73,11 +76,6 @@ const descriptionTextContainerStyle = css({
   marginBottom: "4px",
   display: "flex",
   gap: "10px",
-});
-
-const descriptionTextStyle = css({
-  color: "sub",
-  textStyle: "body1",
 });
 
 const imageContainerStyle = css({
