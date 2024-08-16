@@ -6,7 +6,7 @@ import Tag from "wowds-ui/Tag";
 
 const StudyCurriculum = () => {
   return (
-    <section aria-labelledby="study-curriculum">
+    <section aria-label="study-curriculum">
       <Text className={studyCurriculumTextStyle} typo="h2">
         스터디 커리큘럼
       </Text>
@@ -77,5 +77,6 @@ const studyWeekDescriptionStyle = css({
 
 const rightColStyle = css({
   flexGrow: 1,
-  justifyContent: "space-evenly !important",
+  justifyContent: "space-between !important",
+  padding: "0 25px 0 32px",
 });
