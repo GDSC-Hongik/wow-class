@@ -8,16 +8,7 @@ import Button from "wowds-ui/Button";
 const TestModal = () => {
   const { closeModal } = useModalRoute();
   return (
-    <Modal
-      closeModal={closeModal}
-      title={
-        <>
-          모달
-          <br />
-          테스트
-        </>
-      }
-    >
+    <Modal closeModal={closeModal}>
       <Flex gap="sm" width="21rem">
         <Button variant="outline" onClick={closeModal}>
           취소
