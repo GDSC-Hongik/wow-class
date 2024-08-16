@@ -9,17 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@wojtekmaj/react-timerange-picker": "^6.0.0",
     "@wow-class/ui": "workspace:*",
     "jotai": "^2.9.2",
     "next": "^14.2.5",
     "react": "^18.3.1",
+    "react-clock": "^5.0.0",
     "react-day-picker": "^9.0.8",
-    "react-time-picker": "^7.0.0",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.2"
   },
   "devDependencies": {
-    "react-hook-form": "^7.52.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -29,6 +29,7 @@
     "@wow-class/utils": "workspace:*",
     "eslint": "^8",
     "eslint-config-next": "^14.2.5",
+    "react-hook-form": "^7.52.2",
     "typescript": "^5"
   }
 }

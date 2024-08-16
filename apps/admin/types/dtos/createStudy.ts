@@ -1,8 +1,8 @@
 export type CreateStudyApiRequestDto = {
-  studyName: string;
   mentorId: number;
   academicYear: number;
   semesterType: "FIRST" | "SECOND";
+  title: string;
   applicationStartDate: string;
   applicationEndDate: string;
   totalWeek: number;

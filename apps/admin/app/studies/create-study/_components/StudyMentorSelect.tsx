@@ -20,7 +20,7 @@ const StudyMentorSelect = () => {
             style={{ width: "270px" }}
             value={field.value ? String(field.value) : ""}
             onChange={({ selectedValue }) => {
-              field.onChange(selectedValue);
+              field.onChange(Number(selectedValue));
             }}
           >
             <DropDownOption text="김유진" value="3" />

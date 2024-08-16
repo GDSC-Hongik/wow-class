@@ -1,20 +1,28 @@
+import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
 const StudySemesterSelect = () => {
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
+  const [semesterValue, setSemesterValue] = useState("");
   return (
     <Controller
       control={control}
-      name="studyYearSemester"
+      name="academicYear"
       render={({ field }) => (
         <DropDown
           label="학기"
           placeholder="선택하세요"
           {...field}
+          value={semesterValue}
           onChange={({ selectedValue }) => {
-            field.onChange(selectedValue);
+            setSemesterValue(selectedValue);
+            const [year, semester] = selectedValue.split("-");
+            if (year && semester) {
+              setValue("academicYear", Number(year));
+              setValue("semesterType", semester);
+            }
           }}
         >
           <DropDownOption text="2024-1" value="2024-FIRST" />

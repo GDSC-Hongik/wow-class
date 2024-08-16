@@ -7,16 +7,22 @@ import StudyDayOfWeekSelect from "./StudyDayOfWeekSelect";
 import StudyFormatSelect from "./StudyFormatSelect";
 import StudySemesterSelect from "./StudySemesterSelect";
 import StudyStartDatePick from "./StudyStartDatePick";
+import StudyTime from "./StudyTime";
 const StudyBasicInfo = () => {
   return (
     <Flex direction="column" gap="xl" maxWidth="5/6">
       <Text typo="h2">스터디 기본 설정</Text>
-      <Grid gap="2.25rem" gridTemplateColumns="2" gridTemplateRows="4">
+      <Grid
+        gap="2.25rem"
+        gridAutoRows="minmax(auto, auto)"
+        gridTemplateColumns="1fr 1fr"
+      >
         <StudySemesterSelect />
         <StudyFormatSelect />
         <StudyCourseSelect />
         <StudyStartDatePick />
         <StudyDayOfWeekSelect />
+        <StudyTime />
         <StudyApplyDatePick />
       </Grid>
     </Flex>

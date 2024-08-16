@@ -60,11 +60,16 @@ const StudyApplyDatePick = () => {
         <div ref={datepickerRef}>
           <DayPicker
             mode="range"
-            style={{ position: "absolute", top: "100px" }}
             weekStartsOn={1}
             selected={{
               from: formatStringToDate(studyDate.fromValue),
               to: formatStringToDate(studyDate.toValue),
+            }}
+            style={{
+              position: "absolute",
+              top: "100px",
+              zIndex: 99,
+              backgroundColor: "white",
             }}
             onSelect={(triggerDate) => {
               setStudyDate({

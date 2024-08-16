@@ -18,7 +18,7 @@ const StudyCourseSelect = () => {
             placeholder="선택하세요"
             value={field.value ? String(field.value) : ""}
             onChange={({ selectedValue }) => {
-              field.onChange(selectedValue);
+              field.onChange(Number(selectedValue));
             }}
           >
             <DropDownOption text="1주" value="1" />

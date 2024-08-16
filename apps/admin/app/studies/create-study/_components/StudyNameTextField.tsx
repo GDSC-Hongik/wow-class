@@ -9,7 +9,7 @@ const StudyNameTextField = () => {
     <Controller
       control={control}
       defaultValue=""
-      name="studyName"
+      name="title"
       render={({ field }) => (
         <Flex direction="column" gap="sm">
           <Text color="sub" typo="h3">

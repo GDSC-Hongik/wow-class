@@ -23,11 +23,11 @@ const StudyStartDatePick = () => {
   const { control, getValues, setValue } = useFormContext();
   const [inputValue, setInputValue] = useState("");
 
+  const week = getValues("totalWeek");
+
   useClickOutside(datepickerRef, () => {
     setOpen(false);
   });
-
-  const week = getValues("totalWeek");
 
   useEffect(() => {
     if (studyDate.fromValue) {
@@ -39,22 +39,27 @@ const StudyStartDatePick = () => {
   }, [studyDate, setValue]);
 
   return (
-    <Flex direction="column" gap="xs" height="128px" position="relative">
-      <Text color="sub" typo="label2">
+    <Flex direction="column" position="relative">
+      <Text color="sub" style={{ marginBottom: "8px" }} typo="label2">
         스터디 진행 기간
       </Text>
       <Controller
         control={control}
         name="startDate"
         render={() => (
-          <input
-            className={StudyDatePickerStyle}
-            placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
-            value={inputValue}
-            onClick={() => {
-              setOpen(!isOpen);
-            }}
-          />
+          <Flex direction="column" gap="xs" position="relative">
+            <input
+              className={StudyDatePickerStyle}
+              placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
+              value={inputValue}
+              onClick={() => {
+                setOpen(!isOpen);
+              }}
+            />
+            <Text color="primary" typo="body3">
+              * 휴강 주차 포함
+            </Text>
+          </Flex>
         )}
         rules={{
           required: true,
@@ -65,11 +70,16 @@ const StudyStartDatePick = () => {
         <div ref={datepickerRef}>
           <DayPicker
             mode="range"
-            style={{ position: "absolute", top: "100px" }}
             weekStartsOn={1}
             selected={{
               from: formatStringToDate(studyDate.fromValue),
               to: formatStringToDate(studyDate.toValue),
+            }}
+            style={{
+              position: "absolute",
+              top: "100px",
+              zIndex: 99,
+              backgroundColor: "white",
             }}
             onSelect={(triggerDate, selected) => {
               if (week && selected) {
@@ -90,10 +100,6 @@ const StudyStartDatePick = () => {
           />
         </div>
       )}
-
-      <Text color="primary" typo="body3">
-        * 휴강 주차 포함
-      </Text>
     </Flex>
   );
 };
