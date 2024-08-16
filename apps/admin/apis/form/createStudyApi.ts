@@ -1,5 +1,8 @@
+"use client";
 import { fetcher } from "@wow-class/utils";
 import { apiPath } from "constants/apiPath";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 
 export const createStudyApi = {
@@ -7,5 +10,9 @@ export const createStudyApi = {
     const response = await fetcher.post(apiPath.createStudy, data, {
       credentials: "include",
     });
+
+    if (response.ok) {
+      redirect("/create-study");
+    }
   },
 };
