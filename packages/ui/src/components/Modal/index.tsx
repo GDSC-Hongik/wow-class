@@ -3,14 +3,13 @@
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import Image from "next/image";
-import type { MouseEventHandler, ReactNode } from "react";
+import type { MouseEventHandler, PropsWithChildren } from "react";
 import { useCallback, useRef } from "react";
 
 import closeUrl from "../../assets/images/close.svg";
 
-export interface ModalProps {
+export interface ModalProps extends PropsWithChildren {
   closeModal: () => void;
-  children?: ReactNode;
 }
 
 /**
