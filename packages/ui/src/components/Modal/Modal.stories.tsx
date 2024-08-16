@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useModalState } from "src/hooks";
 
+import Text from "../Text";
 import Modal from ".";
 
 const meta = {
@@ -19,7 +20,11 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    title: "상세 정보가 등록되었어요.",
+    children: (
+      <Text as="h1" typo="h1">
+        상세 정보가 등록되었어요.
+      </Text>
+    ),
     closeModal: () => {
       console.log("모달 닫기");
     },
@@ -33,7 +38,11 @@ export const StateModal = () => {
     <>
       <button onClick={openModal}>모달 열기</button>
       {isOpen && (
-        <Modal closeModal={closeModal} title="상세 정보가 등록되었어요." />
+        <Modal closeModal={closeModal}>
+          <Text as="h1" typo="h1">
+            상세 정보가 등록되었어요.
+          </Text>
+        </Modal>
       )}
     </>
   );

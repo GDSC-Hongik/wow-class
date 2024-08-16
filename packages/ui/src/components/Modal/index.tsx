@@ -6,7 +6,6 @@ import type { MouseEventHandler, ReactNode } from "react";
 import { useCallback, useRef } from "react";
 
 export interface ModalProps {
-  title: ReactNode;
   closeModal: () => void;
   children?: ReactNode;
 }
@@ -14,11 +13,10 @@ export interface ModalProps {
 /**
  * @description 모달 컴포넌트입니다.
  *
- * @param {ReactNode} title - 모달 컴포넌트의 제목.
  * @param {() => void} closeModal - 모달 컴포넌트를 닫기 위한 함수.
  * @param {ReactNode} [children] - 모달 컴포넌트에 들어갈 자식 요소.
  */
-const Modal = ({ title, children, closeModal }: ModalProps) => {
+const Modal = ({ children, closeModal }: ModalProps) => {
   const overlay = useRef<HTMLDivElement>(null);
 
   const onClick: MouseEventHandler = useCallback(
@@ -42,9 +40,6 @@ const Modal = ({ title, children, closeModal }: ModalProps) => {
         <button className={closeButtonStyle} onClick={closeModal}>
           X
         </button>
-        <styled.h1 className={css({ textStyle: "h1", textAlign: "center" })}>
-          {title}
-        </styled.h1>
         {children}
       </styled.dialog>
     </Flex>
@@ -56,10 +51,8 @@ const dialogStyle = css({
   height: "28.125rem",
 
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
   alignItems: "center",
-  gap: "1.75rem",
+  justifyContent: "center",
 
   position: "relative",
 
