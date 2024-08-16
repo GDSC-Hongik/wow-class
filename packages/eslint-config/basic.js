@@ -48,6 +48,7 @@ module.exports = {
       "error",
       {
         namedComponents: "arrow-function",
+        unnamedComponents: "arrow-function",
       },
     ],
     "react/jsx-curly-brace-presence": [

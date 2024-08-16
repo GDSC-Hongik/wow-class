@@ -12,14 +12,14 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       wowds-icons:
-        specifier: ^0.1.2
-        version: 0.1.2
+        specifier: ^0.1.3
+        version: 0.1.3
       wowds-tokens:
         specifier: ^0.1.1
-        version: 0.1.2
+        version: 0.1.3
       wowds-ui:
-        specifier: ^0.1.8
-        version: 0.1.8(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.1.13
+        version: 0.1.13(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@pandacss/dev':
         specifier: ^0.44.0
@@ -111,7 +111,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       wowds-tokens:
         specifier: ^0.1.1
-        version: 0.1.1
+        version: 0.1.3
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -194,8 +194,8 @@ importers:
   packages/panda-config:
     devDependencies:
       wowds-theme:
-        specifier: ^0.1.1
-        version: 0.1.2
+        specifier: ^0.1.3
+        version: 0.1.3
 
   packages/typescript-config: {}
 
@@ -13774,32 +13774,29 @@ packages:
     resolution: {integrity: sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==}
     dev: true
 
-  /wowds-icons@0.1.2:
-    resolution: {integrity: sha512-gq8ebAc832G7/3Rl7W37yBIulcE192oIcp+HognAjAEhNWaXRla+b7svNPWEu37pIAHmE+C1OaFZzMzFlRNQUw==}
+  /wowds-icons@0.1.3:
+    resolution: {integrity: sha512-PQAbzPhrvUcMPhYz3lXbl5NXxJMS9TE5F09Q/LphI+P/FlRSNhZS0v5sqDpNpYxB4rQZXnUOCJfmOEzmoDPZvw==}
     dev: false
 
-  /wowds-theme@0.1.2:
-    resolution: {integrity: sha512-YyjVG+JwjAe4YFw/mhnj1peFzlux326jxrNkr3V8kyo/sOVWTDW0LkWMlscETPSNVSY8TSYgcSYSELrON5uikg==}
+  /wowds-theme@0.1.3:
+    resolution: {integrity: sha512-dygJMMwFTVB0A9bo217Y4hD/AMIrAOb0n4G9clz7tz5E1jVdgfippx3LXoXewJeoZuGY4LZejxRBbfg4pAQAxQ==}
     dev: true
 
-  /wowds-tokens@0.1.1:
-    resolution: {integrity: sha512-aHUaS2KawRly4Y0kSd2t0qpDf/s9kUmg0X4bwRqpHnXnqI2eqPKVnfyRVln/npy0jrtVJ+Tt82GRX+2e1H7yJg==}
+  /wowds-tokens@0.1.3:
+    resolution: {integrity: sha512-Pej6MuUec/i6A04gWELi4bb/T2I8gf/57L9rX8G7ElVeMc7/03ELoM0nBFWKybtpYExXhhlQPp0Lg7iqATpy6Q==}
     dev: false
 
-  /wowds-tokens@0.1.2:
-    resolution: {integrity: sha512-rVKpxNtNMYp68RdsVcXDUMoVZfnD51vrLz8bKXkgh0buRKhjCa8A3qzXvU1RK1h+jEdpLV5oEbabLtwtq1Xkgg==}
-    dev: false
-
-  /wowds-ui@0.1.8(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-a6DSdxoQxZPRMkFodbY1GKYWxzuzCpSAir5WAKU0lPO3cmTmK1ILLXqlI+lANfI9fRAzCZDY9RoX5vdBl9yz7A==}
+  /wowds-ui@0.1.13(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-u8axgvn1vknrkQhTwg1zRwDPyzv+NAMK7soxe1UjNrAnUBncnlSBD4OIVzVk9+2hgC26faZcilq4pij9HSrG6g==}
     peerDependencies:
       next: ^14.1.1
       react: ^18.2.0
     dependencies:
+      clsx: 2.1.1
       lottie-react: 2.4.0(react-dom@18.3.1)(react@18.3.1)
       next: 14.2.5(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
-      wowds-icons: 0.1.2
+      wowds-icons: 0.1.3
     transitivePeerDependencies:
       - react-dom
     dev: false

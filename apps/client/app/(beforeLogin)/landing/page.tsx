@@ -1,7 +1,7 @@
 "use client";
 
 import { css } from "@styled-system/css";
-import { Header } from "@wow-class/ui";
+import { Header, Text } from "@wow-class/ui";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -32,10 +32,10 @@ const LandingPage = () => {
             GDSC에서 스터디해요!
           </h1>
         </div>
-        <p className={descriptionStyle}>
+        <Text as="p" className={descriptionStyle} color="sub" typo="body0">
           GDSC Hongik은 홍익대학교의 학생 개발자들을 위해 <br />
           개발에 쉽게 입문할 수 있는 기회를 제공해요.
-        </p>
+        </Text>
         <Button
           aria-label="로그인 페이지로 이동"
           size="lg"
@@ -89,8 +89,6 @@ const headlineStyle = css({
 });
 
 const descriptionStyle = css({
-  color: "sub",
-  textStyle: "body0",
   marginBottom: "48px",
   zIndex: 1,
 });
