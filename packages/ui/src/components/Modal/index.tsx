@@ -3,8 +3,8 @@
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import Image from "next/image";
-import type { MouseEventHandler, PropsWithChildren } from "react";
-import { useCallback, useRef } from "react";
+import type { PropsWithChildren } from "react";
+import { useClickOutside } from "src/hooks";
 
 import closeUrl from "../../assets/images/close.svg";
 
@@ -19,37 +19,28 @@ export interface ModalProps extends PropsWithChildren {
  * @param {ReactNode} [children] - 모달 컴포넌트에 들어갈 자식 요소.
  */
 const Modal = ({ children, closeModal }: ModalProps) => {
-  const overlay = useRef<HTMLDivElement>(null);
-
-  const onClick: MouseEventHandler = useCallback(
-    (e) => {
-      if (e.target === overlay.current) {
-        if (closeModal) closeModal();
-      }
-    },
-    [closeModal, overlay]
-  );
+  const modal = useClickOutside(closeModal);
 
   return (
-    <Flex
-      alignItems="center"
-      className={backDropStyle}
-      justifyContent="center"
-      ref={overlay}
-      onClick={onClick}
-    >
-      <styled.dialog className={dialogStyle}>
-        <Image
-          alt="close-icon"
-          className={closeButtonStyle}
-          height={24}
-          src={closeUrl}
-          width={24}
-          onClick={closeModal}
-        />
-        {children}
-      </styled.dialog>
-    </Flex>
+    <>
+      <Flex
+        alignItems="center"
+        className={backDropStyle}
+        justifyContent="center"
+      >
+        <styled.dialog className={dialogStyle} ref={modal}>
+          <Image
+            alt="close-icon"
+            className={closeButtonStyle}
+            height={24}
+            src={closeUrl}
+            width={24}
+            onClick={closeModal}
+          />
+          {children}
+        </styled.dialog>
+      </Flex>
+    </>
   );
 };
 
