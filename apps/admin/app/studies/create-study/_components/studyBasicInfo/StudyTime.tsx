@@ -4,7 +4,7 @@ import "react-clock/dist/Clock.css";
 import { Flex } from "@styled-system/jsx";
 import TimeRangePicker from "@wojtekmaj/react-timerange-picker";
 import { Text } from "@wow-class/ui";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 type ValuePiece = Date | string | null;
@@ -13,10 +13,6 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const StudyTime = () => {
   const { control, setValue } = useFormContext();
   const [value, onChange] = useState<Value>(["10:00", "11:00"]);
-
-  useEffect(() => {
-    console.log(value);
-  }, [value]);
 
   const handleSetTime = (value: Value) => {
     if (!value) return;
