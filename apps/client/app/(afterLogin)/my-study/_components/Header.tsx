@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <header>
-      <section>
+      <section aria-label="my-study-header">
         <Flex alignItems="center" gap={8}>
           <Text as="h1" typo="h1">
             기초 웹스터디
@@ -120,7 +120,6 @@ const Header = () => {
           </section>
         </section>
       )}
-      <Space height={48} />
     </header>
   );
 };
