@@ -5,7 +5,7 @@ import { color } from "wowds-tokens";
 
 const StudyNotices = () => {
   return (
-    <section aria-labelledby="study-notices">
+    <section aria-label="study-notices">
       <Text as="h2" className={studyNoticeHeadingStyle} typo="h2">
         스터디 공지
       </Text>
@@ -47,5 +47,5 @@ const studyNoticeBoxStyle = css({
   alignItems: "center",
   borderRadius: "4px",
   height: "80px",
-  paddingX: "20px",
+  padding: "0 47px 0 20px",
 });
