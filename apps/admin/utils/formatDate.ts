@@ -11,7 +11,7 @@ export const dateToFormatString = (date: Date | undefined): string => {
 };
 
 export const setStudyEndDate = (date: Date, studyCourseWeek: number): Date => {
-  const daysToAdd = studyCourseWeek * 7; // 주 수를 일수로 변환 (1주 = 7일)
+  const daysToAdd = studyCourseWeek * 7;
 
   const endDate = new Date(date);
   endDate.setDate(endDate.getDate() + daysToAdd);
