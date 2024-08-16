@@ -1,12 +1,14 @@
 "use client";
 import { Flex, styled } from "@styled-system/jsx";
-import StudyBasicInfo from "components/create-study/studyBasicInfo";
-import StudyMentorSelect from "components/create-study/StudyMentorSelect";
-import StudyNameTextField from "components/create-study/StudyNameTextField";
 import { useFormState } from "react-dom";
 import { Form, FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyFormType } from "types/entities/study";
 import RadioButton from "wowds-ui/RadioButton";
+
+import StudyBasicInfo from "@/studies/create-study/_components/studyBasicInfo";
+import StudyNameTextField from "@/studies/create-study/_components/StudyNameTextField";
+
+import StudyMentorSelect from "./_components/StudyMentorSelect";
 
 const CreateStudyPage = () => {
   const methods = useForm<CreateStudyFormType>({ mode: "onChange" });

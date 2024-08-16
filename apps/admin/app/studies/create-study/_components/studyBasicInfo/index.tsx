@@ -1,6 +1,7 @@
 import { Flex, Grid } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 
+import StudyApplyDatePick from "./StudyApplyDatePick";
 import StudyCourseSelect from "./StudyCourseSelect";
 import StudyDayOfWeekSelect from "./StudyDayOfWeekSelect";
 import StudyFormatSelect from "./StudyFormatSelect";
@@ -16,6 +17,7 @@ const StudyBasicInfo = () => {
         <StudyCourseSelect />
         <StudyStartDatePick />
         <StudyDayOfWeekSelect />
+        <StudyApplyDatePick />
       </Grid>
     </Flex>
   );
