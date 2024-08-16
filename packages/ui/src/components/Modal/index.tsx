@@ -2,8 +2,11 @@
 
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
+import Image from "next/image";
 import type { MouseEventHandler, ReactNode } from "react";
 import { useCallback, useRef } from "react";
+
+import closeUrl from "../../assets/images/close.svg";
 
 export interface ModalProps {
   closeModal: () => void;
@@ -37,9 +40,14 @@ const Modal = ({ children, closeModal }: ModalProps) => {
       onClick={onClick}
     >
       <styled.dialog className={dialogStyle}>
-        <button className={closeButtonStyle} onClick={closeModal}>
-          X
-        </button>
+        <Image
+          alt="close-icon"
+          className={closeButtonStyle}
+          height={24}
+          src={closeUrl}
+          width={24}
+          onClick={closeModal}
+        />
         {children}
       </styled.dialog>
     </Flex>
@@ -75,6 +83,7 @@ const closeButtonStyle = css({
   position: "absolute",
   top: "xl",
   right: "xl",
+  cursor: "pointer",
 });
 
 export default Modal;
