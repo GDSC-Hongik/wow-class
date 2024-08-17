@@ -18,11 +18,15 @@ export const studyApplyApi = {
     return response.data;
   },
   applyStudy: async (studyId: number) => {
-    const response = await fetcher.post(`${apiPath.applyStudy}/${studyId}`, {
-      headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN}`,
-      },
-    });
+    const response = await fetcher.post(
+      `${apiPath.applyStudy}/${studyId}`,
+      null,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN}`,
+        },
+      }
+    );
 
     if (!response.ok) {
       const errorData = await response.json();
