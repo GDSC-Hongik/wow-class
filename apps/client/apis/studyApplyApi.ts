@@ -9,9 +9,6 @@ export const studyApplyApi = {
       apiPath.applyStudy,
       {
         next: { tags: [tags.studyApply] },
-        headers: {
-          Authorization: `Bearer ${process.env.DEV_AUTH_TOKEN}`,
-        },
       }
     );
 
@@ -20,12 +17,7 @@ export const studyApplyApi = {
   applyStudy: async (studyId: number) => {
     const response = await fetcher.post(
       `${apiPath.applyStudy}/${studyId}`,
-      null,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN}`,
-        },
-      }
+      null
     );
 
     if (!response.ok) {
@@ -36,11 +28,7 @@ export const studyApplyApi = {
     return response.data;
   },
   cancelStudyApplication: async (studyId: number) => {
-    const response = await fetcher.delete(`${apiPath.applyStudy}/${studyId}`, {
-      headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN}`,
-      },
-    });
+    const response = await fetcher.delete(`${apiPath.applyStudy}/${studyId}`);
 
     if (!response.ok) {
       const errorData = await response.json();
