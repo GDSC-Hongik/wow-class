@@ -14,6 +14,7 @@ import Tag from "wowds-ui/Tag";
 interface StudyItemProps {
   study: StudyListApiResponseDto;
 }
+
 const StudyItem = ({ study }: StudyItemProps) => {
   //NOTE: 모달이 열리도록 수정 예정
   const handleApplyButtonClick = () => {
@@ -39,10 +40,13 @@ const StudyItem = ({ study }: StudyItemProps) => {
       });
   };
 
+  const startTime = splitTime(study.startTime);
+  const openingDate = parseDate(study.openingDate);
+
   return (
     <Table>
       <Table.Content
-        subText={`${study.introduction}-${study.notionLink}`}
+        subText={`${study.introduction} - ${study.notionLink}`}
         text={study.title}
         rightContent={
           <Tag
@@ -58,13 +62,15 @@ const StudyItem = ({ study }: StudyItemProps) => {
         }
       />
       <Text className={textCellStyle}>{study.mentorName}</Text>
-      <Text
-        className={textCellStyle}
-      >{`${dayToKorean[study.dayOfWeek.toLocaleUpperCase()]} ${splitTime(study.startTime).hours}:${splitTime(study.startTime).minutes}-${Number(splitTime(study.startTime).hours) + 1}:${splitTime(study.startTime).minutes}`}</Text>
+      <Text className={textCellStyle}>
+        {`${dayToKorean[study.dayOfWeek.toUpperCase()]} ${startTime.hours}:${startTime.minutes} - ${
+          Number(startTime.hours) + 1
+        }:${startTime.minutes}`}
+      </Text>
       <Text className={textCellStyle}>{study.totalWeek}주 코스</Text>
-      <Text
-        className={textCellStyle}
-      >{`${parseDate(study.openingDate).month}.${parseDate(study.openingDate).day} 개강`}</Text>
+      <Text className={textCellStyle}>
+        {`${openingDate.month}.${openingDate.day} 개강`}
+      </Text>
       <styled.div paddingX="24px">
         <Button size="sm" variant="solid" onClick={handleApplyButtonClick}>
           수강 신청
