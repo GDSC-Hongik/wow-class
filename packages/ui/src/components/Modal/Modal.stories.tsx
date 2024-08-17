@@ -11,7 +11,22 @@ const meta = {
   parameters: {
     componentSubtitle: "Modal 컴포넌트",
   },
-  argTypes: {},
+  argTypes: {
+    closeModal: {
+      description: "Modal 컴포넌트를 닫을 수 있는 함수를 나타냅니다.",
+      table: {
+        type: { summary: "function" },
+        control: false,
+      },
+    },
+    children: {
+      description: "Modal 컴포넌트의 자식 컴포넌트를 나타냅니다.",
+      table: {
+        type: { summary: "ReactNode" },
+        control: false,
+      },
+    },
+  },
 } satisfies Meta<typeof Modal>;
 
 export default meta;
