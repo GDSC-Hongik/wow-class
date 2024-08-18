@@ -52,7 +52,9 @@ const DailyTasks = () => {
                       </Text>
                     </Flex>
                   </Flex>
-                  <Button size="lg">출석 체크하기</Button>
+                  <Button size="lg" style={attendanceButtonStyle}>
+                    출석 체크하기
+                  </Button>
                 </Flex>
               }
             />
@@ -79,8 +81,8 @@ const DailyTasks = () => {
 export default DailyTasks;
 
 const dailyTaskBoxStyle = {
-  maxWidth: "366px",
-  minWidth: "366px",
+  maxWidth: "376px",
+  minWidth: "376px",
   paddingBottom: "20px",
   height: "229px",
 };
@@ -93,8 +95,12 @@ const dailyTaskBoxContainerStyle = css({
 
 const dailyTaskBoxContentContainerStyle = css({
   height: "185px",
-  minWidth: "316px !important",
+  minWidth: "328px !important",
 });
+
+const attendanceButtonStyle = {
+  minWidth: "328px",
+};
 
 const scrollRightButtonStyle = css({
   position: "absolute",
