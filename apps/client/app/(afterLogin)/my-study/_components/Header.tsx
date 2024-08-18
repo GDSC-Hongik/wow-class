@@ -3,9 +3,41 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
+import { padWithZero, parseISODate } from "@wow-class/utils";
+import { dayToKorean } from "constants/dayToKorean";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+
+const mockData = {
+  studyId: 1,
+  title: "기초 웹스터디",
+  academicYear: 2024,
+  semester: "FIRST",
+  studyType: "오프라인 세션",
+  notionLink: "string",
+  introduction: "새싹 개발자분들을 위한 개발 입문 스터디",
+  mentorName: "강가은",
+  dayOfWeek: "TUESDAY",
+  startTime: {
+    hour: 18,
+    minute: 0,
+    second: 0,
+    nano: 0,
+  },
+  endTime: {
+    hour: 19,
+    minute: 0,
+    second: 0,
+    nano: 0,
+  },
+  totalWeek: 8,
+  period: {
+    startDate: "2024-08-18T17:13:29.913Z",
+    endDate: "2024-08-18T17:13:29.913Z",
+    open: true,
+  },
+};
 
 const Header = () => {
   const [showIntro, setShowIntro] = useState(false);
@@ -14,33 +46,58 @@ const Header = () => {
     setShowIntro((prev) => !prev);
   };
 
+  const introSectionButtonAriaLabel = showIntro
+    ? "Collapse introduction"
+    : "Expand introduction";
+  const introSectionImageAriaLabel = showIntro
+    ? "Collapse introduction icon"
+    : "Expand introduction icon";
+
+  const {
+    title,
+    academicYear,
+    semester,
+    mentorName,
+    studyType,
+    dayOfWeek,
+    startTime: { hour: startHour, minute: startMinute },
+    endTime: { hour: endHour, minute: endMinute },
+    totalWeek,
+    period: { startDate, endDate },
+    introduction,
+    notionLink,
+  } = mockData;
+
+  const { month: startMonth, day: startDay } = parseISODate(startDate);
+  const { month: endMonth, day: endDay } = parseISODate(endDate);
+
+  const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
+  const studySchedule = `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
+  ${endHour}:${padWithZero(endMinute)}`;
+  const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
+  ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
+
   return (
     <header>
       <section aria-label="my-study-header">
         <Flex alignItems="center" gap={8}>
           <Text as="h1" typo="h1">
-            기초 웹스터디
+            {title}
           </Text>
           <button
             aria-controls="intro-section"
             aria-expanded={showIntro}
+            aria-label={introSectionButtonAriaLabel}
             tabIndex={0}
-            aria-label={
-              showIntro ? "Collapse introduction" : "Expand introduction"
-            }
             onClick={handleClickShowIntro}
           >
             <Image
+              alt={introSectionImageAriaLabel}
               className={downArrowIconStyle}
               height={20}
               src="/images/arrow.svg"
               style={{ rotate: showIntro ? "0deg" : "180deg" }}
               width={20}
-              alt={
-                showIntro
-                  ? "Collapse introduction icon"
-                  : "Expand introduction icon"
-              }
             />
           </button>
         </Flex>
@@ -49,15 +106,15 @@ const Header = () => {
         <Space height={8} />
         <Flex gap="xs">
           <Text as="h5" color="sub">
-            2024-1
+            {studySemester}
           </Text>
           <ItemSeparator />
           <Text as="h5" color="sub">
-            강가은 멘토
+            {mentorName} 멘토
           </Text>
           <ItemSeparator />
           <Text as="h5" color="sub">
-            오프라인 세션
+            {studyType}
           </Text>
         </Flex>
       </section>
@@ -71,15 +128,15 @@ const Header = () => {
               </Text>
               <Flex gap="xs">
                 <Text as="h5" color="sub">
-                  화 18:00-19:00
+                  {studySchedule}
                 </Text>
                 <ItemSeparator />
                 <Text as="h5" color="sub">
-                  4주 코스
+                  {totalWeek}주 코스
                 </Text>
                 <ItemSeparator />
                 <Text as="h5" color="sub">
-                  06.18-07.16
+                  {studyPeriod}
                 </Text>
               </Flex>
             </Flex>
@@ -92,11 +149,11 @@ const Header = () => {
               </Text>
               <Flex alignItems="center" gap="sm">
                 <Text as="h5" color="sub">
-                  새싹 개발자분들을 위한 개발 입문 스터디
+                  {introduction}
                 </Text>
                 <Link
                   className={introduceLinkStyle}
-                  href="/"
+                  href={notionLink}
                   role="button"
                   tabIndex={0}
                 >
