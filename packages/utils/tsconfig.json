@@ -1,5 +1,8 @@
 {
   "extends": "@wow-class/typescript-config/basic.json",
+  "compilerOptions": {
+    "baseUrl": "./src"
+  },
   "include": ["src", "jest.setup.ts"],
   "exclude": ["node_modules"]
 }
