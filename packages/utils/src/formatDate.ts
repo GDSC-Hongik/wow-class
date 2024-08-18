@@ -4,7 +4,7 @@
  * @example parseDate("2021-08-31T00:00:00.000Z") -> { year: 2021, month: 8, day: 31, hours: 0, minutes: 0, seconds: 0 }
  */
 
-const parseDate = (dateString: string) => {
+export const parseISODate = (dateString: string) => {
   const date = new Date(dateString);
 
   return {
@@ -16,5 +16,3 @@ const parseDate = (dateString: string) => {
     seconds: date.getSeconds(),
   };
 };
-
-export default parseDate;
