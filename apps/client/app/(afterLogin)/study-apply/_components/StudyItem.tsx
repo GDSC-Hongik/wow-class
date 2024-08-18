@@ -1,7 +1,7 @@
 "use client";
 
 import { css } from "@styled-system/css";
-import { styled } from "@styled-system/jsx";
+import { Flex, styled } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { parseISODate, splitTime } from "@wow-class/utils";
 import { studyApplyApi } from "apis/studyApplyApi";
@@ -17,7 +17,7 @@ interface StudyItemProps {
 
 const StudyItem = ({ study }: StudyItemProps) => {
   //NOTE: 모달이 열리도록 수정 예정
-  const handleApplyButtonClick = async () => {
+  const handleClickApplyButton = async () => {
     const result = await studyApplyApi.applyStudy(study.studyId);
 
     if (!result.success) {
@@ -28,7 +28,7 @@ const StudyItem = ({ study }: StudyItemProps) => {
   };
 
   //NOTE: 임시로 신청 취소 버튼 만듬 (추후에 응답에 신청 여부에 따라 하나의 버튼에서 이루어질 수 있도록 수정)
-  const handleCancelButtonClick = async () => {
+  const handleClickCancelButton = async () => {
     const result = await studyApplyApi.cancelStudyApplication(study.studyId);
 
     if (!result.success) {
@@ -46,18 +46,20 @@ const StudyItem = ({ study }: StudyItemProps) => {
 
   return (
     <Table>
-      <Table.Content
-        subText={`${study.introduction} - ${study.notionLink}`}
-        text={study.title}
-        rightContent={
+      <Flex direction="column" gap="xxs" justifyContent="center">
+        <Flex gap="xs">
+          <Text typo="h3">{study.title}</Text>
           <Tag
             color={sessionColors[study.studyType] ?? "green"}
             variant="solid1"
           >
             {study.studyType}
           </Tag>
-        }
-      />
+        </Flex>
+        <Text color="sub" typo="body2">
+          {`${study.introduction} - ${study.notionLink}`}
+        </Text>
+      </Flex>
       <Text className={textCellStyle}>{study.mentorName}</Text>
       <Text className={textCellStyle}>{studyTime}</Text>
       <Text className={textCellStyle}>{study.totalWeek}주 코스</Text>
@@ -65,10 +67,10 @@ const StudyItem = ({ study }: StudyItemProps) => {
         {`${openingDate.month}.${openingDate.day} 개강`}
       </Text>
       <styled.div paddingX="24px">
-        <Button size="sm" variant="solid" onClick={handleApplyButtonClick}>
+        <Button size="sm" variant="solid" onClick={handleClickApplyButton}>
           수강 신청
         </Button>
-        <Button size="sm" variant="solid" onClick={handleCancelButtonClick}>
+        <Button size="sm" variant="solid" onClick={handleClickCancelButton}>
           신청 취소
         </Button>
       </styled.div>
