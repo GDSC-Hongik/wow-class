@@ -5,7 +5,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
-      <styled.main padding="54px 101px 35px 101px" width="100vw">
+      <styled.main padding="54px 101px 35px 101px" width="calc(100vw - 351px)">
         {children}
       </styled.main>
     </>
