@@ -41,3 +41,5 @@ Table.Right = ({ children }: PropsWithChildren) => {
     </Flex>
   );
 };
+
+export default Table;

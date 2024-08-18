@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Table } from "..";
 import Text from "../Text";
+import Table from ".";
 
 const meta: Meta<typeof Table> = {
   title: "Shared/Table",
