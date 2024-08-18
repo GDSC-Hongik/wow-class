@@ -1,4 +1,4 @@
-import { styled } from "@styled-system/jsx";
+import { Flex, styled } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
@@ -22,10 +22,12 @@ export const HomeworkHistory = () => {
               1주차
             </Text>
             <Space width={50} />
-            <Table.Content
-              subText="종료 : 2024년 5월 23일 23:59"
-              text="(과제 제목) HTTP 통신 코드 작성하기"
-            />
+            <Flex direction="column" gap="xxs" justifyContent="center">
+              <Text typo="h3">(과제 제목) HTTP 통신 코드 작성하기</Text>
+              <Text color="sub" typo="body2">
+                종료 : 2024년 5월 23일 23:59
+              </Text>
+            </Flex>
           </Table.Left>
           <Table.Right>
             <styled.div paddingX="36px">
