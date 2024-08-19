@@ -25,11 +25,8 @@ const middleware = async (req: NextRequest) => {
 
     return NextResponse.redirect(new URL("/auth", url));
   }
-  const response = NextResponse.next();
 
-  response.headers.set("Authorization", `Bearer ${accessToken}`);
-
-  return response;
+  return NextResponse.next();
 };
 
 export default middleware;
