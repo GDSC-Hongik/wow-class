@@ -2,12 +2,14 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import {
+  attendanceStatusColorMap,
+  attendanceStatusMap,
+} from "constants/attendanceStatusMap";
 import type { ComponentProps } from "react";
+import type { LevelType } from "types/entities/myStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
-
-type AttendanceStatusType = "ATTENDED" | "NOT_ATTENDED" | "PENDING";
-type LevelType = "BASIC" | "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
 
 const mockData: {
   week: number;
@@ -146,7 +148,7 @@ const StudyCurriculum = () => {
                   </Text>
                   <Tag
                     aria-label="present"
-                    color={attendanceStatusColorMap[attendanceStatus]}
+                    color={attendanceStatusColorMap[attendanceStatus] || "grey"}
                     variant="solid2"
                   >
                     {attendanceStatusMap[attendanceStatus]}
@@ -175,21 +177,6 @@ const StudyCurriculum = () => {
 };
 
 export default StudyCurriculum;
-
-const attendanceStatusMap = {
-  ATTENDED: "출석 완료",
-  NOT_ATTENDED: "미출석",
-  PENDING: "출석 전",
-};
-
-const attendanceStatusColorMap: Record<
-  AttendanceStatusType,
-  ComponentProps<typeof Tag>["color"]
-> = {
-  ATTENDED: "blue",
-  NOT_ATTENDED: "red",
-  PENDING: "grey",
-};
 
 const levelMap = {
   BASIC: "기초",
