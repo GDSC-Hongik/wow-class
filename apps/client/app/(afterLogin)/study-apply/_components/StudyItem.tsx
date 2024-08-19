@@ -16,9 +16,22 @@ interface StudyItemProps {
 }
 
 const StudyItem = ({ study }: StudyItemProps) => {
-  //NOTE: 모달이 열리도록 수정 예정
+  const {
+    studyId,
+    title,
+    introduction,
+    notionLink,
+    mentorName,
+    studyType,
+    dayOfWeek,
+    startTime: startTimeString,
+    openingDate: openingDateString,
+    totalWeek,
+  } = study;
+
+  // 이벤트 핸들러
   const handleClickApplyButton = async () => {
-    const result = await studyApplyApi.applyStudy(study.studyId);
+    const result = await studyApplyApi.applyStudy(studyId);
 
     if (!result.success) {
       console.error("스터디 신청 실패");
@@ -27,9 +40,8 @@ const StudyItem = ({ study }: StudyItemProps) => {
     }
   };
 
-  //NOTE: 임시로 신청 취소 버튼 만듬 (추후에 응답에 신청 여부에 따라 하나의 버튼에서 이루어질 수 있도록 수정)
   const handleClickCancelButton = async () => {
-    const result = await studyApplyApi.cancelStudyApplication(study.studyId);
+    const result = await studyApplyApi.cancelStudyApplication(studyId);
 
     if (!result.success) {
       console.error("스터디 신청 실패");
@@ -38,9 +50,9 @@ const StudyItem = ({ study }: StudyItemProps) => {
     }
   };
 
-  const startTime = splitTime(study.startTime);
-  const openingDate = parseISODate(study.openingDate);
-  const studyTime = `${dayToKorean[study.dayOfWeek.toUpperCase()]} ${startTime.hours}:${startTime.minutes} - ${
+  const startTime = splitTime(startTimeString);
+  const openingDate = parseISODate(openingDateString);
+  const studyTime = `${dayToKorean[dayOfWeek.toUpperCase()]} ${startTime.hours}:${startTime.minutes} - ${
     Number(startTime.hours) + 1
   }:${startTime.minutes}`;
 
@@ -48,21 +60,18 @@ const StudyItem = ({ study }: StudyItemProps) => {
     <Table>
       <Flex direction="column" gap="xxs" justifyContent="center">
         <Flex gap="xs">
-          <Text typo="h3">{study.title}</Text>
-          <Tag
-            color={sessionColors[study.studyType] ?? "green"}
-            variant="solid1"
-          >
-            {study.studyType}
+          <Text typo="h3">{title}</Text>
+          <Tag color={sessionColors[studyType] ?? "green"} variant="solid1">
+            {studyType}
           </Tag>
         </Flex>
         <Text color="sub" typo="body2">
-          {`${study.introduction} - ${study.notionLink}`}
+          {`${introduction} - ${notionLink}`}
         </Text>
       </Flex>
-      <Text className={textCellStyle}>{study.mentorName}</Text>
+      <Text className={textCellStyle}>{mentorName}</Text>
       <Text className={textCellStyle}>{studyTime}</Text>
-      <Text className={textCellStyle}>{study.totalWeek}주 코스</Text>
+      <Text className={textCellStyle}>{totalWeek}주 코스</Text>
       <Text className={textCellStyle}>
         {`${openingDate.month}.${openingDate.day} 개강`}
       </Text>
