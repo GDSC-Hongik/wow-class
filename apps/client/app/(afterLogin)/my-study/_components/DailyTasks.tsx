@@ -1,31 +1,18 @@
-"use client";
-
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import useHorizontalScroll from "hooks/useHorizontalScroll";
-import Image from "next/image";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
+import DailyTaskCarousel from "./DailyTaskCarousel";
+
 const DailyTasks = () => {
-  const { containerRef, handleScroll } = useHorizontalScroll();
-
-  const handleClickScrollRightButton = () => {
-    handleScroll(289);
-  };
-
   return (
     <section aria-label="daily-tasks">
       <Flex direction="column" gap="xl" position="relative">
         <Text typo="h2">오늘의 할 일</Text>
-        <Flex
-          aria-live="polite"
-          className={dailyTaskBoxContainerStyle}
-          gap="lg"
-          ref={containerRef}
-        >
+        <DailyTaskCarousel>
           {Array.from({ length: 4 }).map((_, index) => (
             <Box
               key={index}
@@ -59,20 +46,7 @@ const DailyTasks = () => {
               }
             />
           ))}
-        </Flex>
-        <button
-          aria-label="scroll-right-button"
-          className={scrollRightButtonStyle}
-          tabIndex={0}
-          onClick={handleClickScrollRightButton}
-        >
-          <Image
-            alt="scroll-right-button"
-            height={36}
-            src="/images/arrow-button.svg"
-            width={36}
-          />
-        </button>
+        </DailyTaskCarousel>
       </Flex>
     </section>
   );
@@ -87,12 +61,6 @@ const dailyTaskBoxStyle = {
   height: "229px",
 };
 
-const dailyTaskBoxContainerStyle = css({
-  overflowX: "auto",
-  scrollBehavior: "smooth",
-  scrollbarWidth: "none",
-});
-
 const dailyTaskBoxContentContainerStyle = css({
   height: "185px",
   minWidth: "328px !important",
@@ -101,10 +69,3 @@ const dailyTaskBoxContentContainerStyle = css({
 const attendanceButtonStyle = {
   minWidth: "328px",
 };
-
-const scrollRightButtonStyle = css({
-  position: "absolute",
-  top: "114px",
-  right: "101px",
-  cursor: "pointer",
-});
