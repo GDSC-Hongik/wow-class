@@ -9,9 +9,6 @@ export const studyDetailApi = {
       `${apiPath.studyDetail}/dashboard?studyId=${studyId}`,
       {
         next: { tags: [tags.studyDetailDashboard] },
-        headers: {
-          Authorization: `Bearer ${process.env.DEV_AUTH_TOKEN}`,
-        },
       }
     );
 

@@ -23,7 +23,7 @@ export const history: AssignmentHistoryDto[] = [
 ];
 
 export const studyDashBoardData: StudyDetailDashboardDto = {
-  repositoryLink: "https://example.com/assignments/react-basics",
+  repositoryLink: "",
   isLinkEditable: true,
   submittableAssignments: [
     {
@@ -31,7 +31,7 @@ export const studyDashBoardData: StudyDetailDashboardDto = {
       assignmentStatus: "OPEN",
       week: 1,
       title: "React Basics",
-      assignmentSubmissionStatus: "FAILURE",
+      assignmentSubmissionStatus: "FAIL",
       descriptionLink: "https://example.com/assignments/react-basics",
       deadline: "2024-08-18T17:56:01.155Z",
       submissionLink: "https://example.com/submissions/react-basics",

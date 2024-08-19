@@ -1,3 +1,5 @@
+import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
+
 export interface StudyDetailDashboardDto {
   repositoryLink: string;
   isLinkEditable: boolean;
@@ -9,7 +11,7 @@ export interface SubmittableAssignment {
   assignmentStatus: "NONE" | "OPEN" | "CANCELLED";
   week: number;
   title: string;
-  assignmentSubmissionStatus: "FAILURE" | "SUCCESS";
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
   descriptionLink: string;
   deadline: string;
   submissionLink: string;

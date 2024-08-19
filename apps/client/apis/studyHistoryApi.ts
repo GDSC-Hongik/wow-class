@@ -10,9 +10,6 @@ export const studyHistoryApi = {
       {
         next: { tags: [tags.studyHistory] },
         cache: "force-cache",
-        headers: {
-          Authorization: `Bearer ${process.env.DEV_AUTH_TOKEN}`,
-        },
       }
     );
 
@@ -23,11 +20,6 @@ export const studyHistoryApi = {
       `${apiPath.studyHistory}/${studyHistoryId}/repository`,
       {
         repositoryLink,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN}`,
-        },
       }
     );
 

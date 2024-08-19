@@ -3,6 +3,7 @@ import { Space, Table, Text } from "@wow-class/ui";
 import { padWithZero, parseDate } from "@wow-class/utils";
 import type { ComponentProps } from "react";
 import type { AssignmentHistoryDto } from "types/dtos/study-history";
+import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
@@ -13,7 +14,6 @@ interface HomeworkHistoryItemProps {
 
 export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
   const {
-    assignmentHistoryId,
     week,
     deadline,
     title,
@@ -22,14 +22,14 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
     submissionLink,
   } = history;
 
-  const deadlineDate = parseDate(deadline);
+  const { year, month, day, hours, minutes } = parseDate(deadline);
 
-  const deadlineText = `종료: ${deadlineDate.year}년 ${deadlineDate.month}월 ${deadlineDate.day}일 ${padWithZero(
-    deadlineDate.hours
-  )}:${padWithZero(deadlineDate.minutes)}`;
+  const deadlineText = `종료: ${year}년 ${month}월 ${day}일 ${padWithZero(
+    hours
+  )}:${padWithZero(minutes)}`;
 
   return (
-    <Table key={assignmentHistoryId}>
+    <Table>
       <Table.Left>
         <Text as="h3" typo="h3">
           {week}주차
@@ -52,10 +52,10 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
         </Flex>
         <styled.div paddingX="32px">
           <Tag
-            color={statusMapping[assignmentSubmissionStatus].color}
+            color={homeworkSubmissionMap[assignmentSubmissionStatus].color}
             variant="solid2"
           >
-            {statusMapping[assignmentSubmissionStatus].message}
+            {homeworkSubmissionMap[assignmentSubmissionStatus].message}
           </Tag>
         </styled.div>
         <Flex
@@ -77,8 +77,8 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
   );
 };
 
-const statusMapping: Record<
-  AssignmentHistoryDto["assignmentSubmissionStatus"],
+const homeworkSubmissionMap: Record<
+  AssignmentSubmissionStatusType,
   { message: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   FAIL: {
