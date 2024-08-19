@@ -21,11 +21,11 @@ export const studyApplyApi = {
       null
     );
 
-    return { success: !!response.ok };
+    return { success: response.ok };
   },
   cancelStudyApplication: async (studyId: number) => {
     const response = await fetcher.delete(`${apiPath.applyStudy}/${studyId}`);
 
-    return { success: !!response.ok };
+    return { success: response.ok };
   },
 };
