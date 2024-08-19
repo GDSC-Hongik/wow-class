@@ -1,35 +1,12 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import type {
-  AttendanceStatusType,
-  HomeworkSubmissionStatusType,
-} from "types/entities/myStudy";
+import type { DailyTaskDataType } from "types/entities/myStudy";
 
 import AttendanceStatusBox from "./AttendanceStatusBox";
 import DailyTaskCarousel from "./DailyTaskCarousel";
 import HomeworkStatusBox from "./HomeworkStatusBox";
 
-interface AttendanceTask {
-  type: "ATTENDANCE";
-  week: number;
-  period: {
-    start: string;
-    end: string;
-  };
-  attendanceStatus: AttendanceStatusType;
-}
-
-interface HomeworkTask {
-  type: "HOMEWORK";
-  week: number;
-  name: string;
-  deadline: string;
-  homeworkSubmissionStatus: HomeworkSubmissionStatusType;
-}
-
-type DataType = AttendanceTask | HomeworkTask;
-
-const mockData: DataType[] = [
+const mockData: DailyTaskDataType[] = [
   {
     type: "ATTENDANCE",
     week: 4,
@@ -69,9 +46,7 @@ const DailyTasks = () => {
         <Text typo="h2">오늘의 할 일</Text>
         <DailyTaskCarousel>
           {mockData.map((dailyTask, index) => {
-            const { type } = dailyTask;
-
-            return type === "ATTENDANCE" ? (
+            return dailyTask.type === "ATTENDANCE" ? (
               <AttendanceStatusBox
                 attendanceStatus={dailyTask.attendanceStatus}
                 key={index}

@@ -7,22 +7,14 @@ import {
   attendanceStatusMap,
 } from "constants/attendanceStatusMap";
 import type { ComponentProps } from "react";
-import type { LevelType } from "types/entities/myStudy";
+import type {
+  LevelType,
+  StudyCurriculumDataType,
+} from "types/entities/myStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
-const mockData: {
-  week: number;
-  title: string;
-  description: string;
-  level: LevelType;
-  period: {
-    startDate: string;
-    endDate: string;
-  };
-  attendanceStatus: "ATTENDED" | "NOT_ATTENDED" | "PENDING";
-  homeworkSubmissionStatus: "SUBMITTED" | "NOT_SUBMITTED" | "PENDING";
-}[] = [
+const mockData: StudyCurriculumDataType[] = [
   {
     week: 1,
     title: "(제목) 웹 개발의 역사",
