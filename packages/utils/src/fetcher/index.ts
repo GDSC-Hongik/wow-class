@@ -87,9 +87,14 @@ class Fetcher {
   ): Promise<ApiResponse<T>> {
     options = await this.interceptRequest(options);
 
+    const fetchOptions: RequestInit = {
+      ...options,
+      credentials: "include",
+    };
+
     const fullUrl = this.baseUrl + url;
 
-    let response: ApiResponse = await fetch(fullUrl, options);
+    let response: ApiResponse = await fetch(fullUrl, fetchOptions);
 
     await this.handleError(response);
 
@@ -157,6 +162,8 @@ class Fetcher {
   }
 }
 
+const isClient = typeof window !== "undefined";
+
 const fetcher = new Fetcher({
   baseUrl:
     process.env.NODE_ENV === "production"
@@ -164,5 +171,23 @@ const fetcher = new Fetcher({
       : process.env.NEXT_PUBLIC_DEV_BASE_URL,
   defaultHeaders: { "Content-Type": "application/json" },
 });
+
+if (!isClient) {
+  fetcher.addRequestInterceptor(async (options) => {
+    const { cookies } = await import("next/headers");
+
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+
+    if (accessToken) {
+      options.headers = {
+        ...options.headers,
+        Authorization: `Bearer ${accessToken}`,
+      };
+    }
+
+    return options;
+  });
+}
 
 export default fetcher;
