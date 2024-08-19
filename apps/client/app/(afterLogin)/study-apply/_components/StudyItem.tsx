@@ -65,7 +65,10 @@ const StudyItem = ({ study }: StudyItemProps) => {
           </Tag>
         </Flex>
         <Text color="sub" typo="body2">
-          {`${introduction} - ${notionLink}`}
+          {`${introduction} -`}
+          <a href={notionLink} target="_blank">
+            {notionLink}
+          </a>
         </Text>
       </Flex>
       <Text className={textCellStyle}>{mentorName}</Text>
