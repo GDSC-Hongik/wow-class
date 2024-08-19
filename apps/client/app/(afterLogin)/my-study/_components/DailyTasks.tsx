@@ -2,9 +2,7 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import type { DailyTaskDataType } from "types/entities/myStudy";
 
-import AttendanceStatusBox from "./AttendanceStatusBox";
-import DailyTaskCarousel from "./DailyTaskCarousel";
-import HomeworkStatusBox from "./HomeworkStatusBox";
+import { AttendanceStatusBox, DailyTaskCarousel, HomeworkStatusBox } from ".";
 
 const mockData: DailyTaskDataType[] = [
   {
