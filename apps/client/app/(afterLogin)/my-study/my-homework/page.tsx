@@ -8,7 +8,15 @@ import {
   RepositorySubmissionBox,
 } from "@/(afterLogin)/my-study/my-homework/_components";
 
-const MyHomeworkPage = () => {
+import { HomeworkBoxWithLinkEdit } from "./_components/HomeworkBoxWithLinkEdit";
+import { studyDashBoardData } from "./_components/mockData";
+
+const MyHomeworkPage = async () => {
+  // const studyDashboard = await studyDetailApi.getStudyDetailDashboard(1);
+
+  //TODO: studyDashboard.isLinkEditable 가 false 면 이번 주 과제 조회 api 사용
+  const studyDashboard = studyDashBoardData;
+
   return (
     <>
       <Flex gap="sm" textStyle="h1">
@@ -26,8 +34,22 @@ const MyHomeworkPage = () => {
       </div>
       <Space height={48} />
       <Flex gap="lg">
-        <RepositorySubmissionBox />
-        <HomeworkOverviewBox />
+        {studyDashBoardData.isLinkEditable && (
+          <>
+            <RepositorySubmissionBox
+              repositoryLink={studyDashBoardData.repositoryLink}
+            />
+            <HomeworkBoxWithLinkEdit
+              assignments={studyDashboard.submittableAssignments}
+              repositoryLink={studyDashBoardData.repositoryLink}
+            />
+          </>
+        )}
+        {/* {!studyDashBoardData.isLinkEditable && (
+          <HomeworkOverviewBox
+            assignments={studyDashboard.submittableAssignments}
+          />
+        )} */}
       </Flex>
       <Space height={64} />
       <HomeworkHistory />

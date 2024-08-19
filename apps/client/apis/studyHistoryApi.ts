@@ -9,6 +9,7 @@ export const studyHistoryApi = {
       `${apiPath.studyHistory}/assignments?studyId=${studyId}`,
       {
         next: { tags: [tags.studyHistory] },
+        cache: "force-cache",
         headers: {
           Authorization: `Bearer ${process.env.DEV_AUTH_TOKEN}`,
         },
