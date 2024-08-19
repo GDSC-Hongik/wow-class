@@ -19,17 +19,17 @@ export const studyHistoryApi = {
   },
   putRepository: async (studyHistoryId: number, repositoryLink: string) => {
     const response = await fetcher.put(
-      `${apiPath.applyStudy}/${studyHistoryId}/repository`,
+      `${apiPath.studyHistory}/${studyHistoryId}/repository`,
       {
-        body: JSON.stringify({ repositoryLink }),
+        repositoryLink,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN}`,
+        },
       }
     );
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData);
-    }
-
-    return response.data;
+    return { success: response.ok };
   },
 };
