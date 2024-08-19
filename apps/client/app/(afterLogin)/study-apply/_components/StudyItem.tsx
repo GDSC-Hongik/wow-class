@@ -29,7 +29,6 @@ const StudyItem = ({ study }: StudyItemProps) => {
     totalWeek,
   } = study;
 
-  // 이벤트 핸들러
   const handleClickApplyButton = async () => {
     const result = await studyApplyApi.applyStudy(studyId);
 
