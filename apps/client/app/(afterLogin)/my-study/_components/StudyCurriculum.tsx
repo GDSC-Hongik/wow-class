@@ -1,8 +1,79 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
+import { padWithZero, parseISODate } from "@wow-class/utils";
+import type { ComponentProps } from "react";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
+
+type AttendanceStatusType = "ATTENDED" | "NOT_ATTENDED" | "PENDING";
+type LevelType = "BASIC" | "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
+
+const mockData: {
+  week: number;
+  title: string;
+  description: string;
+  level: LevelType;
+  period: {
+    startDate: string;
+    endDate: string;
+  };
+  attendanceStatus: "ATTENDED" | "NOT_ATTENDED" | "PENDING";
+  homeworkSubmissionStatus: "SUBMITTED" | "NOT_SUBMITTED" | "PENDING";
+}[] = [
+  {
+    week: 1,
+    title: "(제목) 웹 개발의 역사",
+    description:
+      "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
+    level: "BASIC",
+    period: {
+      startDate: "2024-08-18T17:13:29.913Z",
+      endDate: "2024-08-25T17:13:29.913Z",
+    },
+    attendanceStatus: "ATTENDED",
+    homeworkSubmissionStatus: "PENDING",
+  },
+  {
+    week: 2,
+    title: "(제목) 웹 개발의 역사",
+    description:
+      "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
+    level: "BEGINNER",
+    period: {
+      startDate: "2024-08-18T17:13:29.913Z",
+      endDate: "2024-08-25T17:13:29.913Z",
+    },
+    attendanceStatus: "NOT_ATTENDED",
+    homeworkSubmissionStatus: "SUBMITTED",
+  },
+  {
+    week: 3,
+    title: "(제목) 웹 개발의 역사",
+    description:
+      "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
+    level: "INTERMEDIATE",
+    period: {
+      startDate: "2024-08-18T17:13:29.913Z",
+      endDate: "2024-08-25T17:13:29.913Z",
+    },
+    attendanceStatus: "PENDING",
+    homeworkSubmissionStatus: "NOT_SUBMITTED",
+  },
+  {
+    week: 4,
+    title: "(제목) 웹 개발의 역사",
+    description:
+      "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
+    level: "ADVANCED",
+    period: {
+      startDate: "2024-08-18T17:13:29.913Z",
+      endDate: "2024-08-25T17:13:29.913Z",
+    },
+    attendanceStatus: "PENDING",
+    homeworkSubmissionStatus: "NOT_SUBMITTED",
+  },
+];
 
 const StudyCurriculum = () => {
   return (
@@ -10,48 +81,94 @@ const StudyCurriculum = () => {
       <Text className={studyCurriculumTextStyle} typo="h2">
         스터디 커리큘럼
       </Text>
-      <Flex>
-        <Table>
-          <Table.Left className={leftColStyle}>
-            <Text as="h5" typo="body1">
-              1주차
-            </Text>
-            <Flex direction="column" gap={4.5} justifyContent="center">
-              <Flex alignItems="center" gap="xs">
-                <Text as="h3" typo="h3">
-                  (제목) 웹 개발의 역사
-                </Text>
-                <Tag color="blue" variant="outline">
-                  기초
-                </Tag>
-              </Flex>
-              <Text
-                as="h3"
-                className={studyWeekDescriptionStyle}
-                color="sub"
-                typo="h3"
-              >
-                (설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가
-                무엇인지 알아보는
-              </Text>
-            </Flex>
-          </Table.Left>
-          <Table.Right className={rightColStyle}>
-            <Text as="h5" typo="body1">
-              05.01 - 05.08
-            </Text>
-            <Tag aria-label="present" color="blue" variant="solid2">
-              출석 완료
-            </Tag>
-            <Button
-              aria-label="check-submitted-homework"
-              size="sm"
-              variant="outline"
-            >
-              제출한 과제 확인
-            </Button>
-          </Table.Right>
-        </Table>
+      <Flex direction="column">
+        {mockData.map(
+          (
+            {
+              week,
+              title,
+              description,
+              level,
+              period: { startDate, endDate },
+              attendanceStatus,
+              homeworkSubmissionStatus,
+            },
+            index
+          ) => {
+            const { month: startMonth, day: startDay } =
+              parseISODate(startDate);
+            const { month: endMonth, day: endDay } = parseISODate(endDate);
+
+            const {
+              formattedStartMonth,
+              formattedStartDay,
+              formattedEndMonth,
+              formattedEndDay,
+            } = {
+              formattedStartMonth: padWithZero(startMonth),
+              formattedStartDay: padWithZero(startDay),
+              formattedEndMonth: padWithZero(endMonth),
+              formattedEndDay: padWithZero(endDay),
+            };
+
+            const weekPeriod = `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
+
+            return (
+              <Table key={index}>
+                <Table.Left className={leftColStyle}>
+                  <div className={weekContainerStyle}>
+                    <Text as="h5" typo="body1">
+                      {week}주차
+                    </Text>
+                  </div>
+                  <Flex direction="column" gap={4.5} justifyContent="center">
+                    <Flex alignItems="center" gap="xs">
+                      <Text as="h3" typo="h3">
+                        {title}
+                      </Text>
+                      <Tag color={levelColorMap[level]} variant="outline">
+                        {levelMap[level]}
+                      </Tag>
+                    </Flex>
+                    <Text
+                      as="h3"
+                      className={studyWeekDescriptionStyle}
+                      color="sub"
+                      typo="h3"
+                    >
+                      {description}
+                    </Text>
+                  </Flex>
+                </Table.Left>
+                <Table.Right className={rightColStyle}>
+                  <Text as="h5" typo="body1">
+                    {weekPeriod}
+                  </Text>
+                  <Tag
+                    aria-label="present"
+                    color={attendanceStatusColorMap[attendanceStatus]}
+                    variant="solid2"
+                  >
+                    {attendanceStatusMap[attendanceStatus]}
+                  </Tag>
+                  <Button
+                    aria-label="check-submitted-homework"
+                    disabled={homeworkSubmissionStatus === "PENDING"}
+                    size="sm"
+                    style={homeworkButtonStyle}
+                    variant={
+                      homeworkSubmissionStatus === "SUBMITTED"
+                        ? "outline"
+                        : "solid"
+                    }
+                  >
+                    {homeworkSubmissionStatusMap[homeworkSubmissionStatus]}
+                  </Button>
+                </Table.Right>
+              </Table>
+            );
+          }
+        )}
       </Flex>
     </section>
   );
@@ -59,12 +176,46 @@ const StudyCurriculum = () => {
 
 export default StudyCurriculum;
 
+const attendanceStatusMap = {
+  ATTENDED: "출석 완료",
+  NOT_ATTENDED: "미출석",
+  PENDING: "출석 전",
+};
+
+const attendanceStatusColorMap: Record<
+  AttendanceStatusType,
+  ComponentProps<typeof Tag>["color"]
+> = {
+  ATTENDED: "blue",
+  NOT_ATTENDED: "red",
+  PENDING: "grey",
+};
+
+const levelMap = {
+  BASIC: "기초",
+  BEGINNER: "초급",
+  INTERMEDIATE: "중급",
+  ADVANCED: "고급",
+};
+
+const levelColorMap: Record<LevelType, ComponentProps<typeof Tag>["color"]> = {
+  BASIC: "blue",
+  BEGINNER: "yellow",
+  INTERMEDIATE: "green",
+  ADVANCED: "red",
+};
+
+const homeworkSubmissionStatusMap = {
+  SUBMITTED: "제출한 과제 확인",
+  NOT_SUBMITTED: "과제 제출하기",
+  PENDING: "과제 제출하기",
+};
+
 const studyCurriculumTextStyle = css({
   marginBottom: "xl",
 });
 
 const leftColStyle = css({
-  gap: "50px",
   width: "514px",
 });
 
@@ -79,4 +230,12 @@ const rightColStyle = css({
   flexGrow: 1,
   justifyContent: "space-between !important",
   padding: "0 25px 0 32px",
+});
+
+const homeworkButtonStyle = {
+  minWidth: "131px",
+};
+
+const weekContainerStyle = css({
+  width: "84px",
 });
