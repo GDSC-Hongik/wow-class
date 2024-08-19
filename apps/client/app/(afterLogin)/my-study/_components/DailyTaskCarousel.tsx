@@ -38,9 +38,9 @@ const DailyTaskCarousel = ({ children }: PropsWithChildren) => {
       >
         <Image
           alt="scroll-right-button"
-          height={36}
+          height={52}
           src="/images/arrow-button.svg"
-          width={36}
+          width={52}
         />
       </button>
     </>
@@ -57,7 +57,7 @@ const dailyTaskBoxContainerStyle = css({
 
 const scrollRightButtonStyle = css({
   position: "absolute",
-  top: "114px",
+  top: "110px",
   right: "101px",
   cursor: "pointer",
 });

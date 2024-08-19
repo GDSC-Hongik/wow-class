@@ -1,11 +1,66 @@
-import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import Box from "wowds-ui/Box";
-import Button from "wowds-ui/Button";
-import Tag from "wowds-ui/Tag";
+import type {
+  AttendanceStatusType,
+  HomeworkSubmissionStatusType,
+} from "types/entities/myStudy";
 
+import AttendanceStatusBox from "./AttendanceStatusBox";
 import DailyTaskCarousel from "./DailyTaskCarousel";
+import HomeworkStatusBox from "./HomeworkStatusBox";
+
+interface AttendanceTask {
+  type: "ATTENDANCE";
+  week: number;
+  period: {
+    start: string;
+    end: string;
+  };
+  attendanceStatus: AttendanceStatusType;
+}
+
+interface HomeworkTask {
+  type: "HOMEWORK";
+  week: number;
+  name: string;
+  deadline: string;
+  homeworkSubmissionStatus: HomeworkSubmissionStatusType;
+}
+
+type DataType = AttendanceTask | HomeworkTask;
+
+const mockData: DataType[] = [
+  {
+    type: "ATTENDANCE",
+    week: 4,
+    period: {
+      start: "2024-08-18T17:13:29.913Z",
+      end: "2024-08-18T23:59:29.913Z",
+    },
+    attendanceStatus: "ATTENDED",
+  },
+  {
+    type: "HOMEWORK",
+    week: 3,
+    name: "과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름",
+    deadline: "2024-08-18T17:13:29.913Z",
+    homeworkSubmissionStatus: "SUBMITTED",
+  },
+  {
+    type: "HOMEWORK",
+    week: 2,
+    name: "과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름",
+    deadline: "2024-08-18T17:13:29.913Z",
+    homeworkSubmissionStatus: "NOT_SUBMITTED",
+  },
+  {
+    type: "HOMEWORK",
+    week: 1,
+    name: "과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름",
+    deadline: "2024-08-18T17:13:29.913Z",
+    homeworkSubmissionStatus: "SUBMITTED",
+  },
+];
 
 const DailyTasks = () => {
   return (
@@ -13,39 +68,26 @@ const DailyTasks = () => {
       <Flex direction="column" gap="xl" position="relative">
         <Text typo="h2">오늘의 할 일</Text>
         <DailyTaskCarousel>
-          {Array.from({ length: 4 }).map((_, index) => (
-            <Box
-              key={index}
-              style={dailyTaskBoxStyle}
-              text={
-                <Flex
-                  className={dailyTaskBoxContentContainerStyle}
-                  direction="column"
-                  justifyContent="space-between"
-                >
-                  <Flex direction="column" gap="16px">
-                    <Text as="div" color="primary" typo="label2">
-                      출석
-                    </Text>
-                    <Flex direction="column" gap="4px">
-                      <Flex gap="8px">
-                        <Text>4주차 출석체크</Text>
-                        <Tag color="blue" variant="solid2">
-                          출석완료
-                        </Tag>
-                      </Flex>
-                      <Text as="div" color="error" typo="body1">
-                        2024년 5월 23일 0:00 - 23:59까지
-                      </Text>
-                    </Flex>
-                  </Flex>
-                  <Button size="lg" style={attendanceButtonStyle}>
-                    출석 체크하기
-                  </Button>
-                </Flex>
-              }
-            />
-          ))}
+          {mockData.map((dailyTask, index) => {
+            const { type } = dailyTask;
+
+            return type === "ATTENDANCE" ? (
+              <AttendanceStatusBox
+                attendanceStatus={dailyTask.attendanceStatus}
+                key={index}
+                period={dailyTask.period}
+                week={dailyTask.week}
+              />
+            ) : (
+              <HomeworkStatusBox
+                deadline={dailyTask.deadline}
+                homeworkSubmissionStatus={dailyTask.homeworkSubmissionStatus}
+                key={index}
+                name={dailyTask.name}
+                week={dailyTask.week}
+              />
+            );
+          })}
         </DailyTaskCarousel>
       </Flex>
     </section>
@@ -53,19 +95,3 @@ const DailyTasks = () => {
 };
 
 export default DailyTasks;
-
-const dailyTaskBoxStyle = {
-  maxWidth: "376px",
-  minWidth: "376px",
-  paddingBottom: "20px",
-  height: "229px",
-};
-
-const dailyTaskBoxContentContainerStyle = css({
-  height: "185px",
-  minWidth: "328px !important",
-});
-
-const attendanceButtonStyle = {
-  minWidth: "328px",
-};
