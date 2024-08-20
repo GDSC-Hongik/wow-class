@@ -8,6 +8,7 @@ const useModalState = () => {
 
   return {
     isOpen,
+    setIsOpen,
     openModal,
     closeModal,
   };
