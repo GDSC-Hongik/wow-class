@@ -1,6 +1,6 @@
-export type AttendanceStatusType = "ATTENDED" | "NOT_ATTENDED" | "PENDING";
+import type { AssignmentSubmissionStatusType } from "./common/assignment";
 
-export type AssignmentSubmissionStatusType = "SUCCESS" | "FAILURE" | "PENDING";
+export type AttendanceStatusType = "ATTENDED" | "NOT_ATTENDED" | "PENDING";
 
 export type LevelType = "BASIC" | "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
 

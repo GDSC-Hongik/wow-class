@@ -3,7 +3,7 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { parseISODate } from "@wow-class/utils";
 import { assignmentSubmissionStatusMap } from "constants/assignmentSubmissionStatusMap";
-import type { AssignmentSubmissionStatusType } from "types/entities/myStudy";
+import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
