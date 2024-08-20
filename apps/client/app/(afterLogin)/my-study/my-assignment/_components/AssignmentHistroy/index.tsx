@@ -1,8 +1,8 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
+import { history } from "constants/assignmentMockData";
 import Image from "next/image";
 
-import { history } from "../mockData";
 import { AssignmentHistoryItem } from "./AssignmentHistoryItem";
 
 export const AssignmentHistory = async () => {

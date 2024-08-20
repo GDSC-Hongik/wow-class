@@ -4,7 +4,6 @@ import { Space } from "@wow-class/ui";
 import { tags } from "constants/tags";
 import { revalidateTag } from "next/cache";
 import Link from "next/dist/client/link";
-import type { ReactNode } from "react";
 import type { Assignment } from "types/dtos/study-detail-dashboard";
 import { isDeadlinePassed } from "utils";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
@@ -19,22 +18,27 @@ export const AssignmentButtons = ({
   assignment,
   buttonsDisabled,
 }: AssignmentButtonsProps) => {
-  const handleClickSubmissionComplete = async () => {
+  const {
+    assignmentSubmissionStatus,
+    submissionFailureType,
+    submissionLink,
+    deadline,
+    committedAt,
+  } = assignment;
+
+  const handleClickSubmissionComplete = () => {
     revalidateTag(tags.studyDetailDashboard);
   };
 
   const getButtonProps = () => {
-    if (assignment.assignmentSubmissionStatus === "PENDING") {
+    if (assignmentSubmissionStatus === "PENDING") {
+      const stroke = buttonsDisabled ? "mono100" : "backgroundNormal";
       return {
         primaryButtonText: "제출하러 가기",
         secondaryButtonText: "제출 완료하기",
-        icon: (
-          <ReloadIcon
-            stroke={buttonsDisabled ? "mono100" : "backgroundNormal"}
-          />
-        ),
+        icon: <ReloadIcon stroke={stroke} />,
       };
-    } else if (assignment.assignmentSubmissionStatus === "SUCCESS") {
+    } else if (assignmentSubmissionStatus === "SUCCESS") {
       return {
         primaryButtonText: "제출한 과제 보러가기",
         secondaryButtonText: "제출 갱신하기",
@@ -51,27 +55,28 @@ export const AssignmentButtons = ({
 
   const renderPrimaryButton = (text: string) => {
     if (
-      assignment.assignmentSubmissionStatus === "FAILURE" &&
-      assignment.submissionFailureType === "NOT_SUBMITTED"
+      assignmentSubmissionStatus === "FAILURE" &&
+      submissionFailureType === "NOT_SUBMITTED"
     ) {
       return null;
-    } else
-      return (
-        <Link href={assignment.submissionLink} target="_blank">
-          <Button
-            disabled={buttonsDisabled}
-            icon={<LinkIcon stroke={buttonsDisabled ? "mono100" : "primary"} />}
-            style={buttonStyle}
-            variant="outline"
-          >
-            {text}
-          </Button>
-        </Link>
-      );
+    }
+    const stroke = buttonsDisabled ? "mono100" : "primary";
+    return (
+      <Link href={submissionLink} target="_blank">
+        <Button
+          disabled={buttonsDisabled}
+          icon={<LinkIcon stroke={stroke} />}
+          style={buttonStyle}
+          variant="outline"
+        >
+          {text}
+        </Button>
+      </Link>
+    );
   };
 
-  const renderSecondaryButton = (text: string, icon: ReactNode) => {
-    if (isDeadlinePassed(assignment.deadline)) {
+  const renderSecondaryButton = (text: string, icon: JSX.Element) => {
+    if (isDeadlinePassed(deadline)) {
       return (
         <Button disabled={true} style={buttonStyle}>
           마감
@@ -83,9 +88,9 @@ export const AssignmentButtons = ({
         disabled={buttonsDisabled}
         icon={icon}
         style={buttonStyle}
-        {...(assignment.assignmentSubmissionStatus === "SUCCESS" &&
-          "committedAt" in assignment && {
-            subText: `최종 수정일자 ${assignment?.committedAt}`,
+        {...(assignmentSubmissionStatus === "SUCCESS" &&
+          committedAt && {
+            subText: `최종 수정일자 ${committedAt}`,
           })}
         onClick={handleClickSubmissionComplete}
       >
@@ -93,6 +98,7 @@ export const AssignmentButtons = ({
       </Button>
     );
   };
+
   const { primaryButtonText, secondaryButtonText, icon } = getButtonProps();
 
   return (

@@ -11,15 +11,18 @@ interface AssignmentSubmissionInfoProps {
 export const AssignmentSubmissionInfo = ({
   assignment,
 }: AssignmentSubmissionInfoProps) => {
-  const { year, month, day, hours, minutes } = parseISODate(
-    assignment.deadline
-  );
+  const { deadline, title, assignmentSubmissionStatus, submissionFailureType } =
+    assignment;
 
-  const deadlineText = `종료일시: ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}까지`;
+  const { year, month, day, hours, minutes } = parseISODate(deadline);
 
-  const isFailure = assignment.assignmentSubmissionStatus === "FAILURE";
-  const isPending = assignment.assignmentSubmissionStatus === "PENDING";
-  const isNotSubmitted = assignment.submissionFailureType === "NOT_SUBMITTED";
+  const deadlineText = `종료일시: ${year}년 ${month}월 ${day}일 ${padWithZero(
+    hours
+  )}:${padWithZero(minutes)}까지`;
+
+  const isFailure = assignmentSubmissionStatus === "FAILURE";
+  const isPending = assignmentSubmissionStatus === "PENDING";
+  const isNotSubmitted = submissionFailureType === "NOT_SUBMITTED";
 
   return (
     <>
@@ -29,14 +32,12 @@ export const AssignmentSubmissionInfo = ({
           <Text as="div" color="sub">
             제출한 과제
             <Text as="span" color="textBlack">
-              {assignment.title}
+              {title}
             </Text>
           </Text>
           <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
           <styled.div color={isFailure ? "error" : "primary"}>
-            {isFailure
-              ? failMapping[assignment.submissionFailureType]
-              : "글자수 충족"}
+            {isFailure ? failMapping[submissionFailureType] : "글자수 충족"}
           </styled.div>
         </Flex>
       )}

@@ -22,13 +22,14 @@ export const AssignmentOverviewBox = ({
       {assignments.map((assignment) => (
         <Box
           key={assignment.studyDetailId}
+          variant="text"
           text={
             <>
               <AssignmentBoxTitle assignment={assignment} />
               <Space height={16} />
               <Link href={assignment.descriptionLink} target="_blank">
                 <TextButton
-                  style={{ paddingLeft: "0px" }}
+                  style={{ paddingLeft: "0px", paddingRight: "0px" }}
                   text="과제 명세 확인"
                 />
               </Link>

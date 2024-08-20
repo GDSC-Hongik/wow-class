@@ -9,33 +9,30 @@ interface AssignmentBoxTitleProps {
   assignment: Assignment;
 }
 
-export const AssignmentBoxTitle = ({ assignment }: AssignmentBoxTitleProps) => (
-  <>
-    <Text color="primary" typo="label2">
-      {assignment.week}주차
-    </Text>
-    <Space height={16} />
-    <Flex gap="xs">
-      <Text as="h2" typo="h2">
-        {assignment.title}
+export const AssignmentBoxTitle = ({ assignment }: AssignmentBoxTitleProps) => {
+  const { week, title, assignmentSubmissionStatus } = assignment;
+  const { color, message } =
+    assignmentSubmissionMap[assignmentSubmissionStatus];
+
+  return (
+    <>
+      <Text color="primary" typo="label2">
+        {week}주차
       </Text>
-      {!(assignment.assignmentSubmissionStatus === "PENDING") && (
-        <Tag
-          variant="solid2"
-          color={
-            assignmentSubmissionMap[assignment.assignmentSubmissionStatus]
-              .color ?? "blue"
-          }
-        >
-          {
-            assignmentSubmissionMap[assignment.assignmentSubmissionStatus]
-              .message
-          }
-        </Tag>
-      )}
-    </Flex>
-  </>
-);
+      <Space height={16} />
+      <Flex gap="xs">
+        <Text as="h2" typo="h2">
+          {title}
+        </Text>
+        {assignmentSubmissionStatus !== "PENDING" && (
+          <Tag color={color ?? "blue"} variant="solid2">
+            {message}
+          </Tag>
+        )}
+      </Flex>
+    </>
+  );
+};
 
 const assignmentSubmissionMap: Record<
   AssignmentSubmissionStatusType,
