@@ -1,9 +1,8 @@
-// HomeworkTitle.tsx
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import type { ComponentProps } from "react";
 import type { Assignment } from "types/dtos/study-detail-dashboard";
-import type { HomeworkSubmissionStatusType } from "types/entities/assignment";
+import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
 import Tag from "wowds-ui/Tag";
 
 interface AssignmentBoxTitleProps {
@@ -24,19 +23,22 @@ export const AssignmentBoxTitle = ({ assignment }: AssignmentBoxTitleProps) => (
         <Tag
           variant="solid2"
           color={
-            homeworkSubmissionMap[assignment.assignmentSubmissionStatus]
+            assignmentSubmissionMap[assignment.assignmentSubmissionStatus]
               .color ?? "blue"
           }
         >
-          {homeworkSubmissionMap[assignment.assignmentSubmissionStatus].message}
+          {
+            assignmentSubmissionMap[assignment.assignmentSubmissionStatus]
+              .message
+          }
         </Tag>
       )}
     </Flex>
   </>
 );
 
-const homeworkSubmissionMap: Record<
-  HomeworkSubmissionStatusType,
+const assignmentSubmissionMap: Record<
+  AssignmentSubmissionStatusType,
   { message: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   FAILURE: {
@@ -48,7 +50,7 @@ const homeworkSubmissionMap: Record<
     color: "blue",
   },
   PENDING: {
-    message: "과제 휴강",
+    message: "",
     color: "grey",
   },
 };

@@ -1,4 +1,3 @@
-// HomeworkSubmissionInfo.tsx
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";

@@ -1,4 +1,8 @@
-import type { HomeworkSubmissionStatusType } from "types/entities/assignment";
+import type {
+  AssignmentStatus,
+  AssignmentSubmissionStatusType,
+  SubmissionFailureType,
+} from "types/entities/assignment";
 
 export interface StudyDetailDashboardDto {
   repositoryLink: string;
@@ -8,18 +12,14 @@ export interface StudyDetailDashboardDto {
 
 export interface Assignment {
   studyDetailId: number;
-  assignmentStatus: "NONE" | "OPEN" | "CANCELLED";
+  assignmentStatus: AssignmentStatus;
   week: number;
   title: string;
-  assignmentSubmissionStatus: HomeworkSubmissionStatusType;
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
   descriptionLink: string;
   deadline: string;
   submissionLink: string;
-  submissionFailureType:
-    | "NONE"
-    | "NOT_SUBMITTED"
-    | "WORD_COUNT_INSUFFICIENT"
-    | "LOCATION_UNIDENTIFIABLE";
+  submissionFailureType: SubmissionFailureType;
 
   committedAt?: string;
 }

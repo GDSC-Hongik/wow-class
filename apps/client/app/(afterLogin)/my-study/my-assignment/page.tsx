@@ -3,14 +3,14 @@ import { Space } from "@wow-class/ui";
 import Image from "next/image";
 
 import {
-  HomeworkHistory,
+  AssignmentHistory,
   RepositorySubmissionBox,
-} from "@/(afterLogin)/my-study/my-homework/_components";
+} from "@/(afterLogin)/my-study/my-assignment/_components";
 
-import { AssignmentOverviewBox } from "./_components/AssignmentOverviewBox/AssignmentBox";
+import { AssignmentOverviewBox } from "./_components/AssignmentOverviewBox";
 import { assignmentData, studyDashBoardData } from "./_components/mockData";
 
-const MyHomeworkPage = async () => {
+const MyAssignmentPage = async () => {
   // const studyDashboard = await studyDetailApi.getStudyDetailDashboard(1);
 
   //TODO: studyDashboard.isLinkEditable 가 false 면 이번 주 과제 조회 api 사용
@@ -49,9 +49,9 @@ const MyHomeworkPage = async () => {
         )}
       </Flex>
       <Space height={64} />
-      <HomeworkHistory />
+      <AssignmentHistory />
     </>
   );
 };
 
-export default MyHomeworkPage;
+export default MyAssignmentPage;

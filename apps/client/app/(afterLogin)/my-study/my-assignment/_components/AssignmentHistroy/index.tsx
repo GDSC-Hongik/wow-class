@@ -3,9 +3,9 @@ import { Space, Text } from "@wow-class/ui";
 import Image from "next/image";
 
 import { history } from "../mockData";
-import { HomeworkHistoryItem } from "./HomeworkHistoryItem";
+import { AssignmentHistoryItem } from "./AssignmentHistoryItem";
 
-export const HomeworkHistory = async () => {
+export const AssignmentHistory = async () => {
   //const studyHistory = await studyHistoryApi.getStudyHistory(1);
   const studyHistories = history;
 
@@ -20,7 +20,7 @@ export const HomeworkHistory = async () => {
             지난 과제의 제출 내역을 확인해요.
           </Text>
           {studyHistories.map((history) => (
-            <HomeworkHistoryItem
+            <AssignmentHistoryItem
               history={history}
               key={history.assignmentHistoryId}
             />

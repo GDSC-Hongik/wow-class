@@ -5,16 +5,18 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { AssignmentHistoryDto } from "types/dtos/study-history";
-import type { HomeworkSubmissionStatusType } from "types/entities/assignment";
+import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
-interface HomeworkHistoryItemProps {
+interface AssignmentHistoryItemProps {
   history: AssignmentHistoryDto;
 }
 
-export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
+export const AssignmentHistoryItem = ({
+  history,
+}: AssignmentHistoryItemProps) => {
   const {
     week,
     deadline,
@@ -54,10 +56,10 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
         </Flex>
         <styled.div paddingX="32px">
           <Tag
-            color={homeworkSubmissionMap[assignmentSubmissionStatus].color}
+            color={assignmentSubmissionMap[assignmentSubmissionStatus].color}
             variant="solid2"
           >
-            {homeworkSubmissionMap[assignmentSubmissionStatus].message}
+            {assignmentSubmissionMap[assignmentSubmissionStatus].message}
           </Tag>
         </styled.div>
         <Flex className={buttonContainerStyle} minWidth="182px" paddingX="25px">
@@ -76,8 +78,8 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
   );
 };
 
-const homeworkSubmissionMap: Record<
-  HomeworkSubmissionStatusType,
+const assignmentSubmissionMap: Record<
+  AssignmentSubmissionStatusType,
   { message: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   FAILURE: {

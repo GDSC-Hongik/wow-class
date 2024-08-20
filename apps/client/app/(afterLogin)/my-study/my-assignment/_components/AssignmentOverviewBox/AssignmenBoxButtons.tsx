@@ -4,7 +4,9 @@ import { Space } from "@wow-class/ui";
 import { tags } from "constants/tags";
 import { revalidateTag } from "next/cache";
 import Link from "next/dist/client/link";
+import type { ReactNode } from "react";
 import type { Assignment } from "types/dtos/study-detail-dashboard";
+import { isDeadlinePassed } from "utils";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
 
@@ -68,7 +70,7 @@ export const AssignmentButtons = ({
       );
   };
 
-  const renderSecondaryButton = (text: string, icon: JSX.Element) => {
+  const renderSecondaryButton = (text: string, icon: ReactNode) => {
     if (isDeadlinePassed(assignment.deadline)) {
       return (
         <Button disabled={true} style={buttonStyle}>
@@ -100,13 +102,6 @@ export const AssignmentButtons = ({
       {renderSecondaryButton(secondaryButtonText, icon)}
     </>
   );
-};
-
-const isDeadlinePassed = (deadline: string) => {
-  const now = new Date();
-  const deadlineDate = new Date(deadline);
-
-  return now > deadlineDate;
 };
 
 const buttonStyle = {
