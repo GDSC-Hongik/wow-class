@@ -17,7 +17,7 @@ export const history: AssignmentHistoryDto[] = [
     deadline: "2024-08-24T06:02:17.417Z",
     descriptionLink: "http://example.com/assignment2",
     submissionLink: "",
-    assignmentSubmissionStatus: "FAIL",
+    assignmentSubmissionStatus: "FAILURE",
     week: 2,
   },
 ];
@@ -31,7 +31,7 @@ export const studyDashBoardData: StudyDetailDashboardDto = {
       assignmentStatus: "OPEN",
       week: 1,
       title: "React Basics",
-      assignmentSubmissionStatus: "FAIL",
+      assignmentSubmissionStatus: "FAILURE",
       descriptionLink: "https://example.com/assignments/react-basics",
       deadline: "2024-08-18T17:56:01.155Z",
       submissionLink: "https://example.com/submissions/react-basics",

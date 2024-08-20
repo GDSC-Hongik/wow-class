@@ -9,6 +9,7 @@ export const studyApplyApi = {
       apiPath.applyStudy,
       {
         next: { tags: [tags.studyApply] },
+        cache: "force-cache",
       }
     );
 
@@ -20,21 +21,11 @@ export const studyApplyApi = {
       null
     );
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData);
-    }
-
-    return response.data;
+    return { success: response.ok };
   },
   cancelStudyApplication: async (studyId: number) => {
     const response = await fetcher.delete(`${apiPath.applyStudy}/${studyId}`);
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData);
-    }
-
-    return response.data;
+    return { success: response.ok };
   },
 };

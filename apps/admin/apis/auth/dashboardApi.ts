@@ -12,10 +12,9 @@ export const dashboardApi = {
       }
     );
 
-    const memberRole = response.data?.member.role;
-    const currentRecruitmentOpen =
-      response.data?.currentRecruitmentRound?.period.open || false;
+    const studyRole = response.data?.member.studyRole;
+    const manageRole = response.data?.member.manageRole;
 
-    return { memberRole, currentRecruitmentOpen };
+    return { studyRole, manageRole };
   },
 };

@@ -1,6 +1,6 @@
 import { Flex, styled } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
-import { padWithZero, parseDate } from "@wow-class/utils";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import type { ComponentProps } from "react";
 import type { AssignmentHistoryDto } from "types/dtos/study-history";
 import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
@@ -22,7 +22,7 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
     submissionLink,
   } = history;
 
-  const { year, month, day, hours, minutes } = parseDate(deadline);
+  const { year, month, day, hours, minutes } = parseISODate(deadline);
 
   const deadlineText = `종료: ${year}년 ${month}월 ${day}일 ${padWithZero(
     hours

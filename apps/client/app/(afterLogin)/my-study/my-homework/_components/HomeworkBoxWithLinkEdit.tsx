@@ -1,7 +1,7 @@
 "use client";
 
 import { Space, Text } from "@wow-class/ui";
-import { padWithZero, parseDate } from "@wow-class/utils";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import { tags } from "constants/tags";
 import { revalidateTag } from "next/cache";
 import type { SubmittableAssignment } from "types/dtos/study-detail-dashboard";
@@ -34,7 +34,7 @@ export const HomeworkBoxWithLinkEdit = ({
           descriptionLink,
           submissionLink,
         }) => {
-          const { year, month, day, hours, minutes } = parseDate(deadline);
+          const { year, month, day, hours, minutes } = parseISODate(deadline);
 
           const deadlineText = `종료일시: ${year}년 ${month}월 ${day}일 ${padWithZero(
             hours

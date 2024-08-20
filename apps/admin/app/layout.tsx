@@ -2,7 +2,6 @@ import "./global.css";
 import "wowds-ui/styles.css";
 import "@wow-class/ui/styles.css";
 
-import Navbar from "components/Navbar";
 import type { Metadata } from "next";
 
 import { JotaiProvider } from "../components/JotaiProvider";
@@ -20,10 +19,7 @@ const RootLayout = ({
   return (
     <html lang="ko">
       <body>
-        <JotaiProvider>
-          <Navbar />
-          {children}
-        </JotaiProvider>
+        <JotaiProvider>{children}</JotaiProvider>
       </body>
     </html>
   );
