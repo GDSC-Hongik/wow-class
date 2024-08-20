@@ -14,6 +14,7 @@
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "wowds-icons": "^0.1.3",
     "wowds-tokens": "^0.1.1"
   },
   "devDependencies": {
@@ -21,8 +22,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@wow-class/eslint-config": "workspace:*",
-    "@wow-class/typescript-config": "workspace:*",
     "@wow-class/fonts": "workspace:*",
+    "@wow-class/typescript-config": "workspace:*",
     "@wow-class/utils": "workspace:*",
     "eslint": "^8",
     "eslint-config-next": "^14.2.5",

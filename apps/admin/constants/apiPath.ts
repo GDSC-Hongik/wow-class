@@ -1,6 +1,7 @@
 export const enum apiPath {
   dashboard = "/onboarding/members/me/dashboard",
   studyList = "/admin/studies",
+  createStudy = "/admin/studies",
 }
 
 export const enum mentorApiPath {
