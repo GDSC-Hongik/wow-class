@@ -1,19 +1,10 @@
-"use client";
-
 import { css } from "@styled-system/css";
 import { Header, Text } from "@wow-class/ui";
+import LinkButton from "components/LinkButton";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import Button from "wowds-ui/Button";
 
 const LandingPage = () => {
-  const router = useRouter();
-
-  const handleClickLogin = () => {
-    router.push(routePath.auth);
-  };
-
   return (
     <div className={containerStyle}>
       <Header />
@@ -36,13 +27,13 @@ const LandingPage = () => {
           GDSC Hongik은 홍익대학교의 학생 개발자들을 위해 <br />
           개발에 쉽게 입문할 수 있는 기회를 제공해요.
         </Text>
-        <Button
+        <LinkButton
           aria-label="로그인 페이지로 이동"
+          href={routePath.auth}
           size="lg"
-          onClick={handleClickLogin}
         >
           로그인
-        </Button>
+        </LinkButton>
       </main>
     </div>
   );
