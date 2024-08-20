@@ -5,41 +5,12 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import { dayToKorean } from "constants/dayToKorean";
+import { headerMockData } from "constants/mockData";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { space } from "wowds-tokens";
 import TextButton from "wowds-ui/TextButton";
-
-const mockData = {
-  studyId: 1,
-  title: "기초 웹스터디",
-  academicYear: 2024,
-  semester: "FIRST",
-  studyType: "오프라인 세션",
-  notionLink: "string",
-  introduction: "새싹 개발자분들을 위한 개발 입문 스터디",
-  mentorName: "강가은",
-  dayOfWeek: "TUESDAY",
-  startTime: {
-    hour: 18,
-    minute: 0,
-    second: 0,
-    nano: 0,
-  },
-  endTime: {
-    hour: 19,
-    minute: 0,
-    second: 0,
-    nano: 0,
-  },
-  totalWeek: 8,
-  period: {
-    startDate: "2024-08-18T17:13:29.913Z",
-    endDate: "2024-08-18T17:13:29.913Z",
-    open: true,
-  },
-};
 
 const Header = () => {
   const [showIntro, setShowIntro] = useState(false);
@@ -68,7 +39,7 @@ const Header = () => {
     period: { startDate, endDate },
     introduction,
     notionLink,
-  } = mockData;
+  } = headerMockData;
 
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);

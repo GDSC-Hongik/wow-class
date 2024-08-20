@@ -6,68 +6,11 @@ import {
   attendanceStatusColorMap,
   attendanceStatusMap,
 } from "constants/attendanceStatusMap";
+import { studyCurriculumMockData } from "constants/mockData";
 import type { ComponentProps } from "react";
-import type {
-  LevelType,
-  StudyCurriculumDataType,
-} from "types/entities/myStudy";
+import type { LevelType } from "types/entities/myStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
-
-const mockData: StudyCurriculumDataType[] = [
-  {
-    week: 1,
-    title: "(제목) 웹 개발의 역사",
-    description:
-      "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
-    level: "BASIC",
-    period: {
-      startDate: "2024-08-18T17:13:29.913Z",
-      endDate: "2024-08-25T17:13:29.913Z",
-    },
-    attendanceStatus: "ATTENDED",
-    homeworkSubmissionStatus: "PENDING",
-  },
-  {
-    week: 2,
-    title: "(제목) 웹 개발의 역사",
-    description:
-      "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
-    level: "BEGINNER",
-    period: {
-      startDate: "2024-08-18T17:13:29.913Z",
-      endDate: "2024-08-25T17:13:29.913Z",
-    },
-    attendanceStatus: "NOT_ATTENDED",
-    homeworkSubmissionStatus: "SUBMITTED",
-  },
-  {
-    week: 3,
-    title: "(제목) 웹 개발의 역사",
-    description:
-      "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
-    level: "INTERMEDIATE",
-    period: {
-      startDate: "2024-08-18T17:13:29.913Z",
-      endDate: "2024-08-25T17:13:29.913Z",
-    },
-    attendanceStatus: "PENDING",
-    homeworkSubmissionStatus: "NOT_SUBMITTED",
-  },
-  {
-    week: 4,
-    title: "(제목) 웹 개발의 역사",
-    description:
-      "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
-    level: "ADVANCED",
-    period: {
-      startDate: "2024-08-18T17:13:29.913Z",
-      endDate: "2024-08-25T17:13:29.913Z",
-    },
-    attendanceStatus: "PENDING",
-    homeworkSubmissionStatus: "NOT_SUBMITTED",
-  },
-];
 
 const formatWeekPeriod = (startDate: string, endDate: string) => {
   const { month: startMonth, day: startDay } = parseISODate(startDate);
@@ -95,7 +38,7 @@ const StudyCurriculum = () => {
         스터디 커리큘럼
       </Text>
       <Flex direction="column">
-        {mockData.map(
+        {studyCurriculumMockData.map(
           (
             {
               week,

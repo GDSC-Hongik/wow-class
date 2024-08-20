@@ -1,23 +1,9 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import { formatISODateWithDot } from "@wow-class/utils";
+import { studyNoticesMockData } from "constants/mockData";
 import Link from "next/link";
 import { color } from "wowds-tokens";
-
-const mockData = [
-  {
-    studyAnnounceId: 0,
-    title: "2주차 과제 검사 결과 안내",
-    link: "",
-    createdDate: "2024-08-18T17:13:29.913Z",
-  },
-  {
-    studyAnnounceId: 1,
-    title: "1주차 실습",
-    link: "",
-    createdDate: "2024-08-18T17:13:29.913Z",
-  },
-];
 
 const StudyNotices = () => {
   return (
@@ -25,24 +11,26 @@ const StudyNotices = () => {
       <Text as="h2" className={studyNoticeHeadingStyle} typo="h2">
         스터디 공지
       </Text>
-      {mockData.map(({ studyAnnounceId, title, link, createdDate }, index) => (
-        <Link
-          className={studyNoticeBoxStyle}
-          href={link}
-          key={studyAnnounceId}
-          style={{
-            backgroundColor:
-              index === 0 ? `${color.monoBackgroundPressed}` : "white",
-          }}
-        >
-          <Text as="h3" typo="h3">
-            {title}
-          </Text>
-          <Text as="h3" typo="h3">
-            {formatISODateWithDot(createdDate)}
-          </Text>
-        </Link>
-      ))}
+      {studyNoticesMockData.map(
+        ({ studyAnnounceId, title, link, createdDate }, index) => (
+          <Link
+            className={studyNoticeBoxStyle}
+            href={link}
+            key={studyAnnounceId}
+            style={{
+              backgroundColor:
+                index === 0 ? `${color.monoBackgroundPressed}` : "white",
+            }}
+          >
+            <Text as="h3" typo="h3">
+              {title}
+            </Text>
+            <Text as="h3" typo="h3">
+              {formatISODateWithDot(createdDate)}
+            </Text>
+          </Link>
+        )
+      )}
     </section>
   );
 };

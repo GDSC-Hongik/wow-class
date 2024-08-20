@@ -1,41 +1,8 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import type { DailyTaskDataType } from "types/entities/myStudy";
+import { dailyTaskMockData } from "constants/mockData";
 
 import { AttendanceStatusBox, DailyTaskCarousel, HomeworkStatusBox } from ".";
-
-const mockData: DailyTaskDataType[] = [
-  {
-    type: "ATTENDANCE",
-    week: 4,
-    period: {
-      start: "2024-08-18T17:13:29.913Z",
-      end: "2024-08-18T23:59:29.913Z",
-    },
-    attendanceStatus: "ATTENDED",
-  },
-  {
-    type: "HOMEWORK",
-    week: 3,
-    name: "과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름",
-    deadline: "2024-08-18T17:13:29.913Z",
-    homeworkSubmissionStatus: "SUBMITTED",
-  },
-  {
-    type: "HOMEWORK",
-    week: 2,
-    name: "과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름",
-    deadline: "2024-08-18T17:13:29.913Z",
-    homeworkSubmissionStatus: "NOT_SUBMITTED",
-  },
-  {
-    type: "HOMEWORK",
-    week: 1,
-    name: "과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름",
-    deadline: "2024-08-18T17:13:29.913Z",
-    homeworkSubmissionStatus: "SUBMITTED",
-  },
-];
 
 const DailyTasks = () => {
   return (
@@ -43,7 +10,7 @@ const DailyTasks = () => {
       <Flex direction="column" gap="xl" position="relative">
         <Text typo="h2">오늘의 할 일</Text>
         <DailyTaskCarousel>
-          {mockData.map((dailyTask, index) => {
+          {dailyTaskMockData.map((dailyTask, index) => {
             return dailyTask.type === "ATTENDANCE" ? (
               <AttendanceStatusBox
                 attendanceStatus={dailyTask.attendanceStatus}
