@@ -1,19 +1,10 @@
-"use client";
-
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
+import LinkButton from "components/LinkButton";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import Button from "wowds-ui/Button";
 
 const AuthErrorAfterRecruitmentPage = () => {
-  const router = useRouter();
-
-  const handleClickNavigateHome = () => {
-    router.push(routePath.landing);
-  };
-
   return (
     <main className={mainContentStyle}>
       <Image
@@ -32,9 +23,9 @@ const AuthErrorAfterRecruitmentPage = () => {
         모집 기간에 합류 후 이용해주세요.
       </p>
       <div className={buttonContainerStyle}>
-        <Button aria-label="홈으로 이동" onClick={handleClickNavigateHome}>
+        <LinkButton aria-label="홈으로 이동" href={routePath.landing}>
           홈으로 이동
-        </Button>
+        </LinkButton>
       </div>
     </main>
   );
