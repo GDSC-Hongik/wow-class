@@ -25,12 +25,8 @@ const CheckAttendanceModal = () => {
     router.push(routePath["attendance-complete"]);
   };
 
-  const handleCloseModal = () => {
-    router.back();
-  };
-
   return (
-    <Modal onClose={handleCloseModal}>
+    <Modal>
       <Flex alignItems="center" direction="column" gap="sm" marginBottom="40px">
         <section
           aria-label="check-attendance-title"
