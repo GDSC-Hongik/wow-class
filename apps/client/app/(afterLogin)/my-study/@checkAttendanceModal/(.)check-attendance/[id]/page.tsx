@@ -3,6 +3,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
+import { routePath } from "constants/routePath";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -21,6 +22,7 @@ const CheckAttendanceModal = () => {
 
   const handleClickCheckAttendanceButton = () => {
     // TODO api 요청 및 에러 처리 필요
+    router.push(routePath["attendance-complete"]);
   };
 
   const handleCloseModal = () => {
