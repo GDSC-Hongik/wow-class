@@ -21,14 +21,15 @@ export const RepositorySubmissionBox = ({
 }: RepositorySubmissionBoxProps) => {
   const [url, setUrl] = useState(repositoryLink);
   const [isInitialSubmit, setIsInitialSubmit] = useState(true);
-  const [status, setStatus] = useState<RepositorySubmissionStatusType>("none");
+  const [repositorySubmissionStatus, setrepositorySubmissionStatus] =
+    useState<RepositorySubmissionStatusType>("none");
 
   const handleClickChange = useCallback((value: string) => {
     setUrl(value);
   }, []);
 
   const handleClickEditButton = useCallback(() => {
-    setStatus("editing");
+    setrepositorySubmissionStatus("editing");
   }, []);
 
   const handleClickSubmitButton = useCallback(async () => {
@@ -37,14 +38,14 @@ export const RepositorySubmissionBox = ({
     } else {
       console.log("모달 오픈");
     }
-    setStatus("submitted");
+    setrepositorySubmissionStatus("submitted");
     //TODO: studyHistoryId 넣어주기
     //await studyHistoryApi.putRepository(1, url);
   }, [isInitialSubmit]);
 
   useEffect(() => {
     if (isInitialSubmit) {
-      setStatus(repositoryLink ? "submitted" : "none");
+      setrepositorySubmissionStatus(repositoryLink ? "submitted" : "none");
     }
   }, [isInitialSubmit, repositoryLink]);
 
@@ -61,14 +62,14 @@ export const RepositorySubmissionBox = ({
             <Text as="h2" typo="h2">
               과제 제출을 위한 레포지토리 URL 입력하기
             </Text>
-            {status === "submitted" && (
+            {repositorySubmissionStatus === "submitted" && (
               <Tag color="blue" variant="solid2">
                 제출 완료
               </Tag>
             )}
           </Flex>
           <Space height={4} />
-          {status === "none" && (
+          {repositorySubmissionStatus === "none" && (
             <Flex alignItems="center" gap="xxs">
               <Warn fill="error" stroke="error" />
               <Text color="error" typo="body1">
@@ -76,11 +77,11 @@ export const RepositorySubmissionBox = ({
               </Text>
             </Flex>
           )}
-          {status === "submitted" && (
+          {repositorySubmissionStatus === "submitted" && (
             <Text color="sub">최초 과제 제출 전 까지만 수정이 가능해요.</Text>
           )}
           <Space height={26} />
-          {status !== "submitted" && (
+          {repositorySubmissionStatus !== "submitted" && (
             <TextField
               label=""
               placeholder="URL 을 입력하세요"
@@ -88,7 +89,7 @@ export const RepositorySubmissionBox = ({
               onChange={handleClickChange}
             />
           )}
-          {status === "submitted" && (
+          {repositorySubmissionStatus === "submitted" && (
             <Flex className={urlBoxStyle}>
               {url}
               <Flex gap="xs" marginLeft="auto">

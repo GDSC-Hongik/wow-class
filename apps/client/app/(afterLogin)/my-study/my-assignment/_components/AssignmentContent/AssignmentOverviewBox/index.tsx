@@ -28,10 +28,7 @@ export const AssignmentOverviewBox = ({
               <AssignmentBoxTitle assignment={assignment} />
               <Space height={16} />
               <Link href={assignment.descriptionLink} target="_blank">
-                <TextButton
-                  style={{ paddingLeft: "0px", paddingRight: "0px" }}
-                  text="과제 명세 확인"
-                />
+                <TextButton style={textButtonstyle} text="과제 명세 확인" />
               </Link>
               <AssignmentSubmissionInfo assignment={assignment} />
               <Space height={26} />
@@ -45,4 +42,9 @@ export const AssignmentOverviewBox = ({
       ))}
     </>
   );
+};
+
+const textButtonstyle = {
+  paddingLeft: "0px",
+  paddingRight: "0px",
 };
