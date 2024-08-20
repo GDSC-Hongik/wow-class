@@ -431,6 +431,9 @@ progress {
 .h_80px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   height: 80px;
 }
+.w_100\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 100%;
+}
 .c_textBlack:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-text-black);
 }
