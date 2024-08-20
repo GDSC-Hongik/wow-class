@@ -14,14 +14,14 @@ interface RepositorySubmissionBoxProps {
   repositoryLink: string;
 }
 
-type RepositorySubmissionStatus = "none" | "editing" | "submitted";
+type RepositorySubmissionStatusType = "none" | "editing" | "submitted";
 
 export const RepositorySubmissionBox = ({
   repositoryLink,
 }: RepositorySubmissionBoxProps) => {
   const [url, setUrl] = useState(repositoryLink);
   const [isInitialSubmit, setIsInitialSubmit] = useState(true);
-  const [status, setStatus] = useState<RepositorySubmissionStatus>("none");
+  const [status, setStatus] = useState<RepositorySubmissionStatusType>("none");
 
   const handleClickChange = useCallback((value: string) => {
     setUrl(value);
