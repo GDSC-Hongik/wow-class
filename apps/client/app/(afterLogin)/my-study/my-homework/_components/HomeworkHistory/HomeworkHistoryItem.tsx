@@ -1,3 +1,4 @@
+import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
@@ -42,12 +43,7 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
         </Flex>
       </Table.Left>
       <Table.Right>
-        <Flex
-          justifyContent="center"
-          minWidth="202px"
-          paddingX="36px"
-          textStyle="body1"
-        >
+        <Flex className={buttonContainerStyle} minWidth="202px" paddingX="36px">
           {descriptionLink ? (
             <Link href={descriptionLink} target="_blank">
               <TextButton text="과제 명세 확인" />
@@ -64,12 +60,7 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
             {homeworkSubmissionMap[assignmentSubmissionStatus].message}
           </Tag>
         </styled.div>
-        <Flex
-          justifyContent="center"
-          minWidth="182px"
-          paddingX="25px"
-          textStyle="body1"
-        >
+        <Flex className={buttonContainerStyle} minWidth="182px" paddingX="25px">
           {submissionLink ? (
             <Link href={submissionLink} target="_blank">
               <Button size="sm" variant="outline">
@@ -98,3 +89,8 @@ const homeworkSubmissionMap: Record<
     color: "blue",
   },
 };
+
+const buttonContainerStyle = css({
+  justifyContent: "center",
+  textStyle: "body1",
+});

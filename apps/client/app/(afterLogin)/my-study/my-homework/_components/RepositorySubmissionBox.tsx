@@ -1,5 +1,6 @@
 "use client";
 
+import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { useCallback, useEffect, useState } from "react";
@@ -88,15 +89,7 @@ export const RepositorySubmissionBox = ({
             />
           )}
           {status === "submitted" && (
-            <Flex
-              backgroundColor="backgroundAlternative"
-              borderRadius="5px"
-              color="sub"
-              justifyContent="space-between"
-              paddingX="24px"
-              paddingY="18px"
-              textStyle="h2"
-            >
+            <Flex className={urlBoxStyle}>
               {url}
               <Flex gap="xs" marginLeft="auto">
                 <Edit stroke="textBlack" onClick={handleClickEditButton} />
@@ -116,3 +109,13 @@ export const RepositorySubmissionBox = ({
     />
   );
 };
+
+const urlBoxStyle = css({
+  backgroundColor: "backgroundAlternative",
+  borderRadius: "5px",
+  color: "sub",
+  justifyContent: "space-between",
+  paddingX: "24px",
+  paddingY: "18px",
+  textStyle: "h2",
+});

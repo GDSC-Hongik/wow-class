@@ -42,6 +42,7 @@ export const HomeworkBoxWithLinkEdit = ({
           return (
             <Box
               key={studyDetailId}
+              variant="text"
               text={
                 <>
                   <Text color="primary" typo="label2">
@@ -63,7 +64,7 @@ export const HomeworkBoxWithLinkEdit = ({
                   <Link href={submissionLink} target="_blank">
                     <Button
                       disabled={isButtonDisabled}
-                      style={{ maxWidth: "100%" }}
+                      style={buttonStyle}
                       variant="outline"
                       icon={
                         <LinkIcon
@@ -77,7 +78,7 @@ export const HomeworkBoxWithLinkEdit = ({
                   <Space height={8} />
                   <Button
                     disabled={isButtonDisabled}
-                    style={{ maxWidth: "100%" }}
+                    style={buttonStyle}
                     icon={
                       <ReloadIcon
                         stroke={
@@ -97,4 +98,8 @@ export const HomeworkBoxWithLinkEdit = ({
       )}
     </>
   );
+};
+
+const buttonStyle = {
+  maxWidth: "100%",
 };
