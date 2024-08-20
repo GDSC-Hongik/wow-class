@@ -395,27 +395,12 @@ progress {
 .bg_white:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   background: var(--colors-white);
 }
-.c_blue:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  color: blue;
-}
 .h_80px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   height: 80px;
 }
-<<<<<<< HEAD
 .w_100\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   width: 100%;
 }
-.gap_xxs:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  gap: var(--spacing-xxs);
-}
-.gap_xs:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  gap: var(--spacing-xs);
-}
-.c_sub:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  color: var(--colors-sub);
-}
-=======
->>>>>>> 9d0c1a49c03c25b8ac48d37b6044b845f3349746
 .c_textBlack:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-text-black);
 }
