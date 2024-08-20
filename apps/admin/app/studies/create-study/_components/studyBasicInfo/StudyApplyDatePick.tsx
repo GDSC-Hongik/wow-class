@@ -26,8 +26,8 @@ const StudyApplyDatePick = () => {
 
   const setStudyDateHandler = (triggerDate: DateRange | undefined) => {
     if (!triggerDate) return;
-    const startDateString = dateToFormatString(triggerDate.from);
-    const endDateString = dateToFormatString(triggerDate.to);
+    const startDateString = dateToFormatString(triggerDate.from!!);
+    const endDateString = dateToFormatString(triggerDate.to!!);
     setStudyDate({
       fromValue: startDateString,
       toValue: endDateString,

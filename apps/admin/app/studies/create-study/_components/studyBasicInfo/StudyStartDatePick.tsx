@@ -48,10 +48,11 @@ const StudyStartDatePick = () => {
       setValue("startDate", startDateString);
       setOpen(false);
     } else {
-      setStudyDate({
-        fromValue: dateToFormatString(triggerDate?.from),
-        toValue: dateToFormatString(triggerDate?.to),
-      });
+      if (triggerDate)
+        setStudyDate({
+          fromValue: dateToFormatString(triggerDate?.from!!),
+          toValue: dateToFormatString(triggerDate?.to!!),
+        });
     }
   };
 

@@ -5,13 +5,12 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import { dayToKorean } from "constants/dayToKorean";
+import { headerMockData } from "constants/mockData";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { space } from "wowds-tokens";
 import TextButton from "wowds-ui/TextButton";
-
-import { headerMockData } from "../../../../constants/mockData";
 
 const Header = () => {
   const [showIntro, setShowIntro] = useState(false);

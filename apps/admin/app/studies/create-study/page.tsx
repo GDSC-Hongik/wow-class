@@ -1,14 +1,16 @@
 "use client";
 import { Flex, styled } from "@styled-system/jsx";
+import { Space } from "@wow-class/ui";
 import { createStudyApi } from "apis/form/createStudyApi";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import Button from "wowds-ui/Button";
 
-import StudyBasicInfo from "@/studies/create-study/_components/studyBasicInfo";
-import StudyNameTextField from "@/studies/create-study/_components/StudyNameTextField";
-
-import StudyMentorSelect from "./_components/StudyMentorSelect";
+import {
+  StudyBasicInfo,
+  StudyMentorSelect,
+  StudyNameTextField,
+} from "./_components";
 
 const CreateStudyPage = () => {
   const methods = useForm<CreateStudyApiRequestDto>({ mode: "onChange" });
@@ -28,11 +30,10 @@ const CreateStudyPage = () => {
       >
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <StudyNameTextField />
-          <styled.div height="48px" />
+          <Space height={48} />
           <StudyMentorSelect />
-          <styled.div height="64px" />
+          <Space height={64} />
           <StudyBasicInfo />
-
           <Button
             disabled={!methods.formState.isValid}
             role="button"
