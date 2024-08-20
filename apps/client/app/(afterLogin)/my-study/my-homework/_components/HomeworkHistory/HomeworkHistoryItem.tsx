@@ -35,7 +35,12 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
           {week}주차
         </Text>
         <Space width={50} />
-        <Table.Content subText={deadlineText} text={title} />
+        <Flex direction="column" gap="xxs" justifyContent="center">
+          <Text typo="h3">{title}</Text>
+          <Text color="sub" typo="body2">
+            {deadlineText}
+          </Text>
+        </Flex>
       </Table.Left>
       <Table.Right>
         <Flex
@@ -81,7 +86,7 @@ const homeworkSubmissionMap: Record<
   AssignmentSubmissionStatusType,
   { message: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
-  FAIL: {
+  FAILURE: {
     message: "제출 실패",
     color: "red",
   },
