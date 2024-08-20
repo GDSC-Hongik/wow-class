@@ -5,7 +5,10 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import { studyCurriculumMockData } from "constants/mockData";
 import type { ComponentProps } from "react";
-import type { LevelType } from "types/entities/myStudy";
+import type {
+  HomeworkSubmissionStatusType,
+  LevelType,
+} from "types/entities/myStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
@@ -127,7 +130,10 @@ const levelMap: Record<
   ADVANCED: { label: "고급", color: "red" },
 };
 
-const homeworkSubmissionStatusMap = {
+const homeworkSubmissionStatusMap: Record<
+  HomeworkSubmissionStatusType,
+  string
+> = {
   SUBMITTED: "제출한 과제 확인",
   NOT_SUBMITTED: "과제 제출하기",
   PENDING: "과제 제출하기",
