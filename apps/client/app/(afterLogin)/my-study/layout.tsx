@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 
 const Layout = ({
   children,
-  checkAttendanceModal,
+  attendanceCheckModal,
   attendanceCompleteModal,
 }: {
   children: React.ReactNode;
-  checkAttendanceModal: React.ReactNode;
+  attendanceCheckModal: React.ReactNode;
   attendanceCompleteModal: React.ReactNode;
 }) => {
   const pathname = usePathname();
@@ -18,8 +18,8 @@ const Layout = ({
     <main>
       {children}
       {pathname === routePath["attendance-complete"] && attendanceCompleteModal}
-      {pathname.startsWith(routePath["check-attendance"]) &&
-        checkAttendanceModal}
+      {pathname.startsWith(routePath["attendance-check"]) &&
+        attendanceCheckModal}
     </main>
   );
 };

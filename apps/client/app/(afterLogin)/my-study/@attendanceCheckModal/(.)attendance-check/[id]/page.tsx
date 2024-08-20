@@ -10,7 +10,7 @@ import { useState } from "react";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
-const CheckAttendanceModal = () => {
+const AttendanceCheckModal = () => {
   const [error] = useState(false);
   const [attendanceNumber, setAttendanceNumber] = useState("");
 
@@ -20,7 +20,7 @@ const CheckAttendanceModal = () => {
     setAttendanceNumber(value);
   };
 
-  const handleClickCheckAttendanceButton = () => {
+  const handleClickAttendanceCheckButton = () => {
     // TODO api 요청 및 에러 처리 필요
     router.push(routePath["attendance-complete"]);
   };
@@ -29,8 +29,8 @@ const CheckAttendanceModal = () => {
     <Modal>
       <Flex alignItems="center" direction="column" gap="sm" marginBottom="40px">
         <section
-          aria-label="check-attendance-title"
-          className={checkAttendanceTitleStyle}
+          aria-label="attendance-check-title"
+          className={attendanceCheckTitleStyle}
         >
           <Text as="h1" typo="h1">
             기초 웹스터디
@@ -46,8 +46,8 @@ const CheckAttendanceModal = () => {
           </Text>
         </section>
         <section
-          aria-label="check-attendance-description"
-          className={checkAttendanceDescriptionStyle}
+          aria-label="attendance-check-description"
+          className={attendanceCheckDescriptionStyle}
         >
           <Text as="p" color="sub" typo="body1">
             스터디 시작 후 멘토의 안내에 따라 출결번호를 입력해주세요.
@@ -66,21 +66,21 @@ const CheckAttendanceModal = () => {
         value={attendanceNumber}
         onChange={handleChangeAttendanceNumber}
       />
-      <Button onClick={handleClickCheckAttendanceButton}>출석 체크하기</Button>
+      <Button onClick={handleClickAttendanceCheckButton}>출석 체크하기</Button>
     </Modal>
   );
 };
 
-export default CheckAttendanceModal;
+export default AttendanceCheckModal;
 
 const textfieldHelperText = <div>• 출석 실패! 출결번호를 확인해주세요.</div>;
 
-const checkAttendanceTitleStyle = css({
+const attendanceCheckTitleStyle = css({
   display: "flex",
   gap: "sm",
 });
 
-const checkAttendanceDescriptionStyle = css({
+const attendanceCheckDescriptionStyle = css({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
