@@ -69,6 +69,25 @@ const mockData: StudyCurriculumDataType[] = [
   },
 ];
 
+const formatWeekPeriod = (startDate: string, endDate: string) => {
+  const { month: startMonth, day: startDay } = parseISODate(startDate);
+  const { month: endMonth, day: endDay } = parseISODate(endDate);
+
+  const {
+    formattedStartMonth,
+    formattedStartDay,
+    formattedEndMonth,
+    formattedEndDay,
+  } = {
+    formattedStartMonth: padWithZero(startMonth),
+    formattedStartDay: padWithZero(startDay),
+    formattedEndMonth: padWithZero(endMonth),
+    formattedEndDay: padWithZero(endDay),
+  };
+
+  return `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
+};
+
 const StudyCurriculum = () => {
   return (
     <section aria-label="study-curriculum">
@@ -89,24 +108,6 @@ const StudyCurriculum = () => {
             },
             index
           ) => {
-            const { month: startMonth, day: startDay } =
-              parseISODate(startDate);
-            const { month: endMonth, day: endDay } = parseISODate(endDate);
-
-            const {
-              formattedStartMonth,
-              formattedStartDay,
-              formattedEndMonth,
-              formattedEndDay,
-            } = {
-              formattedStartMonth: padWithZero(startMonth),
-              formattedStartDay: padWithZero(startDay),
-              formattedEndMonth: padWithZero(endMonth),
-              formattedEndDay: padWithZero(endDay),
-            };
-
-            const weekPeriod = `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
-
             return (
               <Table key={index}>
                 <Table.Left className={leftColStyle}>
@@ -136,7 +137,7 @@ const StudyCurriculum = () => {
                 </Table.Left>
                 <Table.Right className={rightColStyle}>
                   <Text as="h5" typo="body1">
-                    {weekPeriod}
+                    {formatWeekPeriod(startDate, endDate)}
                   </Text>
                   <Tag
                     aria-label="present"
