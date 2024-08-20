@@ -4,12 +4,27 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import useHorizontalScroll from "hooks/useHorizontalScroll";
 import Image from "next/image";
-import { type PropsWithChildren } from "react";
+import { type PropsWithChildren, useEffect, useState } from "react";
 
 const DailyTaskCarousel = ({ children }: PropsWithChildren) => {
+  const [showRightButton, setShowRightButton] = useState(false);
+
   const itemWidth = 386;
 
   const { containerRef, handleScroll } = useHorizontalScroll();
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const containerWidth = containerRef.current.offsetWidth;
+      const totalChildrenWidth = Array.from(containerRef.current.children)
+        .map((child) => (child as HTMLElement).offsetWidth)
+        .reduce((acc, width) => acc + width, 0);
+
+      if (totalChildrenWidth > containerWidth) {
+        setShowRightButton(true);
+      }
+    }
+  }, [containerRef]);
 
   const handleClickScrollRightButton = () => {
     if (containerRef.current) {
@@ -30,19 +45,21 @@ const DailyTaskCarousel = ({ children }: PropsWithChildren) => {
       >
         {children}
       </Flex>
-      <button
-        aria-label="scroll-right-button"
-        className={scrollRightButtonStyle}
-        tabIndex={0}
-        onClick={handleClickScrollRightButton}
-      >
-        <Image
-          alt="scroll-right-button"
-          height={52}
-          src="/images/arrow-button.svg"
-          width={52}
-        />
-      </button>
+      {showRightButton && (
+        <button
+          aria-label="scroll-right-button"
+          className={scrollRightButtonStyle}
+          tabIndex={0}
+          onClick={handleClickScrollRightButton}
+        >
+          <Image
+            alt="scroll-right-button"
+            height={52}
+            src="/images/arrow-button.svg"
+            width={52}
+          />
+        </button>
+      )}
     </>
   );
 };
