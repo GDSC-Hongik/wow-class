@@ -36,9 +36,8 @@ export const HomeworkBoxWithLinkEdit = ({
         }) => {
           const { year, month, day, hours, minutes } = parseISODate(deadline);
 
-          const deadlineText = `종료일시: ${year}년 ${month}월 ${day}일 ${padWithZero(
-            hours
-          )}:${padWithZero(minutes)}까지`;
+          const deadlineText = `종료일시: ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}까지`;
+
           return (
             <Box
               key={studyDetailId}

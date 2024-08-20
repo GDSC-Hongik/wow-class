@@ -24,9 +24,7 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
 
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
-  const deadlineText = `종료: ${year}년 ${month}월 ${day}일 ${padWithZero(
-    hours
-  )}:${padWithZero(minutes)}`;
+  const deadlineText = `종료: ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
 
   return (
     <Table>
