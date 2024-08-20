@@ -26,8 +26,8 @@ export const history: AssignmentHistoryDto[] = [
 ];
 
 export const studyDashBoardData: StudyDetailDashboardDto = {
-  repositoryLink: "https://example.com/assignments/react-basics",
-  isLinkEditable: false,
+  repositoryLink: "",
+  isLinkEditable: true,
   submittableAssignments: [
     {
       studyDetailId: 1,
