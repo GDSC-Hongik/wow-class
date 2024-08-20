@@ -1,3 +1,4 @@
+"use client";
 import { Flex, Grid } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 
@@ -8,6 +9,7 @@ import StudyFormatSelect from "./StudyFormatSelect";
 import StudySemesterSelect from "./StudySemesterSelect";
 import StudyStartDatePick from "./StudyStartDatePick";
 import StudyTime from "./StudyTime";
+
 const StudyBasicInfo = () => {
   return (
     <Flex direction="column" gap="xl" maxWidth="5/6">

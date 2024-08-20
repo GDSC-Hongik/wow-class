@@ -1,3 +1,4 @@
+"use client";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { Controller, useFormContext } from "react-hook-form";

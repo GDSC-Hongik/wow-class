@@ -3,11 +3,12 @@ import "react-day-picker/style.css";
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
+import { dateToFormatString, formatStringToDate } from "@wow-class/utils";
 import useClickOutside from "hooks/useClickOutSide";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import type { DateRange } from "react-day-picker";
 import { DayPicker } from "react-day-picker";
 import { Controller, useFormContext } from "react-hook-form";
-import { dateToFormatString, formatStringToDate } from "utils/formatDate";
 
 const StudyApplyDatePick = () => {
   const [studyDate, setStudyDate] = useState({
@@ -23,15 +24,18 @@ const StudyApplyDatePick = () => {
     setOpen(false);
   });
 
-  useEffect(() => {
-    if (studyDate.fromValue) {
-      setInputValue(`${studyDate.fromValue} ~ ${studyDate.toValue}`);
-      setValue("applicationStartDate", studyDate.fromValue);
-      setValue("applicationEndDate", studyDate.toValue);
-    } else {
-      setInputValue("");
-    }
-  }, [studyDate, setValue]);
+  const setStudyDateHandler = (triggerDate: DateRange | undefined) => {
+    if (!triggerDate) return;
+    const startDateString = dateToFormatString(triggerDate.from);
+    const endDateString = dateToFormatString(triggerDate.to);
+    setStudyDate({
+      fromValue: startDateString,
+      toValue: endDateString,
+    });
+    setInputValue(`${startDateString} ~ ${endDateString}`);
+    setValue("applicationStartDate", startDateString);
+    setValue("applicationEndDate", endDateString);
+  };
 
   return (
     <Flex direction="column" gap="xs" height="128px" position="relative">
@@ -72,10 +76,7 @@ const StudyApplyDatePick = () => {
               backgroundColor: "white",
             }}
             onSelect={(triggerDate) => {
-              setStudyDate({
-                fromValue: dateToFormatString(triggerDate?.from),
-                toValue: dateToFormatString(triggerDate?.to),
-              });
+              setStudyDateHandler(triggerDate);
             }}
           />
         </div>

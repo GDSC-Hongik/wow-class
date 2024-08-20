@@ -3,15 +3,16 @@ import "react-day-picker/style.css";
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import useClickOutside from "hooks/useClickOutSide";
-import { useEffect, useRef, useState } from "react";
-import { DayPicker } from "react-day-picker";
-import { Controller, useFormContext } from "react-hook-form";
 import {
   dateToFormatString,
   formatStringToDate,
-  setStudyEndDate,
-} from "utils/formatDate";
+  getStudyEndDate,
+} from "@wow-class/utils";
+import useClickOutside from "hooks/useClickOutSide";
+import { useRef, useState } from "react";
+import type { DateRange } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
+import { Controller, useFormContext } from "react-hook-form";
 
 const StudyStartDatePick = () => {
   const [studyDate, setStudyDate] = useState({
@@ -29,14 +30,30 @@ const StudyStartDatePick = () => {
     setOpen(false);
   });
 
-  useEffect(() => {
-    if (studyDate.fromValue) {
-      setInputValue(`${studyDate.fromValue} ~ ${studyDate.toValue}`);
-      setValue("startDate", studyDate.fromValue);
+  const setStudyDateHandler = (
+    week: unknown,
+    date: Date,
+    triggerDate: DateRange | undefined
+  ) => {
+    if (week && date) {
+      const startDateString = dateToFormatString(date);
+      const endDateString = dateToFormatString(
+        getStudyEndDate(date, Number(week))
+      );
+      setStudyDate({
+        fromValue: startDateString,
+        toValue: endDateString,
+      });
+      setInputValue(`${startDateString} ~ ${endDateString}`);
+      setValue("startDate", startDateString);
+      setOpen(false);
     } else {
-      setInputValue("");
+      setStudyDate({
+        fromValue: dateToFormatString(triggerDate?.from),
+        toValue: dateToFormatString(triggerDate?.to),
+      });
     }
-  }, [studyDate, setValue]);
+  };
 
   return (
     <Flex direction="column" position="relative">
@@ -82,20 +99,7 @@ const StudyStartDatePick = () => {
               backgroundColor: "white",
             }}
             onSelect={(triggerDate, selected) => {
-              if (week && selected) {
-                setStudyDate({
-                  fromValue: dateToFormatString(selected),
-                  toValue: dateToFormatString(
-                    setStudyEndDate(selected, Number(week))
-                  ),
-                });
-                setOpen(false);
-              } else {
-                setStudyDate({
-                  fromValue: dateToFormatString(triggerDate?.from),
-                  toValue: dateToFormatString(triggerDate?.to),
-                });
-              }
+              setStudyDateHandler(week, selected, triggerDate);
             }}
           />
         </div>

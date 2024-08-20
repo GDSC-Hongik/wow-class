@@ -1,20 +1,18 @@
-export type CreateStudyApiRequestDto = {
+import type {
+  DayOfWeekType,
+  SemesterType,
+  StudyType,
+} from "types/entities/study";
+export interface CreateStudyApiRequestDto {
   mentorId: number;
   academicYear: number;
-  semesterType: "FIRST" | "SECOND";
+  semesterType: SemesterType;
   title: string;
   applicationStartDate: string;
   applicationEndDate: string;
   totalWeek: number;
   startDate: string;
-  dayOfWeek:
-    | "MONDAY"
-    | "TUESDAY"
-    | "WEDNESDAY"
-    | "THURSDAY"
-    | "FRIDAY"
-    | "SATURDAY"
-    | "SUNDAY";
+  dayOfWeek: DayOfWeekType;
   studyStartTime: {
     hour: number;
     minute: number;
@@ -27,5 +25,5 @@ export type CreateStudyApiRequestDto = {
     second: number;
     nano: number;
   };
-  studyType: "ASSIGNMENT" | "ONLINE" | "OFFLINE";
-};
+  studyType: StudyType;
+}

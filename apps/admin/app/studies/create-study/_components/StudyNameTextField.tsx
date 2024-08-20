@@ -1,3 +1,4 @@
+"use client";
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
