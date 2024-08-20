@@ -5,7 +5,7 @@ import { createStudyApi } from "apis/study/createStudyApi";
 import Image from "next/image";
 import Link from "next/link";
 import type { ComponentProps } from "react";
-import type { StudyType } from "types/entities/study";
+import type { StudyKoreanType } from "types/entities/study";
 import isAdmin from "utils/isAdmin";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
@@ -117,7 +117,7 @@ const StudyList = async () => {
 };
 
 const studyTypeColorMap: Record<
-  StudyType,
+  StudyKoreanType,
   ComponentProps<typeof Tag>["color"]
 > = {
   "과제 스터디": "green",

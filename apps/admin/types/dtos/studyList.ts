@@ -1,22 +1,19 @@
-import type { StudyType } from "types/entities/study";
+import type {
+  DayOfWeekType,
+  SemesterType,
+  StudyKoreanType,
+} from "types/entities/study";
 
 export interface StudyListApiResponseDto {
   studyId: number;
   academicYear: number;
-  semesterType: "FIRST" | "SECOND";
+  semesterType: SemesterType;
   title: string;
-  studyType: StudyType;
+  studyType: StudyKoreanType;
   notionLink: string;
   introduction: string;
   mentorName: string;
-  dayOfWeek:
-    | "MONDAY"
-    | "TUESDAY"
-    | "WEDNESDAY"
-    | "THURSDAY"
-    | "FRIDAY"
-    | "SATURDAY"
-    | "SUNDAY";
+  dayOfWeek: DayOfWeekType;
   startTime: {
     hour: number;
     minute: number;
