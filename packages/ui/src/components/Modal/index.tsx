@@ -3,7 +3,7 @@
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import Image from "next/image";
-import type { PropsWithChildren } from "react";
+import type { CSSProperties, PropsWithChildren } from "react";
 
 import closeUrl from "../../assets/images/close.svg";
 import { useClickOutside } from "../../hooks";
@@ -15,16 +15,18 @@ import { useClickOutside } from "../../hooks";
  * @param {ReactNode} [children] - 모달 컴포넌트에 들어갈 자식 요소.
  */
 
-export interface ModalProps extends PropsWithChildren {
+interface ModalProps extends PropsWithChildren {
   onClose: () => void;
+  style?: CSSProperties;
+  className?: string;
 }
 
-const Modal = ({ children, onClose }: ModalProps) => {
+const Modal = ({ children, onClose, ...rest }: ModalProps) => {
   const modal = useClickOutside<HTMLDialogElement>(onClose);
 
   return (
     <Flex alignItems="center" className={backDropStyle} justifyContent="center">
-      <styled.dialog className={dialogStyle} ref={modal}>
+      <styled.dialog className={dialogStyle} ref={modal} {...rest}>
         <Image
           alt="close-icon"
           className={closeButtonStyle}
@@ -46,6 +48,7 @@ const dialogStyle = css({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  flexDirection: "column",
 
   position: "relative",
 
