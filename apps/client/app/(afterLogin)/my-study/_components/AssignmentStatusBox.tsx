@@ -2,10 +2,11 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { parseISODate } from "@wow-class/utils";
+import LinkButton from "components/LinkButton";
 import { assignmentSubmissionStatusMap } from "constants/assignmentSubmissionStatusMap";
+import { routePath } from "constants/routePath";
 import type { AssignmentSubmissionStatusType } from "types/entities/myStudy";
 import Box from "wowds-ui/Box";
-import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
 interface AssignmentStatusBoxProps {
@@ -59,13 +60,14 @@ const AssignmentStatusBox = ({
               </Text>
             </Flex>
           </Flex>
-          <Button
+          <LinkButton
             disabled={assignmentSubmissionStatus !== "SUCCESS"}
+            href={routePath["my-assignment"]}
             size="lg"
             style={assignmentButtonStyle}
           >
             나의 과제 바로가기
-          </Button>
+          </LinkButton>
         </Flex>
       }
     />
