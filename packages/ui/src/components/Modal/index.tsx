@@ -20,7 +20,7 @@ export interface ModalProps extends PropsWithChildren {
 }
 
 const Modal = ({ children, onClose }: ModalProps) => {
-  const modal = useClickOutside(onClose);
+  const modal = useClickOutside<HTMLDialogElement>(onClose);
 
   return (
     <Flex alignItems="center" className={backDropStyle} justifyContent="center">

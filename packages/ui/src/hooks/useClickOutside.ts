@@ -1,8 +1,10 @@
 import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 
-const useClickOutside = (onClickOutside: (event: MouseEvent) => void) => {
-  const notClickableRef: RefObject<any> = useRef();
+const useClickOutside = <T extends HTMLElement>(
+  onClickOutside: (event: MouseEvent) => void
+) => {
+  const notClickableRef: RefObject<T> = useRef<T>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
