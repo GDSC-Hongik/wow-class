@@ -1,9 +1,10 @@
 import { Flex, styled } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { AssignmentHistoryDto } from "types/dtos/study-history";
-import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
+import type { HomeworkSubmissionStatusType } from "types/entities/homework";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
@@ -48,7 +49,9 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
           textStyle="body1"
         >
           {descriptionLink ? (
-            <TextButton as="a" href={descriptionLink} text="과제 명세 확인" />
+            <Link href={descriptionLink} target="_blank">
+              <TextButton text="과제 명세 확인" />
+            </Link>
           ) : (
             "-"
           )}
@@ -68,9 +71,11 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
           textStyle="body1"
         >
           {submissionLink ? (
-            <Button as="a" href={submissionLink} size="sm" variant="outline">
-              제출한 과제 확인
-            </Button>
+            <Link href={submissionLink} target="_blank">
+              <Button size="sm" variant="outline">
+                제출한 과제 확인
+              </Button>
+            </Link>
           ) : (
             "-"
           )}
@@ -81,7 +86,7 @@ export const HomeworkHistoryItem = ({ history }: HomeworkHistoryItemProps) => {
 };
 
 const homeworkSubmissionMap: Record<
-  AssignmentSubmissionStatusType,
+  HomeworkSubmissionStatusType,
   { message: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   FAILURE: {

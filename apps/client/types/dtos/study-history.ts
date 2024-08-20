@@ -1,4 +1,4 @@
-import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
+import type { HomeworkSubmissionStatusType } from "types/entities/homework";
 
 export interface AssignmentHistoryDto {
   assignmentHistoryId: number;
@@ -6,6 +6,6 @@ export interface AssignmentHistoryDto {
   deadline: string;
   descriptionLink?: string;
   submissionLink?: string;
-  assignmentSubmissionStatus: AssignmentSubmissionStatusType; //TODO: 과제 휴강 여부 추가
+  assignmentSubmissionStatus: HomeworkSubmissionStatusType; //TODO: 과제 휴강 여부 추가
   week: number;
 }

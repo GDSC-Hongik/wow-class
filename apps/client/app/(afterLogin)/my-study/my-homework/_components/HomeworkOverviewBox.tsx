@@ -4,9 +4,10 @@ import { Flex, styled } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { tags } from "constants/tags";
 import { revalidateTag } from "next/cache";
+import Link from "next/dist/client/link";
 import Image from "next/image";
 import type { SubmittableAssignment } from "types/dtos/study-detail-dashboard";
-import { Link, Reload } from "wowds-icons";
+import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
@@ -40,12 +41,12 @@ export const HomeworkOverviewBox = ({
                   {assignment.assignmentSubmissionStatus}
                 </Tag>
               </Flex>
-              <TextButton
-                as="a"
-                href={assignment.descriptionLink}
-                style={{ paddingLeft: "0px", width: "fit-content" }}
-                text="과제 명세 확인"
-              />
+              <Link href={assignment.descriptionLink} target="_blank">
+                <TextButton
+                  style={{ paddingLeft: "0px" }}
+                  text="과제 명세 확인"
+                />
+              </Link>
               <Space height="xs" />
               <Text color="sub">종료 일시 : {assignment.deadline}</Text>
               <Flex gap="xs">
@@ -63,18 +64,18 @@ export const HomeworkOverviewBox = ({
                 </styled.div>
               </Flex>
               <Space height={26} />
-              <Button
-                as="a"
-                href={assignment.submissionLink}
-                icon={<Link stroke="primary" />}
-                style={{ maxWidth: "100%" }}
-                variant="outline"
-              >
-                제출하러 가기
-              </Button>
+              <Link href={assignment.submissionLink} target="_blank">
+                <Button
+                  icon={<LinkIcon stroke="primary" />}
+                  style={{ maxWidth: "100%" }}
+                  variant="outline"
+                >
+                  제출하러 가기
+                </Button>
+              </Link>
               <Space height={8} />
               <Button
-                icon={<Reload />}
+                icon={<ReloadIcon />}
                 style={{ maxWidth: "100%" }}
                 onClick={handleClickSubmissionComplete}
               >
