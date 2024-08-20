@@ -8,6 +8,8 @@ import { dayToKorean } from "constants/dayToKorean";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { space } from "wowds-tokens";
+import TextButton from "wowds-ui/TextButton";
 
 const mockData = {
   studyId: 1,
@@ -163,14 +165,11 @@ const Header = () => {
                     src="/images/link.svg"
                     width={24}
                   />
-                  <Text
-                    as="h5"
-                    className={introduceTextStyle}
-                    color="sub"
-                    typo="label1"
-                  >
-                    소개 링크 바로가기
-                  </Text>
+                  <TextButton
+                    size="lg"
+                    style={textButtonStyle}
+                    text="소개 링크 바로가기"
+                  />
                 </Link>
               </Flex>
             </Flex>
@@ -191,14 +190,13 @@ const downArrowIconStyle = css({
   cursor: "pointer",
 });
 
-const introduceTextStyle = css({
-  padding: `sm 0px`,
-  textDecoration: "underline",
-});
-
 const introduceLinkStyle = css({
   display: "flex",
   alignItems: "center",
   cursor: "pointer",
   gap: "4px",
 });
+
+const textButtonStyle = {
+  padding: `${space.sm} 0`,
+};
