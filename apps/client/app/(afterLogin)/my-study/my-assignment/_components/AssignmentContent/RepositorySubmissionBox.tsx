@@ -49,6 +49,7 @@ export const RepositorySubmissionBox = ({
 
   return (
     <Box
+      style={boxStyle}
       variant="text"
       text={
         <>
@@ -118,3 +119,7 @@ const urlBoxStyle = css({
   paddingY: "18px",
   textStyle: "h2",
 });
+
+const boxStyle = {
+  minWidth: "484px",
+};

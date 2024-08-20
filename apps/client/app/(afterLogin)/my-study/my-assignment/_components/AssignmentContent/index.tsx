@@ -1,3 +1,4 @@
+import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import {
   assignmentData,
@@ -6,7 +7,6 @@ import {
 
 import { AssignmentOverviewBox } from "./AssignmentOverviewBox";
 import { RepositorySubmissionBox } from "./RepositorySubmissionBox";
-
 export const AssignmentContent = () => {
   // const studyDashboard = await studyDetailApi.getStudyDetailDashboard(1);
 
@@ -14,7 +14,7 @@ export const AssignmentContent = () => {
   const studyDashboard = studyDashBoardData;
   return (
     <>
-      <Flex gap="lg">
+      <Flex className={boxContainerStyle} gap="lg">
         {studyDashBoardData.isLinkEditable && (
           <>
             <RepositorySubmissionBox
@@ -33,3 +33,9 @@ export const AssignmentContent = () => {
     </>
   );
 };
+
+const boxContainerStyle = css({
+  overflowX: "auto",
+  scrollBehavior: "smooth",
+  scrollbarWidth: "none",
+});

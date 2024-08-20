@@ -27,7 +27,7 @@ export const history: AssignmentHistoryDto[] = [
 
 export const studyDashBoardData: StudyDetailDashboardDto = {
   repositoryLink: "",
-  isLinkEditable: true,
+  isLinkEditable: false,
   submittableAssignments: [
     {
       studyDetailId: 1,
@@ -44,18 +44,18 @@ export const studyDashBoardData: StudyDetailDashboardDto = {
 };
 
 export const assignmentData: Assignment[] = [
-  //   {
-  //     studyDetailId: 123,
-  //     assignmentStatus: "OPEN",
-  //     week: 3,
-  //     title: "Database Design Assignment",
-  //     assignmentSubmissionStatus: "SUCCESS",
-  //     descriptionLink: "https://example.com/assignment/123",
-  //     deadline: "2024-08-20T14:30:00",
-  //     submissionLink: "https://github.com/GDSC-Hongik/wow-class",
-  //     submissionFailureType: "NONE",
-  //     committedAt: "2024-08-20T14:30:00",
-  //   },
+  {
+    studyDetailId: 123,
+    assignmentStatus: "OPEN",
+    week: 3,
+    title: "Database Design Assignment",
+    assignmentSubmissionStatus: "PENDING",
+    descriptionLink: "https://example.com/assignment/123",
+    deadline: "2024-08-26T14:30:00",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "NONE",
+    committedAt: "2024-08-20T14:30:00",
+  },
   {
     studyDetailId: 123,
     assignmentStatus: "OPEN",
@@ -81,16 +81,16 @@ export const assignmentData: Assignment[] = [
     committedAt: "sdf",
   },
   //제출 안함/마감
-  //   {
-  //     studyDetailId: 124,
-  //     assignmentStatus: "OPEN",
-  //     week: 4,
-  //     title: "API Development",
-  //     assignmentSubmissionStatus: "FAILURE",
-  //     descriptionLink: "https://example.com/assignment/124",
-  //     deadline: "2024-08-20T14:30:00",
-  //     submissionLink: "https://github.com/GDSC-Hongik/wow-class",
-  //     submissionFailureType: "NOT_SUBMITTED",
-  //     committedAt: "2024-08-20T14:30:00",
-  //   },
+  {
+    studyDetailId: 124,
+    assignmentStatus: "OPEN",
+    week: 4,
+    title: "API Development",
+    assignmentSubmissionStatus: "FAILURE",
+    descriptionLink: "https://example.com/assignment/124",
+    deadline: "2024-08-20T14:30:00",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "NOT_SUBMITTED",
+    committedAt: "2024-08-20T14:30:00",
+  },
 ];

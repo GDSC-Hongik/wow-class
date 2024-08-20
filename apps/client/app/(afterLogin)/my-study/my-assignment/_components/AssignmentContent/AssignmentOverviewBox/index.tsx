@@ -22,6 +22,7 @@ export const AssignmentOverviewBox = ({
       {assignments.map((assignment) => (
         <Box
           key={assignment.studyDetailId}
+          style={boxStyle}
           variant="text"
           text={
             <>
@@ -47,4 +48,8 @@ export const AssignmentOverviewBox = ({
 const textButtonstyle = {
   paddingLeft: "0px",
   paddingRight: "0px",
+};
+
+const boxStyle = {
+  minWidth: "484px",
 };
