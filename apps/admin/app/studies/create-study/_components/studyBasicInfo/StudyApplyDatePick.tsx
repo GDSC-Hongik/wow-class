@@ -16,15 +16,15 @@ const StudyApplyDatePick = () => {
     toValue: "",
   });
   const datepickerRef = useRef(null);
-  const [isOpen, setOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const { control, setValue } = useFormContext();
   const [inputValue, setInputValue] = useState("");
 
   useClickOutside(datepickerRef, () => {
-    setOpen(false);
+    setIsOpen(false);
   });
 
-  const setStudyDateHandler = (triggerDate: DateRange | undefined) => {
+  const handleStudyDateSelect = (triggerDate: DateRange | undefined) => {
     if (!triggerDate) return;
     const startDateString = dateToFormatString(triggerDate.from!!);
     const endDateString = dateToFormatString(triggerDate.to!!);
@@ -51,7 +51,7 @@ const StudyApplyDatePick = () => {
             placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
             value={inputValue}
             onClick={() => {
-              setOpen(!isOpen);
+              setIsOpen(!isOpen);
             }}
           />
         )}
@@ -76,7 +76,7 @@ const StudyApplyDatePick = () => {
               backgroundColor: "white",
             }}
             onSelect={(triggerDate) => {
-              setStudyDateHandler(triggerDate);
+              handleStudyDateSelect(triggerDate);
             }}
           />
         </div>
