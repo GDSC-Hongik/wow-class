@@ -12,7 +12,7 @@ const meta = {
     componentSubtitle: "Modal 컴포넌트",
   },
   argTypes: {
-    closeModal: {
+    onClose: {
       description: "Modal 컴포넌트를 닫을 수 있는 함수를 나타냅니다.",
       table: {
         type: { summary: "function" },
@@ -40,7 +40,7 @@ export const Default: Story = {
         상세 정보가 등록되었어요.
       </Text>
     ),
-    closeModal: () => {
+    onClose: () => {
       console.log("모달 닫기");
     },
   },
@@ -53,7 +53,7 @@ export const StateModal = () => {
     <>
       <button onClick={openModal}>모달 열기</button>
       {isOpen && (
-        <Modal closeModal={closeModal}>
+        <Modal onClose={closeModal}>
           <Text as="h1" typo="h1">
             상세 정보가 등록되었어요.
           </Text>
