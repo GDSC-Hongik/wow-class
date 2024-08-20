@@ -7,7 +7,7 @@ import { routePath } from "constants/routePath";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const CheckAttendanceModal = () => {
+const AttendanceCompleteModal = () => {
   const router = useRouter();
 
   const handleCloseModal = () => {
@@ -44,7 +44,7 @@ const CheckAttendanceModal = () => {
   );
 };
 
-export default CheckAttendanceModal;
+export default AttendanceCompleteModal;
 
 const attendanceCompleteTitleStyle = css({
   display: "flex",
