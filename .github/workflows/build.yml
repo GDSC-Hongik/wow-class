@@ -6,7 +6,7 @@ on:
       - main
       - dev
   pull_request:
-    types: [opened, ready_for_review, converted_to_draft]
+    types: [opened, ready_for_review, converted_to_draft, synchronize]
     branches:
       - main
       - dev
