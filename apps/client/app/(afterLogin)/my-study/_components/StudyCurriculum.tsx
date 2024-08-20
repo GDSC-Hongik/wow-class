@@ -2,13 +2,11 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { assignmentSubmissionStatusMap } from "constants/assignmentSubmissionStatusMap";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import { studyCurriculumMockData } from "constants/mockData";
 import type { ComponentProps } from "react";
-import type {
-  HomeworkSubmissionStatusType,
-  LevelType,
-} from "types/entities/myStudy";
+import type { LevelType } from "types/entities/myStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
@@ -47,7 +45,7 @@ const StudyCurriculum = () => {
               level,
               period: { startDate, endDate },
               attendanceStatus,
-              homeworkSubmissionStatus,
+              assignmentSubmissionStatus,
             },
             index
           ) => {
@@ -56,6 +54,8 @@ const StudyCurriculum = () => {
               label: attendanceStatusLabel,
               color: attendanceStatusColor,
             } = attendanceStatusMap[attendanceStatus];
+            const { label: assignmentSubmissionStatusLabel } =
+              assignmentSubmissionStatusMap[assignmentSubmissionStatus];
 
             return (
               <Table key={index}>
@@ -96,17 +96,17 @@ const StudyCurriculum = () => {
                     {attendanceStatusLabel}
                   </Tag>
                   <Button
-                    aria-label="check-submitted-homework"
-                    disabled={homeworkSubmissionStatus === "PENDING"}
+                    aria-label="check-submitted-assignment"
+                    disabled={assignmentSubmissionStatus === "PENDING"}
                     size="sm"
-                    style={homeworkButtonStyle}
+                    style={assignmentButtonStyle}
                     variant={
-                      homeworkSubmissionStatus === "SUCCESS"
+                      assignmentSubmissionStatus === "SUCCESS"
                         ? "outline"
                         : "solid"
                     }
                   >
-                    {homeworkSubmissionStatusMap[homeworkSubmissionStatus]}
+                    {assignmentSubmissionStatusLabel}
                   </Button>
                 </Table.Right>
               </Table>
@@ -130,15 +130,6 @@ const levelMap: Record<
   ADVANCED: { label: "고급", color: "red" },
 };
 
-const homeworkSubmissionStatusMap: Record<
-  HomeworkSubmissionStatusType,
-  string
-> = {
-  SUCCESS: "제출한 과제 확인",
-  FAILURE: "과제 제출하기",
-  PENDING: "과제 제출하기",
-};
-
 const studyCurriculumTextStyle = css({
   marginBottom: "xl",
 });
@@ -160,7 +151,7 @@ const rightColStyle = css({
   padding: "0 25px 0 32px",
 });
 
-const homeworkButtonStyle = {
+const assignmentButtonStyle = {
   minWidth: "131px",
 };
 

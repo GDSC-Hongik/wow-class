@@ -1,9 +1,9 @@
 import type { ComponentProps } from "react";
-import type { HomeworkSubmissionStatusType } from "types/entities/myStudy";
+import type { AssignmentSubmissionStatusType } from "types/entities/myStudy";
 import type Tag from "wowds-ui/Tag";
 
-export const homeworkSubmissionStatusMap: Record<
-  HomeworkSubmissionStatusType,
+export const assignmentSubmissionStatusMap: Record<
+  AssignmentSubmissionStatusType,
   { label: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   SUCCESS: { label: "제출 완료", color: "blue" },

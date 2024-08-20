@@ -1,6 +1,6 @@
 export type AttendanceStatusType = "ATTENDED" | "NOT_ATTENDED" | "PENDING";
 
-export type HomeworkSubmissionStatusType = "SUCCESS" | "FAILURE" | "PENDING";
+export type AssignmentSubmissionStatusType = "SUCCESS" | "FAILURE" | "PENDING";
 
 export type LevelType = "BASIC" | "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
 
@@ -14,15 +14,15 @@ interface AttendanceTask {
   attendanceStatus: AttendanceStatusType;
 }
 
-interface HomeworkTask {
-  type: "HOMEWORK";
+interface AssignmentTask {
+  type: "ASSIGNMENT";
   week: number;
   name: string;
   deadline: string;
-  homeworkSubmissionStatus: HomeworkSubmissionStatusType;
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
 }
 
-export type DailyTaskDataType = AttendanceTask | HomeworkTask;
+export type DailyTaskDataType = AttendanceTask | AssignmentTask;
 
 export type StudyCurriculumDataType = {
   week: number;
@@ -34,5 +34,5 @@ export type StudyCurriculumDataType = {
     endDate: string;
   };
   attendanceStatus: AttendanceStatusType;
-  homeworkSubmissionStatus: HomeworkSubmissionStatusType;
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
 };

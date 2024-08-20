@@ -2,32 +2,32 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { parseISODate } from "@wow-class/utils";
-import { homeworkSubmissionStatusMap } from "constants/homeworkSubmissionStatusMap";
-import type { HomeworkSubmissionStatusType } from "types/entities/myStudy";
+import { assignmentSubmissionStatusMap } from "constants/assignmentSubmissionStatusMap";
+import type { AssignmentSubmissionStatusType } from "types/entities/myStudy";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
-interface HomeworkStatusBoxProps {
+interface AssignmentStatusBoxProps {
   week: number;
   name: string;
-  homeworkSubmissionStatus: HomeworkSubmissionStatusType;
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
   deadline: string;
 }
 
-const HomeworkStatusBox = ({
+const AssignmentStatusBox = ({
   week,
   name,
-  homeworkSubmissionStatus,
+  assignmentSubmissionStatus,
   deadline,
-}: HomeworkStatusBoxProps) => {
+}: AssignmentStatusBoxProps) => {
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
   const attendanceDeadline = `${year}년 ${month}월 ${day}일 ${hours}:${minutes}까지`;
   const {
-    label: homeworkSubmissionStatusLabel,
-    color: homeworkSubmissionStatusColor,
-  } = homeworkSubmissionStatusMap[homeworkSubmissionStatus];
+    label: assignmentSubmissionStatusLabel,
+    color: assignmentSubmissionStatusColor,
+  } = assignmentSubmissionStatusMap[assignmentSubmissionStatus];
 
   return (
     <Box
@@ -47,11 +47,11 @@ const HomeworkStatusBox = ({
                 <Text as="h2" typo="h2">
                   {week}주차 과제
                 </Text>
-                <Tag color={homeworkSubmissionStatusColor} variant="solid2">
-                  {homeworkSubmissionStatusLabel}
+                <Tag color={assignmentSubmissionStatusColor} variant="solid2">
+                  {assignmentSubmissionStatusLabel}
                 </Tag>
               </Flex>
-              <Text as="div" className={homeworkNameStyle} typo="body1">
+              <Text as="div" className={assignmentNameStyle} typo="body1">
                 {name}
               </Text>
               <Text as="div" color="sub" typo="body1">
@@ -60,9 +60,9 @@ const HomeworkStatusBox = ({
             </Flex>
           </Flex>
           <Button
-            disabled={homeworkSubmissionStatus !== "SUBMITTED"}
+            disabled={assignmentSubmissionStatus !== "SUCCESS"}
             size="lg"
-            style={homeworkButtonStyle}
+            style={assignmentButtonStyle}
           >
             나의 과제 바로가기
           </Button>
@@ -72,7 +72,7 @@ const HomeworkStatusBox = ({
   );
 };
 
-export default HomeworkStatusBox;
+export default AssignmentStatusBox;
 
 const dailyTaskBoxStyle = {
   maxWidth: "376px",
@@ -86,11 +86,11 @@ const dailyTaskBoxContentContainerStyle = css({
   minWidth: "328px !important",
 });
 
-const homeworkButtonStyle = {
+const assignmentButtonStyle = {
   minWidth: "328px",
 };
 
-const homeworkNameStyle = css({
+const assignmentNameStyle = css({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",

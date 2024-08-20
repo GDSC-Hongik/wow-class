@@ -2,7 +2,8 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { dailyTaskMockData } from "constants/mockData";
 
-import { AttendanceStatusBox, DailyTaskCarousel, HomeworkStatusBox } from ".";
+import { AttendanceStatusBox, DailyTaskCarousel } from ".";
+import AssignmentStatusBox from "./AssignmentStatusBox";
 
 const DailyTasks = () => {
   return (
@@ -19,12 +20,14 @@ const DailyTasks = () => {
                 week={dailyTask.week}
               />
             ) : (
-              <HomeworkStatusBox
+              <AssignmentStatusBox
                 deadline={dailyTask.deadline}
-                homeworkSubmissionStatus={dailyTask.homeworkSubmissionStatus}
                 key={index}
                 name={dailyTask.name}
                 week={dailyTask.week}
+                assignmentSubmissionStatus={
+                  dailyTask.assignmentSubmissionStatus
+                }
               />
             );
           })}
