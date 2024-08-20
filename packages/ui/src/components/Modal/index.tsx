@@ -4,9 +4,9 @@ import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import Image from "next/image";
 import type { PropsWithChildren } from "react";
-import { useClickOutside } from "src/hooks";
 
 import closeUrl from "../../assets/images/close.svg";
+import { useClickOutside } from "../../hooks";
 
 /**
  * @description 모달 컴포넌트입니다.
