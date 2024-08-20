@@ -12,8 +12,9 @@ import { useState } from "react";
 import { space } from "wowds-tokens";
 import TextButton from "wowds-ui/TextButton";
 
-const Header = () => {
+const Header = ({ studyId }: { studyId: string }) => {
   const [showIntro, setShowIntro] = useState(false);
+  const [studyInfo, setStudyInfo] = useState({});
 
   const handleClickShowIntro = () => {
     setShowIntro((prev) => !prev);

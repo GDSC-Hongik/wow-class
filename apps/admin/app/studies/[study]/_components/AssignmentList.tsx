@@ -8,11 +8,13 @@ import type { AssignStatusType } from "types/entities/assignStatus";
 import checkThisWeek from "utils/checkThisWeek";
 
 import CancelStudyButton from "./CancelStudyButton";
-const AssignmentList = async () => {
-  // const assignmentList = await studyInfoApi.getAssignmentList(2);
+const AssignmentList = async ({ studyId }: { studyId: string }) => {
+  // const assignmentList = await studyInfoApi.getAssignmentList(
+  //   parseInt(params.study, 10)
+  // );
 
   return (
-    <section>
+    <section aria-label="assignment-list">
       <Text typo="h2">주차별 과제</Text>
       <Space height={24} />
       {assignmentList?.map(

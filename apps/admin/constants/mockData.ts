@@ -1,4 +1,6 @@
-import { Assign } from "./../../client/styled-system/types/system-types.d";
+import type { AssignmentApiResponseDto } from "types/dtos/assignmentList";
+import type { SessionApiResponseDto } from "types/dtos/sessionList";
+
 export const headerMockData = {
   studyId: 1,
   title: "기초 웹스터디",
@@ -29,7 +31,7 @@ export const headerMockData = {
   },
 };
 
-export const assignmentList = [
+export const assignmentList: AssignmentApiResponseDto[] = [
   {
     studyDetailId: 12,
     title: "1번 과제",
@@ -61,5 +63,40 @@ export const assignmentList = [
     week: 4,
     descriptionLink: "",
     assignmentStatus: "NONE",
+  },
+];
+export const sessionList: SessionApiResponseDto[] = [
+  {
+    studyDetailId: 12,
+    period: {
+      startDate: "2024-08-13T16:38:33.554Z",
+      endDate: "2024-08-20T18:38:33.554Z",
+      open: true,
+    },
+    week: 1,
+    title: "웹 개발의 역사",
+    difficulty: "HIGH",
+  },
+  {
+    studyDetailId: 13,
+    period: {
+      startDate: "2024-08-20T18:38:33.554Z",
+      endDate: "2024-08-27T18:38:33.554Z",
+      open: true,
+    },
+    week: 2,
+    title: "네트워크 통신",
+    difficulty: "LOW",
+  },
+  {
+    studyDetailId: 14,
+    period: {
+      startDate: "2024-08-27T18:38:33.554Z",
+      endDate: "2024-09-02T18:38:33.554Z",
+      open: true,
+    },
+    week: 3,
+    title: "쿠키를 활용한 통신",
+    difficulty: "MEDIUM",
   },
 ];
