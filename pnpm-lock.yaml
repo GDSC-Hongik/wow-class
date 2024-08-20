@@ -47,7 +47,7 @@ importers:
     dependencies:
       '@wojtekmaj/react-timerange-picker':
         specifier: ^6.0.0
-        version: 6.0.0(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1)
+        version: 6.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@wow-class/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -62,13 +62,16 @@ importers:
         version: 18.3.1
       react-clock:
         specifier: ^5.0.0
-        version: 5.0.0(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1)
+        version: 5.0.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       react-day-picker:
         specifier: ^9.0.8
         version: 9.0.8(react@18.3.1)
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-hook-form:
+        specifier: ^7.52.2
+        version: 7.52.2(react@18.3.1)
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -96,10 +99,7 @@ importers:
         version: 8.57.0
       eslint-config-next:
         specifier: ^14.2.5
-        version: 14.2.5(eslint@8.57.0)(typescript@5.4.5)
-      react-hook-form:
-        specifier: ^7.52.2
-        version: 7.52.2(react@18.3.1)
+        version: 14.2.5(eslint@8.57.0)(typescript@5.5.4)
       typescript:
         specifier: ^5
         version: 5.5.4
@@ -4266,7 +4266,7 @@ packages:
   /@types/react-dom@18.3.0:
     resolution: {integrity: sha512-EhwApuTmMBmXuFOikhQLIBUn6uFg81SwLMOAUgodJF14SOBOCMdU04gDoYi0WOJJHD144TL32z4yDqCW3dnkQg==}
     dependencies:
-      '@types/react': 18.2.61
+      '@types/react': 18.3.3
 
   /@types/react@18.3.3:
     resolution: {integrity: sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==}
@@ -4940,7 +4940,7 @@ packages:
     resolution: {integrity: sha512-+i7+JmNiE/3c9FKxzWFi2IjRJ+KzZl1QPu6QNrsgaa2MuBgXvUy4gA1TVzf/JMdIIloB76xSKikTWuyYAIVLww==}
     dev: false
 
-  /@wojtekmaj/react-timerange-picker@6.0.0(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1):
+  /@wojtekmaj/react-timerange-picker@6.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-KNRFeF2VpEcOmJG00+Il8Y3F0BoTUTBx8AcEpyrfHTB9x8HfURwfD/jgWinANC6ZxjzJGqngzuDa7DoEwF4jKQ==}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -4950,14 +4950,14 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.61
+      '@types/react': 18.3.3
       clsx: 2.1.1
       make-event-props: 1.6.2
       react: 18.3.1
-      react-clock: 5.0.0(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1)
+      react-clock: 5.0.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       react-dom: 18.3.1(react@18.3.1)
-      react-fit: 2.0.1(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1)
-      react-time-picker: 7.0.0(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1)
+      react-fit: 2.0.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      react-time-picker: 7.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react-dom'
     dev: false
@@ -11479,7 +11479,7 @@ packages:
       strip-json-comments: 2.0.1
     dev: true
 
-  /react-clock@5.0.0(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1):
+  /react-clock@5.0.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-Cj3XqwLB1svtGWiw/A6vmLIPb9OhA/BsWUpS46lXTNTilK7zmP2zmtFgQEAfWUssc3nERXkMXzI0YrkzDpc0gQ==}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -11489,7 +11489,7 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.61
+      '@types/react': 18.3.3
       '@wojtekmaj/date-utils': 1.5.1
       clsx: 2.1.1
       get-user-locale: 2.3.2
@@ -11516,7 +11516,7 @@ packages:
       react: 18.3.1
     dev: false
 
-  /react-docgen-typescript@2.2.2(typescript@5.4.5):
+  /react-docgen-typescript@2.2.2(typescript@5.5.4):
     resolution: {integrity: sha512-tvg2ZtOpOi6QDwsb3GZhOjDkkX0h8Z2gipvTg6OVMUyoYoURhEiRNePT8NZItTVCDh39JJHnLdfCOkzoLbFnTg==}
     peerDependencies:
       typescript: '>= 4.3.x'
@@ -11564,7 +11564,7 @@ packages:
       react-is: 18.1.0
     dev: true
 
-  /react-fit@2.0.1(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1):
+  /react-fit@2.0.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-Eip6ALs/+6Jv82Si0I9UnfysdwVlAhkkZRycgmMdnj7jwUg69SVFp84ICxwB8zszkfvJJ2MGAAo9KAYM8ZUykQ==}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -11577,8 +11577,8 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@types/react': 18.2.61
-      '@types/react-dom': 18.2.19
+      '@types/react': 18.3.3
+      '@types/react-dom': 18.3.0
       detect-element-overflow: 1.4.2
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -11592,7 +11592,7 @@ packages:
       react: ^16.8.0 || ^17 || ^18 || ^19
     dependencies:
       react: 18.3.1
-    dev: true
+    dev: false
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
@@ -11615,7 +11615,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-time-picker@7.0.0(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1):
+  /react-time-picker@7.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-k6mUjkI+OsY73mg0yjMxqkLXv/UXR1LN7AARNqfyGZOwqHqo1JrjL3lLHTHWQ86HmPTBL/dZACbIX/fV1NLmWg==}
     peerDependencies:
       '@types/react': ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -11625,15 +11625,15 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@types/react': 18.2.61
+      '@types/react': 18.3.3
       '@wojtekmaj/date-utils': 1.5.1
       clsx: 2.1.1
       get-user-locale: 2.3.2
       make-event-props: 1.6.2
       react: 18.3.1
-      react-clock: 5.0.0(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1)
+      react-clock: 5.0.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       react-dom: 18.3.1(react@18.3.1)
-      react-fit: 2.0.1(@types/react-dom@18.2.19)(@types/react@18.2.61)(react-dom@18.3.1)(react@18.3.1)
+      react-fit: 2.0.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       update-input-width: 1.4.2
     transitivePeerDependencies:
       - '@types/react-dom'

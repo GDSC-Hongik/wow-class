@@ -22,16 +22,13 @@ export const parseISODate = (dateString: string) => {
  * @example dateToFormatString(new Date('2024-08-20T15:30:00')) -> 2024-08-20
  */
 
-export const dateToFormatString = (date: Date | undefined): string => {
-  if (!date) return "";
-  else {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    const formattedDate = `${year}-${month}-${day}`;
+export const dateToFormatString = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
 
-    return formattedDate;
-  }
+  return formattedDate;
 };
 
 /**
