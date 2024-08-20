@@ -2,7 +2,7 @@ import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import Image from "next/image";
-import type { Assignment } from "types/dtos/study-detail-dashboard";
+import type { Assignment } from "types/dtos/studyDetail";
 
 interface AssignmentSubmissionInfoProps {
   assignment: Assignment;

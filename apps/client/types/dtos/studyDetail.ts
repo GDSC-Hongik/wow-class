@@ -2,7 +2,7 @@ import type {
   AssignmentStatus,
   AssignmentSubmissionStatusType,
   SubmissionFailureType,
-} from "types/entities/assignment";
+} from "types/entities/common/assignment";
 
 export interface StudyDetailDashboardDto {
   repositoryLink: string;

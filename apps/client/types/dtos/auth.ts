@@ -1,4 +1,4 @@
-import type { StatusType } from "types/entities/auth";
+import type { StatusType } from "types/entities/common/auth";
 
 export interface DashboardApiResponseDto {
   member: {

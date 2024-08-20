@@ -1,8 +1,8 @@
 import type {
   Assignment,
   StudyDetailDashboardDto,
-} from "types/dtos/study-detail-dashboard";
-import type { AssignmentHistoryDto } from "types/dtos/study-history";
+} from "types/dtos/studyDetail";
+import type { AssignmentHistoryDto } from "types/dtos/studyHistory";
 
 export const history: AssignmentHistoryDto[] = [
   {

@@ -8,7 +8,7 @@ import { studyApplyApi } from "apis/studyApplyApi";
 import { dayToKorean } from "constants/dayToKorean";
 import Link from "next/link";
 import type { ComponentProps } from "react";
-import type { StudyListApiResponseDto } from "types/dtos/apply-study";
+import type { StudyListApiResponseDto } from "types/dtos/applyStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 

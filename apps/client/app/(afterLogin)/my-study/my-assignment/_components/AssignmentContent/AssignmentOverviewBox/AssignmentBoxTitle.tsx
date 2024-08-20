@@ -1,8 +1,8 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import type { ComponentProps } from "react";
-import type { Assignment } from "types/dtos/study-detail-dashboard";
-import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
+import type { Assignment } from "types/dtos/studyDetail";
+import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
 import Tag from "wowds-ui/Tag";
 
 interface AssignmentBoxTitleProps {

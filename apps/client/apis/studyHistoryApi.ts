@@ -1,7 +1,7 @@
 import { fetcher } from "@wow-class/utils";
 import { apiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
-import type { AssignmentHistoryDto } from "types/dtos/study-history";
+import type { AssignmentHistoryDto } from "types/dtos/studyHistory";
 
 export const studyHistoryApi = {
   getStudyHistory: async (studyId: number) => {

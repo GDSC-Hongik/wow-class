@@ -1,4 +1,4 @@
-import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
+import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
 
 export interface AssignmentHistoryDto {
   assignmentHistoryId: number;

@@ -1,6 +1,6 @@
 import { Space } from "@wow-class/ui";
 import Link from "next/link";
-import type { Assignment } from "types/dtos/study-detail-dashboard";
+import type { Assignment } from "types/dtos/studyDetail";
 import Box from "wowds-ui/Box";
 import TextButton from "wowds-ui/TextButton";
 
