@@ -2,10 +2,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import {
-  attendanceStatusColorMap,
-  attendanceStatusMap,
-} from "constants/attendanceStatusMap";
+import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import { studyCurriculumMockData } from "constants/mockData";
 import type { ComponentProps } from "react";
 import type { LevelType } from "types/entities/myStudy";
@@ -51,6 +48,12 @@ const StudyCurriculum = () => {
             },
             index
           ) => {
+            const { label: levelLabel, color: levelColor } = levelMap[level];
+            const {
+              label: attendanceStatusLabel,
+              color: attendanceStatusColor,
+            } = attendanceStatusMap[attendanceStatus];
+
             return (
               <Table key={index}>
                 <Table.Left className={leftColStyle}>
@@ -64,8 +67,8 @@ const StudyCurriculum = () => {
                       <Text as="h3" typo="h3">
                         {title}
                       </Text>
-                      <Tag color={levelColorMap[level]} variant="outline">
-                        {levelMap[level]}
+                      <Tag color={levelColor} variant="outline">
+                        {levelLabel}
                       </Tag>
                     </Flex>
                     <Text
@@ -84,10 +87,10 @@ const StudyCurriculum = () => {
                   </Text>
                   <Tag
                     aria-label="present"
-                    color={attendanceStatusColorMap[attendanceStatus] || "grey"}
+                    color={attendanceStatusColor || "grey"}
                     variant="solid2"
                   >
-                    {attendanceStatusMap[attendanceStatus]}
+                    {attendanceStatusLabel}
                   </Tag>
                   <Button
                     aria-label="check-submitted-homework"
@@ -114,18 +117,14 @@ const StudyCurriculum = () => {
 
 export default StudyCurriculum;
 
-const levelMap = {
-  BASIC: "기초",
-  BEGINNER: "초급",
-  INTERMEDIATE: "중급",
-  ADVANCED: "고급",
-};
-
-const levelColorMap: Record<LevelType, ComponentProps<typeof Tag>["color"]> = {
-  BASIC: "blue",
-  BEGINNER: "yellow",
-  INTERMEDIATE: "green",
-  ADVANCED: "red",
+const levelMap: Record<
+  LevelType,
+  { label: string; color: ComponentProps<typeof Tag>["color"] }
+> = {
+  BASIC: { label: "기초", color: "blue" },
+  BEGINNER: { label: "초급", color: "yellow" },
+  INTERMEDIATE: { label: "중급", color: "green" },
+  ADVANCED: { label: "고급", color: "red" },
 };
 
 const homeworkSubmissionStatusMap = {

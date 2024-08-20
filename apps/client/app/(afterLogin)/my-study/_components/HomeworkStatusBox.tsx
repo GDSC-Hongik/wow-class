@@ -2,10 +2,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { parseISODate } from "@wow-class/utils";
-import {
-  homeworkSubmissionStatusColorMap,
-  homeworkSubmissionStatusMap,
-} from "constants/homeworkSubmissionStatusMap";
+import { homeworkSubmissionStatusMap } from "constants/homeworkSubmissionStatusMap";
 import type { HomeworkSubmissionStatusType } from "types/entities/myStudy";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
@@ -27,6 +24,10 @@ const HomeworkStatusBox = ({
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
   const attendanceDeadline = `${year}년 ${month}월 ${day}일 ${hours}:${minutes}까지`;
+  const {
+    label: homeworkSubmissionStatusLabel,
+    color: homeworkSubmissionStatusColor,
+  } = homeworkSubmissionStatusMap[homeworkSubmissionStatus];
 
   return (
     <Box
@@ -46,13 +47,8 @@ const HomeworkStatusBox = ({
                 <Text as="h2" typo="h2">
                   {week}주차 과제
                 </Text>
-                <Tag
-                  variant="solid2"
-                  color={
-                    homeworkSubmissionStatusColorMap[homeworkSubmissionStatus]
-                  }
-                >
-                  {homeworkSubmissionStatusMap[homeworkSubmissionStatus]}
+                <Tag color={homeworkSubmissionStatusColor} variant="solid2">
+                  {homeworkSubmissionStatusLabel}
                 </Tag>
               </Flex>
               <Text as="div" className={homeworkNameStyle} typo="body1">

@@ -2,10 +2,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { parseISODate } from "@wow-class/utils";
-import {
-  attendanceStatusColorMap,
-  attendanceStatusMap,
-} from "constants/attendanceStatusMap";
+import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import type { AttendanceStatusType } from "types/entities/myStudy";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
@@ -35,6 +32,8 @@ const AttendanceStatusBox = ({
   const { hours: endHour, minutes: endMinute } = parseISODate(period.end);
 
   const attendancePeriod = `${startYear}년 ${startMonth}월 ${startDay}일 ${startHour}:${startMinute} - ${endHour}:${endMinute}까지`;
+  const { label: attendanceStatusLabel, color: attendanceStatusColor } =
+    attendanceStatusMap[attendanceStatus];
 
   return (
     <Box
@@ -54,11 +53,8 @@ const AttendanceStatusBox = ({
                 <Text as="h2" typo="h2">
                   {week}주차 출석체크
                 </Text>
-                <Tag
-                  color={attendanceStatusColorMap[attendanceStatus]}
-                  variant="solid2"
-                >
-                  {attendanceStatusMap[attendanceStatus]}
+                <Tag color={attendanceStatusColor} variant="solid2">
+                  {attendanceStatusLabel}
                 </Tag>
               </Flex>
               <Text as="div" color="error" typo="body1">
