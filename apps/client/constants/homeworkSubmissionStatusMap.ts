@@ -6,7 +6,7 @@ export const homeworkSubmissionStatusMap: Record<
   HomeworkSubmissionStatusType,
   { label: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
-  SUBMITTED: { label: "제출 완료", color: "blue" },
-  NOT_SUBMITTED: { label: "제출 실패", color: "red" },
+  SUCCESS: { label: "제출 완료", color: "blue" },
+  FAILURE: { label: "제출 실패", color: "red" },
   PENDING: { label: "과제 휴강", color: "grey" },
 };

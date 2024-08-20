@@ -101,7 +101,7 @@ const StudyCurriculum = () => {
                     size="sm"
                     style={homeworkButtonStyle}
                     variant={
-                      homeworkSubmissionStatus === "SUBMITTED"
+                      homeworkSubmissionStatus === "SUCCESS"
                         ? "outline"
                         : "solid"
                     }
@@ -134,8 +134,8 @@ const homeworkSubmissionStatusMap: Record<
   HomeworkSubmissionStatusType,
   string
 > = {
-  SUBMITTED: "제출한 과제 확인",
-  NOT_SUBMITTED: "과제 제출하기",
+  SUCCESS: "제출한 과제 확인",
+  FAILURE: "과제 제출하기",
   PENDING: "과제 제출하기",
 };
 

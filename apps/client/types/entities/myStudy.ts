@@ -1,9 +1,6 @@
 export type AttendanceStatusType = "ATTENDED" | "NOT_ATTENDED" | "PENDING";
 
-export type HomeworkSubmissionStatusType =
-  | "SUBMITTED"
-  | "NOT_SUBMITTED"
-  | "PENDING";
+export type HomeworkSubmissionStatusType = "SUCCESS" | "FAILURE" | "PENDING";
 
 export type LevelType = "BASIC" | "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
 

@@ -18,21 +18,21 @@ export const dailyTaskMockData: DailyTaskDataType[] = [
     week: 3,
     name: "과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름",
     deadline: "2024-08-18T17:13:29.913Z",
-    homeworkSubmissionStatus: "SUBMITTED",
+    homeworkSubmissionStatus: "SUCCESS",
   },
   {
     type: "HOMEWORK",
     week: 2,
     name: "과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름",
     deadline: "2024-08-18T17:13:29.913Z",
-    homeworkSubmissionStatus: "NOT_SUBMITTED",
+    homeworkSubmissionStatus: "FAILURE",
   },
   {
     type: "HOMEWORK",
     week: 1,
     name: "과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름 과제 이름",
     deadline: "2024-08-18T17:13:29.913Z",
-    homeworkSubmissionStatus: "SUBMITTED",
+    homeworkSubmissionStatus: "FAILURE",
   },
 ];
 
@@ -91,7 +91,7 @@ export const studyCurriculumMockData: StudyCurriculumDataType[] = [
       endDate: "2024-08-25T17:13:29.913Z",
     },
     attendanceStatus: "NOT_ATTENDED",
-    homeworkSubmissionStatus: "SUBMITTED",
+    homeworkSubmissionStatus: "SUCCESS",
   },
   {
     week: 3,
@@ -104,7 +104,7 @@ export const studyCurriculumMockData: StudyCurriculumDataType[] = [
       endDate: "2024-08-25T17:13:29.913Z",
     },
     attendanceStatus: "PENDING",
-    homeworkSubmissionStatus: "NOT_SUBMITTED",
+    homeworkSubmissionStatus: "FAILURE",
   },
   {
     week: 4,
@@ -117,7 +117,7 @@ export const studyCurriculumMockData: StudyCurriculumDataType[] = [
       endDate: "2024-08-25T17:13:29.913Z",
     },
     attendanceStatus: "PENDING",
-    homeworkSubmissionStatus: "NOT_SUBMITTED",
+    homeworkSubmissionStatus: "FAILURE",
   },
 ];
 
