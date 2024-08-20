@@ -1,3 +1,4 @@
+import { Assign } from "./../../client/styled-system/types/system-types.d";
 export const headerMockData = {
   studyId: 1,
   title: "기초 웹스터디",
@@ -27,3 +28,38 @@ export const headerMockData = {
     open: true,
   },
 };
+
+export const assignmentList = [
+  {
+    studyDetailId: 12,
+    title: "1번 과제",
+    deadline: "2024-08-20T14:52:41.871Z",
+    week: 1,
+    descriptionLink: "https://github.com/GDSC-Hongik/wow-class",
+    assignmentStatus: "OPEN",
+  },
+  {
+    studyDetailId: 13,
+    title: "2번 과제",
+    deadline: "2024-08-22T14:52:41.871Z",
+    week: 2,
+    descriptionLink: "https://github.com/GDSC-Hongik/wow-class",
+    assignmentStatus: "NONE",
+  },
+  {
+    studyDetailId: 14,
+    title: "-",
+    deadline: "-",
+    week: 3,
+    descriptionLink: "",
+    assignmentStatus: "NONE",
+  },
+  {
+    studyDetailId: 15,
+    title: "-",
+    deadline: "-",
+    week: 4,
+    descriptionLink: "",
+    assignmentStatus: "NONE",
+  },
+];

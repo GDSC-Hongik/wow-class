@@ -1,6 +1,6 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
-import { Text } from "@wow-class/ui";
+import { Space, Text } from "@wow-class/ui";
 import Box from "wowds-ui/Box";
 import Tag from "wowds-ui/Tag";
 
@@ -8,7 +8,7 @@ const CheckAttendanceNumber = () => {
   return (
     <section>
       <Text typo="h2">주차별 출결 번호</Text>
-      <div className={css({ height: "24px" })} />
+      <Space height={24} />
       <div className={AttendanceContainerStyle}>
         <Box
           style={{ maxWidth: "282px" }}

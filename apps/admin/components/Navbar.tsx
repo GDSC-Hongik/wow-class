@@ -1,17 +1,45 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { NavItem } from "@wow-class/ui";
+import { createStudyApi } from "apis/study/createStudyApi";
 import Image from "next/image";
 
-import { navMenu } from "../constants/navMenu";
 import adminImageUrl from "../public/images/administrator.svg";
+import folderImageUrl from "../public/images/folder.svg";
+import homeImageUrl from "../public/images/home.svg";
 import logoImageUrl from "../public/images/logo.svg";
+import participantImageUrl from "../public/images/particpant.svg";
 
 /**
  * @description admin 내비게이션 바 컴포넌트입니다.
  */
 
-const Navbar = () => {
+const Navbar = async () => {
+  const studyList = await createStudyApi.getStudyList();
+
+  const navMenu = [
+    {
+      href: "studies",
+      imageUrl: homeImageUrl,
+      alt: "home-icon",
+      name: "개설된 스터디",
+      items: studyList?.map(({ studyId, title }) => {
+        return {
+          href: `${String(studyId)}`,
+          imageUrl: folderImageUrl,
+          alt: title,
+          name: title,
+        };
+      }),
+    },
+    {
+      href: "participants",
+      imageUrl: participantImageUrl,
+      alt: "participant-icon",
+      name: "수강생 관리",
+    },
+  ];
+
   return (
     <aside aria-label="admin navigation bar" className={navbarContainerStyle}>
       <Flex align="center" gap={8} padding="6px 0px 7px 20px">
