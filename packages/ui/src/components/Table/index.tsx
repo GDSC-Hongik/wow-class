@@ -1,7 +1,5 @@
 import { Flex } from "@styled-system/jsx";
-import type { CSSProperties, PropsWithChildren, ReactNode } from "react";
-
-import Text from "../Text";
+import type { CSSProperties, PropsWithChildren } from "react";
 
 interface TableProps extends PropsWithChildren {
   className?: string;
@@ -57,41 +55,6 @@ Table.Right = ({ children, ...rest }: TableRightProps) => {
   return (
     <Flex alignItems="center" justifyContent="flex-end" {...rest}>
       {children}
-    </Flex>
-  );
-};
-
-interface TableContentProps {
-  text: string;
-  subText?: string;
-  rightContent?: ReactNode;
-  className?: string;
-  style?: CSSProperties;
-}
-
-/**
- * @description Table.Content 컴포넌트
- * @param {string} text - 텍스트
- * @param {string} subText - 서브 텍스트
- * @param {ReactNode} rightContent - 텍스트 영역의 오른쪽 컨텐츠
- */
-Table.Content = ({
-  text,
-  subText,
-  rightContent,
-  ...rest
-}: TableContentProps) => {
-  return (
-    <Flex direction="column" gap="xxs" justifyContent="center" {...rest}>
-      <Flex gap="xs">
-        {text && <Text typo="h3">{text}</Text>}
-        {rightContent}
-      </Flex>
-      {subText && (
-        <Text color="sub" typo="body2">
-          {subText}
-        </Text>
-      )}
     </Flex>
   );
 };

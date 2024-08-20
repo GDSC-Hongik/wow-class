@@ -239,8 +239,6 @@ progress {
   --colors-mono-950: #121212;
   --colors-white: #ffffff;
   --colors-black: #000000;
-  --spacing-xxs: 0.25rem;
-  --spacing-xs: 0.5rem;
   --border-widths-button: 1px;
   --colors-primary: #368ff7;
   --colors-success: #2a8642;
@@ -403,6 +401,7 @@ progress {
 .h_80px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   height: 80px;
 }
+<<<<<<< HEAD
 .w_100\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   width: 100%;
 }
@@ -415,6 +414,8 @@ progress {
 .c_sub:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-sub);
 }
+=======
+>>>>>>> 9d0c1a49c03c25b8ac48d37b6044b845f3349746
 .c_textBlack:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-text-black);
 }
@@ -661,6 +662,9 @@ progress {
 .c_errorBackground:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-error-background);
 }
+.c_sub:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  color: var(--colors-sub);
+}
 .c_outline:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   color: var(--colors-outline);
 }
@@ -795,10 +799,4 @@ progress {
 }
 .jc_flex-end:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   justify-content: flex-end;
-}
-.flex-d_column:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  flex-direction: column;
-}
-.jc_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  justify-content: center;
 }
