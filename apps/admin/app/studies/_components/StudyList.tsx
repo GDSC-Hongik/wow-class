@@ -40,12 +40,25 @@ const StudyList = async () => {
   return (
     <section aria-label="study-list" className={SectionStyle}>
       {studyList?.map(
-        ({ studyId, title, studyType, notionLink, mentorName }, index) => {
+        (
+          {
+            studyId,
+            title,
+            studyType,
+            notionLink,
+            mentorName,
+            academicYear,
+            semesterType,
+          },
+          index
+        ) => {
           return (
             <Table key={`${index}-${studyId}`}>
               <Table.Left>
                 <Flex alignItems="center" gap="31px">
-                  <Text typo="body1">2024-1</Text>
+                  <Text typo="body1">
+                    {academicYear}-{semesterType === "FIRST" ? "1" : "2"}
+                  </Text>
                   <Flex alignItems="center" gap="xs">
                     <Text typo="h3">{title}</Text>
                     <Tag color={studyTypeColorMap[studyType]} variant="solid1">

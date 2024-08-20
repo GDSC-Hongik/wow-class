@@ -2,6 +2,8 @@ import type { StudyType } from "types/entities/study";
 
 export interface StudyListApiResponseDto {
   studyId: number;
+  academicYear: number;
+  semesterType: "FIRST" | "SECOND";
   title: string;
   studyType: StudyType;
   notionLink: string;
