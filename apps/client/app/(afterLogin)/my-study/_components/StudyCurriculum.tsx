@@ -2,12 +2,11 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import { assignmentSubmissionStatusMap } from "constants/assignmentSubmissionStatusMap";
+import LinkButton from "components/LinkButton";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import { studyCurriculumMockData } from "constants/mockData";
 import type { ComponentProps } from "react";
 import type { LevelType } from "types/entities/myStudy";
-import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
 const formatWeekPeriod = (startDate: string, endDate: string) => {
@@ -54,8 +53,10 @@ const StudyCurriculum = () => {
               label: attendanceStatusLabel,
               color: attendanceStatusColor,
             } = attendanceStatusMap[attendanceStatus];
-            const { label: assignmentSubmissionStatusLabel } =
-              assignmentSubmissionStatusMap[assignmentSubmissionStatus];
+            const assignmentButtonText =
+              assignmentSubmissionStatus === "SUCCESS"
+                ? "제출한 과제 확인"
+                : "과제 제출하기";
 
             return (
               <Table key={index}>
@@ -95,9 +96,10 @@ const StudyCurriculum = () => {
                   >
                     {attendanceStatusLabel}
                   </Tag>
-                  <Button
+                  <LinkButton
                     aria-label="check-submitted-assignment"
                     disabled={assignmentSubmissionStatus === "PENDING"}
+                    href=""
                     size="sm"
                     style={assignmentButtonStyle}
                     variant={
@@ -106,8 +108,8 @@ const StudyCurriculum = () => {
                         : "solid"
                     }
                   >
-                    {assignmentSubmissionStatusLabel}
-                  </Button>
+                    {assignmentButtonText}
+                  </LinkButton>
                 </Table.Right>
               </Table>
             );
