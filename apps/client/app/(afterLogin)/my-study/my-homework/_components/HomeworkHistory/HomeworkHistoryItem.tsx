@@ -5,7 +5,7 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { AssignmentHistoryDto } from "types/dtos/study-history";
-import type { HomeworkSubmissionStatusType } from "types/entities/homework";
+import type { HomeworkSubmissionStatusType } from "types/entities/assignment";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
@@ -87,6 +87,10 @@ const homeworkSubmissionMap: Record<
   SUCCESS: {
     message: "제출 완료",
     color: "blue",
+  },
+  PENDING: {
+    message: "과제 휴강",
+    color: "grey",
   },
 };
 

@@ -1,4 +1,7 @@
-import type { StudyDetailDashboardDto } from "types/dtos/study-detail-dashboard";
+import type {
+  Assignment,
+  StudyDetailDashboardDto,
+} from "types/dtos/study-detail-dashboard";
 import type { AssignmentHistoryDto } from "types/dtos/study-history";
 
 export const history: AssignmentHistoryDto[] = [
@@ -23,19 +26,71 @@ export const history: AssignmentHistoryDto[] = [
 ];
 
 export const studyDashBoardData: StudyDetailDashboardDto = {
-  repositoryLink: "",
-  isLinkEditable: true,
+  repositoryLink: "https://example.com/assignments/react-basics",
+  isLinkEditable: false,
   submittableAssignments: [
     {
       studyDetailId: 1,
       assignmentStatus: "OPEN",
       week: 1,
       title: "React Basics",
-      assignmentSubmissionStatus: "FAILURE",
+      assignmentSubmissionStatus: "PENDING",
       descriptionLink: "https://example.com/assignments/react-basics",
-      deadline: "2024-08-18T17:56:01.155Z",
+      deadline: "2024-08-25T23:59:59",
       submissionLink: "https://example.com/submissions/react-basics",
-      submissionFailureType: "NOT_SUBMITTED",
+      submissionFailureType: "NONE",
     },
   ],
 };
+
+export const assignmentData: Assignment[] = [
+  {
+    studyDetailId: 123,
+    assignmentStatus: "OPEN",
+    week: 3,
+    title: "Database Design Assignment",
+    assignmentSubmissionStatus: "SUCCESS",
+    descriptionLink: "https://example.com/assignment/123",
+    deadline: "2024-08-20T14:30:00",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "NONE",
+    committedAt: "2024-08-20T14:30:00",
+  },
+  {
+    studyDetailId: 123,
+    assignmentStatus: "OPEN",
+    week: 3,
+    title: "Database Design Assignment",
+    assignmentSubmissionStatus: "SUCCESS",
+    descriptionLink: "https://example.com/assignment/123",
+    deadline: "2024-08-25T23:59:59",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "NONE",
+    committedAt: "2024-08-20T14:30:00",
+  },
+  {
+    studyDetailId: 123,
+    assignmentStatus: "OPEN",
+    week: 3,
+    title: "Database Design Assignment",
+    assignmentSubmissionStatus: "FAILURE",
+    descriptionLink: "https://example.com/assignment/123",
+    deadline: "2024-08-25T23:59:59",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "WORD_COUNT_INSUFFICIENT",
+    committedAt: "sdf",
+  },
+  //제출 안함/마감
+  {
+    studyDetailId: 124,
+    assignmentStatus: "OPEN",
+    week: 4,
+    title: "API Development",
+    assignmentSubmissionStatus: "FAILURE",
+    descriptionLink: "https://example.com/assignment/124",
+    deadline: "2024-08-20T14:30:00",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "NOT_SUBMITTED",
+    committedAt: "2024-08-20T14:30:00",
+  },
+];

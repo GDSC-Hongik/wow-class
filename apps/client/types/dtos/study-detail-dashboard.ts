@@ -1,12 +1,12 @@
-import type { HomeworkSubmissionStatusType } from "types/entities/homework";
+import type { HomeworkSubmissionStatusType } from "types/entities/assignment";
 
 export interface StudyDetailDashboardDto {
   repositoryLink: string;
   isLinkEditable: boolean;
-  submittableAssignments: SubmittableAssignment[];
+  submittableAssignments: Assignment[];
 }
 
-export interface SubmittableAssignment {
+export interface Assignment {
   studyDetailId: number;
   assignmentStatus: "NONE" | "OPEN" | "CANCELLED";
   week: number;
@@ -20,4 +20,6 @@ export interface SubmittableAssignment {
     | "NOT_SUBMITTED"
     | "WORD_COUNT_INSUFFICIENT"
     | "LOCATION_UNIDENTIFIABLE";
+
+  committedAt?: string;
 }

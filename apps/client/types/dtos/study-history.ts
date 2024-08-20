@@ -1,4 +1,4 @@
-import type { HomeworkSubmissionStatusType } from "types/entities/homework";
+import type { HomeworkSubmissionStatusType } from "types/entities/assignment";
 
 export interface AssignmentHistoryDto {
   assignmentHistoryId: number;

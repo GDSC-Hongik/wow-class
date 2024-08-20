@@ -4,12 +4,11 @@ import Image from "next/image";
 
 import {
   HomeworkHistory,
-  HomeworkOverviewBox,
   RepositorySubmissionBox,
 } from "@/(afterLogin)/my-study/my-homework/_components";
 
-import { HomeworkBoxWithLinkEdit } from "./_components/HomeworkBoxWithLinkEdit";
-import { studyDashBoardData } from "./_components/mockData";
+import { AssignmentOverviewBox } from "./_components/AssignmentOverviewBox/AssignmentBox";
+import { assignmentData, studyDashBoardData } from "./_components/mockData";
 
 const MyHomeworkPage = async () => {
   // const studyDashboard = await studyDetailApi.getStudyDetailDashboard(1);
@@ -39,17 +38,15 @@ const MyHomeworkPage = async () => {
             <RepositorySubmissionBox
               repositoryLink={studyDashBoardData.repositoryLink}
             />
-            <HomeworkBoxWithLinkEdit
+            <AssignmentOverviewBox
               assignments={studyDashboard.submittableAssignments}
-              repositoryLink={studyDashBoardData.repositoryLink}
+              buttonsDisabled={!studyDashBoardData.repositoryLink}
             />
           </>
         )}
-        {/* {!studyDashBoardData.isLinkEditable && (
-          <HomeworkOverviewBox
-            assignments={studyDashboard.submittableAssignments}
-          />
-        )} */}
+        {!studyDashBoardData.isLinkEditable && (
+          <AssignmentOverviewBox assignments={assignmentData} />
+        )}
       </Flex>
       <Space height={64} />
       <HomeworkHistory />
