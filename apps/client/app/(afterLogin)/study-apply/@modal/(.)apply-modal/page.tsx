@@ -10,33 +10,30 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { customRevalidateTag } from "utils/customRevalidateTag";
 import Button from "wowds-ui/Button";
-const TestModal = () => {
+const ApplyModal = () => {
   const searchParams = useSearchParams();
 
   const title = searchParams.get("title");
   const studyId = searchParams.get("studyId");
 
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [applySuccess, setApplySuccess] = useState(false);
   const { closeModal } = useModalRoute();
 
   const handleClickApplyButton = async () => {
     const result = await studyApplyApi.applyStudy(Number(studyId));
-    if (!result.success) {
-      console.error("스터디 신청 실패");
-    } else {
+    if (result.success) {
       customRevalidateTag(tags.studyApply);
-      setIsSuccess(true);
-      console.log("스터디 신청 성공");
+      setApplySuccess(true);
     }
   };
 
   return (
     <Modal onClose={closeModal}>
       <Flex direction="column" textAlign="center" width="21rem">
-        {isSuccess ? (
+        {applySuccess ? (
           <Text typo="h1">
             <span className={titleStyle}>{title}</span>이 <br />
-            신청되었어요
+            신청이 완료되었어요.
           </Text>
         ) : (
           <>
@@ -55,7 +52,7 @@ const TestModal = () => {
   );
 };
 
-export default TestModal;
+export default ApplyModal;
 
 const titleStyle = css({
   color: "primary",

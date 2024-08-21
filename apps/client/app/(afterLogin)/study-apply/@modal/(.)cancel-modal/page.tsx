@@ -10,43 +10,42 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { customRevalidateTag } from "utils/customRevalidateTag";
 import Button from "wowds-ui/Button";
-const TestModal = () => {
+
+const ApplicationCancelModal = () => {
   const searchParams = useSearchParams();
 
   const title = searchParams.get("title");
   const studyId = searchParams.get("studyId");
 
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [cancelSucces, setCancelSuccess] = useState(false);
   const { closeModal } = useModalRoute();
 
   const handleClickCancelButton = async () => {
     const result = await studyApplyApi.cancelStudyApplication(Number(studyId));
 
-    if (!result.success) {
-      console.error("스터디 신청 실패");
-    } else {
+    if (result.success) {
       customRevalidateTag(tags.studyApply);
-      setIsSuccess(true);
-      console.log("스터디 취소 성공");
+      setCancelSuccess(true);
     }
   };
 
   return (
     <Modal onClose={closeModal}>
       <Flex direction="column" textAlign="center" width="21rem">
-        {isSuccess ? (
+        {cancelSucces ? (
           <Text typo="h1">
-            <span className={titleStyle}>{title}</span>이 <br />
-            취소되었어요
+            <span className={titleStyle}>{title}</span>
+            <br />
+            수강이 취소되었어요.
           </Text>
         ) : (
           <>
             <Text typo="h1">
-              <span className={titleStyle}>{title}</span>을(를) <br />
-              취소하시겠습니까?
+              <span className={titleStyle}>{title}</span>의 <br />
+              수강을 취소하시겠습니까?
             </Text>
-            <Space height={22} />
-            <Button onClick={handleClickCancelButton}>수강 취소하기</Button>
+            <Space height={38} />
+            <Button onClick={handleClickCancelButton}>신청 취소하기</Button>
           </>
         )}
       </Flex>
@@ -54,7 +53,7 @@ const TestModal = () => {
   );
 };
 
-export default TestModal;
+export default ApplicationCancelModal;
 
 const titleStyle = css({
   color: "primary",

@@ -1,19 +1,14 @@
-"use client";
-
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
-import { parseISODate, splitTime } from "@wow-class/utils";
-import { studyApplyApi } from "apis/studyApplyApi";
+import { parseISODate } from "@wow-class/utils";
 import { dayToKorean } from "constants/dayToKorean";
 import { routePath } from "constants/routePath";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
 import type { ComponentProps } from "react";
 import type { StudyList } from "types/dtos/applyStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
-
 interface StudyItemProps {
   study: StudyList;
   appliedStudyId: null | number;
@@ -32,10 +27,6 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
     openingDate: openingDateString,
     totalWeek,
   } = study;
-
-  const canApply = appliedStudyId === null;
-  const canCanceled = appliedStudyId === studyId;
-  const canNotApply = !canApply && appliedStudyId !== studyId;
 
   const openingDate = parseISODate(openingDateString);
   const studyTime = `${dayToKorean[dayOfWeek.toUpperCase()]} ${startTimeHour}:${startTimeMinute} - ${
@@ -65,30 +56,11 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
         {`${openingDate.month}.${openingDate.day} 개강`}
       </Text>
       <styled.div paddingX="24px">
-        {canApply ? (
-          <Link
-            href={`/study-apply/apply-modal?studyId=${studyId}&title=${study.title}`}
-          >
-            <Button size="sm" variant="solid">
-              수강 신청
-            </Button>
-          </Link>
-        ) : canCanceled ? (
-          <Link
-            href={`/study-apply/cancel-modal?studyId=${studyId}&title=${study.title}`}
-          >
-            <Button size="sm" variant="solid">
-              신청 취소
-            </Button>
-          </Link>
-        ) : (
-          <Button disabled size="sm" variant="solid">
-            신청 불가
-          </Button>
-        )}
-        {/* <Button size="sm" variant="solid" onClick={handleClickCancelButton}>
-          신청 취소
-        </Button> */}
+        <StudyButton
+          appliedStudyId={appliedStudyId}
+          studyId={studyId}
+          studyTitle={title}
+        />
       </styled.div>
     </Table>
   );
@@ -102,6 +74,47 @@ const sessionColors: Record<string, ComponentProps<typeof Tag>["color"]> = {
   "과제 스터디": "green",
   "온라인 세션": "blue",
   "오프라인 세션": "yellow",
+};
+
+const StudyButton = ({
+  appliedStudyId,
+  studyId,
+  studyTitle,
+}: {
+  appliedStudyId: null | number;
+  studyId: number;
+  studyTitle: string;
+}) => {
+  const isApplyable = appliedStudyId === null;
+  const isCancelable = appliedStudyId === studyId;
+
+  if (isApplyable) {
+    return (
+      <Link
+        href={`${routePath["study-"]}?studyId=${studyId}&title=${studyTitle}`}
+      >
+        <Button size="sm" variant="solid">
+          수강 신청
+        </Button>
+      </Link>
+    );
+  }
+  if (isCancelable) {
+    return (
+      <Link
+        href={`/study-apply/cancel-modal?studyId=${studyId}&title=${studyTitle}`}
+      >
+        <Button size="sm" variant="solid">
+          신청 취소
+        </Button>
+      </Link>
+    );
+  }
+  return (
+    <Button disabled size="sm" variant="solid">
+      신청 불가
+    </Button>
+  );
 };
 
 export default StudyItem;
