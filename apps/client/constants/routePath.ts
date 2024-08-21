@@ -6,6 +6,5 @@ export const routePath = {
   ["auth-error-during-recruitment"]: "/auth-error-during-recruitment",
   ["auth-error-after-recruitment"]: "/auth-error-after-recruitment",
   ["attendance-check"]: "/my-study/attendance-check",
-  ["attendance-complete"]: "/my-study/attendance-complete",
   onboarding: "https://onboarding.gdschongik.com",
 } as const;

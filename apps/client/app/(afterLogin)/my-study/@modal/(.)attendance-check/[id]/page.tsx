@@ -3,70 +3,102 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
-import { routePath } from "constants/routePath";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
 const AttendanceCheckModal = () => {
+  const [attended, setAttended] = useState(false);
   const [error] = useState(false);
   const [attendanceNumber, setAttendanceNumber] = useState("");
-
-  const router = useRouter();
 
   const handleChangeAttendanceNumber = (value: string) => {
     setAttendanceNumber(value);
   };
 
   const handleClickAttendanceCheckButton = () => {
-    // TODO api 요청 및 에러 처리 필요
-    router.push(routePath["attendance-complete"]);
+    setAttended(true);
   };
 
   return (
     <Modal>
-      <Flex alignItems="center" direction="column" gap="sm" marginBottom="40px">
-        <section
-          aria-label="attendance-check-title"
-          className={attendanceCheckTitleStyle}
-        >
-          <Text as="h1" typo="h1">
-            기초 웹스터디
-          </Text>
-          <Image
-            alt="item separator"
-            height={6}
-            src="/images/dot.svg"
-            width={6}
+      {attended ? (
+        <Flex alignItems="center" direction="column" gap="4px">
+          <section
+            aria-label="attendance-complete-title"
+            className={attendanceCompleteTitleStyle}
+          >
+            <Text as="h1" color="primary" typo="h1">
+              기초 웹스터디
+            </Text>
+            <Image
+              alt="item separator"
+              height={6}
+              src="/images/dot.svg"
+              width={6}
+            />
+            <Text as="h1" color="primary" typo="h1">
+              4주차
+            </Text>
+          </section>
+          <section aria-label="attendance-complete-description">
+            <Text as="h1" color="textBlack" typo="h1">
+              출석이 완료되었어요.
+            </Text>
+          </section>
+        </Flex>
+      ) : (
+        <>
+          <Flex
+            alignItems="center"
+            direction="column"
+            gap="sm"
+            marginBottom="40px"
+          >
+            <section
+              aria-label="attendance-check-title"
+              className={attendanceCheckTitleStyle}
+            >
+              <Text as="h1" typo="h1">
+                기초 웹스터디
+              </Text>
+              <Image
+                alt="item separator"
+                height={6}
+                src="/images/dot.svg"
+                width={6}
+              />
+              <Text as="h1" typo="h1">
+                4주차
+              </Text>
+            </section>
+            <section
+              aria-label="attendance-check-description"
+              className={attendanceCheckDescriptionStyle}
+            >
+              <Text as="p" color="sub" typo="body1">
+                스터디 시작 후 멘토의 안내에 따라 출결번호를 입력해주세요.
+              </Text>
+              <Text as="p" color="error" typo="body1">
+                2024년 5월 23일 0:00 - 23:59까지
+              </Text>
+            </section>
+          </Flex>
+          <TextField
+            error={error}
+            helperText={error ? textfieldHelperText : ""}
+            label="출결번호 입력"
+            placeholder="Ex. 0000"
+            style={textfieldStyle}
+            value={attendanceNumber}
+            onChange={handleChangeAttendanceNumber}
           />
-          <Text as="h1" typo="h1">
-            4주차
-          </Text>
-        </section>
-        <section
-          aria-label="attendance-check-description"
-          className={attendanceCheckDescriptionStyle}
-        >
-          <Text as="p" color="sub" typo="body1">
-            스터디 시작 후 멘토의 안내에 따라 출결번호를 입력해주세요.
-          </Text>
-          <Text as="p" color="error" typo="body1">
-            2024년 5월 23일 0:00 - 23:59까지
-          </Text>
-        </section>
-      </Flex>
-      <TextField
-        error={error}
-        helperText={error ? textfieldHelperText : ""}
-        label="출결번호 입력"
-        placeholder="Ex. 0000"
-        style={textfieldStyle}
-        value={attendanceNumber}
-        onChange={handleChangeAttendanceNumber}
-      />
-      <Button onClick={handleClickAttendanceCheckButton}>출석 체크하기</Button>
+          <Button onClick={handleClickAttendanceCheckButton}>
+            출석 체크하기
+          </Button>
+        </>
+      )}
     </Modal>
   );
 };
@@ -91,3 +123,8 @@ const textfieldStyle = {
   height: "89px",
   marginBottom: "20px",
 };
+
+const attendanceCompleteTitleStyle = css({
+  display: "flex",
+  gap: "sm",
+});
