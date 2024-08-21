@@ -1,28 +1,19 @@
+import type { StudyType } from "types/entities/common/study";
+import type { DateType, Time } from "types/entities/common/time";
+
 export interface StudyList {
   studyId: number;
   title: string;
-  studyType: string;
+  studyType: StudyType;
   notionLink: string;
   introduction: string;
   mentorName: string;
-  dayOfWeek:
-    | "MONDAY"
-    | "TUESDAY"
-    | "WEDNESDAY"
-    | "THURSDAY"
-    | "FRIDAY"
-    | "SATURDAY"
-    | "SUNDAY";
+  dayOfWeek: DateType;
   startTime: Time;
+  endTime: Time;
   totalWeek: number;
   openingDate: string;
-}
-
-interface Time {
-  hour: number;
-  minute: number;
-  second: number;
-  nano: number;
+  applicationEndDate: string;
 }
 
 export interface StudyListApiResponseDto {
