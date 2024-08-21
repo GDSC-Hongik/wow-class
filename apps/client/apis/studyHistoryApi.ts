@@ -25,4 +25,18 @@ export const studyHistoryApi = {
 
     return { success: response.ok };
   },
+
+  submitAssignment: async (studyDetailId: number) => {
+    const response = await fetcher.post(
+      `${apiPath.studyHistory}/submit?studyDetailId=${studyDetailId}`,
+      null,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN}`,
+        },
+      }
+    );
+
+    return { success: response.ok };
+  },
 };

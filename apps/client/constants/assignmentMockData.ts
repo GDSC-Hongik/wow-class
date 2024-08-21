@@ -93,4 +93,16 @@ export const assignmentData: Assignment[] = [
     submissionFailureType: "NOT_SUBMITTED",
     committedAt: "2024-08-20T14:30:00",
   },
+  {
+    studyDetailId: 124,
+    assignmentStatus: "OPEN",
+    week: 4,
+    title: "API Development",
+    assignmentSubmissionStatus: "SUCCESS",
+    descriptionLink: "https://example.com/assignment/124",
+    deadline: "2024-08-20T14:30:00",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "NONE",
+    committedAt: "2024-08-20T14:30:00",
+  },
 ];
