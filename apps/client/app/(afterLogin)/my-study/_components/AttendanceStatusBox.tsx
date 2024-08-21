@@ -64,7 +64,7 @@ const AttendanceStatusBox = ({
             </Flex>
           </Flex>
           <LinkButton
-            href={`${routePath["attendance-check"]}/1`}
+            href={`${routePath["attendance-check"]}`}
             size="lg"
             style={attendanceButtonStyle}
           >
