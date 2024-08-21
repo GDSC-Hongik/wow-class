@@ -4,15 +4,18 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { myStudyApi } from "apis/myStudyApi";
 import { dayToKorean } from "constants/dayToKorean";
-import { headerMockData } from "constants/mockData";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import type { BasicStudyInfoDto } from "types/dtos/myStudy";
 import { space } from "wowds-tokens";
 import TextButton from "wowds-ui/TextButton";
 
 const Header = () => {
+  const [basicStudyInfo, setBasicStudyInfo] =
+    useState<BasicStudyInfoDto | null>(null);
   const [showIntro, setShowIntro] = useState(false);
 
   const handleClickShowIntro = () => {
@@ -25,6 +28,21 @@ const Header = () => {
   const introSectionImageAriaLabel = showIntro
     ? "Collapse introduction icon"
     : "Expand introduction icon";
+
+  useEffect(() => {
+    const fetchBasicStudyInfoData = async () => {
+      const basicStudyInfoResponseData = await myStudyApi.getBasicStudyInfo(1);
+
+      basicStudyInfoResponseData &&
+        setBasicStudyInfo(basicStudyInfoResponseData);
+    };
+
+    fetchBasicStudyInfoData();
+  }, []);
+
+  if (!basicStudyInfo) {
+    return null;
+  }
 
   const {
     title,
@@ -39,7 +57,7 @@ const Header = () => {
     period: { startDate, endDate },
     introduction,
     notionLink,
-  } = headerMockData;
+  } = basicStudyInfo;
 
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
