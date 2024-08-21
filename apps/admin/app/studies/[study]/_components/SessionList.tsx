@@ -1,7 +1,7 @@
 import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
-import { parseISODate } from "@wow-class/utils";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 import { sessionList } from "constants/mockData";
 import Image from "next/image";
@@ -75,7 +75,8 @@ const SessionList = async ({ studyId }: { studyId: string }) => {
                 </Table.Left>
                 <Table.Right>
                   <Text typo="body1">
-                    {startMonth}.{startDay} - {endMonth}.{endDay}
+                    {padWithZero(startMonth)}.{padWithZero(startDay)} -{" "}
+                    {padWithZero(endMonth)}.{padWithZero(endDay)}
                   </Text>
                 </Table.Right>
               </Table>

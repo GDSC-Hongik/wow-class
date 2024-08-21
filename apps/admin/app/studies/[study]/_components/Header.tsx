@@ -25,7 +25,6 @@ const Header = ({ studyId }: { studyId: string }) => {
         const data = await studyInfoApi.getStudyBasicInfo(
           parseInt(studyId, 10)
         );
-        console.log(data);
         if (data) setStudyInfo(data);
       }
     };

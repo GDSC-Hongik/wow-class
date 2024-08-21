@@ -22,7 +22,7 @@ const CheckAttendanceNumber = () => {
                   </Tag>
                 </Flex>
                 <Text color="sub" typo="body1">
-                  2024년 5월 23일 0:00 - 23:59까지
+                  2024년 5월 23일 00:00 - 23:59까지
                 </Text>
               </Flex>
               <Text
@@ -46,7 +46,7 @@ const CheckAttendanceNumber = () => {
                   </Tag>
                 </Flex>
                 <Text color="sub" typo="body1">
-                  2024년 5월 23일 0:00 - 23:59까지
+                  2024년 5월 23일 00:00 - 23:59까지
                 </Text>
               </Flex>
               <Text
