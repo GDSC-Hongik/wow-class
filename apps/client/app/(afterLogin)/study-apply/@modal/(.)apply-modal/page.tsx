@@ -32,7 +32,8 @@ const ApplyModal = () => {
       <Flex direction="column" textAlign="center" width="21rem">
         {applySuccess ? (
           <Text typo="h1">
-            <span className={titleStyle}>{title}</span>이 <br />
+            <span className={titleStyle}>{title}</span>
+            <br />
             신청이 완료되었어요.
           </Text>
         ) : (

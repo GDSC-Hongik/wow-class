@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
-import { parseISODate } from "@wow-class/utils";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import { dayToKorean } from "constants/dayToKorean";
 import { routePath } from "constants/routePath";
 import Link from "next/link";
@@ -29,9 +29,9 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   } = study;
 
   const openingDate = parseISODate(openingDateString);
-  const studyTime = `${dayToKorean[dayOfWeek.toUpperCase()]} ${startTimeHour}:${startTimeMinute} - ${
+  const studyTime = `${dayToKorean[dayOfWeek.toUpperCase()]} ${startTimeHour}:${padWithZero(startTimeMinute)} - ${
     Number(startTimeHour) + 1
-  }:${startTimeMinute}`;
+  }:${padWithZero(startTimeMinute)}`;
 
   return (
     <Table>
@@ -91,7 +91,7 @@ const StudyButton = ({
   if (isApplyable) {
     return (
       <Link
-        href={`${routePath["study-"]}?studyId=${studyId}&title=${studyTitle}`}
+        href={`${routePath["study-apply-modal"]}?studyId=${studyId}&title=${studyTitle}`}
       >
         <Button size="sm" variant="solid">
           수강 신청
@@ -102,7 +102,7 @@ const StudyButton = ({
   if (isCancelable) {
     return (
       <Link
-        href={`/study-apply/cancel-modal?studyId=${studyId}&title=${studyTitle}`}
+        href={`${routePath["study-cancel-modal"]}?studyId=${studyId}&title=${studyTitle}`}
       >
         <Button size="sm" variant="solid">
           신청 취소
