@@ -59,7 +59,7 @@ const Header = ({ studyId }: { studyId: string }) => {
       introduction,
       notionLink,
     } = studyInfo;
-
+    const validNotionLink = notionLink || "";
     const { month: startMonth, day: startDay } = parseISODate(startDate);
     const { month: endMonth, day: endDay } = parseISODate(endDate);
     const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
@@ -138,13 +138,13 @@ const Header = ({ studyId }: { studyId: string }) => {
                 <Text as="h3" typo="h3">
                   스터디 소개
                 </Text>
-                <Flex alignItems="center" gap="sm">
+                <Flex alignItems="center" direction="row" gap="sm">
                   <Text as="h5" color="sub">
                     {introduction}
                   </Text>
                   <Link
                     className={introduceLinkStyle}
-                    href={notionLink}
+                    href={validNotionLink}
                     role="button"
                     tabIndex={0}
                   >
