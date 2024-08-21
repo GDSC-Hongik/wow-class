@@ -23,13 +23,23 @@ const AttendanceCheckModal = () => {
   };
 
   const handleClickAttendanceCheckButton = async () => {
+    const myOngoingStudyInfoResponseData =
+      await myStudyApi.getMyOngoingStudyInfo();
+
+    if (!myOngoingStudyInfoResponseData?.studyId) {
+      return;
+    }
+
     const isValidAttendanceNumber = validateAttendanceNumber(attendanceNumber);
 
     if (!isValidAttendanceNumber) {
       return setError(true);
     }
 
-    const { success } = await myStudyApi.checkAttendance(1, attendanceNumber);
+    const { success } = await myStudyApi.checkAttendance(
+      myOngoingStudyInfoResponseData?.studyId,
+      attendanceNumber
+    );
 
     if (!success) {
       return setError(true);
