@@ -3,8 +3,8 @@ import { Space } from "@wow-class/ui";
 import {
   DailyTasks,
   Header,
+  StudyAnnouncementList,
   StudyCurriculum,
-  StudyNotices,
 } from "./_components";
 
 const MyStudyPage = () => {
@@ -16,7 +16,7 @@ const MyStudyPage = () => {
       <Space height={64} />
       <StudyCurriculum />
       <Space height={64} />
-      <StudyNotices />
+      <StudyAnnouncementList />
     </>
   );
 };

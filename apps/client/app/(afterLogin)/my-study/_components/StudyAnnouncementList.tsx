@@ -5,19 +5,19 @@ import { myStudyApi } from "apis/myStudyApi";
 import Link from "next/link";
 import { color } from "wowds-tokens";
 
-const StudyNotices = async () => {
+const StudyAnnouncementList = async () => {
   const studyAnnouncementListResponseData =
     await myStudyApi.getStudyAnnouncementList(1);
 
   return (
-    <section aria-label="study-notices">
-      <Text as="h2" className={studyNoticeHeadingStyle} typo="h2">
+    <section aria-label="study-announcement-list">
+      <Text as="h2" className={studyAnnouncementListHeadingStyle} typo="h2">
         스터디 공지
       </Text>
       {studyAnnouncementListResponseData?.map(
         ({ studyAnnounceId, title, link, createdDate }, index) => (
           <Link
-            className={studyNoticeBoxStyle}
+            className={studyAnnouncementListBoxStyle}
             href={link}
             key={studyAnnounceId}
             style={{
@@ -38,13 +38,13 @@ const StudyNotices = async () => {
   );
 };
 
-export default StudyNotices;
+export default StudyAnnouncementList;
 
-const studyNoticeHeadingStyle = css({
+const studyAnnouncementListHeadingStyle = css({
   marginBottom: "md",
 });
 
-const studyNoticeBoxStyle = css({
+const studyAnnouncementListBoxStyle = css({
   alignItems: "center",
   borderRadius: "4px",
   height: "80px",
