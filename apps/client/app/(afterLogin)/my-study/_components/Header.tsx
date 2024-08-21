@@ -69,7 +69,7 @@ const Header = () => {
   ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
   return (
-    <header>
+    <header className={headerStyle}>
       <section aria-label="my-study-header">
         <Flex alignItems="center" gap={8}>
           <Text as="h1" typo="h1">
@@ -174,6 +174,10 @@ export default Header;
 const ItemSeparator = () => (
   <Image alt="item separator" height={4} src="/images/dot.svg" width={4} />
 );
+
+const headerStyle = css({
+  minHeight: "65px",
+});
 
 const downArrowIconStyle = css({
   cursor: "pointer",
