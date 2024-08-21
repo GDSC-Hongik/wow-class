@@ -6,8 +6,17 @@ import Link from "next/link";
 import { color } from "wowds-tokens";
 
 const StudyAnnouncementList = async () => {
+  const myOngoingStudyInfoResponseData =
+    await myStudyApi.getMyOngoingStudyInfo();
+
+  if (!myOngoingStudyInfoResponseData?.studyId) {
+    return;
+  }
+
   const studyAnnouncementListResponseData =
-    await myStudyApi.getStudyAnnouncementList(1);
+    await myStudyApi.getStudyAnnouncementList(
+      myOngoingStudyInfoResponseData?.studyId
+    );
 
   return (
     <section aria-label="study-announcement-list">
