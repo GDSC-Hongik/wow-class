@@ -6,17 +6,20 @@ import { Table, Text } from "@wow-class/ui";
 import { parseISODate, splitTime } from "@wow-class/utils";
 import { studyApplyApi } from "apis/studyApplyApi";
 import { dayToKorean } from "constants/dayToKorean";
+import { routePath } from "constants/routePath";
 import Link from "next/link";
+import { redirect, useRouter } from "next/navigation";
 import type { ComponentProps } from "react";
-import type { StudyListApiResponseDto } from "types/dtos/applyStudy";
+import type { StudyList } from "types/dtos/applyStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
 interface StudyItemProps {
-  study: StudyListApiResponseDto;
+  study: StudyList;
+  appliedStudyId: null | number;
 }
 
-const StudyItem = ({ study }: StudyItemProps) => {
+const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   const {
     studyId,
     title,
@@ -25,36 +28,19 @@ const StudyItem = ({ study }: StudyItemProps) => {
     mentorName,
     studyType,
     dayOfWeek,
-    startTime: startTimeString,
+    startTime: { hour: startTimeHour, minute: startTimeMinute },
     openingDate: openingDateString,
     totalWeek,
   } = study;
 
-  const handleClickApplyButton = async () => {
-    const result = await studyApplyApi.applyStudy(studyId);
+  const canApply = appliedStudyId === null;
+  const canCanceled = appliedStudyId === studyId;
+  const canNotApply = !canApply && appliedStudyId !== studyId;
 
-    if (!result.success) {
-      console.error("스터디 신청 실패");
-    } else {
-      console.log("스터디 신청 성공");
-    }
-  };
-
-  const handleClickCancelButton = async () => {
-    const result = await studyApplyApi.cancelStudyApplication(studyId);
-
-    if (!result.success) {
-      console.error("스터디 신청 실패");
-    } else {
-      console.log("스터디 취소 성공");
-    }
-  };
-
-  const startTime = splitTime(startTimeString);
   const openingDate = parseISODate(openingDateString);
-  const studyTime = `${dayToKorean[dayOfWeek.toUpperCase()]} ${startTime.hours}:${startTime.minutes} - ${
-    Number(startTime.hours) + 1
-  }:${startTime.minutes}`;
+  const studyTime = `${dayToKorean[dayOfWeek.toUpperCase()]} ${startTimeHour}:${startTimeMinute} - ${
+    Number(startTimeHour) + 1
+  }:${startTimeMinute}`;
 
   return (
     <Table>
@@ -79,12 +65,30 @@ const StudyItem = ({ study }: StudyItemProps) => {
         {`${openingDate.month}.${openingDate.day} 개강`}
       </Text>
       <styled.div paddingX="24px">
-        <Button size="sm" variant="solid" onClick={handleClickApplyButton}>
-          수강 신청
-        </Button>
-        <Button size="sm" variant="solid" onClick={handleClickCancelButton}>
+        {canApply ? (
+          <Link
+            href={`/study-apply/apply-modal?studyId=${studyId}&title=${study.title}`}
+          >
+            <Button size="sm" variant="solid">
+              수강 신청
+            </Button>
+          </Link>
+        ) : canCanceled ? (
+          <Link
+            href={`/study-apply/cancel-modal?studyId=${studyId}&title=${study.title}`}
+          >
+            <Button size="sm" variant="solid">
+              신청 취소
+            </Button>
+          </Link>
+        ) : (
+          <Button disabled size="sm" variant="solid">
+            신청 불가
+          </Button>
+        )}
+        {/* <Button size="sm" variant="solid" onClick={handleClickCancelButton}>
           신청 취소
-        </Button>
+        </Button> */}
       </styled.div>
     </Table>
   );
