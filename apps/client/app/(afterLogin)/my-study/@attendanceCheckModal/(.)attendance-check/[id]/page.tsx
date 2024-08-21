@@ -3,15 +3,17 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
 const AttendanceCheckModal = () => {
-  const [error] = useState(false);
+  const [error, setError] = useState(false);
   const [attendanceNumber, setAttendanceNumber] = useState("");
 
   const router = useRouter();
@@ -20,8 +22,19 @@ const AttendanceCheckModal = () => {
     setAttendanceNumber(value);
   };
 
-  const handleClickAttendanceCheckButton = () => {
-    // TODO api 요청 및 에러 처리 필요
+  const handleClickAttendanceCheckButton = async () => {
+    const isValidAttendanceNumber = validateAttendanceNumber(attendanceNumber);
+
+    if (!isValidAttendanceNumber) {
+      return setError(true);
+    }
+
+    const { success } = await myStudyApi.checkAttendance(1, attendanceNumber);
+
+    if (!success) {
+      return setError(true);
+    }
+
     router.push(routePath["attendance-complete"]);
   };
 
