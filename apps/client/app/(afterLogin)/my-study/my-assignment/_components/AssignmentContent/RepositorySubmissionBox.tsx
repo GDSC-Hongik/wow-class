@@ -3,6 +3,8 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
+import { routePath } from "constants/routePath";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import type { RepositorySubmissionStatusType } from "types/entities/myAssignment";
 import { Edit, Trash, Warn } from "wowds-icons";
@@ -15,13 +17,14 @@ interface RepositorySubmissionBoxProps {
 }
 
 export const RepositorySubmissionBox = ({
-  repositoryLink,
+  repositoryLink: initialUrl,
 }: RepositorySubmissionBoxProps) => {
-  const [url, setUrl] = useState(repositoryLink);
+  const [url, setUrl] = useState(initialUrl);
   const [isInitialSubmit, setIsInitialSubmit] = useState(true);
   const [repositorySubmissionStatus, setRepositorySubmissionStatus] =
     useState<RepositorySubmissionStatusType>("EDITING");
 
+  const router = useRouter();
   const handleClickChange = useCallback((value: string) => {
     setUrl(value);
   }, []);
@@ -31,21 +34,22 @@ export const RepositorySubmissionBox = ({
   }, []);
 
   const handleClickSubmitButton = useCallback(async () => {
-    if (isInitialSubmit) {
+    if (isInitialSubmit && !initialUrl) {
       setIsInitialSubmit(false);
+      setRepositorySubmissionStatus("SUBMITTED");
+      //TODO: studyHistoryId 넣어주기
+      //await studyHistoryApi.putRepository(1, url);
     } else {
-      console.log("모달 오픈");
+      router.push(`${routePath["my-assignment-submit-modal"]}?url=${url}`);
     }
-    setRepositorySubmissionStatus("SUBMITTED");
-    //TODO: studyHistoryId 넣어주기
-    //await studyHistoryApi.putRepository(1, url);
-  }, [isInitialSubmit]);
+  }, [initialUrl, isInitialSubmit, router, url]);
 
   useEffect(() => {
     if (isInitialSubmit) {
-      setRepositorySubmissionStatus(repositoryLink ? "SUBMITTED" : "EDITING");
+      setRepositorySubmissionStatus(initialUrl ? "SUBMITTED" : "EDITING");
+      initialUrl && setIsInitialSubmit(false);
     }
-  }, [isInitialSubmit, repositoryLink]);
+  }, [isInitialSubmit, initialUrl]);
 
   return (
     <Box
@@ -98,12 +102,14 @@ export const RepositorySubmissionBox = ({
             </Flex>
           )}
           <Space height={62} />
-          <Button
-            style={{ maxWidth: "100%" }}
-            onClick={handleClickSubmitButton}
-          >
-            입력하기
-          </Button>
+          {repositorySubmissionStatus === "EDITING" && (
+            <Button
+              style={{ maxWidth: "100%" }}
+              onClick={handleClickSubmitButton}
+            >
+              입력하기
+            </Button>
+          )}
         </>
       }
     />
