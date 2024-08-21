@@ -5,14 +5,19 @@ import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const AttendanceCompleteModal = () => {
+  const pathname = usePathname();
   const router = useRouter();
 
   const handleCloseModal = () => {
     router.push(routePath["my-study"]);
   };
+
+  if (pathname === routePath["my-study"]) {
+    return null;
+  }
 
   return (
     <Modal onClose={handleCloseModal}>
