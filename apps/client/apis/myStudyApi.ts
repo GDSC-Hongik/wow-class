@@ -3,10 +3,18 @@ import { apiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
 import type {
   BasicStudyInfoDto,
+  MyOngoingStudyInfoDto,
   StudyAnnouncementListDtoType,
 } from "types/dtos/myStudy";
 
 export const myStudyApi = {
+  getMyOngoingStudyInfo: async () => {
+    const response = await fetcher.get<MyOngoingStudyInfoDto>(
+      apiPath.myOngoingStudy
+    );
+
+    return response.data;
+  },
   getBasicStudyInfo: async (studyId: number) => {
     const response = await fetcher.get<BasicStudyInfoDto>(
       `${apiPath.basicStudyInfo}/${studyId}`,
