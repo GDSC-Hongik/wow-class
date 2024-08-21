@@ -72,7 +72,7 @@ const StudyList = async () => {
                 <Flex alignItems="center" gap="64px">
                   <Text typo="body1">{mentorName} 멘토</Text>
                   <Link
-                    href={notionLink}
+                    href={notionLink ? notionLink : ""}
                     style={{
                       display: "flex",
                       alignItems: "center",
