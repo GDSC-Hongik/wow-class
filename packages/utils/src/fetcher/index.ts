@@ -172,22 +172,22 @@ const fetcher = new Fetcher({
   defaultHeaders: { "Content-Type": "application/json" },
 });
 
-// if (!isClient) {
-//   fetcher.addRequestInterceptor(async (options) => {
-//     const { cookies } = await import("next/headers");
+if (!isClient) {
+  fetcher.addRequestInterceptor(async (options) => {
+    const { cookies } = await import("next/headers");
 
-//     const cookieStore = cookies();
-//     const accessToken = cookieStore.get("accessToken")?.value;
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
 
-//     if (accessToken) {
-//       options.headers = {
-//         ...options.headers,
-//         Authorization: `Bearer ${accessToken}`,
-//       };
-//     }
+    if (accessToken) {
+      options.headers = {
+        ...options.headers,
+        Authorization: `Bearer ${accessToken}`,
+      };
+    }
 
-//     return options;
-//   });
-// }
+    return options;
+  });
+}
 
 export default fetcher;
