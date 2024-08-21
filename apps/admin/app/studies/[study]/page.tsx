@@ -1,5 +1,6 @@
+import Header from "./_components/Header";
 const Study = () => {
-  return <div>Study</div>;
+  return <Header />;
 };
 
 export default Study;
