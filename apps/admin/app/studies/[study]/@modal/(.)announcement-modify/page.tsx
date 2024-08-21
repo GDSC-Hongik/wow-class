@@ -1,58 +1,71 @@
 "use client";
 
-import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
+import { studyInfoApi } from "apis/study/studyInfoApi";
 import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import type { StudyAnnouncementType } from "types/entities/studyAnnouncement";
+import { customRevalidateTag } from "utils/customRevalidateTag";
 import Button from "wowds-ui/Button";
-const ApplyModal = () => {
+import TextField from "wowds-ui/TextField";
+
+const AnnouncementModifyModal = () => {
   const searchParams = useSearchParams();
+  const [studyAnnouncement, setStudyAnnouncement] =
+    useState<StudyAnnouncementType>({
+      title: "",
+      link: "",
+    });
 
-  const title = searchParams.get("title");
-  const studyId = searchParams.get("studyId");
+  const studyAnnouncementId = searchParams.get("studyAnnouncementId");
 
-  const [applySuccess, setApplySuccess] = useState(false);
   const { closeModal } = useModalRoute();
 
-  const handleClickApplyButton = async () => {
-    // const result = await studyApplyApi.applyStudy(Number(studyId));
-    // if (result.success) {
-    //   customRevalidateTag(tags.studyApply);
-    //   setApplySuccess(true);
-    // }
+  const handleClickModifyButton = async () => {
+    const result = await studyInfoApi.modifyStudyAnnouncement(
+      Number(studyAnnouncementId),
+      studyAnnouncement
+    );
+    if (result.success) {
+      await customRevalidateTag(tags.announcements);
+      closeModal();
+    }
   };
 
   return (
     <Modal onClose={closeModal}>
       <Flex direction="column" textAlign="center" width="21rem">
-        {applySuccess ? (
-          <Text typo="h1">
-            <span className={titleStyle}>{title}</span>
-            <br />
-            신청이 완료되었어요.
-          </Text>
-        ) : (
-          <>
-            <Text typo="h1">
-              <span className={titleStyle}>{title}</span>을(를) <br />
-              신청하시겠습니까?
-            </Text>
-            <Space height={22} />
-            <Text color="sub">한 번에 하나의 강의만 수강할 수 있어요.</Text>
-            <Space height={28} />
-            <Button onClick={handleClickApplyButton}>수강 신청하기</Button>
-          </>
-        )}
+        <Text typo="h1">공지를 수정해주세요</Text>
+        <Space height={29} />
+        <Flex direction="column" gap="1.125rem">
+          <TextField
+            label="공지 제목"
+            placeholder="입력해주세요"
+            onChange={(value) => {
+              setStudyAnnouncement({ ...studyAnnouncement, title: value });
+            }}
+          />
+          <TextField
+            label="공지 링크"
+            placeholder="http://example.com"
+            onChange={(value) => {
+              setStudyAnnouncement({ ...studyAnnouncement, link: value });
+            }}
+          />
+        </Flex>
+        <Space height={28} />
+        <Flex gap="sm">
+          <Button variant="outline" onClick={closeModal}>
+            취소
+          </Button>
+          <Button onClick={handleClickModifyButton}>수정하기</Button>
+        </Flex>
       </Flex>
     </Modal>
   );
 };
 
-export default ApplyModal;
-
-const titleStyle = css({
-  color: "primary",
-});
+export default AnnouncementModifyModal;

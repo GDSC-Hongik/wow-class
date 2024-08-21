@@ -2,6 +2,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
 import { studyInfoApi } from "apis/study/studyInfoApi";
+import { routerPath } from "constants/router/routerPath";
 import Image from "next/image";
 import Link from "next/link";
 import { space } from "wowds-tokens";
@@ -68,7 +69,9 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                   </Table.Left>
                   <Table.Right style={{ flex: "1" }}>
                     <Flex gap="sm">
-                      <Link href="">
+                      <Link
+                        href={`${studyId}/${routerPath["announcement-delete"].href}?studyAnnouncementId=${studyAnnounceId}`}
+                      >
                         <Button
                           size="sm"
                           style={{ minWidth: "81px" }}
@@ -77,7 +80,9 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                           삭제
                         </Button>
                       </Link>
-                      <Link href="">
+                      <Link
+                        href={`${studyId}/${routerPath["announcement-modify"].href}?studyAnnouncementId=${studyAnnounceId}`}
+                      >
                         <Button
                           size="sm"
                           style={{ minWidth: "81px" }}
