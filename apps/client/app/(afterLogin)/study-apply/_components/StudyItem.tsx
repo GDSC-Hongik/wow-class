@@ -6,8 +6,9 @@ import { Table, Text } from "@wow-class/ui";
 import { parseISODate, splitTime } from "@wow-class/utils";
 import { studyApplyApi } from "apis/studyApplyApi";
 import { dayToKorean } from "constants/dayToKorean";
+import Link from "next/link";
 import type { ComponentProps } from "react";
-import type { StudyListApiResponseDto } from "types/dtos/apply-study";
+import type { StudyListApiResponseDto } from "types/dtos/applyStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
@@ -66,9 +67,9 @@ const StudyItem = ({ study }: StudyItemProps) => {
         </Flex>
         <Text color="sub" typo="body2">
           {`${introduction} -`}
-          <a href={notionLink} target="_blank">
+          <Link href={notionLink} target="_blank">
             {notionLink}
-          </a>
+          </Link>
         </Text>
       </Flex>
       <Text className={textCellStyle}>{mentorName}</Text>

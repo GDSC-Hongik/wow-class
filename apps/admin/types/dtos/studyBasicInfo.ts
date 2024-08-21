@@ -10,12 +10,12 @@ export interface StudyBasicInfoApiResponseDto {
   introduction: string;
   mentorName: string;
   dayOfWeek: DayOfWeekType;
-  startTime: number[];
-  endTime: number[];
+  startTime: { hour: number; minute: number; second: number; nano: number };
+  endTime: { hour: number; minute: number; second: number; nano: number };
   totalWeek: number;
   period: {
-    startDate: number[];
-    endDate: number[];
+    startDate: string;
+    endDate: string;
     open: boolean;
   };
 }

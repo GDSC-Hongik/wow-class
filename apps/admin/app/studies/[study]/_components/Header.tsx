@@ -3,7 +3,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import { padWithZero } from "@wow-class/utils";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 import { dayToKorean } from "constants/dayToKorean";
 import Image from "next/image";
@@ -25,7 +25,7 @@ const Header = ({ studyId }: { studyId: string }) => {
         const data = await studyInfoApi.getStudyBasicInfo(
           parseInt(studyId, 10)
         );
-
+        console.log(data);
         if (data) setStudyInfo(data);
       }
     };
@@ -53,19 +53,21 @@ const Header = ({ studyId }: { studyId: string }) => {
       mentorName,
       studyType,
       dayOfWeek,
-      startTime,
-      endTime,
+      startTime: { hour: startHour, minute: startMinute },
+      endTime: { hour: endHour, minute: endMinute },
       totalWeek,
       period: { startDate, endDate },
       introduction,
       notionLink,
     } = studyInfo;
 
+    const { month: startMonth, day: startDay } = parseISODate(startDate);
+    const { month: endMonth, day: endDay } = parseISODate(endDate);
     const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
-    const studySchedule = `${dayToKorean[dayOfWeek]} ${padWithZero(startTime[0]!!)}:${padWithZero(startTime[1]!!)}-
-    ${padWithZero(endTime[0]!!)}:${padWithZero(endTime[1]!!)}`;
-    const studyPeriod = `${padWithZero(startDate[1]!!)}.${padWithZero(startDate[2]!!)} -
-    ${padWithZero(endDate[1]!!)}.${padWithZero(endDate[2]!!)}`;
+    const studySchedule = `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
+  ${endHour}:${padWithZero(endMinute)}`;
+    const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
+  ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
     return (
       <header>
