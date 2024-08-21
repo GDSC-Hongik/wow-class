@@ -10,7 +10,11 @@ import type {
 export const myStudyApi = {
   getMyOngoingStudyInfo: async () => {
     const response = await fetcher.get<MyOngoingStudyInfoDto>(
-      apiPath.myOngoingStudy
+      apiPath.myOngoingStudy,
+      {
+        next: { tags: [tags.myOngoingStudy] },
+        cache: "force-cache",
+      }
     );
 
     return response.data;
