@@ -126,12 +126,12 @@ export const studyNoticesMockData = [
     studyAnnounceId: 0,
     title: "2주차 과제 검사 결과 안내",
     link: "",
-    createdDate: "2024-08-18T17:13:29.913Z",
+    createdDate: "2024-08-21",
   },
   {
     studyAnnounceId: 1,
     title: "1주차 실습",
     link: "",
-    createdDate: "2024-08-18T17:13:29.913Z",
+    createdDate: "2024-08-21",
   },
 ];

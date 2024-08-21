@@ -3,4 +3,5 @@ export const enum apiPath {
 
   applyStudy = "/studies/apply",
   basicStudyInfo = "/common/studies",
+  studyAnnouncementList = "announcements",
 }

@@ -29,3 +29,12 @@ export interface BasicStudyInfoDto {
     open: boolean;
   };
 }
+
+interface StudyAnnouncementDto {
+  studyAnnounceId: number;
+  title: string;
+  link: string;
+  createdDate: string;
+}
+
+export type StudyAnnouncementListDtoType = StudyAnnouncementDto[];
