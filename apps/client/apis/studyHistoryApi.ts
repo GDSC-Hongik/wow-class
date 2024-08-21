@@ -29,12 +29,7 @@ export const studyHistoryApi = {
   submitAssignment: async (studyDetailId: number) => {
     const response = await fetcher.post(
       `${apiPath.studyHistory}/submit?studyDetailId=${studyDetailId}`,
-      null,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN}`,
-        },
-      }
+      null
     );
 
     return { success: response.ok };
