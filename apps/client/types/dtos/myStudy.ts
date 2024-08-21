@@ -38,3 +38,7 @@ interface StudyAnnouncementDto {
 }
 
 export type StudyAnnouncementListDtoType = StudyAnnouncementDto[];
+
+export interface MyOngoingStudyInfoDto {
+  studyId: number;
+}

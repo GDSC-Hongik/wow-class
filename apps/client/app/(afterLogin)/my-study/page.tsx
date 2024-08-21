@@ -1,4 +1,5 @@
 import { Space } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
 
 import {
   DailyTasks,
@@ -6,9 +7,13 @@ import {
   StudyAnnouncementList,
   StudyCurriculum,
 } from "./_components";
+import EmptyStudy from "./_components/EmptyStudy";
 
-const MyStudyPage = () => {
-  return (
+const MyStudyPage = async () => {
+  const myOngoingStudyInfoResponseData =
+    await myStudyApi.getMyOngoingStudyInfo();
+
+  return myOngoingStudyInfoResponseData?.studyId ? (
     <>
       <Header />
       <Space height={48} />
@@ -18,6 +23,8 @@ const MyStudyPage = () => {
       <Space height={64} />
       <StudyAnnouncementList />
     </>
+  ) : (
+    <EmptyStudy />
   );
 };
 

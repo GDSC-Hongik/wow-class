@@ -1,3 +1,5 @@
+import { css } from "@styled-system/css";
+
 const Layout = ({
   children,
   modal,
@@ -6,7 +8,7 @@ const Layout = ({
   modal: React.ReactNode;
 }) => {
   return (
-    <main>
+    <main className={layoutContainerStyle}>
       {children}
       {modal}
     </main>
@@ -14,3 +16,7 @@ const Layout = ({
 };
 
 export default Layout;
+
+const layoutContainerStyle = css({
+  height: "100%",
+});
