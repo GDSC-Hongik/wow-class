@@ -1,17 +1,20 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import { formatISODateWithDot } from "@wow-class/utils";
-import { studyNoticesMockData } from "constants/mockData";
+import { myStudyApi } from "apis/myStudyApi";
 import Link from "next/link";
 import { color } from "wowds-tokens";
 
-const StudyNotices = () => {
+const StudyNotices = async () => {
+  const studyAnnouncementListResponseData =
+    await myStudyApi.getStudyAnnouncementList(1);
+
   return (
     <section aria-label="study-notices">
       <Text as="h2" className={studyNoticeHeadingStyle} typo="h2">
         스터디 공지
       </Text>
-      {studyNoticesMockData.map(
+      {studyAnnouncementListResponseData?.map(
         ({ studyAnnounceId, title, link, createdDate }, index) => (
           <Link
             className={studyNoticeBoxStyle}
