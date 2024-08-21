@@ -10,9 +10,6 @@ export const studyApplyApi = {
       {
         next: { tags: [tags.studyApply] },
         cache: "force-cache",
-        headers: {
-          Authorization: `Bearer ${process.env.DEV_AUTH_TOKEN}`,
-        },
       }
     );
 
