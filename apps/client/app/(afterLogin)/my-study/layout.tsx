@@ -1,25 +1,14 @@
-"use client";
-
-import { routePath } from "constants/routePath";
-import { usePathname } from "next/navigation";
-
 const Layout = ({
   children,
-  attendanceCheckModal,
-  attendanceCompleteModal,
+  modal,
 }: {
   children: React.ReactNode;
-  attendanceCheckModal: React.ReactNode;
-  attendanceCompleteModal: React.ReactNode;
+  modal: React.ReactNode;
 }) => {
-  const pathname = usePathname();
-
   return (
     <main>
       {children}
-      {pathname === routePath["attendance-complete"] && attendanceCompleteModal}
-      {pathname.startsWith(routePath["attendance-check"]) &&
-        attendanceCheckModal}
+      {modal}
     </main>
   );
 };
