@@ -29,4 +29,14 @@ export const myStudyApi = {
 
     return response.data;
   },
+  checkAttendance: async (studyDetailId: number, attendanceNumber: string) => {
+    const response = await fetcher.post(
+      `${apiPath.studyDetails}/${studyDetailId}/${apiPath.attend}`,
+      {
+        attendanceNumber,
+      }
+    );
+
+    return { success: response.ok };
+  },
 };
