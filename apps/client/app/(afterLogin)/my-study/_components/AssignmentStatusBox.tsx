@@ -5,7 +5,7 @@ import { parseISODate } from "@wow-class/utils";
 import LinkButton from "components/LinkButton";
 import { assignmentSubmissionStatusMap } from "constants/assignmentSubmissionStatusMap";
 import { routePath } from "constants/routePath";
-import type { AssignmentSubmissionStatusType } from "types/entities/myStudy";
+import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
 import Box from "wowds-ui/Box";
 import Tag from "wowds-ui/Tag";
 
