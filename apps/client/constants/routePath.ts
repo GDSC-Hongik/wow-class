@@ -2,7 +2,7 @@ export const routePath = {
   auth: "/auth",
   landing: "/landing",
   ["my-study"]: "/my-study",
-  ["my-assignment"]: "/my-study/my-assignment",
+  ["my-assignment"]: "/my-assignment",
   ["study-apply"]: "/study-apply",
   ["study-application-modal"]: "/study-apply/study-application",
   ["study-cancellation-modal"]: "/study-apply/study-cancellation",
