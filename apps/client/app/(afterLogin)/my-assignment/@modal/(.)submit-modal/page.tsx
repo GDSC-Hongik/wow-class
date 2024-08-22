@@ -4,6 +4,8 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
+import { history, studyDashBoardData } from "constants/assignmentMockData";
+import useMatchedStudyHistoryId from "hooks/useMatchedStudyHistoryId";
 import { useSearchParams } from "next/navigation";
 import Button from "wowds-ui/Button";
 
@@ -12,13 +14,12 @@ const SubmitModal = () => {
   const { closeModal } = useModalRoute();
 
   const url = searchParams.get("url");
+  const studyHistoryId = useMatchedStudyHistoryId();
 
   const handleClickSubmitButton = () => {
-    //TODO: studyHistoryId 넣어주기
-    //await studyHistoryApi.putRepository(1, url);
-
+    //await studyHistoryApi.putRepository(studyHistoryId, url);
     //TODO: 제출 후에 RepositoryBox 를 SUBMITTED 로 상태로 바꿔줘야함.
-    //customRevalidateTags(tags.studyDetailDashboard)
+    //tagRevalidateByName(tags.studyDetailDashboard)
     closeModal();
   };
   return (

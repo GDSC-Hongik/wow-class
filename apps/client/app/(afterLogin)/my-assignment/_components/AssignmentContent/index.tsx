@@ -8,7 +8,9 @@ import {
 import { AssignmentOverviewBox } from "./AssignmentOverviewBox";
 import { RepositorySubmissionBox } from "./RepositorySubmissionBox";
 export const AssignmentContent = () => {
-  // const studyDashboard = await studyDetailApi.getStudyDetailDashboard(1);
+  //TODO:수강 중인 스터디 api 호출
+  //const studyId = await myStudyApi.getMyOngoingStudyInfo();
+  //const studyDashboard = await studyDetailApi.getStudyDetailDashboard(studyId);
 
   //TODO: studyDashboard.isLinkEditable 가 false 면 이번 주 과제 조회 api 사용
   const studyDashboard = studyDashBoardData;

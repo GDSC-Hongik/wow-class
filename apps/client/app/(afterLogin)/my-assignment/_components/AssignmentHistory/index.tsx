@@ -6,7 +6,9 @@ import Image from "next/image";
 import { AssignmentHistoryItem } from "./AssignmentHistoryItem";
 
 export const AssignmentHistory = async () => {
-  // const studyHistory = await studyHistoryApi.getStudyHistory(1);
+  //TODO: 수강 중인 스터디 api 호출
+  //const studyId = await myStudyApi.getMyOngoingStudyInfo();
+  // const studyHistory = await studyHistoryApi.getStudyHistory(studyId);
   const studyHistories = history;
 
   if (studyHistories.length === 0) {

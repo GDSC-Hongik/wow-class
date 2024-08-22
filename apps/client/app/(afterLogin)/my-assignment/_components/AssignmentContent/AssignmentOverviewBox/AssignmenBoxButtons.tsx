@@ -4,7 +4,7 @@ import { Space } from "@wow-class/ui";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import { revalidateTag } from "next/cache";
-import Link from "next/dist/client/link";
+import Link from "next/link";
 import type { Assignment } from "types/dtos/studyDetail";
 import { isDeadlinePassed } from "utils";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";

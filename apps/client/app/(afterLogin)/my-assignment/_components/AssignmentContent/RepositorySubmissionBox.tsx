@@ -4,6 +4,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { routePath } from "constants/routePath";
+import useMatchedStudyHistoryId from "hooks/useMatchedStudyHistoryId";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import type { RepositorySubmissionStatusType } from "types/entities/myAssignment";
@@ -38,7 +39,8 @@ export const RepositorySubmissionBox = ({
       setIsInitialSubmit(false);
       setRepositorySubmissionStatus("SUBMITTED");
       //TODO: studyHistoryId 넣어주기
-      //await studyHistoryApi.putRepository(1, url);
+      //const studyHistoryId = useMatchedStudyHistoryId();
+      //await studyHistoryApi.putRepository(studyHistoryId, url);
     } else {
       router.push(`${routePath["my-assignment-submit-modal"]}?url=${url}`);
     }
