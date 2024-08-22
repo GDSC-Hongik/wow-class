@@ -38,20 +38,27 @@ export const RepositorySubmissionBox = ({
     if (isInitialSubmit && !initialUrl) {
       setIsInitialSubmit(false);
       setRepositorySubmissionStatus("SUBMITTED");
-      //TODO: studyHistoryId 넣어주기
       //const studyHistoryId = useMatchedStudyHistoryId();
       //await studyHistoryApi.putRepository(studyHistoryId, url);
     } else {
-      router.push(`${routePath["my-assignment-submit-modal"]}?url=${url}`);
+      router.push(`${routePath["my-assignment-submit-confirmation"]}/${url}`);
     }
   }, [initialUrl, isInitialSubmit, router, url]);
 
+  const handleClickDeleteButton = useCallback(() => {
+    setUrl("");
+    setRepositorySubmissionStatus("EDITING");
+  }, []);
   useEffect(() => {
     if (isInitialSubmit) {
-      setRepositorySubmissionStatus(initialUrl ? "SUBMITTED" : "EDITING");
-      initialUrl && setIsInitialSubmit(false);
+      if (initialUrl) {
+        setRepositorySubmissionStatus("SUBMITTED");
+        setIsInitialSubmit(false);
+      } else {
+        setRepositorySubmissionStatus("EDITING");
+      }
     }
-  }, [isInitialSubmit, initialUrl]);
+  }, [initialUrl, isInitialSubmit]);
 
   return (
     <Box
@@ -98,8 +105,16 @@ export const RepositorySubmissionBox = ({
             <Flex className={urlBoxStyle}>
               {url}
               <Flex gap="xs" marginLeft="auto">
-                <Edit stroke="textBlack" onClick={handleClickEditButton} />
-                <Trash stroke="textBlack" />
+                <Edit
+                  stroke="textBlack"
+                  style={iconStyle}
+                  onClick={handleClickEditButton}
+                />
+                <Trash
+                  stroke="textBlack"
+                  style={iconStyle}
+                  onClick={handleClickDeleteButton}
+                />
               </Flex>
             </Flex>
           )}
@@ -130,4 +145,8 @@ const urlBoxStyle = css({
 
 const boxStyle = {
   minWidth: "484px",
+};
+
+const iconStyle = {
+  cursor: "pointer",
 };

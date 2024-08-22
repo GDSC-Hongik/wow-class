@@ -4,26 +4,23 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
-import { history, studyDashBoardData } from "constants/assignmentMockData";
+import { tags } from "constants/tags";
 import useMatchedStudyHistoryId from "hooks/useMatchedStudyHistoryId";
-import { useSearchParams } from "next/navigation";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
-const SubmitModal = () => {
-  const searchParams = useSearchParams();
-  const { closeModal } = useModalRoute();
+const SubmitModal = ({ params }: { params: { url: string } }) => {
+  const url = params.url;
 
-  const url = searchParams.get("url");
   const studyHistoryId = useMatchedStudyHistoryId();
 
-  const handleClickSubmitButton = () => {
+  const handleClickSubmitButton = async () => {
     //await studyHistoryApi.putRepository(studyHistoryId, url);
     //TODO: 제출 후에 RepositoryBox 를 SUBMITTED 로 상태로 바꿔줘야함.
-    //tagRevalidateByName(tags.studyDetailDashboard)
-    closeModal();
+    revalidateTagByName(tags.studyDetailDashboard);
   };
   return (
-    <Modal onClose={closeModal}>
+    <Modal>
       <Flex alignItems="center" direction="column" width="21rem">
         <Text typo="h1">레포지토리를 입력하시겠어요?</Text>
         <Space height={12} />

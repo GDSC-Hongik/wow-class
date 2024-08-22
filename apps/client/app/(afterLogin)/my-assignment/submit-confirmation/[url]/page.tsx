@@ -1,8 +1,8 @@
 import { routePath } from "constants/routePath";
 import { redirect } from "next/navigation";
 
-const SubmitConfirmModalPage = () => {
+const SubmitConfirmPage = () => {
   return redirect(routePath["my-assignment"]);
 };
 
-export default SubmitConfirmModalPage;
+export default SubmitConfirmPage;

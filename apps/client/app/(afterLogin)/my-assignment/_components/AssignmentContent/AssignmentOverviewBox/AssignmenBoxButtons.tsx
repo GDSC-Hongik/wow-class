@@ -3,10 +3,10 @@
 import { Space } from "@wow-class/ui";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
-import { revalidateTag } from "next/cache";
 import Link from "next/link";
 import type { Assignment } from "types/dtos/studyDetail";
 import { isDeadlinePassed } from "utils";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
 
@@ -33,7 +33,7 @@ export const AssignmentButtons = ({
     if (response.success) {
       //TODO: 과제 제출 이후에는 과제 상태에 대한 업데이트 필요
       //이번주 과제 조회 api, 대시보드 api revaliate
-      //revalidateTag()
+      revalidateTagByName(tags.studyDetailDashboard);
     }
   };
 
