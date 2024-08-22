@@ -23,7 +23,6 @@ const RootLayout = ({
     <html lang="ko">
       <body>
         <JotaiProvider>
-          <Navbar />
           {children}
           {modal}
         </JotaiProvider>
