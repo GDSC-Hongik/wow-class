@@ -43,7 +43,7 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   return (
     <Table>
       <Flex direction="column" gap="xxs" justifyContent="center">
-        <Flex gap="xs">
+        <Flex className={contentStyle} gap="xs">
           <Text typo="h3">{title}</Text>
           <Tag color={sessionColors[studyType] ?? "green"} variant="solid1">
             {studyType}
@@ -71,14 +71,14 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
       </Flex>
       <styled.div paddingX="24px">
         {isApplicable && (
-          <Link href={`${routePath["study-apply-modal"]}/${studyId}`}>
+          <Link href={`${routePath["study-application-modal"]}/${studyId}`}>
             <Button size="sm" variant="solid">
               수강 신청
             </Button>
           </Link>
         )}
         {isCancelable && (
-          <Link href={`${routePath["study-cancel-modal"]}/${studyId}`}>
+          <Link href={`${routePath["study-cancellation-modal"]}/${studyId}`}>
             <Button size="sm" variant="solid">
               신청 취소
             </Button>
@@ -96,6 +96,10 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
 
 const textCellStyle = css({
   paddingX: "28px",
+});
+
+const contentStyle = css({
+  minWidth: "313px",
 });
 
 const sessionColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> = {
