@@ -2,6 +2,6 @@
 
 import { revalidateTag } from "next/cache";
 
-export const customRevalidateTag = (tag: string) => {
+export const revalidateTagByName = (tag: string) => {
   revalidateTag(tag);
 };

@@ -7,22 +7,39 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApplyApi } from "apis/studyApplyApi";
 import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { customRevalidateTag } from "utils/customRevalidateTag";
+import { useEffect, useState } from "react";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 const ApplyModal = () => {
   const searchParams = useSearchParams();
 
-  const title = searchParams.get("title");
   const studyId = searchParams.get("studyId");
 
   const [applySuccess, setApplySuccess] = useState(false);
+  const [studyTitle, setStudyTitle] = useState("");
   const { closeModal } = useModalRoute();
+
+  useEffect(() => {
+    const fetchStudyData = async () => {
+      const data = await studyApplyApi.getStudyList();
+      if (!data) return;
+      const { studyResponses: studyList } = data;
+
+      const selectedStudy = studyList.find(
+        (study) => study.studyId === Number(studyId)
+      );
+      if (selectedStudy) {
+        setStudyTitle(selectedStudy.title);
+      }
+    };
+
+    fetchStudyData();
+  }, [studyId]);
 
   const handleClickApplyButton = async () => {
     const result = await studyApplyApi.applyStudy(Number(studyId));
     if (result.success) {
-      customRevalidateTag(tags.studyApply);
+      revalidateTagByName(tags.studyApply);
       setApplySuccess(true);
     }
   };
@@ -32,14 +49,14 @@ const ApplyModal = () => {
       <Flex direction="column" textAlign="center" width="21rem">
         {applySuccess ? (
           <Text typo="h1">
-            <span className={titleStyle}>{title}</span>
+            <span className={titleStyle}>{studyTitle}</span>
             <br />
             신청이 완료되었어요.
           </Text>
         ) : (
           <>
             <Text typo="h1">
-              <span className={titleStyle}>{title}</span>을(를) <br />
+              <span className={titleStyle}>{studyTitle}</span>을(를) <br />
               신청하시겠습니까?
             </Text>
             <Space height={22} />

@@ -68,11 +68,7 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
         )}
       </Flex>
       <styled.div paddingX="24px">
-        <StudyButton
-          appliedStudyId={appliedStudyId}
-          studyId={studyId}
-          studyTitle={title}
-        />
+        <StudyButton appliedStudyId={appliedStudyId} studyId={studyId} />
       </styled.div>
     </Table>
   );
@@ -91,20 +87,16 @@ const sessionColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> = {
 const StudyButton = ({
   appliedStudyId,
   studyId,
-  studyTitle,
 }: {
   appliedStudyId: null | number;
   studyId: number;
-  studyTitle: string;
 }) => {
   const isApplyable = appliedStudyId === null;
   const isCancelable = appliedStudyId === studyId;
 
   if (isApplyable) {
     return (
-      <Link
-        href={`${routePath["study-apply-modal"]}?studyId=${studyId}&title=${studyTitle}`}
-      >
+      <Link href={`${routePath["study-apply-modal"]}?studyId=${studyId}`}>
         <Button size="sm" variant="solid">
           수강 신청
         </Button>
@@ -113,9 +105,7 @@ const StudyButton = ({
   }
   if (isCancelable) {
     return (
-      <Link
-        href={`${routePath["study-cancel-modal"]}?studyId=${studyId}&title=${studyTitle}`}
-      >
+      <Link href={`${routePath["study-cancel-modal"]}?studyId=${studyId}`}>
         <Button size="sm" variant="solid">
           신청 취소
         </Button>
