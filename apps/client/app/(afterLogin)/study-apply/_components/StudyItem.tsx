@@ -37,7 +37,9 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
     endTimeHour
   }:${padWithZero(endTimeMinute)}`;
 
+  const isApplicable = appliedStudyId === null;
   const isCancelable = appliedStudyId === studyId;
+  const isNotApplicable = !isApplicable && !isCancelable;
   return (
     <Table>
       <Flex direction="column" gap="xxs" justifyContent="center">
@@ -68,7 +70,25 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
         )}
       </Flex>
       <styled.div paddingX="24px">
-        <StudyButton appliedStudyId={appliedStudyId} studyId={studyId} />
+        {isApplicable && (
+          <Link href={`${routePath["study-apply-modal"]}/${studyId}`}>
+            <Button size="sm" variant="solid">
+              수강 신청
+            </Button>
+          </Link>
+        )}
+        {isCancelable && (
+          <Link href={`${routePath["study-cancel-modal"]}/${studyId}`}>
+            <Button size="sm" variant="solid">
+              신청 취소
+            </Button>
+          </Link>
+        )}
+        {isNotApplicable && (
+          <Button disabled size="sm" variant="solid">
+            신청 불가
+          </Button>
+        )}
       </styled.div>
     </Table>
   );
@@ -82,41 +102,6 @@ const sessionColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> = {
   "과제 스터디": "green",
   "온라인 세션": "blue",
   "오프라인 세션": "yellow",
-};
-
-const StudyButton = ({
-  appliedStudyId,
-  studyId,
-}: {
-  appliedStudyId: null | number;
-  studyId: number;
-}) => {
-  const isApplyable = appliedStudyId === null;
-  const isCancelable = appliedStudyId === studyId;
-
-  if (isApplyable) {
-    return (
-      <Link href={`${routePath["study-apply-modal"]}?studyId=${studyId}`}>
-        <Button size="sm" variant="solid">
-          수강 신청
-        </Button>
-      </Link>
-    );
-  }
-  if (isCancelable) {
-    return (
-      <Link href={`${routePath["study-cancel-modal"]}?studyId=${studyId}`}>
-        <Button size="sm" variant="solid">
-          신청 취소
-        </Button>
-      </Link>
-    );
-  }
-  return (
-    <Button disabled size="sm" variant="solid">
-      신청 불가
-    </Button>
-  );
 };
 
 export default StudyItem;
