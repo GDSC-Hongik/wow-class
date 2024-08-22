@@ -1,5 +1,6 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
+import { studyHistoryApi } from "apis/studyHistoryApi";
 import { history } from "constants/assignmentMockData";
 import Image from "next/image";
 
@@ -10,7 +11,6 @@ export const AssignmentHistory = async () => {
   //const studyId = await myStudyApi.getMyOngoingStudyInfo();
   // const studyHistory = await studyHistoryApi.getStudyHistory(studyId);
   const studyHistories = history;
-
   if (studyHistories.length === 0) {
     return (
       <>

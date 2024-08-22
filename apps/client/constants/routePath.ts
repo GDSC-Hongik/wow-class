@@ -3,8 +3,9 @@ export const routePath = {
   landing: "/landing",
   ["my-study"]: "/my-study",
   ["attendance-check"]: "/my-study/attendance-check",
-  ["my-assignment"]: "/my-assignment",
-  ["my-assignment-submit-confirmation"]: "/my-assignment/submit-confirmation",
+  ["my-assignment"]: "/my-study/my-assignment",
+  ["my-assignment-submit-confirmation"]:
+    "/my-study/my-assignment/submit-confirmation",
   ["study-apply"]: "/study-apply",
   ["study-application-modal"]: "/study-apply/study-application",
   ["study-cancellation-modal"]: "/study-apply/study-cancellation",
