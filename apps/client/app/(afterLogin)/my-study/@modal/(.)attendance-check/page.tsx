@@ -4,9 +4,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
-import { routePath } from "constants/routePath";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
 import Button from "wowds-ui/Button";
@@ -16,8 +14,6 @@ const AttendanceCheckModal = () => {
   const [attended, setAttended] = useState(false);
   const [error, setError] = useState(false);
   const [attendanceNumber, setAttendanceNumber] = useState("");
-
-  const router = useRouter();
 
   const handleChangeAttendanceNumber = (value: string) => {
     setAttendanceNumber(value);
@@ -46,7 +42,7 @@ const AttendanceCheckModal = () => {
       return setError(true);
     }
 
-    router.push(routePath["attendance-complete"]);
+    setAttended(true);
   };
 
   return (
