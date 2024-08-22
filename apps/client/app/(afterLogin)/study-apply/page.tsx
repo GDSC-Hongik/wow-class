@@ -4,7 +4,11 @@ import { studyApplyApi } from "apis/studyApplyApi";
 import StudyItem from "./_components/StudyItem";
 
 const StudyApplyPage = async () => {
-  const studyList = await studyApplyApi.getStudyList();
+  const data = await studyApplyApi.getStudyList();
+
+  if (!data) return null;
+
+  const { appliedStudyId, studyResponses: studyList } = data;
 
   return (
     <>
@@ -13,7 +17,11 @@ const StudyApplyPage = async () => {
       </Text>
       <Space height={19} />
       {studyList?.map((study) => (
-        <StudyItem key={study.studyId} study={study} />
+        <StudyItem
+          appliedStudyId={appliedStudyId}
+          key={study.studyId}
+          study={study}
+        />
       ))}
     </>
   );
