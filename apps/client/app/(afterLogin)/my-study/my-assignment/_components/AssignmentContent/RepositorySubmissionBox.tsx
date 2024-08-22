@@ -1,38 +1,56 @@
 "use client";
 
+import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import type { RepositorySubmissionStatusType } from "types/entities/myAssignment";
 import { Edit, Trash, Warn } from "wowds-icons";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextField from "wowds-ui/TextField";
+interface RepositorySubmissionBoxProps {
+  repositoryLink: string;
+}
 
-export const RepositorySubmissionBox = () => {
-  const [url, setUrl] = useState("");
-  const [isEditing, setIsEditing] = useState(true);
+export const RepositorySubmissionBox = ({
+  repositoryLink,
+}: RepositorySubmissionBoxProps) => {
+  const [url, setUrl] = useState(repositoryLink);
   const [isInitialSubmit, setIsInitialSubmit] = useState(true);
+  const [repositorySubmissionStatus, setRepositorySubmissionStatus] =
+    useState<RepositorySubmissionStatusType>("EDITING");
 
-  const handleChange = (value: string) => {
+  const handleClickChange = useCallback((value: string) => {
     setUrl(value);
-  };
+  }, []);
 
-  const handleEditButtonClick = () => {
-    setIsEditing(true);
-  };
+  const handleClickEditButton = useCallback(() => {
+    setRepositorySubmissionStatus("EDITING");
+  }, []);
 
-  const handleSubmitButtonClick = () => {
+  const handleClickSubmitButton = useCallback(async () => {
     if (isInitialSubmit) {
       setIsInitialSubmit(false);
     } else {
       console.log("모달 오픈");
     }
-    setIsEditing(false);
-  };
+    setRepositorySubmissionStatus("SUBMITTED");
+    //TODO: studyHistoryId 넣어주기
+    //await studyHistoryApi.putRepository(1, url);
+  }, [isInitialSubmit]);
+
+  useEffect(() => {
+    if (isInitialSubmit) {
+      setRepositorySubmissionStatus(repositoryLink ? "SUBMITTED" : "EDITING");
+    }
+  }, [isInitialSubmit, repositoryLink]);
 
   return (
     <Box
+      style={boxStyle}
+      variant="text"
       text={
         <>
           <Text color="primary" typo="label2">
@@ -43,14 +61,14 @@ export const RepositorySubmissionBox = () => {
             <Text as="h2" typo="h2">
               과제 제출을 위한 레포지토리 URL 입력하기
             </Text>
-            {!isEditing && (
+            {repositorySubmissionStatus === "SUBMITTED" && (
               <Tag color="blue" variant="solid2">
                 제출 완료
               </Tag>
             )}
           </Flex>
           <Space height={4} />
-          {isEditing && isInitialSubmit && (
+          {isInitialSubmit && repositorySubmissionStatus === "EDITING" && (
             <Flex alignItems="center" gap="xxs">
               <Warn fill="error" stroke="error" />
               <Text color="error" typo="body1">
@@ -58,31 +76,23 @@ export const RepositorySubmissionBox = () => {
               </Text>
             </Flex>
           )}
-          {!isEditing && !isInitialSubmit && (
+          {repositorySubmissionStatus === "SUBMITTED" && (
             <Text color="sub">최초 과제 제출 전 까지만 수정이 가능해요.</Text>
           )}
           <Space height={26} />
-          {isEditing && (
+          {repositorySubmissionStatus === "EDITING" && (
             <TextField
               label=""
               placeholder="URL 을 입력하세요"
               value={url}
-              onChange={handleChange}
+              onChange={handleClickChange}
             />
           )}
-          {!isEditing && (
-            <Flex
-              backgroundColor="backgroundAlternative"
-              borderRadius="5px"
-              color="sub"
-              justifyContent="space-between"
-              paddingX="24px"
-              paddingY="18px"
-              textStyle="h2"
-            >
+          {repositorySubmissionStatus === "SUBMITTED" && (
+            <Flex className={urlBoxStyle}>
               {url}
               <Flex gap="xs" marginLeft="auto">
-                <Edit stroke="textBlack" onClick={handleEditButtonClick} />
+                <Edit stroke="textBlack" onClick={handleClickEditButton} />
                 <Trash stroke="textBlack" />
               </Flex>
             </Flex>
@@ -90,7 +100,7 @@ export const RepositorySubmissionBox = () => {
           <Space height={62} />
           <Button
             style={{ maxWidth: "100%" }}
-            onClick={handleSubmitButtonClick}
+            onClick={handleClickSubmitButton}
           >
             입력하기
           </Button>
@@ -98,4 +108,18 @@ export const RepositorySubmissionBox = () => {
       }
     />
   );
+};
+
+const urlBoxStyle = css({
+  backgroundColor: "backgroundAlternative",
+  borderRadius: "5px",
+  color: "sub",
+  justifyContent: "space-between",
+  paddingX: "24px",
+  paddingY: "18px",
+  textStyle: "h2",
+});
+
+const boxStyle = {
+  minWidth: "484px",
 };
