@@ -4,6 +4,7 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import Image from "next/image";
 import type { Assignment } from "types/dtos/studyDetail";
 
+import { FailurePopover } from "./FailurePopover";
 interface AssignmentSubmissionInfoProps {
   assignment: Assignment;
 }
@@ -39,6 +40,7 @@ export const AssignmentSubmissionInfo = ({
           <styled.div color={isFailure ? "error" : "primary"}>
             {isFailure ? failMapping[submissionFailureType] : "글자수 충족"}
           </styled.div>
+          <FailurePopover submissionFailureType={submissionFailureType} />
         </Flex>
       )}
     </>

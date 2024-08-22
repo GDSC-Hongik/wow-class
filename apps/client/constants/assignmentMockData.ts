@@ -45,6 +45,18 @@ export const studyDashBoardData: StudyDetailDashboardDto = {
 
 export const assignmentData: Assignment[] = [
   {
+    studyDetailId: 125,
+    assignmentStatus: "OPEN",
+    week: 4,
+    title: "API Development",
+    assignmentSubmissionStatus: "FAILURE",
+    descriptionLink: "https://example.com/assignment/124",
+    deadline: "2024-08-25T23:59:59",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "LOCATION_UNIDENTIFIABLE",
+    committedAt: "2024-08-20T14:30:00",
+  },
+  {
     studyDetailId: 123,
     assignmentStatus: "OPEN",
     week: 3,
@@ -80,6 +92,18 @@ export const assignmentData: Assignment[] = [
     submissionFailureType: "WORD_COUNT_INSUFFICIENT",
     committedAt: "sdf",
   },
+  {
+    studyDetailId: 125,
+    assignmentStatus: "OPEN",
+    week: 4,
+    title: "API Development",
+    assignmentSubmissionStatus: "FAILURE",
+    descriptionLink: "https://example.com/assignment/124",
+    deadline: "2024-08-25T23:59:59",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "LOCATION_UNIDENTIFIABLE",
+    committedAt: "2024-08-20T14:30:00",
+  },
   //제출 안함/마감
   {
     studyDetailId: 124,
@@ -91,6 +115,18 @@ export const assignmentData: Assignment[] = [
     deadline: "2024-08-20T14:30:00",
     submissionLink: "https://github.com/GDSC-Hongik/wow-class",
     submissionFailureType: "NOT_SUBMITTED",
+    committedAt: "2024-08-20T14:30:00",
+  },
+  {
+    studyDetailId: 125,
+    assignmentStatus: "OPEN",
+    week: 4,
+    title: "API Development",
+    assignmentSubmissionStatus: "FAILURE",
+    descriptionLink: "https://example.com/assignment/124",
+    deadline: "2024-08-25T23:59:59",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "LOCATION_UNIDENTIFIABLE",
     committedAt: "2024-08-20T14:30:00",
   },
 ];
