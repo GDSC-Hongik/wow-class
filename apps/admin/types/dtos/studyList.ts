@@ -1,28 +1,18 @@
-import type { StudyType } from "types/entities/study";
+import type { DayOfWeekType } from "types/entities/dayofweek";
+import type { SemesterType, StudyKoreanType } from "types/entities/study";
+import type { TimeType } from "types/entities/time";
 
 export interface StudyListApiResponseDto {
   studyId: number;
   academicYear: number;
-  semesterType: "FIRST" | "SECOND";
+  semesterType: SemesterType;
   title: string;
-  studyType: StudyType;
+  studyType: StudyKoreanType;
   notionLink: string;
   introduction: string;
   mentorName: string;
-  dayOfWeek:
-    | "MONDAY"
-    | "TUESDAY"
-    | "WEDNESDAY"
-    | "THURSDAY"
-    | "FRIDAY"
-    | "SATURDAY"
-    | "SUNDAY";
-  startTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
+  dayOfWeek: DayOfWeekType;
+  startTime: TimeType;
   totalWeek: number;
   openingDate: string;
 }
