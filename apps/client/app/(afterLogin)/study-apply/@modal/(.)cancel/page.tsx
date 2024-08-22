@@ -3,7 +3,6 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
-import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApplyApi } from "apis/studyApplyApi";
 import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
@@ -17,7 +16,6 @@ const ApplicationCancelModal = () => {
 
   const [cancelSucces, setCancelSuccess] = useState(false);
   const [studyTitle, setStudyTitle] = useState("");
-  const { closeModal } = useModalRoute();
 
   useEffect(() => {
     const fetchStudyData = async () => {
@@ -46,7 +44,7 @@ const ApplicationCancelModal = () => {
   };
 
   return (
-    <Modal onClose={closeModal}>
+    <Modal>
       <Flex direction="column" textAlign="center" width="21rem">
         {cancelSucces ? (
           <Text typo="h1">
