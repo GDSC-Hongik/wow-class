@@ -1,6 +1,7 @@
 "use client";
 
 import { Space } from "@wow-class/ui";
+import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import { revalidateTag } from "next/cache";
 import Link from "next/dist/client/link";
@@ -24,10 +25,16 @@ export const AssignmentButtons = ({
     submissionLink,
     deadline,
     committedAt,
+    studyDetailId,
   } = assignment;
 
-  const handleClickSubmissionComplete = () => {
-    revalidateTag(tags.studyDetailDashboard);
+  const handleClickSubmissionComplete = async () => {
+    const response = await studyHistoryApi.submitAssignment(studyDetailId);
+    if (response.success) {
+      //TODO: 과제 제출 이후에는 과제 상태에 대한 업데이트 필요
+      //이번주 과제 조회 api, 대시보드 api revaliate
+      //revalidateTag()
+    }
   };
 
   const getButtonProps = () => {
