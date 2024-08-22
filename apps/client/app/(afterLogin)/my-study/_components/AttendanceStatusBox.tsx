@@ -2,10 +2,11 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { parseISODate } from "@wow-class/utils";
+import LinkButton from "components/LinkButton";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
+import { routePath } from "constants/routePath";
 import type { AttendanceStatusType } from "types/entities/myStudy";
 import Box from "wowds-ui/Box";
-import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
 interface AttendanceStatusBoxProps {
@@ -62,9 +63,13 @@ const AttendanceStatusBox = ({
               </Text>
             </Flex>
           </Flex>
-          <Button size="lg" style={attendanceButtonStyle}>
+          <LinkButton
+            href={`${routePath["attendance-check"]}`}
+            size="lg"
+            style={attendanceButtonStyle}
+          >
             출석 체크하기
-          </Button>
+          </LinkButton>
         </Flex>
       }
     />
