@@ -5,6 +5,7 @@ import type {
   BasicStudyInfoDto,
   MyOngoingStudyInfoDto,
   StudyAnnouncementListDtoType,
+  StudyCurriculumListDtoType,
 } from "types/dtos/myStudy";
 
 export const myStudyApi = {
@@ -41,14 +42,25 @@ export const myStudyApi = {
 
     return response.data;
   },
-  checkAttendance: async (studyDetailId: number, attendanceNumber: string) => {
+  checkAttendance: async (studyId: number, attendanceNumber: string) => {
     const response = await fetcher.post(
-      `${apiPath.studyDetails}/${studyDetailId}/${apiPath.attend}`,
+      `${apiPath.studyDetails}/${studyId}/${apiPath.attend}`,
       {
         attendanceNumber,
       }
     );
 
     return { success: response.ok };
+  },
+  getStudyCurriculumList: async (studyId: number) => {
+    const response = await fetcher.get<StudyCurriculumListDtoType>(
+      `${apiPath.studyCurriculum}?studyId=${studyId}`,
+      {
+        next: { tags: [tags.studyCurriculum] },
+        cache: "no-store",
+      }
+    );
+
+    return response.data;
   },
 };

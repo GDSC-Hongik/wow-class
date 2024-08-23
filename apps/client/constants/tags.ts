@@ -6,4 +6,5 @@ export const enum tags {
   myOngoingStudy = "myOngoingStudy",
   studyHistory = "studyHistory",
   studyDetailDashboard = "studyDetailDashboard",
+  studyCurriculum = "studyCurriculum",
 }
