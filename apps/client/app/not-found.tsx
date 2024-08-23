@@ -25,7 +25,12 @@ const NotFoundPage = () => {
             요청하신 페이지를 찾을 수 없어요
           </Text>
         </Flex>
-        <Button asProp={Link} href={routePath.landing} style={buttonStyle}>
+        <Button
+          aria-label="홈으로 이동"
+          asProp={Link}
+          href={routePath.landing}
+          style={buttonStyle}
+        >
           홈으로 이동
         </Button>
       </main>
