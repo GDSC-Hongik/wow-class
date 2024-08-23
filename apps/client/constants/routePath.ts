@@ -5,7 +5,7 @@ export const routePath = {
   ["attendance-check"]: "/my-study/attendance-check",
   ["my-assignment"]: "/my-study/my-assignment",
   ["my-assignment-repository-url-confirmation"]:
-    "/my-study/my-assignment/repository-url-confirmation",
+    "/my-study/my-assignment/repository-url/confirmation",
   ["study-apply"]: "/study-apply",
   ["study-application-modal"]: "/study-apply/study-application",
   ["study-cancellation-modal"]: "/study-apply/study-cancellation",
