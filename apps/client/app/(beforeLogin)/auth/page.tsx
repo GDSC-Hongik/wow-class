@@ -39,6 +39,7 @@ const AuthPage = async () => {
           </Text>
         </div>
         <Button
+          aria-label="github 로그인"
           asProp={Link}
           href={routePath["github-oauth"]}
           icon={githubLogoIcon}
