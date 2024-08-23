@@ -28,7 +28,7 @@ export const FailurePopover = ({
         </Text>
         <Text as="div" color="outline" typo="body3">
           {submissionFailureType === "LOCATION_UNIDENTIFIABLE" && (
-            <p>
+            <>
               아래 조건에 맞게 WIL.md 파일을 제출했는지 확인해주세요. <br />
               <br />
               <ul style={ulStyle}>
@@ -42,16 +42,16 @@ export const FailurePopover = ({
               커밋 후 원격 저장소에 push까지 완료했는지 제대로 제출한 후에도
               계속 "경로 확인 불가"라고 나온다면,GDSC Hongik 카카오톡 채널로
               문의해주세요.
-            </p>
+            </>
           )}
           {submissionFailureType === "WORD_COUNT_INSUFFICIENT" && (
-            <>
+            <p>
               WIL.md 파일에 배운 내용을 최소 300자 이상 작성해야 해요. <br />
               <br />
               제대로 제출한 후에도 계속 글자수가 부족하다고 나온다면,
               <br />
               GDSC Hongik 카카오톡 채널로 문의해주세요.
-            </>
+            </p>
           )}
         </Text>
       </Flex>
