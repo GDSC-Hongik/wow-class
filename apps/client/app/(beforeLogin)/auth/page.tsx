@@ -1,8 +1,9 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
-import { baseUrl } from "constants/environment";
+import { routePath } from "constants/routePath";
 import Image from "next/image";
 import Link from "next/link";
+import { color } from "wowds-tokens";
 import Button from "wowds-ui/Button";
 
 const AuthPage = async () => {
@@ -39,9 +40,9 @@ const AuthPage = async () => {
         </div>
         <Button
           asProp={Link}
-          className={githubLoginButtonStyle}
-          href={`${baseUrl}/oauth2/authorization/github`}
+          href={routePath["github-oauth"]}
           icon={githubLogoIcon}
+          style={{ backgroundColor: `${color.github}` }}
         >
           GitHub 로그인
         </Button>
@@ -105,8 +106,4 @@ const authImageStyle = css({
   objectFit: "cover",
   height: "100%",
   width: "100%",
-});
-
-const githubLoginButtonStyle = css({
-  backgroundColor: "github",
 });
