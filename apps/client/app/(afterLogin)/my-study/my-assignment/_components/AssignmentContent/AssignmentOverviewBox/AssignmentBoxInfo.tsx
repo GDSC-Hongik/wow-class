@@ -4,13 +4,11 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import Image from "next/image";
 import type { Assignment } from "types/dtos/studyDetail";
 
-interface AssignmentSubmissionInfoProps {
+interface AssignmentBoxInfoProps {
   assignment: Assignment;
 }
 
-export const AssignmentSubmissionInfo = ({
-  assignment,
-}: AssignmentSubmissionInfoProps) => {
+export const AssignmentBoxInfo = ({ assignment }: AssignmentBoxInfoProps) => {
   const { deadline, title, assignmentSubmissionStatus, submissionFailureType } =
     assignment;
 
@@ -20,14 +18,14 @@ export const AssignmentSubmissionInfo = ({
     hours
   )}:${padWithZero(minutes)}까지`;
 
+  const isSuccess = assignmentSubmissionStatus === "SUCCESS";
   const isFailure = assignmentSubmissionStatus === "FAILURE";
-  const isPending = assignmentSubmissionStatus === "PENDING";
-  const isNotSubmitted = submissionFailureType === "NOT_SUBMITTED";
+  const isNotSubmitted = isFailure && submissionFailureType === "NOT_SUBMITTED";
 
   return (
     <>
       <Text color="sub">{deadlineText}</Text>
-      {!(isPending || isNotSubmitted) && (
+      {(isSuccess || (isFailure && !isNotSubmitted)) && (
         <Flex alignItems="center" gap="xs">
           <Text as="div" color="sub">
             제출한 과제
