@@ -11,17 +11,7 @@ export interface CreateStudyApiRequestDto {
   totalWeek: number;
   startDate: string;
   dayOfWeek: DayOfWeekType;
-  studyStartTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
-  studyEndTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
+  studyStartTime: TimeType;
+  studyEndTime: TimeType;
   studyType: StudyType;
 }

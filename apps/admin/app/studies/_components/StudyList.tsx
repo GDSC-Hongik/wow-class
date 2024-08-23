@@ -4,37 +4,19 @@ import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import Image from "next/image";
 
+import EmptyStudyList from "./EmptyStudyList";
 import StudyListItem from "./StudyListItem";
 
 const StudyList = async () => {
   const studyList = await studyApi.getStudyList();
 
   if (studyList?.length === 0) {
-    return (
-      <Flex
-        alignItems="center"
-        direction="column"
-        gap="xl"
-        height="100%"
-        justifyContent="center"
-        width="100%"
-      >
-        <Image
-          alt="study-empty"
-          height={186}
-          src="/images/empty.svg"
-          width={140}
-        />
-        <Text color="sub" typo="h2">
-          개설된 스터디가 없어요
-        </Text>
-      </Flex>
-    );
+    return <EmptyStudyList />;
   }
   return (
     <section aria-label="study-list" className={SectionStyle}>
       {studyList?.map((studyItem, index) => (
-        <StudyListItem index={index} study={studyItem} />
+        <StudyListItem key={`studyItem-${index}`} study={studyItem} />
       ))}
     </section>
   );

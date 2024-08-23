@@ -11,12 +11,7 @@ import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
-const StudyListItem = async ({
-  study,
-}: {
-  study: StudyListApiResponseDto;
-  index: number;
-}) => {
+const StudyListItem = async ({ study }: { study: StudyListApiResponseDto }) => {
   const adminStatus = await isAdmin();
   const {
     studyId,
@@ -29,40 +24,35 @@ const StudyListItem = async ({
   } = study;
 
   return (
-    <Table key={`studyItem-${studyId}`}>
-      <Table.Left>
-        <Flex alignItems="center" gap="31px">
-          <Text typo="body1">
-            {academicYear}-{semesterType === "FIRST" ? "1" : "2"}
-          </Text>
-          <Flex alignItems="center" gap="xs">
-            <Text typo="h3">{title}</Text>
-            <Tag color={studyTypeColorMap[studyType]} variant="solid1">
-              {studyType}
-            </Tag>
-          </Flex>
+    <Table>
+      <Table.Left style={TableLeftStyle}>
+        <Text typo="body1">
+          {academicYear}-{semesterType === "FIRST" ? "1" : "2"}
+        </Text>
+        <Flex alignItems="center" gap="xs">
+          <Text typo="h3">{title}</Text>
+          <Tag color={studyTypeColorMap[studyType]} variant="solid1">
+            {studyType}
+          </Tag>
         </Flex>
       </Table.Left>
-
-      <Table.Right>
-        <Flex alignItems="center" gap="64px">
-          <Text typo="body1">{mentorName} 멘토</Text>
-          <Link href={notionLink || ""} style={LinkStyle}>
-            <WowLinkIcon height={24} stroke="sub" width={24} />
-            <TextButton text="스터디 소개 페이지" />
+      <Table.Right style={TableRightStyle}>
+        <Text typo="body1">{mentorName} 멘토</Text>
+        <Link href={notionLink || ""} style={LinkStyle}>
+          <WowLinkIcon height={24} stroke="sub" width={24} />
+          <TextButton text="스터디 소개 페이지" />
+        </Link>
+        <Flex alignItems="center" gap="sm">
+          {adminStatus && (
+            <Button size="sm" variant="outline">
+              스터디 삭제
+            </Button>
+          )}
+          <Link href={`${routerPath.studyDetailInfo}${studyId}`}>
+            <Button size="sm" variant="solid">
+              상세 정보 입력
+            </Button>
           </Link>
-          <Flex alignItems="center" gap="sm">
-            {adminStatus && (
-              <Button size="sm" variant="outline">
-                스터디 삭제
-              </Button>
-            )}
-            <Link href={`${routerPath.studyDetailInfo}${studyId}`}>
-              <Button size="sm" variant="solid">
-                상세 정보 입력
-              </Button>
-            </Link>
-          </Flex>
         </Flex>
       </Table.Right>
     </Table>
@@ -85,4 +75,16 @@ const LinkStyle = {
   alignItems: "center",
   color: "sub",
   gap: "4px",
+};
+
+const TableLeftStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "31px",
+};
+
+const TableRightStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "64px",
 };
