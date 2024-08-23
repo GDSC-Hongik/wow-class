@@ -6,4 +6,6 @@ export const enum apiPath {
   studyDetail = "/study-details/assignments",
 
   logout = "/auth/logout",
+
+  members = "/common/members",
 }

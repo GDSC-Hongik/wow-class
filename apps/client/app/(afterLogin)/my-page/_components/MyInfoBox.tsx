@@ -1,6 +1,6 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import { myInfoMockData } from "constants/myPageMockData";
+import { membersApi } from "apis/membersApi";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,10 +8,10 @@ import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import TextButton from "wowds-ui/TextButton";
 
-export const MyInfoBox = () => {
-  //TODO: 나의 정보 가져오는 api 호출
-  const myInfo = myInfoMockData;
+export const MyInfoBox = async () => {
+  const myInfo = await membersApi.getMyAccountInfo();
 
+  if (!myInfo) return;
   const { name, githubHandle } = myInfo;
 
   return (
