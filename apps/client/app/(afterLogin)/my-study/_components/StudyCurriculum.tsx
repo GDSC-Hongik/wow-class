@@ -1,12 +1,13 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
-import { padWithZero, parseISODate } from "@wow-class/utils";
+import { formatWeekPeriod } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import LinkButton from "components/LinkButton";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import type { ComponentProps } from "react";
 import type { StudyDifficultyType } from "types/entities/myStudy";
+import { getIsCurrentWeek } from "utils/getIsCurrentWeek";
 import Tag from "wowds-ui/Tag";
 
 const StudyCurriculum = async () => {
@@ -49,11 +50,15 @@ const StudyCurriculum = async () => {
               assignmentSubmissionStatus === "SUCCESS"
                 ? "제출한 과제 확인"
                 : "과제 제출하기";
+            const isCurrentWeek = getIsCurrentWeek(startDate, endDate);
 
             return (
               <Table key={index}>
                 <Table.Left className={leftColStyle}>
                   <div className={weekContainerStyle}>
+                    {isCurrentWeek && (
+                      <div className={currentWeekIndicatorStyle} />
+                    )}
                     <Text as="h5" typo="body1">
                       {week}주차
                     </Text>
@@ -114,25 +119,6 @@ const StudyCurriculum = async () => {
 
 export default StudyCurriculum;
 
-const formatWeekPeriod = (startDate: string, endDate: string) => {
-  const { month: startMonth, day: startDay } = parseISODate(startDate);
-  const { month: endMonth, day: endDay } = parseISODate(endDate);
-
-  const {
-    formattedStartMonth,
-    formattedStartDay,
-    formattedEndMonth,
-    formattedEndDay,
-  } = {
-    formattedStartMonth: padWithZero(startMonth),
-    formattedStartDay: padWithZero(startDay),
-    formattedEndMonth: padWithZero(endMonth),
-    formattedEndDay: padWithZero(endDay),
-  };
-
-  return `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
-};
-
 const difficultyMap: Record<
   StudyDifficultyType,
   { label: string; color: ComponentProps<typeof Tag>["color"] }
@@ -170,4 +156,13 @@ const assignmentButtonStyle = {
 
 const weekContainerStyle = css({
   width: "84px",
+  display: "flex",
+  alignItems: "center",
+  gap: "4px",
+});
+
+const currentWeekIndicatorStyle = css({
+  width: "4px",
+  height: "18px",
+  backgroundColor: "primary",
 });

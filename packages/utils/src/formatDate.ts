@@ -71,3 +71,26 @@ export const formatStringToDate = (dateString: string): Date => {
   if (year && month) return new Date(year, month - 1, day);
   return new Date();
 };
+
+/**
+ * @description ISO Date 형식의 startDate와 endDate를 받아, 시작일과 종료일의 월과 일을 "MM.DD-MM.DD" 형식으로 포맷하여 반환합니다.
+ * @example formatWeekPeriod("2024-08-08T15:14:59", "2024-08-13T15:15:04") -> "08.08-08.13"
+ */
+export const formatWeekPeriod = (startDate: string, endDate: string) => {
+  const { month: startMonth, day: startDay } = parseISODate(startDate);
+  const { month: endMonth, day: endDay } = parseISODate(endDate);
+
+  const {
+    formattedStartMonth,
+    formattedStartDay,
+    formattedEndMonth,
+    formattedEndDay,
+  } = {
+    formattedStartMonth: padWithZero(startMonth),
+    formattedStartDay: padWithZero(startDay),
+    formattedEndMonth: padWithZero(endMonth),
+    formattedEndDay: padWithZero(endDay),
+  };
+
+  return `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
+};
