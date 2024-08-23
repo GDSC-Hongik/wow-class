@@ -18,16 +18,16 @@ interface RepositorySubmissionBoxProps {
 }
 
 export const RepositorySubmissionBox = ({
-  repositoryLink: initialUrl,
+  repositoryLink: initialRepositoryUrl,
 }: RepositorySubmissionBoxProps) => {
-  const [url, setUrl] = useState(initialUrl);
+  const [repositoryUrl, setRepositoryUrl] = useState(initialRepositoryUrl);
   const [isInitialSubmit, setIsInitialSubmit] = useState(true);
   const [repositorySubmissionStatus, setRepositorySubmissionStatus] =
-    useState<RepositorySubmissionStatusType>("EDITING");
+    useState<RepositorySubmissionStatusType>("WARNING_WITH_NO_URL");
 
   const router = useRouter();
   const handleClickChange = useCallback((value: string) => {
-    setUrl(value);
+    setRepositoryUrl(value);
   }, []);
 
   const handleClickEditButton = useCallback(() => {
@@ -35,32 +35,35 @@ export const RepositorySubmissionBox = ({
   }, []);
 
   const handleClickSubmitButton = useCallback(async () => {
-    if (isInitialSubmit && !initialUrl) {
+    if (isInitialSubmit && !initialRepositoryUrl) {
       setIsInitialSubmit(false);
       setRepositorySubmissionStatus("SUBMITTED");
       //const studyHistoryId = useMatchedStudyHistoryId();
       //await studyHistoryApi.putRepository(studyHistoryId, url);
     } else {
       router.push(
-        `${routePath["my-assignment-repository-url-confirmation"]}?repositoryUrl=${url}`
+        `${routePath["my-assignment-repository-url-confirmation"]}?repositoryUrl=${repositoryUrl}`
       );
     }
-  }, [initialUrl, isInitialSubmit, router, url]);
+  }, [initialRepositoryUrl, isInitialSubmit, router, repositoryUrl]);
 
   const handleClickDeleteButton = useCallback(() => {
-    setUrl("");
-    setRepositorySubmissionStatus("EDITING");
+    setRepositoryUrl("");
+    setRepositorySubmissionStatus("WARNING_WITH_NO_URL");
   }, []);
   useEffect(() => {
-    if (isInitialSubmit) {
-      if (initialUrl) {
-        setRepositorySubmissionStatus("SUBMITTED");
-        setIsInitialSubmit(false);
-      } else {
-        setRepositorySubmissionStatus("EDITING");
-      }
+    // if (isInitialSubmit) {
+    //   if (initialRepositoryUrl) {
+    //     setRepositorySubmissionStatus("SUBMITTED");
+    //     setIsInitialSubmit(false);
+    //   } else {
+    //     setRepositorySubmissionStatus("EDITING");
+    //   }
+    // }
+    if (initialRepositoryUrl) {
+      setRepositorySubmissionStatus("SUBMITTED");
     }
-  }, [initialUrl, isInitialSubmit]);
+  }, [initialRepositoryUrl, isInitialSubmit]);
 
   return (
     <Box
@@ -83,51 +86,51 @@ export const RepositorySubmissionBox = ({
             )}
           </Flex>
           <Space height={4} />
-          {isInitialSubmit && repositorySubmissionStatus === "EDITING" && (
-            <Flex alignItems="center" gap="xxs">
-              <Warn fill="error" stroke="error" />
-              <Text color="error" typo="body1">
-                입력하지 않으면 앞으로의 과제를 제출할 수 없어요.
-              </Text>
-            </Flex>
-          )}
-          {repositorySubmissionStatus === "SUBMITTED" && (
-            <Text color="sub">최초 과제 제출 전 까지만 수정이 가능해요.</Text>
-          )}
-          <Space height={26} />
-          {repositorySubmissionStatus === "EDITING" && (
-            <TextField
-              label=""
-              placeholder="URL 을 입력하세요"
-              value={url}
-              onChange={handleClickChange}
-            />
-          )}
-          {repositorySubmissionStatus === "SUBMITTED" && (
-            <Flex className={urlBoxStyle}>
-              {url}
-              <Flex gap="xs" marginLeft="auto">
-                <Edit
-                  stroke="textBlack"
-                  style={iconStyle}
-                  onClick={handleClickEditButton}
-                />
-                <Trash
-                  stroke="textBlack"
-                  style={iconStyle}
-                  onClick={handleClickDeleteButton}
-                />
+          {repositorySubmissionStatus === "SUBMITTED" ? (
+            <>
+              <Text color="sub">최초 과제 제출 전 까지만 수정이 가능해요.</Text>
+              <Space height={26} />
+              <Flex className={urlBoxStyle}>
+                {repositoryUrl}
+                <Flex gap="xs" marginLeft="auto">
+                  <Edit
+                    stroke="textBlack"
+                    style={iconStyle}
+                    onClick={handleClickEditButton}
+                  />
+                  <Trash
+                    stroke="textBlack"
+                    style={iconStyle}
+                    onClick={handleClickDeleteButton}
+                  />
+                </Flex>
               </Flex>
-            </Flex>
-          )}
-          <Space height={62} />
-          {repositorySubmissionStatus === "EDITING" && (
-            <Button
-              style={{ maxWidth: "100%" }}
-              onClick={handleClickSubmitButton}
-            >
-              입력하기
-            </Button>
+            </>
+          ) : (
+            <>
+              {repositorySubmissionStatus === "WARNING_WITH_NO_URL" && (
+                <Flex alignItems="center" gap="xxs">
+                  <Warn fill="error" stroke="error" />
+                  <Text color="error" typo="body1">
+                    입력하지 않으면 앞으로의 과제를 제출할 수 없어요.
+                  </Text>
+                </Flex>
+              )}
+              <Space height={26} />
+              <TextField
+                label=""
+                placeholder="URL 을 입력하세요"
+                value={repositoryUrl}
+                onChange={handleClickChange}
+              />
+              <Space height={62} />
+              <Button
+                style={{ maxWidth: "100%" }}
+                onClick={handleClickSubmitButton}
+              >
+                입력하기
+              </Button>
+            </>
           )}
         </>
       }
