@@ -26,7 +26,7 @@ export const history: AssignmentHistoryDto[] = [
 ];
 
 export const studyDashBoardData: StudyDetailDashboardDto = {
-  repositoryLink: "http:sdfsd",
+  repositoryLink: "",
   isLinkEditable: true,
   submittableAssignments: [
     {
