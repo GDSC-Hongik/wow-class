@@ -2,40 +2,31 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { myStudyApi } from "apis/myStudyApi";
 import LinkButton from "components/LinkButton";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
-import { studyCurriculumMockData } from "constants/mockData";
 import type { ComponentProps } from "react";
 import type { StudyDifficultyType } from "types/entities/myStudy";
 import Tag from "wowds-ui/Tag";
 
-const formatWeekPeriod = (startDate: string, endDate: string) => {
-  const { month: startMonth, day: startDay } = parseISODate(startDate);
-  const { month: endMonth, day: endDay } = parseISODate(endDate);
+const StudyCurriculum = async () => {
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
-  const {
-    formattedStartMonth,
-    formattedStartDay,
-    formattedEndMonth,
-    formattedEndDay,
-  } = {
-    formattedStartMonth: padWithZero(startMonth),
-    formattedStartDay: padWithZero(startDay),
-    formattedEndMonth: padWithZero(endMonth),
-    formattedEndDay: padWithZero(endDay),
-  };
+  if (!myOngoingStudyInfoData?.studyId) {
+    return;
+  }
 
-  return `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
-};
+  const studyCurriculumData = await myStudyApi.getStudyCurriculumList(
+    myOngoingStudyInfoData?.studyId
+  );
 
-const StudyCurriculum = () => {
   return (
     <section aria-label="study-curriculum">
       <Text className={studyCurriculumTextStyle} typo="h2">
         스터디 커리큘럼
       </Text>
       <Flex direction="column">
-        {studyCurriculumMockData.map(
+        {studyCurriculumData?.map(
           (
             {
               week,
@@ -48,8 +39,8 @@ const StudyCurriculum = () => {
             },
             index
           ) => {
-            const { label: levelLabel, color: levelColor } =
-              difficultyMap[difficulty];
+            const { label: difficultyLabel, color: difficultyColor } =
+              difficultyMap[difficulty || "LOW"];
             const {
               label: attendanceStatusLabel,
               color: attendanceStatusColor,
@@ -72,8 +63,8 @@ const StudyCurriculum = () => {
                       <Text as="h3" typo="h3">
                         {title}
                       </Text>
-                      <Tag color={levelColor} variant="outline">
-                        {levelLabel}
+                      <Tag color={difficultyColor} variant="outline">
+                        {difficultyLabel}
                       </Tag>
                     </Flex>
                     <Text
@@ -122,6 +113,25 @@ const StudyCurriculum = () => {
 };
 
 export default StudyCurriculum;
+
+const formatWeekPeriod = (startDate: string, endDate: string) => {
+  const { month: startMonth, day: startDay } = parseISODate(startDate);
+  const { month: endMonth, day: endDay } = parseISODate(endDate);
+
+  const {
+    formattedStartMonth,
+    formattedStartDay,
+    formattedEndMonth,
+    formattedEndDay,
+  } = {
+    formattedStartMonth: padWithZero(startMonth),
+    formattedStartDay: padWithZero(startDay),
+    formattedEndMonth: padWithZero(endMonth),
+    formattedEndDay: padWithZero(endDay),
+  };
+
+  return `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
+};
 
 const difficultyMap: Record<
   StudyDifficultyType,
