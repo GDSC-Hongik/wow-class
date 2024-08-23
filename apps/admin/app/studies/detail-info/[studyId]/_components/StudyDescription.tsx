@@ -5,7 +5,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import TextField from "wowds-ui/TextField";
 
 const StudyDescription = () => {
-  const { control, watch } = useFormContext();
+  const { control } = useFormContext();
   return (
     <section
       aria-label="create-study-description"

@@ -42,6 +42,7 @@ export const studyInfoApi = {
         cache: "force-cache",
       }
     );
+    console.log(response.data);
     return response.data;
   },
 };

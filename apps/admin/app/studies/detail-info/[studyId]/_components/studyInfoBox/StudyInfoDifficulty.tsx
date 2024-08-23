@@ -20,7 +20,6 @@ const StudyInfoDifficulty = ({ index }: { index: number }) => {
     <Controller
       control={control}
       name={`studySessions.${index}.difficulty`}
-      rules={{ required: true }}
       render={({ field }) => (
         <DropDown
           {...field}

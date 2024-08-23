@@ -13,7 +13,6 @@ const StudyTextInfo = ({ index }: { index: number }) => {
         <textarea
           maxLength={100}
           {...register(`studySessions.${index}.title`, {
-            required: true,
             maxLength: 100,
           })}
         />
@@ -32,7 +31,6 @@ const StudyTextInfo = ({ index }: { index: number }) => {
         <textarea
           maxLength={100}
           {...register(`studySessions.${index}.description`, {
-            required: true,
             maxLength: 100,
           })}
         />

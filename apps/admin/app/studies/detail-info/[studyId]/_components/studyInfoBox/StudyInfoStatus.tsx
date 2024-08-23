@@ -1,10 +1,16 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
+import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import Checkbox from "wowds-ui/Checkbox";
 
 const StudyInfoStatus = ({ index }: { index: number }) => {
-  const { control } = useFormContext();
+  const { control, setValue } = useFormContext();
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    setValue(`studySessions.${index}.status`, checked ? "CANCELLED" : "NONE");
+  }, [checked]);
+
   return (
     <div className={CurriculumCancelTimeStyle}>
       <Text color="sub" typo="body1">
@@ -13,12 +19,11 @@ const StudyInfoStatus = ({ index }: { index: number }) => {
       <Controller
         control={control}
         name={`studySessions.${index}.status`}
-        render={({ field }) => (
+        render={() => (
           <Checkbox
-            {...field}
-            checked={field.value}
+            checked={checked}
             defaultChecked={false}
-            onClick={() => field.onChange(!field.value)}
+            onClick={() => setChecked(!checked)}
           />
         )}
       />

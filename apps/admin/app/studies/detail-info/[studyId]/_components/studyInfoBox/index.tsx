@@ -1,18 +1,22 @@
 "use client";
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
+import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 
 import StudyInfoDifficulty from "./StudyInfoDifficulty";
-import StudyTextInfo from "./StudyInfoDifficulty";
 import StudyInfoStatus from "./StudyInfoStatus";
+import StudyTextInfo from "./StudyTextInfo";
 import StudyTimeLine from "./StudyTimeline";
 
 const StudyInfoBox = ({
   week,
   period,
   index,
+  studyDetailId,
 }: {
   week: number;
+  studyDetailId: number;
   period: {
     startDate: string;
     endDate: string;
@@ -20,6 +24,10 @@ const StudyInfoBox = ({
   };
   index: number;
 }) => {
+  const { setValue } = useFormContext();
+  useEffect(() => {
+    setValue(`studySessions.${index}.studyDetailId`, studyDetailId);
+  }, []);
   return (
     <section aria-label="create-detailInfo-box" className={StudyInfoBoxStyle}>
       <div className={StudyInfoBoxWeekStyle}>{week}주차</div>

@@ -36,24 +36,25 @@ const CreateStudyDetailInfoPage = ({
     }
   };
 
-  console.log(methods.watch("studySessions"));
   return (
     <FormProvider {...methods}>
       <Flex
         direction="column"
         height="100%"
         justifyContent="flex-start"
+        overflow="auto"
         position="relative"
+        scrollbarWidth="none"
         width="100%"
       >
-        <Text color="sub" typo="h3">
+        <Text as="div" color="sub" typo="h3">
           스터디 상세 정보를 입력해주세요
+          <Space height={12} />
         </Text>
-        <Space height={12} />
         <Suspense fallback={<>loading..</>}>
           <Header isCompact={true} studyId={studyId} />
         </Suspense>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form style={FormStyle} onSubmit={methods.handleSubmit(onSubmit)}>
           <Space height={48} />
           <StudyDescription />
           <Space height={64} />
@@ -74,3 +75,7 @@ const CreateStudyDetailInfoPage = ({
 };
 
 export default CreateStudyDetailInfoPage;
+
+const FormStyle = {
+  maxWidth: "60%",
+};
