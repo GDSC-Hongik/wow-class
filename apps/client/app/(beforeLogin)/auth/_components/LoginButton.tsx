@@ -30,7 +30,7 @@ const githubLogoIcon = (
   <Image
     alt="github-logo"
     height={18}
-    src="/images/github-logo.svg"
+    src="/images/github-logo-white.svg"
     width={18}
   />
 );
