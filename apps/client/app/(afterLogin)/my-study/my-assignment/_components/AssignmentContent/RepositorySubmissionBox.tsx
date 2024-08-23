@@ -27,18 +27,21 @@ export const RepositorySubmissionBox = ({
     useState<RepositorySubmissionStatusType>(
       initialRepositoryUrl ? "SUBMITTED" : "EDITING_WITH_WARNING"
     );
-  const [isValidateUrl, setIsValidateUrl] = useState(true);
+  const [error, setError] = useState(false);
+
+  const router = useRouter();
 
   const handleClickEditButton = useCallback(() => {
+    setError(false);
     setRepositorySubmissionStatus("EDITING");
   }, []);
 
   const handleClickDeleteButton = useCallback(() => {
     setRepositoryUrl("");
+    setError(false);
     setRepositorySubmissionStatus("EDITING_WITH_WARNING");
   }, []);
 
-  const router = useRouter();
   const handleChange = useCallback(
     (value: string) => {
       setRepositoryUrl(value);
@@ -48,7 +51,7 @@ export const RepositorySubmissionBox = ({
 
   const handleClickSubmitButton = useCallback(async () => {
     if (!repositoryUrl) {
-      setIsValidateUrl(false);
+      setError(true);
     } else {
       if (repositorySubmissionStatus === "EDITING_WITH_WARNING") {
         setRepositorySubmissionStatus("SUBMITTED");
@@ -127,15 +130,15 @@ export const RepositorySubmissionBox = ({
                 </Flex>
                 <Space height={26} />
                 <TextField
-                  error={!isValidateUrl}
-                  {...(!isValidateUrl && { helperText: errorMessage })}
+                  error={error}
+                  {...(error && { helperText: errorMessage })}
                   label=""
                   placeholder="URL 을 입력하세요"
                   style={textFieldStyle}
                   value={repositoryUrl}
                   onChange={handleChange}
                 />
-                <Space height={62} />
+                <Space height={46} />
                 <Button style={buttonStyle} onClick={handleClickSubmitButton}>
                   입력하기
                 </Button>
@@ -145,15 +148,15 @@ export const RepositorySubmissionBox = ({
               <>
                 <Space height={56} />
                 <TextField
-                  error={!isValidateUrl}
-                  {...(!isValidateUrl && { helperText: errorMessage })}
+                  error={error}
+                  {...(error && { helperText: errorMessage })}
                   label=""
                   placeholder="URL 을 입력하세요"
                   style={textFieldStyle}
                   value={repositoryUrl}
                   onChange={handleChange}
                 />
-                <Space height={62} />
+                <Space height={46} />
                 <Button style={buttonStyle} onClick={handleClickSubmitButton}>
                   입력하기
                 </Button>
@@ -167,6 +170,7 @@ export const RepositorySubmissionBox = ({
 };
 
 const errorMessage = <li>빈 URL은 입력할 수 없습니다.</li>;
+
 const urlBoxStyle = css({
   backgroundColor: "backgroundAlternative",
   borderRadius: "5px",
@@ -191,4 +195,5 @@ const buttonStyle = {
 
 const textFieldStyle = {
   gap: "0px",
+  height: "58px !important",
 };
