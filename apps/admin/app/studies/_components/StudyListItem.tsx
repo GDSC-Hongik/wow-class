@@ -13,7 +13,6 @@ import TextButton from "wowds-ui/TextButton";
 
 const StudyListItem = async ({
   study,
-  index,
 }: {
   study: StudyListApiResponseDto;
   index: number;

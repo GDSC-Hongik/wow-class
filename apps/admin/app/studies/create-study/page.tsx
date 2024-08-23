@@ -1,5 +1,5 @@
 "use client";
-import { Flex, styled } from "@styled-system/jsx";
+import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
 import { createStudyApi } from "apis/form/createStudyApi";
 import { FormProvider, useForm } from "react-hook-form";

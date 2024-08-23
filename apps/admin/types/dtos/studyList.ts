@@ -1,5 +1,6 @@
 import type { DayOfWeekType } from "types/entities/dayofweek";
-import type { SemesterType, StudyKoreanType } from "types/entities/study";
+import type { SemesterType } from "types/entities/semester";
+import type { StudyKoreanType } from "types/entities/study";
 import type { TimeType } from "types/entities/time";
 
 export interface StudyListApiResponseDto {
