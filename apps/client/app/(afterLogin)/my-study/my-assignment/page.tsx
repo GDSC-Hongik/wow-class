@@ -1,6 +1,4 @@
-import { Flex, styled } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
-import Image from "next/image";
 
 import { AssignmentHistory } from "./_components";
 import { AssignmentContent } from "./_components/AssignmentContent";
@@ -14,12 +12,8 @@ const MyAssignmentPage = () => {
       <Space height={8} />
       <AssignmentDescription />
       <Space height={48} />
-
       <AssignmentContent />
-      <Space height={64} />
-      <section>
-        <AssignmentHistory />
-      </section>
+      <AssignmentHistory />
     </>
   );
 };

@@ -45,4 +45,5 @@ const boxContainerStyle = css({
   overflowX: "auto",
   scrollBehavior: "smooth",
   scrollbarWidth: "none",
+  height: "450px", //FIXME: 팝오버가 Box Container 내부로 들어가면서 짤리는 문제가 생겨 임시로 높이값 고정
 });
