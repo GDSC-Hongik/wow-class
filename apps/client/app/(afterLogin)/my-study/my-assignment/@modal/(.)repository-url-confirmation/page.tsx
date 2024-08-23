@@ -28,7 +28,7 @@ const RepositoryUrlConfirmationModal = () => {
         <Space height={8} />
         <div className={urlBoxStyle}>{url}</div>
         <Space height={28} />
-        <Button onClick={handleClickSubmitButton}>제출하기</Button>
+        <Button onClick={handleClickSubmitButton}>입력하기</Button>
       </Flex>
     </Modal>
   );

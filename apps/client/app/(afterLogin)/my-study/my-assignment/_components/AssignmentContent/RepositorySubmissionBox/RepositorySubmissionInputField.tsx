@@ -53,14 +53,22 @@ export const RepositorySubmissionInputField = ({
       <TextField
         label=""
         placeholder="URL 을 입력하세요"
-        style={{ gap: "0px" }}
+        style={textFieldStyle}
         value={repositoryUrl}
         onChange={handleChange}
       />
       <Space height={62} />
-      <Button style={{ maxWidth: "100%" }} onClick={handleClickSubmitButton}>
+      <Button style={buttonStyle} onClick={handleClickSubmitButton}>
         입력하기
       </Button>
     </div>
   );
+};
+
+const buttonStyle = {
+  maxWidth: "100%",
+};
+
+const textFieldStyle = {
+  gap: "0px",
 };
