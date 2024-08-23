@@ -1,13 +1,13 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { createStudyApi } from "apis/study/createStudyApi";
+import { studyApi } from "apis/study/studyApi";
 import Image from "next/image";
 
 import StudyListItem from "./StudyListItem";
 
 const StudyList = async () => {
-  const studyList = await createStudyApi.getStudyList();
+  const studyList = await studyApi.getStudyList();
 
   if (studyList?.length === 0) {
     return (

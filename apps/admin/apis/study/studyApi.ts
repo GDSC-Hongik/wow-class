@@ -3,7 +3,7 @@ import { apiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 
-export const createStudyApi = {
+export const studyApi = {
   getStudyList: async () => {
     const response = await fetcher.get<StudyListApiResponseDto[]>(
       apiPath.studyList,

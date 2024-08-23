@@ -1,12 +1,35 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
+import { createStudyApi } from "apis/form/createStudyApi";
+import { routerPath } from "constants/router/routerPath";
+import { useRouter } from "next/router";
+import { Suspense } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
 import Button from "wowds-ui/Button";
-const CreateStudyDetailInfoPage = () => {
-  const methods = useForm();
 
-  const onSubmit = async (data: CreateStudyApiRequestDto) => {
-    createStudyApi.postCreateStudy(data);
+import Header from "@/studies/[study]/_components/Header";
+
+const CreateStudyDetailInfoPage = ({
+  params,
+}: {
+  params: { studyId: string };
+}) => {
+  const router = useRouter();
+  const { studyId } = params;
+  const methods = useForm<CreateStudyDetailInfoApiRequestDto>();
+
+  const onSubmit = async (data: CreateStudyDetailInfoApiRequestDto) => {
+    const success = await createStudyApi.postStudyDetailInfo(
+      data,
+      parseInt(studyId, 10)
+    );
+    if (success) {
+      window.alert("스터디 상세 정보를 저장했어요.");
+      router.push(routerPath.root.href);
+    } else {
+      window.alert("스터디 상세 정보 저장에 실패했어요.");
+    }
   };
 
   return (
@@ -18,6 +41,9 @@ const CreateStudyDetailInfoPage = () => {
         position="relative"
         width="100%"
       >
+        <Suspense fallback={<>loading..</>}>
+          <Header />
+        </Suspense>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <Button
             disabled={!methods.formState.isValid}
@@ -26,7 +52,7 @@ const CreateStudyDetailInfoPage = () => {
             style={{ position: "absolute", top: "0px", right: "0px" }}
             type="submit"
           >
-            제출하기
+            저장하기
           </Button>
         </form>
       </Flex>

@@ -1,16 +1,7 @@
-import type { DifficultyType } from "types/entities/difficulty";
-import type { StudyStatusType } from "types/entities/study";
+import type { StudySessionType } from "types/entities/study";
 
-export interface StudyDetailInfoApiRequestDto {
+export interface CreateStudyDetailInfoApiRequestDto {
   notionLink: string;
   introduction: string;
-  studySessions: [
-    {
-      studyDetailId: 0;
-      title: "string";
-      description: "string";
-      difficulty: DifficultyType;
-      status: StudyStatusType;
-    },
-  ];
+  studySessions: StudySessionType[];
 }
