@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
-import { space } from "wowds-tokens";
+import { DownArrow } from "wowds-icons";
 import TextButton from "wowds-ui/TextButton";
 
 const Header = ({ studyId }: { studyId: string }) => {
@@ -39,7 +39,7 @@ const Header = ({ studyId }: { studyId: string }) => {
   const introSectionButtonAriaLabel = showIntro
     ? "Collapse introduction"
     : "Expand introduction";
-  const introSectionImageAriaLabel = showIntro
+  const introSectionIconAriaLabel = showIntro
     ? "Collapse introduction icon"
     : "Expand introduction icon";
 
@@ -59,7 +59,7 @@ const Header = ({ studyId }: { studyId: string }) => {
       introduction,
       notionLink,
     } = studyInfo;
-    const validNotionLink = notionLink || "";
+
     const { month: startMonth, day: startDay } = parseISODate(startDate);
     const { month: endMonth, day: endDay } = parseISODate(endDate);
     const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
@@ -82,11 +82,11 @@ const Header = ({ studyId }: { studyId: string }) => {
               tabIndex={0}
               onClick={handleClickShowIntro}
             >
-              <Image
-                alt={introSectionImageAriaLabel}
+              <DownArrow
+                aria-label={introSectionIconAriaLabel}
                 className={downArrowIconStyle}
                 height={20}
-                src="/images/arrow.svg"
+                stroke="textBlack"
                 style={{ rotate: showIntro ? "0deg" : "180deg" }}
                 width={20}
               />
@@ -134,28 +134,18 @@ const Header = ({ studyId }: { studyId: string }) => {
             </section>
             <section aria-labelledby="study-intro-heading">
               <Space height={28} />
-              <Flex direction="column" gap="4">
+              <Flex direction="column" gap="xs">
                 <Text as="h3" typo="h3">
                   스터디 소개
                 </Text>
-                <Link
-                  className={introduceLinkStyle}
-                  href={notionLink || ""}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <Image
-                    alt="link-icon"
-                    height={24}
-                    src="/images/link.svg"
-                    width={24}
-                  />
-                  <TextButton
-                    size="lg"
-                    style={textButtonStyle}
-                    text="소개 링크 바로가기"
-                  />
-                </Link>
+                <Flex alignItems="center" gap="sm">
+                  <Link href={notionLink || ""} role="button" tabIndex={0}>
+                    <TextButton style={{ padding: "0px" }} text="스터디 소개" />
+                  </Link>
+                  <Text color="sub" typo="body1">
+                    {introduction}
+                  </Text>
+                </Flex>
               </Flex>
             </section>
           </section>
@@ -174,14 +164,3 @@ const ItemSeparator = () => (
 const downArrowIconStyle = css({
   cursor: "pointer",
 });
-
-const introduceLinkStyle = css({
-  display: "flex",
-  alignItems: "center",
-  cursor: "pointer",
-  gap: "4px",
-});
-
-const textButtonStyle = {
-  padding: `${space.sm} 0`,
-};
