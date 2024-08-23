@@ -41,7 +41,9 @@ export const RepositorySubmissionBox = ({
       //const studyHistoryId = useMatchedStudyHistoryId();
       //await studyHistoryApi.putRepository(studyHistoryId, url);
     } else {
-      router.push(`${routePath["my-assignment-submit-confirmation"]}/${url}`);
+      router.push(
+        `${routePath["my-assignment-repository-url-confirmation"]}?repositoryUrl=${url}`
+      );
     }
   }, [initialUrl, isInitialSubmit, router, url]);
 

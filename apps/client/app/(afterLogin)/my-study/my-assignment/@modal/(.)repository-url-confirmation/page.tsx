@@ -3,16 +3,15 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
-import { useModalRoute } from "@wow-class/ui/hooks";
 import { tags } from "constants/tags";
 import useMatchedStudyHistoryId from "hooks/useMatchedStudyHistoryId";
+import { useSearchParams } from "next/navigation";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
-
-const SubmitModal = ({ params }: { params: { url: string } }) => {
-  const url = params.url;
-
-  const studyHistoryId = useMatchedStudyHistoryId();
+const SubmitModal = () => {
+  const searchParams = useSearchParams();
+  const url = searchParams.get("repositoryUrl");
+  //const studyHistoryId = useMatchedStudyHistoryId();
 
   const handleClickSubmitButton = async () => {
     //await studyHistoryApi.putRepository(studyHistoryId, url);
