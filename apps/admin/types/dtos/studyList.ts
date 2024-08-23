@@ -1,8 +1,6 @@
-import type {
-  DayOfWeekType,
-  SemesterType,
-  StudyKoreanType,
-} from "types/entities/study";
+import type { DayOfWeekType } from "types/entities/dayofweek";
+import type { SemesterType, StudyKoreanType } from "types/entities/study";
+import type { TimeType } from "types/entities/time";
 
 export interface StudyListApiResponseDto {
   studyId: number;
@@ -14,12 +12,7 @@ export interface StudyListApiResponseDto {
   introduction: string;
   mentorName: string;
   dayOfWeek: DayOfWeekType;
-  startTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
+  startTime: TimeType;
   totalWeek: number;
   openingDate: string;
 }

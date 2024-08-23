@@ -6,7 +6,12 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 export const config = {
-  matcher: ["/my-page/:path*", "/my-study/:path*", "/study-apply/:path*"],
+  matcher: [
+    "/my-page/:path*",
+    "/my-study/:path*",
+    "/study-apply/:path*",
+    "/my-assignment/:path*",
+  ],
 };
 
 const middleware = async (req: NextRequest) => {

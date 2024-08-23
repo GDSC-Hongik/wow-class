@@ -138,29 +138,24 @@ const Header = ({ studyId }: { studyId: string }) => {
                 <Text as="h3" typo="h3">
                   스터디 소개
                 </Text>
-                <Flex alignItems="center" direction="row" gap="sm">
-                  <Text as="h5" color="sub">
-                    {introduction}
-                  </Text>
-                  <Link
-                    className={introduceLinkStyle}
-                    href={validNotionLink}
-                    role="button"
-                    tabIndex={0}
-                  >
-                    <Image
-                      alt="link-icon"
-                      height={24}
-                      src="/images/link.svg"
-                      width={24}
-                    />
-                    <TextButton
-                      size="lg"
-                      style={textButtonStyle}
-                      text="소개 링크 바로가기"
-                    />
-                  </Link>
-                </Flex>
+                <Link
+                  className={introduceLinkStyle}
+                  href={notionLink || ""}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <Image
+                    alt="link-icon"
+                    height={24}
+                    src="/images/link.svg"
+                    width={24}
+                  />
+                  <TextButton
+                    size="lg"
+                    style={textButtonStyle}
+                    text="소개 링크 바로가기"
+                  />
+                </Link>
               </Flex>
             </section>
           </section>

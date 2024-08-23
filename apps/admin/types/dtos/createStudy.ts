@@ -1,8 +1,5 @@
-import type {
-  DayOfWeekType,
-  SemesterType,
-  StudyType,
-} from "types/entities/study";
+import type { DayOfWeekType } from "types/entities/dayofweek";
+import type { SemesterType, StudyType } from "types/entities/study";
 export interface CreateStudyApiRequestDto {
   mentorId: number;
   academicYear: number;
