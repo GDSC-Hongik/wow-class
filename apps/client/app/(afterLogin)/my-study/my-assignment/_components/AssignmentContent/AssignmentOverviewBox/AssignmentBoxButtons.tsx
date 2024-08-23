@@ -5,6 +5,7 @@ import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import Link from "next/link";
 import type { Assignment } from "types/dtos/studyDetail";
+import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
 import { isDeadlinePassed } from "utils";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
@@ -15,9 +16,9 @@ interface AssignmentButtonsProps {
   buttonsDisabled?: boolean;
 }
 
-export const AssignmentButtons = ({
+export const AssignmentBoxButtons = ({
   assignment,
-  buttonsDisabled,
+  buttonsDisabled = false,
 }: AssignmentButtonsProps) => {
   const {
     assignmentSubmissionStatus,
@@ -37,35 +38,15 @@ export const AssignmentButtons = ({
     }
   };
 
-  const getButtonProps = () => {
-    if (assignmentSubmissionStatus === "PENDING") {
-      const stroke = buttonsDisabled ? "mono100" : "backgroundNormal";
-      return {
-        primaryButtonText: "제출하러 가기",
-        secondaryButtonText: "제출 완료하기",
-        icon: <ReloadIcon stroke={stroke} />,
-      };
-    } else if (assignmentSubmissionStatus === "SUCCESS") {
-      return {
-        primaryButtonText: "제출한 과제 보러가기",
-        secondaryButtonText: "제출 갱신하기",
-        icon: <ReloadIcon />,
-      };
-    } else {
-      return {
-        primaryButtonText: "제출한 과제 보러가기",
-        secondaryButtonText: "제출 완료하기",
-        icon: <ReloadIcon />,
-      };
-    }
-  };
+  const { primaryButtonText, secondaryButtonText } =
+    buttonProps[assignmentSubmissionStatus];
 
-  const renderPrimaryButton = (text: string) => {
+  const PrimaryButton = () => {
     if (
       assignmentSubmissionStatus === "FAILURE" &&
       submissionFailureType === "NOT_SUBMITTED"
     ) {
-      return null;
+      return;
     }
     const stroke = buttonsDisabled ? "mono100" : "primary";
     return (
@@ -76,13 +57,13 @@ export const AssignmentButtons = ({
           style={buttonStyle}
           variant="outline"
         >
-          {text}
+          {primaryButtonText}
         </Button>
       </Link>
     );
   };
 
-  const renderSecondaryButton = (text: string, icon: JSX.Element) => {
+  const SecondaryButton = () => {
     if (isDeadlinePassed(deadline)) {
       return (
         <Button disabled={true} style={buttonStyle}>
@@ -90,10 +71,11 @@ export const AssignmentButtons = ({
         </Button>
       );
     }
+    const stroke = buttonsDisabled ? "mono100" : "backgroundNormal";
     return (
       <Button
         disabled={buttonsDisabled}
-        icon={icon}
+        icon={<ReloadIcon stroke={stroke} />}
         style={buttonStyle}
         {...(assignmentSubmissionStatus === "SUCCESS" &&
           committedAt && {
@@ -101,22 +83,38 @@ export const AssignmentButtons = ({
           })}
         onClick={handleClickSubmissionComplete}
       >
-        {text}
+        {secondaryButtonText}
       </Button>
     );
   };
 
-  const { primaryButtonText, secondaryButtonText, icon } = getButtonProps();
-
   return (
     <>
-      {renderPrimaryButton(primaryButtonText)}
+      <PrimaryButton />
       <Space height={8} />
-      {renderSecondaryButton(secondaryButtonText, icon)}
+      <SecondaryButton />
     </>
   );
 };
 
 const buttonStyle = {
   maxWidth: "100%",
+};
+
+const buttonProps: Record<
+  AssignmentSubmissionStatusType,
+  { primaryButtonText: string; secondaryButtonText: string }
+> = {
+  PENDING: {
+    primaryButtonText: "제출하러 가기",
+    secondaryButtonText: "제출 완료하기",
+  },
+  SUCCESS: {
+    primaryButtonText: "제출한 과제 보러가기",
+    secondaryButtonText: "제출 갱신하기",
+  },
+  FAILURE: {
+    primaryButtonText: "제출한 과제 보러가기",
+    secondaryButtonText: "제출 완료하기",
+  },
 };
