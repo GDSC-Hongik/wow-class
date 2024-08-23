@@ -1,4 +1,12 @@
 import type { DayOfWeekType, SemesterType } from "types/entities/common";
+import type {
+  AssignmentStatusType,
+  AssignmentSubmissionFailureType,
+  AssignmentSubmissionStatusType,
+  AttendanceStatusType,
+  StudyDifficultyType,
+  StudySessionStatusType,
+} from "types/entities/myStudy";
 
 export interface BasicStudyInfoDto {
   studyId: number;
@@ -42,3 +50,23 @@ export type StudyAnnouncementListDtoType = StudyAnnouncementDto[];
 export interface MyOngoingStudyInfoDto {
   studyId: number;
 }
+
+interface StudyCurriculumDto {
+  studyDetailId: number;
+  period: {
+    startDate: string;
+    endDate: string;
+    open: boolean;
+  };
+  week: number;
+  title: string;
+  description: string;
+  sessionStatus: StudySessionStatusType;
+  difficulty: StudyDifficultyType;
+  attendanceStatus: AttendanceStatusType;
+  assignmentStatus: AssignmentStatusType;
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
+  submissionFailureType: AssignmentSubmissionFailureType;
+}
+
+export type StudyCurriculumListDtoType = StudyCurriculumDto[];

@@ -6,7 +6,7 @@ import LinkButton from "components/LinkButton";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import { studyCurriculumMockData } from "constants/mockData";
 import type { ComponentProps } from "react";
-import type { LevelType } from "types/entities/myStudy";
+import type { StudyDifficultyType } from "types/entities/myStudy";
 import Tag from "wowds-ui/Tag";
 
 const formatWeekPeriod = (startDate: string, endDate: string) => {
@@ -41,14 +41,15 @@ const StudyCurriculum = () => {
               week,
               title,
               description,
-              level,
+              difficulty,
               period: { startDate, endDate },
               attendanceStatus,
               assignmentSubmissionStatus,
             },
             index
           ) => {
-            const { label: levelLabel, color: levelColor } = levelMap[level];
+            const { label: levelLabel, color: levelColor } =
+              difficultyMap[difficulty];
             const {
               label: attendanceStatusLabel,
               color: attendanceStatusColor,
@@ -98,7 +99,7 @@ const StudyCurriculum = () => {
                   </Tag>
                   <LinkButton
                     aria-label="check-submitted-assignment"
-                    disabled={assignmentSubmissionStatus === "PENDING"}
+                    disabled={assignmentSubmissionStatus === "FAILURE"}
                     href=""
                     size="sm"
                     style={assignmentButtonStyle}
@@ -122,14 +123,14 @@ const StudyCurriculum = () => {
 
 export default StudyCurriculum;
 
-const levelMap: Record<
-  LevelType,
+const difficultyMap: Record<
+  StudyDifficultyType,
   { label: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   BASIC: { label: "기초", color: "blue" },
-  BEGINNER: { label: "초급", color: "yellow" },
-  INTERMEDIATE: { label: "중급", color: "green" },
-  ADVANCED: { label: "고급", color: "red" },
+  LOW: { label: "초급", color: "yellow" },
+  MEDIUM: { label: "중급", color: "green" },
+  HIGH: { label: "고급", color: "red" },
 };
 
 const studyCurriculumTextStyle = css({

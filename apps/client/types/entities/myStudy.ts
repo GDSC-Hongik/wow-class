@@ -1,8 +1,9 @@
-import type { AssignmentSubmissionStatusType } from "./common/assignment";
+export type AttendanceStatusType =
+  | "ATTENDED"
+  | "NOT_ATTENDED"
+  | "BEFORE_ATTENDANCE";
 
-export type AttendanceStatusType = "ATTENDED" | "NOT_ATTENDED" | "PENDING";
-
-export type LevelType = "BASIC" | "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
+export type StudyDifficultyType = "BASIC" | "LOW" | "MEDIUM" | "HIGH";
 
 interface AttendanceTask {
   type: "ATTENDANCE";
@@ -24,15 +25,18 @@ interface AssignmentTask {
 
 export type DailyTaskDataType = AttendanceTask | AssignmentTask;
 
-export type StudyCurriculumDataType = {
-  week: number;
-  title: string;
-  description: string;
-  level: LevelType;
-  period: {
-    startDate: string;
-    endDate: string;
-  };
-  attendanceStatus: AttendanceStatusType;
-  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
-};
+export type AssignmentStatusType = "NONE" | "OPEN" | "CANCELLED";
+
+export type AssignmentSubmissionFailureType =
+  | "NONE"
+  | "NOT_SUBMITTED"
+  | "WORD_COUNT_INSUFFICIENT"
+  | "LOCATION_UNIDENTIFIABLE"
+  | "UNKNOWN";
+
+export type StudySessionStatusType = "NONE" | "OPEN" | "CANCELLED";
+
+export type AssignmentSubmissionStatusType =
+  | "NOT_SUBMITTED"
+  | "FAILURE"
+  | "SUCCESS";

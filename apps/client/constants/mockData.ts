@@ -1,7 +1,5 @@
-import type {
-  DailyTaskDataType,
-  StudyCurriculumDataType,
-} from "types/entities/myStudy";
+import type { StudyCurriculumListDtoType } from "types/dtos/myStudy";
+import type { DailyTaskDataType } from "types/entities/myStudy";
 
 export const dailyTaskMockData: DailyTaskDataType[] = [
   {
@@ -36,57 +34,59 @@ export const dailyTaskMockData: DailyTaskDataType[] = [
   },
 ];
 
-export const studyCurriculumMockData: StudyCurriculumDataType[] = [
+export const studyCurriculumMockData: StudyCurriculumListDtoType = [
   {
+    studyDetailId: 0,
+    period: {
+      startDate: "2024-08-23T07:23:47.027Z",
+      endDate: "2024-08-23T07:23:47.027Z",
+      open: true,
+    },
     week: 1,
     title: "(제목) 웹 개발의 역사",
     description:
       "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
-    level: "BASIC",
-    period: {
-      startDate: "2024-08-18T17:13:29.913Z",
-      endDate: "2024-08-25T17:13:29.913Z",
-    },
+    sessionStatus: "NONE",
+    difficulty: "HIGH",
     attendanceStatus: "ATTENDED",
-    assignmentSubmissionStatus: "PENDING",
+    assignmentStatus: "NONE",
+    assignmentSubmissionStatus: "NOT_SUBMITTED",
+    submissionFailureType: "NONE",
   },
   {
+    studyDetailId: 0,
+    period: {
+      startDate: "2024-08-23T07:23:47.027Z",
+      endDate: "2024-08-23T07:23:47.027Z",
+      open: true,
+    },
     week: 2,
     title: "(제목) 웹 개발의 역사",
     description:
       "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
-    level: "BEGINNER",
-    period: {
-      startDate: "2024-08-18T17:13:29.913Z",
-      endDate: "2024-08-25T17:13:29.913Z",
-    },
-    attendanceStatus: "NOT_ATTENDED",
-    assignmentSubmissionStatus: "SUCCESS",
+    sessionStatus: "NONE",
+    difficulty: "MEDIUM",
+    attendanceStatus: "BEFORE_ATTENDANCE",
+    assignmentStatus: "NONE",
+    assignmentSubmissionStatus: "FAILURE",
+    submissionFailureType: "NONE",
   },
   {
+    studyDetailId: 0,
+    period: {
+      startDate: "2024-08-23T07:23:47.027Z",
+      endDate: "2024-08-23T07:23:47.027Z",
+      open: true,
+    },
     week: 3,
     title: "(제목) 웹 개발의 역사",
     description:
       "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
-    level: "INTERMEDIATE",
-    period: {
-      startDate: "2024-08-18T17:13:29.913Z",
-      endDate: "2024-08-25T17:13:29.913Z",
-    },
-    attendanceStatus: "PENDING",
-    assignmentSubmissionStatus: "FAILURE",
-  },
-  {
-    week: 4,
-    title: "(제목) 웹 개발의 역사",
-    description:
-      "(설명) 웹 개발의 역사를 알아보며, HTML, CSS, Javascript가 무엇인지 알아보자.",
-    level: "ADVANCED",
-    period: {
-      startDate: "2024-08-18T17:13:29.913Z",
-      endDate: "2024-08-25T17:13:29.913Z",
-    },
-    attendanceStatus: "PENDING",
-    assignmentSubmissionStatus: "FAILURE",
+    sessionStatus: "NONE",
+    difficulty: "LOW",
+    attendanceStatus: "NOT_ATTENDED",
+    assignmentStatus: "NONE",
+    assignmentSubmissionStatus: "SUCCESS",
+    submissionFailureType: "NONE",
   },
 ];
