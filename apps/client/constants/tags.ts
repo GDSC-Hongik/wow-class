@@ -3,4 +3,5 @@ export const enum tags {
   studyApply = "studyApply",
   studyHistory = "studyHistory",
   studyDetailDashboard = "studyDetailDashboard",
+  myAccountInfo = "myAccountInfo",
 }
