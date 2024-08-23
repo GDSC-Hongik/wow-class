@@ -4,11 +4,9 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { routePath } from "constants/routePath";
-import { tags } from "constants/tags";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import type { RepositorySubmissionStatusType } from "types/entities/myAssignment";
-import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Edit, Trash, Warn } from "wowds-icons";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
@@ -53,23 +51,11 @@ export const RepositorySubmissionBox = ({
     if (!repositoryUrl) {
       setError(true);
     } else {
-      if (repositorySubmissionStatus === "EDITING_WITH_WARNING") {
-        setRepositorySubmissionStatus("SUBMITTED");
-        // const studyHistoryId = useMatchedStudyHistoryId();
-        // await studyHistoryApi.putRepository(1, repositoryUrl);
-        revalidateTagByName(tags.studyDetailDashboard);
-      } else {
-        router.push(
-          `${routePath["my-assignment-repository-url-confirmation"]}?repositoryUrl=${repositoryUrl}`
-        );
-      }
+      router.push(
+        `${routePath["my-assignment-repository-url-confirmation"]}?repositoryUrl=${repositoryUrl}`
+      );
     }
-  }, [
-    repositorySubmissionStatus,
-    setRepositorySubmissionStatus,
-    router,
-    repositoryUrl,
-  ]);
+  }, [router, repositoryUrl]);
 
   return (
     <Box
