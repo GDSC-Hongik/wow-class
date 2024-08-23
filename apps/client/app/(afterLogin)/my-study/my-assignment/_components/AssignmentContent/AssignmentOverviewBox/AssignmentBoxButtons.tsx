@@ -53,7 +53,7 @@ export const AssignmentBoxButtons = ({
       <Link href={submissionLink} target="_blank">
         <Button
           disabled={buttonsDisabled}
-          icon={<LinkIcon stroke={stroke} />}
+          icon={<LinkIcon height={20} stroke={stroke} width={20} />}
           style={buttonStyle}
           variant="outline"
         >
@@ -75,7 +75,7 @@ export const AssignmentBoxButtons = ({
     return (
       <Button
         disabled={buttonsDisabled}
-        icon={<ReloadIcon stroke={stroke} />}
+        icon={<ReloadIcon height={20} stroke={stroke} width={20} />}
         style={buttonStyle}
         {...(assignmentSubmissionStatus === "SUCCESS" &&
           committedAt && {
