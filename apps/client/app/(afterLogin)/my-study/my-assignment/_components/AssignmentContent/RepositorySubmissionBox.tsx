@@ -128,7 +128,7 @@ export const RepositorySubmissionBox = ({
                 <Space height={26} />
                 <TextField
                   error={!isValidateUrl}
-                  helperText={!isValidateUrl && errorMessage}
+                  {...(!isValidateUrl && { helperText: errorMessage })}
                   label=""
                   placeholder="URL 을 입력하세요"
                   style={textFieldStyle}
@@ -146,7 +146,7 @@ export const RepositorySubmissionBox = ({
                 <Space height={56} />
                 <TextField
                   error={!isValidateUrl}
-                  helperText={!isValidateUrl && errorMessage}
+                  {...(!isValidateUrl && { helperText: errorMessage })}
                   label=""
                   placeholder="URL 을 입력하세요"
                   style={textFieldStyle}
