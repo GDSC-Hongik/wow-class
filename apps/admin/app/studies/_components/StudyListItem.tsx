@@ -6,7 +6,7 @@ import type { ComponentProps } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import type { StudyKoreanType } from "types/entities/study";
 import isAdmin from "utils/isAdmin";
-import { Link as WowLink } from "wowds-icons";
+import { Link as WowLinkIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
@@ -30,7 +30,7 @@ const StudyListItem = async ({
   } = study;
 
   return (
-    <Table key={`${index}-${studyId}`}>
+    <Table key={`studyItem-${studyId}`}>
       <Table.Left>
         <Flex alignItems="center" gap="31px">
           <Text typo="body1">
@@ -48,8 +48,8 @@ const StudyListItem = async ({
       <Table.Right>
         <Flex alignItems="center" gap="64px">
           <Text typo="body1">{mentorName} 멘토</Text>
-          <Link href={notionLink ? notionLink : ""} style={LinkStyle}>
-            <WowLink height={24} stroke="sub" width={24} />
+          <Link href={notionLink || ""} style={LinkStyle}>
+            <WowLinkIcon height={24} stroke="sub" width={24} />
             <TextButton text="스터디 소개 페이지" />
           </Link>
           <Flex alignItems="center" gap="sm">
