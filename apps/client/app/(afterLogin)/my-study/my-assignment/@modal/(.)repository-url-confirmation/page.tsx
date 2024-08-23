@@ -8,7 +8,8 @@ import useMatchedStudyHistoryId from "hooks/useMatchedStudyHistoryId";
 import { useSearchParams } from "next/navigation";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
-const SubmitModal = () => {
+
+const RepositoryUrlConfirmationModal = () => {
   const searchParams = useSearchParams();
   const url = searchParams.get("repositoryUrl");
   //const studyHistoryId = useMatchedStudyHistoryId();
@@ -33,7 +34,7 @@ const SubmitModal = () => {
   );
 };
 
-export default SubmitModal;
+export default RepositoryUrlConfirmationModal;
 
 const urlBoxStyle = css({
   backgroundColor: "backgroundAlternative",
