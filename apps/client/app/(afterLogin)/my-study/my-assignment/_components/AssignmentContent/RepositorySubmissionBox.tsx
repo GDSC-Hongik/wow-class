@@ -3,13 +3,17 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
+import { routePath } from "constants/routePath";
+import { tags } from "constants/tags";
+import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import type { RepositorySubmissionStatusType } from "types/entities/myAssignment";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Edit, Trash, Warn } from "wowds-icons";
 import Box from "wowds-ui/Box";
+import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
-
-import { RepositorySubmissionInputField } from "./RepositorySubmissionInputField";
+import TextField from "wowds-ui/TextField";
 
 interface RepositorySubmissionBoxProps {
   repositoryLink: string;
@@ -23,6 +27,7 @@ export const RepositorySubmissionBox = ({
     useState<RepositorySubmissionStatusType>(
       initialRepositoryUrl ? "SUBMITTED" : "EDITING_WITH_WARNING"
     );
+  const [isValidateUrl, setIsValidateUrl] = useState(true);
 
   const handleClickEditButton = useCallback(() => {
     setRepositorySubmissionStatus("EDITING");
@@ -32,6 +37,36 @@ export const RepositorySubmissionBox = ({
     setRepositoryUrl("");
     setRepositorySubmissionStatus("EDITING_WITH_WARNING");
   }, []);
+
+  const router = useRouter();
+  const handleChange = useCallback(
+    (value: string) => {
+      setRepositoryUrl(value);
+    },
+    [setRepositoryUrl]
+  );
+
+  const handleClickSubmitButton = useCallback(async () => {
+    if (!repositoryUrl) {
+      setIsValidateUrl(false);
+    } else {
+      if (repositorySubmissionStatus === "EDITING_WITH_WARNING") {
+        setRepositorySubmissionStatus("SUBMITTED");
+        // const studyHistoryId = useMatchedStudyHistoryId();
+        // await studyHistoryApi.putRepository(1, repositoryUrl);
+        revalidateTagByName(tags.studyDetailDashboard);
+      } else {
+        router.push(
+          `${routePath["my-assignment-repository-url-confirmation"]}?repositoryUrl=${repositoryUrl}`
+        );
+      }
+    }
+  }, [
+    repositorySubmissionStatus,
+    setRepositorySubmissionStatus,
+    router,
+    repositoryUrl,
+  ]);
 
   return (
     <Box
@@ -91,23 +126,37 @@ export const RepositorySubmissionBox = ({
                   </Text>
                 </Flex>
                 <Space height={26} />
-                <RepositorySubmissionInputField
-                  repositorySubmissionStatus={repositorySubmissionStatus}
-                  repositoryUrl={repositoryUrl}
-                  setRepositorySubmissionStatus={setRepositorySubmissionStatus}
-                  setRepositoryUrl={setRepositoryUrl}
+                <TextField
+                  error={!isValidateUrl}
+                  helperText={!isValidateUrl && errorMessage}
+                  label=""
+                  placeholder="URL 을 입력하세요"
+                  style={textFieldStyle}
+                  value={repositoryUrl}
+                  onChange={handleChange}
                 />
+                <Space height={62} />
+                <Button style={buttonStyle} onClick={handleClickSubmitButton}>
+                  입력하기
+                </Button>
               </>
             )}
             {repositorySubmissionStatus === "EDITING" && (
               <>
                 <Space height={56} />
-                <RepositorySubmissionInputField
-                  repositorySubmissionStatus={repositorySubmissionStatus}
-                  repositoryUrl={repositoryUrl}
-                  setRepositorySubmissionStatus={setRepositorySubmissionStatus}
-                  setRepositoryUrl={setRepositoryUrl}
+                <TextField
+                  error={!isValidateUrl}
+                  helperText={!isValidateUrl && errorMessage}
+                  label=""
+                  placeholder="URL 을 입력하세요"
+                  style={textFieldStyle}
+                  value={repositoryUrl}
+                  onChange={handleChange}
                 />
+                <Space height={62} />
+                <Button style={buttonStyle} onClick={handleClickSubmitButton}>
+                  입력하기
+                </Button>
               </>
             )}
           </>
@@ -117,6 +166,7 @@ export const RepositorySubmissionBox = ({
   );
 };
 
+const errorMessage = <li>빈 URL은 입력할 수 없습니다.</li>;
 const urlBoxStyle = css({
   backgroundColor: "backgroundAlternative",
   borderRadius: "5px",
@@ -133,4 +183,12 @@ const boxStyle = {
 
 const iconStyle = {
   cursor: "pointer",
+};
+
+const buttonStyle = {
+  maxWidth: "100%",
+};
+
+const textFieldStyle = {
+  gap: "0px",
 };

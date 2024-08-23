@@ -11,24 +11,58 @@ import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
 
-interface AssignmentButtonsProps {
+interface AssignmentBoxButtonsProps {
   assignment: Assignment;
   buttonsDisabled?: boolean;
 }
 
 export const AssignmentBoxButtons = ({
+  ...rest
+}: AssignmentBoxButtonsProps) => {
+  return (
+    <>
+      <PrimaryButton {...rest} />
+      <Space height={8} />
+      <SecondaryButton {...rest} />
+    </>
+  );
+};
+const PrimaryButton = ({
   assignment,
-  buttonsDisabled = false,
-}: AssignmentButtonsProps) => {
-  const {
-    assignmentSubmissionStatus,
-    submissionFailureType,
-    submissionLink,
-    deadline,
-    committedAt,
-    studyDetailId,
-  } = assignment;
+  buttonsDisabled,
+}: AssignmentBoxButtonsProps) => {
+  const { assignmentSubmissionStatus, submissionFailureType, submissionLink } =
+    assignment;
+  const { primaryButtonText } = buttonProps[assignmentSubmissionStatus];
 
+  if (
+    assignmentSubmissionStatus === "FAILURE" &&
+    submissionFailureType === "NOT_SUBMITTED"
+  ) {
+    return;
+  }
+  const stroke = buttonsDisabled ? "mono100" : "primary";
+  return (
+    <Link href={submissionLink} target="_blank">
+      <Button
+        disabled={buttonsDisabled}
+        icon={<LinkIcon height={20} stroke={stroke} width={20} />}
+        style={buttonStyle}
+        variant="outline"
+      >
+        {primaryButtonText}
+      </Button>
+    </Link>
+  );
+};
+
+const SecondaryButton = ({
+  assignment,
+  buttonsDisabled,
+}: AssignmentBoxButtonsProps) => {
+  const { assignmentSubmissionStatus, studyDetailId, deadline, committedAt } =
+    assignment;
+  const { secondaryButtonText } = buttonProps[assignmentSubmissionStatus];
   const handleClickSubmissionComplete = async () => {
     const response = await studyHistoryApi.submitAssignment(studyDetailId);
     if (response.success) {
@@ -38,62 +72,27 @@ export const AssignmentBoxButtons = ({
     }
   };
 
-  const { primaryButtonText, secondaryButtonText } =
-    buttonProps[assignmentSubmissionStatus];
-
-  const PrimaryButton = () => {
-    if (
-      assignmentSubmissionStatus === "FAILURE" &&
-      submissionFailureType === "NOT_SUBMITTED"
-    ) {
-      return;
-    }
-    const stroke = buttonsDisabled ? "mono100" : "primary";
+  if (isDeadlinePassed(deadline)) {
     return (
-      <Link href={submissionLink} target="_blank">
-        <Button
-          disabled={buttonsDisabled}
-          icon={<LinkIcon height={20} stroke={stroke} width={20} />}
-          style={buttonStyle}
-          variant="outline"
-        >
-          {primaryButtonText}
-        </Button>
-      </Link>
-    );
-  };
-
-  const SecondaryButton = () => {
-    if (isDeadlinePassed(deadline)) {
-      return (
-        <Button disabled={true} style={buttonStyle}>
-          마감
-        </Button>
-      );
-    }
-    const stroke = buttonsDisabled ? "mono100" : "backgroundNormal";
-    return (
-      <Button
-        disabled={buttonsDisabled}
-        icon={<ReloadIcon height={20} stroke={stroke} width={20} />}
-        style={buttonStyle}
-        {...(assignmentSubmissionStatus === "SUCCESS" &&
-          committedAt && {
-            subText: `최종 수정일자 ${committedAt}`,
-          })}
-        onClick={handleClickSubmissionComplete}
-      >
-        {secondaryButtonText}
+      <Button disabled={true} style={buttonStyle}>
+        마감
       </Button>
     );
-  };
-
+  }
+  const stroke = buttonsDisabled ? "mono100" : "backgroundNormal";
   return (
-    <>
-      <PrimaryButton />
-      <Space height={8} />
-      <SecondaryButton />
-    </>
+    <Button
+      disabled={buttonsDisabled}
+      icon={<ReloadIcon height={20} stroke={stroke} width={20} />}
+      style={buttonStyle}
+      {...(assignmentSubmissionStatus === "SUCCESS" &&
+        committedAt && {
+          subText: `최종 수정일자 ${committedAt}`,
+        })}
+      onClick={handleClickSubmissionComplete}
+    >
+      {secondaryButtonText}
+    </Button>
   );
 };
 
