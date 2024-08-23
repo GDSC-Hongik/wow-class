@@ -1,8 +1,9 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
+import { baseUrl } from "constants/environment";
 import Image from "next/image";
-
-import LoginButton from "./_components/LoginButton";
+import Link from "next/link";
+import Button from "wowds-ui/Button";
 
 const AuthPage = async () => {
   return (
@@ -36,7 +37,14 @@ const AuthPage = async () => {
             GDSC Hongik 가입을 위해선 GitHub 계정이 필요해요.
           </Text>
         </div>
-        <LoginButton />
+        <Button
+          asProp={Link}
+          className={githubLoginButtonStyle}
+          href={`${baseUrl}/oauth2/authorization/github`}
+          icon={githubLogoIcon}
+        >
+          GitHub 로그인
+        </Button>
       </section>
       <section className={imageContainerStyle}>
         <Image
@@ -51,6 +59,15 @@ const AuthPage = async () => {
 };
 
 export default AuthPage;
+
+const githubLogoIcon = (
+  <Image
+    alt="github-logo"
+    height={18}
+    src="/images/github-logo.svg"
+    width={18}
+  />
+);
 
 const mainContentStyle = css({
   display: "grid",
@@ -88,4 +105,8 @@ const authImageStyle = css({
   objectFit: "cover",
   height: "100%",
   width: "100%",
+});
+
+const githubLoginButtonStyle = css({
+  backgroundColor: "github",
 });

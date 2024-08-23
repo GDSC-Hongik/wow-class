@@ -1,8 +1,9 @@
 import { css } from "@styled-system/css";
 import { Header, Text } from "@wow-class/ui";
-import LinkButton from "components/LinkButton";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
+import Link from "next/link";
+import Button from "wowds-ui/Button";
 
 const LandingPage = () => {
   return (
@@ -27,13 +28,14 @@ const LandingPage = () => {
           GDSC Hongik은 홍익대학교의 학생 개발자들을 위해 <br />
           개발에 쉽게 입문할 수 있는 기회를 제공해요.
         </Text>
-        <LinkButton
+        <Button
           aria-label="로그인 페이지로 이동"
+          asProp={Link}
           href={routePath.auth}
           size="lg"
         >
           로그인
-        </LinkButton>
+        </Button>
       </main>
     </div>
   );
