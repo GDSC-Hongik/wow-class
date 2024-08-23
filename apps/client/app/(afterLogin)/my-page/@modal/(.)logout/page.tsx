@@ -6,17 +6,18 @@ import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
 import { authApi } from "apis/authApi";
 import { routePath } from "constants/routePath";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Button from "wowds-ui/Button";
 
 const LogoutModal = () => {
+  const router = useRouter();
   const { closeModal } = useModalRoute();
   const handleClickLogoutButton = async () => {
     const response = await authApi.logout();
     if (response.success) {
-      redirect(routePath["landing"]);
+      router.push(routePath["landing"]);
     } else {
-      redirect(routePath["my-page"]);
+      router.back();
     }
   };
 
@@ -60,5 +61,5 @@ const containerStyle = css({
 });
 
 const buttonStyle = {
-  width: "147px",
+  width: "173px",
 };
