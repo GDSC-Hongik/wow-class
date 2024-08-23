@@ -10,7 +10,6 @@ import Tag from "wowds-ui/Tag";
 
 const SessionItem = ({ session }: { session: SessionApiResponseDto }) => {
   const { description = "", period, week, title, difficulty } = session;
-  console.log(session);
   const { startDate, endDate } = period;
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
