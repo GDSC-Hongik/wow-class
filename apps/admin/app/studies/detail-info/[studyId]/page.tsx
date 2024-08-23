@@ -1,14 +1,18 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
+import { Space, Text } from "@wow-class/ui";
 import { createStudyApi } from "apis/form/createStudyApi";
 import { routerPath } from "constants/router/routerPath";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
 import Button from "wowds-ui/Button";
 
-import Header from "@/studies/[study]/_components/Header";
+import Header from "@/studies/[study]/_components/header/Header";
+
+import StudyCurriculum from "./_components/StudyCurriculum";
+import StudyDescription from "./_components/StudyDescription";
 
 const CreateStudyDetailInfoPage = ({
   params,
@@ -32,6 +36,7 @@ const CreateStudyDetailInfoPage = ({
     }
   };
 
+  console.log(methods.watch("studySessions"));
   return (
     <FormProvider {...methods}>
       <Flex
@@ -41,10 +46,18 @@ const CreateStudyDetailInfoPage = ({
         position="relative"
         width="100%"
       >
+        <Text color="sub" typo="h3">
+          스터디 상세 정보를 입력해주세요
+        </Text>
+        <Space height={12} />
         <Suspense fallback={<>loading..</>}>
-          <Header />
+          <Header isCompact={true} studyId={studyId} />
         </Suspense>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <Space height={48} />
+          <StudyDescription />
+          <Space height={64} />
+          <StudyCurriculum studyId={studyId} />
           <Button
             disabled={!methods.formState.isValid}
             role="button"

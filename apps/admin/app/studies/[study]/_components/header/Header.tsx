@@ -13,7 +13,13 @@ import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
 import { DownArrow } from "wowds-icons";
 import TextButton from "wowds-ui/TextButton";
 
-const Header = ({ studyId }: { studyId: string }) => {
+const Header = ({
+  studyId,
+  isCompact = false,
+}: {
+  studyId: string;
+  isCompact?: boolean;
+}) => {
   const [showIntro, setShowIntro] = useState(false);
   const [studyInfo, setStudyInfo] = useState<
     StudyBasicInfoApiResponseDto | undefined
@@ -82,14 +88,16 @@ const Header = ({ studyId }: { studyId: string }) => {
               tabIndex={0}
               onClick={handleClickShowIntro}
             >
-              <DownArrow
-                aria-label={introSectionIconAriaLabel}
-                className={downArrowIconStyle}
-                height={20}
-                stroke="textBlack"
-                style={{ rotate: showIntro ? "0deg" : "180deg" }}
-                width={20}
-              />
+              {!isCompact && (
+                <DownArrow
+                  aria-label={introSectionIconAriaLabel}
+                  className={downArrowIconStyle}
+                  height={20}
+                  stroke="textBlack"
+                  style={{ rotate: showIntro ? "0deg" : "180deg" }}
+                  width={20}
+                />
+              )}
             </button>
           </Flex>
         </section>

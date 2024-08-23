@@ -48,7 +48,7 @@ const StudyListItem = async ({ study }: { study: StudyListApiResponseDto }) => {
               스터디 삭제
             </Button>
           )}
-          <Link href={`${routerPath.studyDetailInfo}${studyId}`}>
+          <Link href={`${routerPath.studyDetailInfo.href}/${studyId}`}>
             <Button size="sm" variant="solid">
               상세 정보 입력
             </Button>
