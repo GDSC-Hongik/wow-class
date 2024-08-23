@@ -13,7 +13,7 @@ export const AssignmentContent = () => {
   //TODO: studyDashboard.isLinkEditable 가 false 면 이번 주 과제 조회 api 사용
   const studyDashboard = studyDashBoardData;
   return (
-    <>
+    <section>
       <Flex className={boxContainerStyle} gap="lg">
         {studyDashBoardData.isLinkEditable && (
           <>
@@ -30,7 +30,7 @@ export const AssignmentContent = () => {
           <AssignmentOverviewBox assignments={assignmentData} />
         )}
       </Flex>
-    </>
+    </section>
   );
 };
 

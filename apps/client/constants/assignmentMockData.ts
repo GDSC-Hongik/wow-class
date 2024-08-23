@@ -45,7 +45,7 @@ export const studyDashBoardData: StudyDetailDashboardDto = {
 
 export const assignmentData: Assignment[] = [
   {
-    studyDetailId: 125,
+    studyDetailId: 121,
     assignmentStatus: "OPEN",
     week: 4,
     title: "API Development",
@@ -57,7 +57,7 @@ export const assignmentData: Assignment[] = [
     committedAt: "2024-08-20T14:30:00",
   },
   {
-    studyDetailId: 123,
+    studyDetailId: 122,
     assignmentStatus: "OPEN",
     week: 3,
     title: "Database Design Assignment",
@@ -81,7 +81,7 @@ export const assignmentData: Assignment[] = [
     committedAt: "2024-08-20T14:30:00",
   },
   {
-    studyDetailId: 123,
+    studyDetailId: 124,
     assignmentStatus: "OPEN",
     week: 3,
     title: "Database Design Assignment",
@@ -106,7 +106,7 @@ export const assignmentData: Assignment[] = [
   },
   //제출 안함/마감
   {
-    studyDetailId: 124,
+    studyDetailId: 126,
     assignmentStatus: "OPEN",
     week: 4,
     title: "API Development",
@@ -118,7 +118,7 @@ export const assignmentData: Assignment[] = [
     committedAt: "2024-08-20T14:30:00",
   },
   {
-    studyDetailId: 125,
+    studyDetailId: 127,
     assignmentStatus: "OPEN",
     week: 4,
     title: "API Development",

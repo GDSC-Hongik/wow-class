@@ -1,32 +1,31 @@
 "use client";
 
 import { css } from "@styled-system/css";
-import { useClickOutside } from "@wow-class/ui/hooks";
+import { useClickOutside, useOpenState } from "@wow-class/ui/hooks";
 import type { PropsWithChildren, ReactNode } from "react";
-import React, { useState } from "react";
 import { Close as CloseIcon } from "wowds-icons";
 
 interface PopoverProps extends PropsWithChildren {
-  trigger: ReactNode;
+  triggerContent: ReactNode;
 }
 
-const Popover = ({ trigger, children }: PopoverProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Popover = ({ triggerContent, children }: PopoverProps) => {
+  const { open, setOpen, onClose } = useOpenState();
 
-  const popoverRef = useClickOutside<HTMLDivElement>(() => setIsOpen(false));
+  const popoverRef = useClickOutside<HTMLDivElement>(onClose);
 
   const handleClickTrigger = () => {
-    setIsOpen((prev) => !prev);
+    setOpen((prev) => !prev);
   };
   const handleClickCloseButton = () => {
-    setIsOpen(false);
+    onClose();
   };
   return (
     <div className={popoverContainerStyle}>
       <button className={triggerStyle} onClick={handleClickTrigger}>
-        {trigger}
+        {triggerContent}
       </button>
-      {isOpen && (
+      {open && (
         <div className={popoverStyle} id="popover" ref={popoverRef}>
           <CloseIcon
             className={closeButtonStyle}
@@ -57,9 +56,9 @@ const popoverStyle = css({
   left: 0,
   transform: "translateY(8px)",
   borderRadius: "md",
-  backgroundColor: "backgroundDimmer",
+  backgroundColor: "rgba(0,0,0,0.6)",
   zIndex: 10000,
-  paddingX: "lg",
+  paddingX: "md",
   paddingY: "sm",
   boxShadow: "mono",
   backdropFilter: "blur(15px)",
@@ -71,6 +70,6 @@ const triggerStyle = css({
 const closeButtonStyle = css({
   position: "absolute",
   top: "sm",
-  right: "lg",
+  right: "md",
   cursor: "pointer",
 });

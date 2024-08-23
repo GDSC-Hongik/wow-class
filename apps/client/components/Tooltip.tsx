@@ -1,22 +1,22 @@
 "use client";
 
 import { css } from "@styled-system/css";
+import { useOpenState } from "@wow-class/ui/hooks";
 import type { PropsWithChildren, ReactNode } from "react";
-import React, { useState } from "react";
 
 interface TooltipProps extends PropsWithChildren {
   content: ReactNode;
 }
 
 const Tooltip = ({ content, children }: TooltipProps) => {
-  const [isVisible, setIsVisible] = useState(false);
+  const { open, onOpen, onClose } = useOpenState();
 
   const handleMouseEnter = () => {
-    setIsVisible(true);
+    onOpen();
   };
 
   const handleMouseLeave = () => {
-    setIsVisible(false);
+    onClose();
   };
 
   return (
@@ -26,7 +26,7 @@ const Tooltip = ({ content, children }: TooltipProps) => {
       onMouseLeave={handleMouseLeave}
     >
       {children}
-      {isVisible && <span className={tooltipStyle}>{content}</span>}
+      {open && <span className={tooltipStyle}>{content}</span>}
     </span>
   );
 };
@@ -43,7 +43,7 @@ const tooltipStyle = css({
   top: "100%",
   left: 0,
   borderRadius: "md",
-  backgroundColor: "backgroundDimmer",
+  backgroundColor: "rgba(0,0,0,0.6)",
   zIndex: 10000,
   paddingX: "md",
   paddingY: "sm",
