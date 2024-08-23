@@ -27,7 +27,7 @@ export const history: AssignmentHistoryDto[] = [
 
 export const studyDashBoardData: StudyDetailDashboardDto = {
   repositoryLink: "",
-  isLinkEditable: true,
+  isLinkEditable: false,
   submittableAssignments: [
     {
       studyDetailId: 1,
@@ -45,7 +45,19 @@ export const studyDashBoardData: StudyDetailDashboardDto = {
 
 export const assignmentData: Assignment[] = [
   {
-    studyDetailId: 123,
+    studyDetailId: 121,
+    assignmentStatus: "OPEN",
+    week: 4,
+    title: "API Development",
+    assignmentSubmissionStatus: "FAILURE",
+    descriptionLink: "https://example.com/assignment/124",
+    deadline: "2024-08-25T23:59:59",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "LOCATION_UNIDENTIFIABLE",
+    committedAt: "2024-08-20T14:30:00",
+  },
+  {
+    studyDetailId: 122,
     assignmentStatus: "OPEN",
     week: 3,
     title: "Database Design Assignment",
@@ -69,7 +81,7 @@ export const assignmentData: Assignment[] = [
     committedAt: "2024-08-20T14:30:00",
   },
   {
-    studyDetailId: 123,
+    studyDetailId: 124,
     assignmentStatus: "OPEN",
     week: 3,
     title: "Database Design Assignment",
@@ -80,9 +92,21 @@ export const assignmentData: Assignment[] = [
     submissionFailureType: "WORD_COUNT_INSUFFICIENT",
     committedAt: "sdf",
   },
+  {
+    studyDetailId: 125,
+    assignmentStatus: "OPEN",
+    week: 4,
+    title: "API Development",
+    assignmentSubmissionStatus: "FAILURE",
+    descriptionLink: "https://example.com/assignment/124",
+    deadline: "2024-08-25T23:59:59",
+    submissionLink: "https://github.com/GDSC-Hongik/wow-class",
+    submissionFailureType: "LOCATION_UNIDENTIFIABLE",
+    committedAt: "2024-08-20T14:30:00",
+  },
   //제출 안함/마감
   {
-    studyDetailId: 124,
+    studyDetailId: 126,
     assignmentStatus: "OPEN",
     week: 4,
     title: "API Development",
@@ -94,15 +118,15 @@ export const assignmentData: Assignment[] = [
     committedAt: "2024-08-20T14:30:00",
   },
   {
-    studyDetailId: 124,
+    studyDetailId: 127,
     assignmentStatus: "OPEN",
     week: 4,
     title: "API Development",
-    assignmentSubmissionStatus: "SUCCESS",
+    assignmentSubmissionStatus: "FAILURE",
     descriptionLink: "https://example.com/assignment/124",
-    deadline: "2024-08-20T14:30:00",
+    deadline: "2024-08-25T23:59:59",
     submissionLink: "https://github.com/GDSC-Hongik/wow-class",
-    submissionFailureType: "NONE",
+    submissionFailureType: "LOCATION_UNIDENTIFIABLE",
     committedAt: "2024-08-20T14:30:00",
   },
 ];
