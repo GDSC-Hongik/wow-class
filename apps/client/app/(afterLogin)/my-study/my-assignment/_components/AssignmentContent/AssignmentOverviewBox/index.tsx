@@ -51,4 +51,5 @@ const textButtonstyle = {
 
 const boxStyle = {
   minWidth: "484px",
+  height: "fit-content",
 };
