@@ -1,5 +1,8 @@
+import { baseUrl } from "constants/environment";
+
 export const routePath = {
   auth: "/auth",
+  ["github-oauth"]: `${baseUrl}/oauth2/authorization/github`,
   landing: "/landing",
   ["my-study"]: "/my-study",
   ["attendance-check"]: "/my-study/attendance-check",

@@ -1,19 +1,11 @@
-"use client";
-
 import { css } from "@styled-system/css";
 import { Header, Text } from "@wow-class/ui";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Button from "wowds-ui/Button";
 
 const LandingPage = () => {
-  const router = useRouter();
-
-  const handleClickLogin = () => {
-    router.push(routePath.auth);
-  };
-
   return (
     <div className={containerStyle}>
       <Header />
@@ -38,8 +30,9 @@ const LandingPage = () => {
         </Text>
         <Button
           aria-label="로그인 페이지로 이동"
+          asProp={Link}
+          href={routePath.auth}
           size="lg"
-          onClick={handleClickLogin}
         >
           로그인
         </Button>
