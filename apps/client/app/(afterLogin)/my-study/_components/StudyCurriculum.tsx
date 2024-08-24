@@ -37,6 +37,7 @@ const StudyCurriculum = async () => {
               period: { startDate, endDate },
               attendanceStatus,
               assignmentSubmissionStatus,
+              sessionStatus,
             },
             index
           ) => {
@@ -63,24 +64,30 @@ const StudyCurriculum = async () => {
                       {week}주차
                     </Text>
                   </div>
-                  <Flex direction="column" gap={4.5} justifyContent="center">
-                    <Flex alignItems="center" gap="xs">
-                      <Text as="h3" typo="h3">
-                        {title}
-                      </Text>
-                      <Tag color={difficultyColor} variant="outline">
-                        {difficultyLabel}
-                      </Tag>
-                    </Flex>
-                    <Text
-                      as="h3"
-                      className={studyWeekDescriptionStyle}
-                      color="sub"
-                      typo="h3"
-                    >
-                      {description}
+                  {sessionStatus === "CANCELLED" ? (
+                    <Text as="h3" color="sub" typo="h3">
+                      휴강 주차
                     </Text>
-                  </Flex>
+                  ) : (
+                    <Flex direction="column" gap={4.5} justifyContent="center">
+                      <Flex alignItems="center" gap="xs">
+                        <Text as="h3" typo="h3">
+                          {title}
+                        </Text>
+                        <Tag color={difficultyColor} variant="outline">
+                          {difficultyLabel}
+                        </Tag>
+                      </Flex>
+                      <Text
+                        as="h3"
+                        className={studyWeekDescriptionStyle}
+                        color="sub"
+                        typo="h3"
+                      >
+                        {description}
+                      </Text>
+                    </Flex>
+                  )}
                 </Table.Left>
                 <Table.Right className={rightColStyle}>
                   <Text as="h5" typo="body1">
