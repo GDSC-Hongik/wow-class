@@ -2,10 +2,8 @@ import { Flex } from "@styled-system/jsx";
 
 const AssignmentsLayout = ({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
 }>) => {
   return (
     <Flex
@@ -16,7 +14,6 @@ const AssignmentsLayout = ({
       width="100%"
     >
       {children}
-      {modal}
     </Flex>
   );
 };
