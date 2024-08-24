@@ -4,11 +4,12 @@ import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import AssignmentForm from "components/assignments/AssignmentForm";
+import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import type { AssignmentApiRequestDto } from "types/dtos/assignment";
 import Button from "wowds-ui/Button";
 
-const Assignments = ({ params }: { params: { id: string } }) => {
+const Assignments = ({ params }: { params: { study: string; id: string } }) => {
   const methods = useForm<AssignmentApiRequestDto>({
     defaultValues: {
       title: "",
@@ -17,12 +18,15 @@ const Assignments = ({ params }: { params: { id: string } }) => {
     },
   });
 
+  const router = useRouter();
+
   const handleClickSubmit = () => {
     const data = {
       title: methods.getValues("title"),
       deadline: methods.getValues("deadline"),
       descriptionLink: methods.getValues("descriptionLink"),
     };
+    router.push(`/studies/${params.study}/assignments/success`);
     // TODO: API 연결
   };
 
