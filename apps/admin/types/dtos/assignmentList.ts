@@ -8,3 +8,8 @@ export interface AssignmentApiResponseDto {
   descriptionLink: string;
   assignmentStatus: AssignStatusType;
 }
+
+export type AssignmentApiRequestDto = Pick<
+  AssignmentApiResponseDto,
+  "title" | "descriptionLink" | "deadline"
+>;
