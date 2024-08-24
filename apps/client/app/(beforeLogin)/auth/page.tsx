@@ -1,8 +1,10 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
+import { routePath } from "constants/routePath";
 import Image from "next/image";
-
-import LoginButton from "./_components/LoginButton";
+import Link from "next/link";
+import { color } from "wowds-tokens";
+import Button from "wowds-ui/Button";
 
 const AuthPage = async () => {
   return (
@@ -36,7 +38,15 @@ const AuthPage = async () => {
             GDSC Hongik 가입을 위해선 GitHub 계정이 필요해요.
           </Text>
         </div>
-        <LoginButton />
+        <Button
+          aria-label="github 로그인"
+          asProp={Link}
+          href={routePath["github-oauth"]}
+          icon={githubLogoIcon}
+          style={{ backgroundColor: `${color.github}` }}
+        >
+          GitHub 로그인
+        </Button>
       </section>
       <section className={imageContainerStyle}>
         <Image
@@ -51,6 +61,15 @@ const AuthPage = async () => {
 };
 
 export default AuthPage;
+
+const githubLogoIcon = (
+  <Image
+    alt="github-logo"
+    height={18}
+    src="/images/github-logo-white.svg"
+    width={18}
+  />
+);
 
 const mainContentStyle = css({
   display: "grid",

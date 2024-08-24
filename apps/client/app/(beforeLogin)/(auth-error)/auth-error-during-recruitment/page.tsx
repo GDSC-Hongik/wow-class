@@ -1,23 +1,11 @@
-"use client";
-
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Button from "wowds-ui/Button";
 
 const AuthErrorDuringRecruitmentPage = () => {
-  const router = useRouter();
-
-  const handleClickNavigateHome = () => {
-    router.push(routePath.landing);
-  };
-
-  const handleClickNavigateOnboarding = () => {
-    router.push(routePath.onboarding);
-  };
-
   return (
     <main className={mainContentStyle}>
       <Image
@@ -36,13 +24,14 @@ const AuthErrorDuringRecruitmentPage = () => {
         아래 버튼을 눌러 가입할 수 있어요!
       </p>
       <div className={buttonContainerStyle}>
-        <Button aria-label="홈으로 이동" onClick={handleClickNavigateHome}>
+        <Button aria-label="홈으로 이동" asProp={Link} href={routePath.landing}>
           홈으로 이동
         </Button>
         <Button
           aria-label="GDSC Hongik 가입하기"
+          asProp={Link}
+          href={routePath.onboarding}
           variant="outline"
-          onClick={handleClickNavigateOnboarding}
         >
           GDSC Hongik 가입하기
         </Button>

@@ -21,6 +21,7 @@ const MyStudyPage = async () => {
       <StudyCurriculum />
       <Space height={64} />
       <StudyAnnouncementList />
+      <Space height={35} />
     </>
   ) : (
     <EmptyStudy />
