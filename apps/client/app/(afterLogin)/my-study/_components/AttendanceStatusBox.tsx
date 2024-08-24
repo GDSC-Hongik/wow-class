@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { parseISODate } from "@wow-class/utils";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import LinkButton from "components/LinkButton";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import { routePath } from "constants/routePath";
@@ -28,7 +28,7 @@ const AttendanceStatusBox = ({
     minutes: endMinutes,
   } = parseISODate(deadLine);
 
-  const attendancePeriod = `${startYear}년 ${startMonth}월 ${startDay}일 00:00 - ${endHours}:${endMinutes}까지`;
+  const attendancePeriod = `${startYear}년 ${startMonth}월 ${startDay}일 00:00 - ${padWithZero(endHours)}:${padWithZero(endMinutes)}까지`;
   const { label: attendanceStatusLabel, color: attendanceStatusColor } =
     attendanceStatusMap[attendanceStatus];
 
