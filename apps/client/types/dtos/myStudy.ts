@@ -1,4 +1,5 @@
 import type { DayOfWeekType, SemesterType } from "types/entities/common";
+import type { Time } from "types/entities/common/time";
 import type {
   AssignmentStatusType,
   AssignmentSubmissionFailureType,
@@ -19,18 +20,8 @@ export interface BasicStudyInfoDto {
   introduction: string;
   mentorName: string;
   dayOfWeek: DayOfWeekType;
-  startTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
-  endTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
+  startTime: Time;
+  endTime: Time;
   totalWeek: number;
   period: {
     startDate: string;
