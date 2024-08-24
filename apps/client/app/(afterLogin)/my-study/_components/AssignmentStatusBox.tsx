@@ -12,7 +12,10 @@ import Tag from "wowds-ui/Tag";
 interface AssignmentStatusBoxProps {
   week: number;
   name: string;
-  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
+  assignmentSubmissionStatus: Extract<
+    AssignmentSubmissionStatusType,
+    "SUCCESS" | "FAILURE"
+  >;
   deadLine: string;
 }
 
@@ -77,13 +80,11 @@ const AssignmentStatusBox = ({
 export default AssignmentStatusBox;
 
 const assignmentSubmissionStatusMap: Record<
-  AssignmentSubmissionStatusType,
+  Extract<AssignmentSubmissionStatusType, "SUCCESS" | "FAILURE">,
   { label: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   SUCCESS: { label: "제출 완료", color: "blue" },
   FAILURE: { label: "제출 실패", color: "red" },
-  NOT_SUBMITTED: { label: "과제 휴강", color: "grey" },
-  // TODO 과제 휴강 타입 수정 필요
 };
 
 const dailyTaskBoxStyle = {

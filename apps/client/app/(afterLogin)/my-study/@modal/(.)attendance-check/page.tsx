@@ -5,7 +5,7 @@ import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
@@ -14,6 +14,42 @@ const AttendanceCheckModal = () => {
   const [attended, setAttended] = useState(false);
   const [error, setError] = useState(false);
   const [attendanceNumber, setAttendanceNumber] = useState("");
+  const [studyInfo, setStudyInfo] = useState({
+    currentWeek: 0,
+    studyName: "",
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const myOngoingStudyData = await myStudyApi.getMyOngoingStudyInfo();
+
+      if (!myOngoingStudyData?.studyId) {
+        return null;
+      }
+
+      const dailyTaskListData = await myStudyApi.getDailyTaskList(
+        myOngoingStudyData?.studyId
+      );
+      const basicStudyInfoData = await myStudyApi.getBasicStudyInfo(
+        myOngoingStudyData?.studyId
+      );
+
+      const attendanceDailyTask = dailyTaskListData?.find(
+        (dailyTask) => dailyTask.todoType === "ATTENDANCE"
+      );
+
+      if (!attendanceDailyTask?.week || !basicStudyInfoData?.title) {
+        return null;
+      }
+
+      setStudyInfo({
+        currentWeek: attendanceDailyTask?.week,
+        studyName: basicStudyInfoData?.title,
+      });
+    };
+
+    fetchData();
+  }, []);
 
   const handleChangeAttendanceNumber = (value: string) => {
     setAttendanceNumber(value);
@@ -54,7 +90,7 @@ const AttendanceCheckModal = () => {
             className={attendanceCompleteTitleStyle}
           >
             <Text as="h1" color="primary" typo="h1">
-              기초 웹스터디
+              {studyInfo.studyName}
             </Text>
             <Image
               alt="item separator"
@@ -63,7 +99,7 @@ const AttendanceCheckModal = () => {
               width={6}
             />
             <Text as="h1" color="primary" typo="h1">
-              4주차
+              {studyInfo.currentWeek}주차
             </Text>
           </section>
           <section aria-label="attendance-complete-description">
