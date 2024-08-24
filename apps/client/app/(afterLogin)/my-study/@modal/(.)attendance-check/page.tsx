@@ -4,8 +4,9 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
+import useFetchAttendanceCheckModalInfoData from "hooks/useFetchAttendanceCheckModalInfoData";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
@@ -14,42 +15,8 @@ const AttendanceCheckModal = () => {
   const [attended, setAttended] = useState(false);
   const [error, setError] = useState(false);
   const [attendanceNumber, setAttendanceNumber] = useState("");
-  const [studyInfo, setStudyInfo] = useState({
-    currentWeek: 0,
-    studyName: "",
-  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const myOngoingStudyData = await myStudyApi.getMyOngoingStudyInfo();
-
-      if (!myOngoingStudyData?.studyId) {
-        return null;
-      }
-
-      const dailyTaskListData = await myStudyApi.getDailyTaskList(
-        myOngoingStudyData?.studyId
-      );
-      const basicStudyInfoData = await myStudyApi.getBasicStudyInfo(
-        myOngoingStudyData?.studyId
-      );
-
-      const attendanceDailyTask = dailyTaskListData?.find(
-        (dailyTask) => dailyTask.todoType === "ATTENDANCE"
-      );
-
-      if (!attendanceDailyTask?.week || !basicStudyInfoData?.title) {
-        return null;
-      }
-
-      setStudyInfo({
-        currentWeek: attendanceDailyTask?.week,
-        studyName: basicStudyInfoData?.title,
-      });
-    };
-
-    fetchData();
-  }, []);
+  const { studyInfo } = useFetchAttendanceCheckModalInfoData();
 
   const handleChangeAttendanceNumber = (value: string) => {
     setAttendanceNumber(value);
