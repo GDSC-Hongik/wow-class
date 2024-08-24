@@ -3,6 +3,7 @@ import { apiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
 import type {
   BasicStudyInfoDto,
+  DailyTaskListDtoType,
   MyOngoingStudyInfoDto,
   StudyAnnouncementListDtoType,
   StudyCurriculumListDtoType,
@@ -57,6 +58,17 @@ export const myStudyApi = {
       `${apiPath.studyCurriculum}?studyId=${studyId}`,
       {
         next: { tags: [tags.studyCurriculum] },
+        cache: "no-store",
+      }
+    );
+
+    return response.data;
+  },
+  getDailyTaskList: async (studyId: number) => {
+    const response = await fetcher.get<DailyTaskListDtoType>(
+      `${apiPath.dailyTask}?studyId=${studyId}`,
+      {
+        next: { tags: [tags.dailyTask] },
         cache: "no-store",
       }
     );

@@ -70,3 +70,15 @@ interface StudyCurriculumDto {
 }
 
 export type StudyCurriculumListDtoType = StudyCurriculumDto[];
+
+export interface DailyTaskDto {
+  studyDetailId: number;
+  week: number;
+  todoType: "ATTENDANCE" | "ASSIGNMENT";
+  deadLine: string;
+  attendanceStatus: "ATTENDED" | "NOT_ATTENDED" | "BEFORE_ATTENDANCE";
+  assignmentTitle: string;
+  assignmentSubmissionStatus: "NOT_SUBMITTED" | "FAILURE" | "SUCCESS";
+}
+
+export type DailyTaskListDtoType = DailyTaskDto[];
