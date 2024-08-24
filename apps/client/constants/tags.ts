@@ -8,4 +8,5 @@ export const enum tags {
   studyDetailDashboard = "studyDetailDashboard",
   studyCurriculum = "studyCurriculum",
   dailyTask = "dailyTask",
+  myAccountInfo = "myAccountInfo",
 }

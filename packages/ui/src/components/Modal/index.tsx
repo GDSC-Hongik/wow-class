@@ -18,7 +18,7 @@ import { useClickOutside } from "../../hooks";
  * @param {string} [className] - 커스텀 클래스를 적용하기 위한 문자열.
  */
 
-interface ModalProps extends PropsWithChildren {
+export interface ModalProps extends PropsWithChildren {
   onClose?: () => void;
   style?: CSSProperties;
   className?: string;
