@@ -3,7 +3,7 @@ import type { StatusType } from "types/entities/common/auth";
 export interface DashboardApiResponseDto {
   member: {
     memberId: number;
-    role: "GUEST" | "ADMIN" | "REGULAR";
+    role: "GUEST" | "ASSOCIATE" | "REGULAR";
     manageRole: "ADMIN" | "NONE";
     studyRole: "MENTOR" | "STUDENT";
     basicInfo: {
