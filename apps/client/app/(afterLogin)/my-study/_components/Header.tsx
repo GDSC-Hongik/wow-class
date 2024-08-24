@@ -31,19 +31,17 @@ const Header = () => {
 
   useEffect(() => {
     const fetchBasicStudyInfoData = async () => {
-      const myOngoingStudyInfoResponseData =
-        await myStudyApi.getMyOngoingStudyInfo();
+      const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
-      if (!myOngoingStudyInfoResponseData?.studyId) {
+      if (!myOngoingStudyInfoData?.studyId) {
         return;
       }
 
-      const basicStudyInfoResponseData = await myStudyApi.getBasicStudyInfo(
-        myOngoingStudyInfoResponseData.studyId
+      const basicStudyInfoData = await myStudyApi.getBasicStudyInfo(
+        myOngoingStudyInfoData.studyId
       );
 
-      basicStudyInfoResponseData &&
-        setBasicStudyInfo(basicStudyInfoResponseData);
+      basicStudyInfoData && setBasicStudyInfo(basicStudyInfoData);
     };
 
     fetchBasicStudyInfoData();

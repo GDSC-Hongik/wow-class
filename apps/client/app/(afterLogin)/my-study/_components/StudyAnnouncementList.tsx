@@ -6,24 +6,22 @@ import Link from "next/link";
 import { color } from "wowds-tokens";
 
 const StudyAnnouncementList = async () => {
-  const myOngoingStudyInfoResponseData =
-    await myStudyApi.getMyOngoingStudyInfo();
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
-  if (!myOngoingStudyInfoResponseData?.studyId) {
+  if (!myOngoingStudyInfoData?.studyId) {
     return;
   }
 
-  const studyAnnouncementListResponseData =
-    await myStudyApi.getStudyAnnouncementList(
-      myOngoingStudyInfoResponseData?.studyId
-    );
+  const studyAnnouncementListData = await myStudyApi.getStudyAnnouncementList(
+    myOngoingStudyInfoData?.studyId
+  );
 
   return (
     <section aria-label="study-announcement-list">
       <Text as="h2" className={studyAnnouncementListHeadingStyle} typo="h2">
         스터디 공지
       </Text>
-      {studyAnnouncementListResponseData?.map(
+      {studyAnnouncementListData?.map(
         ({ studyAnnounceId, title, link, createdDate }, index) => (
           <Link
             className={studyAnnouncementListBoxStyle}

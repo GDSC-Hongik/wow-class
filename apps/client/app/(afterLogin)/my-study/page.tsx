@@ -10,10 +10,9 @@ import {
 import EmptyStudy from "./_components/EmptyStudy";
 
 const MyStudyPage = async () => {
-  const myOngoingStudyInfoResponseData =
-    await myStudyApi.getMyOngoingStudyInfo();
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
-  return myOngoingStudyInfoResponseData?.studyId ? (
+  return myOngoingStudyInfoData?.studyId ? (
     <>
       <Header />
       <Space height={48} />
