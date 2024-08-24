@@ -1,8 +1,5 @@
 import { css } from "@styled-system/css";
-import { Flex } from "@styled-system/jsx";
-import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
-import Image from "next/image";
 
 import EmptyStudyList from "./EmptyStudyList";
 import StudyListItem from "./StudyListItem";

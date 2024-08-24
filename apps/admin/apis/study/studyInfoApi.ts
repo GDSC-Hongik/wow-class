@@ -39,10 +39,8 @@ export const studyInfoApi = {
       `${mentorApiPath.sessions}?study=${studyId}`,
       {
         next: { tags: [tags.sessions] },
-        cache: "force-cache",
       }
     );
-    console.log(response.data);
     return response.data;
   },
 };
