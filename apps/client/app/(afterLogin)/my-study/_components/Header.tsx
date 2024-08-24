@@ -4,19 +4,18 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import { myStudyApi } from "apis/myStudyApi";
 import { dayToKorean } from "constants/dayToKorean";
+import useFetchBasicStudyInfoData from "hooks/useFetchBasicStudyInfoData";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import type { BasicStudyInfoDto } from "types/dtos/myStudy";
+import { useState } from "react";
 import { space } from "wowds-tokens";
 import TextButton from "wowds-ui/TextButton";
 
 const Header = () => {
-  const [basicStudyInfo, setBasicStudyInfo] =
-    useState<BasicStudyInfoDto | null>(null);
   const [showIntro, setShowIntro] = useState(false);
+
+  const { basicStudyInfo } = useFetchBasicStudyInfoData();
 
   const handleClickShowIntro = () => {
     setShowIntro((prev) => !prev);
@@ -28,24 +27,6 @@ const Header = () => {
   const introSectionImageAriaLabel = showIntro
     ? "Collapse introduction icon"
     : "Expand introduction icon";
-
-  useEffect(() => {
-    const fetchBasicStudyInfoData = async () => {
-      const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
-
-      if (!myOngoingStudyInfoData?.studyId) {
-        return;
-      }
-
-      const basicStudyInfoData = await myStudyApi.getBasicStudyInfo(
-        myOngoingStudyInfoData.studyId
-      );
-
-      basicStudyInfoData && setBasicStudyInfo(basicStudyInfoData);
-    };
-
-    fetchBasicStudyInfoData();
-  }, []);
 
   if (!basicStudyInfo) {
     return null;
