@@ -68,6 +68,7 @@ interface StudyCurriculumDto {
   assignmentStatus: AssignmentStatusType;
   assignmentSubmissionStatus: AssignmentSubmissionStatusType;
   submissionFailureType: AssignmentSubmissionFailureType;
+  submissionLink: string;
 }
 
 export type StudyCurriculumListDtoType = StudyCurriculumDto[];

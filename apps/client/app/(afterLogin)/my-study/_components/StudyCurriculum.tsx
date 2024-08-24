@@ -38,6 +38,7 @@ const StudyCurriculum = async () => {
               attendanceStatus,
               assignmentSubmissionStatus,
               sessionStatus,
+              submissionLink,
             },
             index
           ) => {
@@ -103,7 +104,7 @@ const StudyCurriculum = async () => {
                   <LinkButton
                     aria-label="check-submitted-assignment"
                     disabled={assignmentSubmissionStatus === "FAILURE"}
-                    href=""
+                    href={submissionLink || ""}
                     size="sm"
                     style={assignmentButtonStyle}
                     variant={
