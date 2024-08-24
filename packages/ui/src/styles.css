@@ -803,6 +803,9 @@ progress {
 .jc_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   justify-content: center;
 }
+.flex-d_column:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  flex-direction: column;
+}
 .top_0:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   top: 0;
 }

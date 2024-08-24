@@ -32,3 +32,42 @@ export const formatISODateWithDot = (dateString: string): string => {
 
   return `${year}.${month}.${day}`;
 };
+
+/**
+ * @description ISO Date 객체를 `${year}-${month}-${day}` 형식의 string으로 반환합니다.
+ * @example dateToFormatString(new Date('2024-08-20T15:30:00')) -> 2024-08-20
+ */
+
+export const dateToFormatString = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+};
+
+/**
+ * @description ISO Date 객체와 스터디 총 진행 기간(주)를 받아 ISO Date 객체를 반환합니다.
+ * @example getStudyEndDate(new Date('2024-08-20T15:30:00'), 2) -> new Date('2024-09-03T15:30:00')
+ */
+
+export const getStudyEndDate = (date: Date, studyCourseWeek: number): Date => {
+  const daysToAdd = studyCourseWeek * 7;
+
+  const endDate = new Date(date);
+  endDate.setDate(endDate.getDate() + daysToAdd);
+
+  return endDate;
+};
+
+/**
+ * @description ISO Date 형식의 string을 ISO Date 객체로 변환합니다.
+ * @example formatStringToDate('2024-08-20') -> new Date('2024-08-20')
+ */
+
+export const formatStringToDate = (dateString: string): Date => {
+  const [year, month, day] = dateString.split("-").map(Number);
+  if (year && month) return new Date(year, month - 1, day);
+  return new Date();
+};

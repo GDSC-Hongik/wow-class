@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { useModalState } from "src/hooks";
+import { useOpenState } from "src/hooks";
 
 import Text from "../Text";
+import type { ModalProps } from ".";
 import Modal from ".";
 
-const meta = {
+const meta: Meta<ModalProps> = {
   title: "Shared/Modal",
   component: Modal,
   tags: ["autodocs"],
@@ -47,13 +48,13 @@ export const Default: Story = {
 };
 
 export const StateModal = () => {
-  const { isOpen, openModal, closeModal } = useModalState();
+  const { open, onOpen, onClose } = useOpenState();
 
   return (
     <>
-      <button onClick={openModal}>모달 열기</button>
-      {isOpen && (
-        <Modal onClose={closeModal}>
+      <button onClick={onOpen}>모달 열기</button>
+      {open && (
+        <Modal onClose={onClose}>
           <Text as="h1" typo="h1">
             상세 정보가 등록되었어요.
           </Text>

@@ -25,4 +25,13 @@ export const studyHistoryApi = {
 
     return { success: response.ok };
   },
+
+  submitAssignment: async (studyDetailId: number) => {
+    const response = await fetcher.post(
+      `${apiPath.studyHistory}/submit?studyDetailId=${studyDetailId}`,
+      null
+    );
+
+    return { success: response.ok };
+  },
 };

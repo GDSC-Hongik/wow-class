@@ -1,17 +1,19 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
+import { studyHistoryApi } from "apis/studyHistoryApi";
 import { history } from "constants/assignmentMockData";
 import Image from "next/image";
 
 import { AssignmentHistoryItem } from "./AssignmentHistoryItem";
 
 export const AssignmentHistory = async () => {
-  // const studyHistory = await studyHistoryApi.getStudyHistory(1);
+  //TODO: 수강 중인 스터디 api 호출
+  //const studyId = await myStudyApi.getMyOngoingStudyInfo();
+  // const studyHistory = await studyHistoryApi.getStudyHistory(studyId);
   const studyHistories = history;
-
   if (studyHistories.length === 0) {
     return (
-      <>
+      <section>
         <Space height={133} />
         <Flex alignItems="center" direction="column" gap="xl">
           <Image
@@ -23,12 +25,12 @@ export const AssignmentHistory = async () => {
           <Text>진행된 과제가 없어요</Text>
         </Flex>
         <Space height={94} />
-      </>
+      </section>
     );
   }
 
   return (
-    <>
+    <section>
       <Text as="h2" typo="h2">
         과제 히스토리
       </Text>
@@ -41,6 +43,6 @@ export const AssignmentHistory = async () => {
           key={history.assignmentHistoryId}
         />
       ))}
-    </>
+    </section>
   );
 };
