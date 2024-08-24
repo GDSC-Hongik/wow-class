@@ -8,6 +8,7 @@ import type {
   StudyAnnouncementListDtoType,
   StudyCurriculumListDtoType,
 } from "types/dtos/myStudy";
+import type { DailyTaskType } from "types/entities/myStudy";
 
 export const myStudyApi = {
   getMyOngoingStudyInfo: async () => {
@@ -65,7 +66,7 @@ export const myStudyApi = {
     return response.data;
   },
   getDailyTaskList: async (studyId: number) => {
-    const response = await fetcher.get<DailyTaskListDtoType>(
+    const response = await fetcher.get<DailyTaskListDtoType<DailyTaskType>>(
       `${apiPath.dailyTask}?studyId=${studyId}`,
       {
         next: { tags: [tags.dailyTask] },

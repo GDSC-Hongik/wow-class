@@ -77,12 +77,10 @@ export interface DailyTaskDto<T extends DailyTaskType> {
   week: number;
   todoType: T;
   deadLine: string;
-  attendanceStatus: T extends "ATTENDANCE"
-    ? "ATTENDED" | "NOT_ATTENDED" | "BEFORE_ATTENDANCE"
-    : never;
+  attendanceStatus: T extends "ATTENDANCE" ? AttendanceStatusType : never;
   assignmentTitle: T extends "ASSIGNMENT" ? string : never;
   assignmentSubmissionStatus: T extends "ASSIGNMENT"
-    ? "NOT_SUBMITTED" | "FAILURE" | "SUCCESS"
+    ? Extract<AssignmentSubmissionStatusType, "FAILURE" | "SUCCESS">
     : never;
 }
 
