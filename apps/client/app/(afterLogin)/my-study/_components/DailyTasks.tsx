@@ -12,21 +12,34 @@ const DailyTasks = () => {
         <Text typo="h2">오늘의 할 일</Text>
         <DailyTaskCarousel>
           {dailyTaskMockData.map((dailyTask, index) => {
-            return dailyTask.type === "ATTENDANCE" ? (
-              <AttendanceStatusBox
-                attendanceStatus={dailyTask.attendanceStatus}
-                key={index}
-                period={dailyTask.period}
-                week={dailyTask.week}
-              />
-            ) : (
+            if (dailyTask.todoType === "ATTENDANCE") {
+              const { attendanceStatus, week, deadLine } = dailyTask;
+
+              return (
+                <AttendanceStatusBox
+                  attendanceStatus={attendanceStatus || "NOT_ATTENDED"}
+                  deadLine={deadLine}
+                  key={index}
+                  week={week}
+                />
+              );
+            }
+
+            const {
+              week,
+              assignmentTitle,
+              deadLine,
+              assignmentSubmissionStatus,
+            } = dailyTask;
+
+            return (
               <AssignmentStatusBox
-                deadline={dailyTask.deadline}
+                deadLine={deadLine}
                 key={index}
-                name={dailyTask.name}
-                week={dailyTask.week}
+                name={assignmentTitle || ""}
+                week={week}
                 assignmentSubmissionStatus={
-                  dailyTask.assignmentSubmissionStatus
+                  assignmentSubmissionStatus || "NOT_SUBMITTED"
                 }
               />
             );

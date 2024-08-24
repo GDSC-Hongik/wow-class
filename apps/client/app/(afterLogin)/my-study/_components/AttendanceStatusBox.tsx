@@ -12,27 +12,23 @@ import Tag from "wowds-ui/Tag";
 interface AttendanceStatusBoxProps {
   week: number;
   attendanceStatus: AttendanceStatusType;
-  period: {
-    start: string;
-    end: string;
-  };
+  deadLine: string;
 }
 
 const AttendanceStatusBox = ({
   week,
   attendanceStatus,
-  period,
+  deadLine,
 }: AttendanceStatusBoxProps) => {
   const {
     year: startYear,
     month: startMonth,
     day: startDay,
-    hours: startHour,
-    minutes: startMinute,
-  } = parseISODate(period.start);
-  const { hours: endHour, minutes: endMinute } = parseISODate(period.end);
+    hours: endHours,
+    minutes: endMinutes,
+  } = parseISODate(deadLine);
 
-  const attendancePeriod = `${startYear}년 ${startMonth}월 ${startDay}일 ${startHour}:${startMinute} - ${endHour}:${endMinute}까지`;
+  const attendancePeriod = `${startYear}년 ${startMonth}월 ${startDay}일 00:00 - ${endHours}:${endMinutes}까지`;
   const { label: attendanceStatusLabel, color: attendanceStatusColor } =
     attendanceStatusMap[attendanceStatus];
 

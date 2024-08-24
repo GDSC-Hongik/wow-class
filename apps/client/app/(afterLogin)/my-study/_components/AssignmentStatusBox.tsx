@@ -3,9 +3,9 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { parseISODate } from "@wow-class/utils";
 import LinkButton from "components/LinkButton";
-import { assignmentSubmissionStatusMap } from "constants/assignmentSubmissionStatusMap";
 import { routePath } from "constants/routePath";
-import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
+import type { ComponentProps } from "react";
+import type { AssignmentSubmissionStatusType } from "types/entities/myStudy";
 import Box from "wowds-ui/Box";
 import Tag from "wowds-ui/Tag";
 
@@ -13,16 +13,16 @@ interface AssignmentStatusBoxProps {
   week: number;
   name: string;
   assignmentSubmissionStatus: AssignmentSubmissionStatusType;
-  deadline: string;
+  deadLine: string;
 }
 
 const AssignmentStatusBox = ({
   week,
   name,
   assignmentSubmissionStatus,
-  deadline,
+  deadLine,
 }: AssignmentStatusBoxProps) => {
-  const { year, month, day, hours, minutes } = parseISODate(deadline);
+  const { year, month, day, hours, minutes } = parseISODate(deadLine);
 
   const attendanceDeadline = `${year}년 ${month}월 ${day}일 ${hours}:${minutes}까지`;
   const {
@@ -75,6 +75,16 @@ const AssignmentStatusBox = ({
 };
 
 export default AssignmentStatusBox;
+
+const assignmentSubmissionStatusMap: Record<
+  AssignmentSubmissionStatusType,
+  { label: string; color: ComponentProps<typeof Tag>["color"] }
+> = {
+  SUCCESS: { label: "제출 완료", color: "blue" },
+  FAILURE: { label: "제출 실패", color: "red" },
+  NOT_SUBMITTED: { label: "과제 휴강", color: "grey" },
+  // TODO 과제 휴강 타입 수정 필요
+};
 
 const dailyTaskBoxStyle = {
   maxWidth: "376px",

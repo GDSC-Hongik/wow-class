@@ -4,6 +4,7 @@ import type {
   AssignmentSubmissionFailureType,
   AssignmentSubmissionStatusType,
   AttendanceStatusType,
+  DailyTaskType,
   StudyDifficultyType,
   StudySessionStatusType,
 } from "types/entities/myStudy";
@@ -71,14 +72,18 @@ interface StudyCurriculumDto {
 
 export type StudyCurriculumListDtoType = StudyCurriculumDto[];
 
-export interface DailyTaskDto {
+export interface DailyTaskDto<T extends DailyTaskType> {
   studyDetailId: number;
   week: number;
-  todoType: "ATTENDANCE" | "ASSIGNMENT";
+  todoType: T;
   deadLine: string;
-  attendanceStatus: "ATTENDED" | "NOT_ATTENDED" | "BEFORE_ATTENDANCE";
-  assignmentTitle: string;
-  assignmentSubmissionStatus: "NOT_SUBMITTED" | "FAILURE" | "SUCCESS";
+  attendanceStatus: T extends "ATTENDANCE"
+    ? "ATTENDED" | "NOT_ATTENDED" | "BEFORE_ATTENDANCE"
+    : never;
+  assignmentTitle: T extends "ASSIGNMENT" ? string : never;
+  assignmentSubmissionStatus: T extends "ASSIGNMENT"
+    ? "NOT_SUBMITTED" | "FAILURE" | "SUCCESS"
+    : never;
 }
 
-export type DailyTaskListDtoType = DailyTaskDto[];
+export type DailyTaskListDtoType<T extends DailyTaskType> = DailyTaskDto<T>[];
