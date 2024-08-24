@@ -1,5 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
+import { Text } from "@wow-class/ui";
+import { studyRouterPath } from "constants/router/study";
 import Link from "next/link";
 import isAdmin from "utils/isAdmin";
 import { Plus } from "wowds-icons";
@@ -10,12 +12,12 @@ const CreateStudyButton = async () => {
   if (!adminStatus) return null;
 
   return (
-    <Link href="studies/create-study">
+    <Link href={studyRouterPath.createStudy.href}>
       <button className={createStudyButtonStyle}>
         <Flex gap="xs">
-          <p className={css({ textStyle: "label1", color: "sub" })}>
+          <Text color="sub" typo="label1">
             새로운 스터디 개설하기
-          </p>
+          </Text>
           <div className={PlusIconStyle}>
             <Plus height={14} width={14} />
           </div>

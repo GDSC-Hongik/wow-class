@@ -2,9 +2,10 @@ import "./global.css";
 import "wowds-ui/styles.css";
 import "@wow-class/ui/styles.css";
 
+import { JotaiProvider } from "components/JotaiProvider";
+import Navbar from "components/Navbar";
 import type { Metadata } from "next";
-
-import { JotaiProvider } from "../components/JotaiProvider";
+import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,13 +14,18 @@ export const metadata: Metadata = {
 
 const RootLayout = ({
   children,
+  modal,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
+  modal: ReactNode;
 }>) => {
   return (
     <html lang="ko">
       <body>
-        <JotaiProvider>{children}</JotaiProvider>
+        <JotaiProvider>
+          {children}
+          {modal}
+        </JotaiProvider>
       </body>
     </html>
   );

@@ -1,11 +1,11 @@
 import { fetcher } from "@wow-class/utils";
 import { apiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
-import type { StudyListApiResponseDto } from "types/dtos/apply-study";
+import type { StudyListApiResponseDto } from "types/dtos/applyStudy";
 
 export const studyApplyApi = {
   getStudyList: async () => {
-    const response = await fetcher.get<StudyListApiResponseDto[]>(
+    const response = await fetcher.get<StudyListApiResponseDto>(
       apiPath.applyStudy,
       {
         next: { tags: [tags.studyApply] },
