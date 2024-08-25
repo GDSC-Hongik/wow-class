@@ -2,7 +2,7 @@
 import { Flex } from "@styled-system/jsx";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 import { useRouter } from "next/navigation";
-import type { AssignmentStatusType } from "types/entities/assignStatus";
+import type { AssignmentStatusType } from "types/entities/study";
 import Button from "wowds-ui/Button";
 
 const CancelStudyButton = ({

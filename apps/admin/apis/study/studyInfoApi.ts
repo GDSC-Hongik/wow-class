@@ -5,7 +5,7 @@ import type { AnnouncementApiResponseDto } from "types/dtos/announcement";
 import type { AssignmentApiResponseDto } from "types/dtos/assignmentList";
 import type { SessionApiResponseDto } from "types/dtos/sessionList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
-import type { StudyAnnouncementType } from "types/entities/studyAnnouncement";
+import type { StudyAnnouncementType } from "types/entities/study";
 
 export const studyInfoApi = {
   getStudyBasicInfo: async (studyId: number) => {
@@ -46,7 +46,7 @@ export const studyInfoApi = {
     );
     return response.data;
   },
-  publishStudyAnnounce: async (
+  publishStudyAnnouncement: async (
     studyId: number,
     announcement: StudyAnnouncementType
   ) => {

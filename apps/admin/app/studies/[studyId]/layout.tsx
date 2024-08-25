@@ -6,10 +6,10 @@ const StudyLayout = ({
   modal: React.ReactNode;
 }>) => {
   return (
-    <>
+    <main>
       {children}
       {modal}
-    </>
+    </main>
   );
 };
 

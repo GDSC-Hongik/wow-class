@@ -25,7 +25,7 @@ const Navbar = async () => {
       name: "개설된 스터디",
       items: studyList?.map(({ studyId, title }) => {
         return {
-          href: `${String(studyId)}`,
+          href: `${studyId}`,
           imageUrl: folderImageUrl,
           alt: title,
           name: title,

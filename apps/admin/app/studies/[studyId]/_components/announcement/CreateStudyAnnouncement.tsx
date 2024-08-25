@@ -6,7 +6,7 @@ import { Text } from "@wow-class/ui";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 import { tags } from "constants/tags";
 import { useState } from "react";
-import type { StudyAnnouncementType } from "types/entities/studyAnnouncement";
+import type { StudyAnnouncementType } from "types/entities/study";
 import { customRevalidateTag } from "utils/customRevalidateTag";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
@@ -19,7 +19,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
     });
 
   const handlePublishAnnouncement = async (studyId: string) => {
-    const { success } = await studyInfoApi.publishStudyAnnounce(
+    const { success } = await studyInfoApi.publishStudyAnnouncement(
       parseInt(studyId, 10),
       studyAnnouncement
     );

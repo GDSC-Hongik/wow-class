@@ -7,7 +7,7 @@ import { studyInfoApi } from "apis/study/studyInfoApi";
 import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import type { StudyAnnouncementType } from "types/entities/studyAnnouncement";
+import type { StudyAnnouncementType } from "types/entities/study";
 import { customRevalidateTag } from "utils/customRevalidateTag";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";

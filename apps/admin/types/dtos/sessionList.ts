@@ -1,4 +1,4 @@
-import type { DifficultyType } from "types/entities/difficulty";
+import type { StudyDifficultyType } from "types/entities/study";
 
 export interface SessionApiResponseDto {
   studyDetailId: number;
@@ -10,5 +10,5 @@ export interface SessionApiResponseDto {
   week: number;
   title: string;
   description: string;
-  difficulty: DifficultyType;
+  difficulty: StudyDifficultyType;
 }
