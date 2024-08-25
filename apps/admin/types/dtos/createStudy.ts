@@ -1,8 +1,6 @@
-import type {
-  DayOfWeekType,
-  SemesterType,
-  StudyType,
-} from "types/entities/study";
+import type { DayOfWeekType } from "types/entities/dayofweek";
+import type { SemesterType, StudyType } from "types/entities/study";
+import type { TimeType } from "types/entities/time";
 export interface CreateStudyApiRequestDto {
   mentorId: number;
   academicYear: number;
@@ -13,17 +11,7 @@ export interface CreateStudyApiRequestDto {
   totalWeek: number;
   startDate: string;
   dayOfWeek: DayOfWeekType;
-  studyStartTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
-  studyEndTime: {
-    hour: number;
-    minute: number;
-    second: number;
-    nano: number;
-  };
+  studyStartTime: TimeType;
+  studyEndTime: TimeType;
   studyType: StudyType;
 }

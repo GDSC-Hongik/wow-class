@@ -4,9 +4,9 @@ import type { Assignment } from "types/dtos/studyDetail";
 import Box from "wowds-ui/Box";
 import TextButton from "wowds-ui/TextButton";
 
-import { AssignmentButtons } from "./AssignmenBoxButtons";
+import { AssignmentBoxButtons } from "./AssignmentBoxButtons";
+import { AssignmentBoxInfo } from "./AssignmentBoxInfo";
 import { AssignmentBoxTitle } from "./AssignmentBoxTitle";
-import { AssignmentSubmissionInfo } from "./AssignmetBoxInfo";
 
 interface AssignmentOverviewBoxProps {
   assignments: Assignment[];
@@ -27,13 +27,12 @@ export const AssignmentOverviewBox = ({
           text={
             <>
               <AssignmentBoxTitle assignment={assignment} />
-              <Space height={16} />
               <Link href={assignment.descriptionLink} target="_blank">
                 <TextButton style={textButtonstyle} text="과제 명세 확인" />
               </Link>
-              <AssignmentSubmissionInfo assignment={assignment} />
+              <AssignmentBoxInfo assignment={assignment} />
               <Space height={26} />
-              <AssignmentButtons
+              <AssignmentBoxButtons
                 assignment={assignment}
                 buttonsDisabled={buttonsDisabled}
               />
@@ -52,4 +51,6 @@ const textButtonstyle = {
 
 const boxStyle = {
   minWidth: "484px",
+  width: "484px",
+  height: "fit-content",
 };

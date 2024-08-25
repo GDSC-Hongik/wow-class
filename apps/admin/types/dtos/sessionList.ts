@@ -9,5 +9,6 @@ export interface SessionApiResponseDto {
   };
   week: number;
   title: string;
+  description: string;
   difficulty: DifficultyType;
 }

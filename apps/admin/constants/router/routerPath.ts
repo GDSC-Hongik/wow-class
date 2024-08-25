@@ -17,4 +17,8 @@ export const routerPath = {
     description: "스터디 공지를 삭제하기 위해 확인하는 모달창입니다.",
     href: `/announcement-delete`,
   },
+  studyDetailInfo: {
+    description: "스터디 관리 페이지로 이동합니다.",
+    href: "/studies/detail-info/",
+  },
 };
