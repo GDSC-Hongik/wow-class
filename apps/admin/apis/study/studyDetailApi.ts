@@ -8,7 +8,7 @@ import type {
 import type { SessionApiResponseDto } from "types/dtos/sessionList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
 
-export const studyInfoApi = {
+export const studyDetailApi = {
   getStudyBasicInfo: async (studyId: number) => {
     const response = await fetcher.get<StudyBasicInfoApiResponseDto>(
       `/common/studies/${studyId}`,
@@ -39,15 +39,19 @@ export const studyInfoApi = {
     );
     return response.data;
   },
-  createAssignment: async (studyId: number) => {
+  createAssignment: async (
+    studyId: number,
+    assignment: AssignmentApiRequestDto
+  ) => {
     const response = await fetcher.put<AssignmentApiRequestDto>(
       `/mentor/study-details/${studyId}/assignments`,
+      assignment,
       {
         next: { tags: [tags.assignments] },
         cache: "force-cache",
       }
     );
-    return response.data;
+    return { success: response.ok };
   },
   editAssignment: async (studyId: number) => {
     const response = await fetcher.patch<AssignmentApiRequestDto>(

@@ -3,6 +3,7 @@
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
+import { studyDetailApi } from "apis/study/studyDetailApi";
 import AssignmentForm from "components/assignments/AssignmentForm";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
@@ -17,21 +18,22 @@ const Assignments = ({
   const methods = useForm<AssignmentApiRequestDto>({
     defaultValues: {
       title: "",
-      deadline: "",
+      deadline: "2024-08-29T11:36:58.180Z",
       descriptionLink: "",
     },
   });
-
   const router = useRouter();
 
-  const handleClickSubmit = () => {
+  const handleClickSubmit = async () => {
     const data = {
       title: methods.getValues("title"),
       deadline: methods.getValues("deadline"),
       descriptionLink: methods.getValues("descriptionLink"),
     };
-    router.push(`/studies/${params.study}/assignments/${params.week}/success`);
-    // TODO: API 연결
+    const result = await studyDetailApi.createAssignment(+params.study, data);
+    if (result.success) {
+      router.push(`/studies/${params.study}/assignments/success`);
+    }
   };
 
   return (
