@@ -24,7 +24,11 @@ const DailyTasks = async () => {
         <Text typo="h2">오늘의 할 일</Text>
         <DailyTaskCarousel>
           {dailyTaskData?.map((dailyTask, index) => (
-            <DailyTaskItem dailyTask={dailyTask} index={index} key={index} />
+            <DailyTaskItem
+              dailyTask={dailyTask}
+              index={index}
+              key={dailyTask.studyDetailId}
+            />
           ))}
         </DailyTaskCarousel>
       </Flex>
