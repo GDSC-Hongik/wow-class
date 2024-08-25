@@ -2,6 +2,7 @@
 import { Flex } from "@styled-system/jsx";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 import { tags } from "constants/tags";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { AssignStatusType } from "types/entities/assignStatus";
 import { revalidateTagByName } from "utils/revalidateTagByName";
@@ -11,10 +12,12 @@ const AssignmentControlButton = ({
   descriptionLink,
   studyDetailId,
   assignmentStatus,
+  week,
 }: {
   descriptionLink: string;
   studyDetailId: number;
   assignmentStatus: AssignStatusType;
+  week: number;
 }) => {
   const router = useRouter();
 
@@ -48,11 +51,10 @@ const AssignmentControlButton = ({
             과제 휴강처리
           </Button>
           <Button
+            as={Link}
+            href={`/studies/${studyDetailId}/assignments/${week}/edit`}
             size="sm"
             variant="solid"
-            onClick={() => {
-              console.log("TODO: 과제 개설 페이지 연결");
-            }}
           >
             과제 개설하기
           </Button>

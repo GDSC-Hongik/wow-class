@@ -48,6 +48,7 @@ const AssignmentItem = ({
           assignmentStatus={assignmentStatus as AssignStatusType}
           descriptionLink={descriptionLink}
           studyDetailId={studyDetailId}
+          week={week}
         />
       </Table.Right>
     </Table>
