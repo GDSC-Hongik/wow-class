@@ -30,12 +30,15 @@ const Assignments = ({
       deadline: methods.getValues("deadline"),
       descriptionLink: methods.getValues("descriptionLink"),
     };
+
+    // TODO: 과제 상태에 따라서 create, edit 결정하기
     const result = await studyDetailApi.createAssignment(+params.study, data);
     if (result.success) {
       router.push(`/studies/${params.study}/assignments/success`);
     }
   };
 
+  // TODO: edit 상태라면 기본값 내려주기
   return (
     <>
       <styled.header className={headerStyle}>
