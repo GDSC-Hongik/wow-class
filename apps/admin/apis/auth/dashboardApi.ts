@@ -1,7 +1,8 @@
 import { fetcher } from "@wow-class/utils";
-import { apiPath } from "constants/apiPath";
+import { apiPath, mentorApiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
 import type { DashboardApiResponseDto } from "types/dtos/auth";
+import type { MyStudyListApiResponseDto } from "types/dtos/studyList";
 
 export const dashboardApi = {
   getDashboardInfo: async () => {
@@ -9,6 +10,7 @@ export const dashboardApi = {
       apiPath.dashboard,
       {
         next: { tags: [tags.dashboard] },
+        cache: "no-store",
       }
     );
 
@@ -16,5 +18,15 @@ export const dashboardApi = {
     const manageRole = response.data?.member.manageRole;
 
     return { studyRole, manageRole };
+  },
+  getMyStudyList: async () => {
+    const response = await fetcher.get<MyStudyListApiResponseDto[]>(
+      mentorApiPath.studyList,
+      {
+        next: { tags: [tags.dashboard] },
+        cache: "force-cache",
+      }
+    );
+    return response.data;
   },
 };
