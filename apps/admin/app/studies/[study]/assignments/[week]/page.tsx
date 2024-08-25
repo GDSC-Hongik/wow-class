@@ -1,21 +1,38 @@
 import { css } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
+import { studyDetailApi } from "apis/study/studyDetailApi";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
 
-const Assignments = ({ params }: { params: { week: string } }) => {
+const Assignments = async ({
+  params,
+}: {
+  params: { study: string; id: string };
+}) => {
+  const assignment = await studyDetailApi.getAssignment(+params.study);
+  if (!assignment) return null;
+
+  const {
+    studyDetailId,
+    title,
+    deadline,
+    week,
+    descriptionLink,
+    assignmentStatus,
+  } = assignment;
+
   return (
     <>
       <styled.header className={headerStyle}>
         <Text as="h1" typo="h1">
-          {params.week}주차 과제
+          {week}주차 과제
         </Text>
         <Flex gap="0.75rem">
           <Button size="sm" variant="outline">
             과제 휴강처리
           </Button>
-          <Link href={`${params.week}/edit`}>
+          <Link href={`${week}/edit`}>
             <Button size="sm" variant="outline">
               수정
             </Button>
@@ -26,19 +43,19 @@ const Assignments = ({ params }: { params: { week: string } }) => {
         <Flex direction="column" gap="xxs">
           <Text typo="h2">과제 제목</Text>
           <Text color="sub" typo="body1">
-            과제 제목
+            {title}
           </Text>
         </Flex>
         <Flex direction="column" gap="xxs">
           <Text typo="h2">과제 명세 링크</Text>
           <Text color="sub" typo="body1">
-            과제 명세 링크
+            {descriptionLink}
           </Text>
         </Flex>
         <Flex direction="column" gap="xxs">
           <Text typo="h2">과제 기한</Text>
           <Text color="sub" typo="body1">
-            과제 기한
+            {deadline}
           </Text>
         </Flex>
       </Flex>
