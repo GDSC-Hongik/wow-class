@@ -1,4 +1,4 @@
-const checkThisWeek = (dateString: string): boolean => {
+const getIsCurrentWeek = (dateString: string): boolean => {
   const date = new Date(dateString);
   const today = new Date();
 
@@ -8,4 +8,4 @@ const checkThisWeek = (dateString: string): boolean => {
   return today >= pastWeekDate && today <= date;
 };
 
-export default checkThisWeek;
+export default getIsCurrentWeek;

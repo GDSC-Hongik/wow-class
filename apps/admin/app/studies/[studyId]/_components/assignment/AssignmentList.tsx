@@ -1,7 +1,7 @@
 import { Space, Text } from "@wow-class/ui";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 
-import AssignmentItem from "./AssignmentItem";
+import AssignmentListItem from "./AssignmentListItem";
 
 const AssignmentList = async ({ studyId }: { studyId: string }) => {
   const assignmentList = await studyInfoApi.getAssignmentList(
@@ -14,7 +14,7 @@ const AssignmentList = async ({ studyId }: { studyId: string }) => {
       <Space height={24} />
       {assignmentList?.map((assignment, index) => {
         return (
-          <AssignmentItem
+          <AssignmentListItem
             assignment={assignment}
             key={`studyDetailId-${index}`}
           />

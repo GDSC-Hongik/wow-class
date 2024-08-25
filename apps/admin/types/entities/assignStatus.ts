@@ -1,1 +1,1 @@
-export type AssignStatusType = "NONE" | "OPEN" | "CANCELLED";
+export type AssignmentStatusType = "NONE" | "OPEN" | "CANCELLED";

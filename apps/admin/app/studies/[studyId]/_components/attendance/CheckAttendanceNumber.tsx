@@ -11,7 +11,7 @@ const CheckAttendanceNumber = () => {
       <Space height={24} />
       <div className={AttendanceContainerStyle}>
         <Box
-          style={{ maxWidth: "282px" }}
+          style={AttendanceBoxStyle}
           text={
             <Flex direction="column" gap="lg">
               <Flex direction="column" gap="xs">
@@ -25,17 +25,14 @@ const CheckAttendanceNumber = () => {
                   2024년 5월 23일 00:00 - 23:59까지
                 </Text>
               </Flex>
-              <Text
-                color="primary"
-                style={{ fontSize: "40px", fontWeight: 700 }}
-              >
+              <Text color="primary" style={AttendanceNumberStyle}>
                 2143
               </Text>
             </Flex>
           }
         />
         <Box
-          style={{ maxWidth: "282px" }}
+          style={AttendanceBoxStyle}
           text={
             <Flex direction="column" gap="lg">
               <Flex direction="column" gap="xs">
@@ -49,10 +46,7 @@ const CheckAttendanceNumber = () => {
                   2024년 5월 23일 00:00 - 23:59까지
                 </Text>
               </Flex>
-              <Text
-                color="outline"
-                style={{ fontSize: "40px", fontWeight: 700 }}
-              >
+              <Text color="outline" style={AttendanceNumberStyle}>
                 4176
               </Text>
             </Flex>
@@ -72,6 +66,11 @@ const AttendanceContainerStyle = css({
   gap: "md",
 });
 
-const SectionStyle = css({
-  padding: "24px 0px",
-});
+const AttendanceBoxStyle = {
+  maxWidth: "282px",
+};
+
+const AttendanceNumberStyle = {
+  fontSize: "40px",
+  fontWeight: 700,
+};

@@ -2,7 +2,7 @@ import { Space, Text } from "@wow-class/ui";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 
 import EmptySessionList from "./EmptySessionList";
-import SessionItem from "./SessionItem";
+import SessionListItem from "./SessionListItem";
 
 const SessionList = async ({ studyId }: { studyId: string }) => {
   const sessionList = await studyInfoApi.getSessionList(parseInt(studyId, 10));
@@ -16,7 +16,7 @@ const SessionList = async ({ studyId }: { studyId: string }) => {
       <Text typo="h2">스터디 커리큘럼</Text>
       <Space height={24} />
       {sessionList?.map((session, index) => (
-        <SessionItem key={`sessionItem-${index}`} session={session} />
+        <SessionListItem key={`sessionItem-${index}`} session={session} />
       ))}
     </section>
   );

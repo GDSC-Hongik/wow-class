@@ -5,15 +5,18 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import type { ComponentProps } from "react";
 import type { SessionApiResponseDto } from "types/dtos/sessionList";
 import type { DifficultyType } from "types/entities/difficulty";
-import checkThisWeek from "utils/checkThisWeek";
+import getIsCurrentWeek from "utils/getIsCurrentWeek";
 import Tag from "wowds-ui/Tag";
 
-const SessionItem = ({ session }: { session: SessionApiResponseDto }) => {
+const SessionListItem = ({ session }: { session: SessionApiResponseDto }) => {
   const { description = "", period, week, title, difficulty } = session;
   const { startDate, endDate } = period;
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
-  const thisWeekAssignment = checkThisWeek(endDate);
+
+  const sessionTimeLine = `${padWithZero(startMonth)}.${padWithZero(startDay)} - ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
+  const thisWeekAssignment = getIsCurrentWeek(endDate);
+
   return (
     <Table>
       <Table.Left>
@@ -42,16 +45,13 @@ const SessionItem = ({ session }: { session: SessionApiResponseDto }) => {
         </Flex>
       </Table.Left>
       <Table.Right>
-        <Text typo="body1">
-          {padWithZero(startMonth)}.{padWithZero(startDay)} -{" "}
-          {padWithZero(endMonth)}.{padWithZero(endDay)}
-        </Text>
+        <Text typo="body1">{sessionTimeLine}</Text>
       </Table.Right>
     </Table>
   );
 };
 
-export default SessionItem;
+export default SessionListItem;
 
 const ThisWeekBarStyle = cva({
   base: {
@@ -72,7 +72,6 @@ const ThisWeekBarStyle = cva({
 
 const DifficultyMap: Record<
   DifficultyType,
-  // eslint-disable-next-line no-undef
   { text: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   HIGH: {
@@ -86,5 +85,9 @@ const DifficultyMap: Record<
   LOW: {
     text: "기초",
     color: "blue",
+  },
+  BASIC: {
+    text: "초급",
+    color: "yellow",
   },
 };

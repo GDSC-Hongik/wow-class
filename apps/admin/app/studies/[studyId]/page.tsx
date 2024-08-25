@@ -7,18 +7,23 @@ import CheckAttendanceNumber from "./_components/attendance/CheckAttendanceNumbe
 import Header from "./_components/header/Header";
 import SessionList from "./_components/session/SessionList";
 
-const StudyPage = ({ params }: { params: { study: string } }) => {
+const StudyPage = ({ params }: { params: { studyId: string } }) => {
+  const { studyId } = params;
   return (
     <Flex direction="column" gap="64px" overflow="scroll" scrollbarWidth="none">
-      <Header studyId={params.study} />
+      <Header studyId={studyId} />
       <CheckAttendanceNumber />
-      <Divider style={{ minHeight: "1.2px" }} />
-      <AssignmentList studyId={params.study} />
-      <Divider style={{ minHeight: "1.2px" }} />
-      <SessionList studyId={params.study} />
+      <Divider style={MinHeightFullDividerStyle} />
+      <AssignmentList studyId={studyId} />
+      <Divider style={MinHeightFullDividerStyle} />
+      <SessionList studyId={studyId} />
       <Space height={64} />
     </Flex>
   );
 };
 
 export default StudyPage;
+
+const MinHeightFullDividerStyle = {
+  minHeight: "1.2px",
+};

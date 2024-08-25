@@ -1,1 +1,1 @@
-export type DifficultyType = "HIGH" | "MEDIUM" | "LOW";
+export type DifficultyType = "HIGH" | "MEDIUM" | "LOW" | "BASIC";
