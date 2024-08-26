@@ -1,10 +1,9 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
-import { createStudyApi } from "apis/form/createStudyApi";
 import { routerPath } from "constants/router/routerPath";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import Button from "wowds-ui/Button";
@@ -16,21 +15,7 @@ import {
 } from "./_components";
 
 const CreateStudyPage = () => {
-  const router = useRouter();
   const methods = useForm<CreateStudyApiRequestDto>({ mode: "onChange" });
-
-  const onSubmit = async (data: CreateStudyApiRequestDto) => {
-    const queryParams = new URLSearchParams();
-
-    Object.entries(data).forEach(([key, value]) => {
-      if (typeof value === "object") {
-        queryParams.append(key, JSON.stringify(value) || "");
-      } else {
-        queryParams.append(key, value || "");
-      }
-    });
-    router.push(`${routerPath["create-study-check"].href}?${queryParams}`);
-  };
 
   return (
     <FormProvider {...methods}>
@@ -41,18 +26,23 @@ const CreateStudyPage = () => {
         position="relative"
         width="100%"
       >
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form>
           <StudyNameTextField />
           <Space height={48} />
           <StudyMentorSelect />
           <Space height={64} />
           <StudyBasicInfo />
           <Button
+            asProp={Link}
             disabled={!methods.formState.isValid}
             role="button"
             size="sm"
             style={{ position: "absolute", top: "0px", right: "0px" }}
             type="submit"
+            href={{
+              pathname: `${routerPath["create-study-check"].href}`,
+              query: { data: JSON.stringify(methods.getValues()) },
+            }}
           >
             개설하기
           </Button>

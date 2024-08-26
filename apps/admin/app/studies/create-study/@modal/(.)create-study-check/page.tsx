@@ -8,21 +8,18 @@ import { routerPath } from "constants/router/routerPath";
 import { tags } from "constants/tags";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import { customRevalidateTag } from "utils/customRevalidateTag";
-import parseSearchParams from "utils/parseSearchParams";
 import Button from "wowds-ui/Button";
 
 const CreateStudyCheckModal = () => {
-  const searchParams = useSearchParams();
+  const data = JSON.parse(useSearchParams().get("data")!!);
   const router = useRouter();
   const { closeModal } = useModalRoute();
 
-  const studyName = searchParams.get("title");
-  const semester = `${searchParams.get("academicYear")}-${searchParams.get("semesterType") === "FIRST" ? "1" : "2"}`;
+  const studyName = data.title;
+  const semester = `${data.academicYear}-${data.semesterType === "FIRST" ? "1" : "2"}`;
 
   const handleClickSubmitButton = async () => {
-    const data = parseSearchParams<CreateStudyApiRequestDto>(searchParams);
     const result = await createStudyApi.postCreateStudy(data);
 
     if (result.success) {
