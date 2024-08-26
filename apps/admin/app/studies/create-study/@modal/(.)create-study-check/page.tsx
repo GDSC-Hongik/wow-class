@@ -21,7 +21,6 @@ const CreateStudyCheckModal = () => {
   const studyName = searchParams.get("title");
   const semester = `${searchParams.get("academicYear")}-${searchParams.get("semesterType") === "FIRST" ? "1" : "2"}`;
 
-  console.log(parseSearchParams<CreateStudyApiRequestDto>(searchParams));
   const handleClickSubmitButton = async () => {
     const data = parseSearchParams<CreateStudyApiRequestDto>(searchParams);
     const result = await createStudyApi.postCreateStudy(data);

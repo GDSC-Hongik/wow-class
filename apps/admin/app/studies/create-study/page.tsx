@@ -24,13 +24,12 @@ const CreateStudyPage = () => {
 
     Object.entries(data).forEach(([key, value]) => {
       if (typeof value === "object") {
-        queryParams.append(key, JSON.stringify(value));
+        queryParams.append(key, JSON.stringify(value) || "");
       } else {
-        queryParams.append(key, value);
+        queryParams.append(key, value || "");
       }
     });
     router.push(`${routerPath["create-study-check"].href}?${queryParams}`);
-    // createStudyApi.postCreateStudy(data);
   };
 
   return (

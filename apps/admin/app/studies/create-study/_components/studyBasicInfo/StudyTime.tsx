@@ -16,7 +16,6 @@ const StudyTime = () => {
 
   const isAssignmentStudy = watch("studyType") === "ASSIGNMENT";
 
-  console.log(isAssignmentStudy);
   const handleSetTime = (value: Value) => {
     if (!value) return;
     onChange(value);
