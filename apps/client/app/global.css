@@ -6,4 +6,5 @@ body {
   font-family: "SUIT" !important;
   display: flex;
   flex-direction: row;
+  min-height: 100vh;
 }
