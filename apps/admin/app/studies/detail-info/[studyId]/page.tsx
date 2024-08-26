@@ -1,9 +1,8 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import { createStudyApi } from "apis/form/createStudyApi";
 import { routerPath } from "constants/router/routerPath";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Suspense } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
@@ -19,22 +18,8 @@ const CreateStudyDetailInfoPage = ({
 }: {
   params: { studyId: string };
 }) => {
-  const router = useRouter();
   const { studyId } = params;
   const methods = useForm<CreateStudyDetailInfoApiRequestDto>();
-
-  const onSubmit = async (data: CreateStudyDetailInfoApiRequestDto) => {
-    const success = await createStudyApi.postStudyDetailInfo(
-      data,
-      parseInt(studyId, 10)
-    );
-    if (success) {
-      window.alert("스터디 상세 정보를 저장했어요.");
-      router.push(routerPath.root.href);
-    } else {
-      window.alert("스터디 상세 정보 저장에 실패했어요.");
-    }
-  };
 
   return (
     <FormProvider {...methods}>
@@ -54,17 +39,25 @@ const CreateStudyDetailInfoPage = ({
         <Suspense fallback={<>loading..</>}>
           <Header isCompact={true} studyId={studyId} />
         </Suspense>
-        <form style={FormStyle} onSubmit={methods.handleSubmit(onSubmit)}>
+        <form style={FormStyle}>
           <Space height={48} />
           <StudyDescription />
           <Space height={64} />
           <StudyCurriculum studyId={studyId} />
           <Button
+            asProp={Link}
             disabled={!methods.formState.isValid}
             role="button"
             size="sm"
             style={{ position: "absolute", top: "0px", right: "0px" }}
             type="submit"
+            href={{
+              pathname: `${studyId}/${routerPath["detail-info-check"].href}`,
+              query: {
+                data: JSON.stringify(methods.getValues()),
+                studyId: studyId,
+              },
+            }}
           >
             저장하기
           </Button>

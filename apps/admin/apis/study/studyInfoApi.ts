@@ -36,7 +36,7 @@ export const studyInfoApi = {
   },
   getSessionList: async (studyId: number) => {
     const response = await fetcher.get<SessionApiResponseDto[]>(
-      `${mentorApiPath.sessions}?study=${studyId}`,
+      `${mentorApiPath.sessions}?studyId=${studyId}`,
       {
         next: { tags: [tags.sessions] },
       }
