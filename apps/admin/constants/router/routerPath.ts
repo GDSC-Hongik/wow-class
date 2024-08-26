@@ -21,4 +21,8 @@ export const routerPath = {
     description: "스터디 관리 페이지로 이동합니다.",
     href: "/studies/detail-info/",
   },
+  "create-study-check": {
+    description: "스터디 생성을 확인하는 모달창입니다.",
+    href: "create-study/create-study-check",
+  },
 };

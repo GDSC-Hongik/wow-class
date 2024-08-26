@@ -1,7 +1,10 @@
 "use client";
-import { Flex, styled } from "@styled-system/jsx";
+import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
 import { createStudyApi } from "apis/form/createStudyApi";
+import { routerPath } from "constants/router/routerPath";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import Button from "wowds-ui/Button";
@@ -13,10 +16,21 @@ import {
 } from "./_components";
 
 const CreateStudyPage = () => {
+  const router = useRouter();
   const methods = useForm<CreateStudyApiRequestDto>({ mode: "onChange" });
 
   const onSubmit = async (data: CreateStudyApiRequestDto) => {
-    createStudyApi.postCreateStudy(data);
+    const queryParams = new URLSearchParams();
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (typeof value === "object") {
+        queryParams.append(key, JSON.stringify(value));
+      } else {
+        queryParams.append(key, value);
+      }
+    });
+    router.push(`${routerPath["create-study-check"].href}?${queryParams}`);
+    // createStudyApi.postCreateStudy(data);
   };
 
   return (
@@ -41,7 +55,7 @@ const CreateStudyPage = () => {
             style={{ position: "absolute", top: "0px", right: "0px" }}
             type="submit"
           >
-            제출하기
+            개설하기
           </Button>
         </form>
       </Flex>
