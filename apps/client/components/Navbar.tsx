@@ -35,7 +35,7 @@ const Navbar = () => {
               alt={menu.alt}
               href={menu.href}
               imageUrl={menu.imageUrl}
-              items={menu.items}
+              // items={menu.items}
               key={menu.name}
               name={menu.name}
             />
