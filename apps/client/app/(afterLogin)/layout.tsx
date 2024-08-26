@@ -1,5 +1,13 @@
 import { styled } from "@styled-system/jsx";
 import Navbar from "components/Navbar";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

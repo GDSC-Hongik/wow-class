@@ -1,6 +1,14 @@
 import { dashboardApi } from "apis/dashboardApi";
 import { routePath } from "constants/routePath";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const SocialLoginRedirectPage = async () => {
   const { memberRole, currentRecruitmentOpen } =

@@ -1,9 +1,17 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import { routePath } from "constants/routePath";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 const AuthErrorAfterRecruitmentPage = () => {
   return (
