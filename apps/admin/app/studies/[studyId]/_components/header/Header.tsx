@@ -4,16 +4,33 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { studyInfoApi } from "apis/study/studyInfoApi";
 import { dayToKorean } from "constants/dayToKorean";
-import { headerMockData } from "constants/mockData";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { space } from "wowds-tokens";
+import { useEffect, useState } from "react";
+import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
+import { DownArrow } from "wowds-icons";
 import TextButton from "wowds-ui/TextButton";
 
-const Header = () => {
+const Header = ({ studyId }: { studyId: string }) => {
   const [showIntro, setShowIntro] = useState(false);
+  const [studyInfo, setStudyInfo] = useState<
+    StudyBasicInfoApiResponseDto | undefined
+  >(undefined);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (studyId) {
+        const data = await studyInfoApi.getStudyBasicInfo(
+          parseInt(studyId, 10)
+        );
+        if (data) setStudyInfo(data);
+      }
+    };
+
+    fetchData();
+  }, [studyId]);
 
   const handleClickShowIntro = () => {
     setShowIntro((prev) => !prev);
@@ -22,9 +39,11 @@ const Header = () => {
   const introSectionButtonAriaLabel = showIntro
     ? "Collapse introduction"
     : "Expand introduction";
-  const introSectionImageAriaLabel = showIntro
+  const introSectionIconAriaLabel = showIntro
     ? "Collapse introduction icon"
     : "Expand introduction icon";
+
+  if (!studyInfo) return null;
 
   const {
     title,
@@ -39,11 +58,10 @@ const Header = () => {
     period: { startDate, endDate },
     introduction,
     notionLink,
-  } = headerMockData;
+  } = studyInfo;
 
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
-
   const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
   const studySchedule = `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
   ${endHour}:${padWithZero(endMinute)}`;
@@ -64,11 +82,11 @@ const Header = () => {
             tabIndex={0}
             onClick={handleClickShowIntro}
           >
-            <Image
-              alt={introSectionImageAriaLabel}
+            <DownArrow
+              aria-label={introSectionIconAriaLabel}
               className={downArrowIconStyle}
               height={20}
-              src="/images/arrow.svg"
+              stroke="textBlack"
               style={{ rotate: showIntro ? "0deg" : "180deg" }}
               width={20}
             />
@@ -116,32 +134,17 @@ const Header = () => {
           </section>
           <section aria-labelledby="study-intro-heading">
             <Space height={28} />
-            <Flex direction="column" gap="4">
+            <Flex direction="column" gap="xs">
               <Text as="h3" typo="h3">
                 스터디 소개
               </Text>
               <Flex alignItems="center" gap="sm">
-                <Text as="h5" color="sub">
+                <Link href={notionLink || ""} role="button" tabIndex={0}>
+                  <TextButton style={{ padding: "0px" }} text="스터디 소개" />
+                </Link>
+                <Text color="sub" typo="body1">
                   {introduction}
                 </Text>
-                <Link
-                  className={introduceLinkStyle}
-                  href={notionLink || ""}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <Image
-                    alt="link-icon"
-                    height={24}
-                    src="/images/link.svg"
-                    width={24}
-                  />
-                  <TextButton
-                    size="lg"
-                    style={textButtonStyle}
-                    text="소개 링크 바로가기"
-                  />
-                </Link>
               </Flex>
             </Flex>
           </section>
@@ -160,14 +163,3 @@ const ItemSeparator = () => (
 const downArrowIconStyle = css({
   cursor: "pointer",
 });
-
-const introduceLinkStyle = css({
-  display: "flex",
-  alignItems: "center",
-  cursor: "pointer",
-  gap: "4px",
-});
-
-const textButtonStyle = {
-  padding: `${space.sm} 0`,
-};
