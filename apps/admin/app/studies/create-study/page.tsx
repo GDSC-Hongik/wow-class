@@ -3,7 +3,6 @@ import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import Button from "wowds-ui/Button";
