@@ -8,7 +8,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
 import Button from "wowds-ui/Button";
 
-import Header from "@/studies/[study]/_components/header/Header";
+import Header from "@/studies/[studyId]/_components/header/Header";
 
 import StudyCurriculum from "./_components/StudyCurriculum";
 import StudyDescription from "./_components/StudyDescription";

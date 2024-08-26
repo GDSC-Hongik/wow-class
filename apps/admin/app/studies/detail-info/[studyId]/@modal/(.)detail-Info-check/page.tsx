@@ -6,7 +6,7 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import { createStudyApi } from "apis/form/createStudyApi";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 import { routerPath } from "constants/router/routerPath";
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Button from "wowds-ui/Button";
 
@@ -32,7 +32,7 @@ const StudyDetailInfoCheckModal = () => {
     if (saveDetailInfo) {
       const timerId = setTimeout(() => {
         router.push(`${routerPath.root.href}`);
-      }, 300);
+      }, 500);
       return () => {
         clearTimeout(timerId);
       };
