@@ -50,5 +50,5 @@ const notFoundPageContentStyle = css({
 });
 
 const buttonStyle = {
-  width: 328,
+  maxWidth: 328,
 };

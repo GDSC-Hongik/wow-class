@@ -24,13 +24,19 @@ const AuthErrorDuringRecruitmentPage = () => {
         아래 버튼을 눌러 가입할 수 있어요!
       </p>
       <div className={buttonContainerStyle}>
-        <Button aria-label="홈으로 이동" asProp={Link} href={routePath.landing}>
+        <Button
+          aria-label="홈으로 이동"
+          asProp={Link}
+          href={routePath.landing}
+          style={buttonStyle}
+        >
           홈으로 이동
         </Button>
         <Button
           aria-label="GDSC Hongik 가입하기"
           asProp={Link}
           href={routePath.onboarding}
+          style={buttonStyle}
           variant="outline"
         >
           GDSC Hongik 가입하기
@@ -79,3 +85,7 @@ const buttonContainerStyle = css({
   gap: "12px",
   width: "100%",
 });
+
+const buttonStyle = {
+  maxWidth: "328px",
+};
