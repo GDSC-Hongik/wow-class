@@ -19,7 +19,7 @@ const middleware = async (req: NextRequest) => {
 
   if (studyRole === "STUDENT" && manageRole === "NONE") {
     const url =
-      process.env.NODE_ENV === "production"
+      process.env.VERCEL_ENV === "production"
         ? process.env.CLIENT_PROD_URL
         : process.env.CLIENT_DEV_URL;
 
