@@ -17,6 +17,7 @@ const MyStudyPage = () => {
       <StudyCurriculum />
       <Space height={64} />
       <StudyNotices />
+      <Space height={35} />
     </>
   );
 };
