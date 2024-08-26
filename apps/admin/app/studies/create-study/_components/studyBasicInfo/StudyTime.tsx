@@ -11,9 +11,12 @@ type ValuePiece = Date | string | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const StudyTime = () => {
-  const { control, setValue } = useFormContext();
+  const { control, setValue, watch } = useFormContext();
   const [value, onChange] = useState<Value>(["10:00", "11:00"]);
 
+  const isAssignmentStudy = watch("studyType") === "ASSIGNMENT";
+
+  console.log(isAssignmentStudy);
   const handleSetTime = (value: Value) => {
     if (!value) return;
     onChange(value);
@@ -47,10 +50,14 @@ const StudyTime = () => {
         control={control}
         name="studyStartTime"
         render={() => (
-          <TimeRangePicker value={value} onChange={handleSetTime} />
+          <TimeRangePicker
+            disabled={isAssignmentStudy}
+            value={value}
+            onChange={handleSetTime}
+          />
         )}
         rules={{
-          required: true,
+          required: !isAssignmentStudy,
         }}
       />
     </Flex>
