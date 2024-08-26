@@ -1,8 +1,10 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { NavItem } from "@wow-class/ui";
+import { dashboardApi } from "apis/auth/dashboardApi";
 import { createStudyApi } from "apis/study/createStudyApi";
 import Image from "next/image";
+import isAdmin from "utils/isAdmin";
 
 import adminImageUrl from "../public/images/administrator.svg";
 import folderImageUrl from "../public/images/folder.svg";
@@ -15,7 +17,9 @@ import participantImageUrl from "../public/images/particpant.svg";
  */
 
 const Navbar = async () => {
-  const studyList = await createStudyApi.getStudyList();
+  const studyList = (await isAdmin())
+    ? await createStudyApi.getStudyList()
+    : await dashboardApi.getMyStudyList();
 
   const navMenu = [
     {
@@ -25,7 +29,7 @@ const Navbar = async () => {
       name: "개설된 스터디",
       items: studyList?.map(({ studyId, title }) => {
         return {
-          href: `${String(studyId)}`,
+          href: `${studyId}`,
           imageUrl: folderImageUrl,
           alt: title,
           name: title,

@@ -1,4 +1,4 @@
-import type { AssignmentStatusType } from "types/entities/assignStatus";
+import type { AssignmentStatusType } from "types/entities/study";
 
 export interface AssignmentApiResponseDto {
   studyDetailId: number;
