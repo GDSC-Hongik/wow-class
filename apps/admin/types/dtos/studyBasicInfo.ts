@@ -1,12 +1,12 @@
 import type { DayOfWeekType } from "types/entities/dayofweek";
-import type { SemesterType } from "types/entities/semester";
+import type { StudySemesterType } from "types/entities/study";
 import type { TimeType } from "types/entities/time";
 
 export interface StudyBasicInfoApiResponseDto {
   studyId: number;
   title: string;
   academicYear: number;
-  semester: SemesterType;
+  semester: StudySemesterType;
   studyType: string;
   notionLink: string;
   introduction: string;

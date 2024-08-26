@@ -2,12 +2,12 @@ import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import type { DifficultyArrayType } from "types/entities/difficulty";
+import type { StudyDifficultyArrayType } from "types/entities/study";
 import { DownArrow } from "wowds-icons";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-export const difficultyArray: DifficultyArrayType = [
+export const difficultyArray: StudyDifficultyArrayType = [
   { text: "고급", value: "HIGH" },
   { text: "중급", value: "MEDIUM" },
   { text: "기초", value: "LOW" },

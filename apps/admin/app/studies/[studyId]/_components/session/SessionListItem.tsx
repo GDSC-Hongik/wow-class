@@ -4,7 +4,7 @@ import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import type { ComponentProps } from "react";
 import type { SessionApiResponseDto } from "types/dtos/sessionList";
-import type { DifficultyType } from "types/entities/difficulty";
+import type { StudyDifficultyType } from "types/entities/study";
 import getIsCurrentWeek from "utils/getIsCurrentWeek";
 import Tag from "wowds-ui/Tag";
 
@@ -71,7 +71,7 @@ const ThisWeekBarStyle = cva({
 });
 
 const DifficultyMap: Record<
-  DifficultyType,
+  StudyDifficultyType,
   { text: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   HIGH: {

@@ -1,4 +1,11 @@
-import type { DifficultyType } from "./difficulty";
+export type StudyDifficultyArrayType = {
+  text: string;
+  value: StudyDifficultyType;
+}[];
+
+export type StudyAssignmentStatusType = "NONE" | "OPEN" | "CANCELLED";
+
+export type StudyDifficultyType = "HIGH" | "MEDIUM" | "LOW" | "BASIC";
 
 export type StudyType = "ASSIGNMENT" | "ONLINE" | "OFFLINE";
 
@@ -8,8 +15,10 @@ export type StudySessionType = {
   studyDetailId: number;
   title: string;
   description: string;
-  difficulty: DifficultyType;
+  difficulty: StudyDifficultyType;
   status: StudyStatusType;
 };
 
 export type StudyStatusType = "NONE" | "OPEN" | "CANCELLED";
+
+export type StudySemesterType = "FIRST" | "SECOND";
