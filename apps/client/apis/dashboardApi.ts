@@ -9,13 +9,18 @@ export const dashboardApi = {
       apiPath.dashboard,
       {
         next: { tags: [tags.dashboard] },
+        cache: "no-store",
       }
     );
 
-    const memberRole = response.data?.member.role;
+    const {
+      role: memberRole,
+      manageRole,
+      studyRole,
+    } = response.data?.member || {};
     const currentRecruitmentOpen =
       response.data?.currentRecruitmentRound?.period.open || false;
 
-    return { memberRole, currentRecruitmentOpen };
+    return { memberRole, currentRecruitmentOpen, manageRole, studyRole };
   },
 };

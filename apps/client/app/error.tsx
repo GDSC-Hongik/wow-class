@@ -12,31 +12,22 @@ const ErrorPage = ({ reset }: { reset: () => void }) => {
   };
 
   return (
-    <html lang="ko">
-      <body>
-        <Flex direction="column" minHeight="100vh">
-          <Header />
-          <main className={errorPageContentStyle}>
-            <Image
-              alt="error"
-              height={344}
-              src="/images/error.svg"
-              width={358}
-            />
-            <Text as="h2" typo="display2">
-              에러가 발생했어요
-            </Text>
-            <Button
-              aria-label="다시 시도"
-              style={buttonStyle}
-              onClick={handleClickResetButton}
-            >
-              다시 시도
-            </Button>
-          </main>
-        </Flex>
-      </body>
-    </html>
+    <Flex direction="column" minHeight="100vh">
+      <Header />
+      <main className={errorPageContentStyle}>
+        <Image alt="error" height={344} src="/images/error.svg" width={358} />
+        <Text as="h2" typo="display2">
+          에러가 발생했어요
+        </Text>
+        <Button
+          aria-label="다시 시도"
+          style={buttonStyle}
+          onClick={handleClickResetButton}
+        >
+          다시 시도
+        </Button>
+      </main>
+    </Flex>
   );
 };
 

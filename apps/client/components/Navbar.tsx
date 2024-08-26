@@ -1,6 +1,8 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { NavItem } from "@wow-class/ui";
+import { dashboardApi } from "apis/dashboardApi";
+import { routePath } from "constants/routePath";
 import Image from "next/image";
 
 import { navMenu } from "../constants/navMenu";
@@ -11,7 +13,12 @@ import logoImageUrl from "../public/images/logo.svg";
  * @description client 내비게이션 바 컴포넌트입니다.
  */
 
-const Navbar = () => {
+const Navbar = async () => {
+  const { manageRole, studyRole } = await dashboardApi.getDashboardInfo();
+
+  const showConvertToMentorPageButton =
+    manageRole === "ADMIN" || studyRole === "MENTOR";
+
   return (
     <aside aria-label="client navigation bar" className={navbarContainerStyle}>
       <Flex align="center" gap={8} padding="6px 0px 7px 20px">
@@ -41,12 +48,14 @@ const Navbar = () => {
             />
           ))}
         </ul>
-        <NavItem
-          alt="administrator-icon"
-          href=""
-          imageUrl={adminImageUrl}
-          name="멘토 페이지로 전환"
-        />
+        {showConvertToMentorPageButton && (
+          <NavItem
+            alt="administrator-icon"
+            href={routePath.admin || ""}
+            imageUrl={adminImageUrl}
+            name="멘토 페이지로 전환"
+          />
+        )}
       </nav>
     </aside>
   );
