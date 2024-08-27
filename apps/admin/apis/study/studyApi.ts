@@ -1,9 +1,11 @@
 import { fetcher } from "@wow-class/utils";
 import { apiPath, mentorApiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
+import type { AnnouncementApiResponseDto } from "types/dtos/announcement";
 import type { AssignmentApiResponseDto } from "types/dtos/assignmentList";
 import type { SessionApiResponseDto } from "types/dtos/sessionList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
+import type { StudyAnnouncementType } from "types/entities/study";
 
 import type { StudyListApiResponseDto } from "../../types/dtos/studyList";
 
@@ -55,5 +57,41 @@ export const studyApi = {
       }
     );
     return response.data;
+  },
+  publishStudyAnnouncement: async (
+    studyId: number,
+    announcement: StudyAnnouncementType
+  ) => {
+    const response = await fetcher.post(
+      `/mentor/studies/${studyId}/announcements`,
+      announcement
+    );
+    return { success: response.ok };
+  },
+  getStudyAnnouncement: async (studyId: number) => {
+    const response = await fetcher.get<AnnouncementApiResponseDto[]>(
+      `/common/studies/${studyId}/announcements`,
+      {
+        next: { tags: [tags.announcements] },
+        cache: "force-cache",
+      }
+    );
+    return response.data;
+  },
+  modifyStudyAnnouncement: async (
+    studyAnnouncementId: number,
+    announcement: StudyAnnouncementType
+  ) => {
+    const response = await fetcher.put(
+      `/mentor/studies/announcements/${studyAnnouncementId}`,
+      announcement
+    );
+    return { success: response.ok };
+  },
+  deleteStudyAnnouncement: async (studyAnnouncementId: number) => {
+    const response = await fetcher.delete(
+      `/mentor/studies/announcements/${studyAnnouncementId}`
+    );
+    return { success: response.ok };
   },
 };

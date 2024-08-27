@@ -16,9 +16,12 @@ export type StudySessionType = {
   title: string;
   description: string;
   difficulty: StudyDifficultyType;
-  status: StudyStatusType;
+  status: StudyAssignmentStatusType;
 };
 
-export type StudyStatusType = "NONE" | "OPEN" | "CANCELLED";
+export type StudyAnnouncementType = {
+  title: string;
+  link: string;
+};
 
 export type StudySemesterType = "FIRST" | "SECOND";

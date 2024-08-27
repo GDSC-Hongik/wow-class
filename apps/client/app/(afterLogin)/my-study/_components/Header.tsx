@@ -5,7 +5,7 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import { dayToKorean } from "constants/dayToKorean";
-import { headerMockData } from "constants/mockData";
+import useFetchBasicStudyInfoData from "hooks/useFetchBasicStudyInfoData";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -14,6 +14,8 @@ import TextButton from "wowds-ui/TextButton";
 
 const Header = () => {
   const [showIntro, setShowIntro] = useState(false);
+
+  const { basicStudyInfo } = useFetchBasicStudyInfoData();
 
   const handleClickShowIntro = () => {
     setShowIntro((prev) => !prev);
@@ -25,6 +27,10 @@ const Header = () => {
   const introSectionImageAriaLabel = showIntro
     ? "Collapse introduction icon"
     : "Expand introduction icon";
+
+  if (!basicStudyInfo) {
+    return null;
+  }
 
   const {
     title,
@@ -39,7 +45,7 @@ const Header = () => {
     period: { startDate, endDate },
     introduction,
     notionLink,
-  } = headerMockData;
+  } = basicStudyInfo;
 
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
@@ -51,7 +57,7 @@ const Header = () => {
   ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
   return (
-    <header>
+    <header className={headerStyle}>
       <section aria-label="my-study-header">
         <Flex alignItems="center" gap={8}>
           <Text as="h1" typo="h1">
@@ -156,6 +162,10 @@ export default Header;
 const ItemSeparator = () => (
   <Image alt="item separator" height={4} src="/images/dot.svg" width={4} />
 );
+
+const headerStyle = css({
+  minHeight: "65px",
+});
 
 const downArrowIconStyle = css({
   cursor: "pointer",

@@ -1,39 +1,72 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { dailyTaskMockData } from "constants/mockData";
+import { myStudyApi } from "apis/myStudyApi";
+import type { DailyTaskDto } from "types/dtos/myStudy";
+import type { DailyTaskType } from "types/entities/myStudy";
 
 import { AttendanceStatusBox, DailyTaskCarousel } from ".";
 import AssignmentStatusBox from "./AssignmentStatusBox";
 
-const DailyTasks = () => {
+const DailyTasks = async () => {
+  const myOngoingStudyData = await myStudyApi.getMyOngoingStudyInfo();
+
+  if (!myOngoingStudyData?.studyId) {
+    return null;
+  }
+
+  const dailyTaskData = await myStudyApi.getDailyTaskList(
+    myOngoingStudyData?.studyId
+  );
+
   return (
     <section aria-label="daily-tasks">
       <Flex direction="column" gap="xl" position="relative">
         <Text typo="h2">오늘의 할 일</Text>
         <DailyTaskCarousel>
-          {dailyTaskMockData.map((dailyTask, index) => {
-            return dailyTask.type === "ATTENDANCE" ? (
-              <AttendanceStatusBox
-                attendanceStatus={dailyTask.attendanceStatus}
-                key={index}
-                period={dailyTask.period}
-                week={dailyTask.week}
-              />
-            ) : (
-              <AssignmentStatusBox
-                deadline={dailyTask.deadline}
-                key={index}
-                name={dailyTask.name}
-                week={dailyTask.week}
-                assignmentSubmissionStatus={
-                  dailyTask.assignmentSubmissionStatus
-                }
-              />
-            );
-          })}
+          {dailyTaskData?.map((dailyTask, index) => (
+            <DailyTaskItem
+              dailyTask={dailyTask}
+              index={index}
+              key={dailyTask.studyDetailId}
+            />
+          ))}
         </DailyTaskCarousel>
       </Flex>
     </section>
+  );
+};
+
+const DailyTaskItem = ({
+  dailyTask,
+  index,
+}: {
+  dailyTask: DailyTaskDto<DailyTaskType>;
+  index: number;
+}) => {
+  const {
+    todoType,
+    week,
+    deadLine,
+    attendanceStatus,
+    assignmentTitle,
+    assignmentSubmissionStatus,
+  } = dailyTask;
+
+  return todoType === "ATTENDANCE" ? (
+    <AttendanceStatusBox
+      attendanceStatus={attendanceStatus || "NOT_ATTENDED"}
+      deadLine={deadLine}
+      key={index}
+      week={week}
+    />
+  ) : (
+    <AssignmentStatusBox
+      assignmentSubmissionStatus={assignmentSubmissionStatus || "SUCCESS"}
+      deadLine={deadLine}
+      key={index}
+      name={assignmentTitle || ""}
+      week={week}
+    />
   );
 };
 
