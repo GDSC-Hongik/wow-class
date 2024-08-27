@@ -37,7 +37,7 @@ const StudyCurriculum = async () => {
               period: { startDate, endDate },
               attendanceStatus,
               assignmentSubmissionStatus,
-              sessionStatus,
+              curriculumStatus,
               submissionLink,
             },
             index
@@ -65,7 +65,7 @@ const StudyCurriculum = async () => {
                       {week}주차
                     </Text>
                   </div>
-                  {sessionStatus === "CANCELLED" ? (
+                  {curriculumStatus === "CANCELLED" ? (
                     <Text as="h3" color="sub" typo="h3">
                       휴강 주차
                     </Text>
