@@ -1,9 +1,9 @@
 import { Flex } from "@styled-system/jsx";
 import { useFormContext } from "react-hook-form";
-import type { AssignmentApiRequestDto } from "types/dtos/assignment";
+import type { AssignmentApiRequestDto } from "types/dtos/assignmentList";
 import TextField from "wowds-ui/TextField";
 
-const AssignmentForm = () => {
+const AssignmentForm = (assignment: AssignmentApiResponseDto) => {
   const { register } = useFormContext<AssignmentApiRequestDto>();
 
   return (
