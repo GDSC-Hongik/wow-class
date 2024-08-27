@@ -4,18 +4,18 @@ import { Text } from "@wow-class/ui";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
 
-const Assignments = ({ params }: { params: { id: string } }) => {
+const Assignments = ({ params }: { params: { week: string } }) => {
   return (
     <>
       <styled.header className={headerStyle}>
         <Text as="h1" typo="h1">
-          {params.id}주차 과제
+          {params.week}주차 과제
         </Text>
         <Flex gap="0.75rem">
           <Button size="sm" variant="outline">
             과제 휴강처리
           </Button>
-          <Link href={`${params.id}/edit`}>
+          <Link href={`${params.week}/edit`}>
             <Button size="sm" variant="outline">
               수정
             </Button>
