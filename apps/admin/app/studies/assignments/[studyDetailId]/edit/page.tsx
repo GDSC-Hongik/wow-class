@@ -1,5 +1,6 @@
 "use client";
 
+import { useOpenState } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -10,17 +11,21 @@ import type {
 
 import AssignmentForm from "../_components/AssignmentForm";
 import AssignmentHeader from "../_components/AssignmentHeader";
+import SuccessModal from "../_components/SuccessModal";
 
 const Assignments = ({
   params: { studyDetailId },
 }: {
   params: { study: string; studyDetailId: string };
 }) => {
+  const { open, onOpen } = useOpenState();
+
   const methods = useForm<AssignmentApiRequestDto>({
     defaultValues: {
       title: "",
       deadline: "",
       descriptionLink: "",
+      onOpen: onOpen,
     },
   });
 
@@ -40,14 +45,24 @@ const Assignments = ({
 
   if (!assignment) return null;
 
+  // TODO: studyName 추가
   return (
-    <FormProvider {...methods}>
-      <AssignmentHeader
-        assignment={assignment}
-        disabled={!methods.formState.isValid}
-      />
-      <AssignmentForm assignment={assignment} />
-    </FormProvider>
+    <>
+      {open && (
+        <SuccessModal
+          studyDetailId={studyDetailId}
+          studyName="스터디 제목"
+          week={assignment.week}
+        />
+      )}
+      <FormProvider {...methods}>
+        <AssignmentHeader
+          assignment={assignment}
+          disabled={!methods.formState.isValid}
+        />
+        <AssignmentForm assignment={assignment} />
+      </FormProvider>
+    </>
   );
 };
 

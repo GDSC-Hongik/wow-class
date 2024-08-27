@@ -19,17 +19,27 @@ interface AssignmentHeaderProps {
 }
 
 const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
-  const { studyDetailId, week } = assignment;
+  const { studyDetailId, week, assignmentStatus } = assignment;
   const methods = useFormContext<AssignmentApiRequestDto>();
   const router = useRouter();
 
+  const onOpen = methods.getValues("onOpen");
+
   const handleClickSubmit = async () => {
+    onOpen();
+
     const data = {
       title: methods.getValues("title"),
       deadline: methods.getValues("deadline"),
       descriptionLink: methods.getValues("descriptionLink"),
     };
-    router.push(`/studies/assignments/${studyDetailId}/success`);
+
+    // if (assignmentStatus === "NONE") {
+    //   router.push(`/studies/assignments/${studyDetailId}/create-success`);
+    // } else if (assignmentStatus === "OPEN") {
+    //   router.push(`/studies/assignments/${studyDetailId}/edit-success`);
+    // }
+
     // TODO: type에 따른 API 연결
     revalidateTagByName([tags.assignments, studyDetailId.toString()]);
   };
@@ -45,7 +55,7 @@ const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
         </Text>
       </Flex>
       <Button
-        disabled={disabled}
+        // disabled={disabled}
         size="sm"
         style={{ height: "fit-content" }}
         onClick={handleClickSubmit}
