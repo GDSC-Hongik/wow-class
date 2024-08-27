@@ -1,5 +1,8 @@
-import type { DayOfWeekType, SemesterType } from "types/entities/common";
-import type { Time } from "types/entities/common/time";
+import type {
+  DayOfWeekType,
+  SemesterType,
+  Time,
+} from "types/entities/common/time";
 import type {
   AssignmentStatusType,
   AssignmentSubmissionFailureType,
