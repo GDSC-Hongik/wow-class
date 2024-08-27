@@ -8,7 +8,7 @@ import { routerPath } from "constants/router/routerPath";
 import { tags } from "constants/tags";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { customRevalidateTag } from "utils/customRevalidateTag";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 const CreateStudyCheckModal = () => {
@@ -23,7 +23,7 @@ const CreateStudyCheckModal = () => {
     const result = await createStudyApi.postCreateStudy(data);
 
     if (result.success) {
-      await customRevalidateTag(tags.studyList);
+      await revalidateTagByName(tags.studyList);
       window.alert("스터디 생성에 성공했어요.");
       router.push(`${routerPath.root.href}`);
     } else {

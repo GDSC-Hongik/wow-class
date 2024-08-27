@@ -5,29 +5,27 @@ import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 import { tags } from "constants/tags";
-import { useSearchParams } from "next/navigation";
-import { customRevalidateTag } from "utils/customRevalidateTag";
+import useParseSearchParams from "hooks/useParseSearchParams";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 const AnnouncementDeleteModal = () => {
-  const searchParams = useSearchParams();
-
-  const studyAnnouncementId = searchParams.get("studyAnnouncementId");
+  const { parseToNumberSearchParams } = useParseSearchParams();
+  const studyAnnouncementId = parseToNumberSearchParams("studyAnnouncementId");
 
   const { closeModal } = useModalRoute();
 
   const handleClickDeleteButton = async () => {
-    const result = await studyInfoApi.deleteStudyAnnouncement(
-      Number(studyAnnouncementId)
-    );
+    const result =
+      await studyInfoApi.deleteStudyAnnouncement(studyAnnouncementId);
     if (result.success) {
-      await customRevalidateTag(tags.announcements);
+      await revalidateTagByName(tags.announcements);
       closeModal();
     }
   };
 
   return (
-    <Modal onClose={closeModal}>
+    <Modal>
       <Flex direction="column" textAlign="center" width="21rem">
         <Text typo="h1">공지를 삭제하시겠어요?</Text>
         <Space height={33} />

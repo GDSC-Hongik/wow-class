@@ -8,7 +8,7 @@ import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
-import { customRevalidateTag } from "utils/customRevalidateTag";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
@@ -30,13 +30,21 @@ const AnnouncementModifyModal = () => {
       studyAnnouncement
     );
     if (result.success) {
-      await customRevalidateTag(tags.announcements);
+      await revalidateTagByName(tags.announcements);
       closeModal();
     }
   };
 
+  const handleChangeStudyAnnouncementTitle = (value: string) => {
+    setStudyAnnouncement({ ...studyAnnouncement, title: value });
+  };
+
+  const handleChangeStudyAnnouncementLink = (value: string) => {
+    setStudyAnnouncement({ ...studyAnnouncement, link: value });
+  };
+
   return (
-    <Modal onClose={closeModal}>
+    <Modal>
       <Flex direction="column" textAlign="center" width="21rem">
         <Text typo="h1">공지를 수정해주세요</Text>
         <Space height={29} />
@@ -44,16 +52,12 @@ const AnnouncementModifyModal = () => {
           <TextField
             label="공지 제목"
             placeholder="입력해주세요"
-            onChange={(value) => {
-              setStudyAnnouncement({ ...studyAnnouncement, title: value });
-            }}
+            onChange={handleChangeStudyAnnouncementTitle}
           />
           <TextField
             label="공지 링크"
             placeholder="http://example.com"
-            onChange={(value) => {
-              setStudyAnnouncement({ ...studyAnnouncement, link: value });
-            }}
+            onChange={handleChangeStudyAnnouncementLink}
           />
         </Flex>
         <Space height={28} />
