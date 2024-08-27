@@ -9,7 +9,7 @@ import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import Button from "wowds-ui/Button";
 
 import {
-  StudyBasicInfo,
+  StudyBasicInformation,
   StudyMentorSelect,
   StudyNameTextField,
 } from "./_components";
@@ -42,7 +42,7 @@ const CreateStudyPage = () => {
           <Space height={48} />
           <StudyMentorSelect />
           <Space height={64} />
-          <StudyBasicInfo />
+          <StudyBasicInformation />
           <Button
             disabled={!methods.formState.isValid}
             role="button"
