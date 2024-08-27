@@ -5,7 +5,7 @@ export interface Time {
   nano: number;
 }
 
-export type DateType =
+export type DayOfWeekType =
   | "MONDAY"
   | "TUESDAY"
   | "WEDNESDAY"
@@ -13,3 +13,5 @@ export type DateType =
   | "FRIDAY"
   | "SATURDAY"
   | "SUNDAY";
+
+export type SemesterType = "FIRST" | "SECOND";

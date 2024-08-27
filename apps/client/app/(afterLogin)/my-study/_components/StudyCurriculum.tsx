@@ -1,54 +1,49 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
-import { padWithZero, parseISODate } from "@wow-class/utils";
+import { formatWeekPeriod } from "@wow-class/utils";
+import { myStudyApi } from "apis/myStudyApi";
 import LinkButton from "components/LinkButton";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
-import { studyCurriculumMockData } from "constants/mockData";
 import type { ComponentProps } from "react";
-import type { LevelType } from "types/entities/myStudy";
+import type { StudyDifficultyType } from "types/entities/myStudy";
+import { getIsCurrentWeek } from "utils/getIsCurrentWeek";
 import Tag from "wowds-ui/Tag";
 
-const formatWeekPeriod = (startDate: string, endDate: string) => {
-  const { month: startMonth, day: startDay } = parseISODate(startDate);
-  const { month: endMonth, day: endDay } = parseISODate(endDate);
+const StudyCurriculum = async () => {
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
-  const {
-    formattedStartMonth,
-    formattedStartDay,
-    formattedEndMonth,
-    formattedEndDay,
-  } = {
-    formattedStartMonth: padWithZero(startMonth),
-    formattedStartDay: padWithZero(startDay),
-    formattedEndMonth: padWithZero(endMonth),
-    formattedEndDay: padWithZero(endDay),
-  };
+  if (!myOngoingStudyInfoData?.studyId) {
+    return;
+  }
 
-  return `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
-};
+  const studyCurriculumData = await myStudyApi.getStudyCurriculumList(
+    myOngoingStudyInfoData?.studyId
+  );
 
-const StudyCurriculum = () => {
   return (
     <section aria-label="study-curriculum">
       <Text className={studyCurriculumTextStyle} typo="h2">
         스터디 커리큘럼
       </Text>
       <Flex direction="column">
-        {studyCurriculumMockData.map(
+        {studyCurriculumData?.map(
           (
             {
               week,
               title,
               description,
-              level,
+              difficulty,
               period: { startDate, endDate },
               attendanceStatus,
               assignmentSubmissionStatus,
+              sessionStatus,
+              submissionLink,
             },
             index
           ) => {
-            const { label: levelLabel, color: levelColor } = levelMap[level];
+            const { label: difficultyLabel, color: difficultyColor } =
+              difficultyMap[difficulty || "LOW"];
             const {
               label: attendanceStatusLabel,
               color: attendanceStatusColor,
@@ -57,33 +52,43 @@ const StudyCurriculum = () => {
               assignmentSubmissionStatus === "SUCCESS"
                 ? "제출한 과제 확인"
                 : "과제 제출하기";
+            const isCurrentWeek = getIsCurrentWeek(startDate, endDate);
 
             return (
               <Table key={index}>
                 <Table.Left className={leftColStyle}>
                   <div className={weekContainerStyle}>
+                    {isCurrentWeek && (
+                      <div className={currentWeekIndicatorStyle} />
+                    )}
                     <Text as="h5" typo="body1">
                       {week}주차
                     </Text>
                   </div>
-                  <Flex direction="column" gap={4.5} justifyContent="center">
-                    <Flex alignItems="center" gap="xs">
-                      <Text as="h3" typo="h3">
-                        {title}
-                      </Text>
-                      <Tag color={levelColor} variant="outline">
-                        {levelLabel}
-                      </Tag>
-                    </Flex>
-                    <Text
-                      as="h3"
-                      className={studyWeekDescriptionStyle}
-                      color="sub"
-                      typo="h3"
-                    >
-                      {description}
+                  {sessionStatus === "CANCELLED" ? (
+                    <Text as="h3" color="sub" typo="h3">
+                      휴강 주차
                     </Text>
-                  </Flex>
+                  ) : (
+                    <Flex direction="column" gap={4.5} justifyContent="center">
+                      <Flex alignItems="center" gap="xs">
+                        <Text as="h3" typo="h3">
+                          {title}
+                        </Text>
+                        <Tag color={difficultyColor} variant="outline">
+                          {difficultyLabel}
+                        </Tag>
+                      </Flex>
+                      <Text
+                        as="h3"
+                        className={studyWeekDescriptionStyle}
+                        color="sub"
+                        typo="h3"
+                      >
+                        {description}
+                      </Text>
+                    </Flex>
+                  )}
                 </Table.Left>
                 <Table.Right className={rightColStyle}>
                   <Text as="h5" typo="body1">
@@ -98,8 +103,8 @@ const StudyCurriculum = () => {
                   </Tag>
                   <LinkButton
                     aria-label="check-submitted-assignment"
-                    disabled={assignmentSubmissionStatus === "PENDING"}
-                    href=""
+                    disabled={assignmentSubmissionStatus === "FAILURE"}
+                    href={submissionLink || ""}
                     size="sm"
                     style={assignmentButtonStyle}
                     variant={
@@ -122,14 +127,14 @@ const StudyCurriculum = () => {
 
 export default StudyCurriculum;
 
-const levelMap: Record<
-  LevelType,
+const difficultyMap: Record<
+  StudyDifficultyType,
   { label: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   BASIC: { label: "기초", color: "blue" },
-  BEGINNER: { label: "초급", color: "yellow" },
-  INTERMEDIATE: { label: "중급", color: "green" },
-  ADVANCED: { label: "고급", color: "red" },
+  LOW: { label: "초급", color: "yellow" },
+  MEDIUM: { label: "중급", color: "green" },
+  HIGH: { label: "고급", color: "red" },
 };
 
 const studyCurriculumTextStyle = css({
@@ -159,4 +164,13 @@ const assignmentButtonStyle = {
 
 const weekContainerStyle = css({
   width: "84px",
+  display: "flex",
+  alignItems: "center",
+  gap: "4px",
+});
+
+const currentWeekIndicatorStyle = css({
+  width: "4px",
+  height: "18px",
+  backgroundColor: "primary",
 });

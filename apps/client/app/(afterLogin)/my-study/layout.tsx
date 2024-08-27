@@ -1,3 +1,4 @@
+import { css } from "@styled-system/css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ const Layout = ({
   modal: React.ReactNode;
 }) => {
   return (
-    <main>
+    <main className={layoutContainerStyle}>
       {children}
       {modal}
     </main>
@@ -20,3 +21,7 @@ const Layout = ({
 };
 
 export default Layout;
+
+const layoutContainerStyle = css({
+  height: "100%",
+});

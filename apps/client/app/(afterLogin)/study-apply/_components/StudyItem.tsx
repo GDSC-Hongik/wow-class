@@ -42,19 +42,18 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   const isNotApplicable = !isApplicable && !isCancelable;
   return (
     <Table>
-      <Flex direction="column" gap="xxs" justifyContent="center">
+      <Flex direction="column" gap="xxs" justifyContent="center" width={334}>
         <Flex className={contentStyle} gap="xs">
           <Text typo="h3">{title}</Text>
           <Tag color={sessionColors[studyType] ?? "green"} variant="solid1">
             {studyType}
           </Tag>
         </Flex>
-        <Text color="sub" typo="body2">
-          {`${introduction} -`}
-          <Link href={notionLink ?? ""} target="_blank">
-            {notionLink}
-          </Link>
-        </Text>
+        <Link href={notionLink ?? ""} target="_blank">
+          <Text className={introductionLinkTextStyle} color="sub" typo="body2">
+            {`(${introduction})`}
+          </Text>
+        </Link>
       </Flex>
       <Text className={textCellStyle}>{mentorName}</Text>
       <Text className={textCellStyle}>{studyTime}</Text>
@@ -100,6 +99,12 @@ const textCellStyle = css({
 
 const contentStyle = css({
   minWidth: "313px",
+});
+
+const introductionLinkTextStyle = css({
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 });
 
 const sessionColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> = {

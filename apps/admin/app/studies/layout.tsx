@@ -1,5 +1,7 @@
-import { Flex, styled } from "@styled-system/jsx";
+import { css } from "@styled-system/css";
+import { styled } from "@styled-system/jsx";
 import Navbar from "components/Navbar";
+
 const StudiesLayout = ({
   children,
 }: Readonly<{
@@ -8,18 +10,18 @@ const StudiesLayout = ({
   return (
     <>
       <Navbar />
-      <styled.div
-        height="100vh"
-        overflow="auto"
-        padding="54px 101px"
-        width="100%"
-      >
-        <Flex direction="column" gap="sm" height="100%" width="100%">
-          {children}
-        </Flex>
-      </styled.div>
+      <styled.main className={StudiesLayoutStyle}>{children}</styled.main>
     </>
   );
 };
 
 export default StudiesLayout;
+
+const StudiesLayoutStyle = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "sm",
+  height: "100vh",
+  width: "100%",
+  padding: "54px 101px",
+});

@@ -2,6 +2,7 @@ import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
 import Divider from "wowds-ui/Divider";
 
+import StudyAnnouncement from "./_components/announcement/StudyAnnouncement";
 import AssignmentList from "./_components/assignment/AssignmentList";
 import CheckAttendanceNumber from "./_components/attendance/CheckAttendanceNumber";
 import Header from "./_components/header/Header";
@@ -15,6 +16,8 @@ const StudyPage = ({ params }: { params: { studyId: string } }) => {
       <CheckAttendanceNumber />
       <Divider style={MinHeightFullDividerStyle} />
       <AssignmentList studyId={studyId} />
+      <Divider style={MinHeightFullDividerStyle} />
+      <StudyAnnouncement studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
       <SessionList studyId={studyId} />
       <Space height={64} />
