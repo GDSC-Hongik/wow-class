@@ -78,11 +78,10 @@ const AssignmentListItem = ({
                 과제 휴강처리
               </Button>
               <Button
+                asProp={Link}
+                href={`/studies/assignments/${studyDetailId}/edit`}
                 size="sm"
                 variant="solid"
-                onClick={() => {
-                  console.log("TODO: 과제 개설 페이지 연결");
-                }}
               >
                 과제 개설하기
               </Button>
