@@ -8,7 +8,7 @@ import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
-import { customRevalidateTag } from "utils/customRevalidateTag";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
@@ -30,7 +30,7 @@ const AnnouncementModifyModal = () => {
       studyAnnouncement
     );
     if (result.success) {
-      await customRevalidateTag(tags.announcements);
+      await revalidateTagByName(tags.announcements);
       closeModal();
     }
   };

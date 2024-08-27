@@ -6,7 +6,7 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
-import { customRevalidateTag } from "utils/customRevalidateTag";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 const AnnouncementDeleteModal = () => {
@@ -21,7 +21,7 @@ const AnnouncementDeleteModal = () => {
       Number(studyAnnouncementId)
     );
     if (result.success) {
-      await customRevalidateTag(tags.announcements);
+      await revalidateTagByName(tags.announcements);
       closeModal();
     }
   };

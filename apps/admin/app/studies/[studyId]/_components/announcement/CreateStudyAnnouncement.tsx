@@ -7,7 +7,7 @@ import { studyInfoApi } from "apis/study/studyInfoApi";
 import { tags } from "constants/tags";
 import { useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
-import { customRevalidateTag } from "utils/customRevalidateTag";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
@@ -24,7 +24,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
       studyAnnouncement
     );
     if (success) {
-      customRevalidateTag(tags.announcements);
+      revalidateTagByName(tags.announcements);
       setStudyAnnouncement({
         title: "",
         link: "",
