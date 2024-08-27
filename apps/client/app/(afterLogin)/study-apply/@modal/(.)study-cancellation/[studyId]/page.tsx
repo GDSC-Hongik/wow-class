@@ -36,6 +36,7 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
 
     if (result.success) {
       revalidateTagByName(tags.studyApply);
+      revalidateTagByName(tags.myOngoingStudy);
       setCancelSuccess(true);
     }
   };

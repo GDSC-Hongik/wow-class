@@ -9,7 +9,7 @@ export const studyApplyApi = {
       apiPath.applyStudy,
       {
         next: { tags: [tags.studyApply] },
-        cache: "force-cache",
+        cache: "no-store",
       }
     );
 
