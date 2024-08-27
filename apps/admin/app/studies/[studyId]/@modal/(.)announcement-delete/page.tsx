@@ -27,7 +27,7 @@ const AnnouncementDeleteModal = () => {
   };
 
   return (
-    <Modal onClose={closeModal}>
+    <Modal>
       <Flex direction="column" textAlign="center" width="21rem">
         <Text typo="h1">공지를 삭제하시겠어요?</Text>
         <Space height={33} />

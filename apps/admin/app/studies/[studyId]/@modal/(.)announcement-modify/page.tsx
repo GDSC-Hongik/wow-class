@@ -36,7 +36,7 @@ const AnnouncementModifyModal = () => {
   };
 
   return (
-    <Modal onClose={closeModal}>
+    <Modal>
       <Flex direction="column" textAlign="center" width="21rem">
         <Text typo="h1">공지를 수정해주세요</Text>
         <Space height={29} />
