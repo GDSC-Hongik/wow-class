@@ -12,7 +12,7 @@ import Button from "wowds-ui/Button";
 const Assignments = ({
   params,
 }: {
-  params: { study: string; week: string };
+  params: { study: string; studyDetailId: string };
 }) => {
   const methods = useForm<AssignmentApiRequestDto>({
     defaultValues: {
@@ -30,7 +30,7 @@ const Assignments = ({
       deadline: methods.getValues("deadline"),
       descriptionLink: methods.getValues("descriptionLink"),
     };
-    router.push(`/studies/${params.study}/assignments/${params.week}/success`);
+    router.push(`/studies/assignments/${params.studyDetailId}/success`);
     // TODO: API 연결
   };
 
@@ -42,7 +42,7 @@ const Assignments = ({
             과제 정보를 입력해주세요
           </Text>
           <Text as="h1" typo="h1">
-            {params.week}주차 과제
+            {params.studyDetailId}주차 과제
           </Text>
         </Flex>
         <Button
