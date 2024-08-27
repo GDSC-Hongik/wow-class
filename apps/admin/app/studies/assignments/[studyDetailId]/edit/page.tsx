@@ -57,6 +57,8 @@ const Assignments = ({
         return "개설";
       case "OPEN":
         return "수정";
+      default:
+        return "개설";
     }
   };
   const statusStr = formatStatusToString();
@@ -66,7 +68,6 @@ const Assignments = ({
     <>
       {open && (
         <SuccessModal
-          assignmentStatus={assignmentStatus}
           studyDetailId={studyDetailId}
           studyName="스터디 제목"
           type={statusStr}
