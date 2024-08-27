@@ -39,7 +39,7 @@ const CreateStudyPage = () => {
             style={{ position: "absolute", top: "0px", right: "0px" }}
             type="submit"
             href={{
-              pathname: `${routerPath["create-study-check"].href}`,
+              pathname: `${routerPath["created-study-check"].href}`,
               query: { data: JSON.stringify(methods.getValues()) },
             }}
           >
