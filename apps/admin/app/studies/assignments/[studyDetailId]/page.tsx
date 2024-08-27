@@ -20,6 +20,7 @@ const Assignments = async ({
 
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
+  // TODO: 휴강처리 API 연결
   return (
     <>
       <styled.header className={headerStyle}>
