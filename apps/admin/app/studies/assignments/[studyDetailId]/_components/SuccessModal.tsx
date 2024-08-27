@@ -8,10 +8,16 @@ import Button from "wowds-ui/Button";
 interface SuccesModalProps {
   studyName: string;
   week: number;
+  type: "개설" | "수정";
   studyDetailId: string;
 }
 
-const SuccessModal = ({ studyName, week, studyDetailId }: SuccesModalProps) => {
+const SuccessModal = ({
+  studyName,
+  week,
+  type,
+  studyDetailId,
+}: SuccesModalProps) => {
   return (
     <Modal>
       <Flex align="center" direction="column" gap="2.375rem" width="21rem">
@@ -20,7 +26,7 @@ const SuccessModal = ({ studyName, week, studyDetailId }: SuccesModalProps) => {
             {studyName} {week}주차
           </styled.span>
           <br />
-          과제가 개설되었어요
+          과제가 {type}되었어요
         </Text>
         <Button asProp={Link} href={`/studies/assignments/${studyDetailId}`}>
           과제 내용 보기
