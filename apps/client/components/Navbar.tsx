@@ -66,7 +66,8 @@ export default Navbar;
 const navbarContainerStyle = css({
   width: "250px",
   minWidth: "250px",
-  minHeight: "100vh",
+  height: "100vh",
+  position: "fixed",
   paddingTop: "54px",
   borderRightWidth: "arrow",
   borderColor: "mono.400",
