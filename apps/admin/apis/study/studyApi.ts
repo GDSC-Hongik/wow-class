@@ -40,6 +40,16 @@ export const studyApi = {
     );
     return response.data;
   },
+  getAssignment: async (studyDetailId: number) => {
+    const response = await fetcher.get<AssignmentApiResponseDto>(
+      `/mentor/study-details/${studyDetailId}/assignments`,
+      {
+        next: { tags: [tags.assignments, studyDetailId.toString()] },
+        cache: "force-cache",
+      }
+    );
+    return response.data;
+  },
   cancelAssignment: async (studyDetailId: number) => {
     const response = await fetcher.patch(
       `/mentor/study-details/${studyDetailId}/assignments/cancel`,
