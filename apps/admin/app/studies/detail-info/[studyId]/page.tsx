@@ -3,6 +3,7 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { Suspense } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
@@ -27,9 +28,7 @@ const CreateStudyDetailInfoPage = ({
         direction="column"
         height="100%"
         justifyContent="flex-start"
-        overflow="auto"
         position="relative"
-        scrollbarWidth="none"
         width="100%"
       >
         <Text as="div" color="sub" typo="h3">
@@ -49,7 +48,7 @@ const CreateStudyDetailInfoPage = ({
             disabled={!methods.formState.isValid}
             role="button"
             size="sm"
-            style={{ position: "absolute", top: "0px", right: "0px" }}
+            style={SubmitButtonStyle}
             type="submit"
             href={{
               pathname: `${studyId}/${routerPath["detail-info-check"].href}`,
@@ -71,4 +70,10 @@ export default CreateStudyDetailInfoPage;
 
 const FormStyle = {
   maxWidth: "60%",
+};
+
+const SubmitButtonStyle: CSSProperties = {
+  top: "0px",
+  right: "0px",
+  position: "absolute",
 };

@@ -1,7 +1,13 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
+import type { ReactNode } from "react";
 import { useState } from "react";
-import { Controller, useFormContext } from "react-hook-form";
+import type { ControllerRenderProps, FieldValues } from "react-hook-form";
+import {
+  Controller,
+  ControllerFieldState,
+  useFormContext,
+} from "react-hook-form";
 import type { StudyDifficultyArrayType } from "types/entities/study";
 import { DownArrow } from "wowds-icons";
 import DropDown from "wowds-ui/DropDown";
@@ -16,6 +22,19 @@ export const difficultyArray: StudyDifficultyArrayType = [
 const StudyInfoDifficulty = ({ index }: { index: number }) => {
   const [selectedOptionText, setSelectedOptionText] = useState("난이도");
   const { control } = useFormContext();
+
+  const handleChangeStudyDifficulty = ({
+    selectedValue,
+    selectedText,
+    field,
+  }: {
+    selectedValue: string;
+    selectedText: ReactNode;
+    field: ControllerRenderProps<FieldValues, string>;
+  }) => {
+    field.onChange(selectedValue);
+    setSelectedOptionText(String(selectedText));
+  };
   return (
     <Controller
       control={control}
@@ -30,9 +49,8 @@ const StudyInfoDifficulty = ({ index }: { index: number }) => {
               <DownArrow height={20} stroke="sub" width={20} />
             </div>
           }
-          onChange={({ selectedValue, selectedText }) => {
-            field.onChange(selectedValue);
-            setSelectedOptionText(String(selectedText));
+          onChange={({ selectedText, selectedValue }) => {
+            handleChangeStudyDifficulty({ selectedValue, selectedText, field });
           }}
         >
           {difficultyArray.map(({ text, value }) => (

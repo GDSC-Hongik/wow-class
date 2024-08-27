@@ -3,8 +3,8 @@
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
-import { createStudyApi } from "apis/form/createStudyApi";
-import { studyInfoApi } from "apis/study/studyInfoApi";
+import { createStudyApi } from "apis/study/createStudyApi";
+import { studyApi } from "apis/study/studyApi";
 import { routerPath } from "constants/router/routerPath";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -20,9 +20,7 @@ const StudyDetailInfoCheckModal = () => {
 
   useEffect(() => {
     const fetchStudyData = async () => {
-      const response = await studyInfoApi.getStudyBasicInfo(
-        parseInt(studyId, 10)
-      );
+      const response = await studyApi.getStudyBasicInfo(parseInt(studyId, 10));
       if (response) setStudyName(response.title);
     };
     fetchStudyData();
@@ -31,7 +29,7 @@ const StudyDetailInfoCheckModal = () => {
   useEffect(() => {
     if (saveDetailInfo) {
       const timerId = setTimeout(() => {
-        router.push(`${routerPath.root.href}`);
+        router.push(`${routerPath.root.href}/${studyId}`);
       }, 500);
       return () => {
         clearTimeout(timerId);

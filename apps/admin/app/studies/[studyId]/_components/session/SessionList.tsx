@@ -1,11 +1,11 @@
 import { Space, Text } from "@wow-class/ui";
-import { studyInfoApi } from "apis/study/studyInfoApi";
+import { studyApi } from "apis/study/studyApi";
 
 import EmptySessionList from "./EmptySessionList";
 import SessionListItem from "./SessionListItem";
 
 const SessionList = async ({ studyId }: { studyId: string }) => {
-  const sessionList = await studyInfoApi.getSessionList(parseInt(studyId, 10));
+  const sessionList = await studyApi.getSessionList(parseInt(studyId, 10));
 
   if (sessionList?.length === 0) {
     return <EmptySessionList />;

@@ -4,7 +4,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import { studyInfoApi } from "apis/study/studyInfoApi";
+import { studyApi } from "apis/study/studyApi";
 import { dayToKorean } from "constants/dayToKorean";
 import Image from "next/image";
 import Link from "next/link";
@@ -28,9 +28,7 @@ const Header = ({
   useEffect(() => {
     const fetchData = async () => {
       if (studyId) {
-        const data = await studyInfoApi.getStudyBasicInfo(
-          parseInt(studyId, 10)
-        );
+        const data = await studyApi.getStudyBasicInfo(parseInt(studyId, 10));
         if (data) setStudyInfo(data);
       }
     };

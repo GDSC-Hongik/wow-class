@@ -1,7 +1,7 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
-import { createStudyApi } from "apis/form/createStudyApi";
+import { createStudyApi } from "apis/study/createStudyApi";
 import { routerPath } from "constants/router/routerPath";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
