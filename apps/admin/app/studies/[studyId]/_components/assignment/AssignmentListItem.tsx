@@ -81,7 +81,7 @@ const AssignmentListItem = ({
                 size="sm"
                 variant="solid"
                 onClick={() => {
-                  console.log("TODO: 과제 개설 페이지 연결!");
+                  console.log("TODO: 과제 개설 페이지 연결");
                 }}
               >
                 과제 개설하기
