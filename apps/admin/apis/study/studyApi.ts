@@ -51,7 +51,7 @@ export const studyApi = {
       `${mentorApiPath.sessions}?studyId=${studyId}`,
       {
         next: { tags: [tags.sessions] },
-        cache: "no-store",
+        cache: "force-cache",
       }
     );
     return response.data;

@@ -6,9 +6,11 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import { createStudyApi } from "apis/study/createStudyApi";
 import { studyApi } from "apis/study/studyApi";
 import { routerPath } from "constants/router/routerPath";
+import { tags } from "constants/tags";
 import useParseSearchParams from "hooks/useParseSearchParams";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 const StudyDetailInfoCheckModal = () => {
@@ -48,6 +50,7 @@ const StudyDetailInfoCheckModal = () => {
     );
     if (success) {
       setSaveDetailInfo(true);
+      revalidateTagByName(tags.sessions);
     } else {
       await window.alert("스터디 상세 정보 저장에 실패했어요.");
       router.push(`${routerPath.root.href}`);
