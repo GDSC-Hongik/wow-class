@@ -16,14 +16,7 @@ const AssignmentListItem = ({
 }: {
   assignment: AssignmentApiResponseDto;
 }) => {
-  const {
-    studyDetailId,
-    title,
-    deadline,
-    week,
-    descriptionLink,
-    assignmentStatus,
-  } = assignment;
+  const { studyDetailId, title, deadline, week, assignmentStatus } = assignment;
   const thisWeekAssignment = getIsCurrentWeek(deadline);
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
@@ -61,7 +54,7 @@ const AssignmentListItem = ({
           {assignmentStatus === "OPEN" ? (
             <Button
               asProp={Link}
-              href={descriptionLink || ""}
+              href={`/studies/assignments/${studyDetailId}`}
               size="sm"
               variant="outline"
             >
