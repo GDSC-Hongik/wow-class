@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { studyRouterPath } from "constants/router/study";
+import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
 import isAdmin from "utils/isAdmin";
 import { Plus } from "wowds-icons";
@@ -12,7 +12,7 @@ const CreateStudyButton = async () => {
   if (!adminStatus) return null;
 
   return (
-    <Link href={studyRouterPath.createStudy.href}>
+    <Link href={routerPath.createStudy.href}>
       <button className={createStudyButtonStyle}>
         <Flex gap="xs">
           <Text color="sub" typo="label1">

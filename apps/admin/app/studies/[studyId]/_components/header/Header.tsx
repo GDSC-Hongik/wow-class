@@ -121,14 +121,19 @@ const Header = ({ studyId }: { studyId: string }) => {
                 <Text as="h5" color="sub">
                   {studySchedule}
                 </Text>
-                <ItemSeparator />
-                <Text as="h5" color="sub">
-                  {totalWeek}주 코스
-                </Text>
-                <ItemSeparator />
-                <Text as="h5" color="sub">
-                  {studyPeriod}
-                </Text>
+                <Flex gap="xs">
+                  <Text as="h5" color="sub">
+                    {studySchedule}
+                  </Text>
+                  <ItemSeparator />
+                  <Text as="h5" color="sub">
+                    {totalWeek}주 코스
+                  </Text>
+                  <ItemSeparator />
+                  <Text as="h5" color="sub">
+                    {studyPeriod}
+                  </Text>
+                </Flex>
               </Flex>
             </Flex>
           </section>
