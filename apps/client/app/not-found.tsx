@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Header, Text } from "@wow-class/ui";
-import { routerPath } from "constants/router/routerPath";
+import { routePath } from "constants/routePath";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
@@ -28,7 +28,7 @@ const NotFoundPage = () => {
         <Button
           aria-label="홈으로 이동"
           asProp={Link}
-          href={routerPath.root.href}
+          href={routePath.landing}
           style={buttonStyle}
         >
           홈으로 이동
