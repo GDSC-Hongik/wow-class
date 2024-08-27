@@ -3,8 +3,8 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
+import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
-import { useRouter } from "next/navigation";
 import { useFormContext } from "react-hook-form";
 import type {
   AssignmentApiRequestDto,
@@ -20,28 +20,34 @@ interface AssignmentHeaderProps {
 
 const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
   const { studyDetailId, week, assignmentStatus } = assignment;
-  const methods = useFormContext<AssignmentApiRequestDto>();
-  const router = useRouter();
+  const methods = useFormContext<
+    AssignmentApiRequestDto & {
+      onOpen: () => void;
+    }
+  >();
 
   const onOpen = methods.getValues("onOpen");
 
   const handleClickSubmit = async () => {
-    onOpen();
-
     const data = {
       title: methods.getValues("title"),
-      deadline: methods.getValues("deadline"),
-      descriptionLink: methods.getValues("descriptionLink"),
+      descriptionNotionLink: methods.getValues("descriptionNotionLink"),
+      deadLine: methods.getValues("deadLine"),
     };
 
-    // if (assignmentStatus === "NONE") {
-    //   router.push(`/studies/assignments/${studyDetailId}/create-success`);
-    // } else if (assignmentStatus === "OPEN") {
-    //   router.push(`/studies/assignments/${studyDetailId}/edit-success`);
-    // }
-
-    // TODO: type에 따른 API 연결
-    revalidateTagByName([tags.assignments, studyDetailId.toString()]);
+    if (assignmentStatus === "NONE") {
+      const { success } = await studyApi.createAssignment(studyDetailId, data);
+      if (success) {
+        revalidateTagByName(`${tags.assignments} ${studyDetailId.toString()}`);
+        onOpen();
+      }
+    } else if (assignmentStatus === "OPEN") {
+      const { success } = await studyApi.patchAssignment(studyDetailId, data);
+      if (success) {
+        revalidateTagByName(`${tags.assignments} ${studyDetailId.toString()}`);
+        onOpen();
+      }
+    }
   };
 
   return (
@@ -55,7 +61,7 @@ const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
         </Text>
       </Flex>
       <Button
-        // disabled={disabled}
+        disabled={disabled}
         size="sm"
         style={{ height: "fit-content" }}
         onClick={handleClickSubmit}

@@ -2,7 +2,10 @@ import { fetcher } from "@wow-class/utils";
 import { apiPath, mentorApiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
 import type { AnnouncementApiResponseDto } from "types/dtos/announcement";
-import type { AssignmentApiResponseDto } from "types/dtos/assignmentList";
+import type {
+  AssignmentApiRequestDto,
+  AssignmentApiResponseDto,
+} from "types/dtos/assignmentList";
 import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
 import type { StudyAnnouncementType } from "types/entities/study";
@@ -44,11 +47,31 @@ export const studyApi = {
     const response = await fetcher.get<AssignmentApiResponseDto>(
       `/mentor/study-details/${studyDetailId}/assignments`,
       {
-        next: { tags: [tags.assignments, studyDetailId.toString()] },
+        next: { tags: [`${tags.assignments} ${studyDetailId.toString()}`] },
         cache: "force-cache",
       }
     );
     return response.data;
+  },
+  createAssignment: async (
+    studyDetailId: number,
+    data: AssignmentApiRequestDto
+  ) => {
+    const response = await fetcher.put(
+      `/mentor/study-details/${studyDetailId}/assignments`,
+      data
+    );
+    return { success: response.ok };
+  },
+  patchAssignment: async (
+    studyDetailId: number,
+    data: AssignmentApiRequestDto
+  ) => {
+    const response = await fetcher.patch(
+      `/mentor/study-details/${studyDetailId}/assignments`,
+      data
+    );
+    return { success: response.ok };
   },
   cancelAssignment: async (studyDetailId: number) => {
     const response = await fetcher.patch(

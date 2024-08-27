@@ -20,11 +20,15 @@ const Assignments = ({
 }) => {
   const { open, onOpen } = useOpenState();
 
-  const methods = useForm<AssignmentApiRequestDto>({
+  const methods = useForm<
+    AssignmentApiRequestDto & {
+      onOpen: () => void;
+    }
+  >({
     defaultValues: {
       title: "",
-      deadline: "",
-      descriptionLink: "",
+      deadLine: "2024-09-07T00:00:00",
+      descriptionNotionLink: "",
       onOpen: onOpen,
     },
   });
@@ -36,7 +40,7 @@ const Assignments = ({
   useEffect(() => {
     const fetchAssignment = async () => {
       if (studyDetailId) {
-        const data = await studyApi.getAssignment(studyDetailId);
+        const data = await studyApi.getAssignment(+studyDetailId);
         if (data) setAssignment(data);
       }
     };
@@ -45,14 +49,28 @@ const Assignments = ({
 
   if (!assignment) return null;
 
+  const { assignmentStatus, week } = assignment;
+
+  const formatStatusToString = () => {
+    switch (assignmentStatus) {
+      case "NONE":
+        return "개설";
+      case "OPEN":
+        return "수정";
+    }
+  };
+  const statusStr = formatStatusToString();
+
   // TODO: studyName 추가
   return (
     <>
       {open && (
         <SuccessModal
+          assignmentStatus={assignmentStatus}
           studyDetailId={studyDetailId}
           studyName="스터디 제목"
-          week={assignment.week}
+          type={statusStr}
+          week={week}
         />
       )}
       <FormProvider {...methods}>
