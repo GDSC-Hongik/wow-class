@@ -8,7 +8,12 @@ const StudiesLayout = ({
   return (
     <>
       <Navbar />
-      <styled.div height="100vh" padding="54px 101px" width="100%">
+      <styled.div
+        height="100vh"
+        overflow="auto"
+        padding="54px 101px"
+        width="100%"
+      >
         <Flex direction="column" gap="sm" height="100%" width="100%">
           {children}
         </Flex>
