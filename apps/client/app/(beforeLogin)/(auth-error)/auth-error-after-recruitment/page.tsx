@@ -32,7 +32,12 @@ const AuthErrorAfterRecruitmentPage = () => {
         모집 기간에 합류 후 이용해주세요.
       </p>
       <div className={buttonContainerStyle}>
-        <Button aria-label="홈으로 이동" asProp={Link} href={routePath.landing}>
+        <Button
+          aria-label="홈으로 이동"
+          asProp={Link}
+          href={routePath.landing}
+          style={buttonStyle}
+        >
           홈으로 이동
         </Button>
       </div>
@@ -79,3 +84,7 @@ const buttonContainerStyle = css({
   gap: "12px",
   width: "100%",
 });
+
+const buttonStyle = {
+  maxWidth: "328px",
+};
