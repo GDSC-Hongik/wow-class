@@ -6,17 +6,21 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import { createStudyApi } from "apis/study/createStudyApi";
 import { studyApi } from "apis/study/studyApi";
 import { routerPath } from "constants/router/routerPath";
-import { useRouter, useSearchParams } from "next/navigation";
+import useParseSearchParams from "hooks/useParseSearchParams";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Button from "wowds-ui/Button";
 
 const StudyDetailInfoCheckModal = () => {
   const { closeModal } = useModalRoute();
+  const { parseToJsonSearchParam, parseToStringSearchParams } =
+    useParseSearchParams();
   const router = useRouter();
   const [saveDetailInfo, setSaveDetailInfo] = useState(false);
   const [studyName, setStudyName] = useState("");
-  const data = JSON.parse(useSearchParams().get("data")!!);
-  const studyId = JSON.parse(useSearchParams().get("studyId")!!);
+
+  const data = parseToJsonSearchParam("data");
+  const studyId = parseToStringSearchParams("studyId");
 
   useEffect(() => {
     const fetchStudyData = async () => {
@@ -35,7 +39,7 @@ const StudyDetailInfoCheckModal = () => {
         clearTimeout(timerId);
       };
     }
-  }, [saveDetailInfo, router]);
+  }, [saveDetailInfo, router, studyId]);
 
   const handleSubmitDetailInfo = async () => {
     const success = await createStudyApi.postStudyDetailInfo(
