@@ -5,13 +5,13 @@ import scheduleImageUrl from "../public/images/schedule.svg";
 
 export const navMenu = [
   {
-    href: "my-study",
+    href: "/my-study",
     imageUrl: homeImageUrl,
     alt: "home-icon",
     name: "나의 스터디",
     items: [
       {
-        href: "my-assignment",
+        href: "/my-assignment",
         imageUrl: folderImageUrl,
         alt: "folder-icon",
         name: "나의 과제",
@@ -19,13 +19,13 @@ export const navMenu = [
     ],
   },
   {
-    href: "study-apply",
+    href: "/study-apply",
     imageUrl: scheduleImageUrl,
     alt: "schedule-icon",
     name: "수강 신청",
   },
   {
-    href: "my-page",
+    href: "/my-page",
     imageUrl: personImageUrl,
     alt: "person-icon",
     name: "마이 페이지",
