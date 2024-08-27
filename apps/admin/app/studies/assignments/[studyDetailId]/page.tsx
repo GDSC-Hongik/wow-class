@@ -12,9 +12,12 @@ const Assignments = async ({
 }: {
   params: { studyDetailId: string };
 }) => {
-  const assignment = await studyApi.getAssignment(studyDetailId);
+  const assignment = await studyApi.getAssignment(+studyDetailId);
+  if (!assignment) return null;
+
   // TODO: studyName 추가
   const { week, title, descriptionLink, deadline } = assignment;
+
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
   return (
