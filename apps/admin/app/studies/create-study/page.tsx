@@ -14,7 +14,6 @@ import {
 } from "./_components";
 
 const CreateStudyPage = () => {
-  const router = useRouter();
   const methods = useForm<CreateStudyApiRequestDto>({ mode: "onChange" });
 
   return (
