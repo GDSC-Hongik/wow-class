@@ -29,26 +29,22 @@ const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
   const onOpen = methods.getValues("onOpen");
 
   const handleClickSubmit = async () => {
+    if (assignmentStatus === "CANCELLED") return;
+
     const data = {
       title: methods.getValues("title"),
       descriptionNotionLink: methods.getValues("descriptionNotionLink"),
       deadLine: methods.getValues("deadLine"),
     };
 
-    if (assignmentStatus === "NONE") {
-      const { success } = await studyApi.createAssignment(studyDetailId, data);
-      if (success) {
-        revalidateTagByName(`${tags.assignments} ${studyDetailId.toString()}`);
-        revalidateTagByName(tags.assignments);
-        onOpen();
-      }
-    } else if (assignmentStatus === "OPEN") {
-      const { success } = await studyApi.patchAssignment(studyDetailId, data);
-      if (success) {
-        revalidateTagByName(`${tags.assignments} ${studyDetailId.toString()}`);
-        revalidateTagByName(tags.assignments);
-        onOpen();
-      }
+    const { success } =
+      assignmentStatus === "NONE"
+        ? await studyApi.createAssignment(studyDetailId, data)
+        : await studyApi.patchAssignment(studyDetailId, data);
+    if (success) {
+      revalidateTagByName(`${tags.assignments} ${studyDetailId.toString()}`);
+      revalidateTagByName(tags.assignments);
+      onOpen();
     }
   };
 
