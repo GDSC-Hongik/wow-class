@@ -32,7 +32,7 @@ const Assignments = async ({
           <CancelAssignmentButton studyDetailId={+studyDetailId} />
           <Button
             asProp={Link}
-            href={`${studyDetailId}/edit`}
+            href={`${studyDetailId}/edit-assignment`}
             size="sm"
             variant="outline"
           >

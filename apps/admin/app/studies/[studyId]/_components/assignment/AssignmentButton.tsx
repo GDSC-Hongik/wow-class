@@ -50,7 +50,7 @@ const AssignmentButton = ({
               </Button>
               <Button
                 asProp={Link}
-                href={`/studies/assignments/${studyDetailId}/edit`}
+                href={`/studies/assignments/${studyDetailId}/edit-assignment`}
                 size="sm"
                 variant="solid"
               >
