@@ -3,21 +3,47 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
+import useFetchAttendanceCheckModalInfoData from "hooks/useFetchAttendanceCheckModalInfoData";
 import Image from "next/image";
 import { useState } from "react";
+import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
 const AttendanceCheckModal = () => {
   const [attended, setAttended] = useState(false);
-  const [error] = useState(false);
+  const [error, setError] = useState(false);
   const [attendanceNumber, setAttendanceNumber] = useState("");
+
+  const { studyInfo } = useFetchAttendanceCheckModalInfoData();
 
   const handleChangeAttendanceNumber = (value: string) => {
     setAttendanceNumber(value);
   };
 
-  const handleClickAttendanceCheckButton = () => {
+  const handleClickAttendanceCheckButton = async () => {
+    const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+
+    if (!myOngoingStudyInfoData?.studyId) {
+      return;
+    }
+
+    const isValidAttendanceNumber = validateAttendanceNumber(attendanceNumber);
+
+    if (!isValidAttendanceNumber) {
+      return setError(true);
+    }
+
+    const { success } = await myStudyApi.checkAttendance(
+      myOngoingStudyInfoData?.studyId,
+      attendanceNumber
+    );
+
+    if (!success) {
+      return setError(true);
+    }
+
     setAttended(true);
   };
 
@@ -30,7 +56,7 @@ const AttendanceCheckModal = () => {
             className={attendanceCompleteTitleStyle}
           >
             <Text as="h1" color="primary" typo="h1">
-              기초 웹스터디
+              {studyInfo.studyName}
             </Text>
             <Image
               alt="item separator"
@@ -39,7 +65,7 @@ const AttendanceCheckModal = () => {
               width={6}
             />
             <Text as="h1" color="primary" typo="h1">
-              4주차
+              {studyInfo.currentWeek}주차
             </Text>
           </section>
           <section aria-label="attendance-complete-description">

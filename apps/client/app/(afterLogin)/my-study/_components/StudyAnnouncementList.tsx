@@ -1,20 +1,30 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import { formatISODateWithDot } from "@wow-class/utils";
-import { studyNoticesMockData } from "constants/mockData";
+import { myStudyApi } from "apis/myStudyApi";
 import Link from "next/link";
 import { color } from "wowds-tokens";
 
-const StudyNotices = () => {
+const StudyAnnouncementList = async () => {
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+
+  if (!myOngoingStudyInfoData?.studyId) {
+    return;
+  }
+
+  const studyAnnouncementListData = await myStudyApi.getStudyAnnouncementList(
+    myOngoingStudyInfoData?.studyId
+  );
+
   return (
-    <section aria-label="study-notices">
-      <Text as="h2" className={studyNoticeHeadingStyle} typo="h2">
+    <section aria-label="study-announcement-list">
+      <Text as="h2" className={studyAnnouncementListHeadingStyle} typo="h2">
         스터디 공지
       </Text>
-      {studyNoticesMockData.map(
+      {studyAnnouncementListData?.map(
         ({ studyAnnounceId, title, link, createdDate }, index) => (
           <Link
-            className={studyNoticeBoxStyle}
+            className={studyAnnouncementListBoxStyle}
             href={link}
             key={studyAnnounceId}
             style={{
@@ -35,13 +45,13 @@ const StudyNotices = () => {
   );
 };
 
-export default StudyNotices;
+export default StudyAnnouncementList;
 
-const studyNoticeHeadingStyle = css({
+const studyAnnouncementListHeadingStyle = css({
   marginBottom: "md",
 });
 
-const studyNoticeBoxStyle = css({
+const studyAnnouncementListBoxStyle = css({
   alignItems: "center",
   borderRadius: "4px",
   height: "80px",

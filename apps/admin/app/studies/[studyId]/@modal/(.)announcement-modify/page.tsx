@@ -35,14 +35,6 @@ const AnnouncementModifyModal = () => {
     }
   };
 
-  const handleChangeStudyAnnouncementTitle = (value: string) => {
-    setStudyAnnouncement({ ...studyAnnouncement, title: value });
-  };
-
-  const handleChangeStudyAnnouncementLink = (value: string) => {
-    setStudyAnnouncement({ ...studyAnnouncement, link: value });
-  };
-
   return (
     <Modal>
       <Flex direction="column" textAlign="center" width="21rem">
@@ -52,12 +44,16 @@ const AnnouncementModifyModal = () => {
           <TextField
             label="공지 제목"
             placeholder="입력해주세요"
-            onChange={handleChangeStudyAnnouncementTitle}
+            onChange={(value) => {
+              setStudyAnnouncement({ ...studyAnnouncement, title: value });
+            }}
           />
           <TextField
             label="공지 링크"
             placeholder="http://example.com"
-            onChange={handleChangeStudyAnnouncementLink}
+            onChange={(value) => {
+              setStudyAnnouncement({ ...studyAnnouncement, link: value });
+            }}
           />
         </Flex>
         <Space height={28} />

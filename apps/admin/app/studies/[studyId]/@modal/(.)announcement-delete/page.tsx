@@ -5,19 +5,21 @@ import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyInfoApi } from "apis/study/studyInfoApi";
 import { tags } from "constants/tags";
-import useParseSearchParams from "hooks/useParseSearchParams";
+import { useSearchParams } from "next/navigation";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 const AnnouncementDeleteModal = () => {
-  const { parseToNumberSearchParams } = useParseSearchParams();
-  const studyAnnouncementId = parseToNumberSearchParams("studyAnnouncementId");
+  const searchParams = useSearchParams();
+
+  const studyAnnouncementId = searchParams.get("studyAnnouncementId");
 
   const { closeModal } = useModalRoute();
 
   const handleClickDeleteButton = async () => {
-    const result =
-      await studyInfoApi.deleteStudyAnnouncement(studyAnnouncementId);
+    const result = await studyInfoApi.deleteStudyAnnouncement(
+      Number(studyAnnouncementId)
+    );
     if (result.success) {
       await revalidateTagByName(tags.announcements);
       closeModal();

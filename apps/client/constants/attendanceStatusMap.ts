@@ -8,5 +8,5 @@ export const attendanceStatusMap: Record<
 > = {
   ATTENDED: { label: "출석 완료", color: "blue" },
   NOT_ATTENDED: { label: "미출석", color: "red" },
-  PENDING: { label: "출석 전", color: "grey" },
+  BEFORE_ATTENDANCE: { label: "출석 전", color: "grey" },
 };

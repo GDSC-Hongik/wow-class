@@ -58,10 +58,12 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
           />
         </Flex>
         <Button
-          disabled={!!studyAnnouncement.link || !!studyAnnouncement.title}
           size="sm"
           style={{ minWidth: "92px", maxHeight: "38px", marginTop: "23px" }}
           variant="solid"
+          disabled={
+            studyAnnouncement.link === "" || studyAnnouncement.title === ""
+          }
           onClick={() => handlePublishAnnouncement(studyId)}
         >
           공지 발행
