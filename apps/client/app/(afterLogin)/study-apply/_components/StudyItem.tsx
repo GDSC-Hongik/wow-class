@@ -49,19 +49,27 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   const isCancelable = appliedStudyId === studyId;
   const isNotApplicable = !isApplicable && !isCancelable;
   return (
-    <Table>
+    <Table className={tableStyle}>
       <Flex direction="column" gap="xxs" justifyContent="center" width={334}>
         <Flex className={contentStyle} gap="xs">
-          <Text typo="h3">{title}</Text>
+          <Text className={titleStyle} typo="h3">
+            {title}
+          </Text>
           <Tag color={sessionColors[studyType] ?? "green"} variant="solid1">
             {studyType}
           </Tag>
         </Flex>
-        <Link href={notionLink ?? ""} target="_blank">
-          <Text className={introductionLinkTextStyle} color="sub" typo="body2">
-            {`(${introduction})`}
-          </Text>
-        </Link>
+        {introduction && (
+          <Link href={notionLink ?? ""} target="_blank">
+            <Text
+              className={introductionLinkTextStyle}
+              color="sub"
+              typo="body2"
+            >
+              {`(${introduction})`}
+            </Text>
+          </Link>
+        )}
       </Flex>
       <Text className={textCellStyle}>{mentorName}</Text>
       <Text
@@ -72,7 +80,7 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
       </Text>
       <Text className={textCellStyle}>{totalWeek}주 코스</Text>
       <Flex direction="column" textAlign="center">
-        <Text className={textCellStyle}>
+        <Text className={dateStyle}>
           {`${openingDate.month}.${openingDate.day} 개강`}
         </Text>
         {isCancelable && (
@@ -106,6 +114,21 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   );
 };
 
+const tableStyle = css({
+  justifyContent: "unset",
+});
+
+const titleStyle = css({
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  maxWidth: "210px",
+  whiteSpace: "nowrap",
+});
+
+const dateStyle = css({
+  width: "118px",
+});
+
 const textCellStyle = css({
   paddingX: "28px",
 });
@@ -118,6 +141,7 @@ const introductionLinkTextStyle = css({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
+  textDecoration: "underline",
 });
 
 const sessionColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> = {
