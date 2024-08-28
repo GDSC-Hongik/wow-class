@@ -2,11 +2,12 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { routerPath } from "constants/router/routerPath";
-import Link from "next/link";
-import type { CSSProperties } from "react";
+import { useRouter } from "next/navigation";
+import type { CSSProperties, MouseEvent } from "react";
 import { Suspense } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
+import createQueryString from "utils/createQueryString";
 import Button from "wowds-ui/Button";
 
 import Header from "@/studies/[studyId]/_components/header/Header";
@@ -20,8 +21,19 @@ const CreateStudyDetailInfoPage = ({
   params: { studyId: string };
 }) => {
   const { studyId } = params;
+  const router = useRouter();
   const methods = useForm<CreateStudyDetailInfoApiRequestDto>();
 
+  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const formData = methods.getValues();
+    const route = createQueryString(
+      `${studyId}/${routerPath["detail-info-check"].href}?studyId=${studyId}`,
+      formData
+    );
+
+    router.push(route);
+  };
   return (
     <FormProvider {...methods}>
       <Flex
@@ -44,19 +56,12 @@ const CreateStudyDetailInfoPage = ({
           <Space height={64} />
           <StudyCurriculum studyId={studyId} />
           <Button
-            asProp={Link}
             disabled={!methods.formState.isValid}
             role="button"
             size="sm"
             style={SubmitButtonStyle}
             type="submit"
-            href={{
-              pathname: `${studyId}/${routerPath["detail-info-check"].href}`,
-              query: {
-                data: JSON.stringify(methods.getValues()),
-                studyId: studyId,
-              },
-            }}
+            onClick={handleSubmit}
           >
             저장하기
           </Button>
