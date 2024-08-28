@@ -9,8 +9,8 @@ export interface StudyList {
   introduction: string;
   mentorName: string;
   dayOfWeek: DayOfWeekType;
-  startTime: Time;
-  endTime: Time;
+  startTime: Time | null;
+  endTime: Time | null;
   totalWeek: number;
   openingDate: string;
   applicationEndDate: string;
