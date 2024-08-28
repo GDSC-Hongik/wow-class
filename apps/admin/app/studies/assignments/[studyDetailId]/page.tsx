@@ -7,6 +7,8 @@ import Link from "next/link";
 import Button from "wowds-ui/Button";
 import TextButton from "wowds-ui/TextButton";
 
+import CancelAssignmentButton from "./_components/CancelAssignmentButton";
+
 const Assignments = async ({
   params: { studyDetailId },
 }: {
@@ -15,12 +17,11 @@ const Assignments = async ({
   const assignment = await studyApi.getAssignment(+studyDetailId);
   if (!assignment) return null;
 
-  // TODO: studyName 추가
   const { week, title, descriptionLink, deadline } = assignment;
 
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
-  // TODO: 휴강처리 API 연결
+  // TODO: studyName 추가
   return (
     <>
       <styled.header className={headerStyle}>
@@ -28,9 +29,7 @@ const Assignments = async ({
           {title} • {week}주차 과제
         </Text>
         <Flex gap="0.75rem">
-          <Button size="sm" variant="outline">
-            과제 휴강처리
-          </Button>
+          <CancelAssignmentButton studyDetailId={+studyDetailId} />
           <Button
             asProp={Link}
             href={`${studyDetailId}/edit`}
