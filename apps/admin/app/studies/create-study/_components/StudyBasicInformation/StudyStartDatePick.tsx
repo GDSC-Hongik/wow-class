@@ -45,7 +45,7 @@ const StudyStartDatePick = () => {
         toValue: endDateString,
       });
       setInputValue(`${startDateString} ~ ${endDateString}`);
-      setValue("startDate", startDateString);
+      setValue("startDate", startDateString, { shouldValidate: true });
       setIsOpen(false);
     } else {
       if (triggerDate)

@@ -33,8 +33,8 @@ const StudyApplyDatePick = () => {
       toValue: endDateString,
     });
     setInputValue(`${startDateString} ~ ${endDateString}`);
-    setValue("applicationStartDate", startDateString);
-    setValue("applicationEndDate", endDateString);
+    setValue("applicationStartDate", startDateString, { shouldValidate: true });
+    setValue("applicationEndDate", endDateString, { shouldValidate: true });
   };
 
   return (
