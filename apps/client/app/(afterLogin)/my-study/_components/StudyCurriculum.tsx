@@ -3,11 +3,12 @@ import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { formatWeekPeriod } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
-import LinkButton from "components/LinkButton";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
+import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { StudyDifficultyType } from "types/entities/myStudy";
 import { getIsCurrentWeek } from "utils/getIsCurrentWeek";
+import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 
 const StudyCurriculum = async () => {
@@ -101,8 +102,9 @@ const StudyCurriculum = async () => {
                   >
                     {attendanceStatusLabel}
                   </Tag>
-                  <LinkButton
+                  <Button
                     aria-label="check-submitted-assignment"
+                    asProp={Link}
                     disabled={assignmentSubmissionStatus === "FAILURE"}
                     href={submissionLink || ""}
                     size="sm"
@@ -114,7 +116,7 @@ const StudyCurriculum = async () => {
                     }
                   >
                     {assignmentButtonText}
-                  </LinkButton>
+                  </Button>
                 </Table.Right>
               </Table>
             );
