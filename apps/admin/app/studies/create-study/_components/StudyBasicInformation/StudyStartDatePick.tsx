@@ -1,6 +1,6 @@
 import "react-day-picker/style.css";
 
-import { css } from "@styled-system/css";
+import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import {
@@ -21,10 +21,10 @@ const StudyStartDatePick = () => {
   });
   const datepickerRef = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { control, getValues, setValue } = useFormContext();
+  const { control, setValue, watch } = useFormContext();
   const [inputValue, setInputValue] = useState("");
 
-  const week = getValues("totalWeek");
+  const week = watch("totalWeek");
 
   useClickOutside(datepickerRef, () => {
     setIsOpen(false);
@@ -67,11 +67,15 @@ const StudyStartDatePick = () => {
         render={() => (
           <Flex direction="column" gap="xs" position="relative">
             <input
-              className={StudyDatePickerStyle}
               placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
               value={inputValue}
+              className={StudyDatePickerStyle({
+                type: inputValue ? "selected" : "unSelected",
+              })}
               onClick={() => {
-                setIsOpen(!isOpen);
+                if (!week) {
+                  window.alert("스터디 코스를 먼저 선택해주세요");
+                } else setIsOpen(!isOpen);
               }}
             />
             <Text color="primary" typo="body3">
@@ -111,20 +115,32 @@ const StudyStartDatePick = () => {
 
 export default StudyStartDatePick;
 
-const StudyDatePickerStyle = css({
-  width: "100%",
-  maxWidth: "358px",
-  border: "1px solid",
-  borderRadius: "sm",
-  borderColor: "outline",
-  height: "44px",
-  padding: "8px 12px",
-  caretColor: "transparent",
-  cursor: "pointer",
-  _placeholder: {
-    color: "outline",
+const StudyDatePickerStyle = cva({
+  base: {
+    width: "100%",
+    maxWidth: "358px",
+    border: "1px solid",
+    borderRadius: "sm",
+    borderColor: "outline",
+    height: "44px",
+    padding: "8px 12px",
+    caretColor: "transparent",
+    cursor: "pointer",
+    _placeholder: {
+      color: "outline",
+    },
+    _focus: {
+      outline: "none",
+    },
   },
-  _focus: {
-    outline: "none",
+  variants: {
+    type: {
+      selected: {
+        borderColor: "sub",
+      },
+      unSelected: {
+        borderColor: "outline",
+      },
+    },
   },
 });

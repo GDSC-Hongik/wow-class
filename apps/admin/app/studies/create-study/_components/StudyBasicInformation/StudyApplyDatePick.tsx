@@ -1,6 +1,6 @@
 import "react-day-picker/style.css";
 
-import { css } from "@styled-system/css";
+import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { dateToFormatString, formatStringToDate } from "@wow-class/utils";
@@ -47,9 +47,11 @@ const StudyApplyDatePick = () => {
         name="applicationStartDate"
         render={() => (
           <input
-            className={StudyDatePickerStyle}
             placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
             value={inputValue}
+            className={StudyDatePickerStyle({
+              type: inputValue ? "selected" : "unSelected",
+            })}
             onClick={() => {
               setIsOpen(!isOpen);
             }}
@@ -87,20 +89,32 @@ const StudyApplyDatePick = () => {
 
 export default StudyApplyDatePick;
 
-const StudyDatePickerStyle = css({
-  width: "100%",
-  maxWidth: "358px",
-  border: "1px solid",
-  borderRadius: "sm",
-  borderColor: "outline",
-  height: "44px",
-  padding: "8px 12px",
-  caretColor: "transparent",
-  cursor: "pointer",
-  _placeholder: {
-    color: "outline",
+const StudyDatePickerStyle = cva({
+  base: {
+    width: "100%",
+    maxWidth: "358px",
+    border: "1px solid",
+    borderRadius: "sm",
+    borderColor: "outline",
+    height: "44px",
+    padding: "8px 12px",
+    caretColor: "transparent",
+    cursor: "pointer",
+    _placeholder: {
+      color: "outline",
+    },
+    _focus: {
+      outline: "none",
+    },
   },
-  _focus: {
-    outline: "none",
+  variants: {
+    type: {
+      selected: {
+        borderColor: "sub",
+      },
+      unSelected: {
+        borderColor: "outline",
+      },
+    },
   },
 });
