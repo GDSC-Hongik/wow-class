@@ -48,7 +48,6 @@ const Header = ({
     : "Expand introduction icon";
 
   if (!studyInfo) return null;
-
   const {
     title,
     academicYear,
@@ -56,19 +55,29 @@ const Header = ({
     mentorName,
     studyType,
     dayOfWeek,
-    startTime: { hour: startHour, minute: startMinute },
-    endTime: { hour: endHour, minute: endMinute },
+    startTime,
+    endTime,
     totalWeek,
     period: { startDate, endDate },
     introduction,
     notionLink,
   } = studyInfo;
 
+  const studySchedule = () => {
+    if (startTime && endDate) {
+      const { hour: startHour, minute: startMinute } = startTime;
+      const { hour: endHour, minute: endMinute } = endTime;
+      return `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
+        ${endHour}:${padWithZero(endMinute)}`;
+    } else {
+      null;
+    }
+  };
+
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
   const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
-  const studySchedule = `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
-  ${endHour}:${padWithZero(endMinute)}`;
+
   const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
   ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
@@ -122,22 +131,21 @@ const Header = ({
                 스터디 일정
               </Text>
               <Flex gap="xs">
+                {startTime && (
+                  <Flex gap="xs">
+                    <Text as="h5" color="sub">
+                      {studySchedule()}
+                    </Text>
+                    <ItemSeparator />
+                  </Flex>
+                )}
                 <Text as="h5" color="sub">
-                  {studySchedule}
+                  {totalWeek}주 코스
                 </Text>
-                <Flex gap="xs">
-                  <Text as="h5" color="sub">
-                    {studySchedule}
-                  </Text>
-                  <ItemSeparator />
-                  <Text as="h5" color="sub">
-                    {totalWeek}주 코스
-                  </Text>
-                  <ItemSeparator />
-                  <Text as="h5" color="sub">
-                    {studyPeriod}
-                  </Text>
-                </Flex>
+                <ItemSeparator />
+                <Text as="h5" color="sub">
+                  {studyPeriod}
+                </Text>
               </Flex>
             </Flex>
           </section>
