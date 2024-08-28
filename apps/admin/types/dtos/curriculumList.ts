@@ -1,6 +1,6 @@
 import type { StudyDifficultyType } from "types/entities/study";
 
-export interface SessionApiResponseDto {
+export interface CurriculumApiResponseDto {
   studyDetailId: number;
   period: {
     startDate: string;

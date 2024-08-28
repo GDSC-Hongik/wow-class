@@ -8,7 +8,10 @@ const StudyInfoStatus = ({ index }: { index: number }) => {
   const { control, setValue } = useFormContext();
   const [checked, setChecked] = useState(false);
   useEffect(() => {
-    setValue(`studySessions.${index}.status`, checked ? "CANCELLED" : "NONE");
+    setValue(
+      `studyCurriculums.${index}.status`,
+      checked ? "CANCELLED" : "NONE"
+    );
   }, [checked]);
 
   return (
@@ -18,7 +21,8 @@ const StudyInfoStatus = ({ index }: { index: number }) => {
       </Text>
       <Controller
         control={control}
-        name={`studySessions.${index}.status`}
+        defaultValue="NONE"
+        name={`studyCurriculums.${index}.status`}
         render={() => (
           <Checkbox
             checked={checked}

@@ -17,7 +17,7 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
   );
 
   return (
-    <section aria-label="session-list">
+    <section aria-label="curriculum-list">
       <Text typo="h2">스터디 공지</Text>
       <Space height={24} />
       <CreateStudyAnnouncement studyId={studyId} />

@@ -26,7 +26,7 @@ const StudyInfoBox = ({
 }) => {
   const { setValue } = useFormContext();
   useEffect(() => {
-    setValue(`studySessions.${index}.studyDetailId`, studyDetailId);
+    setValue(`studyCurriculums.${index}.studyDetailId`, studyDetailId);
   }, []);
   return (
     <section aria-label="create-detailInfo-box" className={StudyInfoBoxStyle}>

@@ -3,7 +3,7 @@ import { apiPath, mentorApiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
 import type { AnnouncementApiResponseDto } from "types/dtos/announcement";
 import type { AssignmentApiResponseDto } from "types/dtos/assignmentList";
-import type { SessionApiResponseDto } from "types/dtos/sessionList";
+import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
 import type { StudyAnnouncementType } from "types/entities/study";
 
@@ -48,11 +48,11 @@ export const studyApi = {
 
     return { success: response.ok };
   },
-  getSessionList: async (studyId: number) => {
-    const response = await fetcher.get<SessionApiResponseDto[]>(
-      `${mentorApiPath.sessions}?studyId=${studyId}`,
+  getCurriculumList: async (studyId: number) => {
+    const response = await fetcher.get<CurriculumApiResponseDto[]>(
+      `${mentorApiPath.curriculums}?studyId=${studyId}`,
       {
-        next: { tags: [tags.sessions] },
+        next: { tags: [tags.curriculums] },
         cache: "force-cache",
       }
     );

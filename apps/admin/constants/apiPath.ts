@@ -7,6 +7,6 @@ export const enum apiPath {
 
 export const enum mentorApiPath {
   assignments = "/mentor/study-details/assignments",
-  sessions = "/mentor/study-details/sessions",
+  curriculums = "/mentor/study-details/curriculums",
   studyList = "/mentor/studies/me",
 }

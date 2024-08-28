@@ -3,17 +3,21 @@ import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import { useEffect, useState } from "react";
-import type { SessionApiResponseDto } from "types/dtos/sessionList";
+import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 
 import StudyInfoBox from "./StudyInfoBox";
 
 const StudyCurriculum = ({ studyId }: { studyId: string }) => {
-  const [sessionList, setSessionList] = useState<SessionApiResponseDto[]>([]);
+  const [curriculumList, setCurriculumList] = useState<
+    CurriculumApiResponseDto[]
+  >([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const sessionList = await studyApi.getSessionList(parseInt(studyId, 10));
-      if (sessionList) setSessionList(sessionList);
+      const curriculumData = await studyApi.getCurriculumList(
+        parseInt(studyId, 10)
+      );
+      if (curriculumData) setCurriculumList(curriculumData);
     };
     fetchData();
   }, [studyId]);
@@ -24,7 +28,7 @@ const StudyCurriculum = ({ studyId }: { studyId: string }) => {
       className={StudyCurriculumSectionStyle}
     >
       <Text typo="h2">전체 커리큘럼 정보</Text>
-      {sessionList?.map(({ week, period, studyDetailId }, index) => (
+      {curriculumList?.map(({ week, period, studyDetailId }, index) => (
         <StudyInfoBox
           index={index}
           key={`studyInfo-${index}`}

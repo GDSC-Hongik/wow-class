@@ -38,7 +38,7 @@ const StudyInfoDifficulty = ({ index }: { index: number }) => {
   return (
     <Controller
       control={control}
-      name={`studySessions.${index}.difficulty`}
+      name={`studyCurriculums.${index}.difficulty`}
       render={({ field }) => (
         <DropDown
           {...field}
