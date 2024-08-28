@@ -6,13 +6,16 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import { createStudyApi } from "apis/form/createStudyApi";
 import { routerPath } from "constants/router/routerPath";
 import { tags } from "constants/tags";
+import useParseSearchParams from "hooks/useParseSearchParams";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
-const CreateStudyCheckModal = () => {
-  const data = JSON.parse(useSearchParams().get("data")!!);
+const CreatedStudyCheckModal = () => {
+  const { parseToJsonSearchParam } = useParseSearchParams();
+  const data = parseToJsonSearchParam<CreateStudyApiRequestDto>("data");
   const router = useRouter();
   const { closeModal } = useModalRoute();
 
@@ -56,7 +59,7 @@ const CreateStudyCheckModal = () => {
   );
 };
 
-export default CreateStudyCheckModal;
+export default CreatedStudyCheckModal;
 
 const ItemSeparator = () => (
   <Image alt="item separator" height={6} src="/images/dot.svg" width={6} />

@@ -2,10 +2,10 @@ import { useSearchParams } from "next/navigation";
 
 const useParseSearchParams = () => {
   const searchParams = useSearchParams();
-  const parseToJsonSearchParam = (queryString: string) => {
+  const parseToJsonSearchParam = <T extends object>(queryString: string): T => {
     const param = searchParams.get(queryString);
     if (param) return JSON.parse(param);
-    else return {};
+    else return {} as T;
   };
 
   const parseToStringSearchParams = (queryString: string) => {
