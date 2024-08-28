@@ -14,7 +14,7 @@ export type AssignmentSubmissionFailureType =
   | "LOCATION_UNIDENTIFIABLE"
   | "UNKNOWN";
 
-export type StudySessionStatusType = "NONE" | "OPEN" | "CANCELLED";
+export type StudyCurriculumStatusType = "NONE" | "OPEN" | "CANCELLED";
 
 export type AssignmentSubmissionStatusType =
   | "NOT_SUBMITTED"

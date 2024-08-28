@@ -9,8 +9,8 @@ import type {
   AssignmentSubmissionStatusType,
   AttendanceStatusType,
   DailyTaskType,
+  StudyCurriculumStatusType,
   StudyDifficultyType,
-  StudySessionStatusType,
 } from "types/entities/myStudy";
 
 export interface BasicStudyInfoDto {
@@ -56,7 +56,7 @@ interface StudyCurriculumDto {
   week: number;
   title: string;
   description: string;
-  sessionStatus: StudySessionStatusType;
+  curriculumStatus: StudyCurriculumStatusType;
   difficulty: StudyDifficultyType;
   attendanceStatus: AttendanceStatusType;
   assignmentStatus: AssignmentStatusType;

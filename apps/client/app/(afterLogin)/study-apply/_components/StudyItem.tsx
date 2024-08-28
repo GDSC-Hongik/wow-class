@@ -109,8 +109,8 @@ const introductionLinkTextStyle = css({
 
 const sessionColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> = {
   "과제 스터디": "green",
-  "온라인 세션": "blue",
-  "오프라인 세션": "yellow",
+  "온라인 커리큘럼": "blue",
+  "오프라인 커리큘럼": "yellow",
 };
 
 export default StudyItem;
