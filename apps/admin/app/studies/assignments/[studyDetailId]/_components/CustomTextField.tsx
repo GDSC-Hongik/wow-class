@@ -7,21 +7,23 @@ interface CustomTextFieldProps extends TextFieldProps {
   control: any;
 }
 
+// TODO: defaultValue 적용 안되는 문제
 const CustomTextField = ({
   name,
   control,
-  label,
+  defaultValue,
   ...rest
 }: CustomTextFieldProps) => {
   const { field } = useController({
     name,
     control,
     rules: { required: true },
+    defaultValue,
   });
 
   return (
     <TextField
-      label={label}
+      defaultValue={defaultValue}
       ref={field.ref}
       value={field.value}
       onBlur={field.onBlur}
