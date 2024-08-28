@@ -12,7 +12,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const StudyTime = () => {
   const { control, setValue, watch } = useFormContext();
-  const [value, onChange] = useState<Value>(["10:00", "11:00"]);
+  const [value, onChange] = useState<Value>("");
 
   const isAssignmentStudy = watch("studyType") === "ASSIGNMENT";
 
