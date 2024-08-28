@@ -17,14 +17,14 @@ const middleware = async (req: NextRequest) => {
 
   const { studyRole, manageRole } = await dashboardApi.getDashboardInfo();
 
-  // if (studyRole === "STUDENT" && manageRole === "NONE") {
-  // const url =
-  //   process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-  //     ? process.env.CLIENT_PROD_URL
-  //     : process.env.CLIENT_DEV_URL;
+  if (studyRole === "STUDENT" && manageRole === "NONE") {
+    const url =
+      process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+        ? process.env.CLIENT_PROD_URL
+        : process.env.CLIENT_DEV_URL;
 
-  // return NextResponse.redirect(new URL("/auth", url));
-  // }
+    return NextResponse.redirect(new URL("/auth", url));
+  }
 
   return NextResponse.next();
 };
