@@ -3,7 +3,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { studyInfoApi } from "apis/study/studyInfoApi";
+import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
 import { useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
@@ -19,7 +19,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
     });
 
   const handlePublishAnnouncement = async (studyId: string) => {
-    const { success } = await studyInfoApi.publishStudyAnnouncement(
+    const { success } = await studyApi.publishStudyAnnouncement(
       parseInt(studyId, 10),
       studyAnnouncement
     );
