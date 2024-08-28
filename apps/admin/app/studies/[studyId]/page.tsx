@@ -11,7 +11,7 @@ import Header from "./_components/header/Header";
 const StudyPage = ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
   return (
-    <Flex direction="column" gap="64px" overflow="scroll" scrollbarWidth="none">
+    <Flex direction="column" gap="64px">
       <Header studyId={studyId} />
       <CheckAttendanceNumber />
       <Divider style={MinHeightFullDividerStyle} />

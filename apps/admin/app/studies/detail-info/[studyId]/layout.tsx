@@ -6,7 +6,7 @@ const StudyDetailInfoLayout = ({
   modal: React.ReactNode;
 }>) => {
   return (
-    <main>
+    <main style={MainLayoutStyle}>
       {children}
       {modal}
     </main>
@@ -14,3 +14,8 @@ const StudyDetailInfoLayout = ({
 };
 
 export default StudyDetailInfoLayout;
+
+const MainLayoutStyle = {
+  height: "100vh",
+  overflow: "auto",
+};

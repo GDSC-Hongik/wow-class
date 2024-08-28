@@ -31,8 +31,9 @@ const StudyInfoBox = ({
   return (
     <section aria-label="create-detailInfo-box" className={StudyInfoBoxStyle}>
       <div className={StudyInfoBoxWeekStyle}>{week}주차</div>
-      <Flex width="100%">
+      <Flex maxHeight={41} width="100%">
         <StudyTimeLine period={period} />
+        <div className={VerticalSectionStyle} />
         <StudyInfoStatus index={index} />
       </Flex>
       <StudyInfoDifficulty index={index} />
@@ -61,4 +62,10 @@ const StudyInfoBoxWeekStyle = css({
   display: "flex",
   alignItems: "center",
   padding: "xs",
+});
+
+const VerticalSectionStyle = css({
+  width: "1px",
+  height: "41px",
+  backgroundColor: "outline",
 });
