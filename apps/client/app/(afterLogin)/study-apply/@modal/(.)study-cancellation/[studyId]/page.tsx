@@ -12,6 +12,7 @@ import Button from "wowds-ui/Button";
 const StudyCancel = ({ params }: { params: { studyId: number } }) => {
   const studyId = params.studyId;
   const [cancelSucces, setCancelSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [studyTitle, setStudyTitle] = useState("");
 
   useEffect(() => {
@@ -26,6 +27,7 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
       if (selectedStudy) {
         setStudyTitle(selectedStudy.title);
       }
+      setIsLoading(false);
     };
 
     fetchStudyData();
@@ -40,6 +42,10 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
       setCancelSuccess(true);
     }
   };
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <Modal>
