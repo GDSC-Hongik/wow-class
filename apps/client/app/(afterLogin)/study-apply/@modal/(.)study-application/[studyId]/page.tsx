@@ -5,7 +5,7 @@ import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { studyApplyApi } from "apis/studyApplyApi";
 import { tags } from "constants/tags";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
@@ -15,7 +15,7 @@ const StudyApplication = ({ params }: { params: { studyId: number } }) => {
   const [applySuccess, setApplySuccess] = useState(false);
   const [studyTitle, setStudyTitle] = useState("");
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const fetchStudyData = async () => {
       const data = await studyApplyApi.getStudyList();
       if (!data) return;
