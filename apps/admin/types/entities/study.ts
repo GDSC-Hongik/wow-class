@@ -9,7 +9,10 @@ export type StudyDifficultyType = "HIGH" | "MEDIUM" | "LOW" | "BASIC";
 
 export type StudyType = "ASSIGNMENT" | "ONLINE" | "OFFLINE";
 
-export type StudyKoreanType = "과제 스터디" | "온라인 세션" | "오프라인 세션";
+export type StudyKoreanType =
+  | "과제 스터디"
+  | "온라인 커리큘럼"
+  | "오프라인 커리큘럼";
 
 export type StudyCurriculumType = {
   studyDetailId: number;
