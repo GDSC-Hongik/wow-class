@@ -109,6 +109,7 @@ const StudyCurriculum = async () => {
                     href={submissionLink || ""}
                     size="sm"
                     style={assignmentButtonStyle}
+                    target="_blank"
                     variant={
                       assignmentSubmissionStatus === "SUCCESS"
                         ? "outline"

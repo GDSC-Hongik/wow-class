@@ -135,6 +135,7 @@ const Header = () => {
                   href={notionLink}
                   role="button"
                   tabIndex={0}
+                  target="_blank"
                 >
                   <Image
                     alt="link-icon"
