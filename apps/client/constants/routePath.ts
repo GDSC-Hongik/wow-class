@@ -20,7 +20,7 @@ export const routePath = {
   onboarding: "https://onboarding.gdschongik.com",
   github: "https://github.com",
   admin:
-    process.env.NODE_ENV === "production"
+    process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
       ? "https://mentor.study.gdschongik.com"
       : "https://dev-mentor.study.gdschongik.com",
 } as const;
