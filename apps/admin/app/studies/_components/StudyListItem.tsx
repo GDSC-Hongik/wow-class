@@ -44,15 +44,24 @@ const StudyListItem = async ({ study }: { study: StudyListApiResponseDto }) => {
         </Link>
         <Flex alignItems="center" gap="sm">
           {adminStatus && (
-            <Button size="sm" variant="outline">
+            <Button
+              asProp={Link}
+              href={`${routerPath.studyDetailInfo}${studyId}`}
+              size="sm"
+              variant="outline"
+            >
               스터디 삭제
             </Button>
           )}
-          <Link href={`${routerPath.studyDetailInfo}${studyId}`}>
-            <Button size="sm" variant="solid">
-              상세 정보 입력
-            </Button>
-          </Link>
+
+          <Button
+            asProp={Link}
+            href={`${routerPath.studyDetailInfo}${studyId}`}
+            size="sm"
+            variant="solid"
+          >
+            상세 정보 입력
+          </Button>
         </Flex>
       </Table.Right>
     </Table>

@@ -82,4 +82,5 @@ export const studyInfoApi = {
     );
     return { success: response.ok };
   },
+  deleteStudy: async (studyId: number) => {},
 };

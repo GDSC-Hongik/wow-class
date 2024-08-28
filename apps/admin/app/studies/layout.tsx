@@ -4,14 +4,19 @@ import Navbar from "components/Navbar";
 
 const StudiesLayout = ({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) => {
   return (
-    <>
+    <main>
       <Navbar />
-      <styled.main className={StudiesLayoutStyle}>{children}</styled.main>
-    </>
+      <styled.main className={StudiesLayoutStyle}>
+        {children}
+        {modal}
+      </styled.main>
+    </main>
   );
 };
 
