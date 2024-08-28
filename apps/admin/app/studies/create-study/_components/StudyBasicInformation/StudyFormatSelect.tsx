@@ -20,7 +20,7 @@ const StudyFormatSelect = () => {
           }}
         >
           <DropDownOption
-            value="ASSIGNMENT"
+            value="OFFLINE"
             text={
               <Flex alignItems="center" gap="md">
                 <Text typo="body1">오프라인 커리큘럼</Text>
@@ -42,7 +42,7 @@ const StudyFormatSelect = () => {
             }
           />
           <DropDownOption
-            value="OFFLINE"
+            value="ASSIGNMENT"
             text={
               <Flex alignItems="center" gap="md">
                 <Text typo="body1">과제 스터디</Text>
