@@ -30,7 +30,7 @@ const AnnouncementModifyModal = () => {
       studyAnnouncement
     );
     if (result.success) {
-      await revalidateTagByName(tags.announcements);
+      revalidateTagByName(tags.announcements);
       closeModal();
     }
   };
