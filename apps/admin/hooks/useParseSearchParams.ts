@@ -2,6 +2,24 @@ import { useSearchParams } from "next/navigation";
 
 const useParseSearchParams = () => {
   const searchParams = useSearchParams();
+
+  const parseQueryString = <T extends Record<string, any>>(
+    query: string
+  ): T => {
+    const params = new URLSearchParams(query);
+    const result: Partial<T> = {};
+
+    params.forEach((value, key) => {
+      try {
+        result[key as keyof T] = JSON.parse(value);
+      } catch (e) {
+        result[key as keyof T] = value as any;
+      }
+    });
+
+    return result as T;
+  };
+
   const parseToJsonSearchParam = <T extends object>(queryString: string): T => {
     const param = searchParams.get(queryString);
     if (param) return JSON.parse(param);
@@ -24,6 +42,7 @@ const useParseSearchParams = () => {
     parseToJsonSearchParam,
     parseToStringSearchParams,
     parseToNumberSearchParams,
+    parseQueryString,
   };
 };
 

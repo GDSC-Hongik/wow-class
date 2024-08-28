@@ -8,16 +8,20 @@ import { routerPath } from "constants/router/routerPath";
 import { tags } from "constants/tags";
 import useParseSearchParams from "hooks/useParseSearchParams";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 const CreatedStudyCheckModal = () => {
-  const { parseToJsonSearchParam } = useParseSearchParams();
-  const data = parseToJsonSearchParam<CreateStudyApiRequestDto>("data");
+  const { parseQueryString } = useParseSearchParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const { closeModal } = useModalRoute();
+
+  const data = parseQueryString<CreateStudyApiRequestDto>(
+    searchParams.toString()
+  );
 
   const studyName = data.title;
   const semester = `${data.academicYear}-${data.semesterType === "FIRST" ? "1" : "2"}`;
