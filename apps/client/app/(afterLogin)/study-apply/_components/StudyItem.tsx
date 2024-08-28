@@ -8,6 +8,7 @@ import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { StudyList } from "types/dtos/applyStudy";
 import type { StudyType } from "types/entities/common/study";
+import type { Time } from "types/entities/common/time";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 interface StudyItemProps {
@@ -24,8 +25,8 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
     mentorName,
     studyType,
     dayOfWeek,
-    startTime: { hour: startTimeHour, minute: startTimeMinute },
-    endTime: { hour: endTimeHour, minute: endTimeMinute },
+    startTime,
+    endTime,
     openingDate: openingDateString,
     applicationEndDate: endDateString,
     totalWeek,
@@ -33,9 +34,16 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
 
   const openingDate = parseISODate(openingDateString);
   const endDate = parseISODate(endDateString);
-  const studyTime = `${dayToKorean[dayOfWeek.toUpperCase()]} ${startTimeHour}:${padWithZero(startTimeMinute)} - ${
-    endTimeHour
-  }:${padWithZero(endTimeMinute)}`;
+
+  const formatTime = (startTime: Time, endTime: Time) => {
+    const { hour: startTimeHour, minute: startTimeMinute } = startTime;
+    const { hour: endTimeHour, minute: endTimeMinute } = endTime;
+
+    return `${dayToKorean[dayOfWeek.toUpperCase()]} ${startTimeHour}:${padWithZero(startTimeMinute)} - ${
+      endTimeHour
+    }:${padWithZero(endTimeMinute)}`;
+  };
+  const studyTime = startTime && endTime ? formatTime(startTime, endTime) : "-";
 
   const isApplicable = appliedStudyId === null;
   const isCancelable = appliedStudyId === studyId;
@@ -56,7 +64,12 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
         </Link>
       </Flex>
       <Text className={textCellStyle}>{mentorName}</Text>
-      <Text className={textCellStyle}>{studyTime}</Text>
+      <Text
+        className={textCellStyle}
+        style={{ width: "11rem", textAlign: "center" }}
+      >
+        {studyTime}
+      </Text>
       <Text className={textCellStyle}>{totalWeek}주 코스</Text>
       <Flex direction="column" textAlign="center">
         <Text className={textCellStyle}>
