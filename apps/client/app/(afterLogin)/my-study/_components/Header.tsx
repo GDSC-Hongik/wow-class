@@ -132,7 +132,7 @@ const Header = () => {
                 </Text>
                 <Link
                   className={introduceLinkStyle}
-                  href={notionLink}
+                  href={notionLink || ""}
                   role="button"
                   tabIndex={0}
                   target="_blank"
