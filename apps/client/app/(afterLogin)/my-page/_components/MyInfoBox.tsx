@@ -28,7 +28,7 @@ export const MyInfoBox = async () => {
             </Flex>
             <Space height={58} />
             <Flex gap="xs">
-              <Link href={routePath["onboarding"]} target="_blank">
+              <Link href={routePath["onboardingDashboard"]} target="_blank">
                 <Button size="sm" variant="outline">
                   계정 정보
                 </Button>

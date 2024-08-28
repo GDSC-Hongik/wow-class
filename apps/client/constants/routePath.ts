@@ -18,6 +18,7 @@ export const routePath = {
   ["my-page"]: "/my-page",
   ["my-page-logout"]: "/my-page/logout",
   onboarding: "https://onboarding.gdschongik.com",
+  onboardingDashboard: "https://onboarding.gdschongik.com/dashboard",
   github: "https://github.com",
   admin:
     process.env.NODE_ENV === "production"
