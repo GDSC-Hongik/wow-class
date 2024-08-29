@@ -53,7 +53,6 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
         aria-expanded={expanded ? "true" : "false"}
         aria-haspopup={items?.length && items.length > 1 ? "true" : undefined}
         href={`${href}`}
-        role="menuitem"
         tabIndex={0}
         className={navItemStyle({
           type:
