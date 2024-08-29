@@ -1,9 +1,9 @@
 import { css } from "@styled-system/css";
-import { Flex } from "@styled-system/jsx";
 import { NavItem } from "@wow-class/ui";
 import { dashboardApi } from "apis/auth/dashboardApi";
 import { studyApi } from "apis/study/studyApi";
 import Image from "next/image";
+import Link from "next/link";
 import isAdmin from "utils/isAdmin";
 
 import adminImageUrl from "../public/images/administrator.svg";
@@ -23,13 +23,13 @@ const Navbar = async () => {
 
   const navMenu = [
     {
-      href: "studies",
+      href: "",
       imageUrl: homeImageUrl,
       alt: "home-icon",
       name: "개설된 스터디",
       items: studyList?.map(({ studyId, title }) => {
         return {
-          href: `${studyId}`,
+          href: `studies/${studyId}`,
           imageUrl: folderImageUrl,
           alt: title,
           name: title,
@@ -46,7 +46,7 @@ const Navbar = async () => {
 
   return (
     <aside aria-label="admin navigation bar" className={navbarContainerStyle}>
-      <Flex align="center" gap={8} padding="6px 0px 7px 20px">
+      <Link className={logoContainerStyle} href="/studies">
         <div className={logoTextStyle}>와우클래스 멘토</div>
         <Image
           alt="logo"
@@ -55,7 +55,7 @@ const Navbar = async () => {
           src={logoImageUrl}
           width={42}
         />
-      </Flex>
+      </Link>
       <nav
         aria-label="admin nav menu"
         className={navContainerStyle}
@@ -93,6 +93,13 @@ const navbarContainerStyle = css({
   paddingTop: "54px",
   borderRightWidth: "arrow",
   borderColor: "mono.400",
+});
+
+const logoContainerStyle = css({
+  display: "flex",
+  alignItems: "center",
+  gap: "sm",
+  padding: "6px 0px 7px 20px",
 });
 
 const logoTextStyle = css({
