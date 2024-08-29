@@ -16,7 +16,6 @@ const StudyDetailInfoLayout = ({
   modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
 }>) => {
   return (
     <main style={MainLayoutStyle}>
