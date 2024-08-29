@@ -11,7 +11,7 @@ export interface CreateStudyApiRequestDto {
   totalWeek: number;
   startDate: string;
   dayOfWeek: DayOfWeekType;
-  studyStartTime: TimeType;
-  studyEndTime: TimeType;
+  studyStartTime?: TimeType;
+  studyEndTime?: TimeType;
   studyType: StudyType;
 }
