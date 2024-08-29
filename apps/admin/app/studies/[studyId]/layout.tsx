@@ -1,3 +1,16 @@
+import { studyInfoApi } from "apis/study/studyInfoApi";
+
+export const generateMetadata = async ({
+  params: { studyId },
+}: {
+  params: { studyId: string };
+}) => {
+  const study = await studyInfoApi.getStudyBasicInfo(+studyId);
+  return {
+    title: study ? study.title : "스터디",
+  };
+};
+
 const StudyLayout = ({
   children,
   modal,
