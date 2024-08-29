@@ -1,10 +1,11 @@
+import { cookieKey } from "constants/cookieKey";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST() {
   const cookieStore = cookies();
 
-  cookieStore.set("middleware-executed", "", {
+  cookieStore.set(cookieKey["middleware-executed"], "", {
     httpOnly: true,
     secure: true,
     sameSite: "lax",

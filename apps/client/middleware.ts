@@ -9,12 +9,10 @@ export const config = {
   matcher: ["/my-page/:path*", "/my-study/:path*", "/study-apply/:path*"],
 };
 
-const CACHE_COOKIE = "middleware-executed";
-
 const middleware = async (req: NextRequest) => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
-  const cacheCookie = cookieStore.get(CACHE_COOKIE);
+  const cacheCookie = cookieStore.get(cookieKey["middleware-executed"]);
 
   if (!accessToken) {
     return NextResponse.redirect(new URL(routePath.auth, req.url));
@@ -29,7 +27,7 @@ const middleware = async (req: NextRequest) => {
       }
 
       const response = NextResponse.next();
-      response.cookies.set(CACHE_COOKIE, "true", {
+      response.cookies.set(cookieKey["middleware-executed"], "true", {
         httpOnly: true,
         secure: true,
         sameSite: "lax",
