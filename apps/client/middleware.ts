@@ -11,7 +11,6 @@ export const config = {
 
 const CACHE_COOKIE = "middleware-executed";
 
-// 로그아웃 시 쿠키 지워주는 로직 추가 필요
 const middleware = async (req: NextRequest) => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
