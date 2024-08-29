@@ -39,13 +39,14 @@ const headerContainerStyle = css({
   borderBottomStyle: "solid",
   display: "flex",
   alignItems: "center",
+  justifyContent: "center",
 });
 
 const logoContainerStyle = css({
   display: "flex",
   gap: "8px",
-  width: "fit-content",
-  marginLeft: "225px",
+  width: "956px",
+  paddingX: "16px",
   alignItems: "center",
 });
 

@@ -53,6 +53,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
         aria-expanded={expanded ? "true" : "false"}
         aria-haspopup={items?.length && items.length > 1 ? "true" : undefined}
         href={`${href}`}
+        prefetch={true}
         role="menuitem"
         tabIndex={0}
         className={navItemStyle({
@@ -93,6 +94,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
               <Link
                 aria-label={item.name}
                 href={`${href}/${item.href}`}
+                prefetch={true}
                 role="menuitem"
                 style={{ padding: "11px 36px" }}
                 className={navItemStyle({
