@@ -36,7 +36,7 @@ const Navbar = async () => {
         className={navContainerStyle}
         role="navigation"
       >
-        <ul>
+        <section>
           {navMenu.map((menu) => (
             <NavItem
               alt={menu.alt}
@@ -47,15 +47,17 @@ const Navbar = async () => {
               name={menu.name}
             />
           ))}
-        </ul>
-        {showConvertToMentorPageButton && (
-          <NavItem
-            alt="administrator-icon"
-            href={routePath.admin || ""}
-            imageUrl={adminImageUrl}
-            name="멘토 페이지로 전환"
-          />
-        )}
+        </section>
+        <section>
+          {showConvertToMentorPageButton && (
+            <NavItem
+              alt="administrator-icon"
+              href={routePath.admin || ""}
+              imageUrl={adminImageUrl}
+              name="멘토 페이지로 전환"
+            />
+          )}
+        </section>
       </nav>
     </aside>
   );

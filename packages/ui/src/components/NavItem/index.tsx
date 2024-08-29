@@ -47,7 +47,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
   };
 
   return (
-    <styled.li listStyle="none" role="presentation">
+    <styled.div listStyle="none" role="presentation">
       <Link
         aria-controls={items ? `${name}-submenu` : undefined}
         aria-expanded={expanded ? "true" : "false"}
@@ -113,7 +113,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
           ))}
         </ul>
       )}
-    </styled.li>
+    </styled.div>
   );
 };
 
