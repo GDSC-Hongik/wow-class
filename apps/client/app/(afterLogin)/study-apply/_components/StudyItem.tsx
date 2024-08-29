@@ -55,7 +55,11 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
           <Text className={titleStyle} typo="h3">
             {title}
           </Text>
-          <Tag color={sessionColors[studyType] ?? "green"} variant="solid1">
+          <Tag
+            color={sessionColors[studyType] ?? "green"}
+            style={tagButtonStyle}
+            variant="solid1"
+          >
             {studyType}
           </Tag>
         </Flex>
@@ -72,19 +76,14 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
         )}
       </Flex>
       <Text className={textCellStyle}>{mentorName}</Text>
-      <Text
-        className={textCellStyle}
-        style={{ width: "11rem", textAlign: "center" }}
-      >
-        {studyTime}
-      </Text>
+      <Text className={timeCellStyle}>{studyTime}</Text>
       <Text className={textCellStyle}>{totalWeek}주 코스</Text>
       <Flex direction="column" textAlign="center">
-        <Text className={dateStyle}>
-          {`${openingDate.month}.${openingDate.day} 개강`}
-        </Text>
+        <Text
+          className={dateStyle}
+        >{`${openingDate.month}.${openingDate.day} 개강`}</Text>
         {isCancelable && (
-          <Text color="error" typo="body3">
+          <Text className={dateStyle} color="error" typo="body3">
             {`${endDate.month}.${endDate.day} 까지 취소 가능`}
           </Text>
         )}
@@ -99,13 +98,13 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
         )}
         {isCancelable && (
           <Link href={`${routePath["study-cancellation-modal"]}/${studyId}`}>
-            <Button size="sm" variant="solid">
+            <Button size="sm" style={tagButtonStyle} variant="solid">
               신청 취소
             </Button>
           </Link>
         )}
         {isNotApplicable && (
-          <Button disabled size="sm" variant="solid">
+          <Button disabled size="sm" style={tagButtonStyle} variant="solid">
             신청 불가
           </Button>
         )}
@@ -127,14 +126,39 @@ const titleStyle = css({
 
 const dateStyle = css({
   width: "118px",
+  "@media (max-width: 1439px)": {
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    width: "38px",
+  },
 });
 
+const timeCellStyle = css({
+  paddingX: "28px",
+  width: "162px",
+  textAlign: "center",
+  "@media (max-width: 1439px)": {
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    padding: "0",
+  },
+});
 const textCellStyle = css({
   paddingX: "28px",
+  "@media (max-width: 1439px)": {
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    padding: "0",
+    width: "38px",
+  },
 });
 
 const contentStyle = css({
   minWidth: "313px",
+  width: "313px",
 });
 
 const introductionLinkTextStyle = css({
@@ -144,6 +168,9 @@ const introductionLinkTextStyle = css({
   textDecoration: "underline",
 });
 
+const tagButtonStyle = {
+  whiteSpace: "nowrap",
+};
 const sessionColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> = {
   "과제 스터디": "green",
   "온라인 커리큘럼": "blue",
