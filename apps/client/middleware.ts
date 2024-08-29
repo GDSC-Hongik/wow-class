@@ -19,26 +19,20 @@ const middleware = async (req: NextRequest) => {
   }
 
   if (!cacheCookie) {
-    try {
-      const { memberRole } = await dashboardApi.getDashboardInfo();
+    const { memberRole } = await dashboardApi.getDashboardInfo();
 
-      if (memberRole !== "REGULAR") {
-        return NextResponse.redirect(new URL(routePath.auth, req.url));
-      }
-
-      const response = NextResponse.next();
-      response.cookies.set(cookieKey["middleware-executed"], "true", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "lax",
-      });
-
-      return response;
-    } catch (error) {
-      console.error("API 호출 오류:", error);
-
-      return NextResponse.next();
+    if (memberRole !== "REGULAR") {
+      return NextResponse.redirect(new URL(routePath.auth, req.url));
     }
+
+    const response = NextResponse.next();
+    response.cookies.set(cookieKey["middleware-executed"], "true", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+    });
+
+    return response;
   }
 
   return NextResponse.next();
