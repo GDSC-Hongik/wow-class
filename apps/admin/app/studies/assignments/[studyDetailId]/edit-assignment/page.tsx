@@ -20,19 +20,6 @@ const Assignments = ({
 }) => {
   const { open, onOpen } = useOpenState();
 
-  const methods = useForm<
-    AssignmentApiRequestDto & {
-      onOpen: () => void;
-    }
-  >({
-    defaultValues: {
-      title: "",
-      deadLine: "2024-09-07T00:00:00",
-      descriptionNotionLink: "",
-      onOpen: onOpen,
-    },
-  });
-
   const [assignment, setAssignment] = useState<AssignmentApiResponseDto | null>(
     null
   );
@@ -46,6 +33,19 @@ const Assignments = ({
     };
     fetchAssignment();
   }, [studyDetailId]);
+
+  const methods = useForm<
+    AssignmentApiRequestDto & {
+      onOpen: () => void;
+    }
+  >({
+    defaultValues: {
+      title: assignment?.title,
+      deadLine: "2024-09-07T00:00:00",
+      descriptionNotionLink: assignment?.descriptionLink,
+      onOpen: onOpen,
+    },
+  });
 
   if (!assignment) return null;
 

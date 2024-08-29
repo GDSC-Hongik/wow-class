@@ -1,3 +1,5 @@
+"use client";
+
 import { useController } from "react-hook-form";
 import type { TextFieldProps } from "wowds-ui/TextField";
 import TextField from "wowds-ui/TextField";
@@ -7,7 +9,6 @@ interface CustomTextFieldProps extends TextFieldProps {
   control: any;
 }
 
-// TODO: defaultValue 적용 안되는 문제
 const CustomTextField = ({
   name,
   control,
