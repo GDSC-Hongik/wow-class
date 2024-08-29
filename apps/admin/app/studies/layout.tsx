@@ -22,6 +22,7 @@ const StudiesLayoutStyle = css({
   flexDirection: "column",
   gap: "sm",
   height: "100vh",
+  overflow: "scroll",
   width: "100%",
   padding: "54px 101px",
 });
