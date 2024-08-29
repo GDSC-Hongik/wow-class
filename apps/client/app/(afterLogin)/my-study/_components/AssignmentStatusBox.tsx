@@ -29,9 +29,9 @@ const AssignmentStatusBox = ({
 
   const attendanceDeadline = `${year}년 ${month}월 ${day}일 ${hours}:${minutes}까지`;
   const {
-    label: assignmentSubmissionStatusLabel,
+    label: assignmentSubmissionStatusLabel = "",
     color: assignmentSubmissionStatusColor,
-  } = assignmentSubmissionStatusMap[assignmentSubmissionStatus];
+  } = assignmentSubmissionStatusMap[assignmentSubmissionStatus] || {};
 
   return (
     <Box
@@ -51,9 +51,11 @@ const AssignmentStatusBox = ({
                 <Text as="h2" typo="h2">
                   {week}주차 과제
                 </Text>
-                <Tag color={assignmentSubmissionStatusColor} variant="solid2">
-                  {assignmentSubmissionStatusLabel}
-                </Tag>
+                {assignmentSubmissionStatusLabel && (
+                  <Tag color={assignmentSubmissionStatusColor} variant="solid2">
+                    {assignmentSubmissionStatusLabel}
+                  </Tag>
+                )}
               </Flex>
               <Text as="div" className={assignmentNameStyle} typo="body1">
                 {name}
