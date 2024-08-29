@@ -3,12 +3,14 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
+import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApplyApi } from "apis/studyApplyApi";
 import { tags } from "constants/tags";
 import { useEffect, useState } from "react";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
+const MODAL_CLOSE_TIME = 1000;
 const StudyApplication = ({ params }: { params: { studyId: number } }) => {
   const studyId = params.studyId;
 
@@ -16,6 +18,7 @@ const StudyApplication = ({ params }: { params: { studyId: number } }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [studyTitle, setStudyTitle] = useState("");
 
+  const { closeModal } = useModalRoute();
   useEffect(() => {
     const fetchStudyData = async () => {
       const data = await studyApplyApi.getStudyList();
@@ -33,6 +36,15 @@ const StudyApplication = ({ params }: { params: { studyId: number } }) => {
 
     fetchStudyData();
   }, [studyId]);
+
+  useEffect(() => {
+    if (applySuccess) {
+      const timer = setTimeout(() => {
+        closeModal();
+      }, MODAL_CLOSE_TIME);
+      return () => clearTimeout(timer);
+    }
+  }, [applySuccess, closeModal]);
 
   const handleClickApplyButton = async () => {
     const result = await studyApplyApi.applyStudy(Number(studyId));

@@ -3,17 +3,21 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
+import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApplyApi } from "apis/studyApplyApi";
 import { tags } from "constants/tags";
 import { useEffect, useState } from "react";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
+const MODAL_CLOSE_TIME = 1000;
+
 const StudyCancel = ({ params }: { params: { studyId: number } }) => {
   const studyId = params.studyId;
   const [cancelSucces, setCancelSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [studyTitle, setStudyTitle] = useState("");
+  const { closeModal } = useModalRoute();
 
   useEffect(() => {
     const fetchStudyData = async () => {
@@ -32,6 +36,15 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
 
     fetchStudyData();
   }, [studyId]);
+
+  useEffect(() => {
+    if (cancelSucces) {
+      const timer = setTimeout(() => {
+        closeModal();
+      }, MODAL_CLOSE_TIME);
+      return () => clearTimeout(timer);
+    }
+  }, [cancelSucces, closeModal]);
 
   const handleClickCancelButton = async () => {
     const result = await studyApplyApi.cancelStudyApplication(Number(studyId));

@@ -70,7 +70,7 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
               color="sub"
               typo="body2"
             >
-              {`(${introduction})`}
+              {introduction}
             </Text>
           </Link>
         )}
@@ -136,7 +136,7 @@ const dateStyle = css({
 
 const timeCellStyle = css({
   paddingX: "28px",
-  width: "162px",
+  width: "178px",
   textAlign: "center",
   "@media (max-width: 1439px)": {
     overflow: "hidden",
