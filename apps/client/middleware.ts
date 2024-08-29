@@ -16,11 +16,15 @@ const middleware = async (req: NextRequest) => {
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
   const cacheCookie = cookieStore.get(CACHE_COOKIE);
 
+  if (!accessToken) {
+    return NextResponse.redirect(new URL(routePath.auth, req.url));
+  }
+
   if (!cacheCookie) {
     try {
       const { memberRole } = await dashboardApi.getDashboardInfo();
 
-      if (!accessToken || memberRole !== "REGULAR") {
+      if (memberRole !== "REGULAR") {
         return NextResponse.redirect(new URL(routePath.auth, req.url));
       }
 
