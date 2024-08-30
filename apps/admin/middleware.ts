@@ -15,7 +15,7 @@ const middleware = async () => {
       : process.env.NEXT_PUBLIC_CLIENT_DEV_URL;
   const cookieStore = cookies();
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
-  const cacheCookie = cookieStore.get(cookieKey["middleware-executed"]);
+  const cacheCookie = cookieStore.get(cookieKey["middleware-executed"])?.value;
 
   if (!accessToken) {
     return NextResponse.redirect(new URL("/auth", url));
