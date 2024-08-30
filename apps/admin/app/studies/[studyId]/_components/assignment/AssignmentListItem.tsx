@@ -1,4 +1,3 @@
-"use client";
 import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
