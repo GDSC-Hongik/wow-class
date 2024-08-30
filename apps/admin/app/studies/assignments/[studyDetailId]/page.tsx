@@ -3,6 +3,7 @@ import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import { studyApi } from "apis/study/studyApi";
+import ItemSeparator from "components/ItemSeparator";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
 import TextButton from "wowds-ui/TextButton";
@@ -26,7 +27,7 @@ const AssignmentsPage = async ({
     <>
       <styled.header className={headerStyle}>
         <Text as="h1" typo="h1">
-          {title} • {week}주차 과제
+          {title} <ItemSeparator height={4} width={4} /> {week}주차 과제
         </Text>
         <Flex gap="0.75rem">
           <CancelAssignmentButton studyDetailId={+studyDetailId} />
