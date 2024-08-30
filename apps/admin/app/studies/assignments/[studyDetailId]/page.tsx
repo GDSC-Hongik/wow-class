@@ -52,9 +52,9 @@ const AssignmentsPage = async ({
           <TextButton
             asProp={Link}
             className={textButtonStyle}
-            href={descriptionLink}
+            href={descriptionLink || ""}
             target="_blank"
-            text={descriptionLink}
+            text={descriptionLink || ""}
           />
         </Flex>
         <Flex direction="column" gap="xxs">
