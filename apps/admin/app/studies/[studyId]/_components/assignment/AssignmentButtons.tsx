@@ -1,6 +1,7 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
 import { studyApi } from "apis/study/studyApi";
+import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
 import type { StudyAssignmentStatusType } from "types/entities/study";
 import Button from "wowds-ui/Button";
@@ -25,7 +26,7 @@ const AssignmentButtons = ({
     return (
       <Button
         asProp={Link}
-        href={`/studies/assignments/${studyDetailId}`}
+        href={routerPath["assignment-detail"].href(studyDetailId)}
         size="sm"
         variant="outline"
       >
@@ -54,7 +55,7 @@ const AssignmentButtons = ({
       </Button>
       <Button
         asProp={Link}
-        href={`/studies/assignments/${studyDetailId}/edit-assignment`}
+        href={routerPath["assignment-edit"].href(studyDetailId)}
         size="sm"
         variant="solid"
       >

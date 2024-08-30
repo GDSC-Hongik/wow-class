@@ -4,6 +4,7 @@ import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import { studyApi } from "apis/study/studyApi";
 import ItemSeparator from "components/ItemSeparator";
+import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
 import TextButton from "wowds-ui/TextButton";
@@ -36,7 +37,7 @@ const AssignmentsPage = async ({
         </Text>
         <Button
           asProp={Link}
-          href={`${studyDetailId}/edit-assignment`}
+          href={routerPath["assignment-edit"].href(studyDetailId)}
           size="sm"
           variant="outline"
         >
