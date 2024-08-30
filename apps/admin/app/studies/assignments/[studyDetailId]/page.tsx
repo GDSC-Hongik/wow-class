@@ -8,8 +8,6 @@ import Link from "next/link";
 import Button from "wowds-ui/Button";
 import TextButton from "wowds-ui/TextButton";
 
-import CancelAssignmentButton from "./_components/CancelAssignmentButton";
-
 const AssignmentsPage = async ({
   params: { studyDetailId },
 }: {
@@ -36,17 +34,14 @@ const AssignmentsPage = async ({
             {week}주차 <styled.span color="textBlack">과제</styled.span>
           </styled.span>
         </Text>
-        <Flex gap="0.75rem">
-          <CancelAssignmentButton studyDetailId={+studyDetailId} />
-          <Button
-            asProp={Link}
-            href={`${studyDetailId}/edit-assignment`}
-            size="sm"
-            variant="outline"
-          >
-            수정
-          </Button>
-        </Flex>
+        <Button
+          asProp={Link}
+          href={`${studyDetailId}/edit-assignment`}
+          size="sm"
+          variant="outline"
+        >
+          수정
+        </Button>
       </header>
       <Flex direction="column" gap="4rem">
         <Flex direction="column" gap="xxs">
