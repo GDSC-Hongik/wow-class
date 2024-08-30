@@ -1,4 +1,4 @@
-const StudyLayout = ({
+const StudyDetailInfoLayout = ({
   children,
   modal,
 }: Readonly<{
@@ -13,7 +13,7 @@ const StudyLayout = ({
   );
 };
 
-export default StudyLayout;
+export default StudyDetailInfoLayout;
 
 const MainLayoutStyle = {
   height: "100vh",

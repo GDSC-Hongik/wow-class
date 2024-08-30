@@ -1,14 +1,30 @@
-export type SemesterType = "FIRST" | "SECOND";
+export type StudyDifficultyArrayType = {
+  text: string;
+  value: StudyDifficultyType;
+}[];
+
+export type StudyAssignmentStatusType = "NONE" | "OPEN" | "CANCELLED";
+
+export type StudyDifficultyType = "HIGH" | "MEDIUM" | "LOW" | "BASIC";
 
 export type StudyType = "ASSIGNMENT" | "ONLINE" | "OFFLINE";
 
-export type StudyKoreanType = "과제 스터디" | "온라인 세션" | "오프라인 세션";
+export type StudyKoreanType =
+  | "과제 스터디"
+  | "온라인 커리큘럼"
+  | "오프라인 커리큘럼";
 
-export type AssignmentStatusType = "NONE" | "OPEN" | "CANCELLED";
-
-export type StudyDifficultyType = "HIGH" | "MEDIUM" | "LOW" | "BASIC";
+export type StudyCurriculumType = {
+  studyDetailId: number;
+  title?: string;
+  description?: string;
+  difficulty?: StudyDifficultyType;
+  status?: StudyAssignmentStatusType;
+};
 
 export type StudyAnnouncementType = {
   title: string;
   link: string;
 };
+
+export type StudySemesterType = "FIRST" | "SECOND";
