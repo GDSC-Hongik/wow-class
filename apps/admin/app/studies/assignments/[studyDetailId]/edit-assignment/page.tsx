@@ -2,6 +2,7 @@
 
 import { useOpenState } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
+import { assignmentStatusMap } from "constants/assignmentStatusMap";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type {
@@ -48,20 +49,10 @@ const Assignments = ({
   });
 
   if (!assignment) return null;
-
   const { assignmentStatus, week } = assignment;
 
-  const formatStatusToString = () => {
-    switch (assignmentStatus) {
-      case "NONE":
-        return "개설";
-      case "OPEN":
-        return "수정";
-      default:
-        return "개설";
-    }
-  };
-  const statusStr = formatStatusToString();
+  // TODO: 휴강된 경우 진입 막기
+  if (assignmentStatus === "CANCELLED") return null;
 
   // TODO: studyName 추가
   return (
@@ -70,7 +61,7 @@ const Assignments = ({
         <SuccessModal
           studyDetailId={studyDetailId}
           studyName="스터디 제목"
-          type={statusStr}
+          type={assignmentStatusMap[assignmentStatus]}
           week={week}
         />
       )}
