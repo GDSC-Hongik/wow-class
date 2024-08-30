@@ -4,6 +4,7 @@ import { NavItem } from "@wow-class/ui";
 import { dashboardApi } from "apis/auth/dashboardApi";
 import { studyApi } from "apis/study/studyApi";
 import Image from "next/image";
+import Link from "next/link";
 import isAdmin from "utils/isAdmin";
 
 import adminImageUrl from "../public/images/administrator.svg";
@@ -47,7 +48,9 @@ const Navbar = async () => {
   return (
     <aside aria-label="admin navigation bar" className={navbarContainerStyle}>
       <Flex align="center" gap={8} padding="6px 0px 7px 20px">
-        <div className={logoTextStyle}>와우클래스 멘토</div>
+        <Link className={logoTextStyle} href="/studies">
+          와우클래스 멘토
+        </Link>
         <Image
           alt="logo"
           className={logoImageStyle}
