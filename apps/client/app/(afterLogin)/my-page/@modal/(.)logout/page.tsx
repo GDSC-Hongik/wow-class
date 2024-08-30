@@ -11,7 +11,7 @@ import Button from "wowds-ui/Button";
 
 const LogoutModal = () => {
   const router = useRouter();
-  const { closeModal } = useModalRoute();
+  const { onClose } = useModalRoute();
   const handleClickLogoutButton = async () => {
     const response = await authApi.logout();
     if (response.success) {
@@ -33,7 +33,7 @@ const LogoutModal = () => {
             size="lg"
             style={buttonStyle}
             variant="outline"
-            onClick={closeModal}
+            onClick={onClose}
           >
             취소
           </Button>
