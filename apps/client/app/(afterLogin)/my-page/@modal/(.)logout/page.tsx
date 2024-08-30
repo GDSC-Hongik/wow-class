@@ -16,7 +16,7 @@ const LogoutModal = () => {
   const { closeModal } = useModalRoute();
 
   const handleClickLogoutButton = async () => {
-    fetcher.setBaseUrl("https://local-study.gdschongik.com");
+    fetcher.setBaseUrl(`https://${window.location.hostname}`);
     const _ = await fetcher.post("/api/my-page/logout", {});
 
     baseUrl && fetcher.setBaseUrl(baseUrl);
