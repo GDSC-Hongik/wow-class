@@ -25,7 +25,7 @@ const Navbar = async () => {
       <Button
         asProp={Link}
         className={logoButtonStyle}
-        href={routePath.landing}
+        href={routePath["my-study"]}
       >
         <div className={logoTextStyle}>와우클래스</div>
         <Image
