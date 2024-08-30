@@ -42,7 +42,7 @@ const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
         ? await studyApi.createAssignment(studyDetailId, data)
         : await studyApi.patchAssignment(studyDetailId, data);
     if (success) {
-      revalidateTagByName(`${tags.assignments} ${studyDetailId.toString()}`);
+      revalidateTagByName(`${tags.assignments} ${studyDetailId}`);
       revalidateTagByName(tags.assignments);
       onOpen();
     }

@@ -47,7 +47,7 @@ export const studyApi = {
     const response = await fetcher.get<AssignmentApiResponseDto>(
       `/mentor/study-details/${studyDetailId}/assignments`,
       {
-        next: { tags: [`${tags.assignments} ${studyDetailId.toString()}`] },
+        next: { tags: [`${tags.assignments} ${studyDetailId}`] },
         cache: "force-cache",
       }
     );
