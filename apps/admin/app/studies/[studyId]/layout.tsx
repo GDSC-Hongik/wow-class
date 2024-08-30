@@ -1,11 +1,11 @@
-import { studyInfoApi } from "apis/study/studyInfoApi";
+import { studyApi } from "apis/study/studyApi";
 
 export const generateMetadata = async ({
   params: { studyId },
 }: {
   params: { studyId: string };
 }) => {
-  const study = await studyInfoApi.getStudyBasicInfo(+studyId);
+  const study = await studyApi.getStudyBasicInfo(+studyId);
   return {
     title: study ? study.title : "스터디",
   };
