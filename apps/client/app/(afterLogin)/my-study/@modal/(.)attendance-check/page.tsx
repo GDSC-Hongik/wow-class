@@ -3,7 +3,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
-import { useOpenState } from "@wow-class/ui/hooks";
+import { useModalRoute } from "@wow-class/ui/hooks";
 import { myStudyApi } from "apis/myStudyApi";
 import useFetchAttendanceCheckModalInfoData from "hooks/useFetchAttendanceCheckModalInfoData";
 import Image from "next/image";
@@ -17,7 +17,7 @@ const AttendanceCheckModal = () => {
   const [error, setError] = useState(false);
   const [attendanceNumber, setAttendanceNumber] = useState("");
 
-  const { onClose } = useOpenState();
+  const { onClose } = useModalRoute();
 
   const { studyInfo } = useFetchAttendanceCheckModalInfoData();
 
