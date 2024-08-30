@@ -14,7 +14,7 @@ const AnnouncementDeleteModal = () => {
 
   const studyAnnouncementId = searchParams.get("studyAnnouncementId");
 
-  const { closeModal } = useModalRoute();
+  const { onClose } = useModalRoute();
 
   const handleClickDeleteButton = async () => {
     const result = await studyApi.deleteStudyAnnouncement(
@@ -22,7 +22,7 @@ const AnnouncementDeleteModal = () => {
     );
     if (result.success) {
       revalidateTagByName(tags.announcements);
-      closeModal();
+      onClose();
     }
   };
 
@@ -33,7 +33,7 @@ const AnnouncementDeleteModal = () => {
         <Space height={33} />
 
         <Flex gap="sm">
-          <Button variant="outline" onClick={closeModal}>
+          <Button variant="outline" onClick={onClose}>
             취소
           </Button>
           <Button onClick={handleClickDeleteButton}>삭제하기</Button>

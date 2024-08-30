@@ -6,11 +6,12 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import Button from "wowds-ui/Button";
 
 const TestModal = () => {
-  const { closeModal } = useModalRoute();
+  const { onClose } = useModalRoute();
+
   return (
-    <Modal onClose={closeModal}>
+    <Modal>
       <Flex gap="sm" width="21rem">
-        <Button variant="outline" onClick={closeModal}>
+        <Button variant="outline" onClick={onClose}>
           취소
         </Button>
         <Button>저장하기</Button>

@@ -14,7 +14,7 @@ import useSubmitStudyDetailInfo from "./_hooks/useSubmitStudyDetailInfo";
 
 const StudyDetailInfoCheckModal = () => {
   const [studyName, setStudyName] = useState("");
-  const { closeModal } = useModalRoute();
+  const { onClose } = useModalRoute();
   const { parseToNumberSearchParams, parseQueryString } =
     useParseSearchParams();
   const searchParams = useSearchParams();
@@ -39,7 +39,7 @@ const StudyDetailInfoCheckModal = () => {
     <Modal>
       <SubmitSuccessMessage studyName={studyName} success={isSuccess} />
       <SubmitConfirmMessage
-        closeModal={closeModal}
+        closeModal={onClose}
         handleSubmitDetailInfo={handleSubmitDetailInfo}
         studyName={studyName}
         success={isSuccess}
