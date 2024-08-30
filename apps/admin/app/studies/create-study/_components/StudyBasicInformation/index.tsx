@@ -10,7 +10,7 @@ import StudySemesterSelect from "./StudySemesterSelect";
 import StudyStartDatePick from "./StudyStartDatePick";
 import StudyTime from "./StudyTime";
 
-const StudyBasicInfo = () => {
+const StudyBasicInformation = () => {
   return (
     <Flex direction="column" gap="xl" maxWidth="5/6">
       <Text typo="h2">스터디 기본 설정</Text>
@@ -31,4 +31,4 @@ const StudyBasicInfo = () => {
   );
 };
 
-export default StudyBasicInfo;
+export default StudyBasicInformation;

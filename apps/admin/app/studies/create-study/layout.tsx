@@ -1,4 +1,4 @@
-const StudyLayout = ({
+const CreateStudyLayout = ({
   children,
   modal,
 }: Readonly<{
@@ -6,16 +6,11 @@ const StudyLayout = ({
   modal: React.ReactNode;
 }>) => {
   return (
-    <main style={MainLayoutStyle}>
+    <main>
       {children}
       {modal}
     </main>
   );
 };
 
-export default StudyLayout;
-
-const MainLayoutStyle = {
-  height: "100vh",
-  overflow: "auto",
-};
+export default CreateStudyLayout;

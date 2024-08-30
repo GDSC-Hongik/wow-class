@@ -3,7 +3,7 @@ import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import { studyInfoApi } from "apis/study/studyInfoApi";
+import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
 import Link from "next/link";
 import type { AssignmentApiResponseDto } from "types/dtos/assignmentList";
@@ -30,7 +30,7 @@ const AssignmentListItem = ({
   const studyDeadline = `종료 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
 
   const handleCancelAssignment = async (studyDetailId: number) => {
-    const { success } = await studyInfoApi.cancelAssignment(studyDetailId);
+    const { success } = await studyApi.cancelAssignment(studyDetailId);
     if (success) {
       window.alert("휴강 처리에 성공했어요.");
       revalidateTagByName(tags.assignments);

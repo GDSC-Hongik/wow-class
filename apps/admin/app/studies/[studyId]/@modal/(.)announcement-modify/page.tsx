@@ -3,7 +3,7 @@
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
-import { studyInfoApi } from "apis/study/studyInfoApi";
+import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -25,12 +25,12 @@ const AnnouncementModifyModal = () => {
   const { closeModal } = useModalRoute();
 
   const handleClickModifyButton = async () => {
-    const result = await studyInfoApi.modifyStudyAnnouncement(
+    const result = await studyApi.modifyStudyAnnouncement(
       Number(studyAnnouncementId),
       studyAnnouncement
     );
     if (result.success) {
-      await revalidateTagByName(tags.announcements);
+      revalidateTagByName(tags.announcements);
       closeModal();
     }
   };
