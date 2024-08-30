@@ -1,4 +1,4 @@
-import { css } from "@styled-system/css";
+import { css, cva } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
@@ -56,11 +56,11 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
             {title}
           </Text>
           <Tag
-            color={sessionColors[studyType] ?? "green"}
+            color={curriculumColors[studyType] ?? "green"}
             style={tagButtonStyle}
             variant="solid1"
           >
-            {studyType}
+            {tagTexts[studyType]}
           </Tag>
         </Flex>
         {introduction && (
@@ -75,9 +75,13 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
           </Link>
         )}
       </Flex>
-      <Text className={textCellStyle}>{mentorName}</Text>
+      <Text className={textCellStyle({ type: "mentor" })}>
+        {mentorName} 멘토
+      </Text>
       <Text className={timeCellStyle}>{studyTime}</Text>
-      <Text className={textCellStyle}>{totalWeek}주 코스</Text>
+      <Text className={textCellStyle({ type: "week" })}>
+        {totalWeek}주 코스
+      </Text>
       <Flex direction="column" textAlign="center">
         <Text
           className={dateStyle}
@@ -91,7 +95,7 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
       <styled.div paddingX="24px">
         {isApplicable && (
           <Link href={`${routePath["study-application-modal"]}/${studyId}`}>
-            <Button size="sm" variant="solid">
+            <Button size="sm" style={tagButtonStyle} variant="solid">
               수강 신청
             </Button>
           </Link>
@@ -144,15 +148,39 @@ const timeCellStyle = css({
     textOverflow: "ellipsis",
     padding: "0",
   },
+  "@media (max-width: 1199px)": {
+    display: "none",
+  },
 });
-const textCellStyle = css({
-  paddingX: "28px",
-  "@media (max-width: 1439px)": {
-    overflow: "hidden",
-    whiteSpace: "nowrap",
-    textOverflow: "ellipsis",
-    padding: "0",
-    width: "38px",
+const textCellStyle = cva({
+  base: {
+    "@media (max-width: 1439px)": {
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      textOverflow: "ellipsis",
+      padding: "0",
+      width: "38px",
+    },
+  },
+  variants: {
+    type: {
+      mentor: {
+        paddingX: "15px",
+        "@media (max-width: 1199px)": {
+          width: "fit-content",
+          paddingInline: "7.25px",
+        },
+        "@media (max-width: 959px)": {
+          display: "none",
+        },
+      },
+      week: {
+        paddingX: "28px",
+        "@media (max-width: 1199px)": {
+          display: "none",
+        },
+      },
+    },
   },
 });
 
@@ -171,10 +199,18 @@ const introductionLinkTextStyle = css({
 const tagButtonStyle = {
   whiteSpace: "nowrap",
 };
-const sessionColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> = {
-  "과제 스터디": "green",
-  "온라인 커리큘럼": "blue",
-  "오프라인 커리큘럼": "yellow",
+
+const tagTexts: Record<StudyType, string> = {
+  "과제 스터디": "과제 스터디",
+  "온라인 커리큘럼": "온라인 스터디",
+  "오프라인 커리큘럼": "오프라인 스터디",
 };
+
+const curriculumColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> =
+  {
+    "과제 스터디": "green",
+    "온라인 커리큘럼": "blue",
+    "오프라인 커리큘럼": "yellow",
+  };
 
 export default StudyItem;
