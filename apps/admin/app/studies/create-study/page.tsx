@@ -37,20 +37,25 @@ const CreateStudyPage = () => {
         position="relative"
         width="100%"
       >
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form>
           <StudyNameTextField />
           <Space height={48} />
           <StudyMentorSelect />
           <Space height={64} />
           <StudyBasicInformation />
           <Button
+            asProp={Link}
             disabled={!methods.formState.isValid}
             role="button"
             size="sm"
             style={{ position: "absolute", top: "0px", right: "0px" }}
             type="submit"
+            href={{
+              pathname: `${routerPath["created-study-check"].href}`,
+              query: { data: JSON.stringify(methods.getValues()) },
+            }}
           >
-            제출하기
+            개설하기
           </Button>
         </form>
       </Flex>

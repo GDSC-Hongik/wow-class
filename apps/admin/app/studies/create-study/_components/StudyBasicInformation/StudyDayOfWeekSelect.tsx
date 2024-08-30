@@ -19,7 +19,7 @@ const StudyDayOfWeekSelect = () => {
           }}
         >
           {dayToKoreanList.map(({ text, value }) => (
-            <DropDownOption text={text} value={value!!} />
+            <DropDownOption key={`${text}`} text={text} value={value!!} />
           ))}
         </DropDown>
       )}

@@ -33,6 +33,7 @@ const LandingPage = () => {
           asProp={Link}
           href={routePath.auth}
           size="lg"
+          style={loginButtonStyle}
         >
           로그인
         </Button>
@@ -85,3 +86,7 @@ const descriptionStyle = css({
   marginBottom: "48px",
   zIndex: 1,
 });
+
+const loginButtonStyle = {
+  maxWidth: "232px",
+};

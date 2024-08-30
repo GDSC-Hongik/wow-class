@@ -1,4 +1,4 @@
-import folderImageUrl from "../public/images/folder.svg";
+// import folderImageUrl from "../public/images/folder.svg";
 import homeImageUrl from "../public/images/home.svg";
 import personImageUrl from "../public/images/person.svg";
 import scheduleImageUrl from "../public/images/schedule.svg";
@@ -9,14 +9,14 @@ export const navMenu = [
     imageUrl: homeImageUrl,
     alt: "home-icon",
     name: "나의 스터디",
-    items: [
-      {
-        href: "/my-assignment",
-        imageUrl: folderImageUrl,
-        alt: "folder-icon",
-        name: "나의 과제",
-      },
-    ],
+    // items: [
+    //   {
+    //     href: "my-assignment",
+    //     imageUrl: folderImageUrl,
+    //     alt: "folder-icon",
+    //     name: "나의 과제",
+    //   },
+    // ],
   },
   {
     href: "/study-apply",

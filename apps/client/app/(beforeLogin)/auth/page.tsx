@@ -43,7 +43,7 @@ const AuthPage = async () => {
           asProp={Link}
           href={routePath["github-oauth"]}
           icon={githubLogoIcon}
-          style={{ backgroundColor: `${color.github}` }}
+          style={githubLoginButtonStyle}
         >
           GitHub 로그인
         </Button>
@@ -108,3 +108,8 @@ const authImageStyle = css({
   height: "100%",
   width: "100%",
 });
+
+const githubLoginButtonStyle = {
+  backgroundColor: `${color.github}`,
+  maxWidth: "328px",
+};
