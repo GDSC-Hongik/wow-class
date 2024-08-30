@@ -62,7 +62,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
       >
         <Image
           alt={alt}
-          className={css({ width: "20px", height: "20px" })}
+          className={navItemImageStyle}
           height={20}
           src={imageUrl}
           width={20}
@@ -73,15 +73,11 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
         {items?.length && items?.length > 1 && (
           <Image
             alt="toggle-icon"
+            className={toggleIconStyle}
             height={20}
             src={arrowImageUrl}
             style={{ transform: expanded ? "rotate(0deg)" : "rotate(180deg)" }}
             width={20}
-            className={css({
-              width: "20px",
-              height: "20px",
-              marginLeft: "auto",
-            })}
           />
         )}
       </Link>
@@ -100,7 +96,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
               >
                 <Image
                   alt={item.alt}
-                  className={css({ width: "20px", height: "20px" })}
+                  className={navItemImageStyle}
                   height={20}
                   src={item.imageUrl}
                   width={20}
@@ -138,3 +134,11 @@ const navItemStyle = cva({
     },
   },
 });
+
+const toggleIconStyle = css({
+  width: "20px",
+  height: "20px",
+  marginLeft: "auto",
+});
+
+const navItemImageStyle = css({ width: "20px", height: "20px" });
