@@ -9,7 +9,7 @@ import TextButton from "wowds-ui/TextButton";
 
 import CancelAssignmentButton from "./_components/CancelAssignmentButton";
 
-const Assignments = async ({
+const AssignmentsPage = async ({
   params: { studyDetailId },
 }: {
   params: { studyDetailId: string };
@@ -78,4 +78,4 @@ const textButtonStyle = css({
   color: "sub",
 });
 
-export default Assignments;
+export default AssignmentsPage;
