@@ -95,14 +95,16 @@ const Header = ({
             tabIndex={0}
             onClick={handleClickShowIntro}
           >
-            <DownArrow
-              aria-label={introSectionIconAriaLabel}
-              className={downArrowIconStyle}
-              height={20}
-              stroke="textBlack"
-              style={{ rotate: showIntro ? "0deg" : "180deg" }}
-              width={20}
-            />
+            {!isCompact && (
+              <DownArrow
+                aria-label={introSectionIconAriaLabel}
+                className={downArrowIconStyle}
+                height={20}
+                stroke="textBlack"
+                style={{ rotate: showIntro ? "0deg" : "180deg" }}
+                width={20}
+              />
+            )}
           </button>
         </Flex>
       </section>

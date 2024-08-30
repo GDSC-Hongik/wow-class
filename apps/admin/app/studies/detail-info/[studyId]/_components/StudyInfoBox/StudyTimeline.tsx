@@ -38,6 +38,4 @@ const CurriculumTimelineStyle = css({
   alignItems: "center",
   padding: "xs",
   gap: "xs",
-  borderRight: "1px solid",
-  borderColor: "outline",
 });
