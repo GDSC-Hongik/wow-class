@@ -30,7 +30,9 @@ const StudyListItem = async ({ study }: { study: StudyListApiResponseDto }) => {
           {academicYear}-{semesterType === "FIRST" ? "1" : "2"}
         </Text>
         <Flex alignItems="center" gap="xs">
-          <Text typo="h3">{title}</Text>
+          <Text style={StudyNameStyle} typo="h3">
+            {title}
+          </Text>
           <Tag color={studyTypeColorMap[studyType]} variant="solid1">
             {studyType}
           </Tag>
@@ -83,12 +85,21 @@ const LinkStyle = {
 
 const TableLeftStyle = {
   display: "flex",
+  flex: 2,
   alignItems: "center",
   gap: "31px",
 };
 
 const TableRightStyle = {
   display: "flex",
+  flex: 3,
   alignItems: "center",
   gap: "64px",
+};
+
+const StudyNameStyle = {
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  maxWidth: "150px",
 };
