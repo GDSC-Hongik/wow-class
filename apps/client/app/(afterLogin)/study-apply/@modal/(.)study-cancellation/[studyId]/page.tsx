@@ -17,7 +17,7 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
   const [cancelSucces, setCancelSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [studyTitle, setStudyTitle] = useState("");
-  const { closeModal } = useModalRoute();
+  const { onClose } = useModalRoute();
 
   useEffect(() => {
     const fetchStudyData = async () => {
@@ -40,11 +40,11 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
   useEffect(() => {
     if (cancelSucces) {
       const timer = setTimeout(() => {
-        closeModal();
+        onClose();
       }, MODAL_CLOSE_TIME);
       return () => clearTimeout(timer);
     }
-  }, [cancelSucces, closeModal]);
+  }, [cancelSucces, onClose]);
 
   const handleClickCancelButton = async () => {
     const result = await studyApplyApi.cancelStudyApplication(Number(studyId));

@@ -18,7 +18,7 @@ const StudyApplication = ({ params }: { params: { studyId: number } }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [studyTitle, setStudyTitle] = useState("");
 
-  const { closeModal } = useModalRoute();
+  const { onClose } = useModalRoute();
   useEffect(() => {
     const fetchStudyData = async () => {
       const data = await studyApplyApi.getStudyList();
@@ -40,11 +40,11 @@ const StudyApplication = ({ params }: { params: { studyId: number } }) => {
   useEffect(() => {
     if (applySuccess) {
       const timer = setTimeout(() => {
-        closeModal();
+        onClose();
       }, MODAL_CLOSE_TIME);
       return () => clearTimeout(timer);
     }
-  }, [applySuccess, closeModal]);
+  }, [applySuccess, onClose]);
 
   const handleClickApplyButton = async () => {
     const result = await studyApplyApi.applyStudy(Number(studyId));
