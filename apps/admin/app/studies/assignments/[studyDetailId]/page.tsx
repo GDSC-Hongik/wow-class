@@ -25,9 +25,16 @@ const AssignmentsPage = async ({
   // TODO: studyName 추가
   return (
     <>
-      <styled.header className={headerStyle}>
-        <Text as="h1" typo="h1">
-          {title} <ItemSeparator height={4} width={4} /> {week}주차 과제
+      <header className={headerStyle}>
+        <Text
+          as="h1"
+          style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
+          typo="h1"
+        >
+          {title} <ItemSeparator height={6} width={6} />
+          <styled.span color="primary">
+            {week}주차 <styled.span color="textBlack">과제</styled.span>
+          </styled.span>
         </Text>
         <Flex gap="0.75rem">
           <CancelAssignmentButton studyDetailId={+studyDetailId} />
@@ -40,7 +47,7 @@ const AssignmentsPage = async ({
             수정
           </Button>
         </Flex>
-      </styled.header>
+      </header>
       <Flex direction="column" gap="4rem">
         <Flex direction="column" gap="xxs">
           <Text typo="h2">과제 제목</Text>
