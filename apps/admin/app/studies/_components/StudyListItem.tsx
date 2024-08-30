@@ -48,11 +48,15 @@ const StudyListItem = async ({ study }: { study: StudyListApiResponseDto }) => {
               스터디 삭제
             </Button>
           )}
-          <Link href={`${routerPath.studyDetailInfo}${studyId}`}>
-            <Button size="sm" variant="solid">
-              상세 정보 입력
-            </Button>
-          </Link>
+
+          <Button
+            asProp={Link}
+            href={`${routerPath.studyDetailInfo.href}${studyId}`}
+            size="sm"
+            variant="solid"
+          >
+            상세 정보 입력
+          </Button>
         </Flex>
       </Table.Right>
     </Table>
@@ -66,8 +70,8 @@ const studyTypeColorMap: Record<
   ComponentProps<typeof Tag>["color"]
 > = {
   "과제 스터디": "green",
-  "온라인 세션": "blue",
-  "오프라인 세션": "yellow",
+  "온라인 커리큘럼": "blue",
+  "오프라인 커리큘럼": "yellow",
 };
 
 const LinkStyle = {

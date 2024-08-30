@@ -4,7 +4,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import { studyInfoApi } from "apis/study/studyInfoApi";
+import { studyApi } from "apis/study/studyApi";
 import { dayToKorean } from "constants/dayToKorean";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,7 +13,13 @@ import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
 import { DownArrow } from "wowds-icons";
 import TextButton from "wowds-ui/TextButton";
 
-const Header = ({ studyId }: { studyId: string }) => {
+const Header = ({
+  studyId,
+  isCompact = false,
+}: {
+  studyId: string;
+  isCompact?: boolean;
+}) => {
   const [showIntro, setShowIntro] = useState(false);
   const [studyInfo, setStudyInfo] = useState<
     StudyBasicInfoApiResponseDto | undefined
@@ -22,9 +28,7 @@ const Header = ({ studyId }: { studyId: string }) => {
   useEffect(() => {
     const fetchData = async () => {
       if (studyId) {
-        const data = await studyInfoApi.getStudyBasicInfo(
-          parseInt(studyId, 10)
-        );
+        const data = await studyApi.getStudyBasicInfo(parseInt(studyId, 10));
         if (data) setStudyInfo(data);
       }
     };
@@ -44,7 +48,6 @@ const Header = ({ studyId }: { studyId: string }) => {
     : "Expand introduction icon";
 
   if (!studyInfo) return null;
-
   const {
     title,
     academicYear,
@@ -52,19 +55,29 @@ const Header = ({ studyId }: { studyId: string }) => {
     mentorName,
     studyType,
     dayOfWeek,
-    startTime: { hour: startHour, minute: startMinute },
-    endTime: { hour: endHour, minute: endMinute },
+    startTime,
+    endTime,
     totalWeek,
     period: { startDate, endDate },
     introduction,
     notionLink,
   } = studyInfo;
 
+  const studySchedule = () => {
+    if (startTime && endDate) {
+      const { hour: startHour, minute: startMinute } = startTime;
+      const { hour: endHour, minute: endMinute } = endTime;
+      return `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
+        ${endHour}:${padWithZero(endMinute)}`;
+    } else {
+      null;
+    }
+  };
+
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
   const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
-  const studySchedule = `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
-  ${endHour}:${padWithZero(endMinute)}`;
+
   const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
   ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
@@ -82,14 +95,16 @@ const Header = ({ studyId }: { studyId: string }) => {
             tabIndex={0}
             onClick={handleClickShowIntro}
           >
-            <DownArrow
-              aria-label={introSectionIconAriaLabel}
-              className={downArrowIconStyle}
-              height={20}
-              stroke="textBlack"
-              style={{ rotate: showIntro ? "0deg" : "180deg" }}
-              width={20}
-            />
+            {!isCompact && (
+              <DownArrow
+                aria-label={introSectionIconAriaLabel}
+                className={downArrowIconStyle}
+                height={20}
+                stroke="textBlack"
+                style={{ rotate: showIntro ? "0deg" : "180deg" }}
+                width={20}
+              />
+            )}
           </button>
         </Flex>
       </section>
@@ -118,22 +133,21 @@ const Header = ({ studyId }: { studyId: string }) => {
                 스터디 일정
               </Text>
               <Flex gap="xs">
+                {startTime && (
+                  <Flex gap="xs">
+                    <Text as="h5" color="sub">
+                      {studySchedule()}
+                    </Text>
+                    <ItemSeparator />
+                  </Flex>
+                )}
                 <Text as="h5" color="sub">
-                  {studySchedule}
+                  {totalWeek}주 코스
                 </Text>
-                <Flex gap="xs">
-                  <Text as="h5" color="sub">
-                    {studySchedule}
-                  </Text>
-                  <ItemSeparator />
-                  <Text as="h5" color="sub">
-                    {totalWeek}주 코스
-                  </Text>
-                  <ItemSeparator />
-                  <Text as="h5" color="sub">
-                    {studyPeriod}
-                  </Text>
-                </Flex>
+                <ItemSeparator />
+                <Text as="h5" color="sub">
+                  {studyPeriod}
+                </Text>
               </Flex>
             </Flex>
           </section>

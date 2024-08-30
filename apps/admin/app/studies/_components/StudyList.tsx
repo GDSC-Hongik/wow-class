@@ -1,11 +1,11 @@
 import { css } from "@styled-system/css";
-import { createStudyApi } from "apis/study/createStudyApi";
+import { studyApi } from "apis/study/studyApi";
 
 import EmptyStudyList from "./EmptyStudyList";
 import StudyListItem from "./StudyListItem";
 
 const StudyList = async () => {
-  const studyList = await createStudyApi.getStudyList();
+  const studyList = await studyApi.getStudyList();
 
   if (studyList?.length === 0) {
     return <EmptyStudyList />;

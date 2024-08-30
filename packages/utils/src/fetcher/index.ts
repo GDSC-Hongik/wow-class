@@ -1,4 +1,4 @@
-type ApiResponse<T = any> = Response & { data?: T };
+type ApiResponse<T = any> = Response & { data?: T; success?: boolean };
 
 type RequestInterceptor = (
   options: RequestInit

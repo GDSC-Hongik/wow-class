@@ -1,18 +1,22 @@
 import { fetcher } from "@wow-class/utils";
 import { apiPath } from "constants/apiPath";
-import { tags } from "constants/tags";
-import type { StudyListApiResponseDto } from "types/dtos/studyList";
+import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
+import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
 
 export const createStudyApi = {
-  getStudyList: async () => {
-    const response = await fetcher.get<StudyListApiResponseDto[]>(
-      apiPath.studyList,
-      {
-        next: { tags: [tags.studyList] },
-        cache: "force-cache",
-      }
-    );
+  postCreateStudy: async (data: CreateStudyApiRequestDto) => {
+    const response = await fetcher.post(apiPath.createStudy, data);
 
-    return response.data;
+    return { success: response.ok };
+  },
+  postStudyDetailInfo: async (
+    data: CreateStudyDetailInfoApiRequestDto,
+    studyId: number
+  ) => {
+    const response = await fetcher.patch(
+      `${apiPath.createStudyDetailInfo}/${studyId}`,
+      data
+    );
+    return { success: response.ok };
   },
 };

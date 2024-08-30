@@ -5,13 +5,13 @@ import Divider from "wowds-ui/Divider";
 import StudyAnnouncement from "./_components/announcement/StudyAnnouncement";
 import AssignmentList from "./_components/assignment/AssignmentList";
 import CheckAttendanceNumber from "./_components/attendance/CheckAttendanceNumber";
+import CurriculumList from "./_components/curriculum/CurriculumList";
 import Header from "./_components/header/Header";
-import SessionList from "./_components/session/SessionList";
 
 const StudyPage = ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
   return (
-    <Flex direction="column" gap="64px" overflow="scroll" scrollbarWidth="none">
+    <Flex direction="column" gap="64px">
       <Header studyId={studyId} />
       <CheckAttendanceNumber />
       <Divider style={MinHeightFullDividerStyle} />
@@ -19,7 +19,7 @@ const StudyPage = ({ params }: { params: { studyId: string } }) => {
       <Divider style={MinHeightFullDividerStyle} />
       <StudyAnnouncement studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
-      <SessionList studyId={studyId} />
+      <CurriculumList studyId={studyId} />
       <Space height={64} />
     </Flex>
   );

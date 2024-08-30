@@ -3,7 +3,7 @@
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
-import { studyInfoApi } from "apis/study/studyInfoApi";
+import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -22,16 +22,16 @@ const AnnouncementModifyModal = () => {
 
   const studyAnnouncementId = searchParams.get("studyAnnouncementId");
 
-  const { closeModal } = useModalRoute();
+  const { onClose } = useModalRoute();
 
   const handleClickModifyButton = async () => {
-    const result = await studyInfoApi.modifyStudyAnnouncement(
+    const result = await studyApi.modifyStudyAnnouncement(
       Number(studyAnnouncementId),
       studyAnnouncement
     );
     if (result.success) {
-      await revalidateTagByName(tags.announcements);
-      closeModal();
+      revalidateTagByName(tags.announcements);
+      onClose();
     }
   };
 
@@ -58,7 +58,7 @@ const AnnouncementModifyModal = () => {
         </Flex>
         <Space height={28} />
         <Flex gap="sm">
-          <Button variant="outline" onClick={closeModal}>
+          <Button variant="outline" onClick={onClose}>
             취소
           </Button>
           <Button onClick={handleClickModifyButton}>수정하기</Button>

@@ -4,11 +4,11 @@ import { useCallback } from "react";
 const useModalRoute = () => {
   const router = useRouter();
 
-  const closeModal = useCallback(() => {
+  const onClose = useCallback(() => {
     router.back();
   }, [router]);
 
-  return { closeModal };
+  return { onClose };
 };
 
 export default useModalRoute;

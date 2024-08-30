@@ -1,22 +1,33 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
-import { createStudyApi } from "apis/form/createStudyApi";
+import { createStudyApi } from "apis/study/createStudyApi";
+import { routerPath } from "constants/router/routerPath";
+import { useRouter } from "next/navigation";
+import type { MouseEvent } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
+import createQueryString from "utils/createQueryString";
 import Button from "wowds-ui/Button";
 
 import {
-  StudyBasicInfo,
+  StudyBasicInformation,
   StudyMentorSelect,
   StudyNameTextField,
 } from "./_components";
 
 const CreateStudyPage = () => {
-  const methods = useForm<CreateStudyApiRequestDto>({ mode: "onChange" });
+  const router = useRouter();
+  const methods = useForm<CreateStudyApiRequestDto>();
 
-  const onSubmit = async (data: CreateStudyApiRequestDto) => {
-    createStudyApi.postCreateStudy(data);
+  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const formData = methods.getValues();
+    const route = createQueryString(
+      `${routerPath["created-study-check"].href}`,
+      formData
+    );
+    router.push(route);
   };
 
   return (
@@ -28,20 +39,21 @@ const CreateStudyPage = () => {
         position="relative"
         width="100%"
       >
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form>
           <StudyNameTextField />
           <Space height={48} />
           <StudyMentorSelect />
           <Space height={64} />
-          <StudyBasicInfo />
+          <StudyBasicInformation />
           <Button
             disabled={!methods.formState.isValid}
             role="button"
             size="sm"
             style={{ position: "absolute", top: "0px", right: "0px" }}
             type="submit"
+            onClick={handleSubmit}
           >
-            제출하기
+            개설하기
           </Button>
         </form>
       </Flex>

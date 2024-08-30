@@ -39,8 +39,8 @@ const Header = () => {
     mentorName,
     studyType,
     dayOfWeek,
-    startTime: { hour: startHour, minute: startMinute },
-    endTime: { hour: endHour, minute: endMinute },
+    startTime,
+    endTime,
     totalWeek,
     period: { startDate, endDate },
     introduction,
@@ -51,8 +51,10 @@ const Header = () => {
   const { month: endMonth, day: endDay } = parseISODate(endDate);
 
   const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
-  const studySchedule = `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
-  ${endHour}:${padWithZero(endMinute)}`;
+  const studySchedule =
+    startTime && endTime
+      ? `${dayToKorean[dayOfWeek]} ${startTime.hour}:${padWithZero(startTime.minute)}-${endTime.hour}:${padWithZero(endTime.minute)}`
+      : "";
   const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
   ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
@@ -132,9 +134,10 @@ const Header = () => {
                 </Text>
                 <Link
                   className={introduceLinkStyle}
-                  href={notionLink}
+                  href={notionLink || ""}
                   role="button"
                   tabIndex={0}
+                  target="_blank"
                 >
                   <Image
                     alt="link-icon"

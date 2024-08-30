@@ -27,6 +27,7 @@ const StudyAnnouncementList = async () => {
             className={studyAnnouncementListBoxStyle}
             href={link}
             key={studyAnnounceId}
+            target="_blank"
             style={{
               backgroundColor:
                 index === 0 ? `${color.monoBackgroundPressed}` : "white",

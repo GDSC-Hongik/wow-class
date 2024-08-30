@@ -1,3 +1,4 @@
-export const enum cookieKey {
-  accessToken = "accessToken",
-}
+export const cookieKey = {
+  accessToken: "accessToken",
+  ["middleware-executed"]: "middleware-executed",
+};
