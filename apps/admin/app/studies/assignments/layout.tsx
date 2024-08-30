@@ -6,13 +6,7 @@ const AssignmentsLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <Flex
-      direction="column"
-      gap="3rem"
-      paddingX="6.25rem"
-      paddingY="3rem"
-      width="100%"
-    >
+    <Flex direction="column" gap="3rem" width="100%">
       {children}
     </Flex>
   );
