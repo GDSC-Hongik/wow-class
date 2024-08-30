@@ -9,8 +9,7 @@ import {
   getStudyEndDate,
 } from "@wow-class/utils";
 import useClickOutside from "hooks/useClickOutSide";
-import { useRef, useState } from "react";
-import type { DateRange } from "react-day-picker";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -30,31 +29,30 @@ const StudyStartDatePick = () => {
     setIsOpen(false);
   });
 
-  const handleStudyDateSelect = (
-    week: unknown,
-    date: Date,
-    triggerDate: DateRange | undefined
-  ) => {
-    if (week && date) {
-      const startDateString = dateToFormatString(date);
-      const endDateString = dateToFormatString(
-        getStudyEndDate(date, Number(week))
-      );
-      setStudyDate({
-        fromValue: startDateString,
-        toValue: endDateString,
-      });
-      setInputValue(`${startDateString} ~ ${endDateString}`);
-      setValue("startDate", startDateString, { shouldValidate: true });
-      setIsOpen(false);
-    } else {
-      if (triggerDate)
+  const handleStudyDateSelect = useCallback(
+    (week: unknown, date: Date) => {
+      if (week && date) {
+        const startDateString = dateToFormatString(date);
+        const endDateString = dateToFormatString(
+          getStudyEndDate(date, Number(week))
+        );
         setStudyDate({
-          fromValue: dateToFormatString(triggerDate?.from!!),
-          toValue: dateToFormatString(triggerDate?.to!!),
+          fromValue: startDateString,
+          toValue: endDateString,
         });
+        setInputValue(`${startDateString} ~ ${endDateString}`);
+        setValue("startDate", startDateString, { shouldValidate: true });
+        setIsOpen(false);
+      }
+    },
+    [setValue]
+  );
+
+  useEffect(() => {
+    if (studyDate.toValue) {
+      handleStudyDateSelect(week, formatStringToDate(studyDate.fromValue));
     }
-  };
+  }, [handleStudyDateSelect, studyDate.fromValue, studyDate.toValue, week]);
 
   return (
     <Flex direction="column" position="relative">
@@ -105,7 +103,7 @@ const StudyStartDatePick = () => {
               backgroundColor: "white",
             }}
             onSelect={(triggerDate, selected) => {
-              handleStudyDateSelect(week, selected, triggerDate);
+              handleStudyDateSelect(week, selected);
             }}
           />
         </div>
