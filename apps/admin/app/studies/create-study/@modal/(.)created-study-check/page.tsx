@@ -3,7 +3,7 @@
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
-import { createStudyApi } from "apis/form/createStudyApi";
+import { createStudyApi } from "apis/study/createStudyApi";
 import { routerPath } from "constants/router/routerPath";
 import { tags } from "constants/tags";
 import useParseSearchParams from "hooks/useParseSearchParams";
