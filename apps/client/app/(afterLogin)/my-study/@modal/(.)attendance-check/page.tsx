@@ -3,6 +3,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
+import { useOpenState } from "@wow-class/ui/hooks";
 import { myStudyApi } from "apis/myStudyApi";
 import useFetchAttendanceCheckModalInfoData from "hooks/useFetchAttendanceCheckModalInfoData";
 import Image from "next/image";
@@ -16,35 +17,52 @@ const AttendanceCheckModal = () => {
   const [error, setError] = useState(false);
   const [attendanceNumber, setAttendanceNumber] = useState("");
 
+  const { onClose } = useOpenState();
+
   const { studyInfo } = useFetchAttendanceCheckModalInfoData();
 
   const handleChangeAttendanceNumber = (value: string) => {
     setAttendanceNumber(value);
   };
 
-  const handleClickAttendanceCheckButton = async () => {
+  const fetchOngoingStudyInfo = async () => {
     const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+    return myOngoingStudyInfoData?.studyId || null;
+  };
 
-    if (!myOngoingStudyInfoData?.studyId) {
-      return;
-    }
+  const isAttendanceNumberValid = (attendanceNumber: string) => {
+    return validateAttendanceNumber(attendanceNumber);
+  };
 
-    const isValidAttendanceNumber = validateAttendanceNumber(attendanceNumber);
+  const checkAttendance = async (studyId: number, attendanceNumber: string) => {
+    const { success } = await myStudyApi.checkAttendance(
+      studyId,
+      attendanceNumber
+    );
+    return success;
+  };
 
-    if (!isValidAttendanceNumber) {
+  const handleClickAttendanceCheckButton = async () => {
+    const studyId = await fetchOngoingStudyInfo();
+    if (!studyId) return;
+
+    if (!isAttendanceNumberValid(attendanceNumber)) {
       return setError(true);
     }
 
-    const { success } = await myStudyApi.checkAttendance(
-      myOngoingStudyInfoData?.studyId,
-      attendanceNumber
-    );
-
+    const success = await checkAttendance(studyId, attendanceNumber);
     if (!success) {
       return setError(true);
     }
 
+    handleAttendanceSuccess();
+  };
+
+  const handleAttendanceSuccess = () => {
     setAttended(true);
+    setTimeout(() => {
+      onClose();
+    }, 500);
   };
 
   return (
