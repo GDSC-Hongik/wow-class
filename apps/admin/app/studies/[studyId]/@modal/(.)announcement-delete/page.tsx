@@ -3,7 +3,7 @@
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
-import { studyApi } from "apis/study/studyApi";
+import { studyInfoApi } from "apis/study/studyInfoApi";
 import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
 import { revalidateTagByName } from "utils/revalidateTagByName";
@@ -17,7 +17,7 @@ const AnnouncementDeleteModal = () => {
   const { closeModal } = useModalRoute();
 
   const handleClickDeleteButton = async () => {
-    const result = await studyApi.deleteStudyAnnouncement(
+    const result = await studyInfoApi.deleteStudyAnnouncement(
       Number(studyAnnouncementId)
     );
     if (result.success) {

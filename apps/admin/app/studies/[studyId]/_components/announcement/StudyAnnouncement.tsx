@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
-import { studyApi } from "apis/study/studyApi";
+import { studyInfoApi } from "apis/study/studyInfoApi";
 import { routerPath } from "constants/router/routerPath";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,12 +12,12 @@ import TextButton from "wowds-ui/TextButton";
 import CreateStudyAnnouncement from "./CreateStudyAnnouncement";
 
 const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
-  const announcementList = await studyApi.getStudyAnnouncement(
+  const announcementList = await studyInfoApi.getStudyAnnouncement(
     parseInt(studyId, 10)
   );
 
   return (
-    <section aria-label="curriculum-list">
+    <section aria-label="session-list">
       <Text typo="h2">스터디 공지</Text>
       <Space height={24} />
       <CreateStudyAnnouncement studyId={studyId} />

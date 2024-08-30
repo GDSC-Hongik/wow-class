@@ -1,8 +1,8 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
-import { studyApi } from "apis/study/studyApi";
+import { studyInfoApi } from "apis/study/studyInfoApi";
 import { useRouter } from "next/navigation";
-import type { StudyAssignmentStatusType } from "types/entities/study";
+import type { AssignmentStatusType } from "types/entities/study";
 import Button from "wowds-ui/Button";
 
 const CancelStudyButton = ({
@@ -12,11 +12,11 @@ const CancelStudyButton = ({
 }: {
   descriptionLink: string;
   studyDetailId: number;
-  assignmentStatus: StudyAssignmentStatusType;
+  assignmentStatus: AssignmentStatusType;
 }) => {
   const router = useRouter();
   const handleCancelAssignment = async (studyDetailId: number) => {
-    const { success } = await studyApi.cancelAssignment(studyDetailId);
+    const { success } = await studyInfoApi.cancelAssignment(studyDetailId);
     if (success) {
       console.log("휴강 처리에 성공했어요.");
     } else {

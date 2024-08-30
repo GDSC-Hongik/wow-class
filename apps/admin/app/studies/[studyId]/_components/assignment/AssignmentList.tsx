@@ -1,10 +1,10 @@
 import { Space, Text } from "@wow-class/ui";
-import { studyApi } from "apis/study/studyApi";
+import { studyInfoApi } from "apis/study/studyInfoApi";
 
 import AssignmentListItem from "./AssignmentListItem";
 
 const AssignmentList = async ({ studyId }: { studyId: string }) => {
-  const assignmentList = await studyApi.getAssignmentList(
+  const assignmentList = await studyInfoApi.getAssignmentList(
     parseInt(studyId, 10)
   );
 

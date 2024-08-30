@@ -3,22 +3,18 @@ import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import type { ComponentProps } from "react";
-import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
+import type { SessionApiResponseDto } from "types/dtos/sessionList";
 import type { StudyDifficultyType } from "types/entities/study";
 import getIsCurrentWeek from "utils/getIsCurrentWeek";
 import Tag from "wowds-ui/Tag";
 
-const CurriculumListItem = ({
-  curriculum,
-}: {
-  curriculum: CurriculumApiResponseDto;
-}) => {
-  const { description = "", period, week, title, difficulty } = curriculum;
+const SessionListItem = ({ session }: { session: SessionApiResponseDto }) => {
+  const { description = "", period, week, title, difficulty } = session;
   const { startDate, endDate } = period;
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
 
-  const curriculumTimeLine = `${padWithZero(startMonth)}.${padWithZero(startDay)} - ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
+  const sessionTimeLine = `${padWithZero(startMonth)}.${padWithZero(startDay)} - ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
   const thisWeekAssignment = getIsCurrentWeek(endDate);
 
   return (
@@ -49,13 +45,13 @@ const CurriculumListItem = ({
         </Flex>
       </Table.Left>
       <Table.Right>
-        <Text typo="body1">{curriculumTimeLine}</Text>
+        <Text typo="body1">{sessionTimeLine}</Text>
       </Table.Right>
     </Table>
   );
 };
 
-export default CurriculumListItem;
+export default SessionListItem;
 
 const ThisWeekBarStyle = cva({
   base: {
