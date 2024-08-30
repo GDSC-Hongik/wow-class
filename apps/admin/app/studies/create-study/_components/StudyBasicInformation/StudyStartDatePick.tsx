@@ -74,8 +74,9 @@ const StudyStartDatePick = () => {
               })}
               onClick={() => {
                 if (!week) {
-                  window.alert("스터디 코스를 먼저 선택해주세요");
-                } else setIsOpen(!isOpen);
+                  return window.alert("스터디 코스를 먼저 선택해주세요");
+                }
+                setIsOpen(!isOpen);
               }}
             />
             <Text color="primary" typo="body3">
