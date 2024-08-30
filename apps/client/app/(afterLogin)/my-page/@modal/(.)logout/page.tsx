@@ -4,7 +4,9 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
+import { fetcher } from "@wow-class/utils";
 import { authApi } from "apis/authApi";
+import { baseUrl } from "constants/environment";
 import { routePath } from "constants/routePath";
 import { useRouter } from "next/navigation";
 import Button from "wowds-ui/Button";
@@ -13,8 +15,14 @@ const LogoutModal = () => {
   const router = useRouter();
   const { onClose } = useModalRoute();
   const handleClickLogoutButton = async () => {
-    const response = await authApi.logout();
-    if (response.success) {
+    fetcher.setBaseUrl(`https://${window.location.hostname}`);
+    await fetcher.post("/api/my-page/logout", {});
+
+    baseUrl && fetcher.setBaseUrl(baseUrl);
+
+    const { success } = await authApi.logout();
+
+    if (success) {
       router.push(routePath["landing"]);
     } else {
       router.back();
