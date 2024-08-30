@@ -1,7 +1,7 @@
 export const enum tags {
   dashboard = "dashboard",
   assignments = "assignments",
-  sessions = "sessions",
+  curriculums = "curriculums",
   studyList = "studyList",
   studyBasicInfo = "studyBasicInfo",
   announcements = "announcements",

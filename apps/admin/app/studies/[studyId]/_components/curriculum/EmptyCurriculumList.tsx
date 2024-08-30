@@ -2,15 +2,15 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import Image from "next/image";
 
-const EmptySessionList = () => {
+const EmptyCurriculumList = () => {
   return (
-    <section aria-label="empty-session-list" style={{ width: "100%" }}>
+    <section aria-label="empty-curriculum-list" style={{ width: "100%" }}>
       <Text typo="h2">스터디 커리큘럼</Text>
       <Space height={24} />
       <Flex direction="column" width="100%">
         <Flex alignItems="center" direction="column" gap="xs">
           <Image
-            alt="empty-session"
+            alt="empty-curriculum"
             height={50}
             src="/images/empty.svg"
             width={150}
@@ -24,4 +24,4 @@ const EmptySessionList = () => {
   );
 };
 
-export default EmptySessionList;
+export default EmptyCurriculumList;
