@@ -1,6 +1,6 @@
 import "react-day-picker/style.css";
 
-import { css } from "@styled-system/css";
+import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import {
@@ -9,8 +9,7 @@ import {
   getStudyEndDate,
 } from "@wow-class/utils";
 import useClickOutside from "hooks/useClickOutSide";
-import { useRef, useState } from "react";
-import type { DateRange } from "react-day-picker";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -21,40 +20,39 @@ const StudyStartDatePick = () => {
   });
   const datepickerRef = useRef(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { control, getValues, setValue } = useFormContext();
+  const { control, setValue, watch } = useFormContext();
   const [inputValue, setInputValue] = useState("");
 
-  const week = getValues("totalWeek");
+  const week = watch("totalWeek");
 
   useClickOutside(datepickerRef, () => {
     setIsOpen(false);
   });
 
-  const handleStudyDateSelect = (
-    week: unknown,
-    date: Date,
-    triggerDate: DateRange | undefined
-  ) => {
-    if (week && date) {
-      const startDateString = dateToFormatString(date);
-      const endDateString = dateToFormatString(
-        getStudyEndDate(date, Number(week))
-      );
-      setStudyDate({
-        fromValue: startDateString,
-        toValue: endDateString,
-      });
-      setInputValue(`${startDateString} ~ ${endDateString}`);
-      setValue("startDate", startDateString);
-      setIsOpen(false);
-    } else {
-      if (triggerDate)
+  const handleStudyDateSelect = useCallback(
+    (week: unknown, date: Date) => {
+      if (week && date) {
+        const startDateString = dateToFormatString(date);
+        const endDateString = dateToFormatString(
+          getStudyEndDate(date, Number(week))
+        );
         setStudyDate({
-          fromValue: dateToFormatString(triggerDate?.from!!),
-          toValue: dateToFormatString(triggerDate?.to!!),
+          fromValue: startDateString,
+          toValue: endDateString,
         });
+        setInputValue(`${startDateString} ~ ${endDateString}`);
+        setValue("startDate", startDateString, { shouldValidate: true });
+        setIsOpen(false);
+      }
+    },
+    [setValue]
+  );
+
+  useEffect(() => {
+    if (studyDate.toValue) {
+      handleStudyDateSelect(week, formatStringToDate(studyDate.fromValue));
     }
-  };
+  }, [handleStudyDateSelect, studyDate.fromValue, studyDate.toValue, week]);
 
   return (
     <Flex direction="column" position="relative">
@@ -67,10 +65,15 @@ const StudyStartDatePick = () => {
         render={() => (
           <Flex direction="column" gap="xs" position="relative">
             <input
-              className={StudyDatePickerStyle}
               placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
               value={inputValue}
+              className={StudyDatePickerStyle({
+                type: inputValue ? "selected" : "unSelected",
+              })}
               onClick={() => {
+                if (!week) {
+                  return window.alert("스터디 코스를 먼저 선택해주세요");
+                }
                 setIsOpen(!isOpen);
               }}
             />
@@ -100,7 +103,7 @@ const StudyStartDatePick = () => {
               backgroundColor: "white",
             }}
             onSelect={(triggerDate, selected) => {
-              handleStudyDateSelect(week, selected, triggerDate);
+              handleStudyDateSelect(week, selected);
             }}
           />
         </div>
@@ -111,20 +114,32 @@ const StudyStartDatePick = () => {
 
 export default StudyStartDatePick;
 
-const StudyDatePickerStyle = css({
-  width: "100%",
-  maxWidth: "358px",
-  border: "1px solid",
-  borderRadius: "sm",
-  borderColor: "outline",
-  height: "44px",
-  padding: "8px 12px",
-  caretColor: "transparent",
-  cursor: "pointer",
-  _placeholder: {
-    color: "outline",
+const StudyDatePickerStyle = cva({
+  base: {
+    width: "100%",
+    maxWidth: "358px",
+    border: "1px solid",
+    borderRadius: "sm",
+    borderColor: "outline",
+    height: "44px",
+    padding: "8px 12px",
+    caretColor: "transparent",
+    cursor: "pointer",
+    _placeholder: {
+      color: "outline",
+    },
+    _focus: {
+      outline: "none",
+    },
   },
-  _focus: {
-    outline: "none",
+  variants: {
+    type: {
+      selected: {
+        borderColor: "sub",
+      },
+      unSelected: {
+        borderColor: "outline",
+      },
+    },
   },
 });

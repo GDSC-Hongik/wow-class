@@ -11,9 +11,9 @@ const StudyDayOfWeekSelect = () => {
       name="dayOfWeek"
       render={({ field }) => (
         <DropDown
+          {...field}
           label="스터디 요일"
           placeholder="선택하세요"
-          {...field}
           onChange={({ selectedValue }) => {
             field.onChange(selectedValue);
           }}

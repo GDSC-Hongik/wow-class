@@ -13,8 +13,7 @@ import Button from "wowds-ui/Button";
 
 const LogoutModal = () => {
   const router = useRouter();
-  const { closeModal } = useModalRoute();
-
+  const { onClose } = useModalRoute();
   const handleClickLogoutButton = async () => {
     fetcher.setBaseUrl(`https://${window.location.hostname}`);
     await fetcher.post("/api/my-page/logout", {});
@@ -42,7 +41,7 @@ const LogoutModal = () => {
             size="lg"
             style={buttonStyle}
             variant="outline"
-            onClick={closeModal}
+            onClick={onClose}
           >
             취소
           </Button>

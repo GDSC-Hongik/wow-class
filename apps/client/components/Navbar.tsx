@@ -1,9 +1,10 @@
 import { css } from "@styled-system/css";
-import { Flex } from "@styled-system/jsx";
 import { NavItem } from "@wow-class/ui";
 import { dashboardApi } from "apis/dashboardApi";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
+import Link from "next/link";
+import Button from "wowds-ui/Button";
 
 import { navMenu } from "../constants/navMenu";
 import adminImageUrl from "../public/images/administrator.svg";
@@ -21,7 +22,11 @@ const Navbar = async () => {
 
   return (
     <aside aria-label="client navigation bar" className={navbarContainerStyle}>
-      <Flex align="center" gap={8} padding="6px 0px 7px 20px">
+      <Button
+        asProp={Link}
+        className={logoButtonStyle}
+        href={routePath["my-study"]}
+      >
         <div className={logoTextStyle}>와우클래스</div>
         <Image
           alt="logo"
@@ -30,7 +35,7 @@ const Navbar = async () => {
           src={logoImageUrl}
           width={42}
         />
-      </Flex>
+      </Button>
       <nav
         aria-label="client nav menu"
         className={navContainerStyle}
@@ -93,4 +98,17 @@ const navContainerStyle = css({
   flexDirection: "column",
   minHeight: "calc(100vh - 98px)",
   justifyContent: "space-between",
+});
+
+const logoButtonStyle = css({
+  display: "flex",
+  alignItems: "center",
+  gap: 8,
+  padding: "6px 0px 7px 20px",
+  backgroundColor: "white",
+  color: "black",
+  width: "fit-content",
+  _hover: {
+    backgroundColor: "transparent",
+  },
 });

@@ -12,7 +12,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const StudyTime = () => {
   const { control, setValue, watch } = useFormContext();
-  const [value, onChange] = useState<Value>(["10:00", "11:00"]);
+  const [value, onChange] = useState<Value>("");
 
   const isAssignmentStudy = watch("studyType") === "ASSIGNMENT";
 
@@ -24,19 +24,27 @@ const StudyTime = () => {
       const endTime = value[1]?.toString().split(":");
 
       if (startTime && endTime) {
-        setValue("studyStartTime", {
-          hour: Number(startTime[0]),
-          minute: Number(startTime[1]),
-          second: 0,
-          nano: 0,
-        });
+        setValue(
+          "studyStartTime",
+          {
+            hour: Number(startTime[0]),
+            minute: Number(startTime[1]),
+            second: 0,
+            nano: 0,
+          },
+          { shouldValidate: true }
+        );
 
-        setValue("studyEndTime", {
-          hour: Number(endTime[0]),
-          minute: Number(endTime[1]),
-          second: 0,
-          nano: 0,
-        });
+        setValue(
+          "studyEndTime",
+          {
+            hour: Number(endTime[0]),
+            minute: Number(endTime[1]),
+            second: 0,
+            nano: 0,
+          },
+          { shouldValidate: true }
+        );
       }
     }
   };

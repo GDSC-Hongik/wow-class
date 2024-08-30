@@ -20,8 +20,8 @@ const StudySemesterSelect = () => {
             setSemesterValue(selectedValue);
             const [year, semester] = selectedValue.split("-");
             if (year && semester) {
-              setValue("academicYear", Number(year));
-              setValue("semesterType", semester);
+              setValue("academicYear", Number(year), { shouldValidate: true });
+              setValue("semesterType", semester, { shouldValidate: true });
             }
           }}
         >

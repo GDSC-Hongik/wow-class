@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: "GDSC Hongik 스터디 서비스, 와우클래스",
     description:
       "와우클래스는 GDSC Hongik이 제공하는 스터디 관리 플랫폼입니다. 이 서비스는 정규 스터디 과제 제출, 출석 체크 등 전반적인 스터디 활동을 효율적으로 관리할 수 있는 기능을 제공합니다.",
-    images: ["/images/og-image.svg"],
+    images: ["/images/og-image.png"],
     siteName: "GDSC Hongik 스터디 서비스, 와우클래스",
     type: "website",
   },
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "GDSC Hongik 스터디 서비스, 와우클래스",
     description:
       "와우클래스는 GDSC Hongik이 제공하는 스터디 관리 플랫폼입니다. 이 서비스는 정규 스터디 과제 제출, 출석 체크 등 전반적인 스터디 활동을 효율적으로 관리할 수 있는 기능을 제공합니다.",
-    images: ["/images/og-image.svg"],
+    images: ["/images/og-image.png"],
   },
   robots: {
     index: true,
