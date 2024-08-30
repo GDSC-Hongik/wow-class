@@ -26,7 +26,6 @@ const CreateStudyPage = () => {
       `${routerPath["created-study-check"].href}`,
       formData
     );
-
     router.push(route);
   };
 

@@ -21,7 +21,7 @@ const AnnouncementDeleteModal = () => {
       Number(studyAnnouncementId)
     );
     if (result.success) {
-      await revalidateTagByName(tags.announcements);
+      revalidateTagByName(tags.announcements);
       closeModal();
     }
   };
