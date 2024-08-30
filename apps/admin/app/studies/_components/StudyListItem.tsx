@@ -70,8 +70,8 @@ const studyTypeColorMap: Record<
   ComponentProps<typeof Tag>["color"]
 > = {
   "과제 스터디": "green",
-  "온라인 커리큘럼": "blue",
-  "오프라인 커리큘럼": "yellow",
+  "온라인 스터디": "blue",
+  "오프라인 스터디": "yellow",
 };
 
 const LinkStyle = {

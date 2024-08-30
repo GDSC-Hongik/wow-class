@@ -11,8 +11,8 @@ export type StudyType = "ASSIGNMENT" | "ONLINE" | "OFFLINE";
 
 export type StudyKoreanType =
   | "과제 스터디"
-  | "온라인 커리큘럼"
-  | "오프라인 커리큘럼";
+  | "온라인 스터디"
+  | "오프라인 스터디";
 
 export type StudyCurriculumType = {
   studyDetailId: number;
