@@ -22,7 +22,7 @@ const AssignmentButtons = ({
     }
   };
 
-  if (status === "OPEN") {
+  if (assignmentStatus === "OPEN") {
     return (
       <Button
         asProp={Link}
