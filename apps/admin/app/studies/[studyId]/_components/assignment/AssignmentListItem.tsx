@@ -6,7 +6,7 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import type { AssignmentApiResponseDto } from "types/dtos/assignmentList";
 import getIsCurrentWeek from "utils/getIsCurrentWeek";
 
-import AssignmentButton from "./AssignmentButton";
+import AssignmentButtons from "./AssignmentButtons";
 
 const AssignmentListItem = ({
   assignment,
@@ -38,7 +38,7 @@ const AssignmentListItem = ({
         </Flex>
       </Table.Left>
       <Table.Right>
-        <AssignmentButton
+        <AssignmentButtons
           assignmentStatus={assignmentStatus}
           studyDetailId={+studyDetailId}
         />
