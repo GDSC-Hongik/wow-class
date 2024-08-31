@@ -55,7 +55,11 @@ const AssignmentForm = ({
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
       >
-        <SingleDatePicker label="종료 날짜" />
+        <SingleDatePicker
+          label="종료 날짜"
+          // TODO: 해당 과제 주차만 선택할 수 있도록?
+          // disabled={{}}
+        />
         <TimePicker label="종료 시간" />
       </PickerGroup>
     </Flex>
