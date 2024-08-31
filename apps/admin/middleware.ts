@@ -11,13 +11,15 @@ export const config = {
 const middleware = async () => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
-  const cacheCookie = cookieStore.get(cookieKey["middleware-executed"])?.value;
+  const middlewareExecuted = cookieStore.get(
+    cookieKey["middleware-executed"]
+  )?.value;
 
   if (!accessToken) {
     return NextResponse.redirect(new URL("/auth", clientUrl));
   }
 
-  if (!cacheCookie) {
+  if (!middlewareExecuted) {
     try {
       const { manageRole, studyRole } = await dashboardApi.getDashboardInfo();
       if (studyRole === "STUDENT" && manageRole === "NONE") {
@@ -32,7 +34,6 @@ const middleware = async () => {
       });
       return response;
     } catch (error) {
-      console.log("API 호출 오류 : ", error);
       return NextResponse.next();
     }
   }
