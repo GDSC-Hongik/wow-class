@@ -1,4 +1,4 @@
-import { css } from "@styled-system/css";
+import { css, cva } from "@styled-system/css";
 import { Flex, styled } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
@@ -49,34 +49,45 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   const isCancelable = appliedStudyId === studyId;
   const isNotApplicable = !isApplicable && !isCancelable;
   return (
-    <Table>
+    <Table className={tableStyle}>
       <Flex direction="column" gap="xxs" justifyContent="center" width={334}>
         <Flex className={contentStyle} gap="xs">
-          <Text typo="h3">{title}</Text>
-          <Tag color={sessionColors[studyType] ?? "green"} variant="solid1">
-            {studyType}
+          <Text className={titleStyle} typo="h3">
+            {title}
+          </Text>
+          <Tag
+            color={curriculumColors[studyType] ?? "green"}
+            style={tagButtonStyle}
+            variant="solid1"
+          >
+            {tagTexts[studyType]}
           </Tag>
         </Flex>
-        <Link href={notionLink ?? ""} target="_blank">
-          <Text className={introductionLinkTextStyle} color="sub" typo="body2">
-            {`(${introduction})`}
-          </Text>
-        </Link>
+        {introduction && (
+          <Link href={notionLink ?? ""} target="_blank">
+            <Text
+              className={introductionLinkTextStyle}
+              color="sub"
+              typo="body2"
+            >
+              {introduction}
+            </Text>
+          </Link>
+        )}
       </Flex>
-      <Text className={textCellStyle}>{mentorName}</Text>
-      <Text
-        className={textCellStyle}
-        style={{ width: "11rem", textAlign: "center" }}
-      >
-        {studyTime}
+      <Text className={textCellStyle({ type: "mentor" })}>
+        {mentorName} 멘토
       </Text>
-      <Text className={textCellStyle}>{totalWeek}주 코스</Text>
+      <Text className={timeCellStyle}>{studyTime}</Text>
+      <Text className={textCellStyle({ type: "week" })}>
+        {totalWeek}주 코스
+      </Text>
       <Flex direction="column" textAlign="center">
-        <Text className={textCellStyle}>
-          {`${openingDate.month}.${openingDate.day} 개강`}
-        </Text>
+        <Text
+          className={dateStyle}
+        >{`${openingDate.month}.${openingDate.day} 개강`}</Text>
         {isCancelable && (
-          <Text color="error" typo="body3">
+          <Text className={dateStyle} color="error" typo="body3">
             {`${endDate.month}.${endDate.day} 까지 취소 가능`}
           </Text>
         )}
@@ -84,20 +95,20 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
       <styled.div paddingX="24px">
         {isApplicable && (
           <Link href={`${routePath["study-application-modal"]}/${studyId}`}>
-            <Button size="sm" variant="solid">
+            <Button size="sm" style={tagButtonStyle} variant="solid">
               수강 신청
             </Button>
           </Link>
         )}
         {isCancelable && (
           <Link href={`${routePath["study-cancellation-modal"]}/${studyId}`}>
-            <Button size="sm" variant="solid">
+            <Button size="sm" style={tagButtonStyle} variant="solid">
               신청 취소
             </Button>
           </Link>
         )}
         {isNotApplicable && (
-          <Button disabled size="sm" variant="solid">
+          <Button disabled size="sm" style={tagButtonStyle} variant="solid">
             신청 불가
           </Button>
         )}
@@ -106,24 +117,100 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   );
 };
 
-const textCellStyle = css({
+const tableStyle = css({
+  justifyContent: "unset",
+});
+
+const titleStyle = css({
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  maxWidth: "210px",
+  whiteSpace: "nowrap",
+});
+
+const dateStyle = css({
+  width: "118px",
+  "@media (max-width: 1439px)": {
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    width: "38px",
+  },
+});
+
+const timeCellStyle = css({
   paddingX: "28px",
+  width: "178px",
+  textAlign: "center",
+  "@media (max-width: 1439px)": {
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    padding: "0",
+  },
+  "@media (max-width: 1199px)": {
+    display: "none",
+  },
+});
+const textCellStyle = cva({
+  base: {
+    "@media (max-width: 1439px)": {
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      textOverflow: "ellipsis",
+      padding: "0",
+      width: "38px",
+    },
+  },
+  variants: {
+    type: {
+      mentor: {
+        paddingX: "15px",
+        "@media (max-width: 1199px)": {
+          width: "fit-content",
+          paddingInline: "7.25px",
+        },
+        "@media (max-width: 959px)": {
+          display: "none",
+        },
+      },
+      week: {
+        paddingX: "28px",
+        "@media (max-width: 1199px)": {
+          display: "none",
+        },
+      },
+    },
+  },
 });
 
 const contentStyle = css({
   minWidth: "313px",
+  width: "313px",
 });
 
 const introductionLinkTextStyle = css({
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
+  textDecoration: "underline",
 });
 
-const sessionColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> = {
-  "과제 스터디": "green",
-  "온라인 커리큘럼": "blue",
-  "오프라인 커리큘럼": "yellow",
+const tagButtonStyle = {
+  whiteSpace: "nowrap",
 };
+
+const tagTexts: Record<StudyType, string> = {
+  "과제 스터디": "과제 스터디",
+  "온라인 커리큘럼": "온라인 스터디",
+  "오프라인 커리큘럼": "오프라인 스터디",
+};
+
+const curriculumColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> =
+  {
+    "과제 스터디": "green",
+    "온라인 커리큘럼": "blue",
+    "오프라인 커리큘럼": "yellow",
+  };
 
 export default StudyItem;

@@ -5,8 +5,8 @@ export interface StudyList {
   studyId: number;
   title: string;
   studyType: StudyType;
-  notionLink: string;
-  introduction: string;
+  notionLink?: string;
+  introduction?: string;
   mentorName: string;
   dayOfWeek: DayOfWeekType;
   startTime: Time | null;

@@ -3,16 +3,21 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
+import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApplyApi } from "apis/studyApplyApi";
 import { tags } from "constants/tags";
 import { useEffect, useState } from "react";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
+const MODAL_CLOSE_TIME = 1000;
+
 const StudyCancel = ({ params }: { params: { studyId: number } }) => {
   const studyId = params.studyId;
   const [cancelSucces, setCancelSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [studyTitle, setStudyTitle] = useState("");
+  const { onClose } = useModalRoute();
 
   useEffect(() => {
     const fetchStudyData = async () => {
@@ -26,10 +31,20 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
       if (selectedStudy) {
         setStudyTitle(selectedStudy.title);
       }
+      setIsLoading(false);
     };
 
     fetchStudyData();
   }, [studyId]);
+
+  useEffect(() => {
+    if (cancelSucces) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, MODAL_CLOSE_TIME);
+      return () => clearTimeout(timer);
+    }
+  }, [cancelSucces, onClose]);
 
   const handleClickCancelButton = async () => {
     const result = await studyApplyApi.cancelStudyApplication(Number(studyId));
@@ -40,6 +55,10 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
       setCancelSuccess(true);
     }
   };
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <Modal>

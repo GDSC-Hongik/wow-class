@@ -1,5 +1,6 @@
 import { fetcher } from "@wow-class/utils";
 import { apiPath } from "constants/apiPath";
+import { revalidateTime } from "constants/revalidateTime";
 import { tags } from "constants/tags";
 import type { StudyListApiResponseDto } from "types/dtos/applyStudy";
 
@@ -8,8 +9,8 @@ export const studyApplyApi = {
     const response = await fetcher.get<StudyListApiResponseDto>(
       apiPath.applyStudy,
       {
-        next: { tags: [tags.studyApply] },
-        cache: "no-store",
+        next: { tags: [tags.studyApply], revalidate: revalidateTime },
+        cache: "force-cache",
       }
     );
 
