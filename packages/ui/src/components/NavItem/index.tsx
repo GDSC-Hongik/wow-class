@@ -47,13 +47,12 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
   };
 
   return (
-    <styled.li listStyle="none" role="presentation">
+    <styled.div listStyle="none" role="presentation">
       <Link
         aria-controls={items ? `${name}-submenu` : undefined}
         aria-expanded={expanded ? "true" : "false"}
         aria-haspopup={items?.length && items.length > 1 ? "true" : undefined}
-        href={`/${href}`}
-        role="menuitem"
+        href={`${href}`}
         tabIndex={0}
         className={navItemStyle({
           type: !segment[1] && `${segment[0]}` === href ? "active" : "inactive",
@@ -62,7 +61,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
       >
         <Image
           alt={alt}
-          className={css({ width: "20px", height: "20px" })}
+          className={navItemImageStyle}
           height={20}
           src={imageUrl}
           width={20}
@@ -73,15 +72,11 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
         {items?.length && items?.length > 1 && (
           <Image
             alt="toggle-icon"
+            className={toggleIconStyle}
             height={20}
             src={arrowImageUrl}
             style={{ transform: expanded ? "rotate(0deg)" : "rotate(180deg)" }}
             width={20}
-            className={css({
-              width: "20px",
-              height: "20px",
-              marginLeft: "auto",
-            })}
           />
         )}
       </Link>
@@ -91,7 +86,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
             <li key={item.name} role="none">
               <Link
                 aria-label={item.name}
-                href={`/${href}/${item.href}`}
+                href={`${href}/${item.href}`}
                 role="menuitem"
                 style={{ padding: "11px 36px" }}
                 className={navItemStyle({
@@ -100,7 +95,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
               >
                 <Image
                   alt={item.alt}
-                  className={css({ width: "20px", height: "20px" })}
+                  className={navItemImageStyle}
                   height={20}
                   src={item.imageUrl}
                   width={20}
@@ -113,7 +108,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
           ))}
         </ul>
       )}
-    </styled.li>
+    </styled.div>
   );
 };
 
@@ -138,3 +133,11 @@ const navItemStyle = cva({
     },
   },
 });
+
+const toggleIconStyle = css({
+  width: "20px",
+  height: "20px",
+  marginLeft: "auto",
+});
+
+const navItemImageStyle = css({ width: "20px", height: "20px" });

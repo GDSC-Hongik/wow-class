@@ -12,11 +12,27 @@ export const config = {
 const middleware = async (req: NextRequest) => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
+  const cacheCookie = cookieStore.get(cookieKey["middleware-executed"]);
 
-  const { memberRole } = await dashboardApi.getDashboardInfo();
-
-  if (!accessToken || memberRole !== "REGULAR") {
+  if (!accessToken) {
     return NextResponse.redirect(new URL(routePath.auth, req.url));
+  }
+
+  if (!cacheCookie) {
+    const { memberRole } = await dashboardApi.getDashboardInfo();
+
+    if (memberRole !== "REGULAR") {
+      return NextResponse.redirect(new URL(routePath.auth, req.url));
+    }
+
+    const response = NextResponse.next();
+    response.cookies.set(cookieKey["middleware-executed"], "true", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+    });
+
+    return response;
   }
 
   return NextResponse.next();

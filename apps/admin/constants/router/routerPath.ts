@@ -29,4 +29,14 @@ export const routerPath = {
     description: "스터디 생성을 확인하는 모달창입니다.",
     href: "create-study/created-study-check",
   },
+  "assignment-detail": {
+    description: "과제 내용 보기 페이지로 이동합니다.",
+    href: (studyDetailId: number | string) =>
+      `/studies/assignments/${studyDetailId}`,
+  },
+  "assignment-edit": {
+    description: "과제 개설/수정 페이지로 이동합니다.",
+    href: (studyDetailId: number | string) =>
+      `/studies/assignments/${studyDetailId}/edit-assignment`,
+  },
 };

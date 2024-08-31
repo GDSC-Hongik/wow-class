@@ -13,9 +13,9 @@ const StudyDetailInfoLayout = ({
   );
 };
 
-export default StudyDetailInfoLayout;
-
 const MainLayoutStyle = {
   height: "100vh",
   overflow: "auto",
 };
+
+export default StudyDetailInfoLayout;

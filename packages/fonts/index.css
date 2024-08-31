@@ -1,61 +1,101 @@
 @font-face {
   font-family: "SUIT";
   font-weight: 200;
-  src: url("./SUIT-Thin.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./SUIT-Thin.woff2") format("woff2"),
+    url("./SUIT-Thin.woff") format("woff"),
+    url("./SUIT-Thin.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "SUIT";
   font-weight: 300;
-  src: url("./SUIT-ExtraLight.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./SUIT-ExtraLight.woff2") format("woff2"),
+    url("./SUIT-ExtraLight.woff") format("woff"),
+    url("./SUIT-ExtraLight.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "SUIT";
   font-weight: 400;
-  src: url("./SUIT-Regular.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./SUIT-Regular.woff2") format("woff2"),
+    url("./SUIT-Regular.woff") format("woff"),
+    url("./SUIT-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "SUIT";
   font-weight: 500;
-  src: url("./SUIT-Medium.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./SUIT-Medium.woff2") format("woff2"),
+    url("./SUIT-Medium.woff") format("woff"),
+    url("./SUIT-Medium.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "SUIT";
   font-weight: 600;
-  src: url("./SUIT-SemiBold.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./SUIT-SemiBold.woff2") format("woff2"),
+    url("./SUIT-SemiBold.woff") format("woff"),
+    url("./SUIT-SemiBold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "SUIT";
   font-weight: 700;
-  src: url("./SUIT-Bold.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./SUIT-Bold.woff2") format("woff2"),
+    url("./SUIT-Bold.woff") format("woff"),
+    url("./SUIT-Bold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "SUIT";
   font-weight: 800;
-  src: url("./SUIT-ExtraBold.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./SUIT-ExtraBold.woff2") format("woff2"),
+    url("./SUIT-ExtraBold.woff") format("woff"),
+    url("./SUIT-ExtraBold.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "SUIT";
   font-weight: 900;
-  src: url("./SUIT-Heavy.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./SUIT-Heavy.woff2") format("woff2"),
+    url("./SUIT-Heavy.woff") format("woff"),
+    url("./SUIT-Heavy.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Product Sans";
   font-weight: 400;
-  src: url("./ProductSans-Regular.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./ProductSans-Regular.woff2") format("woff2"),
+    url("./ProductSans-Regular.woff") format("woff"),
+    url("./ProductSans-Regular.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Product Sans";
   font-weight: 700;
-  src: url("./ProductSans-Bold.ttf") format("truetype");
+  font-display: swap;
+  src:
+    url("./ProductSans-Bold.woff2") format("woff2"),
+    url("./ProductSans-Bold.woff") format("woff"),
+    url("./ProductSans-Bold.ttf") format("truetype");
 }
 
 body {

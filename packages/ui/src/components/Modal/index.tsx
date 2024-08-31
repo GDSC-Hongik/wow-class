@@ -5,6 +5,7 @@ import { Flex, styled } from "@styled-system/jsx";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import type { CSSProperties, PropsWithChildren } from "react";
+import { forwardRef, useEffect } from "react";
 
 import closeUrl from "../../assets/images/close.svg";
 import { useClickOutside } from "../../hooks";
@@ -24,12 +25,18 @@ export interface ModalProps extends PropsWithChildren {
   className?: string;
 }
 
-const Modal = ({ children, onClose, ...rest }: ModalProps) => {
+const Modal = forwardRef(({ children, onClose, ...rest }: ModalProps) => {
   const router = useRouter();
 
   const handleClose = onClose || router.back;
-
   const modal = useClickOutside<HTMLDialogElement>(handleClose);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 
   return (
     <Flex alignItems="center" className={backDropStyle} justifyContent="center">
@@ -46,7 +53,7 @@ const Modal = ({ children, onClose, ...rest }: ModalProps) => {
       </styled.dialog>
     </Flex>
   );
-};
+});
 
 const dialogStyle = css({
   width: "40.75rem",

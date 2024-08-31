@@ -361,8 +361,11 @@ progress {
 .gap_8px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   gap: 8px;
 }
-.w_fit-content:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  width: fit-content;
+.w_956px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 956px;
+}
+.px_16px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  padding-inline: 16px;
 }
 .w_49px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   width: 49px;
@@ -415,12 +418,8 @@ progress {
 .h_20:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   height: 20px;
 }
-.w_20:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#),
-.w_20px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+.w_20:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   width: 20px;
-}
-.h_20px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  height: 20px;
 }
 .gap_12px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   gap: 12px;
@@ -433,6 +432,12 @@ progress {
 }
 .bg_white:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   background: var(--colors-white);
+}
+.w_20px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  width: 20px;
+}
+.h_20px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  height: 20px;
 }
 .h_80px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   height: 80px;
@@ -785,8 +790,8 @@ progress {
 .ai_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   align-items: center;
 }
-.ml_225px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  margin-left: 225px;
+.jc_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  justify-content: center;
 }
 .ff_Product_Sans:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   font-family: Product Sans;
@@ -806,9 +811,6 @@ progress {
 .fs_14px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   font-size: 14px;
 }
-.jc_center:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  justify-content: center;
-}
 .flex-d_column:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   flex-direction: column;
 }
@@ -824,11 +826,11 @@ progress {
 .right_xl:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   right: var(--spacing-xl);
 }
-.ml_auto:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  margin-left: auto;
-}
 .mr_8px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   margin-right: 8px;
+}
+.ml_auto:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  margin-left: auto;
 }
 .jc_space-between:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   justify-content: space-between;

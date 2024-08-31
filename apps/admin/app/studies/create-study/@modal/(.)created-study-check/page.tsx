@@ -4,10 +4,10 @@ import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
 import { createStudyApi } from "apis/study/createStudyApi";
+import ItemSeparator from "components/ItemSeparator";
 import { routerPath } from "constants/router/routerPath";
 import { tags } from "constants/tags";
 import useParseSearchParams from "hooks/useParseSearchParams";
-import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import { revalidateTagByName } from "utils/revalidateTagByName";
@@ -17,7 +17,7 @@ const CreatedStudyCheckModal = () => {
   const { parseQueryString } = useParseSearchParams();
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { closeModal } = useModalRoute();
+  const { onClose } = useModalRoute();
 
   const data = parseQueryString<CreateStudyApiRequestDto>(
     searchParams.toString()
@@ -45,7 +45,7 @@ const CreatedStudyCheckModal = () => {
           <Text color="primary" typo="h1">
             {studyName}
           </Text>
-          <ItemSeparator />
+          <ItemSeparator height={6} width={6} />
           <Text color="primary" typo="h1">
             {semester}
           </Text>
@@ -53,7 +53,7 @@ const CreatedStudyCheckModal = () => {
         <Text typo="h1">새로운 스터디를 개설하시겠어요?</Text>
         <Space height={28} />
         <Flex gap="sm" justify="center" width="21rem">
-          <Button variant="outline" onClick={closeModal}>
+          <Button variant="outline" onClick={onClose}>
             취소
           </Button>
           <Button onClick={handleClickSubmitButton}>개설하기</Button>
@@ -64,7 +64,3 @@ const CreatedStudyCheckModal = () => {
 };
 
 export default CreatedStudyCheckModal;
-
-const ItemSeparator = () => (
-  <Image alt="item separator" height={6} src="/images/dot.svg" width={6} />
-);

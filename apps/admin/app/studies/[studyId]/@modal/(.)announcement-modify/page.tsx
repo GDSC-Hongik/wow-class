@@ -22,7 +22,7 @@ const AnnouncementModifyModal = () => {
 
   const studyAnnouncementId = searchParams.get("studyAnnouncementId");
 
-  const { closeModal } = useModalRoute();
+  const { onClose } = useModalRoute();
 
   const handleClickModifyButton = async () => {
     const result = await studyApi.modifyStudyAnnouncement(
@@ -31,7 +31,7 @@ const AnnouncementModifyModal = () => {
     );
     if (result.success) {
       revalidateTagByName(tags.announcements);
-      closeModal();
+      onClose();
     }
   };
 
@@ -58,7 +58,7 @@ const AnnouncementModifyModal = () => {
         </Flex>
         <Space height={28} />
         <Flex gap="sm">
-          <Button variant="outline" onClick={closeModal}>
+          <Button variant="outline" onClick={onClose}>
             취소
           </Button>
           <Button onClick={handleClickModifyButton}>수정하기</Button>
