@@ -25,7 +25,6 @@ const AssignmentForm = ({
     deadline ? new Date(deadline) : undefined
   );
 
-  // TODO: Date 선택하지 않아도 버튼 활성화되는 문제
   useEffect(() => {
     if (selectedDate) {
       setValue("deadLine", formatDateToISOString(selectedDate), {

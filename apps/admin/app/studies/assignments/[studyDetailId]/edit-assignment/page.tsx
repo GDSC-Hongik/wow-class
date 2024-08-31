@@ -47,6 +47,7 @@ const Assignments = ({
       onOpen: onOpen,
     },
   });
+  const deadline = methods.watch("deadLine");
 
   if (!assignment) return null;
   const { assignmentStatus, week } = assignment;
@@ -68,7 +69,7 @@ const Assignments = ({
       <FormProvider {...methods}>
         <AssignmentHeader
           assignment={assignment}
-          disabled={!methods.formState.isValid}
+          disabled={!methods.formState.isValid || !deadline}
         />
         <AssignmentForm assignment={assignment} />
       </FormProvider>
