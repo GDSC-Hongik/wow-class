@@ -25,6 +25,8 @@ const StudyMentorSelect = () => {
             }}
           >
             <DropDownOption text="김유진" value="6" />
+            <DropDownOption text="홍서현" value="5" />
+            <DropDownOption text="이현영" value="15" />
           </DropDown>
         </Flex>
       )}
