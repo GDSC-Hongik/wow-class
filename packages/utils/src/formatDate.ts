@@ -94,3 +94,15 @@ export const formatWeekPeriod = (startDate: string, endDate: string) => {
 
   return `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
 };
+
+/**
+ * @description ISO Date 객체를 한국 시간 기준의 ISOString 형식으로 반환합니다.
+ * @example Sat Aug 31 2024 17:22:00 GMT+0900 (한국 표준시) -> "2024-08-31T17:22:00.000Z"
+ */
+
+export const formatDateToISOString = (date: Date): string => {
+  const offset = new Date().getTimezoneOffset() * 60000;
+  const UTCDate = new Date(date.getTime() - offset);
+
+  return UTCDate.toISOString();
+};
