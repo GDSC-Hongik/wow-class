@@ -8,3 +8,9 @@ export interface AssignmentApiResponseDto {
   descriptionLink: string;
   assignmentStatus: StudyAssignmentStatusType;
 }
+
+export interface AssignmentApiRequestDto {
+  title: string;
+  descriptionNotionLink: string;
+  deadLine: string;
+}

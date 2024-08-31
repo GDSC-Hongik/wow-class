@@ -5,8 +5,8 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import { studyApi } from "apis/study/studyApi";
+import ItemSeparator from "components/ItemSeparator";
 import { dayToKorean } from "constants/dayToKorean";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
@@ -114,11 +114,11 @@ const Header = ({
           <Text as="h5" color="sub">
             {studySemester}
           </Text>
-          <ItemSeparator />
+          <ItemSeparator height={4} width={4} />
           <Text as="h5" color="sub">
             {mentorName} 멘토
           </Text>
-          <ItemSeparator />
+          <ItemSeparator height={4} width={4} />
           <Text as="h5" color="sub">
             {studyType}
           </Text>
@@ -138,13 +138,13 @@ const Header = ({
                     <Text as="h5" color="sub">
                       {studySchedule()}
                     </Text>
-                    <ItemSeparator />
+                    <ItemSeparator height={4} width={4} />
                   </Flex>
                 )}
                 <Text as="h5" color="sub">
                   {totalWeek}주 코스
                 </Text>
-                <ItemSeparator />
+                <ItemSeparator height={4} width={4} />
                 <Text as="h5" color="sub">
                   {studyPeriod}
                 </Text>
@@ -174,10 +174,6 @@ const Header = ({
 };
 
 export default Header;
-
-const ItemSeparator = () => (
-  <Image alt="item separator" height={4} src="/images/dot.svg" width={4} />
-);
 
 const downArrowIconStyle = css({
   cursor: "pointer",
