@@ -2,8 +2,10 @@
 import { Flex } from "@styled-system/jsx";
 import { studyApi } from "apis/study/studyApi";
 import { routerPath } from "constants/router/routerPath";
+import { tags } from "constants/tags";
 import Link from "next/link";
 import type { StudyAssignmentStatusType } from "types/entities/study";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 const AssignmentButtons = ({
@@ -17,6 +19,8 @@ const AssignmentButtons = ({
     const { success } = await studyApi.cancelAssignment(studyDetailId);
     if (success) {
       console.log("휴강 처리에 성공했어요.");
+      revalidateTagByName(tags.assignments);
+      revalidateTagByName(`${tags.assignments} ${studyDetailId}`);
     } else {
       console.log("휴강 처리에 실패했어요.");
     }
