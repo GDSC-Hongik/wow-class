@@ -9,8 +9,10 @@ import AssignmentButtons from "./AssignmentButtons";
 
 const AssignmentListItem = ({
   assignment,
+  studyStartDate,
 }: {
   assignment: AssignmentApiResponseDto;
+  studyStartDate?: string;
 }) => {
   const { studyDetailId, title, deadline, week, assignmentStatus } = assignment;
 
@@ -21,21 +23,19 @@ const AssignmentListItem = ({
     return `종료 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
   };
 
-  // title, deadline, descriptionLink가 null로 올수도 있어서 이에 대한 대응 필요.
-  // 따라서 deadline으로 이번주인지 판단할 수 없음.
-  // 커리큘럼 기간으로 봐야할듯?
-  // const thisWeekAssignment = getIsCurrentWeek(deadline);
+  const thisWeekAssignment =
+    studyStartDate && getIsCurrentWeek(studyStartDate, week);
   const studyDeadline = formatDateToEndString(deadline);
 
   return (
     <Table>
       <Table.Left style={TableLeftStyle}>
         <Flex alignItems="center" gap="xxs">
-          {/* <div
+          <div
             className={ThisWeekBarStyle({
               type: thisWeekAssignment ? "thisWeek" : "notThisWeek",
             })}
-          /> */}
+          />
           <Text typo="body1">{week}주차</Text>
         </Flex>
         <Flex direction="column" gap="xxs">
