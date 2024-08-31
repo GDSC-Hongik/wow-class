@@ -64,7 +64,8 @@ const AssignmentsPage = async ({
         <Flex direction="column" gap="xxs">
           <Text typo="h2">과제 기한</Text>
           <Text color="sub" typo="body1">
-            {year}년 {month}월 {day}일 {hours}:{padWithZero(minutes)}
+            {year}년 {month}월 {day}일 {padWithZero(hours)}:
+            {padWithZero(minutes)}
           </Text>
         </Flex>
       </Flex>
