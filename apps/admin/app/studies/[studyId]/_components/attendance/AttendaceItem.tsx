@@ -1,6 +1,7 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { attendanceStatusMap } from "constants/status/attendaceStatusMap";
 import type { AttendanceApiResponseDto } from "types/dtos/attendance";
 import Box from "wowds-ui/Box";
 import Tag from "wowds-ui/Tag";
@@ -13,6 +14,16 @@ const AttendaceItem = ({
   const { week, deadLine, attendanceNumber } = attendance;
   const { year, month, day, hours, minutes } = parseISODate(deadLine);
 
+  const getIsCurrentWeek = () => {
+    const diffInTime = new Date(deadLine).getTime() - new Date().getTime();
+    const diffInDays = Math.floor(diffInTime / (1000 * 60 * 60 * 24));
+
+    return diffInDays < 7 ? "ONGOING_ATTENDANCE" : "BEFORE_ATTENDANCE";
+  };
+
+  const state = getIsCurrentWeek();
+  const { label, color } = attendanceStatusMap[state];
+
   return (
     <Box
       style={AttendanceBoxStyle}
@@ -20,8 +31,8 @@ const AttendaceItem = ({
         <Flex direction="column" gap="xs">
           <Flex alignItems="center" gap="xs">
             <Text typo="h2">{week}주차 출결번호</Text>
-            <Tag color="blue" variant="solid2">
-              진행중
+            <Tag color={color} variant="solid2">
+              {label}
             </Tag>
           </Flex>
           <Text
