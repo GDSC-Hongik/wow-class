@@ -130,8 +130,7 @@ export const studyApi = {
   },
   getStudyAttendances: async (studyId: number) => {
     const response = await fetcher.get<AttendanceApiResponseDto[]>(
-      `/mentor/study-details/attendances`,
-      studyId,
+      `/mentor/study-details/attendances?studyId=${studyId}`,
       {
         next: { tags: [tags.attendances] },
         cache: "force-cache",
