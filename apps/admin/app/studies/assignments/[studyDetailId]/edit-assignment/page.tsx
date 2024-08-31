@@ -41,9 +41,9 @@ const Assignments = ({
     }
   >({
     defaultValues: {
-      title: assignment?.title,
-      deadLine: "2024-09-07T00:00:00",
-      descriptionNotionLink: assignment?.descriptionLink,
+      title: assignment?.title || undefined,
+      deadLine: assignment?.deadline || undefined,
+      descriptionNotionLink: assignment?.descriptionLink || undefined,
       onOpen: onOpen,
     },
   });

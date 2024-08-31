@@ -16,9 +16,9 @@ const AssignmentsPage = async ({
 }) => {
   const assignment = await studyApi.getAssignment(+studyDetailId);
   if (!assignment) return null;
-
   const { week, title, descriptionLink, deadline } = assignment;
 
+  if (!deadline) return null;
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
   // TODO: studyName 추가

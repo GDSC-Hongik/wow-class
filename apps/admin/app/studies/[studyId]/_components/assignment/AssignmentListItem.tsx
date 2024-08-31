@@ -13,6 +13,7 @@ const AssignmentListItem = ({
   assignment: AssignmentApiResponseDto;
 }) => {
   const { studyDetailId, title, deadline, week, assignmentStatus } = assignment;
+  if (!deadline) return null;
   const thisWeekAssignment = getIsCurrentWeek(deadline);
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
