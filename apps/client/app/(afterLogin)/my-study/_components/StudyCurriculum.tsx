@@ -54,6 +54,8 @@ const StudyCurriculum = async () => {
                 ? "제출한 과제 확인"
                 : "과제 제출하기";
             const isCurrentWeek = getIsCurrentWeek(startDate, endDate);
+            const buttonDisabled =
+              assignmentSubmissionStatus === "FAILURE" || !isCurrentWeek;
 
             return (
               <Table key={index}>
@@ -105,7 +107,7 @@ const StudyCurriculum = async () => {
                   <Button
                     aria-label="check-submitted-assignment"
                     asProp={Link}
-                    disabled={assignmentSubmissionStatus === "FAILURE"}
+                    disabled={buttonDisabled}
                     href={submissionLink || ""}
                     size="sm"
                     style={assignmentButtonStyle}
