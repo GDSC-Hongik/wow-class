@@ -88,11 +88,15 @@ export default Navbar;
 
 const navbarContainerStyle = css({
   width: "250px",
+  height: "100vh",
   minWidth: "250px",
   minHeight: "100vh",
+
   paddingTop: "54px",
   borderRightWidth: "arrow",
   borderColor: "mono.400",
+
+  overflow: "scroll",
 });
 
 const logoContainerStyle = css({
