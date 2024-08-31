@@ -13,27 +13,35 @@ const AssignmentListItem = ({
   assignment: AssignmentApiResponseDto;
 }) => {
   const { studyDetailId, title, deadline, week, assignmentStatus } = assignment;
-  if (!deadline) return null;
-  const thisWeekAssignment = getIsCurrentWeek(deadline);
-  const { year, month, day, hours, minutes } = parseISODate(deadline);
 
-  const studyDeadline = `종료 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
+  const formatDateToEndString = (date: string | null) => {
+    if (!date) return "-";
+
+    const { year, month, day, hours, minutes } = parseISODate(date);
+    return `종료 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
+  };
+
+  // title, deadline, descriptionLink가 null로 올수도 있어서 이에 대한 대응 필요.
+  // 따라서 deadline으로 이번주인지 판단할 수 없음.
+  // 커리큘럼 기간으로 봐야할듯?
+  // const thisWeekAssignment = getIsCurrentWeek(deadline);
+  const studyDeadline = formatDateToEndString(deadline);
 
   return (
     <Table>
       <Table.Left style={TableLeftStyle}>
         <Flex alignItems="center" gap="xxs">
-          <div
+          {/* <div
             className={ThisWeekBarStyle({
               type: thisWeekAssignment ? "thisWeek" : "notThisWeek",
             })}
-          />
+          /> */}
           <Text typo="body1">{week}주차</Text>
         </Flex>
         <Flex direction="column" gap="xxs">
           <Text typo="h3">{title || "-"}</Text>
           <Text color="sub" typo="body2">
-            {deadline ? studyDeadline : "-"}
+            {studyDeadline}
           </Text>
         </Flex>
       </Table.Left>
