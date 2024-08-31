@@ -2,7 +2,7 @@
 
 import { useOpenState } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
-import { assignmentStatusMap } from "constants/assignmentStatusMap";
+import { assignmentStatusMap } from "constants/status/assignmentStatusMap";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type {
