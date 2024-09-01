@@ -27,7 +27,7 @@ const StudyInfoStatus = ({ index }: { index: number }) => {
           <Checkbox
             checked={watch(`studyCurriculums.${index}.status`) === "CANCELLED"}
             defaultChecked={false}
-            onClick={() => setChecked(!checked)}
+            onChange={() => setChecked(!checked)}
           />
         )}
       />

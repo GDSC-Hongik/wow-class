@@ -11,7 +11,6 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
       const basicData = await studyApi.getStudyBasicInfo(studyId);
       const curriculumData = await studyApi.getCurriculumList(studyId);
 
-      console.log(curriculumData);
       if (basicData || curriculumData) {
         setPrefillStudyInfo({
           notionLink: basicData?.notionLink || "",
