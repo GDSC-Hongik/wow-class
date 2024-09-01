@@ -27,7 +27,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
         parseInt(studyId, 10),
         studyAnnouncement
       );
-      toast({ text: "공지 생성 성공" });
+      toast({ type: "success", text: "공지 생성 성공" });
       revalidateTagByName(tags.announcements);
       setStudyAnnouncement({
         title: "",
@@ -35,7 +35,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
       });
     } catch (error) {
       if (error instanceof Error) {
-        toast({ text: error.message });
+        toast({ type: "error", text: error.message });
       }
     }
   };
