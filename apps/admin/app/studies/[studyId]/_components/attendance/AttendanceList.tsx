@@ -1,12 +1,11 @@
-import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import type { AttendanceApiResponseDto } from "types/dtos/attendance";
 
-import AttendaceItem from "./AttendaceItem";
+import AttendanceItem from "./AttendanceItem";
 
-const AttendaceList = async ({ studyId }: { studyId: string }) => {
+const AttendanceList = async ({ studyId }: { studyId: string }) => {
   const attendanceList = await studyApi.getStudyAttendances(+studyId);
 
   return (
@@ -15,7 +14,7 @@ const AttendaceList = async ({ studyId }: { studyId: string }) => {
       <Space height={24} />
       <Flex align="center" gap="md" overflow="scroll">
         {attendanceList?.map((attendance: AttendanceApiResponseDto, index) => (
-          <AttendaceItem
+          <AttendanceItem
             attendance={attendance}
             key={`${attendance.studyDetailId}-${index}`}
           />
@@ -25,4 +24,4 @@ const AttendaceList = async ({ studyId }: { studyId: string }) => {
   );
 };
 
-export default AttendaceList;
+export default AttendanceList;

@@ -1,12 +1,12 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import { attendanceStatusMap } from "constants/status/attendaceStatusMap";
+import { attendanceStatusMap } from "constants/status/attendanceStatusMap";
 import type { AttendanceApiResponseDto } from "types/dtos/attendance";
 import Box from "wowds-ui/Box";
 import Tag from "wowds-ui/Tag";
 
-const AttendaceItem = ({
+const AttendanceItem = ({
   attendance,
 }: {
   attendance: AttendanceApiResponseDto;
@@ -52,7 +52,7 @@ const AttendaceItem = ({
   );
 };
 
-export default AttendaceItem;
+export default AttendanceItem;
 
 const AttendanceBoxStyle = {
   width: "282px",
