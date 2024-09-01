@@ -1,7 +1,6 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
 import { studyApi } from "apis/study/studyApi";
-import { DEFAULT_ERROR_MESSAGE } from "constants/messages/error";
 import { routerPath } from "constants/router/routerPath";
 import useToast from "hooks/useToast";
 import Link from "next/link";
@@ -20,10 +19,10 @@ const AssignmentButtons = ({
   const handleCancelAssignment = async () => {
     try {
       await studyApi.cancelAssignment(studyDetailId);
-      toast({ text: "휴강 처리에 성공했어요." });
+      toast({ type: "success", text: "휴강 처리에 성공했어요." });
     } catch (error) {
       if (error instanceof Error) {
-        toast({ text: error.message || DEFAULT_ERROR_MESSAGE });
+        toast({ type: "error", text: error.message });
       }
     }
   };

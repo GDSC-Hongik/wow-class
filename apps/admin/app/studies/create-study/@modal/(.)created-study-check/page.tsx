@@ -5,7 +5,6 @@ import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
 import { createStudyApi } from "apis/study/createStudyApi";
 import ItemSeparator from "components/ItemSeparator";
-import { DEFAULT_ERROR_MESSAGE } from "constants/messages/error";
 import { routerPath } from "constants/router/routerPath";
 import { tags } from "constants/tags";
 import useParseSearchParams from "hooks/useParseSearchParams";
@@ -34,11 +33,11 @@ const CreatedStudyCheckModal = () => {
     try {
       await createStudyApi.postCreateStudy(data);
       revalidateTagByName(tags.studyList);
-      toast({ text: "스터디 생성에 성공했어요." });
+      toast({ type: "success", text: "스터디 생성에 성공했어요." });
       router.push(`${routerPath.root.href}`);
     } catch (error) {
       if (error instanceof Error) {
-        toast({ text: error.message || DEFAULT_ERROR_MESSAGE });
+        toast({ type: "error", text: error.message });
       }
     }
   };
