@@ -37,6 +37,7 @@ const StudyCurriculum = async () => {
               difficulty,
               period: { startDate, endDate },
               attendanceStatus,
+              assignmentStatus,
               assignmentSubmissionStatus,
               curriculumStatus,
               submissionLink,
@@ -55,7 +56,9 @@ const StudyCurriculum = async () => {
                 : "과제 제출하기";
             const isCurrentWeek = getIsCurrentWeek(startDate, endDate);
             const buttonDisabled =
-              assignmentSubmissionStatus === "FAILURE" || !isCurrentWeek;
+              !isCurrentWeek ||
+              assignmentSubmissionStatus === "FAILURE" ||
+              assignmentStatus === "CANCELLED";
 
             return (
               <Table key={index}>
