@@ -2,7 +2,7 @@
 
 import { Flex } from "@styled-system/jsx";
 import { formatDateToISOString } from "@wow-class/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import type {
   AssignmentApiRequestDto,
@@ -25,14 +25,6 @@ const AssignmentForm = ({
     deadline ? new Date(deadline) : undefined
   );
 
-  useEffect(() => {
-    if (selectedDate) {
-      setValue("deadLine", formatDateToISOString(selectedDate), {
-        shouldValidate: true,
-      });
-    }
-  }, [selectedDate, setValue]);
-
   return (
     <Flex direction="column" gap="2.25rem">
       <CustomTextField
@@ -53,7 +45,14 @@ const AssignmentForm = ({
       />
       <PickerGroup
         selectedDate={selectedDate}
-        setSelectedDate={setSelectedDate}
+        setSelectedDate={(date) => {
+          setSelectedDate(date);
+          if (date) {
+            setValue("deadLine", formatDateToISOString(date), {
+              shouldValidate: true,
+            });
+          }
+        }}
       >
         <SingleDatePicker
           label="종료 날짜"
