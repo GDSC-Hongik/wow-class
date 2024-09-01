@@ -1,7 +1,7 @@
 "use client";
 
 import { css } from "@styled-system/css";
-import { Flex, styled } from "@styled-system/jsx";
+import { Flex } from "@styled-system/jsx";
 import type { CSSProperties } from "react";
 import { forwardRef } from "react";
 
