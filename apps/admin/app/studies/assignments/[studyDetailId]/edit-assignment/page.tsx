@@ -35,19 +35,21 @@ const Assignments = ({
     fetchAssignment();
   }, [studyDetailId]);
 
+  const { title, deadline, descriptionLink } = assignment || {};
   const methods = useForm<
     AssignmentApiRequestDto & {
       onOpen: () => void;
     }
   >({
     defaultValues: {
-      title: assignment?.title || undefined,
-      deadLine: assignment?.deadline || undefined,
-      descriptionNotionLink: assignment?.descriptionLink || undefined,
+      title: title || undefined,
+      deadLine: deadline || undefined,
+      descriptionNotionLink: descriptionLink || undefined,
       onOpen: onOpen,
     },
   });
-  const deadline = methods.watch("deadLine");
+
+  const isDeadlineValid = methods.watch("deadLine");
 
   if (!assignment) return null;
   const { assignmentStatus, week } = assignment;
@@ -69,7 +71,7 @@ const Assignments = ({
       <FormProvider {...methods}>
         <AssignmentHeader
           assignment={assignment}
-          disabled={!methods.formState.isValid || !deadline}
+          disabled={!methods.formState.isValid || !isDeadlineValid}
         />
         <AssignmentForm assignment={assignment} />
       </FormProvider>
