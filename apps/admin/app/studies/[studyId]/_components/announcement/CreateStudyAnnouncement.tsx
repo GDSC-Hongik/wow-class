@@ -5,6 +5,7 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
+import useToast from "hooks/useToast";
 import { useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
 import { revalidateTagByName } from "utils/revalidateTagByName";
@@ -18,19 +19,24 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
       link: "",
     });
 
+  const { toast } = useToast();
+
   const handlePublishAnnouncement = async (studyId: string) => {
-    const { success } = await studyApi.publishStudyAnnouncement(
-      parseInt(studyId, 10),
-      studyAnnouncement
-    );
-    if (success) {
+    try {
+      await studyApi.publishStudyAnnouncement(
+        parseInt(studyId, 10),
+        studyAnnouncement
+      );
+      toast({ text: "공지 생성 성공" });
       revalidateTagByName(tags.announcements);
       setStudyAnnouncement({
         title: "",
         link: "",
       });
-    } else {
-      console.log("공지 생성 실패");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({ text: error.message });
+      }
     }
   };
   return (
