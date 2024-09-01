@@ -1,6 +1,7 @@
 "use client";
 
 import { css } from "@styled-system/css";
+import type { FlexProps } from "@styled-system/jsx";
 import { Flex } from "@styled-system/jsx";
 import type { CSSProperties } from "react";
 import { forwardRef } from "react";
@@ -16,14 +17,15 @@ import Text from "../Text";
  * @param {string} [className] - 커스텀 클래스를 적용하기 위한 문자열.
  */
 
-export interface ToastProps {
+export interface ToastProps extends FlexProps {
   text: string;
   subText?: string;
   style?: CSSProperties;
   className?: string;
+  id: string;
 }
 
-const Toast = forwardRef(({ text, subText, ...rest }: ToastProps) => {
+export const Toast = forwardRef(({ text, subText, ...rest }: ToastProps) => {
   return (
     <Flex
       className={toastContainerStyle}
@@ -47,15 +49,9 @@ const toastContainerStyle = css({
 
   borderRadius: "md",
 
-  position: "absolute",
-  top: 24,
-  left: "50%",
-  translateX: "-50%",
   zIndex: 9999,
 
   background: "backgroundDimmer",
   backdropFilter: "blur(30px)",
   boxShadow: "mono",
 });
-
-export default Toast;
