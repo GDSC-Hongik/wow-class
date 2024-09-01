@@ -37,7 +37,7 @@ const AssignmentForm = ({
     <Flex direction="column" gap="2.25rem">
       <CustomTextField
         control={control}
-        defaultValue={title || undefined}
+        {...(title ? { defaultValue: title } : {})}
         label="과제 제목"
         maxLength={100}
         name="title"
@@ -45,7 +45,7 @@ const AssignmentForm = ({
       />
       <CustomTextField
         control={control}
-        defaultValue={descriptionLink || undefined}
+        {...(descriptionLink ? { defaultValue: descriptionLink } : {})}
         label="과제 명세 링크"
         name="descriptionNotionLink"
         placeholder="https://example.com"
