@@ -1,10 +1,10 @@
 import { createStudyApi } from "apis/study/createStudyApi";
 import { routerPath } from "constants/router/routerPath";
 import { tags } from "constants/tags";
-import { revalidateTag } from "next/cache";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 
 const useSubmitStudyDetailInfo = (
   studyId: number,
@@ -20,7 +20,7 @@ const useSubmitStudyDetailInfo = (
     );
     if (data.success) {
       setIsSuccess(true);
-      revalidateTag(tags.curriculums);
+      revalidateTagByName(tags.curriculums);
       const timerId = setTimeout(() => {
         router.push(`${routerPath.root.href}/${studyId}`);
       }, 500);

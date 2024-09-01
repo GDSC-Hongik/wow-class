@@ -20,6 +20,7 @@
     "react-hook-form": "^7.53.0"
   },
   "devDependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -29,6 +30,7 @@
     "@wow-class/utils": "workspace:*",
     "eslint": "^8",
     "eslint-config-next": "^14.2.5",
-    "typescript": "^5"
+    "typescript": "^5",
+    "zod": "^3.23.8"
   }
 }

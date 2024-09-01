@@ -1,27 +1,21 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import type { ReactNode } from "react";
-import { useState } from "react";
 import type { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { Controller, useFormContext } from "react-hook-form";
-import type { StudyDifficultyArrayType } from "types/entities/study";
+import type {
+  StudyDifficultyArrayType,
+  StudyDifficultyType,
+} from "types/entities/study";
 import { DownArrow } from "wowds-icons";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-export const difficultyArray: StudyDifficultyArrayType = [
-  { text: "고급", value: "HIGH" },
-  { text: "중급", value: "MEDIUM" },
-  { text: "기초", value: "LOW" },
-];
-
 const StudyInfoDifficulty = ({ index }: { index: number }) => {
-  const [selectedOptionText, setSelectedOptionText] = useState("");
-  const { control } = useFormContext();
+  const { control, watch } = useFormContext();
 
   const handleChangeStudyDifficulty = ({
     selectedValue,
-    selectedText,
     field,
   }: {
     selectedValue: string;
@@ -29,7 +23,6 @@ const StudyInfoDifficulty = ({ index }: { index: number }) => {
     field: ControllerRenderProps<FieldValues, string>;
   }) => {
     field.onChange(selectedValue);
-    setSelectedOptionText(String(selectedText));
   };
   return (
     <Controller
@@ -43,7 +36,15 @@ const StudyInfoDifficulty = ({ index }: { index: number }) => {
             <div className={StudyDifficultySelectStyle}>
               <div className={StudyDifficultySelectText}>
                 <Text color="sub">난이도</Text>
-                <Text color="textBlack">{selectedOptionText}</Text>
+                <Text color="textBlack">
+                  {
+                    difficultyMap[
+                      watch(
+                        `studyCurriculums.${index}.difficulty`
+                      ) as StudyDifficultyType
+                    ]
+                  }
+                </Text>
               </div>
               <DownArrow height={20} stroke="sub" width={20} />
             </div>
@@ -78,3 +79,17 @@ const StudyDifficultySelectText = css({
   display: "flex",
   gap: "8px",
 });
+
+export const difficultyArray: StudyDifficultyArrayType = [
+  { text: "고급", value: "HIGH" },
+  { text: "중급", value: "MEDIUM" },
+  { text: "초급", value: "LOW" },
+  { text: "기초", value: "BASIC" },
+];
+
+export const difficultyMap: Record<StudyDifficultyType, string> = {
+  HIGH: "고급",
+  MEDIUM: "중급",
+  LOW: "초급",
+  BASIC: "기초",
+};
