@@ -12,7 +12,7 @@ const middleware = async () => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
   const middlewareExecuted = cookieStore.get(
-    cookieKey["middleware-executed"]
+    cookieKey["admin-middleware-executed"]
   )?.value;
 
   if (!accessToken) {
@@ -26,7 +26,7 @@ const middleware = async () => {
         return NextResponse.redirect(new URL("/auth", clientUrl));
       }
       const response = NextResponse.next();
-      response.cookies.set(cookieKey["middleware-executed"], "true", {
+      response.cookies.set(cookieKey["admin-middleware-executed"], "true", {
         httpOnly: true,
         secure: true,
         sameSite: "lax",
