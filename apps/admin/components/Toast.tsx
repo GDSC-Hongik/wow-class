@@ -1,6 +1,7 @@
 "use client";
 import type { ToastProps } from "@wow-class/ui";
 import { Toast as ToastUI } from "@wow-class/ui";
+import { toastStatusMap } from "constants/status/toastStatusMap";
 import { useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { removeToastAtom } from "store";
@@ -8,7 +9,7 @@ import { removeToastAtom } from "store";
 const TOAST_DURATION = 2000;
 const ANIMATION_DURATION = 200;
 
-const Toast = ({ id, ...rest }: ToastProps) => {
+const Toast = ({ id, type, text, ...rest }: ToastProps) => {
   const [opacity, setOpacity] = useState<number>(0.2);
   const removeToastItem = useSetAtom(removeToastAtom);
 
@@ -32,9 +33,11 @@ const Toast = ({ id, ...rest }: ToastProps) => {
     <ToastUI
       id={id}
       style={{ opacity }}
+      text={text || toastStatusMap[type]}
       transition="opacity"
       transitionDelay="0.5"
       transitionTimingFunction="ease-in-out"
+      type={type}
       {...rest}
     />
   );
