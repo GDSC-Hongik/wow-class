@@ -16,9 +16,16 @@ const StudyApplyDatePick = () => {
     toValue: "",
   });
   const datepickerRef = useRef(null);
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { control, setValue } = useFormContext();
+  const { control, setValue, watch } = useFormContext();
   const [inputValue, setInputValue] = useState("");
+  const studyStartDate = formatStringToDate(watch("startDate") || "");
+  const studyStartDateYearLater = new Date(studyStartDate);
+  studyStartDateYearLater.setFullYear(studyStartDate.getFullYear() + 1);
 
   useClickOutside(datepickerRef, () => {
     setIsOpen(false);
@@ -37,6 +44,20 @@ const StudyApplyDatePick = () => {
     setValue("applicationEndDate", endDateString, { shouldValidate: true });
   };
 
+  const disableDateList = [
+    {
+      from: new Date(0),
+      to: yesterday,
+    },
+    ...(watch("startDate")
+      ? [
+          {
+            from: studyStartDate,
+            to: studyStartDateYearLater,
+          },
+        ]
+      : []),
+  ];
   return (
     <Flex direction="column" gap="xs" height="128px" position="relative">
       <Text color="sub" typo="label2">
@@ -65,6 +86,7 @@ const StudyApplyDatePick = () => {
       {isOpen && (
         <div ref={datepickerRef}>
           <DayPicker
+            disabled={disableDateList}
             mode="range"
             weekStartsOn={1}
             selected={{
