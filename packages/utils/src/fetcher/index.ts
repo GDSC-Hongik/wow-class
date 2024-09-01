@@ -68,14 +68,17 @@ class Fetcher {
     return response.text();
   }
 
-  private async handleError(response: Response) {
+  private async handleError(
+    response: Response,
+    data: {
+      errorCodeName: string;
+      errorMessage: string;
+    }
+  ) {
     if (!response.ok) {
-      const text = await response.text();
-      const error = new Error(
-        `HTTP Error: ${response.status} ${response.statusText}`
-      );
-      (error as any).response = response;
-      (error as any).responseText = text;
+      const error = new Error();
+      error.message = data.errorMessage;
+      error.name = data.errorCodeName;
 
       throw error;
     }
@@ -96,10 +99,11 @@ class Fetcher {
 
     let response: ApiResponse = await fetch(fullUrl, fetchOptions);
 
-    await this.handleError(response);
+    const data = await this.parseJsonResponse(response);
+    await this.handleError(response, data);
 
     response = await this.interceptResponse(response);
-    response.data = await this.parseJsonResponse(response);
+    response.data = data;
 
     return response;
   }
