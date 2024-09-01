@@ -3,6 +3,7 @@ import "wowds-ui/styles.css";
 import "@wow-class/ui/styles.css";
 
 import { JotaiProvider } from "components/JotaiProvider";
+import ToastProvider from "components/ToastProvider";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
@@ -48,8 +49,10 @@ const RootLayout = ({
     <html lang="ko">
       <body>
         <JotaiProvider>
-          {children}
-          {modal}
+          <ToastProvider>
+            {children}
+            {modal}
+          </ToastProvider>
         </JotaiProvider>
       </body>
     </html>
