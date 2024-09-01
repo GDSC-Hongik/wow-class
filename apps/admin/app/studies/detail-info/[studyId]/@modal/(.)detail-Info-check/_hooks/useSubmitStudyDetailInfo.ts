@@ -12,20 +12,19 @@ const useSubmitStudyDetailInfo = (
   const router = useRouter();
 
   const handleSubmitDetailInfo = async () => {
-    const data = await createStudyApi.postStudyDetailInfo(
-      studyDetailData,
-      studyId
-    );
-    if (data.success) {
+    try {
+      await createStudyApi.postStudyDetailInfo(studyDetailData, studyId);
       setIsSuccess(true);
       const timerId = setTimeout(() => {
         router.push(`${routerPath.root.href}/${studyId}`);
       }, 500);
       return () => clearTimeout(timerId);
-    } else {
-      setIsSuccess(false);
-      window.alert("스터디 상세 정보 저장에 실패했어요.");
-      router.push(`${routerPath.root.href}`);
+    } catch (error) {
+      if (error instanceof Error) {
+        setIsSuccess(false);
+        window.alert(error.message);
+        router.push(`${routerPath.root.href}`);
+      }
     }
   };
 
