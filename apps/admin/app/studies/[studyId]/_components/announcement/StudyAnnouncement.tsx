@@ -51,6 +51,7 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                           href={link}
                           role="button"
                           tabIndex={0}
+                          target="_blank"
                         >
                           <Image
                             alt="link-icon"

@@ -40,7 +40,7 @@ const StudyListItem = async ({ study }: { study: StudyListApiResponseDto }) => {
       </Table.Left>
       <Table.Right style={TableRightStyle}>
         <Text typo="body1">{mentorName} 멘토</Text>
-        <Link href={notionLink || ""} style={LinkStyle}>
+        <Link href={notionLink || ""} style={LinkStyle} target="_blank">
           <WowLinkIcon height={24} stroke="sub" width={24} />
           <TextButton text="스터디 소개 페이지" />
         </Link>
