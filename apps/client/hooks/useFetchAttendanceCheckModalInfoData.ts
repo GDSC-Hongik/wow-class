@@ -5,6 +5,8 @@ const useFetchAttendanceCheckModalInfoData = () => {
   const [studyInfo, setStudyInfo] = useState({
     currentWeek: 0,
     studyName: "",
+    studyDetailId: 0,
+    deadLine: "",
   });
 
   useEffect(() => {
@@ -26,13 +28,15 @@ const useFetchAttendanceCheckModalInfoData = () => {
         (dailyTask) => dailyTask.todoType === "ATTENDANCE"
       );
 
-      if (!attendanceDailyTask?.week || !basicStudyInfoData?.title) {
+      if (!attendanceDailyTask || !basicStudyInfoData) {
         return null;
       }
 
       setStudyInfo({
         currentWeek: attendanceDailyTask?.week,
         studyName: basicStudyInfoData?.title,
+        studyDetailId: attendanceDailyTask?.studyDetailId,
+        deadLine: attendanceDailyTask?.deadLine,
       });
     };
 
