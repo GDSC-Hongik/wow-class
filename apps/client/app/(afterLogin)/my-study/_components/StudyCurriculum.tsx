@@ -209,6 +209,7 @@ const weekPeriodTextStyle = css({
 
 const tagContainerStyle = css({
   display: "none",
+  width: "129px",
   "@media (min-width: 1100px)": {
     display: "block",
   },
@@ -216,5 +217,4 @@ const tagContainerStyle = css({
 
 const tagStyle = {
   margin: "27px 32px",
-  width: "69px",
 };
