@@ -138,7 +138,10 @@ const AttendanceCheckModal = () => {
             value={attendanceNumber}
             onChange={handleChangeAttendanceNumber}
           />
-          <Button onClick={handleClickAttendanceCheckButton}>
+          <Button
+            style={attendanceButtonStyle}
+            onClick={handleClickAttendanceCheckButton}
+          >
             출석 체크하기
           </Button>
         </>
@@ -172,3 +175,7 @@ const attendanceCompleteTitleStyle = css({
   display: "flex",
   gap: "sm",
 });
+
+const attendanceButtonStyle = {
+  maxWidth: "328px",
+};
