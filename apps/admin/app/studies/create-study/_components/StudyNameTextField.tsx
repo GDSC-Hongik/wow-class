@@ -45,6 +45,7 @@ const TextFieldStyle = css({
   },
   _focus: {
     outline: "none",
+    borderColor: "primary",
   },
   resize: "none",
 });

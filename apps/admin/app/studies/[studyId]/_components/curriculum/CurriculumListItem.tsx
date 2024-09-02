@@ -42,7 +42,7 @@ const CurriculumListItem = ({
                 </Tag>
               )}
             </Flex>
-            <Text color="sub" typo="body2">
+            <Text color="sub" style={CurriculumDescriptionStyle} typo="body2">
               {description || "스터디 상세 설명을 작성해주세요."}
             </Text>
           </Flex>
@@ -94,4 +94,8 @@ const DifficultyMap: Record<
     text: "초급",
     color: "yellow",
   },
+};
+
+const CurriculumDescriptionStyle = {
+  maxWidth: "650px",
 };

@@ -39,32 +39,36 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                           whiteSpace: "nowrap",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
-                          maxWidth: "700px",
+                          maxWidth: "450px",
+                          minWidth: "450px",
                         }}
                       >
                         {title}
                       </Text>
-                      <Link
-                        className={linkStyle}
-                        href={link}
-                        role="button"
-                        tabIndex={0}
-                      >
-                        <Image
-                          alt="link-icon"
-                          height={24}
-                          src="/images/link.svg"
-                          width={24}
-                        />
-                        <TextButton
-                          size="lg"
-                          style={textButtonStyle}
-                          text="소개 링크 바로가기"
-                        />
-                      </Link>
-                      <Text style={{ flex: "1" }} typo="body1">
-                        {createdDate.replaceAll("-", ".")}
-                      </Text>
+                      <Flex alignItems="center" flexShrink={0} minWidth="300px">
+                        <Link
+                          className={linkStyle}
+                          href={link}
+                          role="button"
+                          tabIndex={0}
+                          target="_blank"
+                        >
+                          <Image
+                            alt="link-icon"
+                            height={24}
+                            src="/images/link.svg"
+                            width={24}
+                          />
+                          <TextButton
+                            size="lg"
+                            style={textButtonStyle}
+                            text="공지 링크 바로가기"
+                          />
+                        </Link>
+                        <Text style={{ flex: "1" }} typo="body1">
+                          {createdDate.replaceAll("-", ".")}
+                        </Text>
+                      </Flex>
                     </Flex>
                   </Table.Left>
                   <Table.Right style={{ flex: "1" }}>
