@@ -52,18 +52,17 @@ const Assignments = ({
   const isDeadlineValid = methods.watch("deadLine");
 
   if (!assignment) return null;
-  const { assignmentStatus, week } = assignment;
+  const { assignmentStatus, week, studyTitle } = assignment;
 
   // TODO: 휴강된 경우 진입 막기
   if (assignmentStatus === "CANCELLED") return null;
 
-  // TODO: studyName 추가
   return (
     <>
       {open && (
         <SuccessModal
           studyDetailId={studyDetailId}
-          studyName="스터디 제목"
+          studyName={studyTitle}
           type={assignmentStatusMap[assignmentStatus]}
           week={week}
         />
