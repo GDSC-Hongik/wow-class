@@ -6,7 +6,6 @@ import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { Assignment } from "types/dtos/studyDetail";
 import type { AssignmentHistoryDto } from "types/dtos/studyHistory";
-import type { AssignmentStatusType } from "types/entities/myStudy";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";

@@ -2,7 +2,6 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
-import { history } from "constants/assignmentMockData";
 import Image from "next/image";
 
 import { AssignmentHistoryItem } from "./AssignmentHistoryItem";
@@ -14,14 +13,13 @@ export const AssignmentHistory = async () => {
     return;
   }
 
-  const studyHistory = await studyHistoryApi.getStudyHistory(
+  const studyHistories = await studyHistoryApi.getStudyHistory(
     myOngoingStudyInfoData.studyId
   );
-  if (!studyHistory) {
+  if (!studyHistories) {
     return;
   }
-  console.log(studyHistory, "studyHistory");
-  const studyHistories = studyHistory;
+
   if (studyHistories.length === 0) {
     return (
       <section>
