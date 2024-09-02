@@ -105,6 +105,7 @@ const StudyDatePickerStyle = cva({
     },
     _focus: {
       outline: "none",
+      borderColor: "primary",
     },
   },
   variants: {

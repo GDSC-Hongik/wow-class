@@ -59,7 +59,7 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                         <TextButton
                           size="lg"
                           style={textButtonStyle}
-                          text="소개 링크 바로가기"
+                          text="공지 링크 바로가기"
                         />
                       </Link>
                       <Text style={{ flex: "1" }} typo="body1">

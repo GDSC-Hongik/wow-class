@@ -127,6 +127,7 @@ const textareaStyle = cva({
     },
     _focus: {
       outline: "none",
+      borderColor: "primary",
     },
     _scrollbar: {
       width: "2px",
