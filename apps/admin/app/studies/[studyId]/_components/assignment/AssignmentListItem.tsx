@@ -30,7 +30,7 @@ const AssignmentListItem = ({
   return (
     <Table>
       <Table.Left style={TableLeftStyle}>
-        <Flex alignItems="center" flex={1} gap="xxs" minWidth="50px">
+        <Flex alignItems="center" gap="xxs" minWidth="50px">
           <div
             className={ThisWeekBarStyle({
               type: thisWeekAssignment ? "thisWeek" : "notThisWeek",
@@ -38,7 +38,7 @@ const AssignmentListItem = ({
           />
           <Text typo="body1">{week}주차</Text>
         </Flex>
-        <Flex direction="column" flex={2} gap="xxs">
+        <Flex direction="column" gap="xxs">
           <Text style={AssignmentTitleStyle} typo="h3">
             {title || "-"}
           </Text>
