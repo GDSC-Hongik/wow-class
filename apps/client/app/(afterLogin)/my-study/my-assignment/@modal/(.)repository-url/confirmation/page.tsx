@@ -5,15 +5,15 @@ import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
+import { routePath } from "constants/routePath";
 import { tags } from "constants/tags";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
-
 const RepositoryUrlConfirmationModal = () => {
   const searchParams = useSearchParams();
   const url = searchParams.get("repositoryUrl");
-
+  const router = useRouter();
   if (!url) {
     return;
   }
@@ -23,9 +23,16 @@ const RepositoryUrlConfirmationModal = () => {
     if (!myOngoingStudyInfoData?.studyId) {
       return;
     }
-    await studyHistoryApi.putRepository(myOngoingStudyInfoData.studyId, url);
-    //TODO: 제출 후에 RepositoryBox 를 SUBMITTED 로 상태로 바꿔줘야함.
-    revalidateTagByName(tags.studyDetailDashboard);
+    const { success } = await studyHistoryApi.putRepository(
+      myOngoingStudyInfoData.studyId,
+      url
+    );
+    if (success) {
+      revalidateTagByName(tags.studyDetailDashboard);
+      router.push(routePath["my-assignment"]);
+    } else {
+      router.back();
+    }
   };
   return (
     <Modal>

@@ -10,6 +10,7 @@ export const history: AssignmentHistoryDto[] = [
     descriptionLink: "",
     submissionLink: "http://example.com/submission1",
     assignmentSubmissionStatus: "SUCCESS",
+    submissionFailureType: "NONE",
     week: 1,
   },
   {
@@ -20,7 +21,30 @@ export const history: AssignmentHistoryDto[] = [
     descriptionLink: "http://example.com/assignment2",
     submissionLink: "",
     assignmentSubmissionStatus: "FAILURE",
+    submissionFailureType: "WORD_COUNT_INSUFFICIENT",
     week: 2,
+  },
+  {
+    assignmentHistoryId: 3,
+    status: "OPEN",
+    title: "Assignment 2",
+    deadline: "2024-08-24T06:02:17.417Z",
+    descriptionLink: "http://example.com/assignment2",
+    submissionLink: "",
+    assignmentSubmissionStatus: "FAILURE",
+    submissionFailureType: "LOCATION_UNIDENTIFIABLE",
+    week: 3,
+  },
+  {
+    assignmentHistoryId: 3,
+    status: "OPEN",
+    title: "Assignment 2",
+    deadline: "2024-08-24T06:02:17.417Z",
+    descriptionLink: "http://example.com/assignment2",
+    submissionLink: "",
+    assignmentSubmissionStatus: "SUCCESS",
+    submissionFailureType: "NONE",
+    week: 3,
   },
 ];
 

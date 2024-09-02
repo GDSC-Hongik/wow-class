@@ -12,6 +12,6 @@ export interface AssignmentHistoryDto {
   descriptionLink?: string;
   submissionLink?: string;
   assignmentSubmissionStatus: AssignmentSubmissionStatusType;
-  submissionFailureType?: SubmissionFailureType;
+  submissionFailureType: SubmissionFailureType;
   week: number;
 }

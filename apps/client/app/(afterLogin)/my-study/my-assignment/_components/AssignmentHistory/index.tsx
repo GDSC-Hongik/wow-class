@@ -17,8 +17,11 @@ export const AssignmentHistory = async () => {
   const studyHistory = await studyHistoryApi.getStudyHistory(
     myOngoingStudyInfoData.studyId
   );
+  if (!studyHistory) {
+    return;
+  }
   console.log(studyHistory, "studyHistory");
-  const studyHistories = history;
+  const studyHistories = studyHistory;
   if (studyHistories.length === 0) {
     return (
       <section>
