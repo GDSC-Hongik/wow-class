@@ -12,7 +12,6 @@ export const AssignmentHeader = async () => {
     myOngoingStudyInfoData.studyId
   );
 
-  console.log(myBasicInfoData, "myBasicInfoData");
   return (
     <header>
       <Flex gap="sm" textStyle="h1">

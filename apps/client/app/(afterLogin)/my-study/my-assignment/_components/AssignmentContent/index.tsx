@@ -23,9 +23,6 @@ export const AssignmentContent = async () => {
     myOngoingStudyInfoData.studyId
   );
 
-  console.log(studyDashboard, "studyDashboards");
-  console.log(upcomingStudy, "upcomingStudy");
-
   if (!studyDashboard) {
     return;
   }
@@ -48,7 +45,7 @@ export const AssignmentContent = async () => {
           (upcomingStudy ? (
             <AssignmentOverviewBox assignments={upcomingStudy} />
           ) : (
-            <EmptyAssignmentBox week={4} />
+            <EmptyAssignmentBox />
           ))}
       </Flex>
     </section>
