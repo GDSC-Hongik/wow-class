@@ -1,3 +1,4 @@
+import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
@@ -27,13 +28,15 @@ const StudyPage = ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
   return (
     <Flex direction="column" gap="64px">
-      <Header studyId={studyId} />
-      <Link
-        href={`${routerPath.studyDetailInfo.href}/${studyId}`}
-        style={{ ...EditIconStyle, position: "absolute" }}
-      >
-        <Edit height={24} stroke="black" width={24} />
-      </Link>
+      <div className={HeaderWrapper}>
+        <Header studyId={studyId} />
+        <Link
+          href={`${routerPath.studyDetailInfo.href}/${studyId}`}
+          style={{ ...EditIconStyle, position: "absolute" }}
+        >
+          <Edit height={24} stroke="black" width={24} />
+        </Link>
+      </div>
       <CheckAttendanceNumber />
       <Divider style={MinHeightFullDividerStyle} />
       <AssignmentList studyId={studyId} />
@@ -54,7 +57,12 @@ const MinHeightFullDividerStyle = {
 
 const EditIconStyle = {
   position: "absolute",
-  right: "100px",
-  top: "57px",
+  right: "0px",
+  top: "0px",
   cursor: "pointer",
 };
+
+const HeaderWrapper = css({
+  position: "relative",
+  height: "fit-content",
+});
