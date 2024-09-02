@@ -2,7 +2,7 @@ import { css } from "@styled-system/css";
 import { NavItem } from "@wow-class/ui";
 import { dashboardApi } from "apis/auth/dashboardApi";
 import { studyApi } from "apis/study/studyApi";
-import { routerPath } from "constants/router/routerPath";
+import { clientUrl } from "constants/url";
 import Image from "next/image";
 import Link from "next/link";
 import isAdmin from "utils/isAdmin";
@@ -76,7 +76,7 @@ const Navbar = async () => {
         </ul>
         <NavItem
           alt="administrator-icon"
-          href={routerPath.client.href}
+          href={`${clientUrl}/my-study` || ""}
           imageUrl={adminImageUrl}
           name="멘티 페이지로 전환"
         />

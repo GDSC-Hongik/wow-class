@@ -39,11 +39,4 @@ export const routerPath = {
     href: (studyDetailId: number | string) =>
       `/studies/assignments/${studyDetailId}/edit-assignment`,
   },
-  client: {
-    description: "와우클래스 클라이언트 서비스로 이동합니다.",
-    href:
-      process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-        ? "https://study.gdschongik.com/my-study"
-        : "https://dev-study.gdschongik.com/my-study",
-  },
 };
