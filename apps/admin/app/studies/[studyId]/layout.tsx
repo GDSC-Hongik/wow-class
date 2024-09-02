@@ -14,7 +14,7 @@ const StudyLayout = ({
 };
 
 const MainLayoutStyle = {
-  height: "100vh",
+  height: "100%",
   overflow: "auto",
 };
 

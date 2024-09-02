@@ -55,8 +55,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
         href={`${href}`}
         tabIndex={0}
         className={navItemStyle({
-          type:
-            !segment[1] && `/${segment[0]}` === href ? "active" : "inactive",
+          type: !segment[1] && `${segment[0]}` === href ? "active" : "inactive",
         })}
         onClick={handleClickNavItem}
       >
