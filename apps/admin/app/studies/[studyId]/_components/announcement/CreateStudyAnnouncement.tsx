@@ -77,7 +77,7 @@ export default CreateStudyAnnouncement;
 
 const StudyAnnouncementBoxStyle = css({
   width: "100%",
-  height: "171px",
+  minHeight: "171px",
   backgroundColor: "backgroundAlternative",
   borderRadius: "md",
   display: "flex",
