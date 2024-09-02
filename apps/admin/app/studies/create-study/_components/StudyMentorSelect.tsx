@@ -94,4 +94,5 @@ const MemberListPopupStyle = css({
 
 const MemberListItemStyle = css({
   marginY: "5px",
+  cursor: "pointer",
 });
