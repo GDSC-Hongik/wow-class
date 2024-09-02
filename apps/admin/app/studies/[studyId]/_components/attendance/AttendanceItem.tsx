@@ -43,7 +43,10 @@ const AttendanceItem = ({
             {year}년 {month}월 {day}일 00:00 - {padWithZero(hours)}:
             {padWithZero(minutes)}까지
           </Text>
-          <Text color="primary" style={AttendanceNumberStyle}>
+          <Text
+            color={state === "ONGOING_ATTENDANCE" ? "primary" : "sub"}
+            style={AttendanceNumberStyle}
+          >
             {attendanceNumber}
           </Text>
         </Flex>
