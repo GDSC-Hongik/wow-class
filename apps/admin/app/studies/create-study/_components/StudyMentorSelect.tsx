@@ -24,7 +24,7 @@ const StudyMentorSelect = () => {
               field.onChange(Number(selectedValue));
             }}
           >
-            <DropDownOption text="김유진" value="6" />
+            <DropDownOption text="김유진" value="3" />
             <DropDownOption text="홍서현" value="5" />
             <DropDownOption text="이현영" value="15" />
           </DropDown>

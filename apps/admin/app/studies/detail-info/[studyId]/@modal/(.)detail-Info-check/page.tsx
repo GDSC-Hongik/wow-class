@@ -15,8 +15,7 @@ import useSubmitStudyDetailInfo from "./_hooks/useSubmitStudyDetailInfo";
 const StudyDetailInfoCheckModal = () => {
   const [studyName, setStudyName] = useState("");
   const { onClose } = useModalRoute();
-  const { parseToNumberSearchParams, parseQueryString } =
-    useParseSearchParams();
+  const { parseQueryString } = useParseSearchParams();
   const searchParams = useSearchParams();
   const { studyId, ...formData } = parseQueryString<
     CreateStudyDetailInfoApiRequestDto & { studyId: string }

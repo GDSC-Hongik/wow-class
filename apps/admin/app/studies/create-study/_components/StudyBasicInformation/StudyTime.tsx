@@ -24,6 +24,10 @@ const StudyTime = () => {
       const endTime = value[1]?.toString().split(":");
 
       if (startTime && endTime) {
+        if (startTime > endTime) {
+          window.alert("스터디 종료 시간은 스터디 시작 시간 이후여야 합니다!");
+          return;
+        }
         setValue(
           "studyStartTime",
           {
@@ -58,6 +62,7 @@ const StudyTime = () => {
         name="studyStartTime"
         render={() => (
           <TimeRangePicker
+            disableClock={true}
             disabled={isAssignmentStudy}
             value={value}
             onChange={handleSetTime}
