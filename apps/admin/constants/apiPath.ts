@@ -3,6 +3,7 @@ export const enum apiPath {
   studyList = "/admin/studies",
   createStudy = "/admin/studies",
   createStudyDetailInfo = "/mentor/studies",
+  searchMentor = "/admin/members",
 }
 
 export const enum mentorApiPath {
