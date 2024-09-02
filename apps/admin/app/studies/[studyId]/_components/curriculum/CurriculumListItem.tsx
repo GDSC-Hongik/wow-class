@@ -1,4 +1,4 @@
-import { cva } from "@styled-system/css";
+import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
@@ -26,11 +26,8 @@ const CurriculumListItem = ({
       <Table.Left>
         <Flex alignItems="center" gap="47px">
           <Flex alignItems="center" gap="xxs">
-            <div
-              className={ThisWeekBarStyle({
-                type: thisWeekAssignment ? "thisWeek" : "notThisWeek",
-              })}
-            />
+            {thisWeekAssignment && <div className={ThisWeekBarStyle} />}
+
             <Text typo="body1">{week}주차</Text>
           </Flex>
           <Flex direction="column" gap="xxs">
@@ -57,21 +54,10 @@ const CurriculumListItem = ({
 
 export default CurriculumListItem;
 
-const ThisWeekBarStyle = cva({
-  base: {
-    width: "4px",
-    height: "18px",
-  },
-  variants: {
-    type: {
-      thisWeek: {
-        backgroundColor: "primary",
-      },
-      notThisWeek: {
-        backgroundColor: "transparent",
-      },
-    },
-  },
+const ThisWeekBarStyle = css({
+  width: "4px",
+  height: "18px",
+  backgroundColor: "primary",
 });
 
 const DifficultyMap: Record<
