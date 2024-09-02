@@ -3,8 +3,9 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
+import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
-import useMatchedStudyHistoryId from "hooks/useMatchedStudyHistoryId";
 import { useSearchParams } from "next/navigation";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
@@ -12,10 +13,17 @@ import Button from "wowds-ui/Button";
 const RepositoryUrlConfirmationModal = () => {
   const searchParams = useSearchParams();
   const url = searchParams.get("repositoryUrl");
-  //const studyHistoryId = useMatchedStudyHistoryId();
 
+  if (!url) {
+    return;
+  }
   const handleClickSubmitButton = async () => {
-    //await studyHistoryApi.putRepository(studyHistoryId, url);
+    const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+
+    if (!myOngoingStudyInfoData?.studyId) {
+      return;
+    }
+    await studyHistoryApi.putRepository(myOngoingStudyInfoData.studyId, url);
     //TODO: 제출 후에 RepositoryBox 를 SUBMITTED 로 상태로 바꿔줘야함.
     revalidateTagByName(tags.studyDetailDashboard);
   };

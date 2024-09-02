@@ -1,12 +1,10 @@
-import type {
-  Assignment,
-  StudyDetailDashboardDto,
-} from "types/dtos/studyDetail";
+import type { Assignment } from "types/dtos/studyDetail";
 import type { AssignmentHistoryDto } from "types/dtos/studyHistory";
 
 export const history: AssignmentHistoryDto[] = [
   {
     assignmentHistoryId: 1,
+    status: "CANCELLED",
     title: "Assignment 1",
     deadline: "2024-08-17T06:02:17.417Z",
     descriptionLink: "",
@@ -16,6 +14,7 @@ export const history: AssignmentHistoryDto[] = [
   },
   {
     assignmentHistoryId: 2,
+    status: "OPEN",
     title: "Assignment 2",
     deadline: "2024-08-24T06:02:17.417Z",
     descriptionLink: "http://example.com/assignment2",
@@ -24,24 +23,6 @@ export const history: AssignmentHistoryDto[] = [
     week: 2,
   },
 ];
-
-export const studyDashBoardData: StudyDetailDashboardDto = {
-  repositoryLink: "",
-  isLinkEditable: false,
-  submittableAssignments: [
-    {
-      studyDetailId: 1,
-      assignmentStatus: "OPEN",
-      week: 1,
-      title: "React Basics",
-      assignmentSubmissionStatus: "PENDING",
-      descriptionLink: "https://example.com/assignments/react-basics",
-      deadline: "2024-08-25T23:59:59",
-      submissionLink: "https://example.com/submissions/react-basics",
-      submissionFailureType: "NONE",
-    },
-  ],
-};
 
 export const assignmentData: Assignment[] = [
   {
@@ -61,7 +42,7 @@ export const assignmentData: Assignment[] = [
     assignmentStatus: "OPEN",
     week: 3,
     title: "Database Design Assignment",
-    assignmentSubmissionStatus: "PENDING",
+    assignmentSubmissionStatus: "FAILURE",
     descriptionLink: "https://example.com/assignment/123",
     deadline: "2024-08-26T14:30:00",
     submissionLink: "https://github.com/GDSC-Hongik/wow-class",

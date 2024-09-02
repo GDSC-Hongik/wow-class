@@ -1,5 +1,5 @@
 import type {
-  AssignmentStatus,
+  AssignmentStatusType,
   AssignmentSubmissionStatusType,
   SubmissionFailureType,
 } from "types/entities/common/assignment";
@@ -13,7 +13,7 @@ export interface StudyDetailDashboardDto {
 export type UpcomingStudyDto = Assignment[];
 export interface Assignment {
   studyDetailId: number;
-  assignmentStatus: AssignmentStatus;
+  assignmentStatus: AssignmentStatusType;
   week: number;
   title: string;
   assignmentSubmissionStatus: AssignmentSubmissionStatusType;
