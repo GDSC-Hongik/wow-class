@@ -6,4 +6,5 @@ export const enum tags {
   studyBasicInfo = "studyBasicInfo",
   announcements = "announcements",
   memberList = "memberList",
+  attendances = "attendances",
 }

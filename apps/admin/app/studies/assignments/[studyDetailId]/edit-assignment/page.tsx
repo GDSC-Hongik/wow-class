@@ -2,7 +2,7 @@
 
 import { useOpenState } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
-import { assignmentStatusMap } from "constants/assignmentStatusMap";
+import { assignmentStatusMap } from "constants/status/assignmentStatusMap";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type {
@@ -35,32 +35,34 @@ const Assignments = ({
     fetchAssignment();
   }, [studyDetailId]);
 
+  const { title, deadline, descriptionLink } = assignment || {};
   const methods = useForm<
     AssignmentApiRequestDto & {
       onOpen: () => void;
     }
   >({
     defaultValues: {
-      title: assignment?.title,
-      deadLine: "2024-09-07T00:00:00",
-      descriptionNotionLink: assignment?.descriptionLink,
+      title: title || undefined,
+      deadLine: deadline || undefined,
+      descriptionNotionLink: descriptionLink || undefined,
       onOpen: onOpen,
     },
   });
 
+  const isDeadlineValid = methods.watch("deadLine");
+
   if (!assignment) return null;
-  const { assignmentStatus, week } = assignment;
+  const { assignmentStatus, week, studyTitle } = assignment;
 
   // TODO: 휴강된 경우 진입 막기
   if (assignmentStatus === "CANCELLED") return null;
 
-  // TODO: studyName 추가
   return (
     <>
       {open && (
         <SuccessModal
           studyDetailId={studyDetailId}
-          studyName="스터디 제목"
+          studyName={studyTitle}
           type={assignmentStatusMap[assignmentStatus]}
           week={week}
         />
@@ -68,7 +70,7 @@ const Assignments = ({
       <FormProvider {...methods}>
         <AssignmentHeader
           assignment={assignment}
-          disabled={!methods.formState.isValid}
+          disabled={!methods.formState.isValid || !isDeadlineValid}
         />
         <AssignmentForm assignment={assignment} />
       </FormProvider>

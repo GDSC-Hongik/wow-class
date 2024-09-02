@@ -16,12 +16,12 @@ const AssignmentsPage = async ({
 }) => {
   const assignment = await studyApi.getAssignment(+studyDetailId);
   if (!assignment) return null;
+  const { week, title, studyTitle, descriptionLink, deadline } = assignment;
+  console.log(assignment);
 
-  const { week, title, descriptionLink, deadline } = assignment;
-
+  if (!deadline) return null;
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
-  // TODO: studyName 추가
   return (
     <>
       <header className={headerStyle}>
@@ -30,7 +30,7 @@ const AssignmentsPage = async ({
           style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
           typo="h1"
         >
-          {title} <ItemSeparator height={6} width={6} />
+          {studyTitle} <ItemSeparator height={6} width={6} />
           <styled.span color="primary">
             {week}주차 <styled.span color="textBlack">과제</styled.span>
           </styled.span>
@@ -64,7 +64,8 @@ const AssignmentsPage = async ({
         <Flex direction="column" gap="xxs">
           <Text typo="h2">과제 기한</Text>
           <Text color="sub" typo="body1">
-            {year}년 {month}월 {day}일 {hours}:{padWithZero(minutes)}
+            {year}년 {month}월 {day}일 {padWithZero(hours)}:
+            {padWithZero(minutes)}
           </Text>
         </Flex>
       </Flex>

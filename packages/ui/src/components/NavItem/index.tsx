@@ -46,6 +46,11 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
     }
   };
 
+  const navItemType =
+    (!segment[1] && `${segment[0]}` === href) || `/${segment[0]}` === href
+      ? "active"
+      : "inactive";
+
   return (
     <styled.div listStyle="none" role="presentation">
       <Link
@@ -55,7 +60,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
         href={`${href}`}
         tabIndex={0}
         className={navItemStyle({
-          type: !segment[1] && `${segment[0]}` === href ? "active" : "inactive",
+          type: navItemType,
         })}
         onClick={handleClickNavItem}
       >
