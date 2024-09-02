@@ -34,7 +34,7 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
     e.preventDefault();
     const formData = methods.getValues();
     const route = createQueryString(
-      `${studyId}/${routerPath["detail-info-check"].href}?studyId=${studyId}`,
+      `${studyId}${routerPath["detail-info-check"].href}?studyId=${studyId}`,
       formData
     );
     router.push(route);
