@@ -10,8 +10,12 @@ interface AssignmentBoxInfoProps {
 }
 
 export const AssignmentBoxInfo = ({ assignment }: AssignmentBoxInfoProps) => {
-  const { deadline, title, assignmentSubmissionStatus, submissionFailureType } =
-    assignment;
+  const {
+    deadline,
+    assignmentSubmissionStatus,
+    submissionFailureType,
+    submissionLink,
+  } = assignment;
 
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
@@ -31,7 +35,7 @@ export const AssignmentBoxInfo = ({ assignment }: AssignmentBoxInfoProps) => {
           <Text as="div" color="sub">
             제출한 과제
             <Text as="span" color="textBlack">
-              {title}
+              {getTitleOfAssignment(submissionLink)}
             </Text>
           </Text>
           <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
@@ -50,4 +54,15 @@ const failMapping: Record<Assignment["submissionFailureType"], string> = {
   WORD_COUNT_INSUFFICIENT: "글자수 부족",
   NOT_SUBMITTED: "제출 안함",
   NONE: "없음",
+};
+
+const getTitleOfAssignment = (submissionLink: string) => {
+  const regex = /github\.com\/[^/]+\/([^/]+)\/([^/]+)/;
+  const match = submissionLink.match(regex);
+
+  if (match) {
+    const repoName = match[1];
+    const folderName = match[2];
+    return `${repoName}/${folderName}`;
+  }
 };
