@@ -10,6 +10,7 @@ export interface StudyDetailDashboardDto {
   submittableAssignments: Assignment[];
 }
 
+export type UpcomingStudyDto = Assignment[];
 export interface Assignment {
   studyDetailId: number;
   assignmentStatus: AssignmentStatus;

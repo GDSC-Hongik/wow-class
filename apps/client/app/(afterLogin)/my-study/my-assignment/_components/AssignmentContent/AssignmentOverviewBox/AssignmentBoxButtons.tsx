@@ -33,7 +33,10 @@ const PrimaryButton = ({
 }: AssignmentBoxButtonsProps) => {
   const { assignmentSubmissionStatus, submissionFailureType, submissionLink } =
     assignment;
-  const { primaryButtonText } = buttonProps[assignmentSubmissionStatus];
+  const { primaryButtonText } =
+    assignmentSubmissionStatus === null
+      ? buttonProps.null
+      : buttonProps[assignmentSubmissionStatus];
 
   if (
     assignmentSubmissionStatus === "FAILURE" &&
@@ -43,7 +46,7 @@ const PrimaryButton = ({
   }
   const stroke = buttonsDisabled ? "mono100" : "primary";
   return (
-    <Link href={submissionLink} target="_blank">
+    <Link href={submissionLink ?? ""} target="_blank">
       <Button
         disabled={buttonsDisabled}
         icon={<LinkIcon height={20} stroke={stroke} width={20} />}
@@ -62,7 +65,10 @@ const SecondaryButton = ({
 }: AssignmentBoxButtonsProps) => {
   const { assignmentSubmissionStatus, studyDetailId, deadline, committedAt } =
     assignment;
-  const { secondaryButtonText } = buttonProps[assignmentSubmissionStatus];
+  const { secondaryButtonText } =
+    assignmentSubmissionStatus === null
+      ? buttonProps.null
+      : buttonProps[assignmentSubmissionStatus];
   const handleClickSubmissionComplete = async () => {
     const response = await studyHistoryApi.submitAssignment(studyDetailId);
     if (response.success) {
@@ -101,10 +107,12 @@ const buttonStyle = {
 };
 
 const buttonProps: Record<
-  AssignmentSubmissionStatusType,
+  Exclude<AssignmentSubmissionStatusType, null>,
   { primaryButtonText: string; secondaryButtonText: string }
-> = {
-  PENDING: {
+> & {
+  null: { primaryButtonText: string; secondaryButtonText: string }; // null에 대한 별도 처리
+} = {
+  null: {
     primaryButtonText: "제출하러 가기",
     secondaryButtonText: "제출 완료하기",
   },

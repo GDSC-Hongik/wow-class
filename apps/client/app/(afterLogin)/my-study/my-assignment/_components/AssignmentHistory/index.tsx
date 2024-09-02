@@ -1,5 +1,6 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { history } from "constants/assignmentMockData";
 import Image from "next/image";
@@ -7,9 +8,16 @@ import Image from "next/image";
 import { AssignmentHistoryItem } from "./AssignmentHistoryItem";
 
 export const AssignmentHistory = async () => {
-  //TODO: 수강 중인 스터디 api 호출
-  //const studyId = await myStudyApi.getMyOngoingStudyInfo();
-  // const studyHistory = await studyHistoryApi.getStudyHistory(studyId);
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+
+  if (!myOngoingStudyInfoData?.studyId) {
+    return;
+  }
+
+  const studyHistory = await studyHistoryApi.getStudyHistory(
+    myOngoingStudyInfoData.studyId
+  );
+  console.log(studyHistory, "studyHistory");
   const studyHistories = history;
   if (studyHistories.length === 0) {
     return (

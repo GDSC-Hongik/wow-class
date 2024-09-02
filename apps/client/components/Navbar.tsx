@@ -15,10 +15,10 @@ import logoImageUrl from "../public/images/logo.svg";
  */
 
 const Navbar = async () => {
-  const { manageRole, studyRole } = await dashboardApi.getDashboardInfo();
+  // const { manageRole, studyRole } = await dashboardApi.getDashboardInfo();
 
-  const showConvertToMentorPageButton =
-    manageRole === "ADMIN" || studyRole === "MENTOR";
+  // const showConvertToMentorPageButton =
+  //   manageRole === "ADMIN" || studyRole === "MENTOR";
 
   return (
     <aside aria-label="client navigation bar" className={navbarContainerStyle}>
@@ -41,28 +41,18 @@ const Navbar = async () => {
         className={navContainerStyle}
         role="navigation"
       >
-        <section>
+        <ul>
           {navMenu.map((menu) => (
             <NavItem
               alt={menu.alt}
               href={menu.href}
               imageUrl={menu.imageUrl}
-              // items={menu.items}
+              items={menu.items}
               key={menu.name}
               name={menu.name}
             />
           ))}
-        </section>
-        <section>
-          {showConvertToMentorPageButton && (
-            <NavItem
-              alt="administrator-icon"
-              href={routePath.admin || ""}
-              imageUrl={adminImageUrl}
-              name="멘토 페이지로 전환"
-            />
-          )}
-        </section>
+        </ul>
       </nav>
     </aside>
   );

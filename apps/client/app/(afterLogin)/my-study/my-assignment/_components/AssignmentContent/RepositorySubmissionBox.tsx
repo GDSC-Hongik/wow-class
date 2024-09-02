@@ -169,6 +169,7 @@ const urlBoxStyle = css({
 
 const boxStyle = {
   minWidth: "484px",
+  height: "fit-content",
 };
 
 const iconStyle = {

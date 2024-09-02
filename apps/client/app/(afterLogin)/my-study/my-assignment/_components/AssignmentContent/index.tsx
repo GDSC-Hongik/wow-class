@@ -1,21 +1,35 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
-import {
-  assignmentData,
-  studyDashBoardData,
-} from "constants/assignmentMockData";
+import { myStudyApi } from "apis/myStudyApi";
+import { studyDetailApi } from "apis/studyDetailApi";
+import { routePath } from "constants/routePath";
+import { redirect } from "next/navigation";
 
 import { AssignmentOverviewBox } from "./AssignmentOverviewBox";
 import { EmptyAssignmentBox } from "./EmptyAssignmentBox";
 import { RepositorySubmissionBox } from "./RepositorySubmissionBox";
-export const AssignmentContent = () => {
-  //TODO:수강 중인 스터디 api 호출
-  //const studyId = await myStudyApi.getMyOngoingStudyInfo();
-  //const studyDashboard = await studyDetailApi.getStudyDetailDashboard(studyId);
 
-  //TODO: studyDashboard.isLinkEditable 가 false 면 이번 주 과제 조회 api 사용
-  const studyDashboard = studyDashBoardData;
-  const currentAssignments = assignmentData;
+export const AssignmentContent = async () => {
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+
+  if (!myOngoingStudyInfoData?.studyId) {
+    return redirect(routePath["my-study"]);
+  }
+  const studyDashboard = await studyDetailApi.getStudyDetailDashboard(
+    myOngoingStudyInfoData.studyId
+  );
+
+  const upcomingStudy = await studyDetailApi.getUpcomingStudy(
+    myOngoingStudyInfoData.studyId
+  );
+
+  console.log(studyDashboard, "studyDashboards");
+  console.log(upcomingStudy, "upcomingStudy");
+
+  if (!studyDashboard) {
+    return;
+  }
+
   return (
     <section>
       <Flex className={boxContainerStyle} gap="lg">
@@ -31,8 +45,8 @@ export const AssignmentContent = () => {
           </>
         )}
         {!studyDashboard.isLinkEditable &&
-          (currentAssignments ? (
-            <AssignmentOverviewBox assignments={currentAssignments} />
+          (upcomingStudy ? (
+            <AssignmentOverviewBox assignments={upcomingStudy} />
           ) : (
             <EmptyAssignmentBox week={4} />
           ))}

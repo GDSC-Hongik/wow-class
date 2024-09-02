@@ -30,6 +30,11 @@ export const AssignmentHistoryItem = ({
 
   const deadlineText = `종료: ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
 
+  const { color, message } =
+    assignmentSubmissionStatus !== null
+      ? assignmentSubmissionMap[assignmentSubmissionStatus]
+      : assignmentSubmissionMap.null;
+
   return (
     <Table>
       <Table.Left>
@@ -55,11 +60,8 @@ export const AssignmentHistoryItem = ({
           )}
         </Flex>
         <styled.div paddingX="32px">
-          <Tag
-            color={assignmentSubmissionMap[assignmentSubmissionStatus].color}
-            variant="solid2"
-          >
-            {assignmentSubmissionMap[assignmentSubmissionStatus].message}
+          <Tag color={color} variant="solid2">
+            {message}
           </Tag>
         </styled.div>
         <Flex className={buttonContainerStyle} minWidth="182px" paddingX="25px">
@@ -79,9 +81,11 @@ export const AssignmentHistoryItem = ({
 };
 
 const assignmentSubmissionMap: Record<
-  AssignmentSubmissionStatusType,
+  Exclude<AssignmentSubmissionStatusType, null>, // null을 제외한 타입만 처리
   { message: string; color: ComponentProps<typeof Tag>["color"] }
-> = {
+> & {
+  null: { message: string; color: ComponentProps<typeof Tag>["color"] }; // null에 대한 별도 처리
+} = {
   FAILURE: {
     message: "제출 실패",
     color: "red",
@@ -90,7 +94,7 @@ const assignmentSubmissionMap: Record<
     message: "제출 완료",
     color: "blue",
   },
-  PENDING: {
+  null: {
     message: "과제 휴강",
     color: "grey",
   },
