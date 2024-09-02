@@ -30,7 +30,6 @@ const middleware = async () => {
         httpOnly: true,
         secure: true,
         sameSite: "lax",
-        expires: setExpireTime(1),
       });
       return response;
     } catch (error) {
