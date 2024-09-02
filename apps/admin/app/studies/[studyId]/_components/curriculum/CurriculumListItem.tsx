@@ -19,7 +19,7 @@ const CurriculumListItem = ({
   const { month: endMonth, day: endDay } = parseISODate(endDate);
 
   const curriculumTimeLine = `${padWithZero(startMonth)}.${padWithZero(startDay)} - ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
-  const thisWeekAssignment = getIsCurrentWeek(endDate);
+  const thisWeekAssignment = getIsCurrentWeek(startDate, week);
 
   return (
     <Table>

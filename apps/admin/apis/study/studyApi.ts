@@ -6,6 +6,7 @@ import type {
   AssignmentApiRequestDto,
   AssignmentApiResponseDto,
 } from "types/dtos/assignmentList";
+import type { AttendanceApiResponseDto } from "types/dtos/attendance";
 import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
 import type { StudyAnnouncementType } from "types/entities/study";
@@ -126,5 +127,15 @@ export const studyApi = {
       `/mentor/studies/announcements/${studyAnnouncementId}`
     );
     return { success: response.ok };
+  },
+  getStudyAttendances: async (studyId: number) => {
+    const response = await fetcher.get<AttendanceApiResponseDto[]>(
+      `/mentor/study-details/attendances?studyId=${studyId}`,
+      {
+        next: { tags: [tags.attendances] },
+        cache: "force-cache",
+      }
+    );
+    return response.data;
   },
 };

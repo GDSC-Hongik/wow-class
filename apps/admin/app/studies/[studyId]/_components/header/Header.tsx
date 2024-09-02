@@ -101,7 +101,7 @@ const Header = ({
                 className={downArrowIconStyle}
                 height={20}
                 stroke="textBlack"
-                style={{ rotate: showIntro ? "0deg" : "180deg" }}
+                style={{ rotate: showIntro ? "180deg" : "0deg" }}
                 width={20}
               />
             )}

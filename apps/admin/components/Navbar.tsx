@@ -37,12 +37,12 @@ const Navbar = async () => {
         };
       }),
     },
-    {
-      href: "participants",
-      imageUrl: participantImageUrl,
-      alt: "participant-icon",
-      name: "수강생 관리",
-    },
+    // {
+    //   href: "participants",
+    //   imageUrl: participantImageUrl,
+    //   alt: "participant-icon",
+    //   name: "수강생 관리",
+    // },
   ];
 
   return (
@@ -76,7 +76,7 @@ const Navbar = async () => {
         </ul>
         <NavItem
           alt="administrator-icon"
-          href={`${clientUrl}/my-study`}
+          href={`${clientUrl}/my-study` || ""}
           imageUrl={adminImageUrl}
           name="멘티 페이지로 전환"
         />
@@ -89,11 +89,15 @@ export default Navbar;
 
 const navbarContainerStyle = css({
   width: "250px",
+  height: "100vh",
   minWidth: "250px",
   minHeight: "100vh",
+
   paddingTop: "54px",
   borderRightWidth: "arrow",
   borderColor: "mono.400",
+
+  overflow: "scroll",
 });
 
 const logoContainerStyle = css({

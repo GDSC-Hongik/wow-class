@@ -8,16 +8,16 @@ import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: {
-    default: "GDSC Hongik 스터디 서비스, 와우클래스 멘토",
+    default: "와우 클래스: 멘토 | GDSC Hongik 스터디 서비스",
     template: "%s | 와우클래스 멘토",
   },
   description: "와우클래스는 GDSC Hongik이 제공하는 스터디 관리 플랫폼입니다.",
   openGraph: {
-    title: "GDSC Hongik 스터디 서비스, 와우클래스 멘토",
+    title: "와우 클래스: 멘토 | GDSC Hongik 스터디 서비스",
     description:
       "와우클래스는 GDSC Hongik이 제공하는 스터디 관리 플랫폼입니다.",
     images: ["/images/og-image.png"],
-    siteName: "GDSC Hongik 스터디 서비스, 와우클래스 멘토",
+    siteName: "와우 클래스: 멘토 | GDSC Hongik 스터디 서비스",
     type: "website",
   },
   robots: {

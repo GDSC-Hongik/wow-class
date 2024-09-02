@@ -39,9 +39,9 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
     const { hour: startTimeHour, minute: startTimeMinute } = startTime;
     const { hour: endTimeHour, minute: endTimeMinute } = endTime;
 
-    return `${dayToKorean[dayOfWeek.toUpperCase()]} ${startTimeHour}:${padWithZero(startTimeMinute)} - ${
+    return `${dayToKorean[dayOfWeek.toUpperCase()]} ${padWithZero(startTimeHour)}:${padWithZero(startTimeMinute)} - ${padWithZero(
       endTimeHour
-    }:${padWithZero(endTimeMinute)}`;
+    )}:${padWithZero(endTimeMinute)}`;
   };
   const studyTime = startTime && endTime ? formatTime(startTime, endTime) : "-";
 
@@ -60,7 +60,7 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
             style={tagButtonStyle}
             variant="solid1"
           >
-            {tagTexts[studyType]}
+            {studyType}
           </Tag>
         </Flex>
         {introduction && (
@@ -200,17 +200,11 @@ const tagButtonStyle = {
   whiteSpace: "nowrap",
 };
 
-const tagTexts: Record<StudyType, string> = {
-  "과제 스터디": "과제 스터디",
-  "온라인 커리큘럼": "온라인 스터디",
-  "오프라인 커리큘럼": "오프라인 스터디",
-};
-
 const curriculumColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> =
   {
     "과제 스터디": "green",
-    "온라인 커리큘럼": "blue",
-    "오프라인 커리큘럼": "yellow",
+    "온라인 스터디": "blue",
+    "오프라인 스터디": "yellow",
   };
 
 export default StudyItem;
