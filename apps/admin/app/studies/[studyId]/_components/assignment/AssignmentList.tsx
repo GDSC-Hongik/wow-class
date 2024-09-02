@@ -7,6 +7,8 @@ const AssignmentList = async ({ studyId }: { studyId: string }) => {
   const assignmentList = await studyApi.getAssignmentList(
     parseInt(studyId, 10)
   );
+  const study = await studyApi.getStudyBasicInfo(+studyId);
+  const studyStartDate = study?.period?.startDate;
 
   return (
     <section aria-label="assignment-list">
@@ -17,6 +19,7 @@ const AssignmentList = async ({ studyId }: { studyId: string }) => {
           <AssignmentListItem
             assignment={assignment}
             key={`studyDetailId-${index}`}
+            studyStartDate={studyStartDate}
           />
         );
       })}

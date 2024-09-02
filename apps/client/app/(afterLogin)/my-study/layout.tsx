@@ -23,5 +23,5 @@ const Layout = ({
 export default Layout;
 
 const layoutContainerStyle = css({
-  height: "100%",
+  minHeight: "calc(100vh - 108px)",
 });

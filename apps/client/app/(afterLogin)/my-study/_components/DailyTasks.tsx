@@ -1,11 +1,8 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
-import type { DailyTaskDto } from "types/dtos/myStudy";
-import type { DailyTaskType } from "types/entities/myStudy";
 
-import { AttendanceStatusBox, DailyTaskCarousel } from ".";
-import AssignmentStatusBox from "./AssignmentStatusBox";
+import { DailyTaskCarousel, DailyTaskItem } from ".";
 
 const DailyTasks = async () => {
   const myOngoingStudyData = await myStudyApi.getMyOngoingStudyInfo();
@@ -33,40 +30,6 @@ const DailyTasks = async () => {
         </DailyTaskCarousel>
       </Flex>
     </section>
-  );
-};
-
-const DailyTaskItem = ({
-  dailyTask,
-  index,
-}: {
-  dailyTask: DailyTaskDto<DailyTaskType>;
-  index: number;
-}) => {
-  const {
-    todoType,
-    week,
-    deadLine,
-    attendanceStatus,
-    assignmentTitle,
-    assignmentSubmissionStatus,
-  } = dailyTask;
-
-  return todoType === "ATTENDANCE" ? (
-    <AttendanceStatusBox
-      attendanceStatus={attendanceStatus || "NOT_ATTENDED"}
-      deadLine={deadLine}
-      key={index}
-      week={week}
-    />
-  ) : (
-    <AssignmentStatusBox
-      assignmentSubmissionStatus={assignmentSubmissionStatus || "SUCCESS"}
-      deadLine={deadLine}
-      key={index}
-      name={assignmentTitle || ""}
-      week={week}
-    />
   );
 };
 

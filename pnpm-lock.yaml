@@ -12,14 +12,14 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       wowds-icons:
-        specifier: ^0.1.3
-        version: 0.1.3
+        specifier: ^0.1.4
+        version: 0.1.4
       wowds-tokens:
         specifier: ^0.1.1
         version: 0.1.3
       wowds-ui:
-        specifier: ^0.1.14
-        version: 0.1.14(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.1.15
+        version: 0.1.15(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@pandacss/dev':
         specifier: ^0.44.0
@@ -13714,6 +13714,10 @@ packages:
     resolution: {integrity: sha512-PQAbzPhrvUcMPhYz3lXbl5NXxJMS9TE5F09Q/LphI+P/FlRSNhZS0v5sqDpNpYxB4rQZXnUOCJfmOEzmoDPZvw==}
     dev: false
 
+  /wowds-icons@0.1.4:
+    resolution: {integrity: sha512-2mYkhEOZFNXbkH++osn0Qabni08wa0HkbUjnEQVh8j+cni0Te64ZkF9HbynHk2gj1nrFyD6oOSNsIwnJ1IQqmQ==}
+    dev: false
+
   /wowds-theme@0.1.3:
     resolution: {integrity: sha512-dygJMMwFTVB0A9bo217Y4hD/AMIrAOb0n4G9clz7tz5E1jVdgfippx3LXoXewJeoZuGY4LZejxRBbfg4pAQAxQ==}
     dev: true
@@ -13722,8 +13726,8 @@ packages:
     resolution: {integrity: sha512-Pej6MuUec/i6A04gWELi4bb/T2I8gf/57L9rX8G7ElVeMc7/03ELoM0nBFWKybtpYExXhhlQPp0Lg7iqATpy6Q==}
     dev: false
 
-  /wowds-ui@0.1.14(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-pIj4lOL/sVoHU6x+YtnsUbmmTHDDjBC8dkO4W6xN7jxJDFgCivK47SUA8ltiI4OMBLsuqUBfqdRuZQbR25IJnw==}
+  /wowds-ui@0.1.15(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-4RVyZttz9KI2LveNu/lNjIiDixackqH42xKh8tqdsnvXZfrcYdUBgt1u4tm3eOAX4LivYKAlPaMB6chZynGYIw==}
     peerDependencies:
       next: ^14.1.1
       react: ^18.2.0
@@ -13732,7 +13736,8 @@ packages:
       lottie-react: 2.4.0(react-dom@18.3.1)(react@18.3.1)
       next: 14.2.5(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
-      wowds-icons: 0.1.3
+      react-day-picker: 9.0.8(react@18.3.1)
+      wowds-icons: 0.1.4
     transitivePeerDependencies:
       - react-dom
     dev: false

@@ -2,6 +2,7 @@ import { css } from "@styled-system/css";
 import { NavItem } from "@wow-class/ui";
 import { dashboardApi } from "apis/auth/dashboardApi";
 import { studyApi } from "apis/study/studyApi";
+import { clientUrl } from "constants/url";
 import Image from "next/image";
 import Link from "next/link";
 import isAdmin from "utils/isAdmin";
@@ -36,12 +37,12 @@ const Navbar = async () => {
         };
       }),
     },
-    {
-      href: "participants",
-      imageUrl: participantImageUrl,
-      alt: "participant-icon",
-      name: "수강생 관리",
-    },
+    // {
+    //   href: "participants",
+    //   imageUrl: participantImageUrl,
+    //   alt: "participant-icon",
+    //   name: "수강생 관리",
+    // },
   ];
 
   return (
@@ -75,7 +76,7 @@ const Navbar = async () => {
         </ul>
         <NavItem
           alt="administrator-icon"
-          href=""
+          href={`${clientUrl}/my-study` || ""}
           imageUrl={adminImageUrl}
           name="멘티 페이지로 전환"
         />
@@ -88,11 +89,15 @@ export default Navbar;
 
 const navbarContainerStyle = css({
   width: "250px",
+  height: "100vh",
   minWidth: "250px",
   minHeight: "100vh",
+
   paddingTop: "54px",
   borderRightWidth: "arrow",
   borderColor: "mono.400",
+
+  overflow: "scroll",
 });
 
 const logoContainerStyle = css({

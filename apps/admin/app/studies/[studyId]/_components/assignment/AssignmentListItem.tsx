@@ -9,14 +9,23 @@ import AssignmentButtons from "./AssignmentButtons";
 
 const AssignmentListItem = ({
   assignment,
+  studyStartDate,
 }: {
   assignment: AssignmentApiResponseDto;
+  studyStartDate?: string;
 }) => {
   const { studyDetailId, title, deadline, week, assignmentStatus } = assignment;
-  const thisWeekAssignment = getIsCurrentWeek(deadline);
-  const { year, month, day, hours, minutes } = parseISODate(deadline);
 
-  const studyDeadline = `종료 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
+  const formatDateToEndString = (date: string | null) => {
+    if (!date) return "-";
+
+    const { year, month, day, hours, minutes } = parseISODate(date);
+    return `종료 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
+  };
+
+  const thisWeekAssignment =
+    studyStartDate && getIsCurrentWeek(studyStartDate, week);
+  const studyDeadline = formatDateToEndString(deadline);
 
   return (
     <Table>
@@ -32,7 +41,7 @@ const AssignmentListItem = ({
         <Flex direction="column" gap="xxs">
           <Text typo="h3">{title || "-"}</Text>
           <Text color="sub" typo="body2">
-            {deadline ? studyDeadline : "-"}
+            {studyDeadline}
           </Text>
         </Flex>
       </Table.Left>

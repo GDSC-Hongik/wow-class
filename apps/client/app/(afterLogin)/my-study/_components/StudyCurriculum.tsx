@@ -37,6 +37,7 @@ const StudyCurriculum = async () => {
               difficulty,
               period: { startDate, endDate },
               attendanceStatus,
+              assignmentStatus,
               assignmentSubmissionStatus,
               curriculumStatus,
               submissionLink,
@@ -54,6 +55,10 @@ const StudyCurriculum = async () => {
                 ? "제출한 과제 확인"
                 : "과제 제출하기";
             const isCurrentWeek = getIsCurrentWeek(startDate, endDate);
+            const buttonDisabled =
+              !isCurrentWeek ||
+              assignmentSubmissionStatus === "FAILURE" ||
+              assignmentStatus === "CANCELLED";
 
             return (
               <Table key={index}>
@@ -66,46 +71,55 @@ const StudyCurriculum = async () => {
                       {week}주차
                     </Text>
                   </div>
-                  {curriculumStatus === "CANCELLED" ? (
-                    <Text as="h3" color="sub" typo="h3">
-                      휴강 주차
-                    </Text>
-                  ) : (
-                    <Flex direction="column" gap={4.5} justifyContent="center">
-                      <Flex alignItems="center" gap="xs">
-                        <Text as="h3" typo="h3">
-                          {title}
-                        </Text>
-                        <Tag color={difficultyColor} variant="outline">
-                          {difficultyLabel}
-                        </Tag>
-                      </Flex>
-                      <Text
-                        as="h3"
-                        className={studyWeekDescriptionStyle}
-                        color="sub"
-                        typo="h3"
-                      >
-                        {description}
+                  <div className={contentContainerStyle}>
+                    {curriculumStatus === "CANCELLED" ? (
+                      <Text as="h3" color="sub" typo="h3">
+                        휴강 주차
                       </Text>
-                    </Flex>
-                  )}
+                    ) : (
+                      <Flex
+                        direction="column"
+                        gap={4.5}
+                        justifyContent="center"
+                      >
+                        <Flex alignItems="center" gap="xs">
+                          <Text as="h3" typo="h3">
+                            {title}
+                          </Text>
+                          <Tag color={difficultyColor} variant="outline">
+                            {difficultyLabel}
+                          </Tag>
+                        </Flex>
+                        <Text
+                          as="h3"
+                          className={studyWeekDescriptionStyle}
+                          color="sub"
+                          typo="h3"
+                        >
+                          {description}
+                        </Text>
+                      </Flex>
+                    )}
+                  </div>
                 </Table.Left>
                 <Table.Right className={rightColStyle}>
-                  <Text as="h5" typo="body1">
+                  <Text as="h5" className={weekPeriodTextStyle} typo="body1">
                     {formatWeekPeriod(startDate, endDate)}
                   </Text>
-                  <Tag
-                    aria-label="present"
-                    color={attendanceStatusColor || "grey"}
-                    variant="solid2"
-                  >
-                    {attendanceStatusLabel}
-                  </Tag>
+                  <div className={tagContainerStyle}>
+                    <Tag
+                      aria-label="present"
+                      color={attendanceStatusColor || "grey"}
+                      style={tagStyle}
+                      variant="solid2"
+                    >
+                      {attendanceStatusLabel}
+                    </Tag>
+                  </div>
                   <Button
                     aria-label="check-submitted-assignment"
                     asProp={Link}
-                    disabled={assignmentSubmissionStatus === "FAILURE"}
+                    disabled={buttonDisabled}
                     href={submissionLink || ""}
                     size="sm"
                     style={assignmentButtonStyle}
@@ -145,28 +159,29 @@ const studyCurriculumTextStyle = css({
 });
 
 const leftColStyle = css({
-  width: "514px",
+  minWidth: "334px",
 });
 
 const studyWeekDescriptionStyle = css({
-  width: "430px",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
 });
 
 const rightColStyle = css({
-  flexGrow: 1,
-  justifyContent: "space-between !important",
-  padding: "0 25px 0 32px",
+  justifyContent: "flex-end !important",
+  "@media (max-width: 1200px)": {
+    display: "block",
+  },
 });
 
 const assignmentButtonStyle = {
   minWidth: "131px",
+  margin: "21px 25px",
 };
 
 const weekContainerStyle = css({
-  width: "84px",
+  minWidth: "84px",
   display: "flex",
   alignItems: "center",
   gap: "4px",
@@ -177,3 +192,29 @@ const currentWeekIndicatorStyle = css({
   height: "18px",
   backgroundColor: "primary",
 });
+
+const contentContainerStyle = css({
+  width: "calc(100% - 84px)",
+});
+
+const weekPeriodTextStyle = css({
+  textAlign: "center",
+  width: "163px",
+  display: "none",
+  "@media (min-width: 1200px)": {
+    display: "block",
+    width: "116.5px",
+  },
+});
+
+const tagContainerStyle = css({
+  display: "none",
+  "@media (min-width: 1100px)": {
+    display: "block",
+  },
+});
+
+const tagStyle = {
+  margin: "27px 32px",
+  width: "69px",
+};

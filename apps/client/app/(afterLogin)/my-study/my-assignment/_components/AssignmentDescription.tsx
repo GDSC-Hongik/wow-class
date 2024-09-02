@@ -24,7 +24,7 @@ export const AssignmentDescription = async () => {
           <span className={githubTextStyle}>GitHub 레포지토리</span>
         </Tooltip>
       )}
-      의 main 브랜치에서 가장 최신 상태의 WIL.md 파일이 제출돼요. <br />
+      의 main 브랜치에서 가장 최신 상태의 wil.md 파일이 제출돼요. <br />
       과제는 기한 내에 여러 번 제출할 수 있으나, 가장 마지막 제출만 최종 제출로
       인정해요.
     </p>

@@ -9,7 +9,7 @@ import Divider from "wowds-ui/Divider";
 
 import StudyAnnouncement from "./_components/announcement/StudyAnnouncement";
 import AssignmentList from "./_components/assignment/AssignmentList";
-import CheckAttendanceNumber from "./_components/attendance/CheckAttendanceNumber";
+import AttendanceList from "./_components/attendance/AttendanceList";
 import CurriculumList from "./_components/curriculum/CurriculumList";
 import Header from "./_components/header/Header";
 
@@ -37,7 +37,7 @@ const StudyPage = ({ params }: { params: { studyId: string } }) => {
           <Edit height={24} stroke="black" width={24} />
         </Link>
       </div>
-      <CheckAttendanceNumber />
+      <AttendanceList studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
       <AssignmentList studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
