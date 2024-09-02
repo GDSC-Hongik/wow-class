@@ -76,7 +76,7 @@ const Navbar = async () => {
         </ul>
         <NavItem
           alt="administrator-icon"
-          href={clientUrl!!}
+          href={`${clientUrl}/my-study`}
           imageUrl={adminImageUrl}
           name="멘티 페이지로 전환"
         />
