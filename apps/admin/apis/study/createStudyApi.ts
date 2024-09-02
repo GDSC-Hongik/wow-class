@@ -1,6 +1,8 @@
 import { fetcher } from "@wow-class/utils";
 import { apiPath } from "constants/apiPath";
+import { tags } from "constants/tags";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
+import type { SearchStudyMentorResponseDto } from "types/dtos/searchStudyMentor";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
 
 export const createStudyApi = {
@@ -18,5 +20,17 @@ export const createStudyApi = {
       data
     );
     return { success: response.ok };
+  },
+  searchStudyMentor: async (
+    name: string
+  ): Promise<SearchStudyMentorResponseDto[]> => {
+    const response = await fetcher.get(
+      `${apiPath.searchMentor}?name=${name}&roles=REGULAR`,
+      {
+        next: { tags: [tags.memberList] },
+        cache: "force-cache",
+      }
+    );
+    return response.data.content;
   },
 };

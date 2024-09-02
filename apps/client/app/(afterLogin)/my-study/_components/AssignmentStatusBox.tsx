@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { parseISODate } from "@wow-class/utils";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import { routePath } from "constants/routePath";
 import Link from "next/link";
 import type { ComponentProps } from "react";
@@ -28,7 +28,7 @@ const AssignmentStatusBox = ({
 }: AssignmentStatusBoxProps) => {
   const { year, month, day, hours, minutes } = parseISODate(deadLine);
 
-  const attendanceDeadline = `${year}년 ${month}월 ${day}일 ${hours}:${minutes}까지`;
+  const attendanceDeadline = `${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}까지`;
   const {
     label: assignmentSubmissionStatusLabel = "",
     color: assignmentSubmissionStatusColor,

@@ -5,7 +5,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import Checkbox from "wowds-ui/Checkbox";
 
 const StudyInfoStatus = ({ index }: { index: number }) => {
-  const { control, setValue } = useFormContext();
+  const { control, setValue, watch } = useFormContext();
   const [checked, setChecked] = useState(false);
   useEffect(() => {
     setValue(
@@ -25,9 +25,9 @@ const StudyInfoStatus = ({ index }: { index: number }) => {
         name={`studyCurriculums.${index}.status`}
         render={() => (
           <Checkbox
-            checked={checked}
+            checked={watch(`studyCurriculums.${index}.status`) === "CANCELLED"}
             defaultChecked={false}
-            onClick={() => setChecked(!checked)}
+            onChange={() => setChecked(!checked)}
           />
         )}
       />

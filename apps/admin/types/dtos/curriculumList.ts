@@ -1,3 +1,4 @@
+import type { AssignmentStatusType } from "types/entities/assignment";
 import type { StudyDifficultyType } from "types/entities/study";
 
 export interface CurriculumApiResponseDto {
@@ -10,5 +11,6 @@ export interface CurriculumApiResponseDto {
   week: number;
   title: string;
   description: string;
+  curriculumStatus: AssignmentStatusType;
   difficulty: StudyDifficultyType;
 }

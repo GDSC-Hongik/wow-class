@@ -67,6 +67,7 @@ const CurriculumTitleStyle = css({
     resize: "none",
     _focus: {
       outline: "none",
+      borderColor: "primary",
     },
   },
 });
@@ -88,6 +89,7 @@ const CurriculumDescriptionStyle = css({
     scrollbarWidth: "none",
     _focus: {
       outline: "none",
+      borderColor: "primary",
     },
   },
 });

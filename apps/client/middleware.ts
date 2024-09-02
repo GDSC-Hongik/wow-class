@@ -12,13 +12,13 @@ export const config = {
 const middleware = async (req: NextRequest) => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
-  const cacheCookie = cookieStore.get(cookieKey["middleware-executed"]);
+  const middlewareExecuted = cookieStore.get(cookieKey["middleware-executed"]);
 
   if (!accessToken) {
     return NextResponse.redirect(new URL(routePath.auth, req.url));
   }
 
-  if (!cacheCookie) {
+  if (!middlewareExecuted) {
     const { memberRole } = await dashboardApi.getDashboardInfo();
 
     if (memberRole !== "REGULAR") {

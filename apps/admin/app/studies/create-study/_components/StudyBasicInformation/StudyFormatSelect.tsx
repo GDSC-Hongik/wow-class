@@ -23,7 +23,7 @@ const StudyFormatSelect = () => {
             value="OFFLINE"
             text={
               <Flex alignItems="center" gap="md">
-                <Text typo="body1">오프라인 커리큘럼</Text>
+                <Text typo="body1">오프라인 스터디</Text>
                 <Text color="sub" typo="body2">
                   오프라인으로 진행해요.
                 </Text>
@@ -34,7 +34,7 @@ const StudyFormatSelect = () => {
             value="ONLINE"
             text={
               <Flex alignItems="center" gap="md">
-                <Text typo="body1">온라인 커리큘럼</Text>
+                <Text typo="body1">온라인 스터디</Text>
                 <Text color="sub" typo="body2">
                   온라인으로 진행해요.
                 </Text>

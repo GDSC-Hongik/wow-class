@@ -1,29 +1,40 @@
 import { dashboardApi } from "apis/auth/dashboardApi";
+import { cookieKey } from "constants/cookieKey";
+import { clientUrl } from "constants/url";
 import { cookies } from "next/headers";
-import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-
+import setExpireTime from "utils/setExpireTime";
 export const config = {
   matcher: ["/studies/:path*", "/participants/:path*"],
 };
 
-const middleware = async (req: NextRequest) => {
+const middleware = async () => {
   const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
+  const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
+  const middlewareExecuted = cookieStore.get(
+    cookieKey["admin-middleware-executed"]
+  )?.value;
 
   if (!accessToken) {
-    return NextResponse.redirect(new URL("/not-found", req.url));
+    return NextResponse.redirect(new URL("/auth", clientUrl));
   }
 
-  const { studyRole, manageRole } = await dashboardApi.getDashboardInfo();
-
-  if (studyRole === "STUDENT" && manageRole === "NONE") {
-    const url =
-      process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-        ? process.env.NEXT_PUBLIC_CLIENT_PROD_URL
-        : process.env.NEXT_PUBLIC_CLIENT_DEV_URL;
-
-    return NextResponse.redirect(new URL("/auth", url));
+  if (!middlewareExecuted) {
+    try {
+      const { manageRole, studyRole } = await dashboardApi.getDashboardInfo();
+      if (studyRole === "STUDENT" && manageRole === "NONE") {
+        return NextResponse.redirect(new URL("/auth", clientUrl));
+      }
+      const response = NextResponse.next();
+      response.cookies.set(cookieKey["admin-middleware-executed"], "true", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",
+      });
+      return response;
+    } catch (error) {
+      return NextResponse.next();
+    }
   }
 
   return NextResponse.next();
