@@ -8,6 +8,7 @@ import ItemSeparator from "components/ItemSeparator";
 import { routerPath } from "constants/router/routerPath";
 import { tags } from "constants/tags";
 import useParseSearchParams from "hooks/useParseSearchParams";
+import useToast from "hooks/useToast";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { CreateStudyApiRequestDto } from "types/dtos/createStudy";
 import { revalidateTagByName } from "utils/revalidateTagByName";
@@ -26,15 +27,18 @@ const CreatedStudyCheckModal = () => {
   const studyName = data.title;
   const semester = `${data.academicYear}-${data.semesterType === "FIRST" ? "1" : "2"}`;
 
-  const handleClickSubmitButton = async () => {
-    const result = await createStudyApi.postCreateStudy(data);
+  const { toast } = useToast();
 
-    if (result.success) {
-      await revalidateTagByName(tags.studyList);
-      window.alert("스터디 생성에 성공했어요.");
+  const handleClickSubmitButton = async () => {
+    try {
+      await createStudyApi.postCreateStudy(data);
+      revalidateTagByName(tags.studyList);
+      toast({ type: "success", text: "스터디 생성에 성공했어요." });
       router.push(`${routerPath.root.href}`);
-    } else {
-      window.alert("스터디 생성에 실패했어요.");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({ type: "error", text: error.message });
+      }
     }
   };
 

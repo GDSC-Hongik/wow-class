@@ -5,6 +5,7 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
+import useToast from "hooks/useToast";
 import { useFormContext } from "react-hook-form";
 import type {
   AssignmentApiRequestDto,
@@ -25,8 +26,9 @@ const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
       onOpen: () => void;
     }
   >();
-
   const onOpen = methods.getValues("onOpen");
+
+  const { toast } = useToast();
 
   const handleClickSubmit = async () => {
     if (assignmentStatus === "CANCELLED") return;
@@ -37,14 +39,17 @@ const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
       deadLine: methods.getValues("deadLine"),
     };
 
-    const { success } =
+    try {
       assignmentStatus === "NONE"
         ? await studyApi.createAssignment(studyDetailId, data)
         : await studyApi.patchAssignment(studyDetailId, data);
-    if (success) {
       revalidateTagByName(`${tags.assignments} ${studyDetailId}`);
       revalidateTagByName(tags.assignments);
       onOpen();
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({ type: "error", text: error.message });
+      }
     }
   };
 

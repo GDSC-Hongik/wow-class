@@ -2,6 +2,7 @@
 import { Flex } from "@styled-system/jsx";
 import { studyApi } from "apis/study/studyApi";
 import { routerPath } from "constants/router/routerPath";
+import useToast from "hooks/useToast";
 import Link from "next/link";
 import type { StudyAssignmentStatusType } from "types/entities/study";
 import Button from "wowds-ui/Button";
@@ -13,12 +14,16 @@ const AssignmentButtons = ({
   studyDetailId: number;
   assignmentStatus: StudyAssignmentStatusType;
 }) => {
+  const { toast } = useToast();
+
   const handleCancelAssignment = async () => {
-    const { success } = await studyApi.cancelAssignment(studyDetailId);
-    if (success) {
-      console.log("휴강 처리에 성공했어요.");
-    } else {
-      console.log("휴강 처리에 실패했어요.");
+    try {
+      await studyApi.cancelAssignment(studyDetailId);
+      toast({ type: "success", text: "휴강 처리에 성공했어요." });
+    } catch (error) {
+      if (error instanceof Error) {
+        toast({ type: "error", text: error.message });
+      }
     }
   };
 
