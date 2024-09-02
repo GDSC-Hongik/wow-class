@@ -8,8 +8,8 @@ const EmptyStudy = () => {
       alignItems="center"
       direction="column"
       gap="xl"
-      height="100%"
       justifyContent="center"
+      minHeight="calc(100vh - 108px)"
     >
       <Image
         alt="empty-study"
