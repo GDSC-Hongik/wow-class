@@ -6,9 +6,11 @@ import { Modal, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
 import { parseISODate } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
+import { tags } from "constants/tags";
 import useFetchAttendanceCheckModalInfoData from "hooks/useFetchAttendanceCheckModalInfoData";
 import Image from "next/image";
 import { useState } from "react";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
@@ -60,6 +62,7 @@ const AttendanceCheckModal = () => {
 
   const handleAttendanceSuccess = () => {
     setAttended(true);
+    revalidateTagByName(tags.dailyTask);
     setTimeout(() => {
       onClose();
     }, 500);
