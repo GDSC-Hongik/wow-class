@@ -44,7 +44,7 @@ const AttendanceItem = ({
             {padWithZero(minutes)}까지
           </Text>
           <Text
-            color={state === "ONGOING_ATTENDANCE" ? "primary" : "sub"}
+            color={state === "ONGOING_ATTENDANCE" ? "primary" : "outline"}
             style={AttendanceNumberStyle}
           >
             {attendanceNumber}
