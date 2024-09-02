@@ -1,7 +1,7 @@
 "use client";
 
-import { css } from "@styled-system/css";
-import { Flex } from "@styled-system/jsx";
+import { css, cva } from "@styled-system/css";
+import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
@@ -9,7 +9,6 @@ import { useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
-import TextField from "wowds-ui/TextField";
 
 const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
   const [studyAnnouncement, setStudyAnnouncement] =
@@ -38,24 +37,40 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
       <Text typo="h2">공지를 작성해주세요.</Text>
       <Flex gap="xl" justify="space-between" width="100%">
         <Flex gap="sm" justifyContent="stretch" width="100%">
-          <TextField
-            label="공지 제목"
-            placeholder="입력해주세요"
-            style={{ width: "100%" }}
-            value={studyAnnouncement.title}
-            onChange={(value) => {
-              setStudyAnnouncement({ ...studyAnnouncement, title: value });
-            }}
-          />
-          <TextField
-            label="공지 링크"
-            placeholder="http://example.com"
-            style={{ width: "100%" }}
-            value={studyAnnouncement.link}
-            onChange={(value) => {
-              setStudyAnnouncement({ ...studyAnnouncement, link: value });
-            }}
-          />
+          <Flex direction="column" gap="xs" width="100%">
+            <styled.label className={labelStyle}>공지 제목</styled.label>
+            <styled.textarea
+              placeholder="입력해주세요"
+              rows={1}
+              value={studyAnnouncement.title}
+              className={textareaStyle({
+                type: studyAnnouncement.title?.length > 0 ? "typed" : "default",
+              })}
+              onChange={(e) => {
+                setStudyAnnouncement({
+                  ...studyAnnouncement,
+                  title: e.target.value,
+                });
+              }}
+            />
+          </Flex>
+          <Flex direction="column" gap="xs" width="100%">
+            <styled.label className={labelStyle}>공지 링크</styled.label>
+            <styled.textarea
+              placeholder="http://example.com"
+              rows={1}
+              value={studyAnnouncement.link}
+              className={textareaStyle({
+                type: studyAnnouncement.link?.length > 0 ? "typed" : "default",
+              })}
+              onChange={(e) => {
+                setStudyAnnouncement({
+                  ...studyAnnouncement,
+                  link: e.target.value,
+                });
+              }}
+            />
+          </Flex>
         </Flex>
         <Button
           size="sm"
@@ -77,11 +92,67 @@ export default CreateStudyAnnouncement;
 
 const StudyAnnouncementBoxStyle = css({
   width: "100%",
-  height: "171px",
+  minHeight: "171px",
   backgroundColor: "backgroundAlternative",
   borderRadius: "md",
   display: "flex",
   flexDirection: "column",
   gap: "24px",
   padding: "30px",
+});
+
+const labelStyle = css({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  textStyle: "label2",
+  color: "sub",
+});
+
+const textareaStyle = cva({
+  base: {
+    borderRadius: "sm",
+    borderWidth: "button",
+    borderStyle: "solid",
+    paddingX: "sm",
+    paddingY: "xs",
+    textStyle: "body1",
+    height: "2.625rem",
+    maxHeight: "7.5rem",
+    overflowY: "hidden",
+    resize: "none",
+    backgroundColor: "backgroundNormal",
+    _placeholder: {
+      color: "outline",
+    },
+    _focus: {
+      outline: "none",
+      borderColor: "primary",
+    },
+    _scrollbar: {
+      width: "2px",
+    },
+    _scrollbarThumb: {
+      width: "2px",
+      height: "65px",
+      borderRadius: "sm",
+      backgroundColor: "outline",
+    },
+    _scrollbarTrack: {
+      marginTop: "2px",
+      marginBottom: "2px",
+    },
+  },
+  variants: {
+    type: {
+      default: {
+        borderColor: "outline",
+        color: "outline",
+      },
+      typed: {
+        borderColor: "sub",
+        color: "textBlack",
+      },
+    },
+  },
 });

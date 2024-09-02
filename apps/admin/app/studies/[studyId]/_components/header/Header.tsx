@@ -101,7 +101,7 @@ const Header = ({
                 className={downArrowIconStyle}
                 height={20}
                 stroke="textBlack"
-                style={{ rotate: showIntro ? "0deg" : "180deg" }}
+                style={{ rotate: showIntro ? "180deg" : "0deg" }}
                 width={20}
               />
             )}
@@ -158,7 +158,12 @@ const Header = ({
                 스터디 소개
               </Text>
               <Flex alignItems="center" gap="sm">
-                <Link href={notionLink || ""} role="button" tabIndex={0}>
+                <Link
+                  href={notionLink || ""}
+                  role="button"
+                  tabIndex={0}
+                  target="_blank"
+                >
                   <TextButton style={{ padding: "0px" }} text="스터디 소개" />
                 </Link>
                 <Text color="sub" typo="body1">
