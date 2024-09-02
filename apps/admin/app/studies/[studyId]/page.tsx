@@ -44,7 +44,6 @@ const StudyPage = ({ params }: { params: { studyId: string } }) => {
       <StudyAnnouncement studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
       <CurriculumList studyId={studyId} />
-      <Space height={64} />
     </Flex>
   );
 };
