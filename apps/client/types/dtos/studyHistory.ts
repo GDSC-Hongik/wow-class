@@ -1,7 +1,7 @@
 import type {
   AssignmentStatusType,
+  AssignmentSubmissionFailureType,
   AssignmentSubmissionStatusType,
-  SubmissionFailureType,
 } from "types/entities/common/assignment";
 
 export interface AssignmentHistoryDto {
@@ -12,6 +12,6 @@ export interface AssignmentHistoryDto {
   descriptionLink?: string;
   submissionLink?: string;
   assignmentSubmissionStatus: AssignmentSubmissionStatusType;
-  submissionFailureType: SubmissionFailureType;
+  submissionFailureType: AssignmentSubmissionFailureType;
   week: number;
 }

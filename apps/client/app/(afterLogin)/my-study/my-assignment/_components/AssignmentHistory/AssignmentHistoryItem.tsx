@@ -1,11 +1,15 @@
 import { css } from "@styled-system/css";
-import { Flex, styled } from "@styled-system/jsx";
+import { Flex } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { Assignment } from "types/dtos/studyDetail";
 import type { AssignmentHistoryDto } from "types/dtos/studyHistory";
+import type {
+  AssignmentStatusType,
+  AssignmentSubmissionStatusType,
+} from "types/entities/common/assignment";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
@@ -32,13 +36,7 @@ export const AssignmentHistoryItem = ({
 
   const deadlineText = `종료: ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
 
-  const { message, color } =
-    status === "CANCELLED"
-      ? assignmentSubmissionMap.CANCELLED
-      : assignmentSubmissionStatus &&
-          assignmentSubmissionMap[assignmentSubmissionStatus]
-        ? assignmentSubmissionMap[assignmentSubmissionStatus]
-        : assignmentSubmissionMap.CANCELLED;
+  const { tagText, tagColor } = getTagProps(status, assignmentSubmissionStatus);
 
   return (
     <Table>
@@ -64,15 +62,15 @@ export const AssignmentHistoryItem = ({
             "-"
           )}
         </Flex>
-        <styled.div paddingX="32px">
-          <Tag color={color} variant="solid2">
-            {message}
+        <div className={tagContainerStyle}>
+          <Tag color={tagColor} variant="solid2">
+            {tagText}
           </Tag>
           <Text color="error">
             {assignmentSubmissionStatus === "FAILURE" &&
               failMapping[submissionFailureType ?? "NONE"]}
           </Text>
-        </styled.div>
+        </div>
         <Flex className={buttonContainerStyle} minWidth="182px" paddingX="25px">
           {submissionLink ? (
             <Link href={submissionLink} target="_blank">
@@ -89,13 +87,21 @@ export const AssignmentHistoryItem = ({
   );
 };
 
-const assignmentSubmissionMap: Record<
-  "CANCELLED" | "FAILURE" | "SUCCESS",
-  { message: string; color: ComponentProps<typeof Tag>["color"] }
-> = {
-  CANCELLED: { message: "과제 휴강", color: "grey" },
-  FAILURE: { message: "제출 실패", color: "red" },
-  SUCCESS: { message: "제출 완료", color: "blue" },
+const getTagProps = (
+  status: AssignmentStatusType,
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType
+) => {
+  if (status === "CANCELLED") {
+    return assignmentSubmissionMap.CANCELLED;
+  }
+
+  if (
+    assignmentSubmissionStatus &&
+    assignmentSubmissionMap[assignmentSubmissionStatus]
+  ) {
+    return assignmentSubmissionMap[assignmentSubmissionStatus];
+  }
+  return assignmentSubmissionMap.CANCELLED;
 };
 
 const buttonContainerStyle = css({
@@ -103,6 +109,21 @@ const buttonContainerStyle = css({
   textStyle: "body1",
 });
 
+const tagContainerStyle = css({
+  display: "flex",
+  paddingX: "22px",
+  width: "129px",
+  alignItems: "center",
+});
+
+const assignmentSubmissionMap: Record<
+  "CANCELLED" | "FAILURE" | "SUCCESS",
+  { tagText: string; tagColor: ComponentProps<typeof Tag>["color"] }
+> = {
+  CANCELLED: { tagText: "과제 휴강", tagColor: "grey" },
+  FAILURE: { tagText: "제출 실패", tagColor: "red" },
+  SUCCESS: { tagText: "제출 완료", tagColor: "blue" },
+};
 const failMapping: Record<Assignment["submissionFailureType"], string> = {
   LOCATION_UNIDENTIFIABLE: "위치확인불가",
   WORD_COUNT_INSUFFICIENT: "글자수부족",

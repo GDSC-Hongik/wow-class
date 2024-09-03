@@ -35,7 +35,7 @@ export const AssignmentBoxButtons = ({
           ongoingStudyInfo.studyId
         );
 
-        const matchingWeek = curriculumData.find(
+        const matchingWeek = curriculumData?.find(
           (item) => item.week === targetWeek
         );
 

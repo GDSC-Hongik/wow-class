@@ -5,7 +5,7 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import { routePath } from "constants/routePath";
 import Link from "next/link";
 import type { ComponentProps } from "react";
-import type { AssignmentSubmissionStatusType } from "types/entities/myStudy";
+import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";

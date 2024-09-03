@@ -226,6 +226,7 @@ const modalUrlBoxStyle = css({
 });
 const boxStyle = {
   minWidth: "484px",
+  width: "484px",
   height: "fit-content",
 };
 

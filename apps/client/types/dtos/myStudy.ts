@@ -1,12 +1,14 @@
 import type {
+  AssignmentStatusType,
+  AssignmentSubmissionFailureType,
+  AssignmentSubmissionStatusType,
+} from "types/entities/common/assignment";
+import type {
   DayOfWeekType,
   SemesterType,
   Time,
 } from "types/entities/common/time";
 import type {
-  AssignmentStatusType,
-  AssignmentSubmissionFailureType,
-  AssignmentSubmissionStatusType,
   AttendanceStatusType,
   DailyTaskType,
   StudyCurriculumStatusType,
