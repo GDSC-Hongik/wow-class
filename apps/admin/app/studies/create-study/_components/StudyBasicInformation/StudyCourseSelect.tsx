@@ -7,7 +7,7 @@ import DropDownOption from "wowds-ui/DropDownOption";
 const StudyCourseSelect = () => {
   const { control } = useFormContext();
   return (
-    <Flex direction="column" gap="xs">
+    <Flex direction="column" gap="xs" style={{ width: "358px" }}>
       <Controller
         control={control}
         name="totalWeek"

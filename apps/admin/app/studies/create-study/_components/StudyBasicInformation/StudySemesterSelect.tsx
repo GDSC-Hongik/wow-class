@@ -1,38 +1,34 @@
-import { useState } from "react";
-import { Controller, useFormContext } from "react-hook-form";
-import DropDown from "wowds-ui/DropDown";
-import DropDownOption from "wowds-ui/DropDownOption";
+import { Flex } from "@styled-system/jsx";
+import { useFormContext } from "react-hook-form";
+import TextField from "wowds-ui/TextField";
 
 const StudySemesterSelect = () => {
-  const { control, setValue } = useFormContext();
-  const [semesterValue, setSemesterValue] = useState("");
+  const { setValue } = useFormContext();
+
   return (
-    <Controller
-      control={control}
-      name="academicYear"
-      render={({ field }) => (
-        <DropDown
-          label="학기"
-          placeholder="선택하세요"
-          {...field}
-          value={semesterValue}
-          onChange={({ selectedValue }) => {
-            setSemesterValue(selectedValue);
-            const [year, semester] = selectedValue.split("-");
-            if (year && semester) {
-              setValue("academicYear", Number(year), { shouldValidate: true });
-              setValue("semesterType", semester, { shouldValidate: true });
-            }
-          }}
-        >
-          <DropDownOption text="2024-1" value="2024-FIRST" />
-          <DropDownOption text="2024-2" value="2024-SECOND" />
-        </DropDown>
-      )}
-      rules={{
-        required: true,
-      }}
-    />
+    <Flex alignItems="center" gap="36" width="100%">
+      <TextField
+        label="진행연도"
+        placeholder="Ex.2024"
+        style={{ width: "358px" }}
+        onChange={(value) => {
+          setValue("academicYear", parseInt(value), {
+            shouldValidate: true,
+          });
+        }}
+      />
+      <TextField
+        label="진행학기"
+        placeholder="Ex.1학기"
+        style={{ width: "358px" }}
+        onChange={(value) => {
+          const semesterValue = parseInt(value.slice(0, 1), 10);
+          setValue("semesterType", semesterValue === 1 ? "FIRST" : "SECOND", {
+            shouldValidate: true,
+          });
+        }}
+      />
+    </Flex>
   );
 };
 

@@ -53,7 +53,12 @@ const StudyTime = () => {
     }
   };
   return (
-    <Flex direction="column" gap="xs" position="relative">
+    <Flex
+      direction="column"
+      gap="xs"
+      position="relative"
+      style={{ width: "358px" }}
+    >
       <Text color="sub" typo="label2">
         스터디 시간
       </Text>

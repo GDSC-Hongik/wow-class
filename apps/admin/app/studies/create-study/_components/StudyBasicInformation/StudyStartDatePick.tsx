@@ -77,7 +77,7 @@ const StudyStartDatePick = () => {
   ];
 
   return (
-    <Flex direction="column" position="relative">
+    <Flex direction="column" position="relative" style={{ width: "358px" }}>
       <Text color="sub" style={{ marginBottom: "8px" }} typo="label2">
         스터디 진행 기간
       </Text>
