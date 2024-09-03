@@ -28,7 +28,7 @@ export const RepositorySubmissionBox = ({
     useState<RepositorySubmissionStatusType>(
       initialRepositoryUrl ? "SUBMITTED" : "EDITING_WITH_WARNING"
     );
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | false>(false);
   const { open, onOpen, onClose } = useOpenState();
 
   const handleClickEditButton = useCallback(() => {
@@ -51,8 +51,11 @@ export const RepositorySubmissionBox = ({
 
   const handleClickSubmitButton = useCallback(async () => {
     if (!repositoryUrl) {
-      setError(true);
+      setError("빈 URL은 입력할 수 없습니다.");
+    } else if (!isGithubUrl(repositoryUrl)) {
+      setError("GitHub repository URL을 제출해야 합니다.");
     } else {
+      setError(false);
       onOpen();
     }
   }, [repositoryUrl, onOpen]);
@@ -104,7 +107,7 @@ export const RepositorySubmissionBox = ({
                   </Text>
                   <Space height={26} />
                   <Flex className={urlBoxStyle}>
-                    {repositoryUrl}
+                    <div className={overflowTextStyle}>{repositoryUrl}</div>
                     <Flex gap="xs" marginLeft="auto">
                       <Edit
                         height={24}
@@ -134,8 +137,8 @@ export const RepositorySubmissionBox = ({
                   </Flex>
                   <Space height={26} />
                   <TextField
-                    error={error}
-                    {...(error && { helperText: errorMessage })}
+                    error={Boolean(error)}
+                    {...(error && { helperText: error })}
                     label=""
                     placeholder="URL 을 입력하세요"
                     style={textFieldStyle}
@@ -152,8 +155,8 @@ export const RepositorySubmissionBox = ({
                 <>
                   <Space height={56} />
                   <TextField
-                    error={error}
-                    {...(error && { helperText: errorMessage })}
+                    error={Boolean(error)}
+                    {...(error && { helperText: <li>{error}</li> })}
                     label=""
                     placeholder="URL 을 입력하세요"
                     style={textFieldStyle}
@@ -177,7 +180,7 @@ export const RepositorySubmissionBox = ({
             <Space height={12} />
             <Text color="sub">최초 과제 제출 전까지 수정이 가능해요.</Text>
             <Space height={8} />
-            <div className={urlBoxStyle}>{repositoryUrl}</div>
+            <div className={modalUrlBoxStyle}>{repositoryUrl}</div>
             <Space height={28} />
             <Button onClick={handleClickModalSubmitButton}>입력하기</Button>
           </Flex>
@@ -187,8 +190,17 @@ export const RepositorySubmissionBox = ({
   );
 };
 
-const errorMessage = <li>빈 URL은 입력할 수 없습니다.</li>;
+const isGithubUrl = (url: string) => {
+  const githubUrlPattern =
+    /^(https?:\/\/)?(www\.)?github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\/?$/;
+  return githubUrlPattern.test(url);
+};
 
+const overflowTextStyle = css({
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+});
 const urlBoxStyle = css({
   backgroundColor: "backgroundAlternative",
   borderRadius: "5px",
@@ -197,8 +209,21 @@ const urlBoxStyle = css({
   paddingX: "24px",
   paddingY: "18px",
   textStyle: "h2",
+  width: "436px",
 });
 
+const modalUrlBoxStyle = css({
+  backgroundColor: "backgroundAlternative",
+  borderRadius: "5px",
+  color: "sub",
+  paddingX: "lg",
+  paddingY: "sm",
+  textStyle: "h2",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  width: "375px",
+});
 const boxStyle = {
   minWidth: "484px",
   height: "fit-content",
