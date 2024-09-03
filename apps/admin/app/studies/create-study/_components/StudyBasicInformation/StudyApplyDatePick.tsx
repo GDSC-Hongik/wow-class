@@ -95,9 +95,14 @@ const StudyApplyDatePick = () => {
             }}
             style={{
               position: "absolute",
-              top: "100px",
+              top: "80px",
               zIndex: 99,
               backgroundColor: "white",
+            }}
+            styles={{
+              month_grid: {
+                marginBottom: "100px",
+              },
             }}
             onSelect={(triggerDate) => {
               handleStudyDateSelect(triggerDate);

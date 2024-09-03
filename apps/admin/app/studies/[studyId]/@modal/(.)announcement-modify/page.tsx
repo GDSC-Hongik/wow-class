@@ -7,7 +7,7 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
@@ -29,10 +29,20 @@ const AnnouncementModifyModal = ({
   const [studyAnnouncement, setStudyAnnouncement] =
     useState<StudyAnnouncementType>({ title: "", link: "" });
 
+  const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const linkTextareaRef = useRef<HTMLTextAreaElement>(null);
+
   useEffect(() => {
     setStudyAnnouncement(prefillData);
   }, [prefillData]);
+
+  useEffect(() => {
+    autoResizeTextarea(titleTextareaRef.current);
+    autoResizeTextarea(linkTextareaRef.current);
+  }, [studyAnnouncement]);
+
   const { onClose } = useModalRoute();
+
   const handleClickModifyButton = async () => {
     const result = await studyApi.modifyStudyAnnouncement(
       studyAnnouncementId,
@@ -41,6 +51,13 @@ const AnnouncementModifyModal = ({
     if (result.success) {
       await revalidateTagByName(tags.announcements);
       onClose();
+    }
+  };
+
+  const autoResizeTextarea = (textarea: HTMLTextAreaElement | null) => {
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
     }
   };
 
@@ -54,11 +71,13 @@ const AnnouncementModifyModal = ({
             <styled.label className={labelStyle}>공지 제목</styled.label>
             <styled.textarea
               placeholder="입력해주세요"
+              ref={titleTextareaRef}
               rows={1}
               value={studyAnnouncement.title}
               className={textareaStyle({
                 type: studyAnnouncement.title?.length > 0 ? "typed" : "default",
               })}
+              onInput={() => autoResizeTextarea(titleTextareaRef.current)}
               onChange={(e) => {
                 setStudyAnnouncement({
                   ...studyAnnouncement,
@@ -71,11 +90,13 @@ const AnnouncementModifyModal = ({
             <styled.label className={labelStyle}>공지 링크</styled.label>
             <styled.textarea
               placeholder="http://example.com"
+              ref={linkTextareaRef}
               rows={1}
               value={studyAnnouncement.link}
               className={textareaStyle({
                 type: studyAnnouncement.link?.length > 0 ? "typed" : "default",
               })}
+              onInput={() => autoResizeTextarea(linkTextareaRef.current)}
               onChange={(e) => {
                 setStudyAnnouncement({
                   ...studyAnnouncement,
@@ -115,10 +136,9 @@ const textareaStyle = cva({
     paddingX: "sm",
     paddingY: "xs",
     textStyle: "body1",
-    height: "2.625rem",
-    maxHeight: "7.5rem",
-    overflowY: "hidden",
+    maxHeight: "6rem",
     resize: "none",
+    overflowY: "auto",
     backgroundColor: "backgroundNormal",
     _placeholder: {
       color: "outline",
@@ -126,19 +146,6 @@ const textareaStyle = cva({
     _focus: {
       outline: "none",
       borderColor: "primary",
-    },
-    _scrollbar: {
-      width: "2px",
-    },
-    _scrollbarThumb: {
-      width: "2px",
-      height: "65px",
-      borderRadius: "sm",
-      backgroundColor: "outline",
-    },
-    _scrollbarTrack: {
-      marginTop: "2px",
-      marginBottom: "2px",
     },
   },
   variants: {
