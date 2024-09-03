@@ -4,10 +4,13 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
+import { parseISODate } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
+import { tags } from "constants/tags";
 import useFetchAttendanceCheckModalInfoData from "hooks/useFetchAttendanceCheckModalInfoData";
 import Image from "next/image";
 import { useState } from "react";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
@@ -19,38 +22,37 @@ const AttendanceCheckModal = () => {
 
   const { onClose } = useModalRoute();
 
-  const { studyInfo } = useFetchAttendanceCheckModalInfoData();
+  const {
+    studyInfo: { currentWeek, studyDetailId, studyName, deadLine },
+  } = useFetchAttendanceCheckModalInfoData();
+
+  const { year, month, day, hours, minutes } = parseISODate(deadLine);
 
   const handleChangeAttendanceNumber = (value: string) => {
     setAttendanceNumber(value);
-  };
-
-  const fetchOngoingStudyInfo = async () => {
-    const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
-    return myOngoingStudyInfoData?.studyId || null;
   };
 
   const isAttendanceNumberValid = (attendanceNumber: string) => {
     return validateAttendanceNumber(attendanceNumber);
   };
 
-  const checkAttendance = async (studyId: number, attendanceNumber: string) => {
+  const checkAttendance = async (
+    studyDetailId: number,
+    attendanceNumber: string
+  ) => {
     const { success } = await myStudyApi.checkAttendance(
-      studyId,
+      studyDetailId,
       attendanceNumber
     );
     return success;
   };
 
   const handleClickAttendanceCheckButton = async () => {
-    const studyId = await fetchOngoingStudyInfo();
-    if (!studyId) return;
-
     if (!isAttendanceNumberValid(attendanceNumber)) {
       return setError(true);
     }
 
-    const success = await checkAttendance(studyId, attendanceNumber);
+    const success = await checkAttendance(studyDetailId, attendanceNumber);
     if (!success) {
       return setError(true);
     }
@@ -60,6 +62,7 @@ const AttendanceCheckModal = () => {
 
   const handleAttendanceSuccess = () => {
     setAttended(true);
+    revalidateTagByName(tags.dailyTask);
     setTimeout(() => {
       onClose();
     }, 500);
@@ -74,7 +77,7 @@ const AttendanceCheckModal = () => {
             className={attendanceCompleteTitleStyle}
           >
             <Text as="h1" color="primary" typo="h1">
-              {studyInfo.studyName}
+              {studyName}
             </Text>
             <Image
               alt="item separator"
@@ -83,7 +86,7 @@ const AttendanceCheckModal = () => {
               width={6}
             />
             <Text as="h1" color="primary" typo="h1">
-              {studyInfo.currentWeek}주차
+              {currentWeek}주차
             </Text>
           </section>
           <section aria-label="attendance-complete-description">
@@ -105,7 +108,7 @@ const AttendanceCheckModal = () => {
               className={attendanceCheckTitleStyle}
             >
               <Text as="h1" typo="h1">
-                기초 웹스터디
+                {studyName}
               </Text>
               <Image
                 alt="item separator"
@@ -114,7 +117,7 @@ const AttendanceCheckModal = () => {
                 width={6}
               />
               <Text as="h1" typo="h1">
-                4주차
+                {currentWeek}주차
               </Text>
             </section>
             <section
@@ -125,7 +128,7 @@ const AttendanceCheckModal = () => {
                 스터디 시작 후 멘토의 안내에 따라 출결번호를 입력해주세요.
               </Text>
               <Text as="p" color="error" typo="body1">
-                2024년 5월 23일 0:00 - 23:59까지
+                {year}년 {month}월 {day}일 00:00 - {hours}:{minutes}까지
               </Text>
             </section>
           </Flex>
@@ -138,7 +141,10 @@ const AttendanceCheckModal = () => {
             value={attendanceNumber}
             onChange={handleChangeAttendanceNumber}
           />
-          <Button onClick={handleClickAttendanceCheckButton}>
+          <Button
+            style={attendanceButtonStyle}
+            onClick={handleClickAttendanceCheckButton}
+          >
             출석 체크하기
           </Button>
         </>
@@ -172,3 +178,7 @@ const attendanceCompleteTitleStyle = css({
   display: "flex",
   gap: "sm",
 });
+
+const attendanceButtonStyle = {
+  maxWidth: "328px",
+};
