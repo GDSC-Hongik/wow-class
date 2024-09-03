@@ -4,6 +4,7 @@ import { Table, Text } from "@wow-class/ui";
 import { formatWeekPeriod } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
+import { routePath } from "constants/routePath";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { StudyDifficultyType } from "types/entities/myStudy";
@@ -53,11 +54,16 @@ const StudyCurriculum = async () => {
               attendanceStatusMap[
                 curriculumStatus === "CANCELLED" ? "ATTENDED" : attendanceStatus
               ];
+
             const assignmentButtonText =
               assignmentSubmissionStatus === "SUCCESS"
                 ? "제출한 과제 확인"
                 : "과제 제출하기";
+            const assignmentButtonHref =
+              submissionLink ?? routePath["my-assignment"] ?? "";
+
             const isCurrentWeek = getIsCurrentWeek(startDate, endDate);
+
             const buttonDisabled =
               !isCurrentWeek ||
               assignmentSubmissionStatus === "FAILURE" ||
@@ -123,7 +129,7 @@ const StudyCurriculum = async () => {
                     aria-label="check-submitted-assignment"
                     asProp={Link}
                     disabled={buttonDisabled}
-                    href={submissionLink || ""}
+                    href={assignmentButtonHref}
                     size="sm"
                     style={assignmentButtonStyle}
                     target="_blank"
