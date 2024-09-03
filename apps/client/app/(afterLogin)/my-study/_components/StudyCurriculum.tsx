@@ -69,6 +69,8 @@ const StudyCurriculum = async () => {
               assignmentSubmissionStatus === "FAILURE" ||
               assignmentStatus === "CANCELLED";
 
+            const noDescriptionTextColor = description ? "black" : "sub";
+
             return (
               <Table key={index}>
                 <Table.Left className={leftColStyle}>
@@ -76,7 +78,7 @@ const StudyCurriculum = async () => {
                     {isCurrentWeek && (
                       <div className={currentWeekIndicatorStyle} />
                     )}
-                    <Text as="h5" typo="body1">
+                    <Text as="h5" color={noDescriptionTextColor} typo="body1">
                       {week}주차
                     </Text>
                   </div>
@@ -85,7 +87,7 @@ const StudyCurriculum = async () => {
                       <Text as="h3" color="sub" typo="h3">
                         휴강 주차
                       </Text>
-                    ) : (
+                    ) : description ? (
                       <Flex
                         direction="column"
                         gap={4.5}
@@ -108,11 +110,20 @@ const StudyCurriculum = async () => {
                           {description}
                         </Text>
                       </Flex>
+                    ) : (
+                      <Text as="h3" color="sub" typo="h3">
+                        작성된 내용이 없어요
+                      </Text>
                     )}
                   </div>
                 </Table.Left>
                 <Table.Right className={rightColStyle}>
-                  <Text as="h5" className={weekPeriodTextStyle} typo="body1">
+                  <Text
+                    as="h5"
+                    className={weekPeriodTextStyle}
+                    color={noDescriptionTextColor}
+                    typo="body1"
+                  >
                     {formatWeekPeriod(startDate, endDate)}
                   </Text>
                   <div className={tagContainerStyle}>
