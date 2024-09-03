@@ -1,29 +1,66 @@
 "use client";
 
 import { Space } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import type { Assignment } from "types/dtos/studyDetail";
 import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
-import { isDeadlinePassed } from "utils";
+import { getIsAfterStartDate } from "utils/getIsAfterStartDate";
+import { isDeadlinePassed } from "utils/isDeadlinePassed";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
-
 interface AssignmentBoxButtonsProps {
   assignment: Assignment;
   buttonsDisabled?: boolean;
 }
 
 export const AssignmentBoxButtons = ({
-  ...rest
+  buttonsDisabled: _buttonDisabled,
+  assignment,
 }: AssignmentBoxButtonsProps) => {
+  const [period, setPeriod] = useState("");
+
+  const targetWeek = assignment.week;
+
+  useEffect(() => {
+    const fetchAssignmentStartDate = async () => {
+      const ongoingStudyInfo = await myStudyApi.getMyOngoingStudyInfo();
+
+      if (ongoingStudyInfo?.studyId) {
+        const curriculumData = await myStudyApi.getStudyCurriculumList(
+          ongoingStudyInfo.studyId
+        );
+
+        const matchingWeek = curriculumData.find(
+          (item) => item.week === targetWeek
+        );
+
+        if (matchingWeek) {
+          setPeriod(matchingWeek.period.startDate);
+        }
+      }
+    };
+
+    fetchAssignmentStartDate();
+  }, [targetWeek]);
+
+  const buttonsDisabled = _buttonDisabled || !getIsAfterStartDate(period);
+
   return (
     <>
-      <PrimaryButton {...rest} />
+      <PrimaryButton
+        assignment={assignment}
+        buttonsDisabled={buttonsDisabled}
+      />
       <Space height={8} />
-      <SecondaryButton {...rest} />
+      <SecondaryButton
+        assignment={assignment}
+        buttonsDisabled={buttonsDisabled}
+      />
     </>
   );
 };
@@ -110,7 +147,7 @@ const buttonProps: Record<
   Exclude<AssignmentSubmissionStatusType, null>,
   { primaryButtonText: string; secondaryButtonText: string }
 > & {
-  null: { primaryButtonText: string; secondaryButtonText: string }; // null에 대한 별도 처리
+  null: { primaryButtonText: string; secondaryButtonText: string };
 } = {
   null: {
     primaryButtonText: "제출하러 가기",
