@@ -114,6 +114,7 @@ const tagContainerStyle = css({
   paddingX: "22px",
   width: "129px",
   alignItems: "center",
+  flexDirection: "column",
 });
 
 const assignmentSubmissionMap: Record<

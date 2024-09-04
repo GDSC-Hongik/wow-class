@@ -107,6 +107,7 @@ const PrimaryButton = ({
   const stroke = buttonsDisabled ? "mono100" : "primary";
   const link =
     assignmentSubmissionStatus === null ? repositoryLink : submissionLink;
+
   return (
     <Button
       asProp={Link}
@@ -137,7 +138,12 @@ const SecondaryButton = ({
     if (response.success) {
       //TODO: 과제 제출 이후에는 과제 상태에 대한 업데이트 필요
       //이번주 과제 조회 api, 대시보드 api revaliate
-      revalidateTagByName(tags.studyDetailDashboard);
+      revalidateTagByName(
+        assignmentSubmissionStatus === null
+          ? tags.studyDetailDashboard
+          : tags.upcomingStudy
+      );
+      revalidateTagByName(tags.studyHistory);
     }
   };
 

@@ -3,14 +3,15 @@ import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import Image from "next/image";
 import type { Assignment } from "types/dtos/studyDetail";
-import { getAssignmentGithubFolderName } from "utils/getAssignmentGithubFolderName";
 
 import { FailurePopover } from "./FailurePopover";
 interface AssignmentBoxInfoProps {
   assignment: Assignment;
 }
 
-export const AssignmentBoxInfo = ({ assignment }: AssignmentBoxInfoProps) => {
+export const AssignmentBoxInfo = async ({
+  assignment,
+}: AssignmentBoxInfoProps) => {
   const {
     deadline,
     assignmentSubmissionStatus,
@@ -36,7 +37,7 @@ export const AssignmentBoxInfo = ({ assignment }: AssignmentBoxInfoProps) => {
           <Text as="div" color="sub">
             제출한 과제
             <Text as="span" color="textBlack">
-              {getAssignmentGithubFolderName(submissionLink)}
+              과제 이름
             </Text>
           </Text>
           <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
