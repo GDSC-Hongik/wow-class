@@ -9,8 +9,9 @@ import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import { useCallback, useState } from "react";
 import type { RepositorySubmissionStatusType } from "types/entities/myAssignment";
+import { isGithubRepositoryUrl } from "utils/isGithubRepositoryUrl";
 import { revalidateTagByName } from "utils/revalidateTagByName";
-import { Edit, Trash, Warn } from "wowds-icons";
+import { Edit, Trash } from "wowds-icons";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
@@ -28,17 +29,29 @@ export const RepositorySubmissionBox = ({
     useState<RepositorySubmissionStatusType>(
       initialRepositoryUrl ? "SUBMITTED" : "EDITING_WITH_WARNING"
     );
-  const [error, setError] = useState<string | false>(false);
+  const [errorState, setErrorState] = useState<{
+    isError: boolean;
+    errorMessage: string;
+  }>({
+    isError: false,
+    errorMessage: "",
+  });
   const { open, onOpen, onClose } = useOpenState();
 
   const handleClickEditButton = useCallback(() => {
-    setError(false);
+    setErrorState({
+      isError: false,
+      errorMessage: "",
+    });
     setRepositorySubmissionStatus("EDITING");
   }, []);
 
   const handleClickDeleteButton = useCallback(() => {
     setRepositoryUrl("");
-    setError(false);
+    setErrorState({
+      isError: false,
+      errorMessage: "",
+    });
     setRepositorySubmissionStatus("EDITING_WITH_WARNING");
   }, []);
 
@@ -51,11 +64,20 @@ export const RepositorySubmissionBox = ({
 
   const handleClickSubmitButton = useCallback(async () => {
     if (!repositoryUrl) {
-      setError("빈 URL은 입력할 수 없습니다.");
-    } else if (!isGithubUrl(repositoryUrl)) {
-      setError("GitHub repository URL을 제출해야 합니다.");
+      setErrorState({
+        isError: true,
+        errorMessage: "빈 URL은 입력할 수 없습니다.",
+      });
+    } else if (!isGithubRepositoryUrl(repositoryUrl)) {
+      setErrorState({
+        isError: true,
+        errorMessage: "GitHub repository URL을 제출해야 합니다.",
+      });
     } else {
-      setError(false);
+      setErrorState({
+        isError: false,
+        errorMessage: "",
+      });
       onOpen();
     }
   }, [repositoryUrl, onOpen]);
@@ -129,16 +151,18 @@ export const RepositorySubmissionBox = ({
               )}
               {repositorySubmissionStatus === "EDITING_WITH_WARNING" && (
                 <>
-                  <Flex alignItems="center" gap="xxs">
-                    <Warn fill="error" stroke="error" />
-                    <Text color="error" typo="body1">
-                      입력하지 않으면 앞으로의 과제를 제출할 수 없어요.
-                    </Text>
-                  </Flex>
+                  <Text color="error" typo="body1">
+                    * 입력하지 않으면 앞으로의 과제를 제출할 수 없어요.
+                  </Text>
+                  <Text color="sub" typo="body1">
+                    * 레포지토리가 Private 상태면 입력할 수 없어요.
+                  </Text>
                   <Space height={26} />
                   <TextField
-                    error={Boolean(error)}
-                    {...(error && { helperText: error })}
+                    error={errorState.isError}
+                    {...(errorState.isError && {
+                      helperText: <li>{errorState.errorMessage}</li>,
+                    })}
                     label=""
                     placeholder="URL 을 입력하세요"
                     style={textFieldStyle}
@@ -155,8 +179,10 @@ export const RepositorySubmissionBox = ({
                 <>
                   <Space height={56} />
                   <TextField
-                    error={Boolean(error)}
-                    {...(error && { helperText: <li>{error}</li> })}
+                    error={errorState.isError}
+                    {...(errorState.isError && {
+                      helperText: <li>{errorState.errorMessage}</li>,
+                    })}
                     label=""
                     placeholder="URL 을 입력하세요"
                     style={textFieldStyle}
@@ -188,12 +214,6 @@ export const RepositorySubmissionBox = ({
       )}
     </>
   );
-};
-
-const isGithubUrl = (url: string) => {
-  const githubUrlPattern =
-    /^(https?:\/\/)?(www\.)?github\.com\/[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+\/?$/;
-  return githubUrlPattern.test(url);
 };
 
 const overflowTextStyle = css({

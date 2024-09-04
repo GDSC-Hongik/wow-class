@@ -3,6 +3,7 @@ import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import Image from "next/image";
 import type { Assignment } from "types/dtos/studyDetail";
+import { getAssignmentGithubFolderName } from "utils/getAssignmentGithubFolderName";
 
 import { FailurePopover } from "./FailurePopover";
 interface AssignmentBoxInfoProps {
@@ -35,7 +36,7 @@ export const AssignmentBoxInfo = ({ assignment }: AssignmentBoxInfoProps) => {
           <Text as="div" color="sub">
             제출한 과제
             <Text as="span" color="textBlack">
-              {getTitleOfAssignment(submissionLink)}
+              {getAssignmentGithubFolderName(submissionLink)}
             </Text>
           </Text>
           <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
@@ -54,15 +55,4 @@ const failMapping: Record<Assignment["submissionFailureType"], string> = {
   WORD_COUNT_INSUFFICIENT: "글자수 부족",
   NOT_SUBMITTED: "제출 안함",
   NONE: "없음",
-};
-
-const getTitleOfAssignment = (submissionLink: string) => {
-  const regex = /github\.com\/[^/]+\/([^/]+)\/([^/]+)/;
-  const match = submissionLink.match(regex);
-
-  if (match) {
-    const repoName = match[1];
-    const folderName = match[2];
-    return `${repoName}/${folderName}`;
-  }
 };
