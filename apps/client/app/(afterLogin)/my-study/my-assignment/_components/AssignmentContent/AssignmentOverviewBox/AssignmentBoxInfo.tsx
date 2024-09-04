@@ -1,8 +1,11 @@
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { myStudyApi } from "apis/myStudyApi";
+import { studyDetailApi } from "apis/studyDetailApi";
 import Image from "next/image";
 import type { Assignment } from "types/dtos/studyDetail";
+import { getAssignmentGithubFolderName } from "utils/getAssignmentGithubFolderName";
 
 import { FailurePopover } from "./FailurePopover";
 interface AssignmentBoxInfoProps {
@@ -12,12 +15,8 @@ interface AssignmentBoxInfoProps {
 export const AssignmentBoxInfo = async ({
   assignment,
 }: AssignmentBoxInfoProps) => {
-  const {
-    deadline,
-    assignmentSubmissionStatus,
-    submissionFailureType,
-    submissionLink,
-  } = assignment;
+  const { deadline, assignmentSubmissionStatus, submissionFailureType, week } =
+    assignment;
 
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
@@ -29,15 +28,29 @@ export const AssignmentBoxInfo = async ({
   const isFailure = assignmentSubmissionStatus === "FAILURE";
   const isNotSubmitted = isFailure && submissionFailureType === "NOT_SUBMITTED";
 
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+
+  if (!myOngoingStudyInfoData?.studyId) {
+    return;
+  }
+  const studyDashboard = await studyDetailApi.getStudyDetailDashboard(
+    myOngoingStudyInfoData.studyId
+  );
+
+  if (!studyDashboard) {
+    return;
+  }
   return (
     <>
       <Text color="sub">{deadlineText}</Text>
       {(isSuccess || (isFailure && !isNotSubmitted)) && (
         <Flex alignItems="center" gap="xs">
           <Text as="div" color="sub">
-            제출한 과제
+            제출한 과제 :{" "}
             <Text as="span" color="textBlack">
-              과제 이름
+              {`${getAssignmentGithubFolderName(
+                studyDashboard.repositoryLink
+              )}/week${week}`}
             </Text>
           </Text>
           <Image alt="dot" height={6} src="/images/dot.svg" width={6} />

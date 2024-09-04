@@ -1,6 +1,7 @@
 "use client";
 
 import { Space } from "@wow-class/ui";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import { studyDetailApi } from "apis/studyDetailApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
@@ -20,7 +21,7 @@ interface AssignmentBoxButtonsProps {
 }
 
 export const AssignmentBoxButtons = ({
-  buttonsDisabled: buttonDisabledProp,
+  buttonsDisabled: buttonDisabledProp = false,
   assignment,
 }: AssignmentBoxButtonsProps) => {
   const [startDate, setStartDate] = useState("");
@@ -106,8 +107,7 @@ const PrimaryButton = ({
   }
   const stroke = buttonsDisabled ? "mono100" : "primary";
   const link =
-    assignmentSubmissionStatus === null ? repositoryLink : submissionLink;
-
+    assignmentSubmissionStatus === "SUCCESS" ? submissionLink : repositoryLink;
   return (
     <Button
       asProp={Link}
@@ -136,13 +136,7 @@ const SecondaryButton = ({
   const handleClickSubmissionComplete = async () => {
     const response = await studyHistoryApi.submitAssignment(studyDetailId);
     if (response.success) {
-      //TODO: 과제 제출 이후에는 과제 상태에 대한 업데이트 필요
-      //이번주 과제 조회 api, 대시보드 api revaliate
-      revalidateTagByName(
-        assignmentSubmissionStatus === null
-          ? tags.studyDetailDashboard
-          : tags.upcomingStudy
-      );
+      revalidateTagByName(tags.studyDetailDashboard);
       revalidateTagByName(tags.studyHistory);
     }
   };
@@ -155,14 +149,22 @@ const SecondaryButton = ({
     );
   }
   const stroke = buttonsDisabled ? "mono100" : "backgroundNormal";
+  const { year, month, day, hours, minutes } = parseISODate(
+    committedAt as string
+  );
+  const commitText = `최종 수정일자 ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
   return (
     <Button
       disabled={buttonsDisabled}
       icon={<ReloadIcon height={20} stroke={stroke} width={20} />}
-      style={buttonStyle}
+      style={{
+        ...buttonStyle,
+        ...(assignmentSubmissionStatus === "SUCCESS" &&
+          committedAt && { height: "72px !important" }),
+      }}
       {...(assignmentSubmissionStatus === "SUCCESS" &&
         committedAt && {
-          subText: `최종 수정일자 ${committedAt}`,
+          subText: commitText,
         })}
       onClick={handleClickSubmissionComplete}
     >

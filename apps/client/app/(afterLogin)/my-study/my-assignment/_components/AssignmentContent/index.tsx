@@ -19,34 +19,33 @@ export const AssignmentContent = async () => {
     myOngoingStudyInfoData.studyId
   );
 
-  const upcomingStudy = await studyDetailApi.getUpcomingStudy(
-    myOngoingStudyInfoData.studyId
-  );
-
   if (!studyDashboard) {
     return;
   }
 
+  if (studyDashboard.submittableAssignments.length <= 0) {
+    return (
+      <section>
+        <Flex className={boxContainerStyle} gap="lg">
+          <EmptyAssignmentBox />
+        </Flex>
+      </section>
+    );
+  }
+
+  console.log(studyDashboard);
   return (
     <section>
       <Flex className={boxContainerStyle} gap="lg">
         {studyDashboard.isLinkEditable && (
-          <>
-            <RepositorySubmissionBox
-              repositoryLink={studyDashboard.repositoryLink}
-            />
-            <AssignmentOverviewBox
-              assignments={studyDashboard.submittableAssignments}
-              buttonsDisabled={!studyDashboard.repositoryLink}
-            />
-          </>
+          <RepositorySubmissionBox
+            repositoryLink={studyDashboard.repositoryLink}
+          />
         )}
-        {!studyDashboard.isLinkEditable &&
-          (upcomingStudy ? (
-            <AssignmentOverviewBox assignments={upcomingStudy} />
-          ) : (
-            <EmptyAssignmentBox />
-          ))}
+        <AssignmentOverviewBox
+          assignments={studyDashboard.submittableAssignments}
+          buttonsDisabled={!studyDashboard.repositoryLink}
+        />
       </Flex>
     </section>
   );
