@@ -1,12 +1,9 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import {
-  formatDateToISOString,
-  padWithZero,
-  parseISODate,
-} from "@wow-class/utils";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import { attendanceStatusMap } from "constants/status/attendanceStatusMap";
 import type { AttendanceApiResponseDto } from "types/dtos/attendance";
+import getIsToday from "utils/getIsToday";
 import Box from "wowds-ui/Box";
 import Tag from "wowds-ui/Tag";
 
@@ -18,21 +15,9 @@ const AttendanceItem = ({
   const { week, deadLine, attendanceNumber } = attendance;
   const { year, month, day, hours, minutes } = parseISODate(deadLine);
 
-  const getIsToday = () => {
-    const today = new Date();
-    const deadlineDay = parseISODate(deadLine);
-
-    if (
-      today.getFullYear() === deadlineDay.year &&
-      today.getMonth() + 1 === deadlineDay.month &&
-      today.getDate() === deadlineDay.day
-    )
-      return "ONGOING_ATTENDANCE";
-
-    return "BEFORE_ATTENDANCE";
-  };
-
-  const state = getIsToday();
+  const state = getIsToday(deadLine)
+    ? "ONGOING_ATTENDANCE"
+    : "BEFORE_ATTENDANCE";
   const { label, color } = attendanceStatusMap[state];
 
   return (
