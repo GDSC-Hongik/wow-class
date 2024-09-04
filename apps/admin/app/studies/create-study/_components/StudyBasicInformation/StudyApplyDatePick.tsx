@@ -44,20 +44,6 @@ const StudyApplyDatePick = () => {
     setValue("applicationEndDate", endDateString, { shouldValidate: true });
   };
 
-  const disableDateList = [
-    {
-      from: new Date(0),
-      to: yesterday,
-    },
-    ...(watch("startDate")
-      ? [
-          {
-            from: studyStartDate,
-            to: studyStartDateYearLater,
-          },
-        ]
-      : []),
-  ];
   return (
     <Flex direction="column" gap="xs" position="relative" width={358}>
       <Text color="sub" typo="label2">
@@ -89,9 +75,12 @@ const StudyApplyDatePick = () => {
       {isOpen && (
         <div ref={datepickerRef}>
           <DayPicker
-            disabled={disableDateList}
             mode="range"
             weekStartsOn={1}
+            disabled={{
+              from: new Date(0),
+              to: yesterday,
+            }}
             selected={{
               from: formatStringToDate(studyDate.fromValue),
               to: formatStringToDate(studyDate.toValue),
