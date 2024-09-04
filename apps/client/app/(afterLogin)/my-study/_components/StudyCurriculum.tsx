@@ -55,12 +55,19 @@ const StudyCurriculum = async () => {
                 curriculumStatus === "CANCELLED" ? "ATTENDED" : attendanceStatus
               ];
 
-            const assignmentButtonText =
-              assignmentSubmissionStatus === "SUCCESS"
-                ? "제출한 과제 확인"
-                : "과제 제출하기";
+            const isAssignmentSubmissionSuccess =
+              assignmentSubmissionStatus === "SUCCESS";
+            const assignmentButtonText = isAssignmentSubmissionSuccess
+              ? "제출한 과제 확인"
+              : "과제 제출하기";
             const assignmentButtonHref =
               submissionLink ?? routePath["my-assignment"] ?? "";
+            const assignmentButtonTargetProp = isAssignmentSubmissionSuccess
+              ? "_blank"
+              : "_self";
+            const assignmentButtonVariant = isAssignmentSubmissionSuccess
+              ? "outline"
+              : "solid";
 
             const isCurrentWeek = getIsCurrentWeek(startDate, endDate);
 
@@ -143,12 +150,8 @@ const StudyCurriculum = async () => {
                     href={assignmentButtonHref}
                     size="sm"
                     style={assignmentButtonStyle}
-                    target="_blank"
-                    variant={
-                      assignmentSubmissionStatus === "SUCCESS"
-                        ? "outline"
-                        : "solid"
-                    }
+                    target={assignmentButtonTargetProp}
+                    variant={assignmentButtonVariant}
                   >
                     {assignmentButtonText}
                   </Button>
