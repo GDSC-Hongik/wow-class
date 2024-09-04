@@ -12,6 +12,7 @@ export const studyDetailApi = {
       `${apiPath.studyDetail}/dashboard?studyId=${studyId}`,
       {
         next: { tags: [tags.studyDetailDashboard] },
+        cache: "force-cache",
       }
     );
 
@@ -22,6 +23,7 @@ export const studyDetailApi = {
       `${apiPath.studyDetail}/upcoming?studyId=${studyId}`,
       {
         next: { tags: [tags.upcomingStudy] },
+        cache: "force-cache",
       }
     );
 
