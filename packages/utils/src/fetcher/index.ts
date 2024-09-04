@@ -84,8 +84,9 @@ class Fetcher {
       error.message = data.errorMessage;
       error.name = data.errorCodeName;
 
-      if (isClient) toast.error(error.message);
-      throw error;
+      if (isClient) {
+        toast.error(error.message);
+      } else throw error;
     }
   }
 
