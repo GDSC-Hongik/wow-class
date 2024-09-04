@@ -23,26 +23,23 @@ const CurriculumListItem = ({
 
   return (
     <Table>
-      <Table.Left>
-        <Flex alignItems="center" gap="47px">
-          <Flex alignItems="center" gap="xxs">
-            {thisWeekAssignment && <div className={ThisWeekBarStyle} />}
-
-            <Text typo="body1">{week}주차</Text>
+      <Table.Left style={TableLeftStyle}>
+        <Flex alignItems="center" gap="xxs" minWidth="50px">
+          {thisWeekAssignment && <div className={ThisWeekBarStyle} />}
+          <Text typo="body1">{week}주차</Text>
+        </Flex>
+        <Flex direction="column" gap="xxs">
+          <Flex alignItems="center" gap="xs">
+            <Text typo="h3">{title || "-"}</Text>
+            {difficulty && (
+              <Tag color={DifficultyMap[difficulty].color} variant="outline">
+                {DifficultyMap[difficulty].text}
+              </Tag>
+            )}
           </Flex>
-          <Flex direction="column" gap="xxs">
-            <Flex alignItems="center" gap="xs">
-              <Text typo="h3">{title || "-"}</Text>
-              {difficulty && (
-                <Tag color={DifficultyMap[difficulty].color} variant="outline">
-                  {DifficultyMap[difficulty].text}
-                </Tag>
-              )}
-            </Flex>
-            <Text color="sub" style={CurriculumDescriptionStyle} typo="body2">
-              {description || "스터디 상세 설명을 작성해주세요."}
-            </Text>
-          </Flex>
+          <Text color="sub" style={CurriculumDescriptionStyle} typo="body2">
+            {description || "스터디 상세 설명을 작성해주세요."}
+          </Text>
         </Flex>
       </Table.Left>
       <Table.Right>
@@ -53,6 +50,12 @@ const CurriculumListItem = ({
 };
 
 export default CurriculumListItem;
+
+const TableLeftStyle = {
+  display: "flex",
+  alignItems: "center",
+  gap: "47px",
+};
 
 const ThisWeekBarStyle = css({
   width: "4px",
