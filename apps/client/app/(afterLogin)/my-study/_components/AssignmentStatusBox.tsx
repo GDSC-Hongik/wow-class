@@ -13,10 +13,7 @@ import Tag from "wowds-ui/Tag";
 interface AssignmentStatusBoxProps {
   week: number;
   name: string;
-  assignmentSubmissionStatus: Extract<
-    AssignmentSubmissionStatusType,
-    "SUCCESS" | "FAILURE"
-  >;
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
   deadLine: string;
 }
 
@@ -30,9 +27,9 @@ const AssignmentStatusBox = ({
 
   const attendanceDeadline = `${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}까지`;
   const {
-    label: assignmentSubmissionStatusLabel = "",
+    label: assignmentSubmissionStatusLabel,
     color: assignmentSubmissionStatusColor,
-  } = assignmentSubmissionStatusMap[assignmentSubmissionStatus] || {};
+  } = assignmentSubmissionStatusMap[assignmentSubmissionStatus];
 
   return (
     <Box
@@ -68,7 +65,7 @@ const AssignmentStatusBox = ({
           </Flex>
           <Button
             asProp={Link}
-            disabled={assignmentSubmissionStatus === "SUCCESS"}
+            disabled={assignmentSubmissionStatus !== "NOT_SUBMITTED"}
             href={routePath["my-assignment"]}
             size="lg"
             style={assignmentButtonStyle}
@@ -84,11 +81,12 @@ const AssignmentStatusBox = ({
 export default AssignmentStatusBox;
 
 const assignmentSubmissionStatusMap: Record<
-  Extract<AssignmentSubmissionStatusType, "SUCCESS" | "FAILURE">,
+  AssignmentSubmissionStatusType,
   { label: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   SUCCESS: { label: "제출 완료", color: "blue" },
   FAILURE: { label: "제출 실패", color: "red" },
+  NOT_SUBMITTED: { label: "", color: "grey" },
 };
 
 const dailyTaskBoxStyle = {
