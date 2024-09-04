@@ -8,6 +8,7 @@ export interface AssignmentApiResponseDto {
   week: number;
   descriptionLink: string | null;
   assignmentStatus: StudyAssignmentStatusType;
+  studyDetailStartDate: string;
 }
 
 export interface AssignmentApiRequestDto {

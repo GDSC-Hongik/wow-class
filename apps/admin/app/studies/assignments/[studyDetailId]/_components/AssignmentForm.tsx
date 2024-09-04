@@ -1,7 +1,7 @@
 "use client";
 
 import { Flex } from "@styled-system/jsx";
-import { formatDateToISOString, formatStringToDate } from "@wow-class/utils";
+import { formatDateToISOString } from "@wow-class/utils";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import type {
@@ -20,12 +20,12 @@ const AssignmentForm = ({
   assignment: AssignmentApiResponseDto;
 }) => {
   const { control, setValue } = useFormContext<AssignmentApiRequestDto>();
-  const { title, descriptionLink, deadline } = assignment;
+  const { title, descriptionLink, deadline, studyDetailStartDate } = assignment;
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     deadline ? new Date(deadline) : undefined
   );
 
-  const startDate = findStartDate();
+  const startDate = findStartDate(studyDetailStartDate);
 
   return (
     <Flex direction="column" gap="2.25rem">
@@ -75,7 +75,7 @@ const findStartDate = (curriculumStartString?: string) => {
   );
   if (!curriculumStartString) return tomorrow;
 
-  const curriculumStartDate = formatStringToDate(curriculumStartString);
+  const curriculumStartDate = new Date(curriculumStartString);
 
   const curriculumStartTime = curriculumStartDate.getTime();
   const tomorrowTime = tomorrow.getTime();
