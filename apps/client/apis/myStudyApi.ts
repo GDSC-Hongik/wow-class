@@ -44,9 +44,9 @@ export const myStudyApi = {
 
     return response.data;
   },
-  checkAttendance: async (studyId: number, attendanceNumber: string) => {
+  checkAttendance: async (studyDetailId: number, attendanceNumber: string) => {
     const response = await fetcher.post(
-      `${apiPath.studyDetails}/${studyId}/${apiPath.attend}`,
+      `${apiPath.studyDetails}/${studyDetailId}/${apiPath.attend}`,
       {
         attendanceNumber,
       }

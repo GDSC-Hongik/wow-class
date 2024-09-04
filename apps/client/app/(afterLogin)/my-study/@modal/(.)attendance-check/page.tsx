@@ -53,6 +53,7 @@ const AttendanceCheckModal = () => {
     }
 
     const success = await checkAttendance(studyDetailId, attendanceNumber);
+
     if (!success) {
       return setError(true);
     }
