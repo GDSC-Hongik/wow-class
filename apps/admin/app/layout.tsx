@@ -49,13 +49,13 @@ const RootLayout = ({
   return (
     <html lang="ko">
       <body>
+        <ToastContainer
+          hideProgressBar
+          autoClose={4000}
+          closeButton={false}
+          limit={1}
+        />
         <JotaiProvider>
-          <ToastContainer
-            hideProgressBar
-            autoClose={4000}
-            closeButton={false}
-            limit={1}
-          />
           {children}
           {modal}
         </JotaiProvider>

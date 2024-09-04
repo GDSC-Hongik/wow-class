@@ -55,15 +55,13 @@ const RootLayout = ({
   return (
     <html lang="ko">
       <body>
-        <JotaiProvider>
-          <ToastContainer
-            hideProgressBar
-            autoClose={4000}
-            closeButton={false}
-            limit={1}
-          />
-          {children}
-        </JotaiProvider>
+        <ToastContainer
+          hideProgressBar
+          autoClose={4000}
+          closeButton={false}
+          limit={1}
+        />
+        <JotaiProvider>{children}</JotaiProvider>
       </body>
     </html>
   );
