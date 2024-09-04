@@ -72,6 +72,9 @@ importers:
       react-hook-form:
         specifier: ^7.53.0
         version: 7.53.0(react@18.3.1)
+      react-toastify:
+        specifier: ^10.0.5
+        version: 10.0.5(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@hookform/resolvers':
         specifier: ^3.9.0
@@ -127,6 +130,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
+      react-toastify:
+        specifier: ^10.0.5
+        version: 10.0.5(react-dom@18.3.1)(react@18.3.1)
       wowds-icons:
         specifier: ^0.1.3
         version: 0.1.3
@@ -286,6 +292,9 @@ importers:
       next:
         specifier: ^14.2.5
         version: 14.2.5(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
+      react-toastify:
+        specifier: ^10.0.5
+        version: 10.0.5(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@types/jest':
         specifier: ^29.5.12
@@ -11653,6 +11662,17 @@ packages:
       update-input-width: 1.4.2
     transitivePeerDependencies:
       - '@types/react-dom'
+    dev: false
+
+  /react-toastify@10.0.5(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-mNKt2jBXJg4O7pSdbNUfDdTsK9FIdikfsIE/yUCxbAEXl4HMyJaivrVFcn3Elvt5xvCQYhUZm+hqTIu1UXM3Pw==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+    dependencies:
+      clsx: 2.1.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /react@18.3.1:
