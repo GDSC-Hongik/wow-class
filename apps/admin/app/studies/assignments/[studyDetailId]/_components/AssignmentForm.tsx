@@ -1,7 +1,7 @@
 "use client";
 
 import { Flex } from "@styled-system/jsx";
-import { formatDateToISOString } from "@wow-class/utils";
+import { formatDateToISOString, formatStringToDate } from "@wow-class/utils";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import type {
@@ -24,6 +24,8 @@ const AssignmentForm = ({
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     deadline ? new Date(deadline) : undefined
   );
+
+  const startDate = findStartDate();
 
   return (
     <Flex direction="column" gap="2.25rem">
@@ -55,14 +57,31 @@ const AssignmentForm = ({
         }}
       >
         <SingleDatePicker
+          disabled={startDate && { before: startDate }}
           label="종료 날짜"
-          // TODO: 해당 과제 주차만 선택할 수 있도록?
-          // disabled={{}}
         />
         <TimePicker label="종료 시간" />
       </PickerGroup>
     </Flex>
   );
+};
+
+const findStartDate = (curriculumStartString?: string) => {
+  const today = new Date();
+  const tomorrow = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 1
+  );
+  if (!curriculumStartString) return tomorrow;
+
+  const curriculumStartDate = formatStringToDate(curriculumStartString);
+
+  const curriculumStartTime = curriculumStartDate.getTime();
+  const tomorrowTime = tomorrow.getTime();
+
+  if (curriculumStartTime > tomorrowTime) return curriculumStartDate;
+  return tomorrow;
 };
 
 export default AssignmentForm;
