@@ -65,7 +65,6 @@ const AssignmentStatusBox = ({
           </Flex>
           <Button
             asProp={Link}
-            disabled={assignmentSubmissionStatus !== "NOT_SUBMITTED"}
             href={routePath["my-assignment"]}
             size="lg"
             style={assignmentButtonStyle}
