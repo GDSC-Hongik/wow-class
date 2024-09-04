@@ -49,7 +49,10 @@ const StudyCurriculum = async () => {
             const {
               label: attendanceStatusLabel,
               color: attendanceStatusColor,
-            } = attendanceStatusMap[attendanceStatus];
+            } =
+              attendanceStatusMap[
+                curriculumStatus === "CANCELLED" ? "ATTENDED" : attendanceStatus
+              ];
             const assignmentButtonText =
               assignmentSubmissionStatus === "SUCCESS"
                 ? "제출한 과제 확인"
@@ -209,12 +212,12 @@ const weekPeriodTextStyle = css({
 
 const tagContainerStyle = css({
   display: "none",
+  width: "129px",
   "@media (min-width: 1100px)": {
     display: "block",
   },
 });
 
 const tagStyle = {
-  margin: "27px 32px",
-  width: "69px",
+  margin: "auto",
 };
