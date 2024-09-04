@@ -6,6 +6,7 @@ import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
+import useResizeTextarea from "hooks/useResizeTextarea";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
@@ -28,18 +29,13 @@ const AnnouncementModifyModal = ({
   );
   const [studyAnnouncement, setStudyAnnouncement] =
     useState<StudyAnnouncementType>({ title: "", link: "" });
-
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
   const linkTextareaRef = useRef<HTMLTextAreaElement>(null);
+  useResizeTextarea([titleTextareaRef, linkTextareaRef], studyAnnouncement);
 
   useEffect(() => {
     setStudyAnnouncement(prefillData);
   }, [prefillData]);
-
-  useEffect(() => {
-    autoResizeTextarea(titleTextareaRef.current);
-    autoResizeTextarea(linkTextareaRef.current);
-  }, [studyAnnouncement]);
 
   const { onClose } = useModalRoute();
 
@@ -51,13 +47,6 @@ const AnnouncementModifyModal = ({
     if (result.success) {
       await revalidateTagByName(tags.announcements);
       onClose();
-    }
-  };
-
-  const autoResizeTextarea = (textarea: HTMLTextAreaElement | null) => {
-    if (textarea) {
-      textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight}px`;
     }
   };
 
@@ -77,7 +66,6 @@ const AnnouncementModifyModal = ({
               className={textareaStyle({
                 type: studyAnnouncement.title?.length > 0 ? "typed" : "default",
               })}
-              onInput={() => autoResizeTextarea(titleTextareaRef.current)}
               onChange={(e) => {
                 setStudyAnnouncement({
                   ...studyAnnouncement,
@@ -96,7 +84,6 @@ const AnnouncementModifyModal = ({
               className={textareaStyle({
                 type: studyAnnouncement.link?.length > 0 ? "typed" : "default",
               })}
-              onInput={() => autoResizeTextarea(linkTextareaRef.current)}
               onChange={(e) => {
                 setStudyAnnouncement({
                   ...studyAnnouncement,

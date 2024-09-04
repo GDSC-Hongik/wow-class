@@ -5,7 +5,8 @@ import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
-import { useEffect, useRef, useState } from "react";
+import useResizeTextarea from "hooks/useResizeTextarea";
+import { useRef, useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
@@ -19,18 +20,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
 
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
   const linkTextareaRef = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    autoResizeTextarea(titleTextareaRef.current);
-    autoResizeTextarea(linkTextareaRef.current);
-  }, [studyAnnouncement]);
-
-  const autoResizeTextarea = (textarea: HTMLTextAreaElement | null) => {
-    if (textarea) {
-      textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight}px`;
-    }
-  };
+  useResizeTextarea([titleTextareaRef, linkTextareaRef], studyAnnouncement);
 
   const handlePublishAnnouncement = async (studyId: string) => {
     const { success } = await studyApi.publishStudyAnnouncement(
@@ -56,6 +46,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
             <styled.label className={labelStyle}>공지 제목</styled.label>
             <styled.textarea
               placeholder="입력해주세요"
+              ref={titleTextareaRef}
               rows={1}
               value={studyAnnouncement.title}
               className={textareaStyle({
@@ -73,6 +64,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
             <styled.label className={labelStyle}>공지 링크</styled.label>
             <styled.textarea
               placeholder="http://example.com"
+              ref={linkTextareaRef}
               rows={1}
               value={studyAnnouncement.link}
               className={textareaStyle({
