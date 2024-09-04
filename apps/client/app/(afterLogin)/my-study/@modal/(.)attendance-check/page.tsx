@@ -7,7 +7,7 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import { parseISODate } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import { tags } from "constants/tags";
-import useFetchAttendanceCheckModalInfoData from "hooks/useFetchAttendanceCheckModalInfoData";
+import useAttendanceCheckSearchParams from "hooks/useAttendanceCheckSearchParams";
 import Image from "next/image";
 import type { KeyboardEventHandler } from "react";
 import { useState } from "react";
@@ -23,9 +23,8 @@ const AttendanceCheckModal = () => {
 
   const { onClose } = useModalRoute();
 
-  const {
-    studyInfo: { currentWeek, studyDetailId, studyName, deadLine },
-  } = useFetchAttendanceCheckModalInfoData();
+  const { studyDetailId, studyName, deadLine, currentWeek } =
+    useAttendanceCheckSearchParams();
 
   const { year, month, day, hours, minutes } = parseISODate(deadLine);
 
@@ -56,7 +55,7 @@ const AttendanceCheckModal = () => {
     }
 
     const success = await checkAttendance(
-      studyDetailId,
+      +studyDetailId,
       trimmedAttendanceNumber
     );
 
