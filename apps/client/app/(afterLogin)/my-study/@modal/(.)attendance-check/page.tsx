@@ -9,6 +9,7 @@ import { myStudyApi } from "apis/myStudyApi";
 import { tags } from "constants/tags";
 import useFetchAttendanceCheckModalInfoData from "hooks/useFetchAttendanceCheckModalInfoData";
 import Image from "next/image";
+import type { KeyboardEventHandler } from "react";
 import { useState } from "react";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
@@ -72,6 +73,12 @@ const AttendanceCheckModal = () => {
     setTimeout(() => {
       onClose();
     }, 500);
+  };
+
+  const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+    }
   };
 
   return (
@@ -145,6 +152,9 @@ const AttendanceCheckModal = () => {
             placeholder="Ex. 0000"
             style={textfieldStyle}
             value={attendanceNumber}
+            textareaProps={{
+              onKeyDown: handleKeyDown,
+            }}
             onChange={handleChangeAttendanceNumber}
           />
           <Button
