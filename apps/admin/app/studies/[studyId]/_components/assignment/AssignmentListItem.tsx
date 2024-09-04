@@ -55,11 +55,9 @@ const AssignmentListItem = ({
 export default AssignmentListItem;
 
 const ThisWeekBarStyle = css({
-  base: {
-    width: "4px",
-    height: "18px",
-    backgroundColor: "primary",
-  },
+  width: "4px",
+  height: "18px",
+  backgroundColor: "primary",
 });
 
 const TableLeftStyle = {
