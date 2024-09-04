@@ -1,25 +1,23 @@
 "use client";
-
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
-import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
-import useParseSearchParams from "hooks/useParseSearchParams";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
 import Button from "wowds-ui/Button";
 
-import useSubmitStudyDetailInfo from "./_hooks/useSubmitStudyDetailInfo";
+import useSubmitStudyDetailInfo from "../_hooks/useSubmitStudyDetailInfo";
 
-const StudyDetailInfoCheckModal = () => {
+const StudyDetailInfoCheckModal = ({
+  formData,
+  studyId,
+  onClose,
+}: {
+  formData: CreateStudyDetailInfoApiRequestDto;
+  studyId: string;
+  onClose: () => void;
+}) => {
   const [studyName, setStudyName] = useState("");
-  const { onClose } = useModalRoute();
-  const { parseQueryString } = useParseSearchParams();
-  const searchParams = useSearchParams();
-  const { studyId, ...formData } = parseQueryString<
-    CreateStudyDetailInfoApiRequestDto & { studyId: string }
-  >(searchParams.toString());
 
   const { isSuccess, handleSubmitDetailInfo } = useSubmitStudyDetailInfo(
     parseInt(studyId, 10),
@@ -35,7 +33,7 @@ const StudyDetailInfoCheckModal = () => {
   }, [studyId]);
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <SubmitSuccessMessage studyName={studyName} success={isSuccess} />
       <SubmitConfirmMessage
         closeModal={onClose}

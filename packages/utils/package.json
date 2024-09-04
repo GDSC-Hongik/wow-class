@@ -14,10 +14,11 @@
     "@wow-class/typescript-config": "workspace:*",
     "jest": "^29.7.0",
     "jest-fetch-mock": "^3.0.3",
-    "typescript": "^5.3.3",
-    "ts-jest": "^29.2.4"
+    "ts-jest": "^29.2.4",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
-    "next": "^14.2.5"
+    "next": "^14.2.5",
+    "react-toastify": "^10.0.5"
   }
 }

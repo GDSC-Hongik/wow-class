@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 type ApiResponse<T = any> = Response & { data?: T; success?: boolean };
 
 type RequestInterceptor = (
@@ -6,6 +8,8 @@ type RequestInterceptor = (
 type ResponseInterceptor<T = any> = (
   response: ApiResponse
 ) => ApiResponse<T> | Promise<ApiResponse<T>>;
+
+const isClient = typeof window !== "undefined";
 
 class Fetcher {
   private baseUrl: string;
@@ -68,6 +72,24 @@ class Fetcher {
     return response.text();
   }
 
+  private async handleError(
+    response: Response,
+    data: {
+      errorCodeName: string;
+      errorMessage: string;
+    }
+  ) {
+    if (!response.ok) {
+      const error = new Error();
+      error.message = data.errorMessage;
+      error.name = data.errorCodeName;
+
+      if (isClient) {
+        toast.error(error.message);
+      } else throw error;
+    }
+  }
+
   async request<T = any>(
     url: string,
     options: RequestInit = {}
@@ -84,6 +106,8 @@ class Fetcher {
     let response: ApiResponse = await fetch(fullUrl, fetchOptions);
 
     const data = await this.parseJsonResponse(response);
+
+    await this.handleError(response, data);
 
     response = await this.interceptResponse(response);
     response.data = data;
@@ -148,8 +172,6 @@ class Fetcher {
     return this.request(url, { ...options, method: "DELETE" });
   }
 }
-
-const isClient = typeof window !== "undefined";
 
 const fetcher = new Fetcher({
   baseUrl:

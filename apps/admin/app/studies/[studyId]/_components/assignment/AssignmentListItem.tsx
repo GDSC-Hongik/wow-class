@@ -9,12 +9,17 @@ import AssignmentButtons from "./AssignmentButtons";
 
 const AssignmentListItem = ({
   assignment,
-  studyStartDate,
 }: {
   assignment: AssignmentApiResponseDto;
-  studyStartDate?: string;
 }) => {
-  const { studyDetailId, title, deadline, week, assignmentStatus } = assignment;
+  const {
+    studyDetailId,
+    title,
+    deadline,
+    week,
+    assignmentStatus,
+    studyDetailStartDate,
+  } = assignment;
 
   const formatDateToEndString = (date: string | null) => {
     if (!date) return "-";
@@ -23,8 +28,7 @@ const AssignmentListItem = ({
     return `종료 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
   };
 
-  const thisWeekAssignment =
-    studyStartDate && getIsCurrentWeek(studyStartDate, week);
+  const thisWeekAssignment = getIsCurrentWeek(studyDetailStartDate);
   const studyDeadline = formatDateToEndString(deadline);
 
   return (
