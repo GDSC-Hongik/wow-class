@@ -13,7 +13,6 @@ const StudyDetailInfoCheckModal = ({
   formData,
   studyId,
 }: {
-  // eslint-disable-next-line no-undef
   formData: CreateStudyDetailInfoApiRequestDto;
   studyId: string;
 }) => {

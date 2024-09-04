@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
+import { useOpenState } from "@wow-class/ui/hooks";
 import type { CSSProperties, MouseEvent } from "react";
 import { Suspense, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -18,7 +19,7 @@ import StudyDetailInfoCheckModal from "./StudyDetailInfoCheckModal";
 
 const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
-  const [open, setOpen] = useState(false);
+  const { open, setOpen } = useOpenState();
   const prefillStudyInfo = usePrefillStudyDetailInfo(parseInt(studyId, 10));
   const methods = useForm<CreateStudyDetailInfoApiRequestDto>({
     resolver: zodResolver(studyDetailInfoSchema),
