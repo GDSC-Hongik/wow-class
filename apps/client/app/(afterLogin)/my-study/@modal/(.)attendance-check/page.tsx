@@ -68,6 +68,7 @@ const AttendanceCheckModal = () => {
 
   const handleAttendanceSuccess = () => {
     setAttended(true);
+    setError(false);
     revalidateTagByName(tags.dailyTask);
     setTimeout(() => {
       onClose();
