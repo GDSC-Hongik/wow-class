@@ -4,6 +4,7 @@ import { Table, Text } from "@wow-class/ui";
 import { formatWeekPeriod } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
+import { routePath } from "constants/routePath";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { StudyDifficultyType } from "types/entities/myStudy";
@@ -53,15 +54,22 @@ const StudyCurriculum = async () => {
               attendanceStatusMap[
                 curriculumStatus === "CANCELLED" ? "ATTENDED" : attendanceStatus
               ];
+
             const assignmentButtonText =
               assignmentSubmissionStatus === "SUCCESS"
                 ? "제출한 과제 확인"
                 : "과제 제출하기";
+            const assignmentButtonHref =
+              submissionLink ?? routePath["my-assignment"] ?? "";
+
             const isCurrentWeek = getIsCurrentWeek(startDate, endDate);
+
             const buttonDisabled =
               !isCurrentWeek ||
               assignmentSubmissionStatus === "FAILURE" ||
               assignmentStatus === "CANCELLED";
+
+            const noDescriptionTextColor = description ? "black" : "sub";
 
             return (
               <Table key={index}>
@@ -70,7 +78,7 @@ const StudyCurriculum = async () => {
                     {isCurrentWeek && (
                       <div className={currentWeekIndicatorStyle} />
                     )}
-                    <Text as="h5" typo="body1">
+                    <Text as="h5" color={noDescriptionTextColor} typo="body1">
                       {week}주차
                     </Text>
                   </div>
@@ -79,7 +87,7 @@ const StudyCurriculum = async () => {
                       <Text as="h3" color="sub" typo="h3">
                         휴강 주차
                       </Text>
-                    ) : (
+                    ) : description ? (
                       <Flex
                         direction="column"
                         gap={4.5}
@@ -102,11 +110,20 @@ const StudyCurriculum = async () => {
                           {description}
                         </Text>
                       </Flex>
+                    ) : (
+                      <Text as="h3" color="sub" typo="h3">
+                        작성된 내용이 없어요
+                      </Text>
                     )}
                   </div>
                 </Table.Left>
                 <Table.Right className={rightColStyle}>
-                  <Text as="h5" className={weekPeriodTextStyle} typo="body1">
+                  <Text
+                    as="h5"
+                    className={weekPeriodTextStyle}
+                    color={noDescriptionTextColor}
+                    typo="body1"
+                  >
                     {formatWeekPeriod(startDate, endDate)}
                   </Text>
                   <div className={tagContainerStyle}>
@@ -123,7 +140,7 @@ const StudyCurriculum = async () => {
                     aria-label="check-submitted-assignment"
                     asProp={Link}
                     disabled={buttonDisabled}
-                    href={submissionLink || ""}
+                    href={assignmentButtonHref}
                     size="sm"
                     style={assignmentButtonStyle}
                     target="_blank"
