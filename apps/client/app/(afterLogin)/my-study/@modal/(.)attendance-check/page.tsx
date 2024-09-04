@@ -7,8 +7,9 @@ import { useModalRoute } from "@wow-class/ui/hooks";
 import { parseISODate } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import { tags } from "constants/tags";
-import useFetchAttendanceCheckModalInfoData from "hooks/useFetchAttendanceCheckModalInfoData";
+import useAttendanceCheckSearchParams from "hooks/useAttendanceCheckSearchParams";
 import Image from "next/image";
+import type { KeyboardEventHandler } from "react";
 import { useState } from "react";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
@@ -22,9 +23,8 @@ const AttendanceCheckModal = () => {
 
   const { onClose } = useModalRoute();
 
-  const {
-    studyInfo: { currentWeek, studyDetailId, studyName, deadLine },
-  } = useFetchAttendanceCheckModalInfoData();
+  const { studyDetailId, studyName, deadLine, currentWeek } =
+    useAttendanceCheckSearchParams();
 
   const { year, month, day, hours, minutes } = parseISODate(deadLine);
 
@@ -48,11 +48,17 @@ const AttendanceCheckModal = () => {
   };
 
   const handleClickAttendanceCheckButton = async () => {
-    if (!isAttendanceNumberValid(attendanceNumber)) {
+    const trimmedAttendanceNumber = attendanceNumber.trim();
+
+    if (!isAttendanceNumberValid(trimmedAttendanceNumber)) {
       return setError(true);
     }
 
-    const success = await checkAttendance(studyDetailId, attendanceNumber);
+    const success = await checkAttendance(
+      +studyDetailId,
+      trimmedAttendanceNumber
+    );
+
     if (!success) {
       return setError(true);
     }
@@ -62,10 +68,17 @@ const AttendanceCheckModal = () => {
 
   const handleAttendanceSuccess = () => {
     setAttended(true);
+    setError(false);
     revalidateTagByName(tags.dailyTask);
     setTimeout(() => {
       onClose();
     }, 500);
+  };
+
+  const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+    }
   };
 
   return (
@@ -136,9 +149,12 @@ const AttendanceCheckModal = () => {
             error={error}
             helperText={error ? textfieldHelperText : ""}
             label="출결번호 입력"
-            placeholder="Ex. 0000"
+            placeholder="ex) 0000"
             style={textfieldStyle}
             value={attendanceNumber}
+            textareaProps={{
+              onKeyDown: handleKeyDown,
+            }}
             onChange={handleChangeAttendanceNumber}
           />
           <Button
@@ -172,6 +188,7 @@ const attendanceCheckDescriptionStyle = css({
 const textfieldStyle = {
   height: "89px",
   marginBottom: "20px",
+  whiteSpace: "nowrap",
 };
 
 const attendanceCompleteTitleStyle = css({

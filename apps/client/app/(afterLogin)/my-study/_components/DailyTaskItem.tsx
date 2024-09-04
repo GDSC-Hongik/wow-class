@@ -17,6 +17,7 @@ const DailyTaskItem = ({
     attendanceStatus,
     assignmentTitle,
     assignmentSubmissionStatus,
+    studyDetailId,
   } = dailyTask;
 
   return todoType === "ATTENDANCE" ? (
@@ -24,6 +25,7 @@ const DailyTaskItem = ({
       attendanceStatus={attendanceStatus || "NOT_ATTENDED"}
       deadLine={deadLine}
       key={index}
+      studyDetailId={studyDetailId}
       week={week}
     />
   ) : (
