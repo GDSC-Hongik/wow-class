@@ -59,12 +59,7 @@ const StudyApplyDatePick = () => {
       : []),
   ];
   return (
-    <Flex
-      direction="column"
-      gap="xs"
-      position="relative"
-      style={{ width: "358px" }}
-    >
+    <Flex direction="column" gap="xs" position="relative" width={358}>
       <Text color="sub" typo="label2">
         스터디 신청 기간
       </Text>

@@ -6,7 +6,7 @@ const StudySemesterSelect = () => {
   const { setValue } = useFormContext();
 
   return (
-    <Flex alignItems="center" gap="36" width="100%">
+    <Flex alignItems="center" gap={36} width="100%">
       <TextField
         label="진행연도"
         placeholder="Ex.2024"
