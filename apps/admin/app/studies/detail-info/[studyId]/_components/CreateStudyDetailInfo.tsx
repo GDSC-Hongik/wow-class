@@ -19,7 +19,7 @@ import StudyDetailInfoCheckModal from "./StudyDetailInfoCheckModal";
 
 const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
-  const { open, setOpen } = useOpenState();
+  const { open, setOpen, onClose } = useOpenState();
   const prefillStudyInfo = usePrefillStudyDetailInfo(parseInt(studyId, 10));
   const methods = useForm<CreateStudyDetailInfoApiRequestDto>({
     resolver: zodResolver(studyDetailInfoSchema),
@@ -40,6 +40,7 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
         <StudyDetailInfoCheckModal
           formData={methods.getValues()}
           studyId={studyId}
+          onClose={onClose}
         />
       )}
       <Flex

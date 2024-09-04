@@ -1,7 +1,6 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
-import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
 import React, { useEffect, useState } from "react";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
@@ -12,12 +11,13 @@ import useSubmitStudyDetailInfo from "../_hooks/useSubmitStudyDetailInfo";
 const StudyDetailInfoCheckModal = ({
   formData,
   studyId,
+  onClose,
 }: {
   formData: CreateStudyDetailInfoApiRequestDto;
   studyId: string;
+  onClose: () => void;
 }) => {
   const [studyName, setStudyName] = useState("");
-  const { onClose } = useModalRoute();
 
   const { isSuccess, handleSubmitDetailInfo } = useSubmitStudyDetailInfo(
     parseInt(studyId, 10),
@@ -33,7 +33,7 @@ const StudyDetailInfoCheckModal = ({
   }, [studyId]);
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <SubmitSuccessMessage studyName={studyName} success={isSuccess} />
       <SubmitConfirmMessage
         closeModal={onClose}
