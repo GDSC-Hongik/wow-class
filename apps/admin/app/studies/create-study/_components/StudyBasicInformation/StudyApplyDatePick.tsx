@@ -73,6 +73,9 @@ const StudyApplyDatePick = () => {
             className={StudyDatePickerStyle({
               type: inputValue ? "selected" : "unSelected",
             })}
+            onChange={() => {
+              console.log("");
+            }}
             onClick={() => {
               setIsOpen(!isOpen);
             }}
