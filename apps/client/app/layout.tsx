@@ -56,7 +56,6 @@ const RootLayout = ({
     <html lang="ko">
       <body>
         <JotaiProvider>
-          {" "}
           <ToastContainer
             hideProgressBar
             autoClose={4000}
