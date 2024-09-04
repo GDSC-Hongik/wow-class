@@ -17,7 +17,6 @@ const AssignmentsPage = async ({
   const assignment = await studyApi.getAssignment(+studyDetailId);
   if (!assignment) return null;
   const { week, title, studyTitle, descriptionLink, deadline } = assignment;
-  console.log(assignment);
 
   if (!deadline) return null;
   const { year, month, day, hours, minutes } = parseISODate(deadline);

@@ -46,6 +46,6 @@
     "clsx": "^2.1.1",
     "wowds-icons": "^0.1.4",
     "wowds-tokens": "^0.1.1",
-    "wowds-ui": "^0.1.15"
+    "wowds-ui": "^0.1.16"
   }
 }

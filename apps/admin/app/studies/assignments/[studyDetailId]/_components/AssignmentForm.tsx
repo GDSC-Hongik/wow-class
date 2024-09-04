@@ -20,10 +20,12 @@ const AssignmentForm = ({
   assignment: AssignmentApiResponseDto;
 }) => {
   const { control, setValue } = useFormContext<AssignmentApiRequestDto>();
-  const { title, descriptionLink, deadline } = assignment;
+  const { title, descriptionLink, deadline, studyDetailStartDate } = assignment;
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(
     deadline ? new Date(deadline) : undefined
   );
+
+  const startDate = findStartDate(studyDetailStartDate);
 
   return (
     <Flex direction="column" gap="2.25rem">
@@ -55,14 +57,31 @@ const AssignmentForm = ({
         }}
       >
         <SingleDatePicker
+          disabled={startDate && { before: startDate }}
           label="종료 날짜"
-          // TODO: 해당 과제 주차만 선택할 수 있도록?
-          // disabled={{}}
         />
         <TimePicker label="종료 시간" />
       </PickerGroup>
     </Flex>
   );
+};
+
+const findStartDate = (curriculumStartString?: string) => {
+  const today = new Date();
+  const tomorrow = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 1
+  );
+  if (!curriculumStartString) return tomorrow;
+
+  const curriculumStartDate = new Date(curriculumStartString);
+
+  const curriculumStartTime = curriculumStartDate.getTime();
+  const tomorrowTime = tomorrow.getTime();
+
+  if (curriculumStartTime > tomorrowTime) return curriculumStartDate;
+  return tomorrow;
 };
 
 export default AssignmentForm;
