@@ -148,7 +148,7 @@ const AttendanceCheckModal = () => {
             error={error}
             helperText={error ? textfieldHelperText : ""}
             label="출결번호 입력"
-            placeholder="Ex. 0000"
+            placeholder="ex) 0000"
             style={textfieldStyle}
             value={attendanceNumber}
             textareaProps={{
