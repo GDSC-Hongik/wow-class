@@ -165,7 +165,11 @@ const textCellStyle = cva({
   variants: {
     type: {
       mentor: {
-        paddingX: "15px",
+        "@media (min-width: 1440px)": {
+          width: "103px",
+          display: "flex",
+          justifyContent: "center",
+        },
         "@media (max-width: 1199px)": {
           width: "fit-content",
           paddingInline: "7.25px",
