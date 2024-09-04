@@ -1,10 +1,12 @@
 import "./global.css";
 import "wowds-ui/styles.css";
 import "@wow-class/ui/styles.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import { JotaiProvider } from "components/JotaiProvider";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: {
@@ -48,6 +50,12 @@ const RootLayout = ({
     <html lang="ko">
       <body>
         <JotaiProvider>
+          <ToastContainer
+            hideProgressBar
+            autoClose={4000}
+            closeButton={false}
+            limit={1}
+          />
           {children}
           {modal}
         </JotaiProvider>
