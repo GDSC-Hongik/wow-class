@@ -23,7 +23,7 @@ const StudyCourseSelect = () => {
             }}
           >
             {studyCurriculumList.map(({ text, value }) => (
-              <DropDownOption text={text} value={value!!} />
+              <DropDownOption text={text} value={value} />
             ))}
           </DropDown>
         )}
