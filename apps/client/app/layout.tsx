@@ -1,8 +1,10 @@
 import "./global.css";
 import "wowds-ui/styles.css";
 import "@wow-class/ui/styles.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import type { Metadata } from "next";
+import { ToastContainer } from "react-toastify";
 
 import { JotaiProvider } from "../components/JotaiProvider";
 
@@ -53,6 +55,12 @@ const RootLayout = ({
   return (
     <html lang="ko">
       <body>
+        <ToastContainer
+          hideProgressBar
+          autoClose={4000}
+          closeButton={false}
+          limit={1}
+        />
         <JotaiProvider>{children}</JotaiProvider>
       </body>
     </html>
