@@ -2,6 +2,7 @@
 
 import { Space } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
+import { studyDetailApi } from "apis/studyDetailApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import Link from "next/link";
@@ -19,7 +20,7 @@ interface AssignmentBoxButtonsProps {
 }
 
 export const AssignmentBoxButtons = ({
-  buttonsDisabled: _buttonDisabled,
+  buttonsDisabled: buttonDisabledProp,
   assignment,
 }: AssignmentBoxButtonsProps) => {
   const [period, setPeriod] = useState("");
@@ -48,7 +49,7 @@ export const AssignmentBoxButtons = ({
     fetchAssignmentStartDate();
   }, [targetWeek]);
 
-  const buttonsDisabled = _buttonDisabled || !getIsAfterStartDate(period);
+  const buttonsDisabled = buttonDisabledProp || !getIsAfterStartDate(period);
 
   return (
     <>
@@ -68,6 +69,28 @@ const PrimaryButton = ({
   assignment,
   buttonsDisabled,
 }: AssignmentBoxButtonsProps) => {
+  const [repositoryLink, setRepositoryLink] = useState("");
+
+  useEffect(() => {
+    const fetchStudyDashBoard = async () => {
+      const ongoingStudyInfo = await myStudyApi.getMyOngoingStudyInfo();
+      if (!ongoingStudyInfo) {
+        return;
+      }
+      const studyDashboard = await studyDetailApi.getStudyDetailDashboard(
+        ongoingStudyInfo.studyId
+      );
+
+      if (!studyDashboard) {
+        return;
+      } else {
+        setRepositoryLink(studyDashboard.repositoryLink);
+      }
+    };
+
+    fetchStudyDashBoard();
+  }, []);
+
   const { assignmentSubmissionStatus, submissionFailureType, submissionLink } =
     assignment;
   const { primaryButtonText } =
@@ -82,17 +105,20 @@ const PrimaryButton = ({
     return;
   }
   const stroke = buttonsDisabled ? "mono100" : "primary";
+  const link =
+    assignmentSubmissionStatus === null ? repositoryLink : submissionLink;
   return (
-    <Link href={submissionLink ?? ""} target="_blank">
-      <Button
-        disabled={buttonsDisabled}
-        icon={<LinkIcon height={20} stroke={stroke} width={20} />}
-        style={buttonStyle}
-        variant="outline"
-      >
-        {primaryButtonText}
-      </Button>
-    </Link>
+    <Button
+      asProp={Link}
+      disabled={buttonsDisabled}
+      href={link ?? ""}
+      icon={<LinkIcon height={20} stroke={stroke} width={20} />}
+      style={buttonStyle}
+      target="_blank"
+      variant="outline"
+    >
+      {primaryButtonText}
+    </Button>
   );
 };
 
@@ -141,6 +167,7 @@ const SecondaryButton = ({
 
 const buttonStyle = {
   maxWidth: "100%",
+  height: "48px !important",
 };
 
 const buttonProps: Record<
