@@ -1,6 +1,6 @@
 import { parseISODate } from "@wow-class/utils";
 
-export const getIsToday = (deadline: string) => {
+const getIsToday = (deadline: string) => {
   const today = new Date();
   const deadlineDay = parseISODate(deadline);
 
