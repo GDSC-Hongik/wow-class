@@ -9,14 +9,14 @@ export const navMenu = [
     imageUrl: homeImageUrl,
     alt: "home-icon",
     name: "나의 스터디",
-    items: [
-      {
-        href: "my-assignment",
-        imageUrl: folderImageUrl,
-        alt: "folder-icon",
-        name: "나의 과제",
-      },
-    ],
+    // items: [
+    //   {
+    //     href: "my-assignment",
+    //     imageUrl: folderImageUrl,
+    //     alt: "folder-icon",
+    //     name: "나의 과제",
+    //   },
+    // ],
   },
   {
     href: "/study-apply",
