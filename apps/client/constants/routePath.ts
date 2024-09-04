@@ -15,7 +15,10 @@ export const routePath = {
   ["my-assignment"]: "/my-study/my-assignment",
   ["my-page"]: "/my-page",
   ["my-page-logout"]: "/my-page/logout",
-  onboarding: "https://onboarding.gdschongik.com",
+  onboarding:
+    process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+      ? "https://onboarding.gdschongik.com"
+      : "https://dev-onboarding.gdschongik.com",
   github: "https://github.com",
   admin:
     process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
