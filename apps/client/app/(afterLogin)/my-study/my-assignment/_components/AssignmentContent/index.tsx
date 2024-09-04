@@ -33,7 +33,6 @@ export const AssignmentContent = async () => {
     );
   }
 
-  console.log(studyDashboard);
   return (
     <section>
       <Flex className={boxContainerStyle} gap="lg">
@@ -45,6 +44,7 @@ export const AssignmentContent = async () => {
         <AssignmentOverviewBox
           assignments={studyDashboard.submittableAssignments}
           buttonsDisabled={!studyDashboard.repositoryLink}
+          repositoryLink={studyDashboard.repositoryLink}
         />
       </Flex>
     </section>
