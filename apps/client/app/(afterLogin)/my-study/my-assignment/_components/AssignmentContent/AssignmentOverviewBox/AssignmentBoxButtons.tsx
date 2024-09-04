@@ -95,8 +95,8 @@ const PrimaryButton = ({
     assignment;
   const { primaryButtonText } =
     assignmentSubmissionStatus === null
-      ? buttonProps.null
-      : buttonProps[assignmentSubmissionStatus];
+      ? buttonTextMap.INITIAL
+      : buttonTextMap[assignmentSubmissionStatus];
 
   if (
     assignmentSubmissionStatus === "FAILURE" &&
@@ -130,8 +130,8 @@ const SecondaryButton = ({
     assignment;
   const { secondaryButtonText } =
     assignmentSubmissionStatus === null
-      ? buttonProps.null
-      : buttonProps[assignmentSubmissionStatus];
+      ? buttonTextMap.INITIAL
+      : buttonTextMap[assignmentSubmissionStatus];
   const handleClickSubmissionComplete = async () => {
     const response = await studyHistoryApi.submitAssignment(studyDetailId);
     if (response.success) {
@@ -170,13 +170,13 @@ const buttonStyle = {
   height: "48px !important",
 };
 
-const buttonProps: Record<
-  Exclude<AssignmentSubmissionStatusType, null>,
+const buttonTextMap: Record<
+  NonNullable<AssignmentSubmissionStatusType>,
   { primaryButtonText: string; secondaryButtonText: string }
 > & {
-  null: { primaryButtonText: string; secondaryButtonText: string };
+  INITIAL: { primaryButtonText: string; secondaryButtonText: string };
 } = {
-  null: {
+  INITIAL: {
     primaryButtonText: "제출하러 가기",
     secondaryButtonText: "제출 완료하기",
   },

@@ -12,9 +12,9 @@ interface AssignmentBoxTitleProps {
 export const AssignmentBoxTitle = ({ assignment }: AssignmentBoxTitleProps) => {
   const { week, title, assignmentSubmissionStatus } = assignment;
   const { color, message } =
-    assignmentSubmissionStatus !== null
-      ? assignmentSubmissionMap[assignmentSubmissionStatus]
-      : assignmentSubmissionMap.null;
+    assignmentSubmissionStatus === null
+      ? assignmentSubmissionMap.INITIAL
+      : assignmentSubmissionMap[assignmentSubmissionStatus];
 
   return (
     <>
@@ -42,10 +42,10 @@ const textStyle = {
   overflow: "hidden",
 };
 const assignmentSubmissionMap: Record<
-  Exclude<AssignmentSubmissionStatusType, null>, // null을 제외한 타입만 처리
+  NonNullable<AssignmentSubmissionStatusType>,
   { message: string; color: ComponentProps<typeof Tag>["color"] }
 > & {
-  null: { message: string; color: ComponentProps<typeof Tag>["color"] }; // null에 대한 별도 처리
+  INITIAL: { message: string; color: ComponentProps<typeof Tag>["color"] };
 } = {
   FAILURE: {
     message: "제출 실패",
@@ -55,7 +55,7 @@ const assignmentSubmissionMap: Record<
     message: "제출 완료",
     color: "blue",
   },
-  null: {
+  INITIAL: {
     message: "",
     color: "grey",
   },
