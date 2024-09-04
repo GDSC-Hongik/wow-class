@@ -27,7 +27,7 @@ export const RepositorySubmissionBox = ({
   const [repositoryUrl, setRepositoryUrl] = useState(initialRepositoryUrl);
   const [repositorySubmissionStatus, setRepositorySubmissionStatus] =
     useState<RepositorySubmissionStatusType>(
-      initialRepositoryUrl ? "SUBMITTED" : "EDITING_WITH_WARNING"
+      initialRepositoryUrl ? "SUBMITTED" : "EDITING"
     );
   const [errorState, setErrorState] = useState<{
     isError: boolean;
@@ -52,7 +52,7 @@ export const RepositorySubmissionBox = ({
       isError: false,
       errorMessage: "",
     });
-    setRepositorySubmissionStatus("EDITING_WITH_WARNING");
+    setRepositorySubmissionStatus("EDITING");
   }, []);
 
   const handleChange = useCallback(
@@ -114,7 +114,7 @@ export const RepositorySubmissionBox = ({
               <Text as="h2" typo="h2">
                 과제 제출을 위한 레포지토리 URL 입력하기
               </Text>
-              {repositorySubmissionStatus !== "EDITING_WITH_WARNING" && (
+              {repositorySubmissionStatus === "SUBMITTED" && (
                 <Tag color="blue" variant="solid2">
                   제출 완료
                 </Tag>
@@ -149,7 +149,7 @@ export const RepositorySubmissionBox = ({
                   </Flex>
                 </>
               )}
-              {repositorySubmissionStatus === "EDITING_WITH_WARNING" && (
+              {repositorySubmissionStatus === "EDITING" && (
                 <>
                   <Text color="error" typo="body1">
                     * 입력하지 않으면 앞으로의 과제를 제출할 수 없어요.
@@ -158,26 +158,6 @@ export const RepositorySubmissionBox = ({
                     * 레포지토리가 Private 상태면 입력할 수 없어요.
                   </Text>
                   <Space height={26} />
-                  <TextField
-                    error={errorState.isError}
-                    {...(errorState.isError && {
-                      helperText: <li>{errorState.errorMessage}</li>,
-                    })}
-                    label=""
-                    placeholder="URL 을 입력하세요"
-                    style={textFieldStyle}
-                    value={repositoryUrl}
-                    onChange={handleChange}
-                  />
-                  <Space height={46} />
-                  <Button style={buttonStyle} onClick={handleClickSubmitButton}>
-                    입력하기
-                  </Button>
-                </>
-              )}
-              {repositorySubmissionStatus === "EDITING" && (
-                <>
-                  <Space height={56} />
                   <TextField
                     error={errorState.isError}
                     {...(errorState.isError && {

@@ -23,7 +23,7 @@ export const AssignmentBoxButtons = ({
   buttonsDisabled: buttonDisabledProp,
   assignment,
 }: AssignmentBoxButtonsProps) => {
-  const [period, setPeriod] = useState("");
+  const [startDate, setStartDate] = useState("");
 
   const targetWeek = assignment.week;
 
@@ -41,7 +41,7 @@ export const AssignmentBoxButtons = ({
         );
 
         if (matchingWeek) {
-          setPeriod(matchingWeek.period.startDate);
+          setStartDate(matchingWeek.period.startDate);
         }
       }
     };
@@ -49,7 +49,7 @@ export const AssignmentBoxButtons = ({
     fetchAssignmentStartDate();
   }, [targetWeek]);
 
-  const buttonsDisabled = buttonDisabledProp || !getIsAfterStartDate(period);
+  const buttonsDisabled = buttonDisabledProp || !getIsAfterStartDate(startDate);
 
   return (
     <>
