@@ -48,11 +48,16 @@ const AttendanceCheckModal = () => {
   };
 
   const handleClickAttendanceCheckButton = async () => {
-    if (!isAttendanceNumberValid(attendanceNumber)) {
+    const trimmedAttendanceNumber = attendanceNumber.trim();
+
+    if (!isAttendanceNumberValid(trimmedAttendanceNumber)) {
       return setError(true);
     }
 
-    const success = await checkAttendance(studyDetailId, attendanceNumber);
+    const success = await checkAttendance(
+      studyDetailId,
+      trimmedAttendanceNumber
+    );
 
     if (!success) {
       return setError(true);
@@ -173,6 +178,7 @@ const attendanceCheckDescriptionStyle = css({
 const textfieldStyle = {
   height: "89px",
   marginBottom: "20px",
+  whiteSpace: "nowrap",
 };
 
 const attendanceCompleteTitleStyle = css({
