@@ -11,7 +11,7 @@ export const navMenu = [
     name: "나의 스터디",
     items: [
       {
-        href: "/my-assignment",
+        href: "my-assignment",
         imageUrl: folderImageUrl,
         alt: "folder-icon",
         name: "나의 과제",
