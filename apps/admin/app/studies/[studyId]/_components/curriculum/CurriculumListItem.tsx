@@ -1,4 +1,4 @@
-import { css } from "@styled-system/css";
+import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
@@ -13,7 +13,14 @@ const CurriculumListItem = ({
 }: {
   curriculum: CurriculumApiResponseDto;
 }) => {
-  const { description = "", period, week, title, difficulty } = curriculum;
+  const {
+    description = "",
+    period,
+    week,
+    title,
+    difficulty,
+    curriculumStatus,
+  } = curriculum;
   const { startDate, endDate } = period;
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
@@ -23,23 +30,36 @@ const CurriculumListItem = ({
 
   return (
     <Table>
-      <Table.Left style={TableLeftStyle}>
-        <Flex alignItems="center" gap="xxs" minWidth="50px">
-          {thisWeekAssignment && <div className={ThisWeekBarStyle} />}
-          <Text typo="body1">{week}주차</Text>
-        </Flex>
-        <Flex direction="column" gap="xxs">
-          <Flex alignItems="center" gap="xs">
-            <Text typo="h3">{title || "-"}</Text>
-            {difficulty && (
-              <Tag color={DifficultyMap[difficulty].color} variant="outline">
-                {DifficultyMap[difficulty].text}
-              </Tag>
-            )}
+      <Table.Left>
+        <Flex alignItems="center" gap="28px">
+          <Flex alignItems="center" gap="xxs">
+            <div
+              className={ThisWeekBarStyle({
+                type: thisWeekAssignment ? "thisWeek" : "notThisWeek",
+              })}
+            />
+            <Flex direction="column" minWidth={52}>
+              <Text typo="body1">{week}주차</Text>
+              {curriculumStatus === "CANCELLED" && (
+                <Text color="sub" typo="body2">
+                  휴강 주차
+                </Text>
+              )}
+            </Flex>
           </Flex>
-          <Text color="sub" style={CurriculumDescriptionStyle} typo="body2">
-            {description || "스터디 상세 설명을 작성해주세요."}
-          </Text>
+          <Flex direction="column" gap="xxs">
+            <Flex alignItems="center" gap="xs">
+              <Text typo="h3">{title || "-"}</Text>
+              {difficulty && (
+                <Tag color={DifficultyMap[difficulty].color} variant="outline">
+                  {DifficultyMap[difficulty].text}
+                </Tag>
+              )}
+            </Flex>
+            <Text color="sub" style={CurriculumDescriptionStyle} typo="body2">
+              {description || "스터디 상세 설명을 작성해주세요."}
+            </Text>
+          </Flex>
         </Flex>
       </Table.Left>
       <Table.Right>
@@ -51,16 +71,21 @@ const CurriculumListItem = ({
 
 export default CurriculumListItem;
 
-const TableLeftStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: "47px",
-};
-
-const ThisWeekBarStyle = css({
-  width: "4px",
-  height: "18px",
-  backgroundColor: "primary",
+const ThisWeekBarStyle = cva({
+  base: {
+    width: "4px",
+    height: "18px",
+  },
+  variants: {
+    type: {
+      thisWeek: {
+        backgroundColor: "primary",
+      },
+      notThisWeek: {
+        backgroundColor: "transparent",
+      },
+    },
+  },
 });
 
 const DifficultyMap: Record<

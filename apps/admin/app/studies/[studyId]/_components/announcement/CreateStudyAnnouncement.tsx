@@ -5,7 +5,8 @@ import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
-import { useState } from "react";
+import useResizeTextarea from "hooks/useResizeTextarea";
+import { useRef, useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
@@ -16,6 +17,10 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
       title: "",
       link: "",
     });
+
+  const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const linkTextareaRef = useRef<HTMLTextAreaElement>(null);
+  useResizeTextarea([titleTextareaRef, linkTextareaRef], studyAnnouncement);
 
   const handlePublishAnnouncement = async (studyId: string) => {
     const { success } = await studyApi.publishStudyAnnouncement(
@@ -41,6 +46,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
             <styled.label className={labelStyle}>공지 제목</styled.label>
             <styled.textarea
               placeholder="입력해주세요"
+              ref={titleTextareaRef}
               rows={1}
               value={studyAnnouncement.title}
               className={textareaStyle({
@@ -58,6 +64,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
             <styled.label className={labelStyle}>공지 링크</styled.label>
             <styled.textarea
               placeholder="http://example.com"
+              ref={linkTextareaRef}
               rows={1}
               value={studyAnnouncement.link}
               className={textareaStyle({
@@ -117,10 +124,9 @@ const textareaStyle = cva({
     paddingX: "sm",
     paddingY: "xs",
     textStyle: "body1",
-    height: "2.625rem",
-    maxHeight: "7.5rem",
-    overflowY: "hidden",
+    maxHeight: "6rem",
     resize: "none",
+    overflowY: "auto",
     backgroundColor: "backgroundNormal",
     _placeholder: {
       color: "outline",
@@ -128,19 +134,6 @@ const textareaStyle = cva({
     _focus: {
       outline: "none",
       borderColor: "primary",
-    },
-    _scrollbar: {
-      width: "2px",
-    },
-    _scrollbarThumb: {
-      width: "2px",
-      height: "65px",
-      borderRadius: "sm",
-      backgroundColor: "outline",
-    },
-    _scrollbarTrack: {
-      marginTop: "2px",
-      marginBottom: "2px",
     },
   },
   variants: {

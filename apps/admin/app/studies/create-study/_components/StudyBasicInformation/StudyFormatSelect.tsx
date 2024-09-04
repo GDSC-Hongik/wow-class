@@ -15,6 +15,7 @@ const StudyFormatSelect = () => {
           {...field}
           label="스터디 형식"
           placeholder="선택하세요"
+          style={{ width: "358px" }}
           onChange={({ selectedValue }) => {
             field.onChange(selectedValue);
           }}

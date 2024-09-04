@@ -10,7 +10,7 @@ const StudyInfoStatus = ({ index }: { index: number }) => {
   useEffect(() => {
     setValue(
       `studyCurriculums.${index}.status`,
-      checked ? "CANCELLED" : "NONE"
+      checked ? "CANCELLED" : "OPEN"
     );
   }, [checked]);
 
@@ -21,7 +21,7 @@ const StudyInfoStatus = ({ index }: { index: number }) => {
       </Text>
       <Controller
         control={control}
-        defaultValue="NONE"
+        defaultValue="OPEN"
         name={`studyCurriculums.${index}.status`}
         render={() => (
           <Checkbox
