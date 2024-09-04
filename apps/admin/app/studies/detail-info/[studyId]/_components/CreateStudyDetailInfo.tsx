@@ -2,13 +2,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import { routerPath } from "constants/router/routerPath";
-import { useRouter } from "next/navigation";
 import type { CSSProperties, MouseEvent } from "react";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
-import createQueryString from "utils/createQueryString";
 import { studyDetailInfoSchema } from "utils/validate/studyDetailInfo";
 import Button from "wowds-ui/Button";
 
@@ -17,10 +14,11 @@ import Header from "@/studies/[studyId]/_components/header/Header";
 import usePrefillStudyDetailInfo from "../_hooks/usePrefillStudyDetailInfo";
 import StudyCurriculum from "./StudyCurriculum";
 import StudyDescription from "./StudyDescription";
+import StudyDetailInfoCheckModal from "./StudyDetailInfoCheckModal";
 
 const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
-  const router = useRouter();
+  const [open, setOpen] = useState(false);
   const prefillStudyInfo = usePrefillStudyDetailInfo(parseInt(studyId, 10));
   const methods = useForm<CreateStudyDetailInfoApiRequestDto>({
     resolver: zodResolver(studyDetailInfoSchema),
@@ -32,15 +30,17 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
 
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const formData = methods.getValues();
-    const route = createQueryString(
-      `${studyId}${routerPath["detail-info-check"].href}?studyId=${studyId}`,
-      formData
-    );
-    router.push(route);
+    setOpen(true);
   };
+
   return (
     <FormProvider {...methods}>
+      {open && (
+        <StudyDetailInfoCheckModal
+          formData={methods.getValues()}
+          studyId={studyId}
+        />
+      )}
       <Flex
         direction="column"
         height="100%"
