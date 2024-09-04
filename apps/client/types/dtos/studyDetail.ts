@@ -1,7 +1,7 @@
 import type {
-  AssignmentStatus,
+  AssignmentStatusType,
+  AssignmentSubmissionFailureType,
   AssignmentSubmissionStatusType,
-  SubmissionFailureType,
 } from "types/entities/common/assignment";
 
 export interface StudyDetailDashboardDto {
@@ -10,16 +10,17 @@ export interface StudyDetailDashboardDto {
   submittableAssignments: Assignment[];
 }
 
+export type UpcomingStudyDto = Assignment[];
 export interface Assignment {
   studyDetailId: number;
-  assignmentStatus: AssignmentStatus;
+  assignmentStatus: AssignmentStatusType;
   week: number;
   title: string;
   assignmentSubmissionStatus: AssignmentSubmissionStatusType;
   descriptionLink: string;
   deadline: string;
   submissionLink: string;
-  submissionFailureType: SubmissionFailureType;
+  submissionFailureType: AssignmentSubmissionFailureType;
 
   committedAt?: string;
 }

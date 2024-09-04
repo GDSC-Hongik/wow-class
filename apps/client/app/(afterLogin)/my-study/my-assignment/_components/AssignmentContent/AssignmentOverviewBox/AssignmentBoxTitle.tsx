@@ -12,7 +12,9 @@ interface AssignmentBoxTitleProps {
 export const AssignmentBoxTitle = ({ assignment }: AssignmentBoxTitleProps) => {
   const { week, title, assignmentSubmissionStatus } = assignment;
   const { color, message } =
-    assignmentSubmissionMap[assignmentSubmissionStatus];
+    assignmentSubmissionStatus === null
+      ? assignmentSubmissionMap.INITIAL
+      : assignmentSubmissionMap[assignmentSubmissionStatus];
 
   return (
     <>
@@ -21,10 +23,10 @@ export const AssignmentBoxTitle = ({ assignment }: AssignmentBoxTitleProps) => {
       </Text>
       <Space height={16} />
       <Flex gap="xs">
-        <Text as="h2" typo="h2">
+        <Text as="h2" style={textStyle} typo="h2">
           {title}
         </Text>
-        {assignmentSubmissionStatus !== "PENDING" && (
+        {assignmentSubmissionStatus !== null && (
           <Tag color={color ?? "blue"} variant="solid2">
             {message}
           </Tag>
@@ -34,10 +36,17 @@ export const AssignmentBoxTitle = ({ assignment }: AssignmentBoxTitleProps) => {
   );
 };
 
+const textStyle = {
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+};
 const assignmentSubmissionMap: Record<
-  AssignmentSubmissionStatusType,
+  NonNullable<AssignmentSubmissionStatusType>,
   { message: string; color: ComponentProps<typeof Tag>["color"] }
-> = {
+> & {
+  INITIAL: { message: string; color: ComponentProps<typeof Tag>["color"] };
+} = {
   FAILURE: {
     message: "제출 실패",
     color: "red",
@@ -46,7 +55,7 @@ const assignmentSubmissionMap: Record<
     message: "제출 완료",
     color: "blue",
   },
-  PENDING: {
+  INITIAL: {
     message: "",
     color: "grey",
   },

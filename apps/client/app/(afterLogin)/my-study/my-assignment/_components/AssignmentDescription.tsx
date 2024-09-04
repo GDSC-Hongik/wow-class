@@ -1,23 +1,29 @@
 import { css } from "@styled-system/css";
+import { myStudyApi } from "apis/myStudyApi";
 import { studyDetailApi } from "apis/studyDetailApi";
 import Tooltip from "components/Tooltip";
-import { studyDashBoardData } from "constants/assignmentMockData";
 import Link from "next/link";
 
 export const AssignmentDescription = async () => {
-  //const studyDashboard = await studyDetailApi.getStudyDetailDashboard(1);
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
-  const studyDashboard = studyDashBoardData;
+  if (!myOngoingStudyInfoData?.studyId) {
+    return;
+  }
+  const studyDashboard = await studyDetailApi.getStudyDetailDashboard(
+    myOngoingStudyInfoData.studyId
+  );
+
   return (
     <p>
       제출 완료하기 버튼을 누르면 등록한{" "}
-      {studyDashboard.isLinkEditable ? (
-        <span className={githubTextStyle}>GitHub 레포지토리</span>
+      {!studyDashboard?.repositoryLink ? (
+        <span className={nonCursorStyle}>GitHub 레포지토리</span>
       ) : (
         <Tooltip
           content={
-            <Link href="https://github.com/123456789012345678" target="_blank">
-              https://github.com/123456789012345678
+            <Link href={studyDashboard?.repositoryLink} target="_blank">
+              {studyDashboard?.repositoryLink}
             </Link>
           }
         >
@@ -31,6 +37,11 @@ export const AssignmentDescription = async () => {
   );
 };
 
+const nonCursorStyle = css({
+  color: "blueHover",
+  cursor: "auto",
+  textDecoration: "none",
+});
 const githubTextStyle = css({
   color: "blueHover",
   cursor: "pointer",

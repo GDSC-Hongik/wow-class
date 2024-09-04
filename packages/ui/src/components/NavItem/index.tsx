@@ -46,8 +46,11 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
     }
   };
 
+  const currentPath = `/${segment.join("/")}`;
+
   const navItemType =
-    (!segment[1] && `${segment[0]}` === href) || `/${segment[0]}` === href
+    currentPath === href &&
+    ((!segment[1] && `${segment[0]}` === href) || `/${segment[0]}` === href)
       ? "active"
       : "inactive";
 

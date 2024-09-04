@@ -50,4 +50,5 @@ const tooltipStyle = css({
   boxShadow: "mono",
   backdropFilter: "blur(15px)",
   color: "textWhite",
+  whiteSpace: "nowrap",
 });

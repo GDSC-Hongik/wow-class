@@ -13,8 +13,6 @@ export const routePath = {
   ["study-application-modal"]: "/study-apply/study-application",
   ["study-cancellation-modal"]: "/study-apply/study-cancellation",
   ["my-assignment"]: "/my-study/my-assignment",
-  ["my-assignment-repository-url-confirmation"]:
-    "/my-study/my-assignment/repository-url/confirmation",
   ["my-page"]: "/my-page",
   ["my-page-logout"]: "/my-page/logout",
   onboarding: "https://onboarding.gdschongik.com",

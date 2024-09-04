@@ -1,29 +1,67 @@
 "use client";
 
 import { Space } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
+import { studyDetailApi } from "apis/studyDetailApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import type { Assignment } from "types/dtos/studyDetail";
 import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
-import { isDeadlinePassed } from "utils";
+import { getIsAfterStartDate } from "utils/getIsAfterStartDate";
+import { isDeadlinePassed } from "utils/isDeadlinePassed";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
-
 interface AssignmentBoxButtonsProps {
   assignment: Assignment;
   buttonsDisabled?: boolean;
 }
 
 export const AssignmentBoxButtons = ({
-  ...rest
+  buttonsDisabled: buttonDisabledProp,
+  assignment,
 }: AssignmentBoxButtonsProps) => {
+  const [startDate, setStartDate] = useState("");
+
+  const targetWeek = assignment.week;
+
+  useEffect(() => {
+    const fetchAssignmentStartDate = async () => {
+      const ongoingStudyInfo = await myStudyApi.getMyOngoingStudyInfo();
+
+      if (ongoingStudyInfo?.studyId) {
+        const curriculumData = await myStudyApi.getStudyCurriculumList(
+          ongoingStudyInfo.studyId
+        );
+
+        const matchingWeek = curriculumData?.find(
+          (item) => item.week === targetWeek
+        );
+
+        if (matchingWeek) {
+          setStartDate(matchingWeek.period.startDate);
+        }
+      }
+    };
+
+    fetchAssignmentStartDate();
+  }, [targetWeek]);
+
+  const buttonsDisabled = buttonDisabledProp || !getIsAfterStartDate(startDate);
+
   return (
     <>
-      <PrimaryButton {...rest} />
+      <PrimaryButton
+        assignment={assignment}
+        buttonsDisabled={buttonsDisabled}
+      />
       <Space height={8} />
-      <SecondaryButton {...rest} />
+      <SecondaryButton
+        assignment={assignment}
+        buttonsDisabled={buttonsDisabled}
+      />
     </>
   );
 };
@@ -31,9 +69,34 @@ const PrimaryButton = ({
   assignment,
   buttonsDisabled,
 }: AssignmentBoxButtonsProps) => {
+  const [repositoryLink, setRepositoryLink] = useState("");
+
+  useEffect(() => {
+    const fetchStudyDashBoard = async () => {
+      const ongoingStudyInfo = await myStudyApi.getMyOngoingStudyInfo();
+      if (!ongoingStudyInfo) {
+        return;
+      }
+      const studyDashboard = await studyDetailApi.getStudyDetailDashboard(
+        ongoingStudyInfo.studyId
+      );
+
+      if (!studyDashboard) {
+        return;
+      } else {
+        setRepositoryLink(studyDashboard.repositoryLink);
+      }
+    };
+
+    fetchStudyDashBoard();
+  }, []);
+
   const { assignmentSubmissionStatus, submissionFailureType, submissionLink } =
     assignment;
-  const { primaryButtonText } = buttonProps[assignmentSubmissionStatus];
+  const { primaryButtonText } =
+    assignmentSubmissionStatus === null
+      ? buttonTextMap.INITIAL
+      : buttonTextMap[assignmentSubmissionStatus];
 
   if (
     assignmentSubmissionStatus === "FAILURE" &&
@@ -42,17 +105,21 @@ const PrimaryButton = ({
     return;
   }
   const stroke = buttonsDisabled ? "mono100" : "primary";
+  const link =
+    assignmentSubmissionStatus === null ? repositoryLink : submissionLink;
+
   return (
-    <Link href={submissionLink} target="_blank">
-      <Button
-        disabled={buttonsDisabled}
-        icon={<LinkIcon height={20} stroke={stroke} width={20} />}
-        style={buttonStyle}
-        variant="outline"
-      >
-        {primaryButtonText}
-      </Button>
-    </Link>
+    <Button
+      asProp={Link}
+      disabled={buttonsDisabled}
+      href={link ?? ""}
+      icon={<LinkIcon height={20} stroke={stroke} width={20} />}
+      style={buttonStyle}
+      target="_blank"
+      variant="outline"
+    >
+      {primaryButtonText}
+    </Button>
   );
 };
 
@@ -62,13 +129,21 @@ const SecondaryButton = ({
 }: AssignmentBoxButtonsProps) => {
   const { assignmentSubmissionStatus, studyDetailId, deadline, committedAt } =
     assignment;
-  const { secondaryButtonText } = buttonProps[assignmentSubmissionStatus];
+  const { secondaryButtonText } =
+    assignmentSubmissionStatus === null
+      ? buttonTextMap.INITIAL
+      : buttonTextMap[assignmentSubmissionStatus];
   const handleClickSubmissionComplete = async () => {
     const response = await studyHistoryApi.submitAssignment(studyDetailId);
     if (response.success) {
       //TODO: 과제 제출 이후에는 과제 상태에 대한 업데이트 필요
       //이번주 과제 조회 api, 대시보드 api revaliate
-      revalidateTagByName(tags.studyDetailDashboard);
+      revalidateTagByName(
+        assignmentSubmissionStatus === null
+          ? tags.studyDetailDashboard
+          : tags.upcomingStudy
+      );
+      revalidateTagByName(tags.studyHistory);
     }
   };
 
@@ -98,13 +173,16 @@ const SecondaryButton = ({
 
 const buttonStyle = {
   maxWidth: "100%",
+  height: "48px !important",
 };
 
-const buttonProps: Record<
-  AssignmentSubmissionStatusType,
+const buttonTextMap: Record<
+  NonNullable<AssignmentSubmissionStatusType>,
   { primaryButtonText: string; secondaryButtonText: string }
-> = {
-  PENDING: {
+> & {
+  INITIAL: { primaryButtonText: string; secondaryButtonText: string };
+} = {
+  INITIAL: {
     primaryButtonText: "제출하러 가기",
     secondaryButtonText: "제출 완료하기",
   },

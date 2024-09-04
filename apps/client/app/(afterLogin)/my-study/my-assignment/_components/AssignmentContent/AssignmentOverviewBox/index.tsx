@@ -27,9 +27,13 @@ export const AssignmentOverviewBox = ({
           text={
             <>
               <AssignmentBoxTitle assignment={assignment} />
-              <Link href={assignment.descriptionLink} target="_blank">
-                <TextButton style={textButtonstyle} text="과제 명세 확인" />
-              </Link>
+              <TextButton
+                asProp={Link}
+                href={assignment.descriptionLink}
+                style={textButtonstyle}
+                target="_blank"
+                text="과제 명세 확인"
+              />
               <AssignmentBoxInfo assignment={assignment} />
               <Space height={26} />
               <AssignmentBoxButtons
@@ -47,6 +51,8 @@ export const AssignmentOverviewBox = ({
 const textButtonstyle = {
   paddingLeft: "0px",
   paddingRight: "0px",
+  display: "block",
+  width: "fit-content",
 };
 
 const boxStyle = {

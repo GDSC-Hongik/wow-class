@@ -1,11 +1,11 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import Popover from "components/Popover";
-import type { SubmissionFailureType } from "types/entities/common/assignment";
+import type { AssignmentSubmissionFailureType } from "types/entities/common/assignment";
 import { Help as HelpIcon } from "wowds-icons";
 
 interface FailurePopoverProps {
-  submissionFailureType: SubmissionFailureType;
+  submissionFailureType: AssignmentSubmissionFailureType;
 }
 export const FailurePopover = ({
   submissionFailureType,

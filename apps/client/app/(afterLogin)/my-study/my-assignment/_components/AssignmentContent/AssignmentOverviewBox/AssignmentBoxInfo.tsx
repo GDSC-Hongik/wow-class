@@ -9,9 +9,15 @@ interface AssignmentBoxInfoProps {
   assignment: Assignment;
 }
 
-export const AssignmentBoxInfo = ({ assignment }: AssignmentBoxInfoProps) => {
-  const { deadline, title, assignmentSubmissionStatus, submissionFailureType } =
-    assignment;
+export const AssignmentBoxInfo = async ({
+  assignment,
+}: AssignmentBoxInfoProps) => {
+  const {
+    deadline,
+    assignmentSubmissionStatus,
+    submissionFailureType,
+    submissionLink,
+  } = assignment;
 
   const { year, month, day, hours, minutes } = parseISODate(deadline);
 
@@ -31,7 +37,7 @@ export const AssignmentBoxInfo = ({ assignment }: AssignmentBoxInfoProps) => {
           <Text as="div" color="sub">
             제출한 과제
             <Text as="span" color="textBlack">
-              {title}
+              과제 이름
             </Text>
           </Text>
           <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
