@@ -198,6 +198,7 @@ const rightColStyle = css({
 const assignmentButtonStyle = {
   minWidth: "131px",
   margin: "21px 25px",
+  whiteSpace: "nowrap",
 };
 
 const weekContainerStyle = css({
