@@ -3,6 +3,7 @@ import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import { attendanceStatusMap } from "constants/status/attendanceStatusMap";
 import type { AttendanceApiResponseDto } from "types/dtos/attendance";
+import getIsToday from "utils/getIsToday";
 import Box from "wowds-ui/Box";
 import Tag from "wowds-ui/Tag";
 
@@ -14,14 +15,9 @@ const AttendanceItem = ({
   const { week, deadLine, attendanceNumber } = attendance;
   const { year, month, day, hours, minutes } = parseISODate(deadLine);
 
-  const getIsCurrentWeek = () => {
-    const diffInTime = new Date(deadLine).getTime() - new Date().getTime();
-    const diffInDays = Math.floor(diffInTime / (1000 * 60 * 60 * 24));
-
-    return diffInDays < 7 ? "ONGOING_ATTENDANCE" : "BEFORE_ATTENDANCE";
-  };
-
-  const state = getIsCurrentWeek();
+  const state = getIsToday(deadLine)
+    ? "ONGOING_ATTENDANCE"
+    : "BEFORE_ATTENDANCE";
   const { label, color } = attendanceStatusMap[state];
 
   return (

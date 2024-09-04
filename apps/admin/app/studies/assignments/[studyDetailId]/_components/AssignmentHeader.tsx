@@ -1,9 +1,10 @@
 "use client";
 
 import { css } from "@styled-system/css";
-import { Flex } from "@styled-system/jsx";
+import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
+import ItemSeparator from "components/ItemSeparator";
 import { tags } from "constants/tags";
 import { useFormContext } from "react-hook-form";
 import type {
@@ -19,7 +20,7 @@ interface AssignmentHeaderProps {
 }
 
 const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
-  const { studyDetailId, week, assignmentStatus } = assignment;
+  const { studyDetailId, week, assignmentStatus, studyTitle } = assignment;
   const methods = useFormContext<
     AssignmentApiRequestDto & {
       onOpen: () => void;
@@ -54,8 +55,15 @@ const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
         <Text color="sub" typo="h3">
           과제 정보를 입력해주세요
         </Text>
-        <Text as="h1" typo="h1">
-          {week}주차 과제
+        <Text
+          as="h1"
+          style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}
+          typo="h1"
+        >
+          {studyTitle} <ItemSeparator height={6} width={6} />
+          <styled.span color="primary">
+            {week}주차 <styled.span color="textBlack">과제</styled.span>
+          </styled.span>
         </Text>
       </Flex>
       <Button
