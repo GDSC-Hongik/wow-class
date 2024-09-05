@@ -71,7 +71,7 @@ export const RepositorySubmissionBox = ({
     } else if (!isGithubRepositoryUrl(repositoryUrl)) {
       setErrorState({
         isError: true,
-        errorMessage: "GitHub repository URL을 제출해야 합니다.",
+        errorMessage: "GitHub 레포지토리 URL을 제출해야 합니다.",
       });
     } else {
       setErrorState({
