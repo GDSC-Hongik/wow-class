@@ -17,7 +17,8 @@ import participantImageUrl from "../public/images/particpant.svg";
  */
 
 const Navbar = async () => {
-  const studyList = (await isAdmin())
+  const adminStatus = await isAdmin();
+  const studyList = adminStatus
     ? await studyApi.getStudyList()
     : await studyApi.getMyStudyList();
 

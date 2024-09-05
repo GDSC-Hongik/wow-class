@@ -6,7 +6,8 @@ import EmptyStudyList from "./EmptyStudyList";
 import StudyListItem from "./StudyListItem";
 
 const StudyList = async () => {
-  const studyList = (await isAdmin())
+  const adminStatus = await isAdmin();
+  const studyList = adminStatus
     ? await studyApi.getStudyList()
     : await studyApi.getMyStudyList();
 
