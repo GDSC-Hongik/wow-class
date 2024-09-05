@@ -5,6 +5,7 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import Link from "next/link";
+import { toast } from "react-toastify";
 import type { Assignment } from "types/dtos/studyDetail";
 import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
 import { isDeadlinePassed } from "utils/isDeadlinePassed";
@@ -56,13 +57,13 @@ const PrimaryButton = ({
     return;
   }
   const stroke = buttonsDisabled ? "mono100" : "primary";
-  const link =
+  const primaryButtonHref =
     assignmentSubmissionStatus === "SUCCESS" ? submissionLink : repositoryLink;
   return (
     <Button
       asProp={Link}
       disabled={buttonsDisabled}
-      href={link ?? ""}
+      href={primaryButtonHref ?? ""}
       icon={<LinkIcon height={20} stroke={stroke} width={20} />}
       style={buttonStyle}
       target="_blank"
@@ -83,11 +84,13 @@ const SecondaryButton = ({
     assignmentSubmissionStatus === null
       ? buttonTextMap.INITIAL
       : buttonTextMap[assignmentSubmissionStatus];
+
   const handleClickSubmissionComplete = async () => {
     const response = await studyHistoryApi.submitAssignment(studyDetailId);
     if (response.success) {
       revalidateTagByName(tags.studyDetailDashboard);
       revalidateTagByName(tags.studyHistory);
+      toast.success("과제 제출이 완료되었어요.");
     }
   };
 

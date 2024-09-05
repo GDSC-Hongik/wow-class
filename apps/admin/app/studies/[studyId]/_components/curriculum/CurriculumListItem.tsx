@@ -13,25 +13,39 @@ const CurriculumListItem = ({
 }: {
   curriculum: CurriculumApiResponseDto;
 }) => {
-  const { description = "", period, week, title, difficulty } = curriculum;
+  const {
+    description = "",
+    period,
+    week,
+    title,
+    difficulty,
+    curriculumStatus,
+  } = curriculum;
   const { startDate, endDate } = period;
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
 
   const curriculumTimeLine = `${padWithZero(startMonth)}.${padWithZero(startDay)} - ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
-  const thisWeekAssignment = getIsCurrentWeek(startDate, week);
+  const thisWeekAssignment = getIsCurrentWeek(startDate);
 
   return (
     <Table>
       <Table.Left>
-        <Flex alignItems="center" gap="47px">
+        <Flex alignItems="center" gap="28px">
           <Flex alignItems="center" gap="xxs">
             <div
               className={ThisWeekBarStyle({
                 type: thisWeekAssignment ? "thisWeek" : "notThisWeek",
               })}
             />
-            <Text typo="body1">{week}주차</Text>
+            <Flex direction="column" minWidth={52}>
+              <Text typo="body1">{week}주차</Text>
+              {curriculumStatus === "CANCELLED" && (
+                <Text color="sub" typo="body2">
+                  휴강 주차
+                </Text>
+              )}
+            </Flex>
           </Flex>
           <Flex direction="column" gap="xxs">
             <Flex alignItems="center" gap="xs">

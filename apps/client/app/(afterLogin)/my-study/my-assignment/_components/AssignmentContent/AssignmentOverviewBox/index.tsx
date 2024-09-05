@@ -34,12 +34,12 @@ export const AssignmentOverviewBox = async ({
   return (
     <>
       {assignments.map((assignment) => {
-        const currentWeek = curriculumData?.find(
+        const currentCurriculum = curriculumData?.find(
           (item) => item.week === assignment.week
         );
 
         const isCurrentWeek = getIsAfterStartDate(
-          String(currentWeek?.period.startDate)
+          String(currentCurriculum?.period.startDate)
         );
 
         return (

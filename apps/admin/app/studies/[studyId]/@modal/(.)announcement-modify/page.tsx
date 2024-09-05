@@ -6,8 +6,9 @@ import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
+import useResizeTextarea from "hooks/useResizeTextarea";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { StudyAnnouncementType } from "types/entities/study";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
@@ -28,11 +29,16 @@ const AnnouncementModifyModal = ({
   );
   const [studyAnnouncement, setStudyAnnouncement] =
     useState<StudyAnnouncementType>({ title: "", link: "" });
+  const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const linkTextareaRef = useRef<HTMLTextAreaElement>(null);
+  useResizeTextarea([titleTextareaRef, linkTextareaRef], studyAnnouncement);
 
   useEffect(() => {
     setStudyAnnouncement(prefillData);
   }, [prefillData]);
+
   const { onClose } = useModalRoute();
+
   const handleClickModifyButton = async () => {
     const result = await studyApi.modifyStudyAnnouncement(
       studyAnnouncementId,
@@ -54,6 +60,7 @@ const AnnouncementModifyModal = ({
             <styled.label className={labelStyle}>공지 제목</styled.label>
             <styled.textarea
               placeholder="입력해주세요"
+              ref={titleTextareaRef}
               rows={1}
               value={studyAnnouncement.title}
               className={textareaStyle({
@@ -71,6 +78,7 @@ const AnnouncementModifyModal = ({
             <styled.label className={labelStyle}>공지 링크</styled.label>
             <styled.textarea
               placeholder="http://example.com"
+              ref={linkTextareaRef}
               rows={1}
               value={studyAnnouncement.link}
               className={textareaStyle({
@@ -115,10 +123,9 @@ const textareaStyle = cva({
     paddingX: "sm",
     paddingY: "xs",
     textStyle: "body1",
-    height: "2.625rem",
-    maxHeight: "7.5rem",
-    overflowY: "hidden",
+    maxHeight: "6rem",
     resize: "none",
+    overflowY: "auto",
     backgroundColor: "backgroundNormal",
     _placeholder: {
       color: "outline",
@@ -126,19 +133,6 @@ const textareaStyle = cva({
     _focus: {
       outline: "none",
       borderColor: "primary",
-    },
-    _scrollbar: {
-      width: "2px",
-    },
-    _scrollbarThumb: {
-      width: "2px",
-      height: "65px",
-      borderRadius: "sm",
-      backgroundColor: "outline",
-    },
-    _scrollbarTrack: {
-      marginTop: "2px",
-      marginBottom: "2px",
     },
   },
   variants: {

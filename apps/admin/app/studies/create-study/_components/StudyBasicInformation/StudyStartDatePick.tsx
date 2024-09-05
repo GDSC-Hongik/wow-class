@@ -77,7 +77,7 @@ const StudyStartDatePick = () => {
   ];
 
   return (
-    <Flex direction="column" position="relative">
+    <Flex direction="column" position="relative" width={358}>
       <Text color="sub" style={{ marginBottom: "8px" }} typo="label2">
         스터디 진행 기간
       </Text>
@@ -92,6 +92,9 @@ const StudyStartDatePick = () => {
               className={StudyDatePickerStyle({
                 type: inputValue ? "selected" : "unSelected",
               })}
+              onChange={() => {
+                console.log("");
+              }}
               onClick={() => {
                 if (!week) {
                   return window.alert("스터디 코스를 먼저 선택해주세요");

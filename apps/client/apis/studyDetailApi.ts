@@ -10,6 +10,9 @@ export const studyDetailApi = {
       {
         next: { tags: [tags.studyDetailDashboard] },
         cache: "force-cache",
+        headers: {
+          Authorization: `Bearer ${process.env.DEV_AUTH_TOKEN || process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN}`,
+        },
       }
     );
 

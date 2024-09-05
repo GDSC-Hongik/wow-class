@@ -3,28 +3,16 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import useHorizontalScroll from "hooks/useHorizontalScroll";
+import useScrollCarouselButtonVisibility from "hooks/useScrollCarouselButtonVisibility";
 import Image from "next/image";
-import { type PropsWithChildren, useEffect, useState } from "react";
+import { type PropsWithChildren } from "react";
 
 const DailyTaskCarousel = ({ children }: PropsWithChildren) => {
-  const [showRightButton, setShowRightButton] = useState(false);
-
   const itemWidth = 386;
 
   const { containerRef, handleScroll } = useHorizontalScroll();
 
-  useEffect(() => {
-    if (containerRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
-      const totalChildrenWidth = Array.from(containerRef.current.children)
-        .map((child) => (child as HTMLElement).offsetWidth)
-        .reduce((acc, width) => acc + width, 0);
-
-      if (totalChildrenWidth > containerWidth) {
-        setShowRightButton(true);
-      }
-    }
-  }, [containerRef]);
+  const showRightButton = useScrollCarouselButtonVisibility(containerRef);
 
   const handleClickScrollRightButton = () => {
     if (containerRef.current) {

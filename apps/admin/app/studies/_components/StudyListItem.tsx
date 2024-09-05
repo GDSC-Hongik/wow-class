@@ -42,7 +42,7 @@ const StudyListItem = async ({ study }: { study: StudyListApiResponseDto }) => {
         <Text typo="body1">{mentorName} 멘토</Text>
         <Link href={notionLink || ""} style={LinkStyle} target="_blank">
           <WowLinkIcon height={24} stroke="sub" width={24} />
-          <TextButton text="스터디 소개 페이지" />
+          <TextButton style={{ padding: 0 }} text="스터디 소개 페이지" />
         </Link>
         <Flex alignItems="center" gap="sm">
           {adminStatus && (
@@ -80,7 +80,7 @@ const LinkStyle = {
   display: "flex",
   alignItems: "center",
   color: "sub",
-  gap: "4px",
+  gap: "8px",
 };
 
 const TableLeftStyle = {

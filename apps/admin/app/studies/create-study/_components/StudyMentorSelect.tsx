@@ -12,6 +12,7 @@ import SearchBar from "wowds-ui/SearchBar";
 type MentorListType = {
   memberId: number;
   name: string;
+  studentId: string;
 };
 
 const StudyMentorSelect = () => {
@@ -26,6 +27,7 @@ const StudyMentorSelect = () => {
       return {
         memberId: data.memberId,
         name: data.name,
+        studentId: data.studentId,
       };
     });
     setMemberList([...formatMentorList]);
@@ -62,7 +64,7 @@ const StudyMentorSelect = () => {
                     }}
                   >
                     <Text color="sub" typo="body1">
-                      {data.name}
+                      {data.name} {data.studentId}
                     </Text>
                   </li>
                 ))}

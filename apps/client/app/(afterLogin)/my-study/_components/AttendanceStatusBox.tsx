@@ -2,6 +2,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { myStudyApi } from "apis/myStudyApi";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import { routePath } from "constants/routePath";
 import Link from "next/link";
@@ -12,15 +13,28 @@ import Tag from "wowds-ui/Tag";
 
 interface AttendanceStatusBoxProps {
   week: number;
+  studyDetailId: number;
   attendanceStatus: AttendanceStatusType;
   deadLine: string;
 }
 
-const AttendanceStatusBox = ({
+const AttendanceStatusBox = async ({
   week,
   attendanceStatus,
+  studyDetailId,
   deadLine,
 }: AttendanceStatusBoxProps) => {
+  const myOngoingStudyInfoResponse = await myStudyApi.getMyOngoingStudyInfo();
+
+  if (!myOngoingStudyInfoResponse?.studyId) {
+    return null;
+  }
+
+  const basicStudyInfoResponse = await myStudyApi.getBasicStudyInfo(
+    myOngoingStudyInfoResponse?.studyId
+  );
+  const studyName = basicStudyInfoResponse?.title;
+
   const {
     year: startYear,
     month: startMonth,
@@ -62,7 +76,8 @@ const AttendanceStatusBox = ({
           </Flex>
           <Button
             asProp={Link}
-            href={`${routePath["attendance-check"]}`}
+            disabled={attendanceStatus === "ATTENDED"}
+            href={`${routePath["attendance-check"]}?study-detail-id=${studyDetailId}&week=${week}&study-name=${studyName}&deadline=${deadLine}`}
             size="lg"
             style={attendanceButtonStyle}
           >

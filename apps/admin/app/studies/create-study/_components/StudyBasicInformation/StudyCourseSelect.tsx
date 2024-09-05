@@ -1,5 +1,6 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
+import { studyCurriculumList } from "constants/studyCurriculum";
 import { Controller, useFormContext } from "react-hook-form";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
@@ -7,7 +8,7 @@ import DropDownOption from "wowds-ui/DropDownOption";
 const StudyCourseSelect = () => {
   const { control } = useFormContext();
   return (
-    <Flex direction="column" gap="xs">
+    <Flex direction="column" gap="xs" width={358}>
       <Controller
         control={control}
         name="totalWeek"
@@ -21,16 +22,9 @@ const StudyCourseSelect = () => {
               field.onChange(Number(selectedValue));
             }}
           >
-            <DropDownOption text="1주" value="1" />
-            <DropDownOption text="2주" value="2" />
-            <DropDownOption text="3주" value="3" />
-            <DropDownOption text="4주" value="4" />
-            <DropDownOption text="5주" value="5" />
-            <DropDownOption text="6주" value="6" />
-            <DropDownOption text="7주" value="7" />
-            <DropDownOption text="8주" value="8" />
-            <DropDownOption text="9주" value="9" />
-            <DropDownOption text="10주" value="10" />
+            {studyCurriculumList.map(({ text, value }) => (
+              <DropDownOption text={text} value={value} />
+            ))}
           </DropDown>
         )}
         rules={{

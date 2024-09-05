@@ -44,22 +44,8 @@ const StudyApplyDatePick = () => {
     setValue("applicationEndDate", endDateString, { shouldValidate: true });
   };
 
-  const disableDateList = [
-    {
-      from: new Date(0),
-      to: yesterday,
-    },
-    ...(watch("startDate")
-      ? [
-          {
-            from: studyStartDate,
-            to: studyStartDateYearLater,
-          },
-        ]
-      : []),
-  ];
   return (
-    <Flex direction="column" gap="xs" height="128px" position="relative">
+    <Flex direction="column" gap="xs" position="relative" width={358}>
       <Text color="sub" typo="label2">
         스터디 신청 기간
       </Text>
@@ -73,6 +59,9 @@ const StudyApplyDatePick = () => {
             className={StudyDatePickerStyle({
               type: inputValue ? "selected" : "unSelected",
             })}
+            onChange={() => {
+              console.log("");
+            }}
             onClick={() => {
               setIsOpen(!isOpen);
             }}
@@ -86,18 +75,26 @@ const StudyApplyDatePick = () => {
       {isOpen && (
         <div ref={datepickerRef}>
           <DayPicker
-            disabled={disableDateList}
             mode="range"
             weekStartsOn={1}
+            disabled={{
+              from: new Date(0),
+              to: yesterday,
+            }}
             selected={{
               from: formatStringToDate(studyDate.fromValue),
               to: formatStringToDate(studyDate.toValue),
             }}
             style={{
               position: "absolute",
-              top: "100px",
+              top: "80px",
               zIndex: 99,
               backgroundColor: "white",
+            }}
+            styles={{
+              month_grid: {
+                marginBottom: "100px",
+              },
             }}
             onSelect={(triggerDate) => {
               handleStudyDateSelect(triggerDate);
