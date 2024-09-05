@@ -1,6 +1,5 @@
 import { css } from "@styled-system/css";
 import { NavItem } from "@wow-class/ui";
-import { dashboardApi } from "apis/auth/dashboardApi";
 import { studyApi } from "apis/study/studyApi";
 import { clientUrl } from "constants/url";
 import Image from "next/image";
@@ -18,9 +17,10 @@ import participantImageUrl from "../public/images/particpant.svg";
  */
 
 const Navbar = async () => {
-  const studyList = (await isAdmin())
+  const adminStatus = await isAdmin();
+  const studyList = adminStatus
     ? await studyApi.getStudyList()
-    : await dashboardApi.getMyStudyList();
+    : await studyApi.getMyStudyList();
 
   const navMenu = [
     {
