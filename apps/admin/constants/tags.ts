@@ -3,6 +3,7 @@ export const enum tags {
   assignments = "assignments",
   curriculums = "curriculums",
   studyList = "studyList",
+  myStudyList = "myStudyList",
   studyBasicInfo = "studyBasicInfo",
   announcements = "announcements",
   memberList = "memberList",

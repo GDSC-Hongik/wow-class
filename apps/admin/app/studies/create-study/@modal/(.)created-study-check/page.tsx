@@ -31,6 +31,7 @@ const CreatedStudyCheckModal = () => {
 
     if (result.success) {
       await revalidateTagByName(tags.studyList);
+      await revalidateTagByName(tags.myStudyList);
       window.alert("스터디 생성에 성공했어요.");
       router.push(`${routerPath.root.href}`);
     } else {
