@@ -19,14 +19,4 @@ export const dashboardApi = {
 
     return { studyRole, manageRole };
   },
-  getMyStudyList: async () => {
-    const response = await fetcher.get<MyStudyListApiResponseDto[]>(
-      mentorApiPath.studyList,
-      {
-        next: { tags: [tags.dashboard] },
-        cache: "force-cache",
-      }
-    );
-    return response.data;
-  },
 };

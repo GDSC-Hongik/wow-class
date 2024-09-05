@@ -1,9 +1,5 @@
 import type { DayOfWeekType } from "types/entities/dayofweek";
-import type {
-  StudyKoreanType,
-  StudySemesterType,
-  StudyType,
-} from "types/entities/study";
+import type { StudyKoreanType, StudySemesterType } from "types/entities/study";
 import type { TimeType } from "types/entities/time";
 
 export interface StudyListApiResponseDto {
@@ -19,13 +15,4 @@ export interface StudyListApiResponseDto {
   startTime: TimeType;
   totalWeek: number;
   openingDate: string;
-}
-
-export interface MyStudyListApiResponseDto {
-  studyId: number;
-  semester: string;
-  title: string;
-  studyType: StudyType;
-  notionLink: string;
-  mentorName: string;
 }

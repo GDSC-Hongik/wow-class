@@ -24,6 +24,16 @@ export const studyApi = {
 
     return response.data;
   },
+  getMyStudyList: async () => {
+    const response = await fetcher.get<StudyListApiResponseDto[]>(
+      mentorApiPath.studyList,
+      {
+        next: { tags: [tags.myStudyList] },
+        cache: "force-cache",
+      }
+    );
+    return response.data;
+  },
   getStudyBasicInfo: async (studyId: number) => {
     const response = await fetcher.get<StudyBasicInfoApiResponseDto>(
       `/common/studies/${studyId}`,
