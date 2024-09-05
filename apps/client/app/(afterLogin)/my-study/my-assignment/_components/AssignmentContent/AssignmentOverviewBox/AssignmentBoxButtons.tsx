@@ -80,6 +80,13 @@ const SecondaryButton = ({
 }: Omit<AssignmentBoxButtonsProps, "repositoryLink">) => {
   const { assignmentSubmissionStatus, studyDetailId, deadline, committedAt } =
     assignment;
+  if (isDeadlinePassed(deadline)) {
+    return (
+      <Button disabled={true} style={buttonStyle}>
+        마감
+      </Button>
+    );
+  }
   const { secondaryButtonText } =
     assignmentSubmissionStatus === null
       ? buttonTextMap.INITIAL
@@ -94,13 +101,6 @@ const SecondaryButton = ({
     }
   };
 
-  if (isDeadlinePassed(deadline)) {
-    return (
-      <Button disabled={true} style={buttonStyle}>
-        마감
-      </Button>
-    );
-  }
   const stroke = buttonsDisabled ? "mono100" : "backgroundNormal";
   const { year, month, day, hours, minutes } = parseISODate(
     committedAt as string
