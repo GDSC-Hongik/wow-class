@@ -1,5 +1,5 @@
 import { fetcher } from "@wow-class/utils";
-import { apiPath, mentorApiPath } from "constants/apiPath";
+import { apiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
 import type { DashboardApiResponseDto } from "types/dtos/auth";
 
