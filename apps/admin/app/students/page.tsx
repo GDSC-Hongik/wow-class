@@ -9,6 +9,7 @@ import type {
   MyStudyListApiResponseDto,
   StudyListApiResponseDto,
 } from "types/dtos/studyList";
+import type { StudyStudentResponseDto } from "types/dtos/studyStudent";
 import isAdmin from "utils/isAdmin";
 
 import StudentList from "./_components/StudentList";
@@ -19,6 +20,9 @@ const StudentsPage = () => {
   const [studyList, setStudyList] = useState<
     StudyListApiResponseDto[] | MyStudyListApiResponseDto[]
   >();
+  const [studentList, setStudentList] = useState<
+    StudyStudentResponseDto[] | null
+  >(null);
 
   const [study, setStudy] = useAtom(studyAtom);
 
@@ -40,12 +44,23 @@ const StudentsPage = () => {
     fetchData();
   }, [setStudy]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (study) {
+        const data = await studyApi.getStudyStudents(study.studyId);
+        if (data) setStudentList(data);
+      }
+    };
+
+    fetchData();
+  }, [study]);
+
   if (!studyList) return null;
 
   return (
     <Flex direction="column" gap="3rem">
       <StudentsHeader studyList={studyList} />
-      {/* <StudentList studyId={study?.studyId} /> */}
+      <StudentList studentList={studentList} />
     </Flex>
   );
 };

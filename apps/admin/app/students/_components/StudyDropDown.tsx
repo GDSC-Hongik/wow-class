@@ -23,7 +23,13 @@ const StudyDropDown = ({
   return (
     <DropDown
       trigger={
-        <Flex align="center" color="primary" cursor="pointer" gap="sm">
+        <Flex
+          align="center"
+          color="primary"
+          cursor="pointer"
+          gap="sm"
+          width="20rem"
+        >
           {study.title}
           <DropDownTrigger />
         </Flex>

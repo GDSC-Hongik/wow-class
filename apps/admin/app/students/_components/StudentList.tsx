@@ -1,16 +1,15 @@
 import { css } from "@styled-system/css";
 import { styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { studyApi } from "apis/study/studyApi";
 import type { StudyStudentResponseDto } from "types/dtos/studyStudent";
 
 import StudentListItem from "./StudentListItem";
 
-const StudentList = async ({ studyId }: { studyId?: number }) => {
-  if (!studyId) return null;
-
-  const studentList = await studyApi.getStudyStudents(studyId);
-
+const StudentList = ({
+  studentList,
+}: {
+  studentList: StudyStudentResponseDto[] | null;
+}) => {
   if (!studentList) return null;
 
   return (
