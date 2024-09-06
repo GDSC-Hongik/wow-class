@@ -7,7 +7,6 @@ const DropDownTrigger = () => {
       align="center"
       background="backgroundAlternative"
       borderRadius={9999}
-      cursor="pointer"
       height={24}
       justify="center"
       width={24}

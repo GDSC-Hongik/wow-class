@@ -1,4 +1,6 @@
 import { Flex } from "@styled-system/jsx";
+import { useAtom } from "jotai";
+import type { ReactNode } from "react";
 import type {
   MyStudyListApiResponseDto,
   StudyListApiResponseDto,
@@ -7,30 +9,43 @@ import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
 import DropDownTrigger from "./DropDownTrigger";
+import { studyAtom } from "./StudyProvider";
 
 const StudyDropDown = ({
   studyList,
 }: {
   studyList: StudyListApiResponseDto[] | MyStudyListApiResponseDto[];
 }) => {
+  const [study, setStudy] = useAtom(studyAtom);
+
+  if (!study) return null;
+
   return (
-    <Flex align="center" color="primary" gap="sm">
-      테스트
-      <DropDown
-        style={{ width: "16rem", cursor: "default" }}
-        trigger={<DropDownTrigger />}
-      >
-        {studyList.map(
-          (study: StudyListApiResponseDto | MyStudyListApiResponseDto) => (
-            <DropDownOption
-              key={study.studyId}
-              text={study.title}
-              value={study.studyId.toString()}
-            />
-          )
-        )}
-      </DropDown>
-    </Flex>
+    <DropDown
+      trigger={
+        <Flex align="center" color="primary" cursor="pointer" gap="sm">
+          {study.title}
+          <DropDownTrigger />
+        </Flex>
+      }
+      onChange={(value: { selectedValue: string; selectedText: ReactNode }) => {
+        setStudy({
+          studyId: +value.selectedValue,
+          title: value.selectedText,
+        });
+      }}
+    >
+      {studyList.map(
+        (study: StudyListApiResponseDto | MyStudyListApiResponseDto) => (
+          <DropDownOption
+            key={study.studyId}
+            style={{ cursor: "pointer" }}
+            text={study.title}
+            value={study.studyId.toString()}
+          />
+        )
+      )}
+    </DropDown>
   );
 };
 

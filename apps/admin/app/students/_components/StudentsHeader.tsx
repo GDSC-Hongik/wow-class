@@ -1,19 +1,17 @@
 import { Text } from "@wow-class/ui";
-import { dashboardApi } from "apis/auth/dashboardApi";
-import { studyApi } from "apis/study/studyApi";
 import ItemSeparator from "components/ItemSeparator";
-import isAdmin from "utils/isAdmin";
+import type {
+  MyStudyListApiResponseDto,
+  StudyListApiResponseDto,
+} from "types/dtos/studyList";
 
 import StudyDropDown from "./StudyDropDown";
 
-const StudentsHeader = async () => {
-  const adminStatus = await isAdmin();
-  const studyList = adminStatus
-    ? await studyApi.getStudyList()
-    : await dashboardApi.getMyStudyList();
-
-  if (!studyList) return null;
-
+const StudentsHeader = ({
+  studyList,
+}: {
+  studyList: StudyListApiResponseDto[] | MyStudyListApiResponseDto[];
+}) => {
   return (
     <Text
       as="h1"
