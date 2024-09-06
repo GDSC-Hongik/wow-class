@@ -1,16 +1,13 @@
 import { Text } from "@wow-class/ui";
 import ItemSeparator from "components/ItemSeparator";
-import type {
-  MyStudyListApiResponseDto,
-  StudyListApiResponseDto,
-} from "types/dtos/studyList";
+import type { StudyListApiResponseDto } from "types/dtos/studyList";
 
 import StudyDropDown from "./StudyDropDown";
 
 const StudentsHeader = ({
   studyList,
 }: {
-  studyList: StudyListApiResponseDto[] | MyStudyListApiResponseDto[];
+  studyList: StudyListApiResponseDto[];
 }) => {
   return (
     <Text

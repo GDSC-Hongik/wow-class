@@ -1,14 +1,10 @@
 "use client";
 
 import { Flex } from "@styled-system/jsx";
-import { dashboardApi } from "apis/auth/dashboardApi";
 import { studyApi } from "apis/study/studyApi";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
-import type {
-  MyStudyListApiResponseDto,
-  StudyListApiResponseDto,
-} from "types/dtos/studyList";
+import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import type { StudyStudentResponseDto } from "types/dtos/studyStudent";
 import isAdmin from "utils/isAdmin";
 
@@ -17,9 +13,7 @@ import StudentsHeader from "./_components/StudentsHeader";
 import { studyAtom } from "./_components/StudyProvider";
 
 const StudentsPage = () => {
-  const [studyList, setStudyList] = useState<
-    StudyListApiResponseDto[] | MyStudyListApiResponseDto[]
-  >();
+  const [studyList, setStudyList] = useState<StudyListApiResponseDto[]>();
   const [studentList, setStudentList] = useState<
     StudyStudentResponseDto[] | null
   >(null);
@@ -32,7 +26,7 @@ const StudentsPage = () => {
       if (adminStatus) {
         const data = adminStatus
           ? await studyApi.getStudyList()
-          : await dashboardApi.getMyStudyList();
+          : await studyApi.getMyStudyList();
 
         if (data && data.length && data[0]) {
           setStudyList(data);

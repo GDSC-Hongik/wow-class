@@ -1,10 +1,7 @@
 import { Flex } from "@styled-system/jsx";
 import { useAtom } from "jotai";
 import type { ReactNode } from "react";
-import type {
-  MyStudyListApiResponseDto,
-  StudyListApiResponseDto,
-} from "types/dtos/studyList";
+import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
@@ -14,7 +11,7 @@ import { studyAtom } from "./StudyProvider";
 const StudyDropDown = ({
   studyList,
 }: {
-  studyList: StudyListApiResponseDto[] | MyStudyListApiResponseDto[];
+  studyList: StudyListApiResponseDto[];
 }) => {
   const [study, setStudy] = useAtom(studyAtom);
 
@@ -41,16 +38,14 @@ const StudyDropDown = ({
         });
       }}
     >
-      {studyList.map(
-        (study: StudyListApiResponseDto | MyStudyListApiResponseDto) => (
-          <DropDownOption
-            key={study.studyId}
-            style={{ cursor: "pointer" }}
-            text={study.title}
-            value={study.studyId.toString()}
-          />
-        )
-      )}
+      {studyList.map((study: StudyListApiResponseDto) => (
+        <DropDownOption
+          key={study.studyId}
+          style={{ cursor: "pointer" }}
+          text={study.title}
+          value={study.studyId.toString()}
+        />
+      ))}
     </DropDown>
   );
 };
