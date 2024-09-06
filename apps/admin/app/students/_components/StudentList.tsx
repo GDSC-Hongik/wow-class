@@ -6,33 +6,39 @@ import type { StudyStudentResponseDto } from "types/dtos/studyStudent";
 
 import StudentListItem from "./StudentListItem";
 
-const StudentList = async ({ studyId }: { studyId: number }) => {
+const StudentList = async ({ studyId }: { studyId?: number }) => {
+  if (!studyId) return null;
+
   const studentList = await studyApi.getStudyStudents(studyId);
 
   if (!studentList) return null;
 
   return (
     <styled.table borderCollapse="collapse">
-      <styled.tr borderBottom="1px solid" borderColor="sub">
-        <Text as="th" className={tableThStyle} typo="body2">
-          이름
-        </Text>
-        <Text as="th" className={tableThStyle} typo="body2">
-          학번
-        </Text>
-        <Text as="th" className={tableThStyle} typo="body2">
-          디스코드 사용자명
-        </Text>
-        <Text as="th" className={tableThStyle} typo="body2">
-          디스코드 닉네임
-        </Text>
-        <Text as="th" className={tableThStyle} typo="body2">
-          깃허브 링크
-        </Text>
-      </styled.tr>
-      {studentList.map((student: StudyStudentResponseDto) => (
-        <StudentListItem key={student.memberId} {...student} />
-      ))}
+      <thead>
+        <styled.tr borderBottom="1px solid" borderColor="sub">
+          <Text as="th" className={tableThStyle} typo="body2">
+            이름
+          </Text>
+          <Text as="th" className={tableThStyle} typo="body2">
+            학번
+          </Text>
+          <Text as="th" className={tableThStyle} typo="body2">
+            디스코드 사용자명
+          </Text>
+          <Text as="th" className={tableThStyle} typo="body2">
+            디스코드 닉네임
+          </Text>
+          <Text as="th" className={tableThStyle} typo="body2">
+            깃허브 링크
+          </Text>
+        </styled.tr>
+      </thead>
+      <tbody>
+        {studentList.map((student: StudyStudentResponseDto) => (
+          <StudentListItem key={student.memberId} {...student} />
+        ))}
+      </tbody>
     </styled.table>
   );
 };
