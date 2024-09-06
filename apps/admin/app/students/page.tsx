@@ -1,7 +1,7 @@
-import Header from "./_components/Header";
+import StudentsHeader from "./_components/StudentsHeader";
 
 const Students = () => {
-  return <Header />;
+  return <StudentsHeader />;
 };
 
 export default Students;
