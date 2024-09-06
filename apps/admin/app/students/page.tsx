@@ -7,7 +7,7 @@ const Students = () => {
   return (
     <Flex direction="column" gap="3rem">
       <StudentsHeader />
-      <StudentList />
+      <StudentList studyId={45} />
     </Flex>
   );
 };
