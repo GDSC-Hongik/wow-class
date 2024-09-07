@@ -1,7 +1,7 @@
 "use client";
 
 import { atom, createStore, Provider } from "jotai";
-import type { ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 
 const studyIdStore = createStore();
 
@@ -13,6 +13,6 @@ export type StudyAtomprops = {
 export const studyAtom = atom<StudyAtomprops>();
 studyIdStore.set(studyAtom, undefined);
 
-export const StudyProvider = ({ children }: { children: ReactNode }) => {
+export const StudyProvider = ({ children }: PropsWithChildren) => {
   return <Provider store={studyIdStore}>{children}</Provider>;
 };
