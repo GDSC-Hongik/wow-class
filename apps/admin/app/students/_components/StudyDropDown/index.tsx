@@ -5,7 +5,7 @@ import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-import { studyAtom } from "../_contexts/StudyProvider";
+import { studyAtom } from "../../_contexts/StudyProvider";
 import DropDownTrigger from "./DropDownTrigger";
 
 const StudyDropDown = ({
