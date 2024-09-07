@@ -41,9 +41,8 @@ export const FailurePopover = ({
               </ul>
               <br />
               <br />
-              커밋 후 원격 저장소에 push까지 완료했는지 제대로 제출한 후에도
-              계속 "위치 확인 불가"라고 나온다면,GDSC Hongik 카카오톡 채널로
-              문의해주세요.
+              제대로 제출한 후에도 계속 "위치 확인 불가"라고 나온다면,GDSC
+              Hongik 카카오톡 채널로 문의해주세요.
             </>
           )}
           {submissionFailureType === "WORD_COUNT_INSUFFICIENT" && (
@@ -57,7 +56,9 @@ export const FailurePopover = ({
           )}
           {submissionFailureType === "UNKNOWN" && (
             <p>
-              제출 실패의 이유를 알 수 없는 경우에요. <br />
+              '위치 확인 불가' 나 '글자 수 부족' 외의 다른 이유로
+              <br />
+              제출 실패를 한 경우에요. <br />
               <br />
               제대로 제출한 후에도 계속 '알 수 없음' 이 뜬다면,
               <br />
