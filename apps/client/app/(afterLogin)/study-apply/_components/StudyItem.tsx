@@ -78,7 +78,13 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
       <Text className={textCellStyle({ type: "mentor" })}>
         {mentorName} 멘토
       </Text>
-      <Text className={timeCellStyle}>{studyTime}</Text>
+      <Text
+        className={timeCellStyle({
+          type: studyTime === "-" ? "empty" : "default",
+        })}
+      >
+        {studyTime}
+      </Text>
       <Text className={textCellStyle({ type: "week" })}>
         {totalWeek}주 코스
       </Text>
@@ -136,21 +142,36 @@ const dateStyle = css({
     textOverflow: "ellipsis",
     width: "38px",
   },
+  "@media (max-width: 959px)": {
+    display: "none",
+  },
 });
 
-const timeCellStyle = css({
-  width: "162px",
-  display: "flex",
-  paddingLeft: "28px",
-  textAlign: "center",
-  "@media (max-width: 1439px)": {
-    overflow: "hidden",
-    whiteSpace: "nowrap",
-    textOverflow: "ellipsis",
-    padding: "0",
+const timeCellStyle = cva({
+  base: {
+    width: "162px",
+    display: "flex",
+    paddingLeft: "28px",
+    textAlign: "center",
+    "@media (min-width: 1200px) and (max-width: 1400px)": {
+      overflow: "hidden",
+      whiteSpace: "nowrap",
+      textOverflow: "ellipsis",
+      padding: "0 !important",
+      justifyContent: "center",
+    },
+    "@media (max-width: 1199px)": {
+      display: "none !important",
+    },
   },
-  "@media (max-width: 1199px)": {
-    display: "none",
+  variants: {
+    type: {
+      empty: {
+        paddingLeft: "0 !important",
+        justifyContent: "center",
+      },
+      default: {},
+    },
   },
 });
 const textCellStyle = cva({

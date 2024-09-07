@@ -1,5 +1,6 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
+import { Space } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import { studyDetailApi } from "apis/studyDetailApi";
 import { routePath } from "constants/routePath";
@@ -26,8 +27,9 @@ export const AssignmentContent = async () => {
   if (studyDashboard.submittableAssignments.length === 0) {
     return (
       <section>
-        <Flex className={boxContainerStyle} gap="lg">
+        <Flex direction="column">
           <EmptyAssignmentBox />
+          <Space height={64} />
         </Flex>
       </section>
     );
