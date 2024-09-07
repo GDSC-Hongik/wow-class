@@ -9,7 +9,7 @@ export const studyHistoryApi = {
       `${apiPath.studyHistory}/assignments?studyId=${studyId}`,
       {
         next: { tags: [tags.studyHistory] },
-        cache: "force-cache",
+        cache: "no-store",
       }
     );
 

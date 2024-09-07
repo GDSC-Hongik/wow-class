@@ -9,7 +9,7 @@ export const studyDetailApi = {
       `${apiPath.studyDetail}/dashboard?studyId=${studyId}`,
       {
         next: { tags: [tags.studyDetailDashboard] },
-        cache: "force-cache",
+        cache: "no-store",
       }
     );
 
