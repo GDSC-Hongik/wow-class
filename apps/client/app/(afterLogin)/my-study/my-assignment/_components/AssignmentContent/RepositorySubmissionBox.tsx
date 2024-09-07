@@ -66,12 +66,12 @@ export const RepositorySubmissionBox = ({
     if (!repositoryUrl) {
       setErrorState({
         isError: true,
-        errorMessage: "빈 URL은 입력할 수 없습니다.",
+        errorMessage: "빈 URL은 입력할 수 없어요.",
       });
     } else if (!isGithubRepositoryUrl(repositoryUrl)) {
       setErrorState({
         isError: true,
-        errorMessage: "GitHub 레포지토리 URL을 제출해야 합니다.",
+        errorMessage: "GitHub 레포지토리 URL을 입력해야 해요.",
       });
     } else {
       setErrorState({
