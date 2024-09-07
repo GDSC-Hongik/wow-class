@@ -23,7 +23,7 @@ export const AssignmentContent = async () => {
     return;
   }
 
-  if (studyDashboard.submittableAssignments.length <= 0) {
+  if (studyDashboard.submittableAssignments.length === 0) {
     return (
       <section>
         <Flex className={boxContainerStyle} gap="lg">
