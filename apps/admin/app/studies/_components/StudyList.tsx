@@ -1,11 +1,15 @@
 import { css } from "@styled-system/css";
 import { studyApi } from "apis/study/studyApi";
+import isAdmin from "utils/isAdmin";
 
 import EmptyStudyList from "./EmptyStudyList";
 import StudyListItem from "./StudyListItem";
 
 const StudyList = async () => {
-  const studyList = await studyApi.getStudyList();
+  const adminStatus = await isAdmin();
+  const studyList = adminStatus
+    ? await studyApi.getStudyList()
+    : await studyApi.getMyStudyList();
 
   if (studyList?.length === 0) {
     return <EmptyStudyList />;
