@@ -43,23 +43,24 @@ export const AssignmentBoxInfo = async ({
   return (
     <>
       <Text color="sub">{deadlineText}</Text>
-      {(isSuccess || (isFailure && !isNotSubmitted)) && (
-        <Flex alignItems="center" gap="xs">
-          <Text as="div" color="sub">
-            제출한 과제 :{" "}
-            <Text as="span" color="textBlack">
-              {`${getAssignmentGithubFolderName(
-                studyDashboard.repositoryLink
-              )}/week${week}`}
+      {(isSuccess || (isFailure && !isNotSubmitted)) &&
+        studyDashboard.repositoryLink && (
+          <Flex alignItems="center" gap="xs">
+            <Text as="div" color="sub">
+              제출한 과제 :{" "}
+              <Text as="span" color="textBlack">
+                {`${getAssignmentGithubFolderName(
+                  studyDashboard.repositoryLink
+                )}/week${week}`}
+              </Text>
             </Text>
-          </Text>
-          <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
-          <styled.div color={isFailure ? "error" : "primary"}>
-            {isFailure ? failMapping[submissionFailureType] : "글자수 충족"}
-          </styled.div>
-          <FailurePopover submissionFailureType={submissionFailureType} />
-        </Flex>
-      )}
+            <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
+            <styled.div color={isFailure ? "error" : "primary"}>
+              {isFailure ? failMapping[submissionFailureType] : "글자수 충족"}
+            </styled.div>
+            <FailurePopover submissionFailureType={submissionFailureType} />
+          </Flex>
+        )}
     </>
   );
 };
