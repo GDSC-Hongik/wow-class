@@ -10,7 +10,7 @@ import isAdmin from "utils/isAdmin";
 
 import StudentList from "./_components/StudentList";
 import StudentsHeader from "./_components/StudentsHeader";
-import { studyAtom } from "./_components/StudyProvider";
+import { studyAtom } from "./_contexts/StudyProvider";
 
 const StudentsPage = () => {
   const [studyList, setStudyList] = useState<StudyListApiResponseDto[]>();
