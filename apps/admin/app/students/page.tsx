@@ -1,6 +1,7 @@
 "use client";
 
 import { Flex } from "@styled-system/jsx";
+import { Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import useFetchStudents from "hooks/fetch/useFetchStudents";
 import { useAtom } from "jotai";
@@ -35,7 +36,7 @@ const StudentsPage = () => {
   }, [setStudy]);
 
   const student = useFetchStudents(study);
-  if (!studyList) return null;
+  if (!studyList) return <Text>담당한 스터디가 없어요.</Text>;
 
   return (
     <Flex direction="column" gap="3rem">
