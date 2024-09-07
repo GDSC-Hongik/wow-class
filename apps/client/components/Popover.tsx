@@ -21,12 +21,12 @@ const Popover = ({ triggerContent, children }: PopoverProps) => {
     onClose();
   };
   return (
-    <div className={popoverContainerStyle}>
+    <div className={popoverContainerStyle} ref={popoverRef}>
       <button className={triggerStyle} onClick={handleClickTrigger}>
         {triggerContent}
       </button>
       {open && (
-        <div className={popoverStyle} id="popover" ref={popoverRef}>
+        <div className={popoverStyle} id="popover">
           <CloseIcon
             className={closeButtonStyle}
             height={14}
