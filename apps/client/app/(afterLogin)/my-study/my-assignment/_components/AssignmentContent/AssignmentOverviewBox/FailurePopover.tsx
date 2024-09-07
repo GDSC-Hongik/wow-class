@@ -32,7 +32,7 @@ export const FailurePopover = ({
               아래 조건에 맞게 wil.md 파일을 제출했는지 확인해주세요. <br />
               <br />
               <ul style={ulStyle}>
-                <li>본인의 레포지터리가 맞는지</li>
+                <li>본인의 레포지토리가 맞는지</li>
                 <li>제출한 브랜치 이름이 main인지</li>
                 <li>파일 위치가 `weekn/wil.md` 가 맞는지</li>
                 <li>커밋 후 원격 저장소에 push까지 완료했는지</li>
