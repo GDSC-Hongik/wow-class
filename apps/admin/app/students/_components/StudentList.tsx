@@ -8,10 +8,9 @@ import StudentListItem from "./StudentListItem";
 const StudentList = ({
   studentList,
 }: {
-  studentList: StudyStudentApiResponseDto[] | null;
+  studentList: StudyStudentApiResponseDto[] | [];
 }) => {
-  if (!studentList || !studentList.length)
-    return <Text>스터디 수강생이 없어요.</Text>;
+  if (!studentList.length) return <Text>스터디 수강생이 없어요.</Text>;
 
   return (
     <styled.table borderCollapse="collapse">

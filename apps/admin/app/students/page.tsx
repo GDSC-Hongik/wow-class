@@ -2,10 +2,10 @@
 
 import { Flex } from "@styled-system/jsx";
 import { studyApi } from "apis/study/studyApi";
+import useFetchStudents from "hooks/fetch/useFetchStudents";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
-import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
 import isAdmin from "utils/isAdmin";
 
 import StudentList from "./_components/StudentList";
@@ -14,10 +14,6 @@ import { studyAtom } from "./_contexts/StudyProvider";
 
 const StudentsPage = () => {
   const [studyList, setStudyList] = useState<StudyListApiResponseDto[]>();
-  const [studentList, setStudentList] = useState<
-    StudyStudentApiResponseDto[] | []
-  >([]);
-
   const [study, setStudy] = useAtom(studyAtom);
 
   useEffect(() => {
@@ -38,23 +34,13 @@ const StudentsPage = () => {
     fetchData();
   }, [setStudy]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (study) {
-        const data = await studyApi.getStudyStudents(study.studyId);
-        if (data) setStudentList(data);
-      }
-    };
-
-    fetchData();
-  }, [study]);
-
+  const student = useFetchStudents(study);
   if (!studyList) return null;
 
   return (
     <Flex direction="column" gap="3rem">
       <StudentsHeader studyList={studyList} />
-      <StudentList studentList={studentList} />
+      <StudentList studentList={student.studentList} />
     </Flex>
   );
 };
