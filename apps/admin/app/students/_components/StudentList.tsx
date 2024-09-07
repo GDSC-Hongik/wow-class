@@ -35,7 +35,7 @@ const StudentList = ({
         </styled.tr>
       </thead>
       <tbody>
-        {studentList.map((student: StudyStudentApiResponseDto) => (
+        {studentList.map((student) => (
           <StudentListItem key={student.memberId} {...student} />
         ))}
       </tbody>
