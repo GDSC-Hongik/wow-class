@@ -139,8 +139,9 @@ const dateStyle = css({
 });
 
 const timeCellStyle = css({
-  paddingX: "28px",
-  width: "178px",
+  width: "162px",
+  display: "flex",
+  paddingLeft: "28px",
   textAlign: "center",
   "@media (max-width: 1439px)": {
     overflow: "hidden",
@@ -165,7 +166,11 @@ const textCellStyle = cva({
   variants: {
     type: {
       mentor: {
-        paddingX: "15px",
+        "@media (min-width: 1440px)": {
+          width: "103px",
+          display: "flex",
+          justifyContent: "center",
+        },
         "@media (max-width: 1199px)": {
           width: "fit-content",
           paddingInline: "7.25px",
@@ -175,7 +180,11 @@ const textCellStyle = cva({
         },
       },
       week: {
-        paddingX: "28px",
+        "@media (min-width: 1440px)": {
+          width: "118px",
+          display: "flex",
+          justifyContent: "center",
+        },
         "@media (max-width: 1199px)": {
           display: "none",
         },

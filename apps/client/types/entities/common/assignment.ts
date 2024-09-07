@@ -4,4 +4,5 @@ export type AssignmentSubmissionFailureType =
   | "NONE"
   | "NOT_SUBMITTED"
   | "WORD_COUNT_INSUFFICIENT"
-  | "LOCATION_UNIDENTIFIABLE";
+  | "LOCATION_UNIDENTIFIABLE"
+  | "UNKNOWN";

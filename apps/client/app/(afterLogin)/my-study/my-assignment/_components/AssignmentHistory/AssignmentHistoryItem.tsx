@@ -41,11 +41,16 @@ export const AssignmentHistoryItem = ({
   return (
     <Table>
       <Table.Left>
-        <Text as="h3" typo="h3">
+        <Text as="h3" className={weekStyle} typo="h3">
           {week}주차
         </Text>
         <Space width={50} />
-        <Flex direction="column" gap="xxs" justifyContent="center">
+        <Flex
+          className={titleStyle}
+          direction="column"
+          gap="xxs"
+          justifyContent="center"
+        >
           <Text typo="h3">{title}</Text>
           <Text color="sub" typo="body2">
             {deadlineText}
@@ -53,10 +58,10 @@ export const AssignmentHistoryItem = ({
         </Flex>
       </Table.Left>
       <Table.Right>
-        <Flex className={buttonContainerStyle} minWidth="202px" paddingX="36px">
+        <Flex className={buttonContainerStyle}>
           {descriptionLink ? (
             <Link href={descriptionLink} target="_blank">
-              <TextButton text="과제 명세 확인" />
+              <TextButton className={textButtonStyle} text="과제 명세 확인" />
             </Link>
           ) : (
             "-"
@@ -66,7 +71,7 @@ export const AssignmentHistoryItem = ({
           <Tag color={tagColor} variant="solid2">
             {tagText}
           </Tag>
-          <Text color="error">
+          <Text color="red.500">
             {assignmentSubmissionStatus === "FAILURE" &&
               failMapping[submissionFailureType ?? "NONE"]}
           </Text>
@@ -104,9 +109,28 @@ const getTagProps = (
   return assignmentSubmissionMap.CANCELLED;
 };
 
+const weekStyle = css({
+  width: "37px",
+});
+
+const titleStyle = css({
+  "@media (max-width: 1200px)": {
+    width: "250px",
+  },
+});
 const buttonContainerStyle = css({
   justifyContent: "center",
   textStyle: "body1",
+  minWidth: "163px",
+  "@media (max-width: 1440px) and (min-width: 1201px)": {
+    minWidth: "117px",
+  },
+  "@media (max-width: 1200px) and (min-width: 961px)": {
+    minWidth: "133px",
+  },
+  "@media (max-width: 960px)": {
+    display: "none",
+  },
 });
 
 const tagContainerStyle = css({
@@ -115,8 +139,16 @@ const tagContainerStyle = css({
   width: "129px",
   alignItems: "center",
   flexDirection: "column",
+  "@media (max-width: 1199px)": {
+    display: "none !important",
+  },
 });
 
+const textButtonStyle = css({
+  "@media (max-width: 960px)": {
+    display: "none",
+  },
+});
 const assignmentSubmissionMap: Record<
   "CANCELLED" | "FAILURE" | "SUCCESS",
   { tagText: string; tagColor: ComponentProps<typeof Tag>["color"] }
@@ -130,4 +162,5 @@ const failMapping: Record<Assignment["submissionFailureType"], string> = {
   WORD_COUNT_INSUFFICIENT: "글자수부족",
   NOT_SUBMITTED: "미제출",
   NONE: "",
+  UNKNOWN: "알수없음",
 };

@@ -1,61 +1,34 @@
 "use client";
 
 import { Space } from "@wow-class/ui";
-import { myStudyApi } from "apis/myStudyApi";
-import { studyDetailApi } from "apis/studyDetailApi";
+import { padWithZero, parseISODate } from "@wow-class/utils";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import type { Assignment } from "types/dtos/studyDetail";
 import type { AssignmentSubmissionStatusType } from "types/entities/common/assignment";
-import { getIsAfterStartDate } from "utils/getIsAfterStartDate";
 import { isDeadlinePassed } from "utils/isDeadlinePassed";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
 interface AssignmentBoxButtonsProps {
   assignment: Assignment;
+  repositoryLink?: string;
   buttonsDisabled?: boolean;
 }
 
 export const AssignmentBoxButtons = ({
-  buttonsDisabled: buttonDisabledProp,
+  buttonsDisabled,
   assignment,
+  repositoryLink,
 }: AssignmentBoxButtonsProps) => {
-  const [startDate, setStartDate] = useState("");
-
-  const targetWeek = assignment.week;
-
-  useEffect(() => {
-    const fetchAssignmentStartDate = async () => {
-      const ongoingStudyInfo = await myStudyApi.getMyOngoingStudyInfo();
-
-      if (ongoingStudyInfo?.studyId) {
-        const curriculumData = await myStudyApi.getStudyCurriculumList(
-          ongoingStudyInfo.studyId
-        );
-
-        const matchingWeek = curriculumData?.find(
-          (item) => item.week === targetWeek
-        );
-
-        if (matchingWeek) {
-          setStartDate(matchingWeek.period.startDate);
-        }
-      }
-    };
-
-    fetchAssignmentStartDate();
-  }, [targetWeek]);
-
-  const buttonsDisabled = buttonDisabledProp || !getIsAfterStartDate(startDate);
-
   return (
     <>
       <PrimaryButton
         assignment={assignment}
         buttonsDisabled={buttonsDisabled}
+        repositoryLink={repositoryLink}
       />
       <Space height={8} />
       <SecondaryButton
@@ -68,29 +41,8 @@ export const AssignmentBoxButtons = ({
 const PrimaryButton = ({
   assignment,
   buttonsDisabled,
+  repositoryLink,
 }: AssignmentBoxButtonsProps) => {
-  const [repositoryLink, setRepositoryLink] = useState("");
-
-  useEffect(() => {
-    const fetchStudyDashBoard = async () => {
-      const ongoingStudyInfo = await myStudyApi.getMyOngoingStudyInfo();
-      if (!ongoingStudyInfo) {
-        return;
-      }
-      const studyDashboard = await studyDetailApi.getStudyDetailDashboard(
-        ongoingStudyInfo.studyId
-      );
-
-      if (!studyDashboard) {
-        return;
-      } else {
-        setRepositoryLink(studyDashboard.repositoryLink);
-      }
-    };
-
-    fetchStudyDashBoard();
-  }, []);
-
   const { assignmentSubmissionStatus, submissionFailureType, submissionLink } =
     assignment;
   const { primaryButtonText } =
@@ -105,14 +57,13 @@ const PrimaryButton = ({
     return;
   }
   const stroke = buttonsDisabled ? "mono100" : "primary";
-  const link =
-    assignmentSubmissionStatus === null ? repositoryLink : submissionLink;
-
+  const primaryButtonHref =
+    assignmentSubmissionStatus === "SUCCESS" ? submissionLink : repositoryLink;
   return (
     <Button
       asProp={Link}
       disabled={buttonsDisabled}
-      href={link ?? ""}
+      href={primaryButtonHref ?? ""}
       icon={<LinkIcon height={20} stroke={stroke} width={20} />}
       style={buttonStyle}
       target="_blank"
@@ -126,27 +77,9 @@ const PrimaryButton = ({
 const SecondaryButton = ({
   assignment,
   buttonsDisabled,
-}: AssignmentBoxButtonsProps) => {
+}: Omit<AssignmentBoxButtonsProps, "repositoryLink">) => {
   const { assignmentSubmissionStatus, studyDetailId, deadline, committedAt } =
     assignment;
-  const { secondaryButtonText } =
-    assignmentSubmissionStatus === null
-      ? buttonTextMap.INITIAL
-      : buttonTextMap[assignmentSubmissionStatus];
-  const handleClickSubmissionComplete = async () => {
-    const response = await studyHistoryApi.submitAssignment(studyDetailId);
-    if (response.success) {
-      //TODO: 과제 제출 이후에는 과제 상태에 대한 업데이트 필요
-      //이번주 과제 조회 api, 대시보드 api revaliate
-      revalidateTagByName(
-        assignmentSubmissionStatus === null
-          ? tags.studyDetailDashboard
-          : tags.upcomingStudy
-      );
-      revalidateTagByName(tags.studyHistory);
-    }
-  };
-
   if (isDeadlinePassed(deadline)) {
     return (
       <Button disabled={true} style={buttonStyle}>
@@ -154,7 +87,25 @@ const SecondaryButton = ({
       </Button>
     );
   }
+  const { secondaryButtonText } =
+    assignmentSubmissionStatus === null
+      ? buttonTextMap.INITIAL
+      : buttonTextMap[assignmentSubmissionStatus];
+
+  const handleClickSubmissionComplete = async () => {
+    const response = await studyHistoryApi.submitAssignment(studyDetailId);
+    if (response.success) {
+      revalidateTagByName(tags.studyDetailDashboard);
+      revalidateTagByName(tags.studyHistory);
+      toast.success("과제 제출이 완료되었어요.");
+    }
+  };
+
   const stroke = buttonsDisabled ? "mono100" : "backgroundNormal";
+  const { year, month, day, hours, minutes } = parseISODate(
+    committedAt as string
+  );
+  const commitText = `최종 수정일자 ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
   return (
     <Button
       disabled={buttonsDisabled}
@@ -162,7 +113,7 @@ const SecondaryButton = ({
       style={buttonStyle}
       {...(assignmentSubmissionStatus === "SUCCESS" &&
         committedAt && {
-          subText: `최종 수정일자 ${committedAt}`,
+          subText: commitText,
         })}
       onClick={handleClickSubmissionComplete}
     >
@@ -173,7 +124,7 @@ const SecondaryButton = ({
 
 const buttonStyle = {
   maxWidth: "100%",
-  height: "48px !important",
+  height: "fit-content",
 };
 
 const buttonTextMap: Record<
