@@ -25,6 +25,8 @@ export const FailurePopover = ({
             "Q. 글자수가 부족하다고 나와요."}
           {submissionFailureType === "LOCATION_UNIDENTIFIABLE" &&
             'Q. "위치 확인 불가" 라고 나와요.'}
+          {submissionFailureType === "UNKNOWN" &&
+            'Q. "알 수 없음" 라고 나와요.'}
         </Text>
         <Text as="div" color="outline" typo="body3">
           {submissionFailureType === "LOCATION_UNIDENTIFIABLE" && (
@@ -40,7 +42,7 @@ export const FailurePopover = ({
               <br />
               <br />
               커밋 후 원격 저장소에 push까지 완료했는지 제대로 제출한 후에도
-              계속 "경로 확인 불가"라고 나온다면,GDSC Hongik 카카오톡 채널로
+              계속 "위치 확인 불가"라고 나온다면,GDSC Hongik 카카오톡 채널로
               문의해주세요.
             </>
           )}
@@ -49,6 +51,15 @@ export const FailurePopover = ({
               wil.md 파일에 배운 내용을 최소 300자 이상 작성해야 해요. <br />
               <br />
               제대로 제출한 후에도 계속 글자수가 부족하다고 나온다면,
+              <br />
+              GDSC Hongik 카카오톡 채널로 문의해주세요.
+            </p>
+          )}
+          {submissionFailureType === "UNKNOWN" && (
+            <p>
+              제출 실패의 이유를 알 수 없는 경우에요. <br />
+              <br />
+              제대로 제출한 후에도 계속 '알 수 없음' 이 뜬다면,
               <br />
               GDSC Hongik 카카오톡 채널로 문의해주세요.
             </p>

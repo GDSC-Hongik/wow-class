@@ -51,7 +51,7 @@ export const AssignmentBoxInfo = async ({
 };
 
 const failMapping: Record<Assignment["submissionFailureType"], string> = {
-  LOCATION_UNIDENTIFIABLE: "위치 정보 확인 불가",
+  LOCATION_UNIDENTIFIABLE: "위치 확인 불가",
   WORD_COUNT_INSUFFICIENT: "글자수 부족",
   NOT_SUBMITTED: "제출 안함",
   NONE: "없음",

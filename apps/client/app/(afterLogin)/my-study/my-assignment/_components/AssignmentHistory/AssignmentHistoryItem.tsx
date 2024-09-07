@@ -71,7 +71,7 @@ export const AssignmentHistoryItem = ({
           <Tag color={tagColor} variant="solid2">
             {tagText}
           </Tag>
-          <Text color="error">
+          <Text color="red.500">
             {assignmentSubmissionStatus === "FAILURE" &&
               failMapping[submissionFailureType ?? "NONE"]}
           </Text>
@@ -162,4 +162,5 @@ const failMapping: Record<Assignment["submissionFailureType"], string> = {
   WORD_COUNT_INSUFFICIENT: "글자수부족",
   NOT_SUBMITTED: "미제출",
   NONE: "",
+  UNKNOWN: "알수없음",
 };
