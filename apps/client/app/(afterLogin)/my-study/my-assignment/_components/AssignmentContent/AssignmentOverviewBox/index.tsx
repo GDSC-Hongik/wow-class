@@ -57,7 +57,10 @@ export const AssignmentOverviewBox = async ({
                   target="_blank"
                   text="과제 명세 확인"
                 />
-                <AssignmentBoxInfo assignment={assignment} />
+                <AssignmentBoxInfo
+                  assignment={assignment}
+                  repositoryLink={repositoryLink}
+                />
                 <Space height={26} />
                 <AssignmentBoxButtons
                   assignment={assignment}

@@ -1,8 +1,6 @@
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import { myStudyApi } from "apis/myStudyApi";
-import { studyDetailApi } from "apis/studyDetailApi";
 import Image from "next/image";
 import type { Assignment } from "types/dtos/studyDetail";
 import { getAssignmentGithubFolderName } from "utils/getAssignmentGithubFolderName";
@@ -10,10 +8,12 @@ import { getAssignmentGithubFolderName } from "utils/getAssignmentGithubFolderNa
 import { FailurePopover } from "./FailurePopover";
 interface AssignmentBoxInfoProps {
   assignment: Assignment;
+  repositoryLink?: string;
 }
 
 export const AssignmentBoxInfo = async ({
   assignment,
+  repositoryLink,
 }: AssignmentBoxInfoProps) => {
   const { deadline, assignmentSubmissionStatus, submissionFailureType, week } =
     assignment;
@@ -28,39 +28,24 @@ export const AssignmentBoxInfo = async ({
   const isFailure = assignmentSubmissionStatus === "FAILURE";
   const isNotSubmitted = isFailure && submissionFailureType === "NOT_SUBMITTED";
 
-  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
-
-  if (!myOngoingStudyInfoData?.studyId) {
-    return;
-  }
-  const studyDashboard = await studyDetailApi.getStudyDetailDashboard(
-    myOngoingStudyInfoData.studyId
-  );
-
-  if (!studyDashboard) {
-    return;
-  }
   return (
     <>
       <Text color="sub">{deadlineText}</Text>
-      {(isSuccess || (isFailure && !isNotSubmitted)) &&
-        studyDashboard.repositoryLink && (
-          <Flex alignItems="center" gap="xs">
-            <Text as="div" color="sub">
-              제출한 과제 :{" "}
-              <Text as="span" color="textBlack">
-                {`${getAssignmentGithubFolderName(
-                  studyDashboard.repositoryLink
-                )}/week${week}`}
-              </Text>
+      {(isSuccess || (isFailure && !isNotSubmitted)) && repositoryLink && (
+        <Flex alignItems="center" gap="xs">
+          <Text as="div" color="sub">
+            제출한 과제 :{" "}
+            <Text as="span" color="textBlack">
+              {`${getAssignmentGithubFolderName(repositoryLink)}/week${week}`}
             </Text>
-            <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
-            <styled.div color={isFailure ? "error" : "primary"}>
-              {isFailure ? failMapping[submissionFailureType] : "글자수 충족"}
-            </styled.div>
-            <FailurePopover submissionFailureType={submissionFailureType} />
-          </Flex>
-        )}
+          </Text>
+          <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
+          <styled.div color={isFailure ? "error" : "primary"}>
+            {isFailure ? failMapping[submissionFailureType] : "글자수 충족"}
+          </styled.div>
+          <FailurePopover submissionFailureType={submissionFailureType} />
+        </Flex>
+      )}
     </>
   );
 };
