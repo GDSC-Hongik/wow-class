@@ -1,6 +1,6 @@
-export const getAssignmentGithubFolderName = (submissionLink: string) => {
+export const getAssignmentGithubFolderName = (repositoryLink: string) => {
   const regex = /github\.com\/[^/]+\/([^/]+)(?:\/([^/]+))?/;
-  const match = submissionLink.match(regex);
+  const match = repositoryLink.match(regex);
 
   if (match) {
     const repoName = match[1];
