@@ -7,7 +7,7 @@ export const EmptyAssignmentBox = () => {
       style={boxStyle}
       text={
         <Text as="h2" typo="h2">
-          과제가 없어요
+          과제가 없어요.
         </Text>
       }
     />
