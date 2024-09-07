@@ -1,14 +1,14 @@
 import { css } from "@styled-system/css";
 import { styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import type { StudyStudentResponseDto } from "types/dtos/studyStudent";
+import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
 
 import StudentListItem from "./StudentListItem";
 
 const StudentList = ({
   studentList,
 }: {
-  studentList: StudyStudentResponseDto[] | null;
+  studentList: StudyStudentApiResponseDto[] | null;
 }) => {
   if (!studentList || !studentList.length)
     return <Text>스터디 수강생이 없어요.</Text>;
@@ -35,7 +35,7 @@ const StudentList = ({
         </styled.tr>
       </thead>
       <tbody>
-        {studentList.map((student: StudyStudentResponseDto) => (
+        {studentList.map((student: StudyStudentApiResponseDto) => (
           <StudentListItem key={student.memberId} {...student} />
         ))}
       </tbody>

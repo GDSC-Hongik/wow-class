@@ -2,7 +2,7 @@ import { css } from "@styled-system/css";
 import { styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import Link from "next/link";
-import type { StudyStudentResponseDto } from "types/dtos/studyStudent";
+import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
 import TextButton from "wowds-ui/TextButton";
 
 const StudentListItem = ({
@@ -11,7 +11,7 @@ const StudentListItem = ({
   discordUsername,
   nickname,
   githubLink,
-}: StudyStudentResponseDto) => {
+}: StudyStudentApiResponseDto) => {
   return (
     <styled.tr>
       <Text as="td" className={tableThStyle} typo="body1">

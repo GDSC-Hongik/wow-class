@@ -1,4 +1,4 @@
-export interface StudyStudentResponseDto {
+export interface StudyStudentApiResponseDto {
   memberId: number;
   name: string;
   studentId: string;

@@ -9,7 +9,7 @@ import type {
 import type { AttendanceApiResponseDto } from "types/dtos/attendance";
 import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
-import type { StudyStudentResponseDto } from "types/dtos/studyStudent";
+import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
 import type { StudyAnnouncementType } from "types/entities/study";
 
 import type { StudyListApiResponseDto } from "../../types/dtos/studyList";
@@ -150,7 +150,7 @@ export const studyApi = {
     return response.data;
   },
   getStudyStudents: async (studyId: number) => {
-    const response = await fetcher.get<StudyStudentResponseDto[]>(
+    const response = await fetcher.get<StudyStudentApiResponseDto[]>(
       `/mentor/studies/${studyId}/students`,
       {
         next: { tags: [tags.students] },

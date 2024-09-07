@@ -5,7 +5,7 @@ import { studyApi } from "apis/study/studyApi";
 import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
-import type { StudyStudentResponseDto } from "types/dtos/studyStudent";
+import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
 import isAdmin from "utils/isAdmin";
 
 import StudentList from "./_components/StudentList";
@@ -15,8 +15,8 @@ import { studyAtom } from "./_components/StudyProvider";
 const StudentsPage = () => {
   const [studyList, setStudyList] = useState<StudyListApiResponseDto[]>();
   const [studentList, setStudentList] = useState<
-    StudyStudentResponseDto[] | null
-  >(null);
+    StudyStudentApiResponseDto[] | []
+  >([]);
 
   const [study, setStudy] = useAtom(studyAtom);
 
