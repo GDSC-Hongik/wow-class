@@ -2,7 +2,7 @@ import { Space } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import Link from "next/link";
 import type { Assignment } from "types/dtos/studyDetail";
-import { getIsAfterStartDate } from "utils/getIsAfterStartDate";
+import { getNowIsAfterStartDate } from "utils/getNowIsAfterStartDate";
 import Box from "wowds-ui/Box";
 import TextButton from "wowds-ui/TextButton";
 
@@ -38,7 +38,7 @@ export const AssignmentOverviewBox = async ({
           (item) => item.week === assignment.week
         );
 
-        const isCurrentWeek = getIsAfterStartDate(
+        const isSubmittable = getNowIsAfterStartDate(
           String(currentCurriculum?.period.startDate)
         );
 
@@ -64,7 +64,7 @@ export const AssignmentOverviewBox = async ({
                 <Space height={26} />
                 <AssignmentBoxButtons
                   assignment={assignment}
-                  buttonsDisabled={buttonsDisabled || !isCurrentWeek}
+                  buttonsDisabled={buttonsDisabled || !isSubmittable}
                   repositoryLink={repositoryLink}
                 />
               </>

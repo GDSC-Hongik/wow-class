@@ -40,7 +40,7 @@ export const AssignmentBoxInfo = async ({
             </Text>
           </Text>
           <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
-          <styled.div color={isFailure ? "error" : "primary"}>
+          <styled.div color={isFailure ? "red.500" : "primary"}>
             {isFailure ? failMapping[submissionFailureType] : "글자수 충족"}
           </styled.div>
           <FailurePopover submissionFailureType={submissionFailureType} />
@@ -55,4 +55,5 @@ const failMapping: Record<Assignment["submissionFailureType"], string> = {
   WORD_COUNT_INSUFFICIENT: "글자수 부족",
   NOT_SUBMITTED: "제출 안함",
   NONE: "없음",
+  UNKNOWN: "알 수 없음",
 };
