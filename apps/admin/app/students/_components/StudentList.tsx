@@ -10,7 +10,8 @@ const StudentList = ({
 }: {
   studentList: StudyStudentResponseDto[] | null;
 }) => {
-  if (!studentList) return null;
+  if (!studentList || !studentList.length)
+    return <Text>스터디 수강생이 없어요.</Text>;
 
   return (
     <styled.table borderCollapse="collapse">
