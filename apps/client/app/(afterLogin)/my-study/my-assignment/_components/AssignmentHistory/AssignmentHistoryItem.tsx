@@ -58,11 +58,14 @@ export const AssignmentHistoryItem = ({
         </Flex>
       </Table.Left>
       <Table.Right>
-        <Flex className={buttonContainerStyle}>
+        <Flex className={textButtonContainerStyle}>
           {descriptionLink ? (
-            <Link href={descriptionLink} target="_blank">
-              <TextButton className={textButtonStyle} text="과제 명세 확인" />
-            </Link>
+            <TextButton
+              asProp={Link}
+              href={descriptionLink}
+              target="_blank"
+              text="과제 명세 확인"
+            />
           ) : (
             "-"
           )}
@@ -78,11 +81,15 @@ export const AssignmentHistoryItem = ({
         </div>
         <Flex className={buttonContainerStyle} minWidth="182px" paddingX="25px">
           {submissionLink ? (
-            <Link href={submissionLink} target="_blank">
-              <Button size="sm" variant="outline">
-                제출한 과제 확인
-              </Button>
-            </Link>
+            <Button
+              asProp={Link}
+              href={submissionLink}
+              size="sm"
+              target="_blank"
+              variant="outline"
+            >
+              제출한 과제 확인
+            </Button>
           ) : (
             "-"
           )}
@@ -121,6 +128,12 @@ const titleStyle = css({
 const buttonContainerStyle = css({
   justifyContent: "center",
   textStyle: "body1",
+  minWidth: "182px",
+});
+
+const textButtonContainerStyle = css({
+  justifyContent: "center",
+  textStyle: "body1",
   minWidth: "163px",
   "@media (max-width: 1440px) and (min-width: 1201px)": {
     minWidth: "117px",
@@ -129,7 +142,7 @@ const buttonContainerStyle = css({
     minWidth: "133px",
   },
   "@media (max-width: 960px)": {
-    display: "none",
+    display: "none !important",
   },
 });
 
@@ -144,11 +157,6 @@ const tagContainerStyle = css({
   },
 });
 
-const textButtonStyle = css({
-  "@media (max-width: 960px)": {
-    display: "none",
-  },
-});
 const assignmentSubmissionMap: Record<
   "CANCELLED" | "FAILURE" | "SUCCESS",
   { tagText: string; tagColor: ComponentProps<typeof Tag>["color"] }
