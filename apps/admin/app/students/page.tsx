@@ -15,7 +15,7 @@ import { studyAtom } from "./_contexts/StudyProvider";
 
 const StudentsPage = () => {
   const [studyList, setStudyList] = useState<StudyListApiResponseDto[]>();
-  const [study, setStudy] = useAtom(studyAtom);
+  const [selectedStudy, setSelectedStudy] = useAtom(studyAtom);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,15 +27,15 @@ const StudentsPage = () => {
 
         if (data && data.length && data[0]) {
           setStudyList(data);
-          setStudy({ studyId: data[0].studyId, title: data[0].title });
+          setSelectedStudy({ studyId: data[0].studyId, title: data[0].title });
         }
       }
     };
 
     fetchData();
-  }, [setStudy]);
+  }, [setSelectedStudy]);
 
-  const student = useFetchStudents(study);
+  const student = useFetchStudents(selectedStudy);
   if (!studyList) return <Text>담당한 스터디가 없어요.</Text>;
 
   return (
