@@ -1,12 +1,15 @@
 import { Space } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
 
+import { EmptyStudy } from "../_components";
 import { AssignmentHistory } from "./_components";
 import { AssignmentContent } from "./_components/AssignmentContent";
 import { AssignmentDescription } from "./_components/AssignmentDescription";
 import { AssignmentHeader } from "./_components/AssignmentHeader";
 
-const MyAssignmentPage = () => {
-  return (
+const MyAssignmentPage = async () => {
+  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+  return myOngoingStudyInfoData?.studyId ? (
     <>
       <AssignmentHeader />
       <Space height={8} />
@@ -15,6 +18,8 @@ const MyAssignmentPage = () => {
       <AssignmentContent />
       <AssignmentHistory />
     </>
+  ) : (
+    <EmptyStudy />
   );
 };
 

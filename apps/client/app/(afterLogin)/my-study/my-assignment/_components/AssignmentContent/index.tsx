@@ -3,8 +3,6 @@ import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import { studyDetailApi } from "apis/studyDetailApi";
-import { routePath } from "constants/routePath";
-import { redirect } from "next/navigation";
 
 import { AssignmentOverviewBox } from "./AssignmentOverviewBox";
 import { EmptyAssignmentBox } from "./EmptyAssignmentBox";
@@ -14,7 +12,7 @@ export const AssignmentContent = async () => {
   const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
   if (!myOngoingStudyInfoData?.studyId) {
-    return redirect(routePath["my-study"]);
+    return;
   }
   const studyDashboard = await studyDetailApi.getStudyDetailDashboard(
     myOngoingStudyInfoData.studyId
