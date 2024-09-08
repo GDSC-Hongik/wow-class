@@ -129,6 +129,7 @@ const buttonContainerStyle = css({
   justifyContent: "center",
   textStyle: "body1",
   minWidth: "182px",
+  whiteSpace: "nowrap",
 });
 
 const textButtonContainerStyle = css({
