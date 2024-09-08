@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import setExpireTime from "utils/setExpireTime";
 export const config = {
-  matcher: ["/studies/:path*", "/participants/:path*"],
+  matcher: ["/studies/:path*", "/students/:path*"],
 };
 
 const middleware = async () => {

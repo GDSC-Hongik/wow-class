@@ -37,12 +37,12 @@ const Navbar = async () => {
         };
       }),
     },
-    // {
-    //   href: "participants",
-    //   imageUrl: participantImageUrl,
-    //   alt: "participant-icon",
-    //   name: "수강생 관리",
-    // },
+    {
+      href: "/students",
+      imageUrl: participantImageUrl,
+      alt: "participant-icon",
+      name: "수강생 관리",
+    },
   ];
 
   return (
