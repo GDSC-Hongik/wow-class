@@ -162,5 +162,5 @@ const failMapping: Record<Assignment["submissionFailureType"], string> = {
   WORD_COUNT_INSUFFICIENT: "글자수부족",
   NOT_SUBMITTED: "미제출",
   NONE: "",
-  UNKNOWN: "알수없음",
+  UNKNOWN: "제출실패",
 };

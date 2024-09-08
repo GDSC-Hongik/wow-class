@@ -25,8 +25,7 @@ export const FailurePopover = ({
             "Q. 글자수가 부족하다고 나와요."}
           {submissionFailureType === "LOCATION_UNIDENTIFIABLE" &&
             'Q. "위치 확인 불가" 라고 나와요.'}
-          {submissionFailureType === "UNKNOWN" &&
-            'Q. "알 수 없음" 라고 나와요.'}
+          {submissionFailureType === "UNKNOWN" && 'Q. "제출 실패" 라고 나와요.'}
         </Text>
         <Text as="div" color="outline" typo="body3">
           {submissionFailureType === "LOCATION_UNIDENTIFIABLE" && (
@@ -56,13 +55,11 @@ export const FailurePopover = ({
           )}
           {submissionFailureType === "UNKNOWN" && (
             <p>
-              '위치 확인 불가' 나 '글자 수 부족' 외의 다른 이유로
+              제출이 실패한 이유를 파악할 수 없어요. <br />
               <br />
-              제출 실패를 한 경우에요. <br />
+              이름, 학번과 함께 어떤 상황인지
               <br />
-              제대로 제출한 후에도 계속 '알 수 없음' 이 뜬다면,
-              <br />
-              GDSC Hongik 카카오톡 채널로 문의해주세요.
+              GDSC Hongik 카카오톡 채널로 전달해주세요.
             </p>
           )}
         </Text>
