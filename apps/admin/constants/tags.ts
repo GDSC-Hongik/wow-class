@@ -8,4 +8,5 @@ export const enum tags {
   announcements = "announcements",
   memberList = "memberList",
   attendances = "attendances",
+  students = "students",
 }

@@ -106,7 +106,6 @@ class Fetcher {
     let response: ApiResponse = await fetch(fullUrl, fetchOptions);
 
     const data = await this.parseJsonResponse(response);
-
     await this.handleError(response, data);
 
     response = await this.interceptResponse(response);
