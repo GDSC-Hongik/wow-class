@@ -1,5 +1,6 @@
 import { css } from "@styled-system/css";
 import Image from "next/image";
+import Link from "next/link";
 
 import logoImageUrl from "../../assets/images/logo.svg";
 
@@ -10,7 +11,7 @@ import logoImageUrl from "../../assets/images/logo.svg";
 const Header = () => {
   return (
     <header className={headerContainerStyle} role="banner">
-      <div className={logoContainerStyle}>
+      <Link className={logoContainerStyle} href="/landing">
         <Image
           alt="gdsc logo"
           className={imageStyle}
@@ -24,7 +25,7 @@ const Header = () => {
         <div aria-level={2} className={subTitleStyle} role="heading">
           Hongik Univ.
         </div>
-      </div>
+      </Link>
     </header>
   );
 };
@@ -48,6 +49,7 @@ const logoContainerStyle = css({
   width: "956px",
   paddingX: "16px",
   alignItems: "center",
+  cursor: "pointer",
 });
 
 const imageStyle = css({
