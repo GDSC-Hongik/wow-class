@@ -24,10 +24,7 @@ const AuthPage = async () => {
             와우클래스는 GDSC Hongik 정회원만 이용 가능해요.
           </Text>
         </div>
-        <div
-          className={descriptionTextContainerStyle}
-          style={{ marginBottom: "48px" }}
-        >
+        <div className={descriptionTextContainerStyle}>
           <Image
             alt="check-icon"
             height={20}
@@ -36,6 +33,17 @@ const AuthPage = async () => {
           />
           <Text as="p" color="sub" typo="body1">
             GDSC Hongik 가입을 위해선 GitHub 계정이 필요해요.
+          </Text>
+        </div>
+        <div className={mobileDescriptionTextContainerStyle}>
+          <Image
+            alt="check-icon"
+            height={20}
+            src="/images/check.svg"
+            width={20}
+          />
+          <Text as="p" color="primary" typo="body1">
+            PC에 최적화되어 있어요. PC로 이용해주세요.
           </Text>
         </div>
         <Button
@@ -48,7 +56,7 @@ const AuthPage = async () => {
           GitHub 로그인
         </Button>
       </section>
-      <section className={imageContainerStyle}>
+      <section className={rightColStyle}>
         <Image
           fill
           alt="auth-background-image"
@@ -78,6 +86,9 @@ const mainContentStyle = css({
   height: "100vh",
   alignItems: "center",
   justifyContent: "center",
+  "@media (max-width: 599px)": {
+    gridTemplateColumns: "1fr 0",
+  },
 });
 
 const leftColStyle = css({
@@ -95,9 +106,19 @@ const descriptionTextContainerStyle = css({
   marginBottom: "4px",
   display: "flex",
   gap: "10px",
+  stroke: "primary",
 });
 
-const imageContainerStyle = css({
+const mobileDescriptionTextContainerStyle = css({
+  display: "none",
+  marginBottom: "4px",
+  "@media (max-width: 599px)": {
+    display: "flex",
+    gap: "10px",
+  },
+});
+
+const rightColStyle = css({
   position: "relative",
   width: "100%",
   height: "100%",
@@ -112,4 +133,8 @@ const authImageStyle = css({
 const githubLoginButtonStyle = {
   backgroundColor: `${color.github}`,
   maxWidth: "328px",
+  marginTop: "44px",
+  "@media (max-width: 599px)": {
+    marginTop: "36px",
+  },
 };
