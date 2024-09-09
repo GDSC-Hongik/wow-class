@@ -17,7 +17,7 @@ const AuthPage = async () => {
           <Image
             alt="check-icon"
             height={20}
-            src="/images/check.svg"
+            src="/images/check-gray.svg"
             width={20}
           />
           <Text as="p" color="sub" typo="body1">
@@ -28,7 +28,7 @@ const AuthPage = async () => {
           <Image
             alt="check-icon"
             height={20}
-            src="/images/check.svg"
+            src="/images/check-gray.svg"
             width={20}
           />
           <Text as="p" color="sub" typo="body1">
@@ -39,7 +39,7 @@ const AuthPage = async () => {
           <Image
             alt="check-icon"
             height={20}
-            src="/images/check.svg"
+            src="/images/check-blue.svg"
             width={20}
           />
           <Text as="p" color="primary" typo="body1">
@@ -133,8 +133,5 @@ const authImageStyle = css({
 const githubLoginButtonStyle = {
   backgroundColor: `${color.github}`,
   maxWidth: "328px",
-  marginTop: "44px",
-  "@media (max-width: 599px)": {
-    marginTop: "36px",
-  },
+  marginTop: "40px",
 };
