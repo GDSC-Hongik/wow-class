@@ -367,6 +367,9 @@ progress {
 .px_16px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   padding-inline: 16px;
 }
+.cursor_pointer:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  cursor: pointer;
+}
 .w_49px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   width: 49px;
 }
@@ -408,9 +411,6 @@ progress {
 }
 .pos_absolute:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   position: absolute;
-}
-.cursor_pointer:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  cursor: pointer;
 }
 .li-s_none:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   list-style: none;
