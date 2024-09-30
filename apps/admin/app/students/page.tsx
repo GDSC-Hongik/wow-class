@@ -20,15 +20,13 @@ const StudentsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const adminStatus = await isAdmin();
-      if (adminStatus) {
-        const data = adminStatus
-          ? await studyApi.getStudyList()
-          : await studyApi.getMyStudyList();
+      const data = adminStatus
+        ? await studyApi.getStudyList()
+        : await studyApi.getMyStudyList();
 
-        if (data && data.length && data[0]) {
-          setStudyList(data);
-          setSelectedStudy({ studyId: data[0].studyId, title: data[0].title });
-        }
+      if (data && data.length && data[0]) {
+        setStudyList(data);
+        setSelectedStudy({ studyId: data[0].studyId, title: data[0].title });
       }
     };
 
