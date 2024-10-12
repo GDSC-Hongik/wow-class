@@ -2,6 +2,6 @@
 
 import { revalidateTag } from "next/cache";
 
-export const revalidateTagByName = (tag: string) => {
+export const revalidateTagByName = async (tag: string) => {
   revalidateTag(tag);
 };

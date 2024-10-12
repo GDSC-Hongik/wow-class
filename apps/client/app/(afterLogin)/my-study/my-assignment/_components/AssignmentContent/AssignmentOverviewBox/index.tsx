@@ -66,6 +66,7 @@ export const AssignmentOverviewBox = async ({
                   assignment={assignment}
                   buttonsDisabled={buttonsDisabled || !isSubmittable}
                   repositoryLink={repositoryLink}
+                  studyId={myOngoingStudyInfoData.studyId}
                 />
               </>
             }
