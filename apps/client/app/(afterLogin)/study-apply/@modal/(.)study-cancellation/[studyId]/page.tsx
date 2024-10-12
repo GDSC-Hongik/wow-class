@@ -50,8 +50,8 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
     const result = await studyApplyApi.cancelStudyApplication(Number(studyId));
 
     if (result.success) {
-      revalidateTagByName(tags.studyApply);
-      revalidateTagByName(tags.myOngoingStudy);
+      await revalidateTagByName(tags.studyApply);
+      await revalidateTagByName(tags.myOngoingStudy);
       setCancelSuccess(true);
     }
   };
