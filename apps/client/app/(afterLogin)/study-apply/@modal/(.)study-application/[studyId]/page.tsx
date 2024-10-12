@@ -49,8 +49,8 @@ const StudyApplication = ({ params }: { params: { studyId: number } }) => {
   const handleClickApplyButton = async () => {
     const result = await studyApplyApi.applyStudy(Number(studyId));
     if (result.success) {
-      revalidateTagByName(tags.studyApply);
-      revalidateTagByName(tags.myOngoingStudy);
+      await revalidateTagByName(tags.studyApply);
+      await revalidateTagByName(tags.myOngoingStudy);
       setApplySuccess(true);
     }
   };

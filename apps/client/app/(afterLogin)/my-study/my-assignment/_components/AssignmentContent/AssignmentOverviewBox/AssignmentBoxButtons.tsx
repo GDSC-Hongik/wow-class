@@ -2,6 +2,7 @@
 
 import { Space } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { studyDetailApi } from "apis/studyDetailApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import Link from "next/link";
@@ -16,12 +17,14 @@ interface AssignmentBoxButtonsProps {
   assignment: Assignment;
   repositoryLink?: string;
   buttonsDisabled?: boolean;
+  studyId: number;
 }
 
 export const AssignmentBoxButtons = ({
   buttonsDisabled,
   assignment,
   repositoryLink,
+  studyId,
 }: AssignmentBoxButtonsProps) => {
   return (
     <>
@@ -34,6 +37,8 @@ export const AssignmentBoxButtons = ({
       <SecondaryButton
         assignment={assignment}
         buttonsDisabled={buttonsDisabled}
+        key={assignment.assignmentSubmissionStatus}
+        studyId={studyId}
       />
     </>
   );
@@ -42,7 +47,7 @@ const PrimaryButton = ({
   assignment,
   buttonsDisabled,
   repositoryLink,
-}: AssignmentBoxButtonsProps) => {
+}: Omit<AssignmentBoxButtonsProps, "studyId">) => {
   const { assignmentSubmissionStatus, submissionFailureType, submissionLink } =
     assignment;
   const { primaryButtonText } =
@@ -77,9 +82,11 @@ const PrimaryButton = ({
 const SecondaryButton = ({
   assignment,
   buttonsDisabled,
+  studyId,
 }: Omit<AssignmentBoxButtonsProps, "repositoryLink">) => {
   const { assignmentSubmissionStatus, studyDetailId, deadline, committedAt } =
     assignment;
+
   if (isDeadlinePassed(deadline)) {
     return (
       <Button disabled={true} style={buttonStyle}>
@@ -92,12 +99,28 @@ const SecondaryButton = ({
       ? buttonTextMap.INITIAL
       : buttonTextMap[assignmentSubmissionStatus];
 
+  const fetchStudyDashboard = async () => {
+    const studyDashboard =
+      await studyDetailApi.getStudyDetailDashboard(studyId);
+    return studyDashboard;
+  };
+
   const handleClickSubmissionComplete = async () => {
     const response = await studyHistoryApi.submitAssignment(studyDetailId);
     if (response.success) {
-      revalidateTagByName(tags.studyDetailDashboard);
-      revalidateTagByName(tags.studyHistory);
-      toast.success("과제 제출이 완료되었어요.");
+      await revalidateTagByName(tags.studyDetailDashboard);
+      await revalidateTagByName(tags.studyHistory);
+      const fetchedStudyDashBoardData = await fetchStudyDashboard();
+      const currentAssignmentSubmissionStatus =
+        fetchedStudyDashBoardData?.submittableAssignments.filter(
+          (item) => item.studyDetailId === studyDetailId
+        )[0]?.assignmentSubmissionStatus;
+
+      if (currentAssignmentSubmissionStatus === "SUCCESS") {
+        toast.success("과제 제출이 완료되었습니다.");
+      } else if (currentAssignmentSubmissionStatus === "FAILURE") {
+        toast.error("과제 제출에 실패했습니다.");
+      }
     }
   };
 
@@ -106,6 +129,7 @@ const SecondaryButton = ({
     committedAt as string
   );
   const commitText = `최종 수정일자 ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
+
   return (
     <Button
       disabled={buttonsDisabled}
