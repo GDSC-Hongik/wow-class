@@ -55,7 +55,7 @@ const Assignments = ({
   const { assignmentStatus, week, studyTitle } = assignment;
 
   // TODO: 휴강된 경우 진입 막기
-  if (assignmentStatus === "CANCELLED") return null;
+  if (assignmentStatus === "CANCELED") return null;
 
   return (
     <>

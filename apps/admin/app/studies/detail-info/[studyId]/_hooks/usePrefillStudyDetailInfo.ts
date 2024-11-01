@@ -22,7 +22,7 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
               description: data.description || "",
               difficulty: data.difficulty || undefined,
               status:
-                data.curriculumStatus === "CANCELLED" ? "CANCELLED" : "OPEN",
+                data.curriculumStatus === "CANCELED" ? "CANCELED" : "OPEN",
             })) || [],
         });
       }

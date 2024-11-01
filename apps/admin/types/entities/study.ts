@@ -3,7 +3,7 @@ export type StudyDifficultyArrayType = {
   value: StudyDifficultyType;
 }[];
 
-export type StudyAssignmentStatusType = "NONE" | "OPEN" | "CANCELLED";
+export type StudyAssignmentStatusType = "NONE" | "OPEN" | "CANCELED";
 
 export type StudyDifficultyType = "HIGH" | "MEDIUM" | "LOW" | "BASIC";
 

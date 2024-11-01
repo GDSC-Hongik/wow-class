@@ -65,7 +65,10 @@ class Fetcher {
 
     if (contentType.includes("application/json")) {
       return response.json();
-    } else if (contentType.startsWith("image/")) {
+    } else if (
+      contentType.startsWith("image/") ||
+      contentType.startsWith("application/octet-stream")
+    ) {
       return response.blob();
     }
 
