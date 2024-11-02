@@ -14,8 +14,12 @@ const useFetchStudents = (
   useEffect(() => {
     const fetchStudentsData = async () => {
       if (study) {
-        const studentsData = await studyApi.getStudyStudents(study.studyId);
-        if (studentsData) setStudentList(studentsData);
+        const studentsData = await studyApi.getStudyStudents(study.studyId, {
+          page: 1,
+          size: 1,
+          sort: [],
+        });
+        if (studentsData) setStudentList(studentsData.content);
       }
     };
 
