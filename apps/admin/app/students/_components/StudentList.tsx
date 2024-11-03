@@ -29,6 +29,7 @@ const StudentList = ({
 }: {
   studentList: StudyStudentApiResponseDto[] | [];
 }) => {
+  if (!studentList) return null;
   if (!studentList.length) return <Text>스터디 수강생이 없어요.</Text>;
 
   return (
