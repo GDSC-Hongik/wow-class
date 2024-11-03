@@ -157,9 +157,7 @@ export const studyApi = {
         next: { tags: [tags.students] },
         cache: "force-cache",
       },
-      {
-        params: pageable,
-      }
+      pageable
     );
     return response.data;
   },

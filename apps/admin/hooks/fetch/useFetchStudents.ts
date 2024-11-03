@@ -26,7 +26,7 @@ const useFetchStudents = (
     const fetchStudentsData = async () => {
       if (study) {
         const studentsData = await studyApi.getStudyStudents(study.studyId, {
-          page: page,
+          page: page - 1,
           size: PAGE_SIZE,
           sort: [],
         });
