@@ -5,12 +5,13 @@ import type {
   StudyStudentApiResponseDto,
   StudyTaskResponseDto,
 } from "types/dtos/studyStudent";
+import { formatNumberToPercent } from "utils/formatNumber";
 import Table from "wowds-ui/Table";
 import TextButton from "wowds-ui/TextButton";
 
 import TaskTag from "./TaskTag";
 
-const STUENT_INFO_LIST = [
+const STUENT_INFO_LIST_BEFORE = [
   "수료",
   "1차 우수회원",
   "2차 우수회원",
@@ -20,6 +21,8 @@ const STUENT_INFO_LIST = [
   "디스코드 닉네임",
   "깃허브 링크",
 ];
+
+const STUDENT_INFO_LIST_AFTER = ["출석률", "과제 수행률", "전체 수행정도"];
 
 const StudentList = ({
   studentList,
@@ -31,14 +34,17 @@ const StudentList = ({
   return (
     <Table>
       <Table.Thead>
-        {STUENT_INFO_LIST.map((info) => (
+        {STUENT_INFO_LIST_BEFORE.map((info) => (
           <Table.Th key={info}>{info}</Table.Th>
         ))}
         {studentList[0] && <StudyTasksThs tasks={studentList[0].studyTasks} />}
+        {STUDENT_INFO_LIST_AFTER.map((info) => (
+          <Table.Th key={info}>{info}</Table.Th>
+        ))}
       </Table.Thead>
       <Table.Tbody>
         {studentList.map((student) => (
-          <StudentListItem {...student} />
+          <StudentListItem key={student.memberId} {...student} />
         ))}
       </Table.Tbody>
     </Table>
@@ -55,6 +61,8 @@ const StudentListItem = ({
   nickname,
   githubLink,
   studyTasks,
+  assignmentRate,
+  attendanceRate,
 }: StudyStudentApiResponseDto) => {
   return (
     <Table.Tr key={studentId} value={studentId}>
@@ -86,6 +94,8 @@ const StudentListItem = ({
         />
       </Table.Td>
       <StudyTasksTds tasks={studyTasks} />
+      <Table.Td>{formatNumberToPercent(assignmentRate)}</Table.Td>
+      <Table.Td>{formatNumberToPercent(attendanceRate)}</Table.Td>
     </Table.Tr>
   );
 };
