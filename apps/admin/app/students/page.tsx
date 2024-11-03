@@ -22,9 +22,11 @@ const StudentsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const adminStatus = await isAdmin();
-      const data = adminStatus
-        ? await studyApi.getStudyList()
-        : await studyApi.getMyStudyList();
+      const data =
+        // adminStatus
+        //   ? await studyApi.getStudyList()
+        //   :
+        await studyApi.getMyStudyList();
 
       if (data && data.length && data[0]) {
         setStudyList(data);
@@ -41,11 +43,16 @@ const StudentsPage = () => {
   };
 
   const { studentList, pageInfo } = useFetchStudents(selectedStudy, page);
+  if (!selectedStudy) return null;
   if (!studyList) return <Text>담당한 스터디가 없어요.</Text>;
 
   return (
     <Flex direction="column" gap="1.5rem">
-      <StudentsHeader studyList={studyList} />
+      <StudentsHeader
+        studentLength={studentList.length}
+        studyId={selectedStudy.studyId}
+        studyList={studyList}
+      />
       {studentList.length ? <StudentFilter /> : null}
       <StudentList studentList={studentList} />
       <StudentPagination

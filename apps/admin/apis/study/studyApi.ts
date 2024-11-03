@@ -161,4 +161,15 @@ export const studyApi = {
     );
     return response.data;
   },
+  getStudyStudentsExcel: async (studyId: number) => {
+    const response = await fetcher.get(
+      `/mentor/studies/${studyId}/students/excel`,
+      {
+        next: { tags: [tags.studentsExcel] },
+        cache: "force-cache",
+      }
+    );
+
+    return response.data;
+  },
 };
