@@ -1,3 +1,4 @@
+import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
 import type { PageableObject, SortType } from "types/entities/page";
 
 export interface StudyStudentApiResponseDto {
@@ -49,11 +50,7 @@ export interface AttendanceTask extends StudyTaskResponseDtoBase {
 export interface AssignmentTask extends StudyTaskResponseDtoBase {
   taskType: "ASSIGNMENT";
   assignmentTitle: string;
-  assignmentSubmissionStatus:
-    | "NOT_SUBMITTED"
-    | "FAILURE"
-    | "SUCCESS"
-    | "CANCELED";
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
 }
 
 export type StudyTaskResponseDto<T extends "ATTENDANCE" | "ASSIGNMENT"> =
