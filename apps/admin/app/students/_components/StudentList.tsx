@@ -5,6 +5,17 @@ import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
 import Table from "wowds-ui/Table";
 import TextButton from "wowds-ui/TextButton";
 
+const STUENT_INFO_LIST = [
+  "수료",
+  "1차 우수회원",
+  "2차 우수회원",
+  "이름",
+  "학번",
+  "디스코드 사용자명",
+  "디스코드 닉네임",
+  "깃허브 링크",
+];
+
 const StudentList = ({
   studentList,
 }: {
@@ -15,14 +26,9 @@ const StudentList = ({
   return (
     <Table>
       <Table.Thead>
-        <Table.Th>수료</Table.Th>
-        <Table.Th>1차 우수회원</Table.Th>
-        <Table.Th>2차 우수회원</Table.Th>
-        <Table.Th>이름</Table.Th>
-        <Table.Th>학번</Table.Th>
-        <Table.Th>디스코드 사용자명</Table.Th>
-        <Table.Th>디스코드 닉네임</Table.Th>
-        <Table.Th>깃허브 링크</Table.Th>
+        {STUENT_INFO_LIST.map((info) => (
+          <Table.Th key={info}>{info}</Table.Th>
+        ))}
       </Table.Thead>
       <Table.Tbody>
         {studentList.map((student) => {
