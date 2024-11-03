@@ -1,4 +1,4 @@
-import { AwardIcon, Text } from "@wow-class/ui";
+import { AwardIcon, StarCheckIcon, Text } from "@wow-class/ui";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
@@ -38,7 +38,9 @@ const StudentList = ({
           } = student;
           return (
             <Table.Tr key={studentId} value={studentId}>
-              <Table.Td>{studyHistoryStatus}</Table.Td>
+              <Table.Td>
+                <StarCheckIcon checked={studyHistoryStatus === "COMPLETED"} />
+              </Table.Td>
               <Table.Td>
                 <Text style={awardTextStyle} typo="body2">
                   <AwardIcon disabled={!isFirstRoundOutstandingStudent} />
