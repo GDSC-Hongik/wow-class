@@ -96,9 +96,9 @@ const StudyTasksThs = ({
   )[];
 }) => {
   return tasks.map((task) => {
-    const { studyDetailId, week, taskType } = task;
+    const { week, taskType } = task;
     return (
-      <Table.Th key={studyDetailId}>
+      <Table.Th key={taskType + week}>
         {taskType === "ATTENDANCE" ? `${week}주차 출석` : `${week}주차 과제`}
       </Table.Th>
     );
@@ -114,9 +114,9 @@ const StudyTasksTds = ({
   )[];
 }) => {
   return tasks.map((task) => {
-    const { studyDetailId } = task;
+    const { week, taskType } = task;
     return (
-      <Table.Td key={studyDetailId}>
+      <Table.Td key={taskType + week}>
         <TaskTag task={task} />
       </Table.Td>
     );
