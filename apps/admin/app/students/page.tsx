@@ -10,6 +10,7 @@ import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import isAdmin from "utils/isAdmin";
 
 import StudentList from "./_components/StudentList";
+import StudentPagination from "./_components/StudentPagination";
 import StudentsHeader from "./_components/StudentsHeader";
 import { studyAtom } from "./_contexts/StudyProvider";
 
@@ -33,13 +34,22 @@ const StudentsPage = () => {
     fetchData();
   }, [setSelectedStudy]);
 
-  const student = useFetchStudents(selectedStudy);
+  const [page, setPage] = useState(1);
+  const handleClickChangePage = (nextPage: number) => {
+    setPage(nextPage);
+  };
+
+  const { studentList, pageInfo } = useFetchStudents(selectedStudy, page);
   if (!studyList) return <Text>담당한 스터디가 없어요.</Text>;
 
   return (
     <Flex direction="column" gap="3rem">
       <StudentsHeader studyList={studyList} />
-      <StudentList studentList={student.studentList} />
+      <StudentList studentList={studentList} />
+      <StudentPagination
+        handleClickChangePage={handleClickChangePage}
+        pageInfo={pageInfo}
+      />
     </Flex>
   );
 };

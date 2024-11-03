@@ -1,32 +1,47 @@
 import { studyApi } from "apis/study/studyApi";
 import { useEffect, useState } from "react";
-import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
+import type {
+  PageStudyStudentApiResponseDto,
+  StudyStudentApiResponseDto,
+} from "types/dtos/studyStudent";
 
 import type { StudyAtomprops } from "@/students/_contexts/StudyProvider";
 
+const PAGE_SIZE = 10;
+
 const useFetchStudents = (
-  study: StudyAtomprops | undefined
-): { studentList: StudyStudentApiResponseDto[] | [] } => {
+  study: StudyAtomprops | undefined,
+  page: number
+): {
+  studentList: StudyStudentApiResponseDto[] | [];
+  pageInfo: Omit<PageStudyStudentApiResponseDto, "content">;
+} => {
   const [studentList, setStudentList] = useState<
     StudyStudentApiResponseDto[] | []
   >([]);
+  const [pageInfo, setPageInfo] =
+    useState<Omit<PageStudyStudentApiResponseDto, "content">>(null);
 
   useEffect(() => {
     const fetchStudentsData = async () => {
       if (study) {
         const studentsData = await studyApi.getStudyStudents(study.studyId, {
-          page: 1,
-          size: 1,
+          page: page,
+          size: PAGE_SIZE,
           sort: [],
         });
-        if (studentsData) setStudentList(studentsData.content);
+        if (studentsData) {
+          const { content, ...rest } = studentsData;
+          setStudentList(content);
+          setPageInfo(rest);
+        }
       }
     };
 
     fetchStudentsData();
-  }, [study]);
+  }, [study, page]);
 
-  return { studentList };
+  return { studentList, pageInfo };
 };
 
 export default useFetchStudents;
