@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import isAdmin from "utils/isAdmin";
 
+import StudentFilter from "./_components/StudentFilter";
 import StudentList from "./_components/StudentList";
 import StudentPagination from "./_components/StudentPagination";
 import StudentsHeader from "./_components/StudentsHeader";
@@ -43,8 +44,9 @@ const StudentsPage = () => {
   if (!studyList) return <Text>담당한 스터디가 없어요.</Text>;
 
   return (
-    <Flex direction="column" gap="3rem">
+    <Flex direction="column" gap="1.5rem">
       <StudentsHeader studyList={studyList} />
+      {studentList.length ? <StudentFilter /> : null}
       <StudentList studentList={studentList} />
       <StudentPagination
         handleClickChangePage={handleClickChangePage}

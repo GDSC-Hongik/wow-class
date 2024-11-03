@@ -1,3 +1,4 @@
+import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import ItemSeparator from "components/ItemSeparator";
 import type { CSSProperties } from "react";
@@ -11,10 +12,12 @@ const StudentsHeader = ({
   studyList: StudyListApiResponseDto[];
 }) => {
   return (
-    <Text as="h1" style={titleStyle} typo="h1">
-      수강생 관리 <ItemSeparator height={6} width={6} />
-      <StudyDropDown studyList={studyList} />
-    </Text>
+    <Flex paddingBottom="1.5rem">
+      <Text as="h1" style={titleStyle} typo="h1">
+        수강생 관리 <ItemSeparator height={6} width={6} />
+        <StudyDropDown studyList={studyList} />
+      </Text>
+    </Flex>
   );
 };
 
