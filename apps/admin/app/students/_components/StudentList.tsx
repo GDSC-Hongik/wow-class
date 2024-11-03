@@ -1,9 +1,14 @@
 import { AwardIcon, StarCheckIcon, Text } from "@wow-class/ui";
 import Link from "next/link";
 import type { CSSProperties } from "react";
-import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
+import type {
+  StudyStudentApiResponseDto,
+  StudyTaskResponseDto,
+} from "types/dtos/studyStudent";
 import Table from "wowds-ui/Table";
 import TextButton from "wowds-ui/TextButton";
+
+import TaskTag from "./TaskTag";
 
 const STUENT_INFO_LIST = [
   "수료",
@@ -29,6 +34,7 @@ const StudentList = ({
         {STUENT_INFO_LIST.map((info) => (
           <Table.Th key={info}>{info}</Table.Th>
         ))}
+        {studentList[0] && <StudyTasksThs tasks={studentList[0].studyTasks} />}
       </Table.Thead>
       <Table.Tbody>
         {studentList.map((student) => {
@@ -41,6 +47,7 @@ const StudentList = ({
             discordUsername,
             nickname,
             githubLink,
+            studyTasks,
           } = student;
           return (
             <Table.Tr key={studentId} value={studentId}>
@@ -71,12 +78,49 @@ const StudentList = ({
                   text={githubLink}
                 />
               </Table.Td>
+              <StudyTasksTds tasks={studyTasks} />
             </Table.Tr>
           );
         })}
       </Table.Tbody>
     </Table>
   );
+};
+
+const StudyTasksThs = ({
+  tasks,
+}: {
+  tasks: (
+    | StudyTaskResponseDto<"ASSIGNMENT">
+    | StudyTaskResponseDto<"ATTENDANCE">
+  )[];
+}) => {
+  return tasks.map((task) => {
+    const { studyDetailId, week, taskType } = task;
+    return (
+      <Table.Th key={studyDetailId}>
+        {taskType === "ATTENDANCE" ? `${week}주차 출석` : `${week}주차 과제`}
+      </Table.Th>
+    );
+  });
+};
+
+const StudyTasksTds = ({
+  tasks,
+}: {
+  tasks: (
+    | StudyTaskResponseDto<"ASSIGNMENT">
+    | StudyTaskResponseDto<"ATTENDANCE">
+  )[];
+}) => {
+  return tasks.map((task) => {
+    const { studyDetailId } = task;
+    return (
+      <Table.Td key={studyDetailId}>
+        <TaskTag task={task} />
+      </Table.Td>
+    );
+  });
 };
 
 const textButtonStyle: CSSProperties = {
