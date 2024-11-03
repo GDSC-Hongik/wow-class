@@ -1,4 +1,4 @@
-import { Text } from "@wow-class/ui";
+import { AwardIcon, Text } from "@wow-class/ui";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
@@ -15,6 +15,9 @@ const StudentList = ({
   return (
     <Table>
       <Table.Thead>
+        <Table.Th>수료</Table.Th>
+        <Table.Th>1차 우수회원</Table.Th>
+        <Table.Th>2차 우수회원</Table.Th>
         <Table.Th>이름</Table.Th>
         <Table.Th>학번</Table.Th>
         <Table.Th>디스코드 사용자명</Table.Th>
@@ -23,10 +26,31 @@ const StudentList = ({
       </Table.Thead>
       <Table.Tbody>
         {studentList.map((student) => {
-          const { name, studentId, discordUsername, nickname, githubLink } =
-            student;
+          const {
+            studyHistoryStatus,
+            isFirstRoundOutstandingStudent,
+            isSecondRoundOutstandingStudent,
+            name,
+            studentId,
+            discordUsername,
+            nickname,
+            githubLink,
+          } = student;
           return (
             <Table.Tr key={studentId} value={studentId}>
+              <Table.Td>{studyHistoryStatus}</Table.Td>
+              <Table.Td>
+                <Text style={awardTextStyle} typo="body2">
+                  <AwardIcon disabled={!isFirstRoundOutstandingStudent} />
+                  1차
+                </Text>
+              </Table.Td>
+              <Table.Td>
+                <Text style={awardTextStyle} typo="body2">
+                  <AwardIcon disabled={!isSecondRoundOutstandingStudent} />
+                  2차
+                </Text>
+              </Table.Td>
               <Table.Td>{name}</Table.Td>
               <Table.Td>{studentId}</Table.Td>
               <Table.Td>{discordUsername}</Table.Td>
@@ -52,4 +76,9 @@ const textButtonStyle: CSSProperties = {
   padding: 0,
 };
 
+const awardTextStyle: CSSProperties = {
+  display: "flex",
+  gap: "0.25rem",
+  alignItems: "center",
+};
 export default StudentList;
