@@ -37,53 +37,56 @@ const StudentList = ({
         {studentList[0] && <StudyTasksThs tasks={studentList[0].studyTasks} />}
       </Table.Thead>
       <Table.Tbody>
-        {studentList.map((student) => {
-          const {
-            studyHistoryStatus,
-            isFirstRoundOutstandingStudent,
-            isSecondRoundOutstandingStudent,
-            name,
-            studentId,
-            discordUsername,
-            nickname,
-            githubLink,
-            studyTasks,
-          } = student;
-          return (
-            <Table.Tr key={studentId} value={studentId}>
-              <Table.Td>
-                <StarCheckIcon checked={studyHistoryStatus === "COMPLETED"} />
-              </Table.Td>
-              <Table.Td>
-                <Text style={awardTextStyle} typo="body2">
-                  <AwardIcon disabled={!isFirstRoundOutstandingStudent} />
-                  1차
-                </Text>
-              </Table.Td>
-              <Table.Td>
-                <Text style={awardTextStyle} typo="body2">
-                  <AwardIcon disabled={!isSecondRoundOutstandingStudent} />
-                  2차
-                </Text>
-              </Table.Td>
-              <Table.Td>{name}</Table.Td>
-              <Table.Td>{studentId}</Table.Td>
-              <Table.Td>{discordUsername}</Table.Td>
-              <Table.Td>{nickname}</Table.Td>
-              <Table.Td>
-                <TextButton
-                  asProp={Link}
-                  href={githubLink || ""}
-                  style={textButtonStyle}
-                  text={githubLink}
-                />
-              </Table.Td>
-              <StudyTasksTds tasks={studyTasks} />
-            </Table.Tr>
-          );
-        })}
+        {studentList.map((student) => (
+          <StudentListItem {...student} />
+        ))}
       </Table.Tbody>
     </Table>
+  );
+};
+
+const StudentListItem = ({
+  studyHistoryStatus,
+  isFirstRoundOutstandingStudent,
+  isSecondRoundOutstandingStudent,
+  name,
+  studentId,
+  discordUsername,
+  nickname,
+  githubLink,
+  studyTasks,
+}: StudyStudentApiResponseDto) => {
+  return (
+    <Table.Tr key={studentId} value={studentId}>
+      <Table.Td>
+        <StarCheckIcon checked={studyHistoryStatus === "COMPLETED"} />
+      </Table.Td>
+      <Table.Td>
+        <Text style={awardTextStyle} typo="body2">
+          <AwardIcon disabled={!isFirstRoundOutstandingStudent} />
+          1차
+        </Text>
+      </Table.Td>
+      <Table.Td>
+        <Text style={awardTextStyle} typo="body2">
+          <AwardIcon disabled={!isSecondRoundOutstandingStudent} />
+          2차
+        </Text>
+      </Table.Td>
+      <Table.Td>{name}</Table.Td>
+      <Table.Td>{studentId}</Table.Td>
+      <Table.Td>{discordUsername}</Table.Td>
+      <Table.Td>{nickname}</Table.Td>
+      <Table.Td>
+        <TextButton
+          asProp={Link}
+          href={githubLink || ""}
+          style={textButtonStyle}
+          text={githubLink}
+        />
+      </Table.Td>
+      <StudyTasksTds tasks={studyTasks} />
+    </Table.Tr>
   );
 };
 
