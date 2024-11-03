@@ -1,5 +1,7 @@
 import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
+import type { AttendanceStatusType } from "types/entities/attendance";
 import type { PageableObject, SortType } from "types/entities/page";
+import type { TaskType } from "types/entities/task";
 
 export interface StudyStudentApiResponseDto {
   memberId: number;
@@ -11,7 +13,10 @@ export interface StudyStudentApiResponseDto {
   studyHistoryStatus: "NONE" | "COMPLETED";
   isFirstRoundOutstandingStudent: boolean;
   isSecondRoundOutstandingStudent: boolean;
-  studyTasks: StudyTaskResponseDto<"ATTENDANCE" | "ASSIGNMENT">[];
+  studyTasks: (
+    | StudyTaskResponseDto<"ASSIGNMENT">
+    | StudyTaskResponseDto<"ATTENDANCE">
+  )[];
   assignmentRate: number;
   attendanceRate: number;
 }
@@ -40,11 +45,7 @@ export interface StudyTaskResponseDtoBase {
 
 export interface AttendanceTask extends StudyTaskResponseDtoBase {
   taskType: "ATTENDANCE";
-  attendanceStatus:
-    | "ATTENDED"
-    | "NOT_ATTENDED"
-    | "BEFORE_ATTENDANCE"
-    | "CANCELED";
+  attendanceStatus: AttendanceStatusType;
 }
 
 export interface AssignmentTask extends StudyTaskResponseDtoBase {
@@ -53,5 +54,6 @@ export interface AssignmentTask extends StudyTaskResponseDtoBase {
   assignmentSubmissionStatus: AssignmentSubmissionStatusType;
 }
 
-export type StudyTaskResponseDto<T extends "ATTENDANCE" | "ASSIGNMENT"> =
-  T extends "ATTENDANCE" ? AttendanceTask : AssignmentTask;
+export type StudyTaskResponseDto<T extends TaskType> = T extends "ATTENDANCE"
+  ? AttendanceTask
+  : AssignmentTask;
