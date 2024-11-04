@@ -30,7 +30,7 @@ const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
   const onOpen = methods.getValues("onOpen");
 
   const handleClickSubmit = async () => {
-    if (assignmentStatus === "CANCELLED") return;
+    if (assignmentStatus === "CANCELED") return;
 
     const data = {
       title: methods.getValues("title"),

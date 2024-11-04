@@ -40,7 +40,7 @@ const CurriculumListItem = ({
             />
             <Flex direction="column" minWidth={52}>
               <Text typo="body1">{week}주차</Text>
-              {curriculumStatus === "CANCELLED" && (
+              {curriculumStatus === "CANCELED" && (
                 <Text color="sub" typo="body2">
                   휴강 주차
                 </Text>

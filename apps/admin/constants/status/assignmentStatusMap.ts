@@ -11,7 +11,7 @@ export const assignmentStatusMap: Record<
 > = {
   NONE: "개설",
   OPEN: "수정",
-  CANCELLED: "개설",
+  CANCELED: "개설",
 };
 
 export const assignmentSubmissionStatusMap: Record<
