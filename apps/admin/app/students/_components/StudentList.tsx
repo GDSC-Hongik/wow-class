@@ -53,6 +53,7 @@ const StudentList = ({
 };
 
 const StudentListItem = ({
+  memberId,
   studyHistoryStatus,
   isFirstRoundOutstandingStudent,
   isSecondRoundOutstandingStudent,
@@ -66,7 +67,7 @@ const StudentListItem = ({
   attendanceRate,
 }: StudyStudentApiResponseDto) => {
   return (
-    <Table.Tr key={studentId} value={studentId}>
+    <Table.Tr key={memberId}>
       <Table.Td>
         <StarCheckIcon checked={studyHistoryStatus === "COMPLETED"} />
       </Table.Td>

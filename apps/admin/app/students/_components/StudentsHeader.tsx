@@ -15,7 +15,7 @@ const StudentsHeader = ({
   studentLength,
 }: {
   studyList: StudyListApiResponseDto[];
-  studyId?: number;
+  studyId: number;
   studentLength: number;
 }) => {
   const [url, setUrl] = useState<string>("");

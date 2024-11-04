@@ -3,7 +3,11 @@ import { attendanceTaskStatusMap } from "constants/status/attendanceStatusMap";
 import type { StudyTaskResponseDto } from "types/dtos/studyStudent";
 import Tag from "wowds-ui/Tag";
 
-const TaskTag = ({ task }: { task: StudyTaskResponseDto }) => {
+const TaskTag = ({
+  task,
+}: {
+  task: StudyTaskResponseDto<"ASSIGNMENT" | "ATTENDANCE">;
+}) => {
   const { taskType } = task;
   if (taskType === "ATTENDANCE") {
     const { attendanceStatus } = task;

@@ -14,13 +14,15 @@ const useFetchStudents = (
   page: number
 ): {
   studentList: StudyStudentApiResponseDto[] | [];
-  pageInfo: Omit<PageStudyStudentApiResponseDto, "content">;
+  pageInfo: Omit<PageStudyStudentApiResponseDto, "content"> | null;
 } => {
   const [studentList, setStudentList] = useState<
     StudyStudentApiResponseDto[] | []
   >([]);
-  const [pageInfo, setPageInfo] =
-    useState<Omit<PageStudyStudentApiResponseDto, "content">>(null);
+  const [pageInfo, setPageInfo] = useState<Omit<
+    PageStudyStudentApiResponseDto,
+    "content"
+  > | null>(null);
 
   useEffect(() => {
     const fetchStudentsData = async () => {

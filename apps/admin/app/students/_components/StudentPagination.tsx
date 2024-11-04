@@ -5,7 +5,7 @@ const StudentPagination = ({
   pageInfo,
   handleClickChangePage,
 }: {
-  pageInfo: Omit<PageStudyStudentApiResponseDto, "content">;
+  pageInfo: Omit<PageStudyStudentApiResponseDto, "content"> | null;
   handleClickChangePage: (nextPage: number) => void;
 }) => {
   if (!pageInfo || !pageInfo.numberOfElements) return null;
