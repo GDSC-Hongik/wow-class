@@ -10,9 +10,9 @@ import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import isAdmin from "utils/isAdmin";
 
 import StudentFilter from "./_components/StudentFilter";
-import StudentList from "./_components/StudentList";
 import StudentPagination from "./_components/StudentPagination";
 import StudentsHeader from "./_components/StudentsHeader";
+import StudentList from "./_components/StudentTable/StudentList";
 import { studyAtom } from "./_contexts/StudyProvider";
 
 const StudentsPage = () => {
