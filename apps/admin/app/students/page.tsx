@@ -22,11 +22,9 @@ const StudentsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const adminStatus = await isAdmin();
-      const data =
-        // adminStatus
-        //   ? await studyApi.getStudyList()
-        //   :
-        await studyApi.getMyStudyList();
+      const data = adminStatus
+        ? await studyApi.getStudyList()
+        : await studyApi.getMyStudyList();
 
       if (data && data.length && data[0]) {
         setStudyList(data);
@@ -53,7 +51,10 @@ const StudentsPage = () => {
         studyId={selectedStudy.studyId}
         studyList={studyList}
       />
-      {studentList.length ? <StudentFilter /> : null}
+
+      {/* TODO: 페이지네이션 API 필터 추가 후 주석 해제
+      {studentList.length ? <StudentFilter /> : null} 
+      */}
       <StudentList studentList={studentList} />
       <StudentPagination
         handleClickChangePage={handleClickChangePage}

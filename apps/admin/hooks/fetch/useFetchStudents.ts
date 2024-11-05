@@ -30,7 +30,6 @@ const useFetchStudents = (
         const studentsData = await studyApi.getStudyStudents(study.studyId, {
           page: page - 1,
           size: PAGE_SIZE,
-          sort: [],
         });
         if (studentsData) {
           const { content, ...rest } = studentsData;

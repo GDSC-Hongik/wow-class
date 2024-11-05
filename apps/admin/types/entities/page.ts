@@ -7,7 +7,7 @@ export type SortType = {
 export type PageableType = {
   page: number;
   size: number;
-  sort: [];
+  sort?: [];
 };
 
 export type PageableObject = {
