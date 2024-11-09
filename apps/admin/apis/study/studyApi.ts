@@ -9,6 +9,7 @@ import type {
 import type { AttendanceApiResponseDto } from "types/dtos/attendance";
 import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
+import type { StudyStatisticsApiResponseDto } from "types/dtos/studyStatistics";
 import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
 import type { StudyAnnouncementType } from "types/entities/study";
 
@@ -155,6 +156,15 @@ export const studyApi = {
       {
         next: { tags: [tags.students] },
         cache: "force-cache",
+      }
+    );
+    return response.data;
+  },
+  getStudyStatistics: async (studyId: number) => {
+    const response = await fetcher.get<StudyStatisticsApiResponseDto>(
+      `/mentor/study-details/statistics?studyId=${studyId}`,
+      {
+        next: { tags: [tags.statistics] },
       }
     );
     return response.data;
