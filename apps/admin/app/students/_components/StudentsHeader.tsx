@@ -1,10 +1,9 @@
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { studyApi } from "apis/study/studyApi";
 import ItemSeparator from "components/ItemSeparator";
+import useFetchStudentsExcelUrl from "hooks/fetch/useFetchStudentsExcelUrl";
 import Image from "next/image";
 import type { CSSProperties } from "react";
-import { useEffect, useState } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 
 import OutstandingDropDown from "./OutstandingDropDown";
@@ -19,20 +18,7 @@ const StudentsHeader = ({
   studyId: number;
   studentLength: number;
 }) => {
-  const [url, setUrl] = useState<string>("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await studyApi.getStudyStudentsExcel(studyId);
-      const blob = new Blob([response], {
-        type: "application/vnd.ms-excel",
-      });
-      const url = URL.createObjectURL(blob);
-      if (url) setUrl(url);
-    };
-
-    if (studentLength) fetchData();
-  }, [studyId, studentLength]);
+  const url = useFetchStudentsExcelUrl({ studyId, studentLength });
 
   return (
     <Flex justify="space-between" paddingBottom="1.5rem">
