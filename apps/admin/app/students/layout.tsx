@@ -6,13 +6,18 @@ import { StudyProvider } from "./_contexts/StudyProvider";
 
 const StudentsLayout = ({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) => {
   return (
     <StudyProvider>
       <Navbar />
-      <styled.main className={StudentsLayoutStyle}>{children}</styled.main>
+      <styled.main className={StudentsLayoutStyle}>
+        {children}
+        {modal}
+      </styled.main>
     </StudyProvider>
   );
 };

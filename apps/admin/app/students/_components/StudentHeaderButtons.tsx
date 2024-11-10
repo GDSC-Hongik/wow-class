@@ -1,6 +1,7 @@
 import studyAchievementApi from "apis/study/studyAchievementApi";
 import { tags } from "constants/tags";
 import { useAtom, useAtomValue } from "jotai";
+import Link from "next/link";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
@@ -68,9 +69,10 @@ const StudentsHeaderButtons = () => {
         취소하기
       </Button>
       <Button
+        asProp={Link}
         disabled={!selectedStudents.length}
+        href={selectedStudents.length ? "/students/outstanding" : ""}
         size="sm"
-        onClick={handleClickEnabledButton}
       >
         {`${formatAchievementToText()} ${formatTypeToText()}`}
       </Button>

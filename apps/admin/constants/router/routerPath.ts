@@ -39,4 +39,8 @@ export const routerPath = {
     href: (studyDetailId: number | string) =>
       `/studies/assignments/${studyDetailId}/edit-assignment`,
   },
+  students: {
+    description: "스터디 학생 관리 페이지로 이동합니다.",
+    href: "/students",
+  },
 };
