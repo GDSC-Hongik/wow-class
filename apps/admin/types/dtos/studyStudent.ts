@@ -21,7 +21,7 @@ export interface StudyStudentApiResponseDto {
   attendanceRate: number;
 }
 
-export interface PageStudyStudentApiResponseDto {
+export interface PaginatedStudyStudentResponseDto {
   totalElements: number;
   totalPages: number;
   size: number;

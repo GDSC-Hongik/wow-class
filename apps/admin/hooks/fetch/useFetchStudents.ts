@@ -1,7 +1,7 @@
 import { studyApi } from "apis/study/studyApi";
 import { useEffect, useState } from "react";
 import type {
-  PageStudyStudentApiResponseDto,
+  PaginatedStudyStudentResponseDto,
   StudyStudentApiResponseDto,
 } from "types/dtos/studyStudent";
 
@@ -14,13 +14,13 @@ const useFetchStudents = (
   page: number
 ): {
   studentList: StudyStudentApiResponseDto[] | [];
-  pageInfo: Omit<PageStudyStudentApiResponseDto, "content"> | null;
+  pageInfo: Omit<PaginatedStudyStudentResponseDto, "content"> | null;
 } => {
   const [studentList, setStudentList] = useState<
     StudyStudentApiResponseDto[] | []
   >([]);
   const [pageInfo, setPageInfo] = useState<Omit<
-    PageStudyStudentApiResponseDto,
+    PaginatedStudyStudentResponseDto,
     "content"
   > | null>(null);
 

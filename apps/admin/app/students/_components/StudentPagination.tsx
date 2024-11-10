@@ -1,11 +1,11 @@
-import type { PageStudyStudentApiResponseDto } from "types/dtos/studyStudent";
+import type { PaginatedStudyStudentResponseDto } from "types/dtos/studyStudent";
 import Pagination from "wowds-ui/Pagination";
 
 const StudentPagination = ({
   pageInfo,
   handleClickChangePage,
 }: {
-  pageInfo: Omit<PageStudyStudentApiResponseDto, "content"> | null;
+  pageInfo: Omit<PaginatedStudyStudentResponseDto, "content"> | null;
   handleClickChangePage: (nextPage: number) => void;
 }) => {
   if (!pageInfo || !pageInfo.numberOfElements) return null;
