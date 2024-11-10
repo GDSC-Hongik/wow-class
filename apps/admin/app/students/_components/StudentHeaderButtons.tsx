@@ -25,31 +25,28 @@ const StudentsHeaderButtons = () => {
 
   const buttonText = `${formatAchievementToText()} ${formatTypeToText()}`;
 
-  return (
+  return enabled ? (
     <>
-      {enabled ? (
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={() =>
-            setOutstandingStudents({
-              ...outstandingStudents,
-              enabled: false,
-            })
-          }
-        >
-          취소하기
-        </Button>
-      ) : (
-        <OutstandingDropDown type="ADD" />
-      )}
-      {enabled ? (
-        <Button disabled size="sm">
-          {buttonText}
-        </Button>
-      ) : (
-        <OutstandingDropDown type="DEL" />
-      )}
+      <Button
+        size="sm"
+        variant="outline"
+        onClick={() =>
+          setOutstandingStudents({
+            ...outstandingStudents,
+            enabled: false,
+          })
+        }
+      >
+        취소하기
+      </Button>
+      <Button disabled size="sm">
+        {buttonText}
+      </Button>
+    </>
+  ) : (
+    <>
+      <OutstandingDropDown type="ADD" />
+      <OutstandingDropDown type="DEL" />
     </>
   );
 };
