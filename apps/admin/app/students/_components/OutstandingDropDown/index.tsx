@@ -6,10 +6,10 @@ import {
   OUTSTANDING_DEL_OPTIONS,
 } from "constants/status/outstandigOptions";
 import { useSetAtom } from "jotai";
+import type { AchievementType } from "types/entities/achievement";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-import type { AchievementType } from "@/students/_contexts/StudyProvider";
 import { outstandingStudentsAtom } from "@/students/_contexts/StudyProvider";
 
 import DropDownTrigger from "./DropDownTrigger";
