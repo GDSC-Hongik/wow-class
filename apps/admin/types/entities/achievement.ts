@@ -1,0 +1,3 @@
+export type AchievementType =
+  | "FIRST_ROUND_OUTSTANDING_STUDENT"
+  | "SECOND_ROUND_OUTSTANDING_STUDENT";

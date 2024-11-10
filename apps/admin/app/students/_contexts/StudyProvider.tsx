@@ -2,6 +2,7 @@
 
 import { atom, createStore, Provider } from "jotai";
 import type { PropsWithChildren, ReactNode } from "react";
+import type { AchievementType } from "types/entities/achievement";
 
 const studyIdStore = createStore();
 
@@ -11,10 +12,6 @@ export type StudyAtomprops = {
 };
 
 export type OutstandingStudentsType = "ADD" | "DEL";
-
-export type AchievementType =
-  | "FIRST_ROUND_OUTSTANDING_STUDENT"
-  | "SECOND_ROUND_OUTSTANDING_STUDENT";
 
 export type OutstandingStudentsProps = {
   type?: OutstandingStudentsType;

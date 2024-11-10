@@ -1,6 +1,4 @@
-export type AchievementType =
-  | "FIRST_ROUND_OUTSTANDING_STUDENT"
-  | "SECOND_ROUND_OUTSTANDING_STUDENT";
+import type { AchievementType } from "types/entities/achievement";
 
 export type OutstandingDropDownOption = {
   id: number;
