@@ -1,6 +1,12 @@
 import { Text } from "@wow-class/ui";
+import { useAtom, useAtomValue } from "jotai";
 import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
 import Table from "wowds-ui/Table";
+
+import {
+  outstandingStudentsAtom,
+  selectedStudentsAtom,
+} from "@/students/_contexts/StudyProvider";
 
 import StudentListItem from "./StudentListItem";
 import { StudyTasksThs } from "./StudyTasks";
@@ -23,11 +29,23 @@ const StudentList = ({
 }: {
   studentList: StudyStudentApiResponseDto[] | [];
 }) => {
+  const { enabled } = useAtomValue(outstandingStudentsAtom);
+  const [selectedStudents, setSelectedStudents] = useAtom(selectedStudentsAtom);
+
   if (!studentList) return null;
   if (!studentList.length) return <Text>스터디 수강생이 없어요.</Text>;
 
+  const handleChangeSelectedStudents = (rows: number[]) => {
+    setSelectedStudents(rows);
+  };
+
   return (
-    <Table>
+    <Table
+      fullWidth
+      selectedRowsProp={selectedStudents}
+      showCheckbox={enabled}
+      onChange={handleChangeSelectedStudents}
+    >
       <Table.Thead>
         {STUENT_INFO_LIST_BEFORE.map((info) => (
           <Table.Th key={info}>{info}</Table.Th>
