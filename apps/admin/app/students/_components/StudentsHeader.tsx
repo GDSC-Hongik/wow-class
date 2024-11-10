@@ -7,6 +7,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 
+import OutstandingDropDown from "./OutstandingDropDown";
 import StudyDropDown from "./StudyDropDown";
 
 const StudentsHeader = ({
@@ -39,16 +40,20 @@ const StudentsHeader = ({
         수강생 관리 <ItemSeparator height={6} width={6} />
         <StudyDropDown studyList={studyList} />
       </Text>
-      {studyId && !!studentLength && (
-        <styled.a download="study.xls" href={url}>
-          <Image
-            alt="다운로드"
-            height={24}
-            src="/images/download.svg"
-            width={24}
-          />
-        </styled.a>
-      )}
+      <Flex align="center" gap="0.75rem">
+        <OutstandingDropDown type="ADD" />
+        <OutstandingDropDown type="DEL" />
+        {studyId && !!studentLength && (
+          <styled.a download="study.xls" href={url}>
+            <Image
+              alt="다운로드"
+              height={24}
+              src="/images/download.svg"
+              width={24}
+            />
+          </styled.a>
+        )}
+      </Flex>
     </Flex>
   );
 };
