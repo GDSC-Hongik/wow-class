@@ -39,7 +39,7 @@ const StudentsHeader = ({
         수강생 관리 <ItemSeparator height={6} width={6} />
         <StudyDropDown studyList={studyList} />
       </Text>
-      {studyId && studentLength ? (
+      {studyId && !!studentLength && (
         <styled.a download="study.xls" href={url}>
           <Image
             alt="다운로드"
@@ -48,7 +48,7 @@ const StudentsHeader = ({
             width={24}
           />
         </styled.a>
-      ) : null}
+      )}
     </Flex>
   );
 };
