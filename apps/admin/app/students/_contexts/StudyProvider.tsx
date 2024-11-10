@@ -10,8 +10,24 @@ export type StudyAtomprops = {
   title: ReactNode;
 };
 
+export type OutstandingStudentsType = "ADD" | "DEL";
+
+export type AchievementType =
+  | "FIRST_ROUND_OUTSTANDING_STUDENT"
+  | "SECOND_ROUND_OUTSTANDING_STUDENT";
+
+export type OutstandingStudentsProps = {
+  type?: OutstandingStudentsType;
+  achievement?: AchievementType;
+  enabled: boolean;
+};
+
 export const studyAtom = atom<StudyAtomprops>();
 studyIdStore.set(studyAtom, undefined);
+
+export const outstandingStudentsAtom = atom<OutstandingStudentsProps>({
+  enabled: false,
+});
 
 export const StudyProvider = ({ children }: PropsWithChildren) => {
   return <Provider store={studyIdStore}>{children}</Provider>;

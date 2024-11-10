@@ -5,12 +5,18 @@ import {
   OUTSTANDING_ADD_OPTIONS,
   OUTSTANDING_DEL_OPTIONS,
 } from "constants/status/outstandigOptions";
+import { useSetAtom } from "jotai";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
+
+import type { AchievementType } from "@/students/_contexts/StudyProvider";
+import { outstandingStudentsAtom } from "@/students/_contexts/StudyProvider";
 
 import DropDownTrigger from "./DropDownTrigger";
 
 const OutstandingDropDown = ({ type }: { type: "ADD" | "DEL" }) => {
+  const setOutstandingStudents = useSetAtom(outstandingStudentsAtom);
+
   const findOptions = () => {
     if (type === "ADD") return OUTSTANDING_ADD_OPTIONS;
     if (type === "DEL") return OUTSTANDING_DEL_OPTIONS;
@@ -26,6 +32,16 @@ const OutstandingDropDown = ({ type }: { type: "ADD" | "DEL" }) => {
           <DropDownTrigger type={type} />
         </styled.div>
       }
+      onChange={(value: {
+        selectedValue: string;
+        selectedText: React.ReactNode;
+      }) => {
+        setOutstandingStudents({
+          type,
+          achievement: value.selectedValue as AchievementType,
+          enabled: true,
+        });
+      }}
     >
       {options &&
         options.map((option) => (
