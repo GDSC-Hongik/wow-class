@@ -6,7 +6,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 
-import OutstandingDropDown from "./OutstandingDropDown";
+import StudentsHeaderButtons from "./StudentHeaderButtons";
 import StudyDropDown from "./StudyDropDown";
 
 const StudentsHeader = ({
@@ -27,8 +27,7 @@ const StudentsHeader = ({
         <StudyDropDown studyList={studyList} />
       </Text>
       <Flex align="center" gap="0.75rem">
-        <OutstandingDropDown type="ADD" />
-        <OutstandingDropDown type="DEL" />
+        <StudentsHeaderButtons />
         {studyId && !!studentLength && (
           <styled.a download="study.xls" href={url}>
             <Image
