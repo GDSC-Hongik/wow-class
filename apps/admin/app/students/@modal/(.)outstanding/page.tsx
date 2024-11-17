@@ -1,11 +1,7 @@
-import { Modal, Text } from "@wow-class/ui";
+import OutstandingModal from "@/students/_components/OutstandingModal";
 
-const OutstandingModal = () => {
-  return (
-    <Modal>
-      <Text typo="h1">우수회원철회</Text>
-    </Modal>
-  );
+const OutstandinModalPage = () => {
+  return <OutstandingModal />;
 };
 
-export default OutstandingModal;
+export default OutstandinModalPage;
