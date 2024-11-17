@@ -1,9 +1,11 @@
 import Button from "wowds-ui/Button";
 
-const DropDownTrigger = ({ type }: { type: "ADD" | "DEL" }) => {
+import type { OutstandingStudentsType } from "@/students/_contexts/StudyProvider";
+
+const DropDownTrigger = ({ type }: { type: OutstandingStudentsType }) => {
   return (
     <Button size="sm" variant="outline">
-      우수 및 수료 {type === "ADD" ? "처리" : "철회"}
+      우수 및 수료 {type}
     </Button>
   );
 };

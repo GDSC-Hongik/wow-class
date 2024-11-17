@@ -14,3 +14,11 @@ export const OUTSTANDING_DEL_OPTIONS: OutstandingDropDownOption[] = [
   { id: 1, text: "1차 우수 철회", value: "FIRST_ROUND_OUTSTANDING_STUDENT" },
   { id: 2, text: "2차 우수 철회", value: "SECOND_ROUND_OUTSTANDING_STUDENT" },
 ];
+
+export const outstandingRoundMap: Record<
+  AchievementType,
+  "1차 우수" | "2차 우수"
+> = {
+  FIRST_ROUND_OUTSTANDING_STUDENT: "1차 우수",
+  SECOND_ROUND_OUTSTANDING_STUDENT: "2차 우수",
+};

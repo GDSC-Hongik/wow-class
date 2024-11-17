@@ -11,7 +11,7 @@ export type StudyAtomprops = {
   title: ReactNode;
 };
 
-export type OutstandingStudentsType = "ADD" | "DEL";
+export type OutstandingStudentsType = "처리" | "철회";
 
 export type OutstandingStudentsProps = {
   type?: OutstandingStudentsType;

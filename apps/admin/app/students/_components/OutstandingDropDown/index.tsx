@@ -10,16 +10,17 @@ import type { AchievementType } from "types/entities/achievement";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
+import type { OutstandingStudentsType } from "@/students/_contexts/StudyProvider";
 import { outstandingStudentsAtom } from "@/students/_contexts/StudyProvider";
 
 import DropDownTrigger from "./DropDownTrigger";
 
-const OutstandingDropDown = ({ type }: { type: "ADD" | "DEL" }) => {
+const OutstandingDropDown = ({ type }: { type: OutstandingStudentsType }) => {
   const setOutstandingStudents = useSetAtom(outstandingStudentsAtom);
 
   const findOptions = () => {
-    if (type === "ADD") return OUTSTANDING_ADD_OPTIONS;
-    if (type === "DEL") return OUTSTANDING_DEL_OPTIONS;
+    if (type === "처리") return OUTSTANDING_ADD_OPTIONS;
+    if (type === "철회") return OUTSTANDING_DEL_OPTIONS;
     return null;
   };
 
