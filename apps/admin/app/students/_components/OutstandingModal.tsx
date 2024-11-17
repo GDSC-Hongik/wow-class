@@ -18,8 +18,8 @@ import {
 
 const OutstandingModal = () => {
   const study = useAtomValue(studyAtom);
-  const selectedStudents = useAtomValue(selectedStudentsAtom);
-  const STUDENTS_NUM = selectedStudents.length;
+  const { firstStudentName, students } = useAtomValue(selectedStudentsAtom);
+  const STUDENTS_NUM = students.length;
 
   const [outstandingStudents, setOutstandingStudents] = useAtom(
     outstandingStudentsAtom
@@ -39,7 +39,7 @@ const OutstandingModal = () => {
         : studyAchievementApi.deleteStudyAchievement;
 
     const result = await fetch(study.studyId, {
-      studentIds: selectedStudents,
+      studentIds: students,
       achievementType: achievement,
     });
 
@@ -79,11 +79,8 @@ const OutstandingModal = () => {
         )}
 
         <Text color="sub">
-          {
-            // TODO: 가장 앞 사람 정보 요청
-            /* 이현영 님 외{" "} */
-          }
-          <styled.span color="primary">{STUDENTS_NUM}명</styled.span>
+          {firstStudentName} 님 외{" "}
+          <styled.span color="primary">{STUDENTS_NUM - 1}명</styled.span>
         </Text>
         {enabled ? (
           <Button onClick={handleClickOutstanding}>

@@ -19,6 +19,11 @@ export type OutstandingStudentsProps = {
   enabled: boolean;
 };
 
+export type SelectedStudentsProps = {
+  firstStudentName?: string;
+  students: number[] | [];
+};
+
 export const studyAtom = atom<StudyAtomprops>();
 studyIdStore.set(studyAtom, undefined);
 
@@ -26,7 +31,9 @@ export const outstandingStudentsAtom = atom<OutstandingStudentsProps>({
   enabled: false,
 });
 
-export const selectedStudentsAtom = atom<number[] | []>([]);
+export const selectedStudentsAtom = atom<SelectedStudentsProps>({
+  students: [],
+});
 
 export const StudyProvider = ({ children }: PropsWithChildren) => {
   return <Provider store={studyIdStore}>{children}</Provider>;

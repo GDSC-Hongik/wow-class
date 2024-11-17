@@ -36,13 +36,20 @@ const StudentList = ({
   if (!studentList.length) return <Text>스터디 수강생이 없어요.</Text>;
 
   const handleChangeSelectedStudents = (rows: number[]) => {
-    setSelectedStudents(rows);
+    const firstStudent = studentList.find(
+      (student) => student.memberId === rows[0]
+    );
+
+    setSelectedStudents({
+      firstStudentName: firstStudent && firstStudent.name,
+      students: rows,
+    });
   };
 
   return (
     <Table
       fullWidth
-      selectedRowsProp={selectedStudents}
+      selectedRowsProp={selectedStudents.students}
       showCheckbox={enabled}
       onChange={handleChangeSelectedStudents}
     >

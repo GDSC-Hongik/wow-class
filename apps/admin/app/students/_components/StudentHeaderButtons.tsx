@@ -14,7 +14,7 @@ const StudentsHeaderButtons = () => {
     outstandingStudentsAtom
   );
   const { type, achievement, enabled } = outstandingStudents;
-  const selectedStudents = useAtomValue(selectedStudentsAtom);
+  const { students } = useAtomValue(selectedStudentsAtom);
 
   const handleClickCancelButton = () => {
     setOutstandingStudents({
@@ -30,8 +30,8 @@ const StudentsHeaderButtons = () => {
       </Button>
       <Button
         asProp={Link}
-        disabled={!selectedStudents.length}
-        href={selectedStudents.length ? "/students/outstanding" : ""}
+        disabled={!students.length}
+        href={students.length ? "/students/outstanding" : ""}
         size="sm"
       >
         {achievement && `${outstandingRoundMap[achievement]} ${type}`}
