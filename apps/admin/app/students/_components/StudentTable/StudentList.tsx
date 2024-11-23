@@ -36,12 +36,12 @@ const StudentList = ({
   if (!studentList.length) return <Text>스터디 수강생이 없어요.</Text>;
 
   const handleChangeSelectedStudents = (rows: number[]) => {
-    const firstStudent = studentList.find(
-      (student) => student.memberId === rows[0]
-    );
+    const firstStudent =
+      selectedStudents.firstStudentName ||
+      studentList.find((student) => student.memberId === rows[0])?.name;
 
     setSelectedStudents({
-      firstStudentName: firstStudent && firstStudent.name,
+      firstStudentName: firstStudent,
       students: rows,
     });
   };
