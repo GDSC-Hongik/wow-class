@@ -16,6 +16,9 @@ export type OutstandingStudentsType = "처리" | "철회";
 export type OutstandingStudentsProps = {
   type?: OutstandingStudentsType;
   achievement?: AchievementType;
+};
+
+export type SetOutstandingStudentsProps = {
   enabled: boolean;
 };
 
@@ -26,13 +29,15 @@ export type SelectedStudentsProps = {
 
 export const studyAtom = atom<StudyAtomprops>();
 
-export const outstandingStudentsAtom = atom<OutstandingStudentsProps>({
-  enabled: false,
-});
+export const outstandingStudentsAtom = atom<OutstandingStudentsProps>({});
 
 export const selectedStudentsAtom = atom<SelectedStudentsProps>({
   students: [],
 });
+
+export const enabledOutstandingStudentsAtom = atom<SetOutstandingStudentsProps>(
+  { enabled: false }
+);
 
 export const StudyProvider = ({ children }: PropsWithChildren) => {
   return <Provider store={studyIdStore}>{children}</Provider>;

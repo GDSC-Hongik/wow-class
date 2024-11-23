@@ -11,12 +11,16 @@ import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
 import type { OutstandingStudentsType } from "@/students/_contexts/StudyProvider";
-import { outstandingStudentsAtom } from "@/students/_contexts/StudyProvider";
+import {
+  enabledOutstandingStudentsAtom,
+  outstandingStudentsAtom,
+} from "@/students/_contexts/StudyProvider";
 
 import DropDownTrigger from "./DropDownTrigger";
 
 const OutstandingDropDown = ({ type }: { type: OutstandingStudentsType }) => {
   const setOutstandingStudents = useSetAtom(outstandingStudentsAtom);
+  const setEnabled = useSetAtom(enabledOutstandingStudentsAtom);
 
   const findOptions = () => {
     if (type === "처리") return OUTSTANDING_ADD_OPTIONS;
@@ -40,8 +44,8 @@ const OutstandingDropDown = ({ type }: { type: OutstandingStudentsType }) => {
         setOutstandingStudents({
           type,
           achievement: value.selectedValue as AchievementType,
-          enabled: true,
         });
+        setEnabled({ enabled: true });
       }}
     >
       {options &&

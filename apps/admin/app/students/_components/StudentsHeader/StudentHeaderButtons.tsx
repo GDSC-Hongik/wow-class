@@ -4,23 +4,21 @@ import Link from "next/link";
 import Button from "wowds-ui/Button";
 
 import {
+  enabledOutstandingStudentsAtom,
   outstandingStudentsAtom,
   selectedStudentsAtom,
 } from "../../_contexts/StudyProvider";
 import OutstandingDropDown from "../OutstandingDropDown";
 
 const StudentsHeaderButtons = () => {
-  const [outstandingStudents, setOutstandingStudents] = useAtom(
-    outstandingStudentsAtom
+  const [{ enabled }, setEnabledOutstandingStudents] = useAtom(
+    enabledOutstandingStudentsAtom
   );
-  const { type, achievement, enabled } = outstandingStudents;
+  const { type, achievement } = useAtomValue(outstandingStudentsAtom);
   const { students } = useAtomValue(selectedStudentsAtom);
 
   const handleClickCancelButton = () => {
-    setOutstandingStudents({
-      ...outstandingStudents,
-      enabled: false,
-    });
+    setEnabledOutstandingStudents({ enabled: false });
   };
 
   return enabled ? (

@@ -11,6 +11,7 @@ import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 import {
+  enabledOutstandingStudentsAtom,
   outstandingStudentsAtom,
   selectedStudentsAtom,
   studyAtom,
@@ -19,13 +20,13 @@ import {
 const OutstandingModal = () => {
   const study = useAtomValue(studyAtom);
   const { firstStudentName, students } = useAtomValue(selectedStudentsAtom);
-  const [outstandingStudents, setOutstandingStudents] = useAtom(
-    outstandingStudentsAtom
+  const [{ enabled }, setEnabledOutstandingStudents] = useAtom(
+    enabledOutstandingStudentsAtom
   );
+  const { type, achievement } = useAtomValue(outstandingStudentsAtom);
   const { onClose } = useModalRoute();
 
   const STUDENTS_NUM = students.length;
-  const { type, achievement, enabled } = outstandingStudents;
   if (!type || !achievement) return null;
 
   const handleClickOutstanding = async () => {
@@ -45,8 +46,7 @@ const OutstandingModal = () => {
       // TODO: revalidate 되지 않는 문제 해결
       revalidateTagByName(tags.students);
       // TODO: 수강생 목록과 활성화 여부 컨텍스트 분리
-      setOutstandingStudents({
-        ...outstandingStudents,
+      setEnabledOutstandingStudents({
         enabled: false,
       });
     }

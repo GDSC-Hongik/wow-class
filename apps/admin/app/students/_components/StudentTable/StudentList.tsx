@@ -4,7 +4,7 @@ import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
 import Table from "wowds-ui/Table";
 
 import {
-  outstandingStudentsAtom,
+  enabledOutstandingStudentsAtom,
   selectedStudentsAtom,
 } from "@/students/_contexts/StudyProvider";
 
@@ -29,7 +29,7 @@ const StudentList = ({
 }: {
   studentList: StudyStudentApiResponseDto[] | [];
 }) => {
-  const { enabled } = useAtomValue(outstandingStudentsAtom);
+  const { enabled } = useAtomValue(enabledOutstandingStudentsAtom);
   const [selectedStudents, setSelectedStudents] = useAtom(selectedStudentsAtom);
 
   if (!studentList) return null;
