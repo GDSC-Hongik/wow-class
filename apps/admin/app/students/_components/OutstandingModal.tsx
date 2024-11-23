@@ -19,14 +19,12 @@ import {
 const OutstandingModal = () => {
   const study = useAtomValue(studyAtom);
   const { firstStudentName, students } = useAtomValue(selectedStudentsAtom);
-  const STUDENTS_NUM = students.length;
-
   const [outstandingStudents, setOutstandingStudents] = useAtom(
     outstandingStudentsAtom
   );
-
   const { onClose } = useModalRoute();
 
+  const STUDENTS_NUM = students.length;
   const { type, achievement, enabled } = outstandingStudents;
   if (!type || !achievement) return null;
 
@@ -46,7 +44,7 @@ const OutstandingModal = () => {
     if (result.success) {
       // TODO: revalidate 되지 않는 문제 해결
       revalidateTagByName(tags.students);
-      // TODO: 이미 처리된 / 철회된 요청 에러처리
+      // TODO: 수강생 목록과 활성화 여부 컨텍스트 분리
       setOutstandingStudents({
         ...outstandingStudents,
         enabled: false,
