@@ -1,4 +1,4 @@
-import OutstandingModal from "@/students/_components/OutstandingModal";
+import OutstandingModal from "../_components/OutstandingModal";
 
 const OutstandinModalPage = () => {
   return <OutstandingModal />;

@@ -6,8 +6,8 @@ import Button from "wowds-ui/Button";
 import {
   outstandingStudentsAtom,
   selectedStudentsAtom,
-} from "../_contexts/StudyProvider";
-import OutstandingDropDown from "./OutstandingDropDown";
+} from "../../_contexts/StudyProvider";
+import OutstandingDropDown from "../OutstandingDropDown";
 
 const StudentsHeaderButtons = () => {
   const [outstandingStudents, setOutstandingStudents] = useAtom(

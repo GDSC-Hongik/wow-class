@@ -1,13 +1,7 @@
 import { studyApi } from "apis/study/studyApi";
 import { useEffect, useState } from "react";
 
-const useFetchStudentsExcelUrl = ({
-  studyId,
-  studentLength,
-}: {
-  studyId: number;
-  studentLength: number;
-}) => {
+const useFetchStudentsExcelUrl = ({ studyId }: { studyId: number }) => {
   const [url, setUrl] = useState<string>("");
 
   useEffect(() => {
@@ -20,8 +14,8 @@ const useFetchStudentsExcelUrl = ({
       if (url) setUrl(url);
     };
 
-    if (studentLength) fetchData();
-  }, [studyId, studentLength]);
+    fetchData();
+  }, [studyId]);
 
   return url;
 };

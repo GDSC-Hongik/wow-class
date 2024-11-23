@@ -25,7 +25,6 @@ export type SelectedStudentsProps = {
 };
 
 export const studyAtom = atom<StudyAtomprops>();
-studyIdStore.set(studyAtom, undefined);
 
 export const outstandingStudentsAtom = atom<OutstandingStudentsProps>({
   enabled: false,
