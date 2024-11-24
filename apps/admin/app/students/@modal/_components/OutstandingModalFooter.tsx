@@ -26,6 +26,7 @@ const OutstandingModalFooter = () => {
 
   const { onClose } = useModalRoute();
 
+  // TODO: 복잡한 분기처리 리팩터링
   const fetchOutstanding = async (studyId: number) => {
     const fetch =
       type === "처리"
