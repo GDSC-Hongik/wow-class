@@ -20,14 +20,21 @@ const OutstandingModal = () => {
   if (!type || !achievement) return null;
   if (!STUDENTS_NUM) return <Text>선택된 수강생이 없습니다.</Text>;
 
-  // TODO: 선택한 수강생이 1명일 때 ~외 0명으로 렌더링 되는 부분 처리
+  const renderAdditionalStudents = () => {
+    if (STUDENTS_NUM === 1) return null;
+    return (
+      <>
+        외 <styled.span color="primary">{STUDENTS_NUM - 1}명</styled.span>
+      </>
+    );
+  };
+
   return (
     <Modal>
       <Flex align="center" direction="column" gap="1.5rem">
         <OutstandingModalHeader />
         <Text color="sub">
-          {firstStudentName} 님 외{" "}
-          <styled.span color="primary">{STUDENTS_NUM - 1}명</styled.span>
+          {firstStudentName} 님 {renderAdditionalStudents()}
         </Text>
         <OutstandingModalFooter />
       </Flex>
