@@ -26,38 +26,35 @@ const OutstandingModalFooter = () => {
 
   const { onClose } = useModalRoute();
 
-  // TODO: 복잡한 분기처리 리팩터링
-  const fetchOutstanding = async (studyId: number) => {
-    const fetch =
-      type === "처리"
-        ? studyAchievementApi.postStudyAchievement
-        : studyAchievementApi.deleteStudyAchievement;
-    const result = await fetch(studyId, {
-      studentIds: students,
-      achievementType: achievement as AchievementType,
-    });
-    return result;
-  };
-
-  const fetchComplete = async (studyId: number) => {
-    const fetch =
-      type === "처리"
-        ? studyCompleteApi.postStudyComplete
-        : studyCompleteApi.postStudyCompleteWithdraw;
-    const result = await fetch({
-      studyId,
-      studentIds: students,
-    });
-    return result;
+  const apiMap = {
+    ACHIEVEMENT: {
+      처리: studyAchievementApi.postStudyAchievement,
+      철회: studyAchievementApi.deleteStudyAchievement,
+    },
+    COMPLETE: {
+      처리: studyCompleteApi.postStudyComplete,
+      철회: studyCompleteApi.postStudyCompleteWithdraw,
+    },
   };
 
   const handleClickOutstanding = async () => {
-    if (!study || !achievement) return;
+    if (!study || !achievement || !type) return;
 
-    const result =
-      achievement === "COMPLETE"
-        ? await fetchComplete(study.studyId)
-        : await fetchOutstanding(study.studyId);
+    const fetchApi = () => {
+      if (achievement === "COMPLETE") {
+        const fetch = apiMap["COMPLETE"][type];
+        return fetch({
+          studyId: study.studyId,
+          studentIds: students,
+        });
+      }
+      const fetch = apiMap["ACHIEVEMENT"][type];
+      return fetch(study.studyId, {
+        studentIds: students,
+        achievementType: achievement as AchievementType,
+      });
+    };
+    const result = await fetchApi();
 
     if (result.success) {
       revalidateTagByName(tags.students);
