@@ -1,4 +1,5 @@
 import { studyApi } from "apis/study/studyApi";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import type {
   PaginatedStudyStudentResponseDto,
@@ -23,6 +24,7 @@ const useFetchStudents = (
     PaginatedStudyStudentResponseDto,
     "content"
   > | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchStudentsData = async () => {
@@ -40,7 +42,7 @@ const useFetchStudents = (
     };
 
     fetchStudentsData();
-  }, [study, page]);
+  }, [study, page, pathname]);
 
   return { studentList, pageInfo };
 };
