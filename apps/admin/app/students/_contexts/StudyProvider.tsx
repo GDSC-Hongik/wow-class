@@ -1,6 +1,9 @@
 "use client";
 
-import type { OutstandingType } from "constants/status/outstandigOptions";
+import type {
+  CompleteType,
+  OutstandingType,
+} from "constants/status/outstandigOptions";
 import { atom, createStore, Provider } from "jotai";
 import type { PropsWithChildren, ReactNode } from "react";
 import type { AchievementType } from "types/entities/achievement";
@@ -14,7 +17,7 @@ export type StudyAtomprops = {
 
 export type OutstandingStudentsProps = {
   type?: OutstandingType;
-  achievement?: AchievementType;
+  achievement?: AchievementType | CompleteType;
 };
 
 export type SetOutstandingStudentsProps = {
