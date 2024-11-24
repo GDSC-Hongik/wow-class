@@ -22,3 +22,10 @@ export const outstandingRoundMap: Record<
   FIRST_ROUND_OUTSTANDING_STUDENT: "1차 우수",
   SECOND_ROUND_OUTSTANDING_STUDENT: "2차 우수",
 };
+
+export type OutstandingType = "처리" | "철회";
+
+export const outstandingTypeMap: Record<OutstandingType, string> = {
+  처리: "회원으로 등록",
+  철회: "회원에서 철회",
+};
