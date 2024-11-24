@@ -1,6 +1,7 @@
 "use client";
 
 import { styled } from "@styled-system/jsx";
+import type { OutstandingType } from "constants/status/outstandigOptions";
 import {
   OUTSTANDING_ADD_OPTIONS,
   OUTSTANDING_DEL_OPTIONS,
@@ -10,7 +11,6 @@ import type { AchievementType } from "types/entities/achievement";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-import type { OutstandingStudentsType } from "@/students/_contexts/StudyProvider";
 import {
   enabledOutstandingStudentsAtom,
   outstandingStudentsAtom,
@@ -18,7 +18,7 @@ import {
 
 import DropDownTrigger from "./DropDownTrigger";
 
-const OutstandingDropDown = ({ type }: { type: OutstandingStudentsType }) => {
+const OutstandingDropDown = ({ type }: { type: OutstandingType }) => {
   const setOutstandingStudents = useSetAtom(outstandingStudentsAtom);
   const setEnabled = useSetAtom(enabledOutstandingStudentsAtom);
 
