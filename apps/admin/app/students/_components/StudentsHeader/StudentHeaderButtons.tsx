@@ -21,6 +21,7 @@ const StudentsHeaderButtons = () => {
     setEnabledOutstandingStudents({ enabled: false });
   };
 
+  // TODO: 취소하기 버튼 클릭 시 selectedStudentsAtom 초기화
   return enabled ? (
     <>
       <Button size="sm" variant="outline" onClick={handleClickCancelButton}>
