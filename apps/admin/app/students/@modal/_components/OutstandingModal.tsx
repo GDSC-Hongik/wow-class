@@ -19,7 +19,8 @@ import {
 
 const OutstandingModal = () => {
   const study = useAtomValue(studyAtom);
-  const { firstStudentName, students } = useAtomValue(selectedStudentsAtom);
+  const [{ firstStudentName, students }, setSelectedStudents] =
+    useAtom(selectedStudentsAtom);
   const [{ enabled }, setEnabledOutstandingStudents] = useAtom(
     enabledOutstandingStudentsAtom
   );
@@ -43,13 +44,19 @@ const OutstandingModal = () => {
     });
 
     if (result.success) {
-      // TODO: revalidate 되지 않는 문제 해결
       revalidateTagByName(tags.students);
-      // TODO: 수강생 목록과 활성화 여부 컨텍스트 분리
       setEnabledOutstandingStudents({
         enabled: false,
       });
     }
+  };
+
+  const handleClickCloseModal = () => {
+    setSelectedStudents({
+      students: [],
+      firstStudentName: "",
+    });
+    onClose();
   };
 
   const formatTypeToString = () => {
@@ -85,7 +92,7 @@ const OutstandingModal = () => {
             선택한 우수 회원 {type}
           </Button>
         ) : (
-          <Button onClick={onClose}>확인하기</Button>
+          <Button onClick={handleClickCloseModal}>확인하기</Button>
         )}
       </Flex>
     </Modal>
