@@ -15,13 +15,13 @@ const StudentsHeaderButtons = () => {
     enabledOutstandingStudentsAtom
   );
   const { type, achievement } = useAtomValue(outstandingStudentsAtom);
-  const { students } = useAtomValue(selectedStudentsAtom);
+  const [{ students }, setSelectedStudents] = useAtom(selectedStudentsAtom);
 
   const handleClickCancelButton = () => {
     setEnabledOutstandingStudents({ enabled: false });
+    setSelectedStudents({ students: [] });
   };
 
-  // TODO: 취소하기 버튼 클릭 시 selectedStudentsAtom 초기화
   return enabled ? (
     <>
       <Button size="sm" variant="outline" onClick={handleClickCancelButton}>
