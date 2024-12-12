@@ -9,7 +9,7 @@ import {
   selectedStudentsAtom,
 } from "@/students/_contexts/StudyProvider";
 
-import OutstandingModalFooter from "./OutstandingModalFooter";
+import OutstandingModalButton from "./OutstandingModalButton";
 import OutstandingModalHeader from "./OutstandingModalHeader";
 
 const OutstandingModal = () => {
@@ -36,7 +36,7 @@ const OutstandingModal = () => {
         <Text color="sub">
           {firstStudentName} 님 {renderAdditionalStudents()}
         </Text>
-        <OutstandingModalFooter />
+        <OutstandingModalButton />
       </Flex>
     </Modal>
   );

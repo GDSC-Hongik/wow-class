@@ -16,7 +16,7 @@ import {
   studyAtom,
 } from "@/students/_contexts/StudyProvider";
 
-const OutstandingModalFooter = () => {
+const OutstandingModalButton = () => {
   const study = useAtomValue(studyAtom);
   const [{ enabled }, setEnabledOutstandingStudents] = useAtom(
     enabledOutstandingStudentsAtom
@@ -81,4 +81,4 @@ const OutstandingModalFooter = () => {
   );
 };
 
-export default OutstandingModalFooter;
+export default OutstandingModalButton;
