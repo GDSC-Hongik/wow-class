@@ -1,6 +1,9 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
+
+import StudyAttendanceRate from "./StudyAttendanceRate";
+
 const StudyStatics = async ({ studyId }: { studyId: string }) => {
   const studyStatistics = await studyApi.getStudyStatistics(
     parseInt(studyId, 10)
@@ -17,7 +20,15 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
           {studyStatistics?.completeStudentCount}명
         </Text>
       </Flex>
-      <Space height={24} />
+      <Space height={33} />
+      <Flex>
+        <StudyAttendanceRate
+          totalStudent={studyStatistics?.totalStudentCount}
+          studyWeekStatisticsResponses={
+            studyStatistics?.studyWeekStatisticsResponses
+          }
+        />
+      </Flex>
     </section>
   );
 };

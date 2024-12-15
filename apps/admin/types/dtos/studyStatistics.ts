@@ -7,7 +7,7 @@ export interface StudyStatisticsApiResponseDto {
   studyWeekStatisticsResponses: StudyWeekStatisticsApiResponseDto[];
 }
 
-interface StudyWeekStatisticsApiResponseDto {
+export interface StudyWeekStatisticsApiResponseDto {
   week: number;
   attendanceRate: number;
   assignmentSubmissionRate: number;
