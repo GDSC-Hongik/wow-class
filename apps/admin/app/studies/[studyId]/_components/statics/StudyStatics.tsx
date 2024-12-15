@@ -2,6 +2,7 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 
+import StudyAssignmentRate from "./StudyAssignmentRate";
 import StudyAttendanceRate from "./StudyAttendanceRate";
 
 const StudyStatics = async ({ studyId }: { studyId: string }) => {
@@ -21,9 +22,19 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
         </Text>
       </Flex>
       <Space height={33} />
-      <Flex>
+      <Flex alignItems="center" gap="xl">
         <StudyAttendanceRate
+          averageAttendanceRate={studyStatistics?.averageAttendanceRate}
           totalStudent={studyStatistics?.totalStudentCount}
+          studyWeekStatisticsResponses={
+            studyStatistics?.studyWeekStatisticsResponses
+          }
+        />
+        <StudyAssignmentRate
+          totalStudent={studyStatistics?.totalStudentCount}
+          averageAssignmentSubmissionRate={
+            studyStatistics?.averageAssignmentSubmissionRate
+          }
           studyWeekStatisticsResponses={
             studyStatistics?.studyWeekStatisticsResponses
           }

@@ -6,13 +6,17 @@ import { useState } from "react";
 import GraphToolTip from "./GraphToolTip";
 
 const BarGraph = ({
+  barColor = "default",
   totalStudent = 0,
-  percent,
+  percent = 0,
   isCurriculumCanceled,
+  isToolTipActive = true,
 }: {
+  barColor?: "default" | "average";
   totalStudent?: number;
-  percent: number;
-  isCurriculumCanceled: boolean;
+  isToolTipActive?: boolean;
+  percent?: number;
+  isCurriculumCanceled?: boolean;
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   return (
@@ -29,13 +33,15 @@ const BarGraph = ({
         <>
           {percent > 0 ? (
             <div
-              className={BarGraphStyle}
-              style={{ width: `${232 * (percent / 100)}px` }}
+              style={{ width: `${50 + (232 - 50) * (percent / 100)}px` }}
+              className={BarGraphStyle({
+                type: barColor,
+              })}
               onMouseEnter={() => {
-                setShowTooltip(true);
+                if (isToolTipActive) setShowTooltip(true);
               }}
               onMouseLeave={() => {
-                setShowTooltip(false);
+                if (isToolTipActive) setShowTooltip(false);
               }}
             >
               <div className={BarGraphInnerStyle}>
@@ -86,16 +92,27 @@ const BarGraphBackgroundStyle = cva({
   },
 });
 
-const BarGraphStyle = css({
-  position: "absolute",
-  zIndex: 10,
-  top: 0,
-  left: 0,
-  backgroundColor: "primary",
-  height: "24px",
-  padding: "4px 8px",
-  display: "flex",
-  alignItems: "center",
+const BarGraphStyle = cva({
+  base: {
+    position: "absolute",
+    zIndex: 10,
+    top: 0,
+    left: 0,
+    height: "24px",
+    padding: "4px 8px",
+    display: "flex",
+    alignItems: "center",
+  },
+  variants: {
+    type: {
+      default: {
+        backgroundColor: "primary",
+      },
+      average: {
+        backgroundColor: "success",
+      },
+    },
+  },
 });
 
 const BarGraphZeroPercent = css({
