@@ -1,6 +1,5 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
-import { Space } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";

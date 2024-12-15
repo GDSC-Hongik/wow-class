@@ -4,6 +4,7 @@ import { studyApi } from "apis/study/studyApi";
 
 import StudyAssignmentRate from "./StudyAssignmentRate";
 import StudyAttendanceRate from "./StudyAttendanceRate";
+import StudyCompleteRate from "./StudyCompleteRate";
 
 const StudyStatics = async ({ studyId }: { studyId: string }) => {
   const studyStatistics = await studyApi.getStudyStatistics(
@@ -38,6 +39,9 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
           studyWeekStatisticsResponses={
             studyStatistics?.studyWeekStatisticsResponses
           }
+        />
+        <StudyCompleteRate
+          studyCompleteRate={studyStatistics?.studyCompleteRate}
         />
       </Flex>
     </section>
