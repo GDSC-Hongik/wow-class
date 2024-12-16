@@ -7,6 +7,7 @@ import Table from "wowds-ui/Table";
 
 import {
   enabledOutstandingStudentsAtom,
+  outstandingStudentsAtom,
   selectedStudentsAtom,
 } from "@/students/_contexts/StudyProvider";
 
@@ -32,6 +33,7 @@ const StudentList = ({
   studentList: StudyStudentApiResponseDto[] | [];
 }) => {
   const { enabled } = useAtomValue(enabledOutstandingStudentsAtom);
+  const { type, achievement } = useAtomValue(outstandingStudentsAtom);
   const [selectedStudents, setSelectedStudents] = useAtom(selectedStudentsAtom);
 
   if (!studentList) return null;
@@ -48,6 +50,26 @@ const StudentList = ({
     });
   };
 
+  const isDisabled = (student: StudyStudentApiResponseDto) => {
+    if (achievement === "COMPLETE") {
+      return type === "처리"
+        ? student.studyHistoryStatus === "COMPLETED"
+        : student.studyHistoryStatus !== "COMPLETED";
+    } else if (achievement === "FIRST_ROUND_OUTSTANDING_STUDENT") {
+      return type === "처리"
+        ? student.isFirstRoundOutstandingStudent
+        : !student.isFirstRoundOutstandingStudent;
+    } else if (achievement === "SECOND_ROUND_OUTSTANDING_STUDENT") {
+      return type === "처리"
+        ? student.isSecondRoundOutstandingStudent
+        : !student.isSecondRoundOutstandingStudent;
+    }
+  };
+
+  const isAllChecked =
+    studentList.filter((student) => !isDisabled(student)).length ===
+    selectedStudents.students.size;
+
   const handleChangeAllChecked = () => {
     if (isAllChecked) {
       setSelectedStudents({
@@ -57,7 +79,9 @@ const StudentList = ({
       return;
     }
     handleChangeSelectedStudents(
-      studentList.map((student) => student.memberId)
+      studentList
+        .filter((student) => !isDisabled(student))
+        .map((student) => student.memberId)
     );
   };
 
@@ -70,8 +94,6 @@ const StudentList = ({
     }
     handleChangeSelectedStudents([...selectedStudents.students, id]);
   };
-
-  const isAllChecked = studentList.length === selectedStudents.students.size;
 
   return (
     <Table fullWidth showCheckbox={enabled}>
@@ -110,6 +132,7 @@ const StudentList = ({
               <Table.Td style={tableCheckBoxStyle}>
                 <Checkbox
                   checked={selectedStudents.students.has(student.memberId)}
+                  disabled={isDisabled(student)}
                   onChange={() => handleChangeSingleChecked(student.memberId)}
                 />
               </Table.Td>
