@@ -53,7 +53,7 @@ const StudentList = ({
   return (
     <Table
       fullWidth
-      selectedRowsProp={selectedStudents.students}
+      selectedRowsProp={Array.from(selectedStudents.students)}
       showCheckbox={enabled}
     >
       <styled.thead>
