@@ -105,7 +105,6 @@ const StudentList = ({
             minWidth="100%"
             role="row"
             textStyle="body2"
-            value={student.memberId}
           >
             {enabled && (
               <Table.Td style={tableCheckBoxStyle}>
