@@ -48,32 +48,40 @@ const StudentList = ({
     });
   };
 
+  const handleChangeAllChecked = () => {
+    if (isAllChecked) {
+      setSelectedStudents({
+        firstStudentName: "",
+        students: new Set(),
+      });
+      return;
+    }
+    handleChangeSelectedStudents(
+      studentList.map((student) => student.memberId)
+    );
+  };
+
+  const handleChangeSingleChecked = (id: number) => {
+    if (selectedStudents.students.has(id)) {
+      const newSet = new Set(selectedStudents.students);
+      newSet.delete(id);
+      handleChangeSelectedStudents([...newSet]);
+      return;
+    }
+    handleChangeSelectedStudents([...selectedStudents.students, id]);
+  };
+
   const isAllChecked = studentList.length === selectedStudents.students.size;
 
   return (
-    <Table
-      fullWidth
-      selectedRowsProp={Array.from(selectedStudents.students)}
-      showCheckbox={enabled}
-    >
+    <Table fullWidth showCheckbox={enabled}>
       <styled.thead>
         <styled.tr>
           {enabled && (
             <Table.Th style={tableCheckBoxStyle}>
               <Checkbox
                 checked={isAllChecked}
-                onChange={() => {
-                  if (isAllChecked) {
-                    setSelectedStudents({
-                      firstStudentName: "",
-                      students: new Set(),
-                    });
-                    return;
-                  }
-                  handleChangeSelectedStudents(
-                    studentList.map((student) => student.memberId)
-                  );
-                }}
+                onChange={handleChangeAllChecked}
               />
             </Table.Th>
           )}
@@ -90,24 +98,25 @@ const StudentList = ({
       </styled.thead>
       <Table.Tbody>
         {studentList.map((student) => (
-          <Table.Tr
+          <styled.tr
+            color="textBlack"
+            height="44px"
             key={student.memberId}
+            minWidth="100%"
+            role="row"
+            textStyle="body2"
             value={student.memberId}
-            onChange={() => {
-              if (selectedStudents.students.has(student.memberId)) {
-                const newSet = new Set(selectedStudents.students);
-                newSet.delete(student.memberId);
-                handleChangeSelectedStudents([...newSet]);
-                return;
-              }
-              handleChangeSelectedStudents([
-                ...selectedStudents.students,
-                student.memberId,
-              ]);
-            }}
           >
+            {enabled && (
+              <Table.Td style={tableCheckBoxStyle}>
+                <Checkbox
+                  checked={selectedStudents.students.has(student.memberId)}
+                  onChange={() => handleChangeSingleChecked(student.memberId)}
+                />
+              </Table.Td>
+            )}
             <StudentListItem {...student} />
-          </Table.Tr>
+          </styled.tr>
         ))}
       </Table.Tbody>
     </Table>
