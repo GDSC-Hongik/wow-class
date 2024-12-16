@@ -12,7 +12,7 @@ import {
   outstandingStudentsAtom,
 } from "@/students/_contexts/StudyProvider";
 
-const OutstandingModalHeader = () => {
+const StudentStatusModalHeader = () => {
   const { enabled } = useAtomValue(enabledOutstandingStudentsAtom);
   const { type, achievement } = useAtomValue(outstandingStudentsAtom);
 
@@ -35,4 +35,4 @@ const OutstandingModalHeader = () => {
     </Text>
   );
 };
-export default OutstandingModalHeader;
+export default StudentStatusModalHeader;

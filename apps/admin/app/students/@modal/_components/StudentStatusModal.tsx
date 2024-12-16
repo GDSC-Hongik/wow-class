@@ -9,10 +9,11 @@ import {
   selectedStudentsAtom,
 } from "@/students/_contexts/StudyProvider";
 
+import CompleteModalButton from "./CompleteModalButton";
 import OutstandingModalButton from "./OutstandingModalButton";
-import OutstandingModalHeader from "./OutstandingModalHeader";
+import StudentStatusModalHeader from "./StudentStatusModalHeader";
 
-const OutstandingModal = () => {
+const StudentStatusModal = () => {
   const { firstStudentName, students } = useAtomValue(selectedStudentsAtom);
   const { type, achievement } = useAtomValue(outstandingStudentsAtom);
 
@@ -32,14 +33,18 @@ const OutstandingModal = () => {
   return (
     <Modal>
       <Flex align="center" direction="column" gap="1.5rem">
-        <OutstandingModalHeader />
+        <StudentStatusModalHeader />
         <Text color="sub">
           {firstStudentName} 님 {renderAdditionalStudents()}
         </Text>
-        <OutstandingModalButton />
+        {achievement === "COMPLETE" ? (
+          <CompleteModalButton />
+        ) : (
+          <OutstandingModalButton />
+        )}
       </Flex>
     </Modal>
   );
 };
 
-export default OutstandingModal;
+export default StudentStatusModal;

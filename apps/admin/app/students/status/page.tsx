@@ -1,8 +1,8 @@
 import { routerPath } from "constants/router/routerPath";
 import { redirect } from "next/navigation";
 
-const OutstandingPage = () => {
+const StudentStatusPage = () => {
   return redirect(routerPath.students.href);
 };
 
-export default OutstandingPage;
+export default StudentStatusPage;

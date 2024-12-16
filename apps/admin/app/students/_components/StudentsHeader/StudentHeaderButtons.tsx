@@ -30,7 +30,7 @@ const StudentsHeaderButtons = () => {
       <Button
         asProp={Link}
         disabled={!students.size}
-        href={students.size ? "/students/outstanding" : ""}
+        href={students.size ? "/students/status" : ""}
         size="sm"
       >
         {achievement && `${outstandingRoundMap[achievement]} ${type}`}

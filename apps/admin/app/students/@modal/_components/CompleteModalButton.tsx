@@ -1,8 +1,7 @@
 "use client";
 
-import studyAchievementApi from "apis/study/studyAchievementApi";
+import studyCompleteApi from "apis/study/studyCompleteApi";
 import { useAtomValue } from "jotai";
-import type { AchievementType } from "types/entities/achievement";
 import Button from "wowds-ui/Button";
 
 import {
@@ -14,10 +13,10 @@ import {
 
 import useCloseStudentStatusModal from "../_hooks/useCloseStudentStatusModal";
 
-const OutstandingModalButton = () => {
+const CompleteModalButton = () => {
   const study = useAtomValue(studyAtom);
   const { enabled } = useAtomValue(enabledOutstandingStudentsAtom);
-  const { type, achievement } = useAtomValue(outstandingStudentsAtom);
+  const { type } = useAtomValue(outstandingStudentsAtom);
   const { students } = useAtomValue(selectedStudentsAtom);
 
   const {
@@ -26,19 +25,19 @@ const OutstandingModalButton = () => {
     closeModalWithFailure,
   } = useCloseStudentStatusModal();
 
-  const handleClickOutstanding = async () => {
-    if (!study || !achievement || !type) return;
+  const handleClickComplete = async () => {
+    if (!study || !type) return;
 
     const apiMap = {
-      처리: studyAchievementApi.postStudyAchievement,
-      철회: studyAchievementApi.deleteStudyAchievement,
+      처리: studyCompleteApi.postStudyComplete,
+      철회: studyCompleteApi.postStudyCompleteWithdraw,
     };
 
     const fetchApi = () => {
       const fetch = apiMap[type];
-      return fetch(study.studyId, {
+      return fetch({
+        studyId: study.studyId,
         studentIds: Array.from(students),
-        achievementType: achievement as AchievementType,
       });
     };
     const result = await fetchApi();
@@ -47,10 +46,10 @@ const OutstandingModalButton = () => {
   };
 
   return enabled ? (
-    <Button onClick={handleClickOutstanding}>선택한 회원 우수 {type}</Button>
+    <Button onClick={handleClickComplete}>선택한 회원 수료 {type}</Button>
   ) : (
     <Button onClick={handleClickCloseModal}>확인하기</Button>
   );
 };
 
-export default OutstandingModalButton;
+export default CompleteModalButton;
