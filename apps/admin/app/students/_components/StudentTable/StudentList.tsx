@@ -35,25 +35,26 @@ const StudentList = ({
   if (!studentList) return null;
   if (!studentList.length) return <Text>스터디 수강생이 없어요.</Text>;
 
-  const handleChangeSelectedStudents = (rows: number[]) => {
+  const handleChangeSelectedStudents = (ids: number[]) => {
     const firstStudent =
       selectedStudents.firstStudentName ||
-      studentList.find((student) => student.memberId === rows[0])?.name;
+      studentList.find((student) => student.memberId === ids[0])?.name;
 
     setSelectedStudents({
       firstStudentName: firstStudent,
-      students: rows,
+      students: new Set(ids),
     });
   };
 
   return (
-    <Table
-      fullWidth
-      selectedRowsProp={selectedStudents.students}
-      showCheckbox={enabled}
-      onChange={handleChangeSelectedStudents}
-    >
-      <Table.Thead>
+    <Table fullWidth showCheckbox={enabled}>
+      <Table.Thead
+        onChange={() =>
+          handleChangeSelectedStudents(
+            studentList.map((student) => student.memberId)
+          )
+        }
+      >
         {STUENT_INFO_LIST_BEFORE.map((info) => (
           <Table.Th key={info}>{info}</Table.Th>
         ))}
@@ -64,7 +65,16 @@ const StudentList = ({
       </Table.Thead>
       <Table.Tbody>
         {studentList.map((student) => (
-          <Table.Tr key={student.memberId} value={student.memberId}>
+          <Table.Tr
+            key={student.memberId}
+            value={student.memberId}
+            onChange={() =>
+              handleChangeSelectedStudents([
+                ...selectedStudents.students,
+                student.memberId,
+              ])
+            }
+          >
             <StudentListItem {...student} />
           </Table.Tr>
         ))}

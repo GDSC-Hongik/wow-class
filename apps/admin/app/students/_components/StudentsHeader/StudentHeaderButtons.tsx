@@ -19,7 +19,7 @@ const StudentsHeaderButtons = () => {
 
   const handleClickCancelButton = () => {
     setEnabledOutstandingStudents({ enabled: false });
-    setSelectedStudents({ students: [] });
+    setSelectedStudents({ firstStudentName: "", students: new Set() });
   };
 
   return enabled ? (
@@ -29,8 +29,8 @@ const StudentsHeaderButtons = () => {
       </Button>
       <Button
         asProp={Link}
-        disabled={!students.length}
-        href={students.length ? "/students/outstanding" : ""}
+        disabled={!students.size}
+        href={students.size ? "/students/outstanding" : ""}
         size="sm"
       >
         {achievement && `${outstandingRoundMap[achievement]} ${type}`}

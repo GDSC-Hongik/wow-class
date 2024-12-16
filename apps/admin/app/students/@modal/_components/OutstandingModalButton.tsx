@@ -66,7 +66,7 @@ const OutstandingModalButton = () => {
 
   const handleClickCloseModal = () => {
     setSelectedStudents({
-      students: [],
+      students: new Set(),
       firstStudentName: "",
     });
     onClose();

@@ -26,7 +26,7 @@ export type SetOutstandingStudentsProps = {
 
 export type SelectedStudentsProps = {
   firstStudentName?: string;
-  students: number[] | [];
+  students: Set<number>;
 };
 
 export const studyAtom = atom<StudyAtomprops>();
@@ -34,7 +34,7 @@ export const studyAtom = atom<StudyAtomprops>();
 export const outstandingStudentsAtom = atom<OutstandingStudentsProps>({});
 
 export const selectedStudentsAtom = atom<SelectedStudentsProps>({
-  students: [],
+  students: new Set<number>(),
 });
 
 export const enabledOutstandingStudentsAtom = atom<SetOutstandingStudentsProps>(

@@ -43,7 +43,8 @@ const StudyDropDown = ({
           title: value.selectedText,
         });
         setSelectedStudents({
-          students: [],
+          firstStudentName: "",
+          students: new Set(),
         });
         setEnabled({
           enabled: false,

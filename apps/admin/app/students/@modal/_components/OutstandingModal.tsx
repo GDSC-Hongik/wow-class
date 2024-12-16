@@ -16,7 +16,7 @@ const OutstandingModal = () => {
   const { firstStudentName, students } = useAtomValue(selectedStudentsAtom);
   const { type, achievement } = useAtomValue(outstandingStudentsAtom);
 
-  const STUDENTS_NUM = students.length;
+  const STUDENTS_NUM = students.size;
   if (!type || !achievement) return null;
   if (!STUDENTS_NUM) return <Text>선택된 수강생이 없습니다.</Text>;
 
