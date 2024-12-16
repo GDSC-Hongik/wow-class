@@ -37,6 +37,14 @@ const OutstandingModalButton = () => {
     },
   };
 
+  const handleClickCloseModal = () => {
+    setSelectedStudents({
+      students: new Set(),
+      firstStudentName: "",
+    });
+    onClose();
+  };
+
   const handleClickOutstanding = async () => {
     if (!study || !achievement || !type) return;
 
@@ -45,31 +53,25 @@ const OutstandingModalButton = () => {
         const fetch = apiMap["COMPLETE"][type];
         return fetch({
           studyId: study.studyId,
-          studentIds: students,
+          studentIds: Array.from(students),
         });
       }
       const fetch = apiMap["ACHIEVEMENT"][type];
       return fetch(study.studyId, {
-        studentIds: students,
+        studentIds: Array.from(students),
         achievementType: achievement as AchievementType,
       });
     };
     const result = await fetchApi();
 
-    if (result.success) {
-      revalidateTagByName(tags.students);
-      setEnabledOutstandingStudents({
-        enabled: false,
-      });
-    }
-  };
-
-  const handleClickCloseModal = () => {
-    setSelectedStudents({
-      students: new Set(),
-      firstStudentName: "",
+    revalidateTagByName(tags.students);
+    setEnabledOutstandingStudents({
+      enabled: false,
     });
-    onClose();
+
+    if (!result.success) {
+      handleClickCloseModal();
+    }
   };
 
   return enabled ? (

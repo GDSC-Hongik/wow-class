@@ -1,6 +1,8 @@
+import { styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { useAtom, useAtomValue } from "jotai";
 import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
+import Checkbox from "wowds-ui/Checkbox";
 import Table from "wowds-ui/Table";
 
 import {
@@ -36,9 +38,9 @@ const StudentList = ({
   if (!studentList.length) return <Text>스터디 수강생이 없어요.</Text>;
 
   const handleChangeSelectedStudents = (ids: number[]) => {
-    const firstStudent =
-      selectedStudents.firstStudentName ||
-      studentList.find((student) => student.memberId === ids[0])?.name;
+    const firstStudent = studentList.find(
+      (student) => student.memberId === ids[0]
+    )?.name;
 
     setSelectedStudents({
       firstStudentName: firstStudent,
@@ -46,34 +48,63 @@ const StudentList = ({
     });
   };
 
+  const isAllChecked = studentList.length === selectedStudents.students.size;
+
   return (
-    <Table fullWidth showCheckbox={enabled}>
-      <Table.Thead
-        onChange={() =>
-          handleChangeSelectedStudents(
-            studentList.map((student) => student.memberId)
-          )
-        }
-      >
-        {STUENT_INFO_LIST_BEFORE.map((info) => (
-          <Table.Th key={info}>{info}</Table.Th>
-        ))}
-        {studentList[0] && <StudyTasksThs tasks={studentList[0].studyTasks} />}
-        {STUDENT_INFO_LIST_AFTER.map((info) => (
-          <Table.Th key={info}>{info}</Table.Th>
-        ))}
-      </Table.Thead>
+    <Table
+      fullWidth
+      selectedRowsProp={selectedStudents.students}
+      showCheckbox={enabled}
+    >
+      <styled.thead>
+        <styled.tr>
+          {enabled && (
+            <Table.Th style={tableCheckBoxStyle}>
+              <Checkbox
+                checked={isAllChecked}
+                onChange={() => {
+                  if (isAllChecked) {
+                    setSelectedStudents({
+                      firstStudentName: "",
+                      students: new Set(),
+                    });
+                    return;
+                  }
+                  handleChangeSelectedStudents(
+                    studentList.map((student) => student.memberId)
+                  );
+                }}
+              />
+            </Table.Th>
+          )}
+          {STUENT_INFO_LIST_BEFORE.map((info) => (
+            <Table.Th key={info}>{info}</Table.Th>
+          ))}
+          {studentList[0] && (
+            <StudyTasksThs tasks={studentList[0].studyTasks} />
+          )}
+          {STUDENT_INFO_LIST_AFTER.map((info) => (
+            <Table.Th key={info}>{info}</Table.Th>
+          ))}
+        </styled.tr>
+      </styled.thead>
       <Table.Tbody>
         {studentList.map((student) => (
           <Table.Tr
             key={student.memberId}
             value={student.memberId}
-            onChange={() =>
+            onChange={() => {
+              if (selectedStudents.students.has(student.memberId)) {
+                const newSet = new Set(selectedStudents.students);
+                newSet.delete(student.memberId);
+                handleChangeSelectedStudents([...newSet]);
+                return;
+              }
               handleChangeSelectedStudents([
                 ...selectedStudents.students,
                 student.memberId,
-              ])
-            }
+              ]);
+            }}
           >
             <StudentListItem {...student} />
           </Table.Tr>
@@ -84,3 +115,11 @@ const StudentList = ({
 };
 
 export default StudentList;
+
+const tableCheckBoxStyle = {
+  minWidth: "15px",
+  display: "flex",
+  minHeight: "44px",
+  justifyContent: "center",
+  alignItems: "center",
+};
