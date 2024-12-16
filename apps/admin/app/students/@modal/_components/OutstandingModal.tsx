@@ -23,9 +23,9 @@ const OutstandingModal = () => {
   const renderAdditionalStudents = () => {
     if (STUDENTS_NUM === 1) return null;
     return (
-      <>
+      <styled.span>
         외 <styled.span color="primary">{STUDENTS_NUM - 1}명</styled.span>
-      </>
+      </styled.span>
     );
   };
 
