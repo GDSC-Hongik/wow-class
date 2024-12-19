@@ -72,7 +72,7 @@ export type StudyCurriculumListDtoType = StudyCurriculumDto[];
 export interface DailyTaskDto<T extends DailyTaskType> {
   studyDetailId: number;
   week: number;
-  todoType: T;
+  taskType: T;
   deadLine: string;
   attendanceStatus: T extends "ATTENDANCE" ? AttendanceStatusType : never;
   assignmentTitle: T extends "ASSIGNMENT" ? string : never;

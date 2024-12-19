@@ -95,8 +95,8 @@ export const RepositorySubmissionBox = ({
     if (success) {
       revalidateTagByName(tags.studyDetailDashboard);
       setRepositorySubmissionStatus("SUBMITTED");
-      onClose();
     }
+    onClose();
   };
 
   return (

@@ -11,7 +11,7 @@ const DailyTaskItem = ({
   index: number;
 }) => {
   const {
-    todoType,
+    taskType,
     week,
     deadLine,
     attendanceStatus,
@@ -20,7 +20,7 @@ const DailyTaskItem = ({
     studyDetailId,
   } = dailyTask;
 
-  return todoType === "ATTENDANCE" ? (
+  return taskType === "ATTENDANCE" ? (
     <AttendanceStatusBox
       attendanceStatus={attendanceStatus || "NOT_ATTENDED"}
       deadLine={deadLine}

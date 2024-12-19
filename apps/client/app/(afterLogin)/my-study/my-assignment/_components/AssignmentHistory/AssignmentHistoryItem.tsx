@@ -103,8 +103,8 @@ const getTagProps = (
   status: AssignmentStatusType,
   assignmentSubmissionStatus: AssignmentSubmissionStatusType
 ) => {
-  if (status === "CANCELLED") {
-    return assignmentSubmissionMap.CANCELLED;
+  if (status === "CANCELED") {
+    return assignmentSubmissionMap.CANCELED;
   }
 
   if (
@@ -113,7 +113,7 @@ const getTagProps = (
   ) {
     return assignmentSubmissionMap[assignmentSubmissionStatus];
   }
-  return assignmentSubmissionMap.CANCELLED;
+  return assignmentSubmissionMap.CANCELED;
 };
 
 const weekStyle = css({
@@ -159,10 +159,10 @@ const tagContainerStyle = css({
 });
 
 const assignmentSubmissionMap: Record<
-  "CANCELLED" | "FAILURE" | "SUCCESS",
+  "CANCELED" | "FAILURE" | "SUCCESS",
   { tagText: string; tagColor: ComponentProps<typeof Tag>["color"] }
 > = {
-  CANCELLED: { tagText: "과제 휴강", tagColor: "grey" },
+  CANCELED: { tagText: "과제 휴강", tagColor: "grey" },
   FAILURE: { tagText: "제출 실패", tagColor: "red" },
   SUCCESS: { tagText: "제출 완료", tagColor: "blue" },
 };

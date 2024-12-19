@@ -52,7 +52,7 @@ const StudyCurriculum = async () => {
               color: attendanceStatusColor,
             } =
               attendanceStatusMap[
-                curriculumStatus === "CANCELLED" ? "ATTENDED" : attendanceStatus
+                curriculumStatus === "CANCELED" ? "ATTENDED" : attendanceStatus
               ];
 
             const isAssignmentSubmissionSuccess =
@@ -74,7 +74,7 @@ const StudyCurriculum = async () => {
             const buttonDisabled =
               !isCurrentWeek ||
               assignmentSubmissionStatus === "FAILURE" ||
-              assignmentStatus === "CANCELLED";
+              assignmentStatus === "CANCELED";
 
             const noDescriptionTextColor = description ? "black" : "sub";
 
@@ -90,7 +90,7 @@ const StudyCurriculum = async () => {
                     </Text>
                   </div>
                   <div className={contentContainerStyle}>
-                    {curriculumStatus === "CANCELLED" ? (
+                    {curriculumStatus === "CANCELED" ? (
                       <Text as="h3" color="sub" typo="h3">
                         휴강 주차
                       </Text>

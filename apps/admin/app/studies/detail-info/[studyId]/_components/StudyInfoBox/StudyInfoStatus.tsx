@@ -8,10 +8,7 @@ const StudyInfoStatus = ({ index }: { index: number }) => {
   const { control, setValue, watch } = useFormContext();
   const [checked, setChecked] = useState(false);
   useEffect(() => {
-    setValue(
-      `studyCurriculums.${index}.status`,
-      checked ? "CANCELLED" : "OPEN"
-    );
+    setValue(`studyCurriculums.${index}.status`, checked ? "CANCELED" : "OPEN");
   }, [checked]);
 
   return (
@@ -25,7 +22,7 @@ const StudyInfoStatus = ({ index }: { index: number }) => {
         name={`studyCurriculums.${index}.status`}
         render={() => (
           <Checkbox
-            checked={watch(`studyCurriculums.${index}.status`) === "CANCELLED"}
+            checked={watch(`studyCurriculums.${index}.status`) === "CANCELED"}
             defaultChecked={false}
             onChange={() => setChecked(!checked)}
           />

@@ -9,4 +9,5 @@ export const enum tags {
   memberList = "memberList",
   attendances = "attendances",
   students = "students",
+  studentsExcel = "studentsExcel",
 }

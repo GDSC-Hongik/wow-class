@@ -5,7 +5,7 @@ export type AttendanceStatusType =
 
 export type StudyDifficultyType = "BASIC" | "LOW" | "MEDIUM" | "HIGH";
 
-export type StudyCurriculumStatusType = "NONE" | "OPEN" | "CANCELLED";
+export type StudyCurriculumStatusType = "NONE" | "OPEN" | "CANCELED";
 
 export type DailyTaskType = "ATTENDANCE" | "ASSIGNMENT";
 
