@@ -3,7 +3,7 @@ import type {
   AssignmentSubmissionFailureType,
   AssignmentSubmissionStatusType,
 } from "types/entities/common/assignment";
-import type { StudyType } from "types/entities/common/study";
+import type { AchievmentType, StudyType } from "types/entities/common/study";
 
 export interface AssignmentHistoryDto {
   assignmentHistoryId: number;
@@ -28,7 +28,5 @@ export interface CompletedStudyDto {
   mentorName: string;
   totalWeek: number;
   studyHistoryStatus: "NONE" | "COMPLETED";
-  achievements: Array<
-    "FIRST_ROUND_OUTSTANDING_STUDENT" | "SECOND_ROUND_OUTSTANDING_STUDENT"
-  >;
+  achievements: Array<AchievmentType>;
 }

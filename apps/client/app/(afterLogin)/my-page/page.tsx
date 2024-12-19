@@ -11,7 +11,6 @@ const MyPage = () => {
       <MyInfoBox />
       <Space height={64} />
       <CompletedStudy />
-      <div>sdf</div>
     </>
   );
 };
