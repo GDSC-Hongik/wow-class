@@ -6,41 +6,12 @@ import { AwardIcon, StarCheckIcon, Text } from "@wow-class/ui";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import Link from "next/link";
 import type { ComponentProps } from "react";
-import type { CompletedStudyDto } from "types/dtos/studyHistory";
 import type { AchievmentType, StudyType } from "types/entities/common/study";
 import Table from "wowds-ui/Table";
 import Tag from "wowds-ui/Tag";
 
-const mockData: CompletedStudyDto[] = [
-  {
-    studyId: 48,
-    academicYear: 2024,
-    semesterType: "SECOND",
-    title: "세은 ㅅㅌㄷ",
-    studyType: "온라인 스터디",
-    notionLink: "ㅇㄴㄹㄴㅇㄹ",
-    introduction: "ㄴㅇㄹㄴㅇㄹ",
-    mentorName: "유세은",
-    totalWeek: 3,
-    studyHistoryStatus: "NONE",
-    achievements: ["FIRST_ROUND_OUTSTANDING_STUDENT"],
-  },
-  {
-    studyId: 49,
-    academicYear: 2024,
-    semesterType: "SECOND",
-    title: "1102 현영 스터디",
-    studyType: "오프라인 스터디",
-    mentorName: "권찬",
-    totalWeek: 12,
-    studyHistoryStatus: "COMPLETED",
-    achievements: [],
-  },
-];
-
 export const CompletedStudy = async () => {
-  //const data = await studyHistoryApi.getMyCompletedStudy();
-  const data = mockData;
+  const data = await studyHistoryApi.getMyCompletedStudy();
   if (!data) return null;
 
   const getAchievementIcons = (achievements: string[]) => {
@@ -70,50 +41,52 @@ export const CompletedStudy = async () => {
       </Table.Thead>
       <Table.Tbody>
         {data.map((study) => (
-          <Table.Tr key={study.studyId} value={study.studyId}>
-            <Table.Td>
-              <Flex>
-                <Text typo="h3">{study.title}</Text>
-                <Tag
-                  color={curriculumColors[study.studyType] ?? "green"}
-                  variant="solid1"
-                >
-                  {study.studyType}
-                </Tag>
-              </Flex>
-              {study.introduction && (
-                <Link
-                  className={introductionLinkTextStyle}
-                  href={study.notionLink ?? ""}
-                  target="_blank"
-                >
-                  <Text color="sub" typo="body2">
-                    {study.introduction}
-                  </Text>
-                </Link>
-              )}
-            </Table.Td>
-            <Table.Td>
-              <Text className={mentorTextstyle}>{study.mentorName} 멘토</Text>
-            </Table.Td>
-            <Table.Td>
-              <Text>
-                {study.academicYear}-
-                {study.semesterType === "FIRST" ? "1" : "2"}
-              </Text>
-            </Table.Td>
-            <Table.Td>
-              <Text>{study.totalWeek}주 코스</Text>
-            </Table.Td>
-            <Table.Td>
-              {study.studyHistoryStatus === "COMPLETED" ? (
-                <StarCheckIcon checked={true} />
-              ) : (
-                <Text>-</Text>
-              )}
-            </Table.Td>
-            <Table.Td>{getAchievementIcons(study.achievements)}</Table.Td>
-          </Table.Tr>
+          <div key={study.studyId}>
+            <Table.Tr value={study.studyId}>
+              <Table.Td>
+                <Flex>
+                  <Text typo="h3">{study.title}</Text>
+                  <Tag
+                    color={curriculumColors[study.studyType] ?? "green"}
+                    variant="solid1"
+                  >
+                    {study.studyType}
+                  </Tag>
+                </Flex>
+                {study.introduction && (
+                  <Link
+                    className={introductionLinkTextStyle}
+                    href={study.notionLink ?? ""}
+                    target="_blank"
+                  >
+                    <Text color="sub" typo="body2">
+                      {study.introduction}
+                    </Text>
+                  </Link>
+                )}
+              </Table.Td>
+              <Table.Td>
+                <Text className={mentorTextstyle}>{study.mentorName} 멘토</Text>
+              </Table.Td>
+              <Table.Td>
+                <Text>
+                  {study.academicYear}-
+                  {study.semesterType === "FIRST" ? "1" : "2"}
+                </Text>
+              </Table.Td>
+              <Table.Td>
+                <Text>{study.totalWeek}주 코스</Text>
+              </Table.Td>
+              <Table.Td>
+                {study.studyHistoryStatus === "COMPLETED" ? (
+                  <StarCheckIcon checked={true} />
+                ) : (
+                  <Text>-</Text>
+                )}
+              </Table.Td>
+              <Table.Td>{getAchievementIcons(study.achievements)}</Table.Td>
+            </Table.Tr>
+          </div>
         ))}
       </Table.Tbody>
     </Table>
