@@ -1,5 +1,4 @@
 import { css } from "@styled-system/css";
-import { styled } from "@styled-system/jsx";
 import Navbar from "components/Navbar";
 
 import { StudyProvider } from "./_contexts/StudyProvider";
@@ -14,17 +13,17 @@ const StudentsLayout = ({
   return (
     <StudyProvider>
       <Navbar />
-      <styled.main className={StudentsLayoutStyle}>
+      <main className={studentsLayoutStyle}>
         {children}
         {modal}
-      </styled.main>
+      </main>
     </StudyProvider>
   );
 };
 
 export default StudentsLayout;
 
-const StudentsLayoutStyle = css({
+const studentsLayoutStyle = css({
   display: "flex",
   flexDirection: "column",
   gap: "sm",

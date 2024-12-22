@@ -1,5 +1,4 @@
 import { css } from "@styled-system/css";
-import { styled } from "@styled-system/jsx";
 import Navbar from "components/Navbar";
 
 const StudiesLayout = ({
@@ -10,14 +9,14 @@ const StudiesLayout = ({
   return (
     <>
       <Navbar />
-      <styled.main className={StudiesLayoutStyle}>{children}</styled.main>
+      <main className={studiesLayoutStyle}>{children}</main>
     </>
   );
 };
 
 export default StudiesLayout;
 
-const StudiesLayoutStyle = css({
+const studiesLayoutStyle = css({
   display: "flex",
   flexDirection: "column",
   gap: "sm",
