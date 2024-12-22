@@ -1,5 +1,6 @@
 "use client";
 import { css, cva } from "@styled-system/css";
+import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { useState } from "react";
 
@@ -20,49 +21,55 @@ const BarGraph = ({
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
   return (
-    <div
-      className={BarGraphBackgroundStyle({
-        type: isCurriculumCanceled ? "canceled" : "default",
-      })}
+    <Flex
+      alignItems="center"
+      flexShrink="0"
+      gap="sm"
+      justifyContent="flex-start"
     >
+      <div
+        className={BarGraphBackgroundStyle({
+          type: isCurriculumCanceled ? "canceled" : "default",
+        })}
+      >
+        {percent > 0 ? (
+          <div
+            style={{ width: `${50 + (232 - 50) * (percent / 100)}px` }}
+            className={BarGraphStyle({
+              type: barColor,
+            })}
+            onMouseEnter={() => {
+              if (isToolTipActive) setShowTooltip(true);
+            }}
+            onMouseLeave={() => {
+              if (isToolTipActive) setShowTooltip(false);
+            }}
+          >
+            <div className={BarGraphInnerStyle}>
+              <Text className={percentLabelStyle} color="white" typo="label2">
+                {percent > 0 && `${percent}%`}
+              </Text>
+              {showTooltip && (
+                <GraphToolTip
+                  studentCount={Math.ceil((percent / 100) * totalStudent)}
+                />
+              )}
+            </div>
+          </div>
+        ) : (
+          <Text className={zeroPercentLabel} color="sub" typo="label2">
+            0%
+          </Text>
+        )}
+      </div>
       {isCurriculumCanceled ? (
-        <Text className={CanceledClassLabel} color="mono.800" typo="label2">
-          휴강 주차
+        <Text as="div" color="sub" typo="label2">
+          휴강
         </Text>
       ) : (
-        <>
-          {percent > 0 ? (
-            <div
-              style={{ width: `${50 + (232 - 50) * (percent / 100)}px` }}
-              className={BarGraphStyle({
-                type: barColor,
-              })}
-              onMouseEnter={() => {
-                if (isToolTipActive) setShowTooltip(true);
-              }}
-              onMouseLeave={() => {
-                if (isToolTipActive) setShowTooltip(false);
-              }}
-            >
-              <div className={BarGraphInnerStyle}>
-                <Text color="white" typo="label2">
-                  {percent > 0 && `${percent}%`}
-                </Text>
-                {showTooltip && (
-                  <GraphToolTip
-                    studentCount={Math.ceil((percent / 100) * totalStudent)}
-                  />
-                )}
-              </div>
-            </div>
-          ) : (
-            <div>
-              <div className={BarGraphZeroPercent}></div>
-            </div>
-          )}
-        </>
+        ""
       )}
-    </div>
+    </Flex>
   );
 };
 
@@ -71,14 +78,15 @@ export default BarGraph;
 const BarGraphBackgroundStyle = cva({
   base: {
     position: "relative",
-    maxWidth: "232px",
+    minWidth: "232px",
     width: "232px",
-    height: "24px",
+    height: "32px",
     display: "flex",
     alignItems: "center",
     gap: "4px",
     flex: 2,
     zIndex: "5",
+    borderRadius: "4px",
   },
   variants: {
     type: {
@@ -86,7 +94,7 @@ const BarGraphBackgroundStyle = cva({
         backgroundColor: "monoBackgroundPressed",
       },
       canceled: {
-        backgroundColor: "mono.400",
+        backgroundColor: "lightDisabled",
       },
     },
   },
@@ -98,10 +106,11 @@ const BarGraphStyle = cva({
     zIndex: 10,
     top: 0,
     left: 0,
-    height: "24px",
+    height: "32px",
     padding: "4px 8px",
     display: "flex",
     alignItems: "center",
+    borderRadius: "4px",
   },
   variants: {
     type: {
@@ -109,16 +118,16 @@ const BarGraphStyle = cva({
         backgroundColor: "primary",
       },
       average: {
-        backgroundColor: "success",
+        backgroundColor: "secondaryYellow",
       },
     },
   },
 });
 
-const BarGraphZeroPercent = css({
-  width: "2px",
-  height: "24px",
-  backgroundColor: "primary",
+const percentLabelStyle = css({
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
 });
 
 const BarGraphInnerStyle = css({
@@ -127,6 +136,6 @@ const BarGraphInnerStyle = css({
   height: "100%",
 });
 
-const CanceledClassLabel = css({
+const zeroPercentLabel = css({
   marginLeft: "8px",
 });

@@ -16,15 +16,19 @@ const StudyAttendanceRate = ({
 }) => {
   return (
     <Flex direction="column" gap="md">
-      <Text typo="h2">출석률</Text>
+      <Text className={StaticsTitleStyle} typo="h2">
+        출석률
+      </Text>
       <Flex direction="column" gap="xs">
-        <Text className={maxPercentLabel} color="sub" typo="label2">
-          100%
-        </Text>
-        <Flex alignItems="center" direction="column" gap="md">
+        <Flex alignItems="flex-start" direction="column" gap="md">
           {studyWeekStatisticsResponses?.map((data) => (
-            <Flex direction="row" gap="lg" key={data.week}>
-              <Text className={studyWeekStyle} color="sub" typo="body1">
+            <Flex direction="row" gap="lg" key={data.week} minWidth="340px">
+              <Text
+                as="div"
+                className={StudyWeekStyle}
+                color="sub"
+                typo="body1"
+              >
                 {data.week}주차
               </Text>
               <BarGraph
@@ -35,7 +39,7 @@ const StudyAttendanceRate = ({
             </Flex>
           ))}
           <Flex direction="row" gap="lg">
-            <Text className={studyWeekStyle} color="sub" typo="body1">
+            <Text className={StudyWeekStyle} color="sub" typo="body1">
               평균
             </Text>
             <BarGraph
@@ -52,10 +56,10 @@ const StudyAttendanceRate = ({
 
 export default StudyAttendanceRate;
 
-const studyWeekStyle = css({
+const StudyWeekStyle = css({
   minWidth: "45px",
 });
 
-const maxPercentLabel = css({
-  textAlign: "right",
+const StaticsTitleStyle = css({
+  marginBottom: "10px",
 });
