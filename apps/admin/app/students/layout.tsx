@@ -1,25 +1,29 @@
 import { css } from "@styled-system/css";
-import { styled } from "@styled-system/jsx";
 import Navbar from "components/Navbar";
 
 import { StudyProvider } from "./_contexts/StudyProvider";
 
 const StudentsLayout = ({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) => {
   return (
     <StudyProvider>
       <Navbar />
-      <styled.main className={StudentsLayoutStyle}>{children}</styled.main>
+      <main className={studentsLayoutStyle}>
+        {children}
+        {modal}
+      </main>
     </StudyProvider>
   );
 };
 
 export default StudentsLayout;
 
-const StudentsLayoutStyle = css({
+const studentsLayoutStyle = css({
   display: "flex",
   flexDirection: "column",
   gap: "sm",

@@ -1,11 +1,15 @@
 import { Flex } from "@styled-system/jsx";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import type { ReactNode } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-import { studyAtom } from "../../_contexts/StudyProvider";
+import {
+  enabledOutstandingStudentsAtom,
+  selectedStudentsAtom,
+  studyAtom,
+} from "../../_contexts/StudyProvider";
 import DropDownTrigger from "./DropDownTrigger";
 
 const StudyDropDown = ({
@@ -14,6 +18,8 @@ const StudyDropDown = ({
   studyList: StudyListApiResponseDto[];
 }) => {
   const [study, setStudy] = useAtom(studyAtom);
+  const setSelectedStudents = useSetAtom(selectedStudentsAtom);
+  const setEnabled = useSetAtom(enabledOutstandingStudentsAtom);
 
   if (!study) return null;
 
@@ -35,6 +41,13 @@ const StudyDropDown = ({
         setStudy({
           studyId: +value.selectedValue,
           title: value.selectedText,
+        });
+        setSelectedStudents({
+          firstStudentName: "",
+          students: new Set(),
+        });
+        setEnabled({
+          enabled: false,
         });
       }}
     >

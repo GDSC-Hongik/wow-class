@@ -157,7 +157,7 @@ class Fetcher {
 
   patch<T = any>(
     url: string,
-    body: any,
+    body: any = {},
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
     return this.request(url, {
@@ -169,9 +169,14 @@ class Fetcher {
 
   delete<T = any>(
     url: string,
+    body: any = {},
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    return this.request(url, { ...options, method: "DELETE" });
+    return this.request(url, {
+      ...options,
+      method: "DELETE",
+      body: JSON.stringify(body),
+    });
   }
 }
 
