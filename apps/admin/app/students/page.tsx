@@ -9,8 +9,10 @@ import { useEffect, useState } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import isAdmin from "utils/isAdmin";
 
-import StudentList from "./_components/StudentList";
+import StudentFilter from "./_components/StudentFilter";
+import StudentPagination from "./_components/StudentPagination";
 import StudentsHeader from "./_components/StudentsHeader";
+import StudentList from "./_components/StudentTable/StudentList";
 import { studyAtom } from "./_contexts/StudyProvider";
 
 const StudentsPage = () => {
@@ -33,13 +35,31 @@ const StudentsPage = () => {
     fetchData();
   }, [setSelectedStudy]);
 
-  const student = useFetchStudents(selectedStudy);
+  const [page, setPage] = useState(1);
+  const handleClickChangePage = (nextPage: number) => {
+    setPage(nextPage);
+  };
+
+  const { studentList, pageInfo } = useFetchStudents(selectedStudy, page);
+  if (!selectedStudy) return null;
   if (!studyList) return <Text>담당한 스터디가 없어요.</Text>;
 
   return (
-    <Flex direction="column" gap="3rem">
-      <StudentsHeader studyList={studyList} />
-      <StudentList studentList={student.studentList} />
+    <Flex direction="column" gap="1.5rem">
+      <StudentsHeader
+        studentLength={studentList.length}
+        studyId={selectedStudy.studyId}
+        studyList={studyList}
+      />
+
+      {/* TODO: 페이지네이션 API 필터 추가 후 주석 해제
+      {studentList.length ? <StudentFilter /> : null} 
+      */}
+      <StudentList studentList={studentList} />
+      <StudentPagination
+        handleClickChangePage={handleClickChangePage}
+        pageInfo={pageInfo}
+      />
     </Flex>
   );
 };

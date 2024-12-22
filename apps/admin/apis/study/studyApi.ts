@@ -10,7 +10,11 @@ import type { AttendanceApiResponseDto } from "types/dtos/attendance";
 import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
 import type { StudyStatisticsApiResponseDto } from "types/dtos/studyStatistics";
-import type { StudyStudentApiResponseDto } from "types/dtos/studyStudent";
+import type {
+  PaginatedStudyStudentResponseDto,
+  StudyStudentApiResponseDto,
+} from "types/dtos/studyStudent";
+import type { PageableType } from "types/entities/page";
 import type { StudyAnnouncementType } from "types/entities/study";
 
 import type { StudyListApiResponseDto } from "../../types/dtos/studyList";
@@ -150,14 +154,26 @@ export const studyApi = {
     );
     return response.data;
   },
-  getStudyStudents: async (studyId: number) => {
-    const response = await fetcher.get<StudyStudentApiResponseDto[]>(
+  getStudyStudents: async (studyId: number, pageable: PageableType) => {
+    const response = await fetcher.get<PaginatedStudyStudentResponseDto>(
       `/mentor/studies/${studyId}/students`,
       {
         next: { tags: [tags.students] },
         cache: "force-cache",
+      },
+      pageable
+    );
+    return response.data;
+  },
+  getStudyStudentsExcel: async (studyId: number) => {
+    const response = await fetcher.get(
+      `/mentor/studies/${studyId}/students/excel`,
+      {
+        next: { tags: [tags.studentsExcel] },
+        cache: "force-cache",
       }
     );
+
     return response.data;
   },
   getStudyStatistics: async (studyId: number) => {

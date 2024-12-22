@@ -1,81 +1,48 @@
-# Turborepo starter
+# wow-class
 
-This is an official starter Turborepo.
+GDSC Hongik 스터디 서비스, 와우 클래스
 
-## Using this example
+![image](https://github.com/user-attachments/assets/2557aa14-4593-4cb0-a323-57dd8f1a5cd5)
 
-Run the following command:
+## Link
 
-```sh
-npx create-turbo@latest
-```
+- [client 서비스](https://study.gdschongik.com/)
+- [admin 서비스](https://mentor.study.gdschongik.com/)
 
-## What's inside?
+## 서비스 소개
 
-This Turborepo includes the following packages/apps:
+### 클라이언트 서비스(학생용)
 
-### Apps and Packages
+| 나의 스터디                             | 나의 과제                            | 수강신청                                   |
+|-------------------------------------------|-------------------------------------------|-------------------------------------------|
+| <img src="https://github.com/user-attachments/assets/646ff757-f10b-439e-b941-b19cb965861d" width="1000"/> | <img src="https://github.com/user-attachments/assets/571f9539-727c-4a02-84cc-bf86ca1f209c" width="1000"/> | <img src="https://github.com/user-attachments/assets/d13e020b-fa7c-4dc2-b187-2ad7a5cd4a09" width="1000"/> |
+| 스터디 과제 및 출석 상황을 한눈에 확인할 수 있습니다. | 제출해야 할 과제 목록과 과제 히스토리를 확인합니다. | 수강신청한 스터디를 확인할 수 있습니다. |
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### 어드민 서비스(멘토용)
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+| 개설된 스터디 페이지                     | 스터디 개설 페이지                     | 스터디 정보 확인 페이지                     |
+|-------------------------------------------|-------------------------------------------|-------------------------------------------|
+| <img src="https://github.com/user-attachments/assets/d33493d0-f598-4183-87bc-b4ef55d6e175" width="1000"/> | <img src="https://github.com/user-attachments/assets/d4984e5a-90e1-464c-8b7f-4345c484401e" width="1000"/> | <img src="https://github.com/user-attachments/assets/aabfe146-aa06-440b-aa2c-1e2c7d4872ef" width="1000" height='200'/> |
+| 현재  개설되어 있는 스터디 목록을 확인할 수 있습니다. | 새 스터디를 개설하고 세부 정보를 입력하는 페이지입니다. | 스터디의 상세 정보를 확인할 수 있습니다. |
 
-### Utilities
 
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+## 기술 스택
+<div align="left">
+<div>
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white">
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black">
+<img src="https://img.shields.io/badge/Next-000000?style=flat-square&logo=Next.js&logoColor=white">
+<img src="https://img.shields.io/badge/Storybook-FF4785?style=flat-square&logo=storybook&logoColor=white">
+</div>
+<div>
+ <img src="https://img.shields.io/badge/Turbo-333333?style=flat-square&logo=turbo&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Panda CSS-EF7C8E?style=flat-square&logo=pandacss&logoColor=white"/>
+   <img src="https://img.shields.io/badge/Jotai-00C7B7?style=flat-square&logo=react&logoColor=white">
+</div>
+<div>
+<img src="https://img.shields.io/badge/ESlint-4B32C3?style=flat-square&logo=eslint&logoColor=white">
+<img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=white">
+</div>
+</div>
+    
+  
