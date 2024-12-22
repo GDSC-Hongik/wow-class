@@ -11,8 +11,6 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
     parseInt(studyId, 10)
   );
 
-  console.log(studyStatistics?.studyWeekStatisticsResponses);
-
   return (
     <section aria-label="study-statics">
       <Flex direction="column" gap="sm">
@@ -23,7 +21,7 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
         </Text>
       </Flex>
       <Space height={33} />
-      <Flex alignItems="center" gap="xl">
+      <Flex alignItems="flex-start" gap="xl">
         <StudyAttendanceRate
           averageAttendanceRate={studyStatistics?.averageAttendanceRate}
           totalStudent={studyStatistics?.totalStudentCount}
@@ -41,6 +39,7 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
           }
         />
         <StudyCompleteRate
+          studyCompleteCount={studyStatistics?.completeStudentCount}
           studyCompleteRate={studyStatistics?.studyCompleteRate}
         />
       </Flex>

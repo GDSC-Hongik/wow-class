@@ -57,17 +57,15 @@ const BarGraph = ({
             </div>
           </div>
         ) : (
-          <Text className={zeroPercentLabel} color="sub" typo="label2">
+          <Text className={ZeroPercentLabel} color="sub" typo="label2">
             0%
           </Text>
         )}
       </div>
-      {isCurriculumCanceled ? (
+      {isCurriculumCanceled && (
         <Text as="div" color="sub" typo="label2">
           휴강
         </Text>
-      ) : (
-        ""
       )}
     </Flex>
   );
@@ -136,6 +134,6 @@ const BarGraphInnerStyle = css({
   height: "100%",
 });
 
-const zeroPercentLabel = css({
+const ZeroPercentLabel = css({
   marginLeft: "8px",
 });

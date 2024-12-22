@@ -16,7 +16,7 @@ const StudyAssignmentRate = ({
 }) => {
   return (
     <Flex direction="column" gap="md">
-      <Text className={StaticsTitleStyle} typo="h2">
+      <Text className={StaticsTitleStyle} typo="h3">
         과제 제출률
       </Text>
       <Flex direction="column" gap="xs">

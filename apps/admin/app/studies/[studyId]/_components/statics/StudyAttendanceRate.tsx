@@ -16,7 +16,7 @@ const StudyAttendanceRate = ({
 }) => {
   return (
     <Flex direction="column" gap="md">
-      <Text className={StaticsTitleStyle} typo="h2">
+      <Text className={StaticsTitleStyle} typo="h3">
         출석률
       </Text>
       <Flex direction="column" gap="xs">
