@@ -2,7 +2,8 @@
 
 import { css } from "@styled-system/css";
 import type { PropsWithChildren, ReactNode } from "react";
-import { useOpenState } from "src/hooks";
+
+import useOpenState from "../../hooks/useOpenState";
 
 interface TooltipProps extends PropsWithChildren {
   content: ReactNode;
