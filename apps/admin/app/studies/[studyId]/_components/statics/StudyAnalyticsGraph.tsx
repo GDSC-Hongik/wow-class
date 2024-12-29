@@ -5,19 +5,21 @@ import type { StudyWeekStatisticsApiResponseDto } from "types/dtos/studyStatisti
 
 import BarGraph from "./graph/BarGraph";
 
-const StudyAttendanceRate = ({
-  averageAttendanceRate = 0,
+const StudyAnalyticsGraph = ({
+  graphTitle,
+  averageRate = 0,
   totalStudent,
   studyWeekStatisticsResponses,
 }: {
-  averageAttendanceRate?: number;
+  graphTitle: string;
+  averageRate?: number;
   totalStudent?: number;
   studyWeekStatisticsResponses?: StudyWeekStatisticsApiResponseDto[];
 }) => {
   return (
     <Flex direction="column" gap="md">
-      <Text className={StaticsTitleStyle} typo="h3">
-        출석률
+      <Text className={staticsTitleStyle} typo="h3">
+        {graphTitle}
       </Text>
       <Flex direction="column" gap="xs">
         <Flex alignItems="flex-start" direction="column" gap="md">
@@ -25,7 +27,7 @@ const StudyAttendanceRate = ({
             <Flex direction="row" gap="lg" key={data.week} minWidth="340px">
               <Text
                 as="div"
-                className={StudyWeekStyle}
+                className={studyWeekStyle}
                 color="sub"
                 typo="body1"
               >
@@ -39,13 +41,13 @@ const StudyAttendanceRate = ({
             </Flex>
           ))}
           <Flex direction="row" gap="lg">
-            <Text className={StudyWeekStyle} color="sub" typo="body1">
+            <Text className={studyWeekStyle} color="sub" typo="body1">
               평균
             </Text>
             <BarGraph
               barColor="average"
               isToolTipActive={false}
-              percent={averageAttendanceRate}
+              percent={averageRate}
             />
           </Flex>
         </Flex>
@@ -54,12 +56,12 @@ const StudyAttendanceRate = ({
   );
 };
 
-export default StudyAttendanceRate;
+export default StudyAnalyticsGraph;
 
-const StudyWeekStyle = css({
+const studyWeekStyle = css({
   minWidth: "45px",
 });
 
-const StaticsTitleStyle = css({
+const staticsTitleStyle = css({
   marginBottom: "10px",
 });

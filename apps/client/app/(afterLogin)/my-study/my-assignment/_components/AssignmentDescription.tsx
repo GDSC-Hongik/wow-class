@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
+import { Tooltip } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import { studyDetailApi } from "apis/studyDetailApi";
-import Tooltip from "components/Tooltip";
 import Link from "next/link";
 
 export const AssignmentDescription = async () => {

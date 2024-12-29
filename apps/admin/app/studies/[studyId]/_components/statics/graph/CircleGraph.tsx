@@ -20,9 +20,9 @@ const CircleGraph = ({
 
   return (
     <Flex alignItems="center" direction="column" gap="lg" minWidth={size}>
-      <div className={CircleGraphWrapperStyle}>
+      <div className={circleGraphWrapperStyle}>
         <svg
-          className={CircleGraphStyle}
+          className={circleGraphStyle}
           height={size}
           viewBox={`0 0 ${size} ${size}`}
           width={size}
@@ -46,7 +46,7 @@ const CircleGraph = ({
             strokeWidth={strokeWidth}
           />
         </svg>
-        <Text className={CircleGraphLabelStyle} typo="h1">
+        <Text className={circleGraphLabelStyle} typo="h1">
           {percentage}%
         </Text>
       </div>
@@ -56,17 +56,17 @@ const CircleGraph = ({
 
 export default CircleGraph;
 
-const CircleGraphStyle = css({
+const circleGraphStyle = css({
   width: "100%",
   transform: "rotate(-90deg)",
 });
 
-const CircleGraphWrapperStyle = css({
+const circleGraphWrapperStyle = css({
   width: "100%",
   position: "relative",
 });
 
-const CircleGraphLabelStyle = css({
+const circleGraphLabelStyle = css({
   position: "absolute",
   top: "50%",
   left: "50%",

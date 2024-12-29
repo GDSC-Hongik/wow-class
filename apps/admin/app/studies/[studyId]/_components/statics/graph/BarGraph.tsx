@@ -20,6 +20,9 @@ const BarGraph = ({
   isCurriculumCanceled?: boolean;
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
+  const toggleTooltip = () => {
+    if (isToolTipActive) setShowTooltip((prevState) => !prevState);
+  };
   return (
     <Flex
       alignItems="center"
@@ -35,17 +38,13 @@ const BarGraph = ({
         {percent > 0 ? (
           <div
             style={{ width: `${50 + (232 - 50) * (percent / 100)}px` }}
-            className={BarGraphStyle({
+            className={barGraphStyle({
               type: barColor,
             })}
-            onMouseEnter={() => {
-              if (isToolTipActive) setShowTooltip(true);
-            }}
-            onMouseLeave={() => {
-              if (isToolTipActive) setShowTooltip(false);
-            }}
+            onMouseEnter={toggleTooltip}
+            onMouseLeave={toggleTooltip}
           >
-            <div className={BarGraphInnerStyle}>
+            <div className={barGraphInnerStyle}>
               <Text className={percentLabelStyle} color="white" typo="label2">
                 {percent > 0 && `${percent}%`}
               </Text>
@@ -57,7 +56,7 @@ const BarGraph = ({
             </div>
           </div>
         ) : (
-          <Text className={ZeroPercentLabel} color="sub" typo="label2">
+          <Text className={zeroPercentLabelStyle} color="sub" typo="label2">
             0%
           </Text>
         )}
@@ -98,7 +97,7 @@ const BarGraphBackgroundStyle = cva({
   },
 });
 
-const BarGraphStyle = cva({
+const barGraphStyle = cva({
   base: {
     position: "absolute",
     zIndex: 10,
@@ -128,12 +127,12 @@ const percentLabelStyle = css({
   alignItems: "center",
 });
 
-const BarGraphInnerStyle = css({
+const barGraphInnerStyle = css({
   position: "relative",
   width: "100%",
   height: "100%",
 });
 
-const ZeroPercentLabel = css({
+const zeroPercentLabelStyle = css({
   marginLeft: "8px",
 });

@@ -2,20 +2,20 @@ import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 const GraphToolTip = ({ studentCount }: { studentCount: number }) => {
   return (
-    <div className={ToolTipContainerStyle}>
-      <div className={ToolTipStyle}>
+    <div className={toolTipContainerStyle}>
+      <div className={toolTipStyle}>
         <Text color="black" typo="label2">
           {studentCount}명
         </Text>
       </div>
-      <div className={ToolTipDecoStyle}></div>
+      <div className={toolTipDecoStyle}></div>
     </div>
   );
 };
 
 export default GraphToolTip;
 
-const ToolTipContainerStyle = css({
+const toolTipContainerStyle = css({
   position: "absolute",
   width: "43px",
   height: "38px",
@@ -25,7 +25,7 @@ const ToolTipContainerStyle = css({
   zIndex: 20,
 });
 
-const ToolTipStyle = css({
+const toolTipStyle = css({
   position: "relative",
   width: "100%",
   height: "24px",
@@ -36,7 +36,7 @@ const ToolTipStyle = css({
   zIndex: 20,
 });
 
-const ToolTipDecoStyle = css({
+const toolTipDecoStyle = css({
   position: "absolute",
   bottom: 0,
   left: "50%",

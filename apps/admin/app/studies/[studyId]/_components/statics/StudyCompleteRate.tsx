@@ -1,7 +1,6 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
-import { Text } from "@wow-class/ui";
-import Tooltip from "components/Tooltip";
+import { Text, Tooltip } from "@wow-class/ui";
 import { Help } from "wowds-icons";
 
 import CircleGraph from "./graph/CircleGraph";
