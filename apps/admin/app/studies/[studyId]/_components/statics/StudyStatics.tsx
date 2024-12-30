@@ -42,6 +42,7 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
           studyCompleteRate={studyStatistics?.studyCompleteRate}
         />
       </Flex>
+      <Space height={33} />
     </section>
   );
 };

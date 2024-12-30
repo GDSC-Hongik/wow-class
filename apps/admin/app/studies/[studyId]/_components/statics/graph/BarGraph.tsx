@@ -20,8 +20,17 @@ const BarGraph = ({
   isCurriculumCanceled?: boolean;
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const toggleTooltip = () => {
-    if (isToolTipActive) setShowTooltip((prevState) => !prevState);
+
+  const handleMouseEnter = () => {
+    if (isToolTipActive) {
+      setShowTooltip(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (isToolTipActive) {
+      setShowTooltip(false);
+    }
   };
   return (
     <Flex
@@ -41,12 +50,12 @@ const BarGraph = ({
             className={barGraphStyle({
               type: barColor,
             })}
-            onMouseEnter={toggleTooltip}
-            onMouseLeave={toggleTooltip}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <div className={barGraphInnerStyle}>
               <Text className={percentLabelStyle} color="white" typo="label2">
-                {percent > 0 && `${percent}%`}
+                {percent}%
               </Text>
               {showTooltip && (
                 <GraphToolTip
