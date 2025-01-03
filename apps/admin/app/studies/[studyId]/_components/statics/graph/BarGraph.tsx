@@ -2,7 +2,7 @@
 import { css, cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { useState } from "react";
+import clsx from "clsx";
 
 import GraphToolTip from "./GraphToolTip";
 
@@ -19,19 +19,6 @@ const BarGraph = ({
   percent?: number;
   isCurriculumCanceled?: boolean;
 }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
-
-  const handleMouseEnter = () => {
-    if (isToolTipActive) {
-      setShowTooltip(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (isToolTipActive) {
-      setShowTooltip(false);
-    }
-  };
   return (
     <Flex
       alignItems="center"
@@ -47,21 +34,25 @@ const BarGraph = ({
         {percent > 0 ? (
           <div
             style={{ width: `${50 + (232 - 50) * (percent / 100)}px` }}
-            className={barGraphStyle({
-              type: barColor,
-            })}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            className={clsx(
+              barGraphStyle({
+                type: barColor,
+              }),
+              isToolTipActive &&
+                css({
+                  "&:hover .tooltip": {
+                    visibility: "visible !important",
+                  },
+                })
+            )}
           >
             <div className={barGraphInnerStyle}>
               <Text className={percentLabelStyle} color="white" typo="label2">
                 {percent}%
               </Text>
-              {showTooltip && (
-                <GraphToolTip
-                  studentCount={Math.ceil((percent / 100) * totalStudent)}
-                />
-              )}
+              <GraphToolTip
+                studentCount={Math.ceil((percent / 100) * totalStudent)}
+              />
             </div>
           </div>
         ) : (
@@ -118,6 +109,7 @@ const barGraphStyle = cva({
     alignItems: "center",
     borderRadius: "4px",
   },
+
   variants: {
     type: {
       default: {

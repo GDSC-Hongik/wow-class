@@ -1,7 +1,6 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import React from "react";
 import { color } from "wowds-tokens";
 
 const CircleGraph = ({

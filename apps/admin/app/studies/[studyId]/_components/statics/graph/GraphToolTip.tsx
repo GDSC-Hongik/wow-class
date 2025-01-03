@@ -1,8 +1,9 @@
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
+import clsx from "clsx";
 const GraphToolTip = ({ studentCount }: { studentCount: number }) => {
   return (
-    <div className={toolTipContainerStyle}>
+    <div className={clsx("tooltip", toolTipContainerStyle)}>
       <div className={toolTipStyle}>
         <Text color="black" typo="label2">
           {studentCount}명
@@ -23,6 +24,7 @@ const toolTipContainerStyle = css({
   transform: "translate(50%, -50%)",
   right: "-8px",
   zIndex: 20,
+  visibility: "hidden",
 });
 
 const toolTipStyle = css({
