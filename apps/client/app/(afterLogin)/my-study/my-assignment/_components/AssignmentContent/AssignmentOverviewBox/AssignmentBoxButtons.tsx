@@ -128,7 +128,7 @@ const SecondaryButton = ({
   const { year, month, day, hours, minutes } = parseISODate(
     committedAt as string
   );
-  const commitText = `최종 수정일자 ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
+  const commitText = `최종 수정 일시 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
 
   return (
     <Button
