@@ -2,7 +2,7 @@
 
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
-import { AwardIcon, Space, StarCheckIcon, Text } from "@wow-class/ui";
+import { AwardIcon, StarCheckIcon, Text } from "@wow-class/ui";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import Link from "next/link";
 import type { ComponentProps, CSSProperties } from "react";
@@ -39,56 +39,53 @@ export const CompletedStudy = async () => {
             studyHistoryStatus,
             achievements,
           }) => (
-            <div key={studyId}>
-              <Table.Tr value={studyId}>
-                <Table.Td style={tdStyle}>
-                  <Flex>
-                    <Text typo="h3">{title}</Text>
-                    <Tag
-                      color={curriculumColors[studyType] ?? "green"}
-                      variant="solid1"
-                    >
-                      {studyType}
-                    </Tag>
-                  </Flex>
-                  {introduction && (
-                    <Link
-                      className={introductionLinkTextStyle}
-                      href={notionLink ?? ""}
-                      target="_blank"
-                    >
-                      <Text color="sub" typo="body2">
-                        {introduction}
-                      </Text>
-                    </Link>
-                  )}
-                </Table.Td>
-                <Table.Td style={tdStyle}>
-                  <Text className={mentorTextstyle}>{mentorName} 멘토</Text>
-                </Table.Td>
-                <Table.Td style={tdStyle}>
-                  <Text>
-                    {academicYear}-{semesterType === "FIRST" ? "1" : "2"}
-                  </Text>
-                </Table.Td>
-                <Table.Td style={tdStyle}>
-                  <Text>{totalWeek}주 코스</Text>
-                </Table.Td>
-                <Table.Td style={tdStyle}>
-                  {studyHistoryStatus === "COMPLETED" ? (
-                    <StarCheckIcon checked={true} />
-                  ) : (
-                    <Text className={emptyTextStyle}>-</Text>
-                  )}
-                </Table.Td>
-                <Table.Td style={tdStyle}>
-                  <Flex gap="10px">
-                    <AchievementIcons achievements={achievements} />
-                  </Flex>
-                </Table.Td>
-              </Table.Tr>
-              <Space height={16} />
-            </div>
+            <Table.Tr key={studyId} value={studyId}>
+              <Table.Td style={tdStyle}>
+                <Flex>
+                  <Text typo="h3">{title}</Text>
+                  <Tag
+                    color={curriculumColors[studyType] ?? "green"}
+                    variant="solid1"
+                  >
+                    {studyType}
+                  </Tag>
+                </Flex>
+                {introduction && (
+                  <Link
+                    className={introductionLinkTextStyle}
+                    href={notionLink ?? ""}
+                    target="_blank"
+                  >
+                    <Text color="sub" typo="body2">
+                      {introduction}
+                    </Text>
+                  </Link>
+                )}
+              </Table.Td>
+              <Table.Td style={tdStyle}>
+                <Text className={mentorTextstyle}>{mentorName} 멘토</Text>
+              </Table.Td>
+              <Table.Td style={tdStyle}>
+                <Text>
+                  {academicYear}-{semesterType === "FIRST" ? "1" : "2"}
+                </Text>
+              </Table.Td>
+              <Table.Td style={tdStyle}>
+                <Text>{totalWeek}주 코스</Text>
+              </Table.Td>
+              <Table.Td style={tdStyle}>
+                {studyHistoryStatus === "COMPLETED" ? (
+                  <StarCheckIcon checked={true} />
+                ) : (
+                  <Text className={emptyTextStyle}>-</Text>
+                )}
+              </Table.Td>
+              <Table.Td style={tdStyle}>
+                <Flex gap="10px">
+                  <AchievementIcons achievements={achievements} />
+                </Flex>
+              </Table.Td>
+            </Table.Tr>
           )
         )}
       </Table.Tbody>
