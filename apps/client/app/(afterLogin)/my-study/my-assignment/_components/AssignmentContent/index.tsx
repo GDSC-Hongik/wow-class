@@ -43,11 +43,13 @@ export const AssignmentContent = async () => {
         flexDirection={isAnyFirstWeekAssignment ? "row-reverse" : "row"}
         gap="lg"
       >
-        <AssignmentOverviewBox
-          assignments={studyDashboard.submittableAssignments}
-          buttonsDisabled={!studyDashboard.repositoryLink}
-          repositoryLink={studyDashboard.repositoryLink}
-        />
+        <Flex flexDirection="row" gap="lg">
+          <AssignmentOverviewBox
+            assignments={studyDashboard.submittableAssignments}
+            buttonsDisabled={!studyDashboard.repositoryLink}
+            repositoryLink={studyDashboard.repositoryLink}
+          />
+        </Flex>
         <RepositorySubmissionBox
           repositoryLink={studyDashboard.repositoryLink}
         />
