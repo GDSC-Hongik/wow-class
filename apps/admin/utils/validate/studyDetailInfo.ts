@@ -5,7 +5,7 @@ const StudyCurriculumTypeSchema = z.object({
   title: z.string().optional().nullable(),
   description: z.string().optional().nullable(),
   difficulty: z.enum(["HIGH", "MEDIUM", "LOW", "BASIC"]).optional().nullable(),
-  status: z.enum(["OPEN", "CANCELLED", "NONE"]).optional().nullable(),
+  status: z.enum(["OPEN", "CANCELED", "NONE"]).optional().nullable(),
 });
 
 export const studyDetailInfoSchema = z.object({

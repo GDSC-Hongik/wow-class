@@ -1,6 +1,5 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
-import { Space } from "@wow-class/ui";
 import { studyApi } from "apis/study/studyApi";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
@@ -12,6 +11,7 @@ import AssignmentList from "./_components/assignment/AssignmentList";
 import AttendanceList from "./_components/attendance/AttendanceList";
 import CurriculumList from "./_components/curriculum/CurriculumList";
 import Header from "./_components/header/Header";
+import StudyStatics from "./_components/statics/StudyStatics";
 
 export const generateMetadata = async ({
   params: { studyId },
@@ -44,6 +44,8 @@ const StudyPage = ({ params }: { params: { studyId: string } }) => {
       <StudyAnnouncement studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
       <CurriculumList studyId={studyId} />
+      <Divider style={MinHeightFullDividerStyle} />
+      <StudyStatics studyId={studyId} />
     </Flex>
   );
 };

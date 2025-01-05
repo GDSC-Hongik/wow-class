@@ -18,8 +18,8 @@ importers:
         specifier: ^0.1.1
         version: 0.1.3
       wowds-ui:
-        specifier: ^0.1.16
-        version: 0.1.16(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.1.20
+        version: 0.1.20(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@pandacss/dev':
         specifier: ^0.44.0
@@ -13476,6 +13476,11 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: true
 
+  /uuid@10.0.0:
+    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
+    hasBin: true
+    dev: false
+
   /uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
     hasBin: true
@@ -13751,6 +13756,10 @@ packages:
     resolution: {integrity: sha512-2mYkhEOZFNXbkH++osn0Qabni08wa0HkbUjnEQVh8j+cni0Te64ZkF9HbynHk2gj1nrFyD6oOSNsIwnJ1IQqmQ==}
     dev: false
 
+  /wowds-icons@0.1.6:
+    resolution: {integrity: sha512-/7xLOIvHNTuOfMhSM+JfPF6MaDwS5jC6JN7JXPvo3T52l63Wy63cNskwWrZ1WaD5fHvuG9Il4p9AOB8+zp/ppg==}
+    dev: false
+
   /wowds-theme@0.1.3:
     resolution: {integrity: sha512-dygJMMwFTVB0A9bo217Y4hD/AMIrAOb0n4G9clz7tz5E1jVdgfippx3LXoXewJeoZuGY4LZejxRBbfg4pAQAxQ==}
     dev: true
@@ -13759,8 +13768,8 @@ packages:
     resolution: {integrity: sha512-Pej6MuUec/i6A04gWELi4bb/T2I8gf/57L9rX8G7ElVeMc7/03ELoM0nBFWKybtpYExXhhlQPp0Lg7iqATpy6Q==}
     dev: false
 
-  /wowds-ui@0.1.16(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-pJM0k67+j1mNjOtxuOWLfSaTs3PKzKKCoUDZ3gUGE8yfwpZr5QgE0vDd8hgGiZweB35+q/5QWO4NPAJKQkPIug==}
+  /wowds-ui@0.1.20(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-UhdmUrN/fSEt0dpWC3UflSE2qK5Y+n46tR9ZEvfvLOW5J8fwBFhbKhgW867qKGxC851GP/o16TOTU9jMsuzZ8A==}
     peerDependencies:
       next: ^14.1.1
       react: ^18.2.0
@@ -13770,7 +13779,8 @@ packages:
       next: 14.2.5(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
       react-day-picker: 9.0.8(react@18.3.1)
-      wowds-icons: 0.1.4
+      uuid: 10.0.0
+      wowds-icons: 0.1.6
     transitivePeerDependencies:
       - react-dom
     dev: false

@@ -1,7 +1,10 @@
 import { fetcher } from "@wow-class/utils";
 import { apiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
-import type { AssignmentHistoryDto } from "types/dtos/studyHistory";
+import type {
+  AssignmentHistoryDto,
+  CompletedStudyDto,
+} from "types/dtos/studyHistory";
 
 export const studyHistoryApi = {
   getStudyHistory: async (studyId: number) => {
@@ -33,5 +36,16 @@ export const studyHistoryApi = {
     );
 
     return { success: response.ok };
+  },
+  getMyCompletedStudy: async () => {
+    const response = await fetcher.get<CompletedStudyDto[]>(
+      `${apiPath.studyHistory}/me/complete`,
+      {
+        next: { tags: [tags.studyHistory] },
+        cache: "force-cache",
+      }
+    );
+
+    return response.data;
   },
 };

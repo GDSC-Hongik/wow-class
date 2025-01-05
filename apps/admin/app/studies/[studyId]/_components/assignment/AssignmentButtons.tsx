@@ -39,7 +39,7 @@ const AssignmentButtons = ({
     );
   }
 
-  if (assignmentStatus === "CANCELLED") {
+  if (assignmentStatus === "CANCELED") {
     return (
       <Flex gap="sm">
         <Button size="sm" style={{ pointerEvents: "none" }} variant="sub">

@@ -21,6 +21,8 @@ interface RepositorySubmissionBoxProps {
   repositoryLink: string;
 }
 
+const repositoryInfoMessage = "과제 제출 후에도 레포지토리 수정이 가능해요.";
+
 export const RepositorySubmissionBox = ({
   repositoryLink: initialRepositoryUrl,
 }: RepositorySubmissionBoxProps) => {
@@ -124,9 +126,7 @@ export const RepositorySubmissionBox = ({
             <>
               {repositorySubmissionStatus === "SUBMITTED" && (
                 <>
-                  <Text color="sub">
-                    최초 과제 제출 전 까지만 수정이 가능해요.
-                  </Text>
+                  <Text color="sub">{repositoryInfoMessage}</Text>
                   <Space height={26} />
                   <Flex className={urlBoxStyle}>
                     <div className={overflowTextStyle}>{repositoryUrl}</div>
@@ -184,7 +184,7 @@ export const RepositorySubmissionBox = ({
           <Flex alignItems="center" direction="column" width="21rem">
             <Text typo="h1">레포지토리를 입력하시겠어요?</Text>
             <Space height={12} />
-            <Text color="sub">최초 과제 제출 전까지 수정이 가능해요.</Text>
+            <Text color="sub">{repositoryInfoMessage}</Text>
             <Space height={8} />
             <div className={modalUrlBoxStyle}>{repositoryUrl}</div>
             <Space height={28} />
@@ -219,9 +219,6 @@ const modalUrlBoxStyle = css({
   paddingX: "lg",
   paddingY: "sm",
   textStyle: "h2",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
   width: "375px",
 });
 const boxStyle = {
