@@ -1,8 +1,9 @@
 "use client";
 
 import { css } from "@styled-system/css";
-import { useOpenState } from "@wow-class/ui/hooks";
 import type { PropsWithChildren, ReactNode } from "react";
+
+import useOpenState from "../../hooks/useOpenState";
 
 interface TooltipProps extends PropsWithChildren {
   content: ReactNode;
