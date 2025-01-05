@@ -33,17 +33,24 @@ export const AssignmentContent = async () => {
     );
   }
 
+  const isAnyFirstWeekAssignment = studyDashboard.submittableAssignments.some(
+    ({ week }) => week === 1
+  );
   return (
     <section>
-      <Flex className={boxContainerStyle} gap="lg">
-        {studyDashboard.isLinkEditable && (
-          <RepositorySubmissionBox
+      <Flex
+        className={boxContainerStyle}
+        flexDirection={isAnyFirstWeekAssignment ? "row-reverse" : "row"}
+        gap="lg"
+      >
+        <Flex flexDirection="row" gap="lg">
+          <AssignmentOverviewBox
+            assignments={studyDashboard.submittableAssignments}
+            buttonsDisabled={!studyDashboard.repositoryLink}
             repositoryLink={studyDashboard.repositoryLink}
           />
-        )}
-        <AssignmentOverviewBox
-          assignments={studyDashboard.submittableAssignments}
-          buttonsDisabled={!studyDashboard.repositoryLink}
+        </Flex>
+        <RepositorySubmissionBox
           repositoryLink={studyDashboard.repositoryLink}
         />
       </Flex>
