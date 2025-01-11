@@ -2,7 +2,8 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space } from "@wow-class/ui";
 import type { Metadata } from "next";
-import Header from "wowds-ui/Header";
+
+import PageHeader from "./_components/PageHeader";
 
 export const metadata: Metadata = {
   robots: {
@@ -11,22 +12,13 @@ export const metadata: Metadata = {
   },
 };
 
-const Layout = ({
-  children,
-  modal,
-}: {
-  children: React.ReactNode;
-  modal: React.ReactNode;
-}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Flex direction="column" width="100%">
-      <div className={headerStyle}>
-        <Header />
-      </div>
+      <PageHeader />
       <main className={layoutContainerStyle}>
         <Space height={40} />
         {children}
-        {modal}
       </main>
     </Flex>
   );
@@ -45,9 +37,4 @@ const layoutContainerStyle = css({
   marginTop: "66px",
   minHeight: "calc(100vh - 66px)",
   paddingBottom: "20px",
-});
-
-const headerStyle = css({
-  position: "fixed",
-  backgroundColor: "backgroundNormal",
 });

@@ -4,15 +4,10 @@ import type { Metadata } from "next";
 import Navigation from "../_components/Navigation";
 
 export const metadata: Metadata = {
-  title: "나의 스터디",
+  title: "커리큘럼",
 };
 
-const Layout = ({
-  children,
-}: {
-  children: React.ReactNode;
-  modal: React.ReactNode;
-}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <section className={layoutContainerStyle}>{children}</section>

@@ -15,7 +15,7 @@ import { color } from "wowds-tokens";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
-const AttendanceCheckInputPage = () => {
+const MobileAttendanceCheckInputPage = () => {
   const { studyDetailId, studyName, currentWeek } =
     useAttendanceCheckSearchParams();
 
@@ -137,7 +137,7 @@ const AttendanceCheckInputPage = () => {
   );
 };
 
-export default AttendanceCheckInputPage;
+export default MobileAttendanceCheckInputPage;
 
 const textfieldHelperText = <div>• 출석 실패! 출결번호를 확인해주세요.</div>;
 

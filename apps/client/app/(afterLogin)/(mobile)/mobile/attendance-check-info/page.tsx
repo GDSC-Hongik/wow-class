@@ -11,7 +11,7 @@ import { useSearchParams } from "next/navigation";
 import Button from "wowds-ui/Button";
 import Divider from "wowds-ui/Divider";
 
-const AttendanceCheckInfoPage = () => {
+const MobileAttendanceCheckInfoPage = () => {
   const { studyDetailId, studyName, deadLine, currentWeek, mentorName } =
     useAttendanceCheckSearchParams();
   const searchParams = useSearchParams();
@@ -84,7 +84,7 @@ const AttendanceCheckInfoPage = () => {
   );
 };
 
-export default AttendanceCheckInfoPage;
+export default MobileAttendanceCheckInfoPage;
 
 const attendanceBoxStyle = css({
   width: "100%",

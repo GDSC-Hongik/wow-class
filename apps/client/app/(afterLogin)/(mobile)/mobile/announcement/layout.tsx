@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Navigation from "../_components/Navigation";
 
 export const metadata: Metadata = {
-  title: "나의 스터디",
+  title: "스터디 공지",
 };
 
 const Layout = ({

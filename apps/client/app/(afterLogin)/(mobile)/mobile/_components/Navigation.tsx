@@ -63,4 +63,5 @@ const navigationStyle = css({
   height: "90px",
   width: "100%",
   paddingTop: "16px",
+  boxShadow: "0px -2px 10px 0px rgba(0, 0, 0, 0.10)",
 });
