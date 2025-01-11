@@ -7,12 +7,7 @@ export const metadata: Metadata = {
   title: "스터디 공지",
 };
 
-const Layout = ({
-  children,
-}: {
-  children: React.ReactNode;
-  modal: React.ReactNode;
-}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <section className={layoutContainerStyle}>{children}</section>
