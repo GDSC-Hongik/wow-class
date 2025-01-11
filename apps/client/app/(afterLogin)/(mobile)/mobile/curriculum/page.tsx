@@ -63,7 +63,7 @@ const MobileStudyCurriculumPage = async () => {
                 : assignmentMap[assignmentSubmissionStatus || "NOT_SUBMITTED"];
 
             return (
-              <Link href={routePath["my-assignment"]}>
+              <Link href={routePath["my-assignment"]} key={index}>
                 <Flex className={boxContainerStyle}>
                   <div>
                     <div className={weekContainerStyle}>
