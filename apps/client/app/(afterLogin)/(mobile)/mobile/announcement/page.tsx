@@ -4,7 +4,6 @@ import { Text } from "@wow-class/ui";
 import { formatISODateWithDot } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import Image from "next/image";
-import Link from "next/link";
 
 const MobileStudyAnnouncementPage = async () => {
   const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
@@ -25,12 +24,10 @@ const MobileStudyAnnouncementPage = async () => {
       <Flex direction="column" gap="12px" justifyContent="center">
         {studyAnnouncementListData?.length ? (
           studyAnnouncementListData?.map(
-            ({ studyAnnounceId, title, link, createdDate }) => (
-              <Link
+            ({ studyAnnounceId, title, createdDate }) => (
+              <div
                 className={studyAnnouncementListBoxStyle}
-                href={link}
                 key={studyAnnounceId}
-                target="_blank"
               >
                 <Text
                   as="span"
@@ -42,7 +39,7 @@ const MobileStudyAnnouncementPage = async () => {
                 <Text as="span" color="sub" typo="body3">
                   {formatISODateWithDot(createdDate)}
                 </Text>
-              </Link>
+              </div>
             )
           )
         ) : (
