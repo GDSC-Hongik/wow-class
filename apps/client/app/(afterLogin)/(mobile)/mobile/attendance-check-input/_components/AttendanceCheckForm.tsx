@@ -3,7 +3,7 @@
 import { myStudyApi } from "apis/myStudyApi";
 import { tags } from "constants/tags";
 import useAttendanceCheckSearchParams from "hooks/useAttendanceCheckSearchParams";
-import type { CSSProperties, KeyboardEventHandler } from "react";
+import type { CSSProperties } from "react";
 import { useState } from "react";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import { validateAttendanceNumber } from "utils/validateAttendanceNumber";
@@ -65,11 +65,6 @@ const AttendanceCheckForm = ({
     revalidateTagByName(tags.dailyTask);
   };
 
-  const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-    }
-  };
   return (
     <>
       <TextField
@@ -78,9 +73,6 @@ const AttendanceCheckForm = ({
         label="출결번호 입력"
         placeholder="Ex. 0000"
         value={attendanceNumber}
-        textareaProps={{
-          onKeyDown: handleKeyDown,
-        }}
         onChange={handleChangeAttendanceNumber}
       />
       <Button
