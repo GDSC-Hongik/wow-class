@@ -3,8 +3,6 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
-import { routePath } from "constants/routePath";
-import Link from "next/link";
 import type { ComponentProps, CSSProperties } from "react";
 import type {
   AssignmentSubmissionStatusType,
@@ -65,71 +63,65 @@ const MobileStudyCurriculumPage = async () => {
                 : assignmentMap[assignmentSubmissionStatus || "NOT_SUBMITTED"];
 
             return (
-              <Link href={routePath["my-assignment"]} key={index}>
-                <Flex className={boxContainerStyle}>
-                  <div style={{ maxWidth: "11.38rem" }}>
-                    <div className={weekContainerStyle}>
-                      <Text as="h5" color="black" typo="body1">
-                        {week}주차
-                      </Text>
-                    </div>
-                    <div>
-                      {curriculumStatus === "CANCELED" ? (
-                        <Text as="h3" color="sub" typo="h3">
-                          휴강 주차
-                        </Text>
-                      ) : description ? (
-                        <Flex
-                          direction="column"
-                          gap={4.5}
-                          justifyContent="center"
-                        >
-                          <Flex alignItems="center" gap="xs">
-                            <Text
-                              as="h3"
-                              className={descriptionStyle}
-                              typo="h3"
-                            >
-                              {title}
-                            </Text>
-                            <Tag
-                              color={difficultyColor}
-                              style={tagStyle}
-                              variant="outline"
-                            >
-                              {difficultyLabel}
-                            </Tag>
-                          </Flex>
-                        </Flex>
-                      ) : (
-                        <Text as="h3" color="sub" typo="h3">
-                          작성된 내용이 없어요
-                        </Text>
-                      )}
-                    </div>
+              <Flex className={boxContainerStyle} key={index}>
+                <div style={{ maxWidth: "11.38rem" }}>
+                  <div className={weekContainerStyle}>
+                    <Text as="h5" color="black" typo="body1">
+                      {week}주차
+                    </Text>
                   </div>
                   <div>
-                    <Flex direction="column" gap="4px">
-                      <Tag
-                        aria-label="present"
-                        color={attendanceStatusColor || "grey"}
-                        style={tagStyle}
-                        variant="solid2"
+                    {curriculumStatus === "CANCELED" ? (
+                      <Text as="h3" color="sub" typo="h3">
+                        휴강 주차
+                      </Text>
+                    ) : description ? (
+                      <Flex
+                        direction="column"
+                        gap={4.5}
+                        justifyContent="center"
                       >
-                        {attendanceStatusLabel}
-                      </Tag>
-                      <Tag
-                        aria-label="present"
-                        color={assignmentSubmissionStatusColor || "grey"}
-                        style={tagStyle}
-                        variant="solid2"
-                      >
-                        {assignmentSubmissionStatusLabel}
-                      </Tag>
-                    </Flex>
+                        <Flex alignItems="center" gap="xs">
+                          <Text as="h3" className={descriptionStyle} typo="h3">
+                            {title}
+                          </Text>
+                          <Tag
+                            color={difficultyColor}
+                            style={tagStyle}
+                            variant="outline"
+                          >
+                            {difficultyLabel}
+                          </Tag>
+                        </Flex>
+                      </Flex>
+                    ) : (
+                      <Text as="h3" color="sub" typo="h3">
+                        작성된 내용이 없어요
+                      </Text>
+                    )}
                   </div>
-                </Flex>
-              </Link>
+                </div>
+                <div>
+                  <Flex direction="column" gap="4px">
+                    <Tag
+                      aria-label="present"
+                      color={attendanceStatusColor || "grey"}
+                      style={tagStyle}
+                      variant="solid2"
+                    >
+                      {attendanceStatusLabel}
+                    </Tag>
+                    <Tag
+                      aria-label="present"
+                      color={assignmentSubmissionStatusColor || "grey"}
+                      style={tagStyle}
+                      variant="solid2"
+                    >
+                      {assignmentSubmissionStatusLabel}
+                    </Tag>
+                  </Flex>
+                </div>
+              </Flex>
             );
           }
         )}

@@ -38,7 +38,7 @@ const MobileAttendanceCheckInputPage = () => {
       </Button>
     </Flex>
   ) : (
-    <Flex alignItems="center" direction="column" padding="16px">
+    <Flex alignItems="flex-start" direction="column">
       <Text as="h1" typo="h1">
         출석 체크
       </Text>
