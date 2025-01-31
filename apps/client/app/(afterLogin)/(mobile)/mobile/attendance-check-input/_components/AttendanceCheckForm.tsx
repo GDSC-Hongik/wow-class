@@ -73,6 +73,9 @@ const AttendanceCheckForm = ({
         label="출결번호 입력"
         placeholder="Ex. 0000"
         value={attendanceNumber}
+        textareaProps={{
+          inputMode: "numeric",
+        }}
         onChange={handleChangeAttendanceNumber}
       />
       <Button
