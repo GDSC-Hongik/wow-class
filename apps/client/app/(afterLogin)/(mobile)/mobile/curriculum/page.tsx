@@ -5,18 +5,20 @@ import { myStudyApi } from "apis/myStudyApi";
 import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import { routePath } from "constants/routePath";
 import Link from "next/link";
-import type { ComponentProps } from "react";
+import type { ComponentProps, CSSProperties } from "react";
 import type {
   AssignmentSubmissionStatusType,
   StudyDifficultyType,
 } from "types/entities/myStudy";
 import Tag from "wowds-ui/Tag";
 
+import EmptyStudy from "../my-study/_components/EmptyStudy";
+
 const MobileStudyCurriculumPage = async () => {
   const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
   if (!myOngoingStudyInfoData?.studyId) {
-    return;
+    return <EmptyStudy />;
   }
 
   const studyCurriculumData = await myStudyApi.getStudyCurriculumList(
@@ -65,7 +67,7 @@ const MobileStudyCurriculumPage = async () => {
             return (
               <Link href={routePath["my-assignment"]} key={index}>
                 <Flex className={boxContainerStyle}>
-                  <div>
+                  <div style={{ maxWidth: "11.38rem" }}>
                     <div className={weekContainerStyle}>
                       <Text as="h5" color="black" typo="body1">
                         {week}주차
@@ -83,10 +85,18 @@ const MobileStudyCurriculumPage = async () => {
                           justifyContent="center"
                         >
                           <Flex alignItems="center" gap="xs">
-                            <Text as="h3" typo="h3">
+                            <Text
+                              as="h3"
+                              className={descriptionStyle}
+                              typo="h3"
+                            >
                               {title}
                             </Text>
-                            <Tag color={difficultyColor} variant="outline">
+                            <Tag
+                              color={difficultyColor}
+                              style={tagStyle}
+                              variant="outline"
+                            >
                               {difficultyLabel}
                             </Tag>
                           </Flex>
@@ -164,6 +174,13 @@ const weekContainerStyle = css({
   gap: "4px",
 });
 
-const tagStyle = {
+const tagStyle: CSSProperties = {
   margin: "auto",
+  whiteSpace: "nowrap",
 };
+
+const descriptionStyle = css({
+  textOverflow: "ellipsis",
+  overflow: "hidden",
+  whiteSpace: "nowrap",
+});

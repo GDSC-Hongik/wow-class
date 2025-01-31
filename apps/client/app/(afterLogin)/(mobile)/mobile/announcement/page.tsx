@@ -5,11 +5,13 @@ import { formatISODateWithDot } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import Image from "next/image";
 
+import EmptyStudy from "../my-study/_components/EmptyStudy";
+
 const MobileStudyAnnouncementPage = async () => {
   const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
   if (!myOngoingStudyInfoData?.studyId) {
-    return;
+    return <EmptyStudy />;
   }
 
   const studyAnnouncementListData = await myStudyApi.getStudyAnnouncementList(
