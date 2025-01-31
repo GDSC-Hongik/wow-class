@@ -4,6 +4,7 @@ import { routePath } from "constants/routePath";
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { isMobileAllowedUrl } from "utils/isMobileAllowedUrl";
 import { isMobileUser } from "utils/isMobileUser";
 
 export const config = {
@@ -28,7 +29,7 @@ const middleware = async (req: NextRequest) => {
     return NextResponse.redirect(new URL(routePath.auth, req.url));
   }
 
-  if (isMobile && (url.pathname === "/my-study" || url.pathname === "/auth")) {
+  if (isMobile && isMobileAllowedUrl(url.pathname)) {
     url.pathname = `/mobile/${url.pathname}`;
     return NextResponse.redirect(url);
   }
