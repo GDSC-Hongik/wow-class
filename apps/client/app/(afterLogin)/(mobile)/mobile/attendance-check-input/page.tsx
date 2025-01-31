@@ -8,6 +8,7 @@ import { Suspense, useState } from "react";
 import { color } from "wowds-tokens";
 import Button from "wowds-ui/Button";
 
+import Spinner from "../_components/Spinner";
 import AttendanceCheckForm from "./_components/AttendanceCheckForm";
 import StudyInfo from "./_components/StudyInfo";
 
@@ -30,7 +31,7 @@ const MobileAttendanceCheckInputPage = () => {
       <Space height={40} />
       <Text typo="h1">출석이 완료되었어요</Text>
       <Space height={12} />
-      <Suspense fallback={null}>
+      <Suspense fallback={<Spinner />}>
         <StudyInfo />
       </Suspense>
       <Button asProp={Link} href="/my-study" style={buttonStyle}>
@@ -48,7 +49,7 @@ const MobileAttendanceCheckInputPage = () => {
         출결번호를 입력해주세요.
       </Text>
       <Space height={20} />
-      <Suspense fallback={null}>
+      <Suspense fallback={<Spinner />}>
         <AttendanceCheckForm
           onAttendanceSuccess={() => {
             setAttended(true);
