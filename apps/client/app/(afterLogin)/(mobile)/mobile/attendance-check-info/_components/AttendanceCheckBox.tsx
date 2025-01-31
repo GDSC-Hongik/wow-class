@@ -1,11 +1,13 @@
 "use client";
 
-import { Divider, Flex } from "@styled-system/jsx";
+import { css } from "@styled-system/css";
+import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { parseISODate } from "@wow-class/utils";
 import useAttendanceCheckSearchParams from "hooks/useAttendanceCheckSearchParams";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
+import Divider from "wowds-ui/Divider";
 
 export const AttendanceCheckBox = () => {
   const { studyDetailId, studyName, deadLine, currentWeek, mentorName } =
@@ -20,7 +22,11 @@ export const AttendanceCheckBox = () => {
   } = parseISODate(new Date().toISOString());
 
   return (
-    <>
+    <div className={boxContainerStyle}>
+      <Text color="sub" typo="body3">
+        현재 진행 강의
+      </Text>
+      <Space height={8} />
       <Flex alignItems="center" direction="column">
         <Text typo="h1">{studyName}</Text>
         <Space height={8} />
@@ -52,6 +58,15 @@ export const AttendanceCheckBox = () => {
       >
         출석 체크하기
       </Button>
-    </>
+    </div>
   );
 };
+
+const boxContainerStyle = css({
+  backgroundColor: "backgroundNormal",
+  paddingX: "1.5rem",
+  paddingY: "1.75rem",
+  borderRadius: "0.5rem",
+  border: "1px solid",
+  borderColor: "outline",
+});
