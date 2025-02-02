@@ -4,18 +4,34 @@ import { routePath } from "constants/routePath";
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import { isMobileAllowedUrl } from "utils/isMobileAllowedUrl";
+import { isMobileUser } from "utils/isMobileUser";
 
 export const config = {
-  matcher: ["/my-page/:path*", "/my-study/:path*", "/study-apply/:path*"],
+  matcher: [
+    "/my-page/:path*",
+    "/my-study/:path*",
+    "/study-apply/:path*",
+    "/mobile/:path*",
+  ],
 };
 
 const middleware = async (req: NextRequest) => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
   const middlewareExecuted = cookieStore.get(cookieKey["middleware-executed"]);
+  const userAgent = req.headers.get("user-agent") || "";
+  const isMobile = isMobileUser(userAgent);
+
+  const url = new URL(req.url);
 
   if (!accessToken) {
     return NextResponse.redirect(new URL(routePath.auth, req.url));
+  }
+
+  if (isMobile && isMobileAllowedUrl(url.pathname)) {
+    url.pathname = `/mobile/${url.pathname}`;
+    return NextResponse.redirect(url);
   }
 
   if (!middlewareExecuted) {
