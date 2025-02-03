@@ -25,14 +25,27 @@ const middleware = async (req: NextRequest) => {
   const isMobile = isMobileUser(userAgent);
 
   const url = new URL(req.url);
-
-  if (!accessToken) {
-    return NextResponse.redirect(new URL(routePath.auth, req.url));
-  }
+  const isAuthUrl =
+    url.pathname === routePath.auth ||
+    url.pathname === `/mobile${routePath.auth}`;
 
   if (isMobile && isMobileAllowedUrl(url.pathname)) {
     url.pathname = `/mobile/${url.pathname}`;
     return NextResponse.redirect(url);
+  }
+
+  if (isAuthUrl) {
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set("x-pathname", req.nextUrl.pathname);
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
+  if (!accessToken && !isAuthUrl) {
+    return NextResponse.redirect(new URL(routePath.auth, req.url));
   }
 
   if (!middlewareExecuted) {
