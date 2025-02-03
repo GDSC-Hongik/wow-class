@@ -48,7 +48,7 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   const isApplicable = appliedStudyId === null;
   const isCancelable = appliedStudyId === studyId;
   const isNotApplicable = !isApplicable && !isCancelable;
-  console.log(appliedStudyId, studyId);
+
   return (
     <Table className={tableStyle}>
       <Flex direction="column" gap="xxs" justifyContent="center" width={334}>
