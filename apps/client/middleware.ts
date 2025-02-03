@@ -13,6 +13,7 @@ export const config = {
     "/my-study/:path*",
     "/study-apply/:path*",
     "/mobile/:path*",
+    "/auth",
   ],
 };
 
