@@ -84,7 +84,7 @@ const AttendanceStatusBox = async ({
           </Flex>
           <Button
             asProp={Link}
-            disabled={attendanceStatus !== "BEFORE_ATTENDANCE"}
+            disabled={attendanceStatus === "ATTENDED"}
             href={`/mobile/attendance-check-info?study-detail-id=${studyDetailId}&week=${week}&study-name=${studyName}&deadline=${deadLine}&mentor=${mentorName}&isAttendanceCheck=${attendanceStatus === "BEFORE_ATTENDANCE"}`}
             size="lg"
             style={attendanceButtonStyle}
