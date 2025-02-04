@@ -139,6 +139,9 @@ importers:
       wowds-tokens:
         specifier: ^0.1.1
         version: 0.1.3
+      wowds-ui:
+        specifier: ^0.2.0
+        version: 0.2.0(next@14.2.5)(react-dom@18.3.1)(react@18.3.1)
     devDependencies:
       '@types/node':
         specifier: ^20
@@ -13770,6 +13773,23 @@ packages:
 
   /wowds-ui@0.1.20(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-UhdmUrN/fSEt0dpWC3UflSE2qK5Y+n46tR9ZEvfvLOW5J8fwBFhbKhgW867qKGxC851GP/o16TOTU9jMsuzZ8A==}
+    peerDependencies:
+      next: ^14.1.1
+      react: ^18.2.0
+    dependencies:
+      clsx: 2.1.1
+      lottie-react: 2.4.0(react-dom@18.3.1)(react@18.3.1)
+      next: 14.2.5(@babel/core@7.25.2)(react-dom@18.3.1)(react@18.3.1)
+      react: 18.3.1
+      react-day-picker: 9.0.8(react@18.3.1)
+      uuid: 10.0.0
+      wowds-icons: 0.1.6
+    transitivePeerDependencies:
+      - react-dom
+    dev: false
+
+  /wowds-ui@0.2.0(next@14.2.5)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-f3Le98hITXl3Mn2iVCvRCCvZcEx7Now0AJAjT+hNlbZcYWK/HVAy0eUZNKixdEq6FwQ0/SbSEsMEIxp8S4szfA==}
     peerDependencies:
       next: ^14.1.1
       react: ^18.2.0
