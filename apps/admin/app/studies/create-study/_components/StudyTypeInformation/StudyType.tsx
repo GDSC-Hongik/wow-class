@@ -4,13 +4,14 @@ import { Controller, useFormContext } from "react-hook-form";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-const StudyFormatSelect = () => {
+const StudyType = () => {
   const { control } = useFormContext();
   return (
     <Controller
       control={control}
       name="studyType"
-      render={({ field }) => (
+      // eslint-disable-next-line no-unused-vars
+      render={({ field: { ref, ...field } }) => (
         <DropDown
           {...field}
           label="스터디 형식"
@@ -62,4 +63,4 @@ const StudyFormatSelect = () => {
   );
 };
 
-export default StudyFormatSelect;
+export default StudyType;

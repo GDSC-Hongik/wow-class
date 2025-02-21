@@ -3,15 +3,23 @@ import type { StudySemesterType, StudyType } from "types/entities/study";
 import type { TimeType } from "types/entities/time";
 export interface CreateStudyApiRequestDto {
   mentorId: number;
-  academicYear: number;
-  semesterType: StudySemesterType;
+  type: StudyType;
   title: string;
-  applicationStartDate: string;
-  applicationEndDate: string;
-  totalWeek: number;
-  startDate: string;
-  dayOfWeek: DayOfWeekType;
-  studyStartTime?: TimeType;
-  studyEndTime?: TimeType;
-  studyType: StudyType;
+  description?: string;
+  descriptionNotionLink?: string;
+  semester: {
+    academicYear: number;
+    semesterType: StudySemesterType;
+  };
+  totalRound: number;
+  dayOfWeek?: DayOfWeekType;
+  startTime?: TimeType;
+  endTime?: TimeType;
+  applicationPeriod: {
+    startDate: string;
+    endDate: string;
+    open: boolean;
+  };
+  discordChannelId?: string;
+  discordRoleId?: string;
 }
