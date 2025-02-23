@@ -17,11 +17,11 @@ export const routePath = {
   ["my-page-logout"]: "/my-page/logout",
   onboarding:
     process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-      ? "https://onboarding.gdschongik.com"
-      : "https://dev-onboarding.gdschongik.com",
+      ? "https://onboarding.wawoo.dev"
+      : "https://dev-onboarding.wawoo.dev",
   github: "https://github.com",
   admin:
     process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
-      ? "https://mentor.study.gdschongik.com"
-      : "https://dev-mentor.study.gdschongik.com",
+      ? "https://mentor.study.wawoo.dev"
+      : "https://dev-mentor.study.wawoo.dev",
 } as const;
