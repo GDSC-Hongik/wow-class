@@ -1,15 +1,20 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { Controller, useFormContext } from "react-hook-form";
+import type { StudyType } from "types/entities/study";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-const StudyType = () => {
+interface StudyTypeProps {
+  onChange: (value: StudyType) => void;
+}
+
+const StudyTypeSelect = ({ onChange }: StudyTypeProps) => {
   const { control } = useFormContext();
   return (
     <Controller
       control={control}
-      name="studyType"
+      name="type"
       // eslint-disable-next-line no-unused-vars
       render={({ field: { ref, ...field } }) => (
         <DropDown
@@ -19,6 +24,7 @@ const StudyType = () => {
           style={{ width: "358px" }}
           onChange={({ selectedValue }) => {
             field.onChange(selectedValue);
+            onChange(selectedValue as "OFFLINE" | "ONLINE" | "ASSIGNMENT");
           }}
         >
           <DropDownOption
@@ -63,4 +69,4 @@ const StudyType = () => {
   );
 };
 
-export default StudyType;
+export default StudyTypeSelect;

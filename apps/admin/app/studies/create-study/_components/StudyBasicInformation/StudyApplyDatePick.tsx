@@ -54,7 +54,7 @@ const StudyApplyDatePick = () => {
       </Text>
       <Controller
         control={control}
-        name="applicationStartDate"
+        name="applicationPeriod"
         render={() => (
           <input
             placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
