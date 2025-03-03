@@ -15,7 +15,7 @@ export const StudyTasksThs = ({
     const { week, taskType } = task;
     return (
       <Table.Th key={taskType + week}>
-        {taskType === "ATTENDANCE" ? `${week}주차 출석` : `${week}주차 과제`}
+        {taskType === "ATTENDANCE" ? `${week}회차 출석` : `${week}회차 과제`}
       </Table.Th>
     );
   });
