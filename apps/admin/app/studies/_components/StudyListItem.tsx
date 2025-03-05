@@ -11,12 +11,16 @@ import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
-import { useFetchStudies } from "../_hooks/useFetchStudies";
-
-const StudyListItem = ({ study }: { study: StudyListApiResponseDto }) => {
+const StudyListItem = ({
+  study,
+  adminStatus,
+}: {
+  study: StudyListApiResponseDto;
+  adminStatus: boolean;
+}) => {
   const { studyId, title, type, descriptionNotionLink, mentorName, semester } =
     study.study;
-  const { adminStatus } = useFetchStudies();
+
   const studyType: Record<StudyType, StudyKoreanType> = {
     ASSIGNMENT: "과제 스터디",
     OFFLINE: "오프라인 스터디",

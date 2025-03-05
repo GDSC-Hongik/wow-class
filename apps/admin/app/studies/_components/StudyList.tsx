@@ -8,7 +8,7 @@ import StudyListItem from "./StudyListItem";
 
 const StudyList = () => {
   const semester = useSearchParams().get("semester");
-  const { studyList } = useFetchStudies();
+  const { studyList, adminStatus } = useFetchStudies();
   if (studyList?.length === 0) {
     return <EmptyStudyList />;
   }
@@ -19,7 +19,11 @@ const StudyList = () => {
           (semester === null ||
             semester ===
               `${studyItem.study.semester.academicYear}-${studyItem.study.semester.semesterType === "FIRST" ? 1 : 2}`) && (
-            <StudyListItem key={`studyItem-${index}`} study={studyItem} />
+            <StudyListItem
+              adminStatus={adminStatus}
+              key={`studyItem-${index}`}
+              study={studyItem}
+            />
           )
       )}
     </section>
