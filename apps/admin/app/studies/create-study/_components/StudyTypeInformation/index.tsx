@@ -9,9 +9,7 @@ import StudyTypeSelect from "./StudyTypeSelect";
 const StudyTypeInformation = () => {
   const [showStudyTime, setShowStudyTime] = useState(false);
 
-  const handleStudyTypeChange = (
-    value: "OFFLINE" | "ONLINE" | "ASSIGNMENT"
-  ) => {
+  const handleStudyTypeChange = (value: string) => {
     if (value === "ONLINE" || value === "OFFLINE") {
       setShowStudyTime(true);
     } else {
