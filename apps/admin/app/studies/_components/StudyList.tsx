@@ -1,24 +1,27 @@
+"use client";
 import { css } from "@styled-system/css";
-import { studyApi } from "apis/study/studyApi";
-import isAdmin from "utils/isAdmin";
+import { useSearchParams } from "next/navigation";
 
+import { useFetchStudies } from "../_hooks/useFetchStudies";
 import EmptyStudyList from "./EmptyStudyList";
 import StudyListItem from "./StudyListItem";
 
-const StudyList = async () => {
-  const adminStatus = await isAdmin();
-  const studyList = adminStatus
-    ? await studyApi.getStudyList()
-    : await studyApi.getMyStudyList();
-
+const StudyList = () => {
+  const semester = useSearchParams().get("semester");
+  const { studyList } = useFetchStudies();
   if (studyList?.length === 0) {
     return <EmptyStudyList />;
   }
   return (
     <section aria-label="study-list" className={SectionStyle}>
-      {studyList?.map((studyItem, index) => (
-        <StudyListItem key={`studyItem-${index}`} study={studyItem} />
-      ))}
+      {studyList?.map(
+        (studyItem, index) =>
+          (semester === null ||
+            semester ===
+              `${studyItem.study.semester.academicYear}-${studyItem.study.semester.semesterType === "FIRST" ? 1 : 2}`) && (
+            <StudyListItem key={`studyItem-${index}`} study={studyItem} />
+          )
+      )}
     </section>
   );
 };

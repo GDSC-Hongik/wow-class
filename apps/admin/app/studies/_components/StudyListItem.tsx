@@ -1,3 +1,4 @@
+"use client";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { routerPath } from "constants/router/routerPath";
@@ -5,16 +6,17 @@ import Link from "next/link";
 import type { ComponentProps } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import type { StudyKoreanType, StudyType } from "types/entities/study";
-import isAdmin from "utils/isAdmin";
 import { Link as WowLinkIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
-const StudyListItem = async ({ study }: { study: StudyListApiResponseDto }) => {
-  const adminStatus = await isAdmin();
+import { useFetchStudies } from "../_hooks/useFetchStudies";
+
+const StudyListItem = ({ study }: { study: StudyListApiResponseDto }) => {
   const { studyId, title, type, descriptionNotionLink, mentorName, semester } =
     study.study;
+  const { adminStatus } = useFetchStudies();
   const studyType: Record<StudyType, StudyKoreanType> = {
     ASSIGNMENT: "과제 스터디",
     OFFLINE: "오프라인 스터디",
