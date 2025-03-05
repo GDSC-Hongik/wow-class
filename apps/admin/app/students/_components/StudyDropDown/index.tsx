@@ -51,12 +51,12 @@ const StudyDropDown = ({
         });
       }}
     >
-      {studyList.map((study: StudyListApiResponseDto) => (
+      {studyList.map((studyItem: StudyListApiResponseDto) => (
         <DropDownOption
-          key={study.studyId}
+          key={studyItem.study.studyId}
           style={{ cursor: "pointer" }}
-          text={study.title}
-          value={study.studyId.toString()}
+          text={studyItem.study.title}
+          value={studyItem.study.studyId.toString()}
         />
       ))}
     </DropDown>

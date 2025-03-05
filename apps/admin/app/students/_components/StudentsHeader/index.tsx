@@ -28,7 +28,10 @@ const StudentsHeader = () => {
 
       if (data && data.length && data[0]) {
         setStudyList(data);
-        setSelectedStudy({ studyId: data[0].studyId, title: data[0].title });
+        setSelectedStudy({
+          studyId: data[0].study.studyId,
+          title: data[0].study.title,
+        });
       }
     };
 
