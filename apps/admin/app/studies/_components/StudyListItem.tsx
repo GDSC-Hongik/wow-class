@@ -3,6 +3,7 @@ import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import type { ComponentProps } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import type { StudyKoreanType, StudyType } from "types/entities/study";
@@ -20,7 +21,7 @@ const StudyListItem = ({
 }) => {
   const { studyId, title, type, descriptionNotionLink, mentorName, semester } =
     study.study;
-
+  const querySemester = useSearchParams().get("semester");
   const studyType: Record<StudyType, StudyKoreanType> = {
     ASSIGNMENT: "과제 스터디",
     OFFLINE: "오프라인 스터디",
@@ -55,9 +56,13 @@ const StudyListItem = ({
         </Link>
         <Flex alignItems="center" gap="sm">
           {adminStatus && (
-            <Button size="sm" variant="outline">
-              스터디 삭제
-            </Button>
+            <Link
+              href={`${routerPath["delete-study-check"].href}/${studyId}?${querySemester ? `semester=${querySemester}&` : ""}title=${title}&academicYear=${semester.academicYear}&semesterType=${semester.semesterType}`}
+            >
+              <Button size="sm" variant="outline">
+                스터디 삭제
+              </Button>
+            </Link>
           )}
 
           <Button
