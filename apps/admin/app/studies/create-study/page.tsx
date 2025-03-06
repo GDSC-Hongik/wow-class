@@ -10,9 +10,11 @@ import createQueryString from "utils/createQueryString";
 import Button from "wowds-ui/Button";
 
 import {
+  DiscordID,
   StudyBasicInformation,
   StudyMentorSelect,
   StudyNameTextField,
+  StudyTypeInformation,
 } from "./_components";
 
 const CreateStudyPage = () => {
@@ -44,6 +46,10 @@ const CreateStudyPage = () => {
           <StudyMentorSelect />
           <Space height={64} />
           <StudyBasicInformation />
+          <Space height={64} />
+          <DiscordID />
+          <Space height={64} />
+          <StudyTypeInformation />
           <Button
             disabled={!methods.formState.isValid}
             role="button"

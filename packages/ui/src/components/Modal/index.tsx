@@ -25,7 +25,7 @@ export interface ModalProps extends PropsWithChildren {
   className?: string;
 }
 
-const Modal = forwardRef(({ children, onClose, ...rest }: ModalProps) => {
+const Modal = ({ children, onClose, ...rest }: ModalProps) => {
   const router = useRouter();
 
   const handleClose = onClose || router.back;
@@ -53,7 +53,7 @@ const Modal = forwardRef(({ children, onClose, ...rest }: ModalProps) => {
       </styled.dialog>
     </Flex>
   );
-});
+};
 
 const dialogStyle = css({
   width: "40.75rem",

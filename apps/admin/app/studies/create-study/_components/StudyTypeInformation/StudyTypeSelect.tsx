@@ -4,13 +4,18 @@ import { Controller, useFormContext } from "react-hook-form";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
-const StudyFormatSelect = () => {
+interface StudyTypeProps {
+  onChange: (value: string) => void;
+}
+
+const StudyTypeSelect = ({ onChange }: StudyTypeProps) => {
   const { control } = useFormContext();
   return (
     <Controller
       control={control}
-      name="studyType"
-      render={({ field }) => (
+      name="type"
+      // eslint-disable-next-line no-unused-vars
+      render={({ field: { ref, ...field } }) => (
         <DropDown
           {...field}
           label="스터디 형식"
@@ -18,6 +23,7 @@ const StudyFormatSelect = () => {
           style={{ width: "358px" }}
           onChange={({ selectedValue }) => {
             field.onChange(selectedValue);
+            onChange(selectedValue);
           }}
         >
           <DropDownOption
@@ -62,4 +68,4 @@ const StudyFormatSelect = () => {
   );
 };
 
-export default StudyFormatSelect;
+export default StudyTypeSelect;

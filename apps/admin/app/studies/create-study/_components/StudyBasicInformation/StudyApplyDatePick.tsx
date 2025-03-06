@@ -40,8 +40,11 @@ const StudyApplyDatePick = () => {
       toValue: endDateString,
     });
     setInputValue(`${startDateString} ~ ${endDateString}`);
-    setValue("applicationStartDate", startDateString, { shouldValidate: true });
-    setValue("applicationEndDate", endDateString, { shouldValidate: true });
+    setValue(
+      "applicationPeriod",
+      { startDate: startDateString, endDate: endDateString, open: true },
+      { shouldValidate: true }
+    );
   };
 
   return (
@@ -51,7 +54,7 @@ const StudyApplyDatePick = () => {
       </Text>
       <Controller
         control={control}
-        name="applicationStartDate"
+        name="applicationPeriod"
         render={() => (
           <input
             placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
@@ -81,10 +84,14 @@ const StudyApplyDatePick = () => {
               from: new Date(0),
               to: yesterday,
             }}
-            selected={{
-              from: formatStringToDate(studyDate.fromValue),
-              to: formatStringToDate(studyDate.toValue),
-            }}
+            selected={
+              studyDate.fromValue || studyDate.toValue
+                ? {
+                    from: formatStringToDate(studyDate.fromValue),
+                    to: formatStringToDate(studyDate.toValue),
+                  }
+                : undefined
+            }
             style={{
               position: "absolute",
               top: "80px",
