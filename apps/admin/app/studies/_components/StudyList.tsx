@@ -1,6 +1,7 @@
 "use client";
 import { css } from "@styled-system/css";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 import { useFetchStudies } from "../_hooks/useFetchStudies";
 import EmptyStudyList from "./EmptyStudyList";
@@ -8,10 +9,15 @@ import StudyListItem from "./StudyListItem";
 
 const StudyList = () => {
   const semester = useSearchParams().get("semester");
-  const { studyList, adminStatus } = useFetchStudies();
+  const { studyList, semesterList, adminStatus } = useFetchStudies();
+  const router = useRouter();
   if (studyList?.length === 0) {
     return <EmptyStudyList />;
   }
+  useEffect(() => {
+    if (semester && semesterList && !semesterList?.includes(semester))
+      router.replace("/studies");
+  }, [semester, studyList]);
   return (
     <section aria-label="study-list" className={SectionStyle}>
       {studyList?.map(
