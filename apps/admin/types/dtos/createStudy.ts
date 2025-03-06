@@ -18,7 +18,6 @@ export interface CreateStudyApiRequestDto {
   applicationPeriod: {
     startDate: string;
     endDate: string;
-    open: boolean;
   };
   discordChannelId?: string;
   discordRoleId?: string;

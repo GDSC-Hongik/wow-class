@@ -33,8 +33,8 @@ const StudyApplyDatePick = () => {
 
   const handleStudyDateSelect = (triggerDate: DateRange | undefined) => {
     if (!triggerDate) return;
-    const startDateString = dateToFormatString(triggerDate.from!!);
-    const endDateString = dateToFormatString(triggerDate.to!!);
+    const startDateString = dateToFormatString(triggerDate.from!);
+    const endDateString = dateToFormatString(triggerDate.to!);
     setStudyDate({
       fromValue: startDateString,
       toValue: endDateString,
@@ -42,7 +42,10 @@ const StudyApplyDatePick = () => {
     setInputValue(`${startDateString} ~ ${endDateString}`);
     setValue(
       "applicationPeriod",
-      { startDate: startDateString, endDate: endDateString, open: true },
+      {
+        startDate: `${startDateString}T00:00:00`,
+        endDate: `${endDateString}T00:00:00`,
+      },
       { shouldValidate: true }
     );
   };
