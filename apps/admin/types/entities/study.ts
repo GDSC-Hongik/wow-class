@@ -23,6 +23,7 @@ export type StudyCurriculumType = {
 };
 
 export type StudyAnnouncementType = {
+  studyId: number;
   title: string;
   link: string;
 };

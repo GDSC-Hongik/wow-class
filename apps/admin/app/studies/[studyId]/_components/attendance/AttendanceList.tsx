@@ -10,7 +10,7 @@ const AttendanceList = async ({ studyId }: { studyId: string }) => {
 
   return (
     <section>
-      <Text typo="h2">주차별 출결번호</Text>
+      <Text typo="h2">회차별 출결번호</Text>
       <Space height={24} />
       <Flex align="center" gap="md" overflow="scroll">
         {attendanceList?.map((attendance: AttendanceApiResponseDto, index) => (

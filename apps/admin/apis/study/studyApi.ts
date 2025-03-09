@@ -108,12 +108,9 @@ export const studyApi = {
     );
     return response.data;
   },
-  publishStudyAnnouncement: async (
-    studyId: number,
-    announcement: StudyAnnouncementType
-  ) => {
+  publishStudyAnnouncement: async (announcement: StudyAnnouncementType) => {
     const response = await fetcher.post(
-      `/mentor/studies/${studyId}/announcements`,
+      `v2/mentor/study-announcements`,
       announcement
     );
     return { success: response.ok };

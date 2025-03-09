@@ -14,6 +14,7 @@ import Button from "wowds-ui/Button";
 const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
   const [studyAnnouncement, setStudyAnnouncement] =
     useState<StudyAnnouncementType>({
+      studyId: parseInt(studyId, 10),
       title: "",
       link: "",
     });
@@ -23,13 +24,12 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
   useResizeTextarea([titleTextareaRef, linkTextareaRef], studyAnnouncement);
 
   const handlePublishAnnouncement = async (studyId: string) => {
-    const { success } = await studyApi.publishStudyAnnouncement(
-      parseInt(studyId, 10),
-      studyAnnouncement
-    );
+    const { success } =
+      await studyApi.publishStudyAnnouncement(studyAnnouncement);
     if (success) {
       revalidateTagByName(tags.announcements);
       setStudyAnnouncement({
+        studyId: parseInt(studyId, 10),
         title: "",
         link: "",
       });

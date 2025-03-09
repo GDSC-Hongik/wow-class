@@ -38,8 +38,8 @@ const StudyPage = ({ params }: { params: { studyId: string } }) => {
         </Link>
       </div>
       <AttendanceList studyId={studyId} />
-      <Divider style={MinHeightFullDividerStyle} />
-      <AssignmentList studyId={studyId} />
+      {/* <Divider style={MinHeightFullDividerStyle} /> */}
+      {/* <AssignmentList studyId={studyId} /> */}
       <Divider style={MinHeightFullDividerStyle} />
       <StudyAnnouncement studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />

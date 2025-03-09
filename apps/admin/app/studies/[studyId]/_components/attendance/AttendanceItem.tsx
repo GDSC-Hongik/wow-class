@@ -26,7 +26,7 @@ const AttendanceItem = ({
       text={
         <Flex direction="column" gap="xs">
           <Flex alignItems="center" gap="xs">
-            <Text typo="h2">{week}주차 출결번호</Text>
+            <Text typo="h2">{week}회차 출결번호</Text>
             <Tag color={color} variant="solid2">
               {label}
             </Tag>
