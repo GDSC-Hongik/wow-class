@@ -20,7 +20,7 @@ const Header = ({
   studyId: string;
   isCompact?: boolean;
 }) => {
-  const [showIntro, setShowIntro] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
   const [studyInfo, setStudyInfo] = useState<
     StudyBasicInfoApiResponseDto | undefined
   >(undefined);
@@ -129,7 +129,7 @@ const Header = ({
           <section aria-labelledby="study-schedule-heading">
             <Space height={24} />
             <Flex direction="column" gap="4">
-              <Text as="h3" typo="h3">
+              <Text as="h2" typo="h2">
                 스터디 일정
               </Text>
               <Flex gap="xs">
@@ -142,10 +142,6 @@ const Header = ({
                   </Flex>
                 )}
                 <Text as="h5" color="sub">
-                  {totalWeek}주 코스
-                </Text>
-                <ItemSeparator height={4} width={4} />
-                <Text as="h5" color="sub">
                   {studyPeriod}
                 </Text>
               </Flex>
@@ -154,7 +150,7 @@ const Header = ({
           <section aria-labelledby="study-intro-heading">
             <Space height={28} />
             <Flex direction="column" gap="xs">
-              <Text as="h3" typo="h3">
+              <Text as="h2" typo="h2">
                 스터디 소개
               </Text>
               <Flex alignItems="center" gap="sm">

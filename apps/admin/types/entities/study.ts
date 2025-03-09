@@ -28,3 +28,8 @@ export type StudyAnnouncementType = {
 };
 
 export type StudySemesterType = "FIRST" | "SECOND";
+
+export type StudySemesterWithYearType = {
+  academicYear: number;
+  semesterType: "FIRST" | "SECOND";
+};
