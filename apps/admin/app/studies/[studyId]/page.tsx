@@ -1,6 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { studyApi } from "apis/study/studyApi";
+import { studyApiV2 } from "apis/study/v2/studyApi";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
 import { Edit } from "wowds-icons";
@@ -24,12 +25,18 @@ export const generateMetadata = async ({
   };
 };
 
-const StudyPage = ({ params }: { params: { studyId: string } }) => {
+const StudyPage = async ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
+  const myStudyList = await studyApiV2.getMyStudyList();
+  const study = myStudyList?.find((data) => data.study.studyId === +studyId);
+
+  const studyBasicInfo = study?.study;
+  const studySessionsInfo = study?.studySessions;
+
   return (
     <Flex direction="column" gap="64px">
       <div className={HeaderWrapper}>
-        <Header studyId={studyId} />
+        <Header studyBasicInfo={studyBasicInfo} />
         <Link
           href={`${routerPath.studyDetailInfo.href}/${studyId}`}
           style={{ ...EditIconStyle, position: "absolute" }}

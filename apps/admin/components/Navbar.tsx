@@ -1,6 +1,6 @@
 import { css } from "@styled-system/css";
 import { NavItem } from "@wow-class/ui";
-import { studyApi } from "apis/study/studyApi";
+import { studyApiV2 } from "apis/study/v2/studyApi";
 import { clientUrl } from "constants/url";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,8 +19,8 @@ import participantImageUrl from "../public/images/particpant.svg";
 const Navbar = async () => {
   const adminStatus = await isAdmin();
   const studyList = adminStatus
-    ? await studyApi.getStudyList()
-    : await studyApi.getMyStudyList();
+    ? await studyApiV2.getStudyList()
+    : await studyApiV2.getMyStudyList();
 
   const navMenu = [
     {
@@ -28,12 +28,12 @@ const Navbar = async () => {
       imageUrl: homeImageUrl,
       alt: "home-icon",
       name: "개설된 스터디",
-      items: studyList?.map(({ studyId, title }) => {
+      items: studyList?.map(({ study }) => {
         return {
-          href: `studies/${studyId}`,
+          href: `studies/${study.studyId}`,
           imageUrl: folderImageUrl,
-          alt: title,
-          name: title,
+          alt: study.title,
+          name: study.title,
         };
       }),
     },

@@ -15,6 +15,7 @@ export interface StudyApiResponseV2Dto {
   type: StudyType;
   title: string;
   descriptionNotionLink: string;
+  description: string;
   semester: StudySemesterWithYearType;
   totalRound: number;
   dayOfWeek: DayOfWeekType;

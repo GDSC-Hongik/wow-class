@@ -10,31 +10,23 @@ import { dayToKorean } from "constants/dayToKorean";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
+import type {
+  StudyApiResponseV2Dto,
+  StudySessionApiResponseV2Dto,
+} from "types/dtos/v2/myStudyList";
 import { DownArrow } from "wowds-icons";
 import TextButton from "wowds-ui/TextButton";
 
 const Header = ({
-  studyId,
+  studyBasicInfo,
+  studySessionsInfo,
   isCompact = false,
 }: {
-  studyId: string;
+  studyBasicInfo?: StudyApiResponseV2Dto;
+  studySessionsInfo?: StudySessionApiResponseV2Dto[];
   isCompact?: boolean;
 }) => {
   const [showIntro, setShowIntro] = useState(true);
-  const [studyInfo, setStudyInfo] = useState<
-    StudyBasicInfoApiResponseDto | undefined
-  >(undefined);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (studyId) {
-        const data = await studyApi.getStudyBasicInfo(parseInt(studyId, 10));
-        if (data) setStudyInfo(data);
-      }
-    };
-
-    fetchData();
-  }, [studyId]);
 
   const handleClickShowIntro = () => {
     setShowIntro((prev) => !prev);
@@ -47,21 +39,19 @@ const Header = ({
     ? "Collapse introduction icon"
     : "Expand introduction icon";
 
-  if (!studyInfo) return null;
+  if (!studyBasicInfo) return null;
   const {
     title,
-    academicYear,
     semester,
     mentorName,
-    studyType,
+    type,
     dayOfWeek,
     startTime,
     endTime,
-    totalWeek,
-    period: { startDate, endDate },
-    introduction,
-    notionLink,
-  } = studyInfo;
+    totalRound,
+    description,
+    descriptionNotionLink,
+  } = studyBasicInfo;
 
   const studySchedule = () => {
     if (startTime && endDate) {
@@ -76,7 +66,7 @@ const Header = ({
 
   const { month: startMonth, day: startDay } = parseISODate(startDate);
   const { month: endMonth, day: endDay } = parseISODate(endDate);
-  const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
+  const studySemester = `${semester.academicYear}-${semester.semesterType === "FIRST" ? 1 : 2}`;
 
   const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
   ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
@@ -120,7 +110,7 @@ const Header = ({
           </Text>
           <ItemSeparator height={4} width={4} />
           <Text as="h5" color="sub">
-            {studyType}
+            {type}
           </Text>
         </Flex>
       </section>
@@ -155,7 +145,7 @@ const Header = ({
               </Text>
               <Flex alignItems="center" gap="sm">
                 <Link
-                  href={notionLink || ""}
+                  href={descriptionNotionLink || ""}
                   role="button"
                   tabIndex={0}
                   target="_blank"
@@ -163,7 +153,7 @@ const Header = ({
                   <TextButton style={{ padding: "0px" }} text="스터디 소개" />
                 </Link>
                 <Text color="sub" typo="body1">
-                  {introduction}
+                  {description}
                 </Text>
               </Flex>
             </Flex>
