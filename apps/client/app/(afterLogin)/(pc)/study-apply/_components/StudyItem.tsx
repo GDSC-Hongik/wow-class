@@ -52,10 +52,13 @@ const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
   };
   const studyTime = startTime && endTime ? formatTime(startTime, endTime) : "-";
 
-  const isApplicable =
+  const isApplicableDate =
     getNowIsAfterStartDate(applicationStartDateString) &&
     getNowIsBeforeEndDate(applicationEndDateString);
-  const isCancelable = appliedStudyIds?.includes(studyId);
+  const isAppliedStudy = appliedStudyIds?.includes(studyId);
+
+  const isApplicable = isApplicableDate && !isAppliedStudy;
+  const isCancelable = isApplicableDate && isAppliedStudy;
   const isNotApplicable = !isApplicable && !isCancelable;
 
   return (
