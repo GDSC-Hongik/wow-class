@@ -4,20 +4,20 @@ import personImageUrl from "../public/images/person.svg";
 import scheduleImageUrl from "../public/images/schedule.svg";
 
 export const navMenu = [
-  {
-    href: "/my-study",
-    imageUrl: homeImageUrl,
-    alt: "home-icon",
-    name: "나의 스터디",
-    items: [
-      {
-        href: "my-assignment",
-        imageUrl: folderImageUrl,
-        alt: "folder-icon",
-        name: "나의 과제",
-      },
-    ],
-  },
+  // {
+  //   href: "/my-study",
+  //   imageUrl: homeImageUrl,
+  //   alt: "home-icon",
+  //   name: "나의 스터디",
+  //   items: [
+  //     {
+  //       href: "my-assignment",
+  //       imageUrl: folderImageUrl,
+  //       alt: "folder-icon",
+  //       name: "나의 과제",
+  //     },
+  //   ],
+  // },
   {
     href: "/study-apply",
     imageUrl: scheduleImageUrl,
