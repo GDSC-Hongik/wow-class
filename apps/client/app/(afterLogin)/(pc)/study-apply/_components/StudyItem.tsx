@@ -9,31 +9,38 @@ import type { ComponentProps } from "react";
 import type { StudyList } from "types/dtos/applyStudy";
 import type { StudyType } from "types/entities/common/study";
 import type { Time } from "types/entities/common/time";
+import {
+  getNowIsAfterStartDate,
+  getNowIsBeforeEndDate,
+} from "utils/isValidDate";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 interface StudyItemProps {
   study: StudyList;
-  appliedStudyId: null | number;
+  appliedStudyIds: null | number[];
 }
 
-const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
+const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
   const {
     studyId,
     title,
-    introduction,
-    notionLink,
+    description,
+    descriptionNotionLink,
     mentorName,
-    studyType,
+    type: studyType,
     dayOfWeek,
     startTime,
     endTime,
-    openingDate: openingDateString,
-    applicationEndDate: endDateString,
+    openingDate: studyOpeningDate,
+    applicationPeriod: {
+      startTime: applicationStartTime,
+      endTime: applicationEndTime,
+    },
     totalWeek,
   } = study;
 
-  const openingDate = parseISODate(openingDateString);
-  const endDate = parseISODate(endDateString);
+  const openingDate = parseISODate(studyOpeningDate);
+  const applicationEndDate = parseISODate(applicationEndTime);
 
   const formatTime = (startTime: Time, endTime: Time) => {
     const { hour: startTimeHour, minute: startTimeMinute } = startTime;
@@ -45,8 +52,13 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
   };
   const studyTime = startTime && endTime ? formatTime(startTime, endTime) : "-";
 
-  const isApplicable = appliedStudyId === null;
-  const isCancelable = appliedStudyId === studyId;
+  // 수강 신청한 스터디 목록에 있으면 삭제 가능
+  // 신청 가능한 날짜 이후, 마감일 이전일때는 신청 가능
+  //
+  const isApplicable =
+    getNowIsAfterStartDate(applicationStartTime) &&
+    getNowIsBeforeEndDate(applicationEndTime);
+  const isCancelable = appliedStudyIds?.includes(studyId);
   const isNotApplicable = !isApplicable && !isCancelable;
 
   return (
@@ -61,17 +73,17 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
             style={tagButtonStyle}
             variant="solid1"
           >
-            {studyType}
+            {curriculumText[studyType] ?? "과제 스터디"}
           </Tag>
         </Flex>
-        {introduction && (
-          <Link href={notionLink ?? ""} target="_blank">
+        {description && (
+          <Link href={descriptionNotionLink ?? ""} target="_blank">
             <Text
               className={introductionLinkTextStyle}
               color="sub"
               typo="body2"
             >
-              {introduction}
+              {description}
             </Text>
           </Link>
         )}
@@ -86,16 +98,14 @@ const StudyItem = ({ study, appliedStudyId }: StudyItemProps) => {
       >
         {studyTime}
       </Text>
-      <Text className={textCellStyle({ type: "week" })}>
-        {totalWeek}주 코스
-      </Text>
+      <Text className={textCellStyle({ type: "week" })}>{totalWeek}회차</Text>
       <Flex direction="column" textAlign="center">
         <Text
           className={dateStyle}
         >{`${openingDate.month}.${openingDate.day} 개강`}</Text>
         {isCancelable && (
           <Text className={dateStyle} color="error" typo="body3">
-            {`${endDate.month}.${endDate.day} 까지 취소 가능`}
+            {`${applicationEndDate.month}.${applicationEndDate.day} 까지 취소 가능`}
           </Text>
         )}
       </Flex>
@@ -233,9 +243,15 @@ const tagButtonStyle = {
 
 const curriculumColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> =
   {
-    "과제 스터디": "green",
-    "온라인 스터디": "blue",
-    "오프라인 스터디": "yellow",
+    ASSIGNMENT: "green",
+    ONLINE: "blue",
+    OFFLINE: "yellow",
   };
+
+const curriculumText: Record<StudyType, string> = {
+  ASSIGNMENT: "과제 스터디",
+  ONLINE: "온라인",
+  OFFLINE: "오프라인",
+};
 
 export default StudyItem;

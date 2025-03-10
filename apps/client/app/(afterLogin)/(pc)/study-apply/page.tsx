@@ -9,7 +9,7 @@ const StudyApplyPage = async () => {
 
   if (!data) return null;
 
-  const { appliedStudyId, studyResponses: studyList } = data;
+  const { appliedStudyIds, applicableStudies: studyList } = data;
 
   return (
     <>
@@ -20,7 +20,7 @@ const StudyApplyPage = async () => {
       {studyList.length > 0 ? (
         studyList.map((study) => (
           <StudyItem
-            appliedStudyId={appliedStudyId}
+            appliedStudyIds={appliedStudyIds}
             key={study.studyId}
             study={study}
           />
