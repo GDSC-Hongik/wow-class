@@ -12,11 +12,10 @@ export interface StudyList {
   dayOfWeek: DayOfWeekType;
   startTime: Time | null;
   endTime: Time | null;
-  totalWeek: number;
   openingDate: string;
   applicationPeriod: {
-    startTime: string;
-    endTime: string;
+    startDate: string;
+    endDate: string;
   };
   totalRound: number;
   semester: {

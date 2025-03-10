@@ -33,14 +33,14 @@ const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
     endTime,
     openingDate: studyOpeningDate,
     applicationPeriod: {
-      startTime: applicationStartTime,
-      endTime: applicationEndTime,
+      startDate: applicationStartDateString,
+      endDate: applicationEndDateString,
     },
-    totalWeek,
+    totalRound,
   } = study;
 
   const openingDate = parseISODate(studyOpeningDate);
-  const applicationEndDate = parseISODate(applicationEndTime);
+  const applicationEndDate = parseISODate(applicationEndDateString);
 
   const formatTime = (startTime: Time, endTime: Time) => {
     const { hour: startTimeHour, minute: startTimeMinute } = startTime;
@@ -52,12 +52,9 @@ const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
   };
   const studyTime = startTime && endTime ? formatTime(startTime, endTime) : "-";
 
-  // 수강 신청한 스터디 목록에 있으면 삭제 가능
-  // 신청 가능한 날짜 이후, 마감일 이전일때는 신청 가능
-  //
   const isApplicable =
-    getNowIsAfterStartDate(applicationStartTime) &&
-    getNowIsBeforeEndDate(applicationEndTime);
+    getNowIsAfterStartDate(applicationStartDateString) &&
+    getNowIsBeforeEndDate(applicationEndDateString);
   const isCancelable = appliedStudyIds?.includes(studyId);
   const isNotApplicable = !isApplicable && !isCancelable;
 
@@ -98,7 +95,7 @@ const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
       >
         {studyTime}
       </Text>
-      <Text className={textCellStyle({ type: "week" })}>{totalWeek}회차</Text>
+      <Text className={textCellStyle({ type: "week" })}>{totalRound}회차</Text>
       <Flex direction="column" textAlign="center">
         <Text
           className={dateStyle}
