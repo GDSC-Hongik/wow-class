@@ -6,10 +6,10 @@ import Image from "next/image";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
 
-import { navMenu } from "../constants/navMenu";
 import adminImageUrl from "../public/images/administrator.svg";
 import logoImageUrl from "../public/images/logo.svg";
-
+import personImageUrl from "../public/images/person.svg";
+import scheduleImageUrl from "../public/images/schedule.svg";
 /**
  * @description client 내비게이션 바 컴포넌트입니다.
  */
@@ -19,6 +19,35 @@ const Navbar = async () => {
 
   const showConvertToMentorPageButton =
     manageRole === "ADMIN" || studyRole === "MENTOR";
+
+  const navMenu = [
+    // {
+    //   href: "/my-study",
+    //   imageUrl: homeImageUrl,
+    //   alt: "home-icon",
+    //   name: "나의 스터디",
+    //   items: [
+    //     {
+    //       href: "my-assignment",
+    //       imageUrl: folderImageUrl,
+    //       alt: "folder-icon",
+    //       name: "나의 과제",
+    //     },
+    //   ],
+    // },
+    {
+      href: "/study-apply",
+      imageUrl: scheduleImageUrl,
+      alt: "schedule-icon",
+      name: "수강 신청",
+    },
+    {
+      href: "/my-page",
+      imageUrl: personImageUrl,
+      alt: "person-icon",
+      name: "마이 페이지",
+    },
+  ];
 
   return (
     <aside aria-label="client navigation bar" className={navbarContainerStyle}>
