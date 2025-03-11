@@ -5,7 +5,7 @@ export interface StudyList {
   studyId: number;
   title: string;
   type: StudyType;
-  description: string;
+  description?: string;
   descriptionNotionLink?: string;
   mentorId: number;
   mentorName: string;
