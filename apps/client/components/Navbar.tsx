@@ -1,12 +1,15 @@
 import { css } from "@styled-system/css";
 import { NavItem } from "@wow-class/ui";
 import { dashboardApi } from "apis/dashboardApi";
+import { studyHistoryApi } from "apis/studyHistoryApi";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
 
 import adminImageUrl from "../public/images/administrator.svg";
+import folderImageUrl from "../public/images/folder.svg";
+import homeImageUrl from "../public/images/home.svg";
 import logoImageUrl from "../public/images/logo.svg";
 import personImageUrl from "../public/images/person.svg";
 import scheduleImageUrl from "../public/images/schedule.svg";
@@ -20,20 +23,22 @@ const Navbar = async () => {
   const showConvertToMentorPageButton =
     manageRole === "ADMIN" || studyRole === "MENTOR";
 
+  // const myStudyList = await studyHistoryApi.getMyAppliedStudyList();
   const navMenu = [
     // {
     //   href: "/my-study",
     //   imageUrl: homeImageUrl,
     //   alt: "home-icon",
     //   name: "나의 스터디",
-    //   items: [
-    //     {
-    //       href: "my-assignment",
+    //   items: myStudyList?.map((studyItem) => {
+    //     const { studyId, title } = studyItem.study;
+    //     return {
+    //       href: `${studyId}`,
     //       imageUrl: folderImageUrl,
-    //       alt: "folder-icon",
-    //       name: "나의 과제",
-    //     },
-    //   ],
+    //       alt: title,
+    //       name: title,
+    //     };
+    //   }),
     // },
     {
       href: "/study-apply",
