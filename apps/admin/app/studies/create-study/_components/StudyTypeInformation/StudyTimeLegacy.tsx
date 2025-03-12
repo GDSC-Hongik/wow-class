@@ -10,6 +10,9 @@ import { Controller, useFormContext } from "react-hook-form";
 type ValuePiece = Date | string | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
+/**
+ * TODO: wow-ds 컴포넌트로 교체 필요
+ */
 const StudyTimeLegacy = () => {
   const { control, setValue, watch } = useFormContext();
   const [value, onChange] = useState<Value>("");

@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormContext } from "react-hook-form";
+import type { DropDownProps } from "wowds-ui/DropDown";
 import DropDown from "wowds-ui/DropDown";
 import DropDownOption from "wowds-ui/DropDownOption";
 
@@ -10,23 +11,25 @@ const StudySemesterSelect = () => {
   const { setValue } = useFormContext();
   const { semesters, semestersDict } = getUpcomingSemesters();
 
+  const handleChange: DropDownProps["onChange"] = (value) => {
+    const semester = semestersDict[value.selectedValue];
+    if (!semester) return;
+    setValue(
+      "semester",
+      {
+        academicYear: semester.academicYear,
+        semesterType: semester.semesterType,
+      },
+      { shouldValidate: true }
+    );
+  };
+
   return (
     <DropDown
       label="진행학기"
       placeholder="선택하세요"
       style={{ width: "358px" }}
-      onChange={(value) => {
-        const semester = semestersDict[value.selectedValue];
-        if (!semester) return;
-        setValue(
-          "semester",
-          {
-            academicYear: semester.academicYear,
-            semesterType: semester.semesterType,
-          },
-          { shouldValidate: true }
-        );
-      }}
+      onChange={handleChange}
     >
       {semesters.map((semester) => (
         <DropDownOption
