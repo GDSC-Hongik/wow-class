@@ -35,10 +35,7 @@ const getCurrentSemester = (now: Date): { year: number; semester: number } => {
 };
 
 // 다음 학기를 계산하는 함수
-const getNextSemester = (
-  year: number,
-  semester: number
-): { year: number; semester: number } => {
+const getNextSemester = (year: number, semester: number) => {
   return semester === 1
     ? { year, semester: 2 }
     : { year: year + 1, semester: 1 };
