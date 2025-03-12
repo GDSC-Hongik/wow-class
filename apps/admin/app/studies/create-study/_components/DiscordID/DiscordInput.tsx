@@ -12,7 +12,7 @@ const DiscordInput = () => {
         <Controller
           control={control}
           name="discordChannelId"
-          render={({ field: { ref, ...field } }) => (
+          render={({ field }) => (
             <TextField
               {...field}
               label="디스코드 채널 ID"
