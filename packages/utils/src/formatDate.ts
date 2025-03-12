@@ -106,3 +106,14 @@ export const formatWeekPeriod = (startDate: string, endDate: string) => {
 
   return `${formattedStartMonth}.${formattedStartDay}-${formattedEndMonth}.${formattedEndDay}`;
 };
+
+/**
+ * @description ISO Date 형식의 startDate와 endDate를 받아 시간을 추가한 뒤 하나의 객체로 반환합니다
+ * @example formatStartEndDate("2025-03-12", "2025-03-20")
+ * @returns
+ * object: { startDate: string, endDate: string, }
+ */
+export const formatStartEndDate = (startDate: string, endDate: string) => ({
+  startDate: `${startDate}T00:00:00`,
+  endDate: `${endDate}T23:59:59`,
+});

@@ -3,7 +3,11 @@ import "react-day-picker/style.css";
 import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { dateToFormatString, formatStringToDate } from "@wow-class/utils";
+import {
+  dateToFormatString,
+  formatStartEndDate,
+  formatStringToDate,
+} from "@wow-class/utils";
 import useClickOutside from "hooks/useClickOutSide";
 import { useRef, useState } from "react";
 import type { DateRange } from "react-day-picker";
@@ -42,10 +46,7 @@ const StudyApplyDatePick = () => {
     setInputValue(`${startDateString} ~ ${endDateString}`);
     setValue(
       "applicationPeriod",
-      {
-        startDate: `${startDateString}T00:00:00`,
-        endDate: `${endDateString}T00:00:00`,
-      },
+      formatStartEndDate(startDateString, endDateString),
       { shouldValidate: true }
     );
   };
