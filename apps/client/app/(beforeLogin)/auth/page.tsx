@@ -21,7 +21,7 @@ const AuthPage = async () => {
             width={20}
           />
           <Text as="p" color="sub" typo="body1">
-            와우클래스는 GDSC Hongik 정회원만 이용 가능해요.
+            와우클래스는 GDGoC Hongik 정회원만 이용 가능해요.
           </Text>
         </div>
         <div className={descriptionTextContainerStyle}>
@@ -32,7 +32,7 @@ const AuthPage = async () => {
             width={20}
           />
           <Text as="p" color="sub" typo="body1">
-            GDSC Hongik 가입을 위해선 GitHub 계정이 필요해요.
+            GDGoC Hongik 가입을 위해선 GitHub 계정이 필요해요.
           </Text>
         </div>
         <div className={mobileDescriptionTextContainerStyle}>
