@@ -10,17 +10,18 @@ export const useFetchStudies = () => {
   const pathName = usePathname();
 
   useEffect(() => {
-    const fetchStudyListData = async () => {
-      const admin = await isAdmin();
-      const studyList = admin
-        ? await studyApi.getStudyList()
-        : await studyApi.getMyStudyList();
+    if (pathName === "/studies") {
+      const fetchStudyListData = async () => {
+        const admin = await isAdmin();
+        const studyList = admin
+          ? await studyApi.getStudyList()
+          : await studyApi.getMyStudyList();
 
-      setStudyList(studyList);
-      setAdminStatus(admin);
-    };
-
-    fetchStudyListData();
+        setStudyList(studyList);
+        setAdminStatus(admin);
+      };
+      fetchStudyListData();
+    }
   }, [pathName]);
 
   // 현재 개설되어있는 전체 스터디들의 진행 학기 목록

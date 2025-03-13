@@ -7,8 +7,8 @@ export interface StudyListApiResponseDto {
     studyId: number;
     type: StudyType;
     title: string;
-    description: string;
-    descriptionNotionLink: string;
+    description?: string;
+    descriptionNotionLink?: string;
     semester: {
       academicYear: number;
       semesterType: StudySemesterType;
@@ -20,7 +20,6 @@ export interface StudyListApiResponseDto {
     applicationPeriod: {
       startDate: string;
       endDate: string;
-      open: boolean;
     };
     discordChannelId: string;
     discordRoleId: string;
@@ -37,13 +36,11 @@ export interface StudyListApiResponseDto {
       lessonPeriod: {
         startDate: string;
         endDate: string;
-        open: boolean;
       };
       assignmentDescriptionLink: string;
       assignmentPeriod: {
         startDate: string;
         endDate: string;
-        open: boolean;
       };
       studyId: number;
     },
