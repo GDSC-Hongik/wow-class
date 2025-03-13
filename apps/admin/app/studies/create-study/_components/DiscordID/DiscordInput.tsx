@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Flex } from "@styled-system/jsx";
 import { Controller, useFormContext } from "react-hook-form";
 import TextField from "wowds-ui/TextField";
@@ -25,7 +24,7 @@ const DiscordInput = () => {
         <Controller
           control={control}
           name="discordRoleId"
-          render={({ field: { ref, ...field } }) => (
+          render={({ field: { ...field } }) => (
             <TextField
               {...field}
               label="디스코드 역할 ID"

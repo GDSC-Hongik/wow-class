@@ -46,7 +46,7 @@ const StudyApplyDatePick = () => {
     setInputValue(`${startDateString} ~ ${endDateString}`);
     setValue(
       "applicationPeriod",
-      formatStartEndDate(startDateString, endDateString),
+      formatStartEndDate(triggerDate.from!, triggerDate.to!),
       { shouldValidate: true }
     );
   };
