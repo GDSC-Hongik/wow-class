@@ -119,9 +119,9 @@ const AchievementIcons = ({ achievements }: { achievements: string[] }) => {
 
 const curriculumColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> =
   {
-    "과제 스터디": "green",
-    "온라인 스터디": "blue",
-    "오프라인 스터디": "yellow",
+    ASSIGNMENT: "green",
+    ONLINE: "blue",
+    OFFLINE: "yellow",
   };
 
 const introductionLinkTextStyle = css({

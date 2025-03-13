@@ -2,7 +2,7 @@ import { Space } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import Link from "next/link";
 import type { Assignment } from "types/dtos/studyDetail";
-import { getNowIsAfterStartDate } from "utils/getNowIsAfterStartDate";
+import { getNowIsAfterStartDate } from "utils/isValidDate";
 import Box from "wowds-ui/Box";
 import TextButton from "wowds-ui/TextButton";
 
