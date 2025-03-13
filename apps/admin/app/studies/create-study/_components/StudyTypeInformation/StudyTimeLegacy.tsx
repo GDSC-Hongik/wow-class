@@ -10,7 +10,10 @@ import { Controller, useFormContext } from "react-hook-form";
 type ValuePiece = Date | string | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-const StudyTime = () => {
+/**
+ * TODO: wow-ds 컴포넌트로 교체 필요
+ */
+const StudyTimeLegacy = () => {
   const { control, setValue, watch } = useFormContext();
   const [value, onChange] = useState<Value>("");
 
@@ -29,7 +32,7 @@ const StudyTime = () => {
           return;
         }
         setValue(
-          "studyStartTime",
+          "startTime",
           {
             hour: Number(startTime[0]),
             minute: Number(startTime[1]),
@@ -40,7 +43,7 @@ const StudyTime = () => {
         );
 
         setValue(
-          "studyEndTime",
+          "endTime",
           {
             hour: Number(endTime[0]),
             minute: Number(endTime[1]),
@@ -59,7 +62,7 @@ const StudyTime = () => {
       </Text>
       <Controller
         control={control}
-        name="studyStartTime"
+        name="startTime"
         render={() => (
           <TimeRangePicker
             disableClock={true}
@@ -76,4 +79,4 @@ const StudyTime = () => {
   );
 };
 
-export default StudyTime;
+export default StudyTimeLegacy;

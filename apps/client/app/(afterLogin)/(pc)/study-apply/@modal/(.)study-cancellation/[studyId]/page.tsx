@@ -23,7 +23,7 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
     const fetchStudyData = async () => {
       const data = await studyApplyApi.getStudyList();
       if (!data) return;
-      const { studyResponses: studyList } = data;
+      const { applicableStudies: studyList } = data;
 
       const selectedStudy = studyList.find(
         (study) => study.studyId === Number(studyId)

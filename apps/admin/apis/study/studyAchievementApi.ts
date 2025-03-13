@@ -7,7 +7,7 @@ const studyAchievementApi = {
     data: OutstandingStudentApiRequestDto
   ) => {
     const response = await fetcher.post(
-      `/mentor/study-achievements?studyId=${studyId}`,
+      `/v2/mentor/study-achievements?studyId=${studyId}`,
       data
     );
     return { success: response.ok };
@@ -18,7 +18,7 @@ const studyAchievementApi = {
     data: OutstandingStudentApiRequestDto
   ) => {
     const response = await fetcher.delete(
-      `/mentor/study-achievements?studyId=${studyId}`,
+      `/v2/mentor/study-achievements?studyId=${studyId}`,
       data
     );
     return { success: response.ok };

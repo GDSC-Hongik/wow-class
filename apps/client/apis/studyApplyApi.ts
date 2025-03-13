@@ -6,7 +6,7 @@ import type { StudyListApiResponseDto } from "types/dtos/applyStudy";
 export const studyApplyApi = {
   getStudyList: async () => {
     const response = await fetcher.get<StudyListApiResponseDto>(
-      apiPath.applyStudy,
+      apiPath.applicableStudy,
       {
         next: { tags: [tags.studyApply] },
         cache: "no-store",
@@ -16,15 +16,16 @@ export const studyApplyApi = {
     return response.data;
   },
   applyStudy: async (studyId: number) => {
-    const response = await fetcher.post(
-      `${apiPath.applyStudy}/${studyId}`,
-      null
-    );
+    const response = await fetcher.post(`${apiPath.applyStudy}`, {
+      studyId,
+    });
 
     return { success: response.ok };
   },
   cancelStudyApplication: async (studyId: number) => {
-    const response = await fetcher.delete(`${apiPath.applyStudy}/${studyId}`);
+    const response = await fetcher.delete(`${apiPath.applyStudy}`, {
+      studyId,
+    });
 
     return { success: response.ok };
   },

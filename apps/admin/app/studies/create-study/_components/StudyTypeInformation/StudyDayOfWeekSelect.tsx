@@ -9,7 +9,7 @@ const StudyDayOfWeekSelect = () => {
     <Controller
       control={control}
       name="dayOfWeek"
-      render={({ field }) => (
+      render={({ field: { ref, ...field } }) => (
         <DropDown
           {...field}
           label="스터디 요일"
