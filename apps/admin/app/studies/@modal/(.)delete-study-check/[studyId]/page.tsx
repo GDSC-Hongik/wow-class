@@ -5,15 +5,16 @@ import { Modal, Space, Text } from "@wow-class/ui";
 import { useModalRoute } from "@wow-class/ui/hooks";
 import { studyApi } from "apis/study/studyApi";
 import ItemSeparator from "components/ItemSeparator";
+import { tags } from "constants/tags";
 import useParseSearchParams from "hooks/useParseSearchParams";
 import { useRouter, useSearchParams } from "next/navigation";
+import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 const DeleteStudyCheckModal = ({ params }: { params: { studyId: number } }) => {
   const { parseQueryString } = useParseSearchParams();
   const searchParams = useSearchParams();
   const router = useRouter();
-
   const { onClose } = useModalRoute();
 
   const data = parseQueryString(searchParams.toString());
@@ -24,7 +25,12 @@ const DeleteStudyCheckModal = ({ params }: { params: { studyId: number } }) => {
   const handleClickDeleteButton = async () => {
     const result = await studyApi.deleteStudy(params.studyId);
     if (result.success) {
-      onClose();
+      await revalidateTagByName(tags.studyList);
+      await revalidateTagByName(tags.myStudyList);
+      setTimeout(() => {
+        onClose();
+        router.refresh();
+      }, 1000);
     }
   };
 

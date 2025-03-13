@@ -17,7 +17,7 @@ const StudyList = () => {
   useEffect(() => {
     if (semester && semesterList && !semesterList?.includes(semester))
       router.replace("/studies");
-  }, [semester, studyList]);
+  }, [semester, semesterList, studyList]);
   return (
     <section aria-label="study-list" className={SectionStyle}>
       {studyList?.map(

@@ -56,13 +56,14 @@ const StudyListItem = ({
         </Link>
         <Flex alignItems="center" gap="sm">
           {adminStatus && (
-            <Link
+            <Button
+              asProp={Link}
               href={`${routerPath["delete-study-check"].href}/${studyId}?${querySemester ? `semester=${querySemester}&` : ""}title=${title}&academicYear=${semester.academicYear}&semesterType=${semester.semesterType}`}
+              size="sm"
+              variant="outline"
             >
-              <Button size="sm" variant="outline">
-                스터디 삭제
-              </Button>
-            </Link>
+              스터디 삭제
+            </Button>
           )}
 
           <Button

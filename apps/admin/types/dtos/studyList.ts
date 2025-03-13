@@ -1,5 +1,6 @@
 import type { DayOfWeekType } from "types/entities/dayofweek";
 import type { StudySemesterType, StudyType } from "types/entities/study";
+import type { TimeType } from "types/entities/time";
 
 export interface StudyListApiResponseDto {
   study: {
@@ -14,18 +15,8 @@ export interface StudyListApiResponseDto {
     };
     totalRound: number;
     dayOfWeek: DayOfWeekType;
-    startTime: {
-      hour: number;
-      minute: number;
-      second: number;
-      nano: number;
-    };
-    endTime: {
-      hour: number;
-      minute: number;
-      second: number;
-      nano: number;
-    };
+    startTime: TimeType;
+    endTime: TimeType;
     applicationPeriod: {
       startDate: string;
       endDate: string;
