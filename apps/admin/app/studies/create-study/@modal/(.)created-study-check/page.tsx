@@ -24,7 +24,7 @@ const CreatedStudyCheckModal = () => {
   );
 
   const studyName = data.title;
-  const semester = `${data.academicYear}-${data.semesterType === "FIRST" ? "1" : "2"}`;
+  const semester = `${data.semester.academicYear}-${data.semester.semesterType === "FIRST" ? "1" : "2"}`;
 
   const handleClickSubmitButton = async () => {
     const result = await createStudyApi.postCreateStudy(data);

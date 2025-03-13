@@ -3,7 +3,11 @@ import "react-day-picker/style.css";
 import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { dateToFormatString, formatStringToDate } from "@wow-class/utils";
+import {
+  dateToFormatString,
+  formatStartEndDate,
+  formatStringToDate,
+} from "@wow-class/utils";
 import useClickOutside from "hooks/useClickOutSide";
 import { useRef, useState } from "react";
 import type { DateRange } from "react-day-picker";
@@ -33,15 +37,18 @@ const StudyApplyDatePick = () => {
 
   const handleStudyDateSelect = (triggerDate: DateRange | undefined) => {
     if (!triggerDate) return;
-    const startDateString = dateToFormatString(triggerDate.from!!);
-    const endDateString = dateToFormatString(triggerDate.to!!);
+    const startDateString = dateToFormatString(triggerDate.from!);
+    const endDateString = dateToFormatString(triggerDate.to!);
     setStudyDate({
       fromValue: startDateString,
       toValue: endDateString,
     });
     setInputValue(`${startDateString} ~ ${endDateString}`);
-    setValue("applicationStartDate", startDateString, { shouldValidate: true });
-    setValue("applicationEndDate", endDateString, { shouldValidate: true });
+    setValue(
+      "applicationPeriod",
+      formatStartEndDate(triggerDate.from!, triggerDate.to!),
+      { shouldValidate: true }
+    );
   };
 
   return (
@@ -51,7 +58,7 @@ const StudyApplyDatePick = () => {
       </Text>
       <Controller
         control={control}
-        name="applicationStartDate"
+        name="applicationPeriod"
         render={() => (
           <input
             placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
@@ -81,10 +88,14 @@ const StudyApplyDatePick = () => {
               from: new Date(0),
               to: yesterday,
             }}
-            selected={{
-              from: formatStringToDate(studyDate.fromValue),
-              to: formatStringToDate(studyDate.toValue),
-            }}
+            selected={
+              studyDate.fromValue || studyDate.toValue
+                ? {
+                    from: formatStringToDate(studyDate.fromValue),
+                    to: formatStringToDate(studyDate.toValue),
+                  }
+                : undefined
+            }
             style={{
               position: "absolute",
               top: "80px",
