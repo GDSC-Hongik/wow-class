@@ -1,6 +1,15 @@
-const StudyDetailPage = ({ params }: { params: { studyId: string } }) => {
+import Divider from "wowds-ui/Divider";
+
+import Header from "./_components/Header";
+
+const StudyDetailPage = ({ params }: { params: { studyId: number } }) => {
   const { studyId } = params;
-  return <div>{studyId} 스터디 상세 페이지</div>;
+  return (
+    <>
+      <Header studyId={studyId} />
+      <Divider />
+    </>
+  );
 };
 
 export default StudyDetailPage;
