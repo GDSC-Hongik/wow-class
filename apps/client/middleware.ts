@@ -12,8 +12,8 @@ export const config = {
     "/my-page/:path*",
     "/my-study/:path*",
     "/study-apply/:path*",
-    "/mobile/:path*",
-    "/auth",
+    // "/mobile/:path*",
+    // "/auth",
   ],
 };
 
@@ -24,10 +24,10 @@ const middleware = async (req: NextRequest) => {
   const userAgent = req.headers.get("user-agent") || "";
   // const isMobile = isMobileUser(userAgent);
 
-  const url = new URL(req.url);
-  const isAuthUrl =
-    url.pathname === routePath.auth ||
-    url.pathname === `/mobile${routePath.auth}`;
+  // const url = new URL(req.url);
+  // const isAuthUrl =
+  //   url.pathname === routePath.auth ||
+  //   url.pathname === `/mobile${routePath.auth}`;
 
   // if (isMobile && isMobileAllowedUrl(url.pathname)) {
   //   url.pathname = `/mobile/${url.pathname}`;
@@ -44,7 +44,7 @@ const middleware = async (req: NextRequest) => {
   //   });
   // }
 
-  if (!accessToken && !isAuthUrl) {
+  if (!accessToken) {
     return NextResponse.redirect(new URL(routePath.auth, req.url));
   }
 
