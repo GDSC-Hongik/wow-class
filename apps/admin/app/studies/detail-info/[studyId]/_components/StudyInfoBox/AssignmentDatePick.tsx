@@ -3,7 +3,11 @@ import "react-day-picker/style.css";
 import { css, cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { dateToFormatString, formatStringToDate } from "@wow-class/utils";
+import {
+  dateToFormatString,
+  formatStartEndDate,
+  formatStringToDate,
+} from "@wow-class/utils";
 import useClickOutside from "hooks/useClickOutSide";
 import { useRef, useState } from "react";
 import type { DateRange } from "react-day-picker";
@@ -60,6 +64,10 @@ const AssignmentDatePick = ({
     const startDateString = dateToFormatString(triggerDate.from!).split("T")[0];
     const endDateString = dateToFormatString(triggerDate.to!).split("T")[0];
 
+    const timeFormattedDate = formatStartEndDate(
+      triggerDate.from!,
+      triggerDate.to!
+    );
     setStudyDate({
       fromValue: startDateString,
       toValue: endDateString,
@@ -69,13 +77,13 @@ const AssignmentDatePick = ({
 
     setValue(
       `studySessions[${index}].assignmentPeriod.startDate`,
-      startDateString,
+      timeFormattedDate.startDate,
       { shouldValidate: true }
     );
 
     setValue(
       `studySessions[${index}].assignmentPeriod.endDate`,
-      endDateString,
+      timeFormattedDate.endDate,
       { shouldValidate: true }
     );
   };
