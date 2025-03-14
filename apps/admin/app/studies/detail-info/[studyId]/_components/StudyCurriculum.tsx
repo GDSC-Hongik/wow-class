@@ -1,41 +1,40 @@
 "use client";
 import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
-import { studyApi } from "apis/study/studyApi";
-import { useEffect, useState } from "react";
-import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
+import type { StudySession } from "types/dtos/studyDetailInfo";
 
 import StudyInfoBox from "./StudyInfoBox";
+import AssignmentInfoBox from "./StudyInfoBox/AssignmentInfoBox";
 
-const StudyCurriculum = ({ studyId }: { studyId: string }) => {
-  const [curriculumList, setCurriculumList] = useState<
-    CurriculumApiResponseDto[]
-  >([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const curriculumData = await studyApi.getCurriculumList(
-        parseInt(studyId, 10)
-      );
-      if (curriculumData) setCurriculumList(curriculumData);
-    };
-    fetchData();
-  }, [studyId]);
-
+interface CurriculumListProps {
+  studySessions?: StudySession[] | undefined;
+}
+const StudyCurriculum = ({ studySessions }: CurriculumListProps) => {
+  console.log(studySessions?.length);
   return (
     <section
       aria-label="create-study-description"
       className={StudyCurriculumSectionStyle}
     >
       <Text typo="h2">전체 커리큘럼 정보</Text>
-      {curriculumList?.map(({ week, period, studyDetailId }, index) => (
-        <StudyInfoBox
-          index={index}
-          key={`studyInfo-${index}`}
-          period={period}
-          studyDetailId={studyDetailId}
-          week={week}
-        />
+      {studySessions?.map(({ lessonPeriod, assignmentPeriod }, index) => (
+        <>
+          <span>{index + 1} 주차</span>
+          <StudyInfoBox
+            assignmentPeriod={assignmentPeriod}
+            index={index}
+            key={`studyInfo-${index}-lesson`}
+            lessonPeriod={lessonPeriod}
+            week={index + 1}
+          />
+          <AssignmentInfoBox
+            assignmentPeriod={assignmentPeriod}
+            index={index}
+            key={`studyInfo-${index}-assignment`}
+            lessonPeriod={lessonPeriod}
+            week={index + 1}
+          />
+        </>
       ))}
     </section>
   );

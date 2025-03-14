@@ -2,17 +2,17 @@ import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import { useFormContext } from "react-hook-form";
 
-const StudyTextInfo = ({ index }: { index: number }) => {
+const AssignemntTextInfo = ({ index }: { index: number }) => {
   const { register, watch } = useFormContext();
   return (
     <>
       <div className={CurriculumTitleStyle}>
-        <Text color="sub" typo="body1">
-          제목
+        {/* <Text color="sub" typo="body1">
+          과제 제목
         </Text>
         <textarea
           maxLength={100}
-          {...register(`studySessions.${index}.title`, {
+          {...register(`studySessions.${index}.assignmentTitle`, {
             maxLength: 100,
           })}
         />
@@ -21,16 +21,16 @@ const StudyTextInfo = ({ index }: { index: number }) => {
           style={{ position: "absolute", right: "8px" }}
           typo="label3"
         >
-          {watch(`studySessions.${index}.title`)?.length}/100
-        </Text>
+          {watch(`studySessions.${index}.assignmentTitle`)?.length}/100
+        </Text> */}
       </div>
       <div className={CurriculumDescriptionStyle}>
         <Text color="sub" typo="body1">
-          설명
+          과제 명세 링크
         </Text>
         <textarea
           maxLength={100}
-          {...register(`studySessions.${index}.description`, {
+          {...register(`studySessions.${index}.assignmentDescriptionLink`, {
             maxLength: 100,
           })}
         />
@@ -39,14 +39,15 @@ const StudyTextInfo = ({ index }: { index: number }) => {
           style={{ position: "absolute", right: "8px" }}
           typo="label3"
         >
-          {watch(`studySessions.${index}.description`)?.length}/100
+          {watch(`studySessions.${index}.assignmentDescriptionLink`)?.length}
+          /100
         </Text>
       </div>
     </>
   );
 };
 
-export default StudyTextInfo;
+export default AssignemntTextInfo;
 
 const CurriculumTitleStyle = css({
   position: "relative",
@@ -73,7 +74,7 @@ const CurriculumTitleStyle = css({
 });
 
 const CurriculumDescriptionStyle = css({
-  height: "120px",
+  height: "42px",
   position: "relative",
   width: "100%",
   display: "flex",

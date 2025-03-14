@@ -1,36 +1,75 @@
 import { studyApi } from "apis/study/studyApi";
 import { useEffect, useState } from "react";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
+import type { StudyListApiResponseDto } from "types/dtos/studyList";
+import isAdmin from "utils/isAdmin";
+
+import { useFetchStudies } from "@/studies/_hooks/useFetchStudies";
 
 const usePrefillStudyDetailInfo = (studyId: number) => {
-  const [prefillStudyInfo, setPrefillStudyInfo] =
+  const [prefill, setPrefill] =
     useState<CreateStudyDetailInfoApiRequestDto | null>(null);
-
+  const [studyList, setStudyList] = useState<StudyListApiResponseDto[]>();
   useEffect(() => {
-    const fetchStudyDetailInfo = async () => {
-      const basicData = await studyApi.getStudyBasicInfo(studyId);
-      const curriculumData = await studyApi.getCurriculumList(studyId);
+    {
+      const fetchStudyListData = async () => {
+        const admin = await isAdmin();
+        const studyList = admin
+          ? await studyApi.getStudyList()
+          : await studyApi.getMyStudyList();
+        setStudyList(studyList);
+      };
+      fetchStudyListData();
+    }
+  }, []);
 
-      if (basicData || curriculumData) {
-        setPrefillStudyInfo({
-          notionLink: basicData?.notionLink || "",
-          introduction: basicData?.introduction || "",
-          studyCurriculums:
-            curriculumData?.map((data) => ({
-              studyDetailId: data.studyDetailId,
-              title: data.title || "",
-              description: data.description || "",
-              difficulty: data.difficulty || undefined,
-              status:
-                data.curriculumStatus === "CANCELED" ? "CANCELED" : "OPEN",
-            })) || [],
-        });
-      }
-    };
-    fetchStudyDetailInfo();
-  }, [studyId]);
+  // ✅ studyList가 변경될 때만 prefill 설정
+  useEffect(() => {
+    if (!studyList) return;
 
-  return prefillStudyInfo;
+    const detailedStudy = studyList.find(
+      (data) => data.study.studyId === Number(studyId)
+    );
+
+    if (detailedStudy) {
+      setPrefill({
+        title: detailedStudy.study.title,
+        description: detailedStudy.study.description || "",
+        descriptionNotionLink: detailedStudy.study.descriptionNotionLink || "",
+        dayOfWeek: detailedStudy.study.dayOfWeek || [],
+
+        startTime: detailedStudy.study.startTime
+          ? {
+              hour: detailedStudy.study.startTime.hour,
+              minute: detailedStudy.study.startTime.minute,
+              second: detailedStudy.study.startTime.second,
+              nano: detailedStudy.study.startTime.nano,
+            }
+          : undefined,
+
+        endTime: detailedStudy.study.endTime
+          ? {
+              hour: detailedStudy.study.endTime.hour,
+              minute: detailedStudy.study.endTime.minute,
+              second: detailedStudy.study.endTime.second,
+              nano: detailedStudy.study.endTime.nano,
+            }
+          : undefined,
+
+        studySessions:
+          detailedStudy.studySessions?.map((session) => ({
+            studySessionId: session.studySessionId,
+            title: session.title || "",
+            description: session.description || "",
+            lessonPeriod: session.lessonPeriod || null,
+            assignmentDescriptionLink: session.assignmentDescriptionLink || "",
+            assignmentPeriod: session.assignmentPeriod || null,
+          })) || [],
+      });
+    }
+  }, [studyList, studyId]); // ✅ studyList 변경될 때만 실행
+
+  return prefill;
 };
 
 export default usePrefillStudyDetailInfo;

@@ -12,33 +12,33 @@ const StudyDetailInfoCheckModal = ({
   formData,
   studyId,
   onClose,
+  studyTitle,
 }: {
   formData: CreateStudyDetailInfoApiRequestDto;
   studyId: string;
   onClose: () => void;
+  studyTitle: string;
 }) => {
-  const [studyName, setStudyName] = useState("");
-
   const { isSuccess, handleSubmitDetailInfo } = useSubmitStudyDetailInfo(
     parseInt(studyId, 10),
     formData
   );
 
-  useEffect(() => {
-    const fetchStudyData = async () => {
-      const response = await studyApi.getStudyBasicInfo(parseInt(studyId, 10));
-      if (response) setStudyName(response.title);
-    };
-    fetchStudyData();
-  }, [studyId]);
+  // useEffect(() => {
+  //   const fetchStudyData = async () => {
+  //     const response = await studyApi.getStudyBasicInfo(parseInt(studyId, 10));
+  //     if (response) setStudyName(response.title);
+  //   };
+  //   fetchStudyData();
+  // }, [studyId]);
 
   return (
     <Modal onClose={onClose}>
-      <SubmitSuccessMessage studyName={studyName} success={isSuccess} />
+      <SubmitSuccessMessage studyName={studyTitle} success={isSuccess} />
       <SubmitConfirmMessage
         closeModal={onClose}
         handleSubmitDetailInfo={handleSubmitDetailInfo}
-        studyName={studyName}
+        studyName={studyTitle}
         success={isSuccess}
       />
     </Modal>

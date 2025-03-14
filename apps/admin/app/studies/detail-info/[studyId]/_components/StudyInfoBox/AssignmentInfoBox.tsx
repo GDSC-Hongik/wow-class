@@ -2,12 +2,12 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 
-import StudyDatePick from "./StudyDatePick";
-import StudyTextInfo from "./StudyTextInfo";
-import StudyTimePick from "./StudyTimePick";
+import AssignmentDatePick from "./AssignmentDatePick";
+import AssignemntTextInfo from "./AssignmentTextInfo";
 
-const StudyInfoBox = ({
-  lessonPeriod,
+const AssignmentInfoBox = ({
+  week,
+  assignmentPeriod,
   index,
 }: {
   week: number;
@@ -21,23 +21,19 @@ const StudyInfoBox = ({
   };
   index: number;
 }) => {
-  // const { setValue } = useFormContext();
-  // useEffect(() => {
-  //   setValue(`studySession.${index}.lesson`, index + 1);
-  // }, []);
   return (
     <section aria-label="create-detailInfo-box" className={StudyInfoBoxStyle}>
-      <div className={StudyInfoBoxWeekStyle}>수업정보</div>
-      <Flex flexDirection="column" maxHeight={41} width="100%">
-        <StudyDatePick index={index} lessonPeriod={lessonPeriod} />
-        <StudyTimePick index={index} />
-        <StudyTextInfo index={index} />
+      <div className={StudyInfoBoxWeekStyle}>과제 정보</div>
+      <Flex maxHeight={41} width="100%">
+        <AssignmentDatePick index={index} />
+        <div className={VerticalSectionStyle} />
       </Flex>
+      <AssignemntTextInfo index={index} />
     </section>
   );
 };
 
-export default StudyInfoBox;
+export default AssignmentInfoBox;
 
 const StudyInfoBoxStyle = css({
   width: "100%",
@@ -57,4 +53,10 @@ const StudyInfoBoxWeekStyle = css({
   display: "flex",
   alignItems: "center",
   padding: "xs",
+});
+
+const VerticalSectionStyle = css({
+  width: "1px",
+  height: "41px",
+  backgroundColor: "outline",
 });

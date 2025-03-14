@@ -15,7 +15,7 @@ export const createStudyApi = {
     data: CreateStudyDetailInfoApiRequestDto,
     studyId: number
   ) => {
-    const response = await fetcher.patch(
+    const response = await fetcher.put(
       `${apiPath.createStudyDetailInfo}/${studyId}`,
       data
     );

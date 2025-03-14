@@ -23,11 +23,16 @@ const StudyDescription = () => {
             placeholder="http://example.com"
             rows={1}
             className={textareaStyle({
-              type: watch("notionLink")?.length > 0 ? "typed" : "default",
+              type:
+                watch("descriptionNotionLink")?.length > 0
+                  ? "typed"
+                  : "default",
             })}
-            {...register("notionLink")}
+            {...register("descriptionNotionLink")}
             onChange={(e) => {
-              setValue("notionLink", e.target.value, { shouldValidate: true });
+              setValue("descriptionNotionLink", e.target.value, {
+                shouldValidate: true,
+              });
             }}
           />
         </Flex>
@@ -37,7 +42,7 @@ const StudyDescription = () => {
               스터디 한 줄 소개
             </Text>
             <Text color="sub" typo="label2">
-              {watch("introduction")?.length}/100
+              {watch("description")?.length}/100
             </Text>
           </styled.label>
           <styled.textarea
@@ -45,11 +50,11 @@ const StudyDescription = () => {
             placeholder="Ex. 새싹 개발자분들을 위한 개발 입문 스터디"
             rows={1}
             className={textareaStyle({
-              type: watch("introduction")?.length > 0 ? "typed" : "default",
+              type: watch("description")?.length > 0 ? "typed" : "default",
             })}
-            {...register("introduction")}
+            {...register("description")}
             onChange={(e) => {
-              setValue("introduction", e.target.value, {
+              setValue("description", e.target.value, {
                 shouldValidate: true,
               });
             }}
