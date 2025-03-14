@@ -24,10 +24,10 @@ const AuthErrorAfterRecruitmentPage = () => {
         width={200}
       />
       <Text as="h1" className={headingStyle} typo="display2">
-        GDSC Hongik 정회원만 이용 가능해요.
+        GDGoC Hongik 정회원만 이용 가능해요.
       </Text>
       <p className={descriptionStyle}>
-        GDSC Hongik 정회원 모집 기간이 아니에요!
+        GDGoC Hongik 정회원 모집 기간이 아니에요!
         <br />
         모집 기간에 합류 후 이용해주세요.
       </p>

@@ -4,8 +4,8 @@ import { routePath } from "constants/routePath";
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { isMobileAllowedUrl } from "utils/isMobileAllowedUrl";
-import { isMobileUser } from "utils/isMobileUser";
+// import { isMobileAllowedUrl } from "utils/isMobileAllowedUrl";
+// import { isMobileUser } from "utils/isMobileUser";
 
 export const config = {
   matcher: [
@@ -22,27 +22,27 @@ const middleware = async (req: NextRequest) => {
   const accessToken = cookieStore.get(cookieKey.accessToken)?.value;
   const middlewareExecuted = cookieStore.get(cookieKey["middleware-executed"]);
   const userAgent = req.headers.get("user-agent") || "";
-  const isMobile = isMobileUser(userAgent);
+  // const isMobile = isMobileUser(userAgent);
 
   const url = new URL(req.url);
   const isAuthUrl =
     url.pathname === routePath.auth ||
     url.pathname === `/mobile${routePath.auth}`;
 
-  if (isMobile && isMobileAllowedUrl(url.pathname)) {
-    url.pathname = `/mobile/${url.pathname}`;
-    return NextResponse.redirect(url);
-  }
+  // if (isMobile && isMobileAllowedUrl(url.pathname)) {
+  //   url.pathname = `/mobile/${url.pathname}`;
+  //   return NextResponse.redirect(url);
+  // }
 
-  if (isAuthUrl) {
-    const requestHeaders = new Headers(req.headers);
-    requestHeaders.set("x-pathname", req.nextUrl.pathname);
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-  }
+  // if (isAuthUrl) {
+  //   const requestHeaders = new Headers(req.headers);
+  //   requestHeaders.set("x-pathname", req.nextUrl.pathname);
+  //   return NextResponse.next({
+  //     request: {
+  //       headers: requestHeaders,
+  //     },
+  //   });
+  // }
 
   if (!accessToken && !isAuthUrl) {
     return NextResponse.redirect(new URL(routePath.auth, req.url));
