@@ -3,18 +3,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { useOpenState } from "@wow-class/ui/hooks";
-import { studyApi } from "apis/study/studyApi";
 import type { CSSProperties, MouseEvent } from "react";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
-import type { StudyListApiResponseDto } from "types/dtos/studyList";
-import isAdmin from "utils/isAdmin";
 import { studyDetailInfoSchema } from "utils/validate/studyDetailInfo";
 import Button from "wowds-ui/Button";
 
 import usePrefillStudyDetailInfo from "../_hooks/usePrefillStudyDetailInfo";
-import Header from "./Header";
 import StudyCurriculum from "./StudyCurriculum";
 import StudyDescription from "./StudyDescription";
 import StudyDetailInfoCheckModal from "./StudyDetailInfoCheckModal";
@@ -22,15 +18,17 @@ import StudyDetailInfoCheckModal from "./StudyDetailInfoCheckModal";
 const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
   const { open, setOpen, onClose } = useOpenState();
-  const prefillStudyInfo = usePrefillStudyDetailInfo(parseInt(studyId, 10));
+  const { prefillStudyDetailInfo } = usePrefillStudyDetailInfo(
+    parseInt(studyId, 10)
+  );
   const methods = useForm<CreateStudyDetailInfoApiRequestDto>({
     resolver: zodResolver(studyDetailInfoSchema),
-    mode: "onChange", // ✅ 실시간 검증
+    mode: "onChange",
   });
 
   useEffect(() => {
-    if (prefillStudyInfo) methods.reset(prefillStudyInfo);
-  }, [prefillStudyInfo, methods]);
+    if (prefillStudyDetailInfo) methods.reset(prefillStudyDetailInfo);
+  }, [methods, prefillStudyDetailInfo]);
 
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -45,7 +43,7 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
         <StudyDetailInfoCheckModal
           formData={methods.getValues()}
           studyId={studyId}
-          studyTitle={prefillStudyInfo?.title || ""}
+          studyTitle={prefillStudyDetailInfo?.title || ""}
           onClose={onClose}
         />
       )}
@@ -65,7 +63,9 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
           <Space height={48} />
           <StudyDescription />
           <Space height={64} />
-          <StudyCurriculum studySessions={prefillStudyInfo?.studySessions} />
+          <StudyCurriculum
+            studySessions={prefillStudyDetailInfo?.studySessions}
+          />
           <Button
             //disabled={!methods.formState.isValid}
             role="button"

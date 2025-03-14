@@ -7,9 +7,17 @@ import isAdmin from "utils/isAdmin";
 import { useFetchStudies } from "@/studies/_hooks/useFetchStudies";
 
 const usePrefillStudyDetailInfo = (studyId: number) => {
-  const [prefill, setPrefill] =
+  const [prefillStudyDetailInfo, setPrefillStudyInfo] =
     useState<CreateStudyDetailInfoApiRequestDto | null>(null);
   const [studyList, setStudyList] = useState<StudyListApiResponseDto[]>();
+  const [headerInfo, setHeaderInfo] =
+    useState<
+      Pick<
+        StudyListApiResponseDto["study"],
+        "title" | "semester" | "mentorName" | "type"
+      >
+    >();
+
   useEffect(() => {
     {
       const fetchStudyListData = async () => {
@@ -32,7 +40,13 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
     );
 
     if (detailedStudy) {
-      setPrefill({
+      setHeaderInfo({
+        title: detailedStudy.study.title,
+        semester: detailedStudy.study.semester,
+        mentorName: detailedStudy.study.mentorName,
+        type: detailedStudy.study.type,
+      });
+      setPrefillStudyInfo({
         title: detailedStudy.study.title,
         description: detailedStudy.study.description || "",
         descriptionNotionLink: detailedStudy.study.descriptionNotionLink || "",
@@ -69,7 +83,7 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
     }
   }, [studyList, studyId]); // ✅ studyList 변경될 때만 실행
 
-  return prefill;
+  return { prefillStudyDetailInfo };
 };
 
 export default usePrefillStudyDetailInfo;
