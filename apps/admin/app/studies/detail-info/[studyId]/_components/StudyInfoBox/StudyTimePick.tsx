@@ -4,21 +4,48 @@ import "react-clock/dist/Clock.css";
 import { Flex } from "@styled-system/jsx";
 import TimeRangePicker from "@wojtekmaj/react-timerange-picker";
 import { Text } from "@wow-class/ui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 type ValuePiece = Date | string | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-/**
- * TODO: wow-ds 컴포넌트로 교체 필요
- */
 const StudyTimePick = ({ index }: { index: number }) => {
   const { control, setValue, watch } = useFormContext();
-  const [value, onChange] = useState<Value>("");
 
-  const startDate = watch(`studySessions.${index}.lessonPeriod.startDate`);
-  const formattedStartDate = startDate ? startDate.split("T")[0] : "";
+  const watchedStartDate = watch(
+    `studySessions.${index}.lessonPeriod.startDate`
+  );
+  const watchedEndDate = watch(`studySessions.${index}.lessonPeriod.endDate`);
+
+  const [startDate, watchedStartTime] = watchedStartDate
+    ? watchedStartDate.split("T")
+    : ["", "00:00:00"];
+
+  const [_, watchedEndTime] = watchedEndDate
+    ? watchedEndDate.split("T")
+    : ["", "23:59:59"];
+
+  const formattedStartDate = startDate || "";
+  const formattedEndDate = startDate || "";
+
+  const [value, onChange] = useState<Value>(
+    watchedStartTime && watchedEndTime
+      ? [
+          `${watchedStartTime.split(":")[0]}:${watchedStartTime.split(":")[1]}`,
+          `${watchedEndTime.split(":")[0]}:${watchedEndTime.split(":")[1]}`,
+        ]
+      : ["00:00", "23:59"]
+  );
+
+  useEffect(() => {
+    if (watchedStartTime && watchedEndTime) {
+      onChange([
+        `${watchedStartTime.split(":")[0]}:${watchedStartTime.split(":")[1]}`,
+        `${watchedEndTime.split(":")[0]}:${watchedEndTime.split(":")[1]}`,
+      ]);
+    }
+  }, [watchedStartTime, watchedEndTime]);
 
   const handleSetTime = (value: Value) => {
     if (!value) return;
@@ -34,8 +61,7 @@ const StudyTimePick = ({ index }: { index: number }) => {
         }
 
         const startDateTime = `${formattedStartDate}T${startTime[0]}:${startTime[1]}:00`;
-
-        const endDateTime = `${formattedStartDate}T${endTime[0]}:${endTime[1]}:00`;
+        const endDateTime = `${formattedEndDate}T${endTime[0]}:${endTime[1]}:00`;
 
         setValue(
           `studySessions.${index}.lessonPeriod.startDate`,
@@ -49,14 +75,23 @@ const StudyTimePick = ({ index }: { index: number }) => {
       }
     }
   };
+
   return (
-    <Flex direction="column" gap="xs" position="relative" width={358}>
+    <Flex
+      alignItems="center"
+      borderBottom="1px solid"
+      borderColor="outline"
+      gap={52}
+      paddingX={8}
+      paddingY={12}
+      position="relative"
+    >
       <Text color="sub" typo="label2">
-        스터디 시간
+        수업 시간
       </Text>
       <Controller
         control={control}
-        name="startTime"
+        name={`studySessions.${index}.lessonPeriod.startDate`}
         render={() => (
           <TimeRangePicker
             disableClock={true}

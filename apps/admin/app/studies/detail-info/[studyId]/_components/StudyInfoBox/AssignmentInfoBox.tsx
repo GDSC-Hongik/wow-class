@@ -6,26 +6,23 @@ import AssignmentDatePick from "./AssignmentDatePick";
 import AssignemntTextInfo from "./AssignmentTextInfo";
 
 const AssignmentInfoBox = ({
-  week,
   assignmentPeriod,
   index,
 }: {
-  week: number;
   assignmentPeriod: {
-    startDate: string;
-    endDate: string;
-  };
-  lessonPeriod: {
     startDate: string;
     endDate: string;
   };
   index: number;
 }) => {
   return (
-    <section aria-label="create-detailInfo-box" className={StudyInfoBoxStyle}>
+    <section
+      aria-label="create-detailInfo-assignment-box"
+      className={StudyInfoBoxStyle}
+    >
       <div className={StudyInfoBoxWeekStyle}>과제 정보</div>
       <Flex maxHeight={41} width="100%">
-        <AssignmentDatePick index={index} />
+        <AssignmentDatePick assignmentPeriod={assignmentPeriod} index={index} />
         <div className={VerticalSectionStyle} />
       </Flex>
       <AssignemntTextInfo index={index} />
@@ -41,7 +38,7 @@ const StudyInfoBoxStyle = css({
   borderRadius: "md",
   border: "1px solid",
   borderColor: "outline",
-  height: "297px",
+  height: "168px",
   fontStyle: "body1",
 });
 

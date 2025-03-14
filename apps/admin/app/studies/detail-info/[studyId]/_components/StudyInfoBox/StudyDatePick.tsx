@@ -1,6 +1,6 @@
 import "react-day-picker/style.css";
 
-import { cva } from "@styled-system/css";
+import { css, cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { dateToFormatString, formatStringToDate } from "@wow-class/utils";
@@ -17,15 +17,29 @@ interface StudyDatePickProps {
   index: number;
 }
 const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
-  const [studyDate, setStudyDate] = useState<string>(lessonPeriod.startDate);
+  const { control, setValue, watch } = useFormContext();
+
+  const watchedStartDate = watch(
+    `studySessions.${index}.lessonPeriod.startDate`
+  );
+  const watchedEndDate = watch(`studySessions.${index}.lessonPeriod.endDate`);
+
+  const [watchedStartDateOnly, watchedStartTime] = watchedStartDate
+    ? watchedStartDate.split("T")
+    : [lessonPeriod.startDate?.split("T")[0] || "", "00:00:00"];
+
+  const [_, watchedEndTime] = watchedEndDate
+    ? watchedEndDate.split("T")
+    : [lessonPeriod.endDate?.split("T")[0] || "", "23:59:59"];
+
+  const [studyDate, setStudyDate] = useState<string>(watchedStartDateOnly);
+  const [inputValue, setInputValue] = useState(watchedStartDateOnly);
+
   const datepickerRef = useRef(null);
   const today = new Date();
   const yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - 1);
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { control, setValue, watch } = useFormContext();
-  const [inputValue, setInputValue] = useState(lessonPeriod.startDate);
 
   useClickOutside(datepickerRef, () => {
     setIsOpen(false);
@@ -34,27 +48,33 @@ const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
   const handleStudyDateSelect = (selectedDate: Date | undefined) => {
     if (!selectedDate) return;
     const selectedDateString = dateToFormatString(selectedDate);
+
+    const updatedStartDate = `${selectedDateString}T${watchedStartTime}`;
+    const updatedEndDate = `${selectedDateString}T${watchedEndTime}`;
+
     setStudyDate(selectedDateString);
     setInputValue(selectedDateString);
     setValue(
       `studySessions.${index}.lessonPeriod.startDate`,
-      `${selectedDateString}T00:00:00`,
-      {
-        shouldValidate: true,
-      }
+      updatedStartDate,
+      { shouldValidate: true }
     );
-    setValue(
-      `studySessions.${index}.lessonPeriod.endDate`,
-      `${selectedDateString}T23:59:59`,
-      {
-        shouldValidate: true,
-      }
-    );
+    setValue(`studySessions.${index}.lessonPeriod.endDate`, updatedEndDate, {
+      shouldValidate: true,
+    });
   };
 
   return (
-    <Flex gap="xs" position="relative" width={358}>
-      <Text color="sub" typo="label2">
+    <Flex
+      alignItems="center"
+      borderBottom="1px solid"
+      borderColor="outline"
+      gap={52}
+      paddingX={8}
+      paddingY={12}
+      position="relative"
+    >
+      <Text className={textStyle} color="sub" typo="label2">
         수업 날짜
       </Text>
       <Controller
@@ -111,12 +131,13 @@ const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
 
 export default StudyDatePick;
 
+const textStyle = css({
+  whiteSpace: "nowrap",
+});
 const StudyDatePickerStyle = cva({
   base: {
     width: "100%",
 
-    height: "44px",
-    padding: "8px 12px",
     caretColor: "transparent",
     cursor: "pointer",
     _placeholder: {

@@ -12,6 +12,7 @@ const AssignemntTextInfo = ({ index }: { index: number }) => {
         </Text>
         <textarea
           maxLength={100}
+          placeholder={'ex) HTTP 통신 코드 작성하기'}
           {...register(`studySessions.${index}.assignmentTitle`, {
             maxLength: 100,
           })}
@@ -25,11 +26,12 @@ const AssignemntTextInfo = ({ index }: { index: number }) => {
         </Text> */}
       </div>
       <div className={CurriculumDescriptionStyle}>
-        <Text color="sub" typo="body1">
+        <Text className={textStyle} color="sub" typo="body1">
           과제 명세 링크
         </Text>
         <textarea
           maxLength={100}
+          placeholder="http://example.com"
           {...register(`studySessions.${index}.assignmentDescriptionLink`, {
             maxLength: 100,
           })}
@@ -48,6 +50,10 @@ const AssignemntTextInfo = ({ index }: { index: number }) => {
 };
 
 export default AssignemntTextInfo;
+
+const textStyle = css({
+  whiteSpace: "nowrap",
+});
 
 const CurriculumTitleStyle = css({
   position: "relative",
@@ -83,7 +89,7 @@ const CurriculumDescriptionStyle = css({
   padding: "xs",
   gap: "xs",
   "& textarea": {
-    height: "110px",
+    height: "42px",
     textAlign: "start",
     minWidth: "80%",
     resize: "none",

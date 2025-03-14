@@ -11,14 +11,14 @@ import { studyDetailInfoSchema } from "utils/validate/studyDetailInfo";
 import Button from "wowds-ui/Button";
 
 import usePrefillStudyDetailInfo from "../_hooks/usePrefillStudyDetailInfo";
+import Header from "./Header";
 import StudyCurriculum from "./StudyCurriculum";
 import StudyDescription from "./StudyDescription";
 import StudyDetailInfoCheckModal from "./StudyDetailInfoCheckModal";
-
 const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
   const { open, setOpen, onClose } = useOpenState();
-  const { prefillStudyDetailInfo } = usePrefillStudyDetailInfo(
+  const { prefillStudyDetailInfo, headerInfo } = usePrefillStudyDetailInfo(
     parseInt(studyId, 10)
   );
   const methods = useForm<CreateStudyDetailInfoApiRequestDto>({
@@ -36,7 +36,7 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
   };
 
   console.log(methods.getValues(), "formdata");
-  console.log(methods.formState.isValid, "isValid");
+  console.log(headerInfo);
   return (
     <FormProvider {...methods}>
       {open && (
@@ -58,12 +58,15 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
           스터디 상세 정보를 입력해주세요
           <Space height={12} />
         </Text>
-        <Suspense fallback={<>loading..</>}>header 자리</Suspense>
+        <Suspense fallback={<>loading..</>}>
+          <Header headerInfo={headerInfo} />
+        </Suspense>
         <form style={FormStyle}>
           <Space height={48} />
           <StudyDescription />
           <Space height={64} />
           <StudyCurriculum
+            isAssignmentStudy={headerInfo?.type === "ASSIGNMENT"}
             studySessions={prefillStudyDetailInfo?.studySessions}
           />
           <Button

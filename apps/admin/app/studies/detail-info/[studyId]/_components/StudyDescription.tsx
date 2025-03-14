@@ -47,7 +47,7 @@ const StudyDescription = () => {
           </styled.label>
           <styled.textarea
             maxLength={100}
-            placeholder="Ex. 새싹 개발자분들을 위한 개발 입문 스터디"
+            placeholder="ex) 새싹 개발자분들을 위한 개발 입문 스터디"
             rows={1}
             className={textareaStyle({
               type: watch("description")?.length > 0 ? "typed" : "default",

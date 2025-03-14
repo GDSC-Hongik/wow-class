@@ -1,14 +1,22 @@
 "use client";
 
-import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import ItemSeparator from "components/ItemSeparator";
+import { studyToKoreanType } from "constants/study";
+import type { StudyListApiResponseDto } from "types/dtos/studyList";
+interface HeaderProps {
+  headerInfo?: Pick<
+    StudyListApiResponseDto["study"],
+    "title" | "semester" | "mentorName" | "type"
+  >;
+}
 
-const Header = (studyInfo: any) => {
-  const { title, academicYear, semester, mentorName, type } = studyInfo as any;
+const Header = ({ headerInfo }: HeaderProps) => {
+  if (!headerInfo) return null;
+  const { title, semester, mentorName, type } = headerInfo;
 
-  const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
+  const studySemester = `${semester.academicYear}-${semester.semesterType === "FIRST" ? 1 : 2}`;
 
   return (
     <header>
@@ -31,7 +39,7 @@ const Header = (studyInfo: any) => {
           </Text>
           <ItemSeparator height={4} width={4} />
           <Text as="h5" color="sub">
-            {type}
+            {studyToKoreanType[type]}
           </Text>
         </Flex>
       </section>
@@ -40,7 +48,3 @@ const Header = (studyInfo: any) => {
 };
 
 export default Header;
-
-const downArrowIconStyle = css({
-  cursor: "pointer",
-});

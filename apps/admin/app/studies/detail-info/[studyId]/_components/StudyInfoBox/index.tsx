@@ -10,23 +10,17 @@ const StudyInfoBox = ({
   lessonPeriod,
   index,
 }: {
-  week: number;
-  assignmentPeriod: {
-    startDate: string;
-    endDate: string;
-  };
   lessonPeriod: {
     startDate: string;
     endDate: string;
   };
   index: number;
 }) => {
-  // const { setValue } = useFormContext();
-  // useEffect(() => {
-  //   setValue(`studySession.${index}.lesson`, index + 1);
-  // }, []);
   return (
-    <section aria-label="create-detailInfo-box" className={StudyInfoBoxStyle}>
+    <section
+      aria-label="create-detailInfo-lesson-box"
+      className={StudyInfoBoxStyle}
+    >
       <div className={StudyInfoBoxWeekStyle}>수업정보</div>
       <Flex flexDirection="column" maxHeight={41} width="100%">
         <StudyDatePick index={index} lessonPeriod={lessonPeriod} />

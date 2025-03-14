@@ -1,8 +1,6 @@
 "use client";
 import { Flex } from "@styled-system/jsx";
 import { Modal, Space, Text } from "@wow-class/ui";
-import { studyApi } from "apis/study/studyApi";
-import React, { useEffect, useState } from "react";
 import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailInfo";
 import Button from "wowds-ui/Button";
 

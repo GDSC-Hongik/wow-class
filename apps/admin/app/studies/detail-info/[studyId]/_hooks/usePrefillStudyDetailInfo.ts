@@ -4,8 +4,6 @@ import type { CreateStudyDetailInfoApiRequestDto } from "types/dtos/studyDetailI
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
 import isAdmin from "utils/isAdmin";
 
-import { useFetchStudies } from "@/studies/_hooks/useFetchStudies";
-
 const usePrefillStudyDetailInfo = (studyId: number) => {
   const [prefillStudyDetailInfo, setPrefillStudyInfo] =
     useState<CreateStudyDetailInfoApiRequestDto | null>(null);
@@ -31,7 +29,6 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
     }
   }, []);
 
-  // ✅ studyList가 변경될 때만 prefill 설정
   useEffect(() => {
     if (!studyList) return;
 
@@ -50,7 +47,7 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
         title: detailedStudy.study.title,
         description: detailedStudy.study.description || "",
         descriptionNotionLink: detailedStudy.study.descriptionNotionLink || "",
-        dayOfWeek: detailedStudy.study.dayOfWeek || [],
+        dayOfWeek: detailedStudy.study.dayOfWeek || "MONDAY",
 
         startTime: detailedStudy.study.startTime
           ? {
@@ -81,9 +78,9 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
           })) || [],
       });
     }
-  }, [studyList, studyId]); // ✅ studyList 변경될 때만 실행
+  }, [studyList, studyId]);
 
-  return { prefillStudyDetailInfo };
+  return { prefillStudyDetailInfo, headerInfo };
 };
 
 export default usePrefillStudyDetailInfo;
