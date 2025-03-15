@@ -88,41 +88,58 @@ const AssignmentDatePick = ({
   };
 
   return (
-    <Flex
-      alignItems="center"
-      borderBottom="1px solid"
-      borderColor="outline"
-      gap={52}
-      height={42}
-      paddingX={8}
-      paddingY={12}
-      position="relative"
-      width="100%"
-    >
-      <Text className={textStyle} color="sub">
-        과제 진행 기간
-      </Text>
-      <Controller
-        control={control}
-        name={`studySessions[${index}].assignmentPeriod.startDate`}
-        render={() => (
-          <input
-            placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
-            value={inputValue}
-            className={StudyDatePickerStyle({
-              type: inputValue ? "selected" : "unSelected",
-            })}
-            onChange={() => {}}
-            onClick={() => {
-              setIsOpen(!isOpen);
+    <>
+      <Flex
+        alignItems="center"
+        borderBottom="1px solid"
+        borderColor="outline"
+        gap={52}
+        height={42}
+        justifyContent="space-between"
+        paddingX={8}
+        paddingY={12}
+        position="relative"
+        width="100%"
+      >
+        <Text className={textStyle} color="sub">
+          과제 진행 기간
+        </Text>
+        <Flex
+          cursor="pointer"
+          flex={1}
+          justifyContent="space-between"
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        >
+          <Controller
+            control={control}
+            name={`studySessions[${index}].assignmentPeriod.startDate`}
+            render={() => (
+              <input
+                placeholder="YYYY-MM-DD ~ YYYY-MM-DD"
+                value={inputValue}
+                className={StudyDatePickerStyle({
+                  type: inputValue ? "selected" : "unSelected",
+                })}
+                onChange={() => {}}
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+              />
+            )}
+            rules={{
+              required: true,
             }}
           />
-        )}
-        rules={{
-          required: true,
-        }}
-      />
-      <Image alt="calander" height={24} src="/images/calander.svg" width={24} />
+          <Image
+            alt="calander"
+            height={24}
+            src="/images/calander.svg"
+            width={24}
+          />
+        </Flex>
+      </Flex>
       {isOpen && (
         <div ref={datepickerRef}>
           <DayPicker
@@ -142,7 +159,8 @@ const AssignmentDatePick = ({
             }
             style={{
               position: "absolute",
-              top: "42px",
+              top: "84px",
+              left: "500px",
               zIndex: 99,
               backgroundColor: "white",
             }}
@@ -157,7 +175,7 @@ const AssignmentDatePick = ({
           />
         </div>
       )}
-    </Flex>
+    </>
   );
 };
 

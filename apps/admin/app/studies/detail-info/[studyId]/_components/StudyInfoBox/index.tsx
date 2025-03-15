@@ -42,7 +42,7 @@ const StudyInfoBoxStyle = css({
 const StudyInfoBoxWeekStyle = css({
   width: "100%",
   borderBottom: "1px solid",
-  borderColor: "sub",
+  borderColor: "outline",
   height: "42px",
   display: "flex",
   alignItems: "center",

@@ -63,40 +63,54 @@ const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
   };
 
   return (
-    <Flex
-      alignItems="center"
-      borderBottom="1px solid"
-      borderColor="outline"
-      gap={52}
-      height={42}
-      paddingX={8}
-      paddingY={12}
-      position="relative"
-    >
-      <Text className={textStyle} color="sub">
-        수업 날짜
-      </Text>
-      <Controller
-        control={control}
-        name={`studySessions.${index}.lessonPeriod.startDate`}
-        render={() => (
-          <input
-            placeholder="YYYY-MM-DD"
-            value={inputValue}
-            className={StudyDatePickerStyle({
-              type: inputValue ? "selected" : "unSelected",
-            })}
-            onChange={() => {}}
-            onClick={() => {
-              setIsOpen(!isOpen);
+    <>
+      <Flex
+        alignItems="center"
+        borderBottom="1px solid"
+        borderColor="outline"
+        gap={52}
+        height={42}
+        justifyContent="space-between"
+        paddingX={8}
+        paddingY={12}
+        position="relative"
+      >
+        <Text className={textStyle} color="sub">
+          수업 날짜
+        </Text>
+        <Flex
+          cursor="pointer"
+          flex={1}
+          justifyContent="space-between"
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        >
+          <Controller
+            control={control}
+            name={`studySessions.${index}.lessonPeriod.startDate`}
+            render={() => (
+              <input
+                placeholder="YYYY-MM-DD"
+                value={inputValue}
+                className={StudyDatePickerStyle({
+                  type: inputValue ? "selected" : "unSelected",
+                })}
+                onChange={() => {}}
+              />
+            )}
+            rules={{
+              required: true,
             }}
           />
-        )}
-        rules={{
-          required: true,
-        }}
-      />
-      <Image alt="calander" height={24} src="/images/calander.svg" width={24} />
+          <Image
+            alt="calander"
+            height={24}
+            src="/images/calander.svg"
+            width={24}
+          />
+        </Flex>
+      </Flex>
       {isOpen && (
         <div ref={datepickerRef}>
           <DayPicker
@@ -109,7 +123,8 @@ const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
             }}
             style={{
               position: "absolute",
-              top: "42px",
+              top: "82px",
+              left: "500px",
               zIndex: 99,
               backgroundColor: "white",
             }}
@@ -124,7 +139,7 @@ const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
           />
         </div>
       )}
-    </Flex>
+    </>
   );
 };
 
