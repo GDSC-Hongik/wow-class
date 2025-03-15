@@ -1,5 +1,4 @@
 import type { DayOfWeekType } from "types/entities/dayofweek";
-import type { StudyCurriculumType } from "types/entities/study";
 import type { TimeType } from "types/entities/time";
 
 interface Period {
@@ -9,9 +8,9 @@ interface Period {
 
 export interface StudySession {
   studySessionId: number;
-  title: string;
-  description: string;
-  lessonPeriod: Period;
+  title?: string;
+  description?: string;
+  lessonPeriod?: Period;
   assignmentDescriptionLink: string;
   assignmentPeriod: Period;
 }

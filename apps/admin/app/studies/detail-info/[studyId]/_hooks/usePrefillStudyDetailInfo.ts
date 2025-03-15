@@ -36,6 +36,7 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
       (data) => data.study.studyId === Number(studyId)
     );
 
+    const isAssignmentStudy = detailedStudy?.study.type === "ASSIGNMENT";
     if (detailedStudy) {
       setHeaderInfo({
         title: detailedStudy.study.title,
@@ -70,9 +71,13 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
         studySessions:
           detailedStudy.studySessions?.map((session) => ({
             studySessionId: session.studySessionId,
-            title: session.title || "",
-            description: session.description || "",
-            lessonPeriod: session.lessonPeriod || null,
+            ...(isAssignmentStudy
+              ? {}
+              : {
+                  title: session.title || "",
+                  description: session.description || "",
+                  lessonPeriod: session.lessonPeriod || null,
+                }),
             assignmentDescriptionLink: session.assignmentDescriptionLink || "",
             assignmentPeriod: session.assignmentPeriod || null,
           })) || [],
