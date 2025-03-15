@@ -2,7 +2,7 @@ export const enum apiPath {
   dashboard = "/onboarding/members/me/dashboard",
   studyList = "/v2/admin/studies",
   createStudy = "/v2/admin/studies",
-  createStudyDetailInfo = "/mentor/studies",
+  createStudyDetailInfo = "/v2/mentor/studies",
   searchMentor = "/admin/members",
 }
 

@@ -1,41 +1,44 @@
 "use client";
 import { css } from "@styled-system/css";
-import { Text } from "@wow-class/ui";
-import { studyApi } from "apis/study/studyApi";
-import { useEffect, useState } from "react";
-import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
+import { Flex } from "@styled-system/jsx";
+import { Space, Text } from "@wow-class/ui";
+import type { StudySession } from "types/dtos/studyDetailInfo";
 
+import AssignmentInfoBox from "./AssignmentInfoBox";
 import StudyInfoBox from "./StudyInfoBox";
-
-const StudyCurriculum = ({ studyId }: { studyId: string }) => {
-  const [curriculumList, setCurriculumList] = useState<
-    CurriculumApiResponseDto[]
-  >([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const curriculumData = await studyApi.getCurriculumList(
-        parseInt(studyId, 10)
-      );
-      if (curriculumData) setCurriculumList(curriculumData);
-    };
-    fetchData();
-  }, [studyId]);
-
+interface CurriculumListProps {
+  studySessions?: StudySession[] | undefined;
+  isAssignmentStudy: boolean;
+}
+const StudyCurriculum = ({
+  studySessions,
+  isAssignmentStudy,
+}: CurriculumListProps) => {
   return (
     <section
       aria-label="create-study-description"
       className={StudyCurriculumSectionStyle}
     >
       <Text typo="h2">전체 커리큘럼 정보</Text>
-      {curriculumList?.map(({ week, period, studyDetailId }, index) => (
-        <StudyInfoBox
-          index={index}
-          key={`studyInfo-${index}`}
-          period={period}
-          studyDetailId={studyDetailId}
-          week={week}
-        />
+      <Space height={30} />
+      {studySessions?.map(({ lessonPeriod, assignmentPeriod }, index) => (
+        <Flex gap={30} key={`studyInfo-${index}`}>
+          <span>{index + 1}회차</span>
+          <Flex flexDirection="column" gap={15} style={{ flex: 1 }}>
+            {!isAssignmentStudy && lessonPeriod && (
+              <StudyInfoBox
+                index={index}
+                key={`studyInfo-${index}-lesson`}
+                lessonPeriod={lessonPeriod}
+              />
+            )}
+            <AssignmentInfoBox
+              assignmentPeriod={assignmentPeriod}
+              index={index}
+              key={`studyInfo-${index}-assignment`}
+            />
+          </Flex>
+        </Flex>
       ))}
     </section>
   );
