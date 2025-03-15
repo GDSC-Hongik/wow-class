@@ -15,6 +15,7 @@ import Header from "./Header";
 import StudyCurriculum from "./StudyCurriculum";
 import StudyDescription from "./StudyDescription";
 import StudyDetailInfoCheckModal from "./StudyDetailInfoCheckModal";
+
 const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
   const { open, setOpen, onClose } = useOpenState();
@@ -35,8 +36,6 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
     setOpen(true);
   };
 
-  console.log(methods.getValues(), "formdata");
-  console.log(headerInfo);
   return (
     <FormProvider {...methods}>
       {open && (
@@ -70,7 +69,7 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
             studySessions={prefillStudyDetailInfo?.studySessions}
           />
           <Button
-            //disabled={!methods.formState.isValid}
+            disabled={!methods.formState.isValid}
             role="button"
             size="sm"
             style={SubmitButtonStyle}
