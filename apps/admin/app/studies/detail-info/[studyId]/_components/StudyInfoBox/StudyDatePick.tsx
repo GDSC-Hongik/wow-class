@@ -5,15 +5,13 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { dateToFormatString, formatStringToDate } from "@wow-class/utils";
 import useClickOutside from "hooks/useClickOutSide";
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { Controller, useFormContext } from "react-hook-form";
-
+import type { PeriodType } from "types/entities/period";
 interface StudyDatePickProps {
-  lessonPeriod: {
-    startDate: string;
-    endDate: string;
-  };
+  lessonPeriod: PeriodType;
   index: number;
 }
 const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
@@ -70,11 +68,12 @@ const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
       borderBottom="1px solid"
       borderColor="outline"
       gap={52}
+      height={42}
       paddingX={8}
       paddingY={12}
       position="relative"
     >
-      <Text className={textStyle} color="sub" typo="label2">
+      <Text className={textStyle} color="sub">
         수업 날짜
       </Text>
       <Controller
@@ -97,7 +96,7 @@ const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
           required: true,
         }}
       />
-
+      <Image alt="calander" height={24} src="/images/calander.svg" width={24} />
       {isOpen && (
         <div ref={datepickerRef}>
           <DayPicker
@@ -110,7 +109,7 @@ const StudyDatePick = ({ index, lessonPeriod }: StudyDatePickProps) => {
             }}
             style={{
               position: "absolute",
-              top: "80px",
+              top: "42px",
               zIndex: 99,
               backgroundColor: "white",
             }}

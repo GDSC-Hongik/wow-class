@@ -82,13 +82,12 @@ const StudyTimePick = ({ index }: { index: number }) => {
       borderBottom="1px solid"
       borderColor="outline"
       gap={52}
+      height={42}
       paddingX={8}
       paddingY={12}
       position="relative"
     >
-      <Text color="sub" typo="label2">
-        수업 시간
-      </Text>
+      <Text color="sub">수업 시간</Text>
       <Controller
         control={control}
         name={`studySessions.${index}.lessonPeriod.startDate`}

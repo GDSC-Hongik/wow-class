@@ -1,6 +1,6 @@
 "use client";
 import { css } from "@styled-system/css";
-import { Flex } from "@styled-system/jsx";
+import type { PeriodType } from "types/entities/period";
 
 import StudyDatePick from "./StudyDatePick";
 import StudyTextInfo from "./StudyTextInfo";
@@ -10,10 +10,7 @@ const StudyInfoBox = ({
   lessonPeriod,
   index,
 }: {
-  lessonPeriod: {
-    startDate: string;
-    endDate: string;
-  };
+  lessonPeriod: PeriodType;
   index: number;
 }) => {
   return (
@@ -22,11 +19,10 @@ const StudyInfoBox = ({
       className={StudyInfoBoxStyle}
     >
       <div className={StudyInfoBoxWeekStyle}>수업정보</div>
-      <Flex flexDirection="column" maxHeight={41} width="100%">
-        <StudyDatePick index={index} lessonPeriod={lessonPeriod} />
-        <StudyTimePick index={index} />
-        <StudyTextInfo index={index} />
-      </Flex>
+
+      <StudyDatePick index={index} lessonPeriod={lessonPeriod} />
+      <StudyTimePick index={index} />
+      <StudyTextInfo index={index} />
     </section>
   );
 };

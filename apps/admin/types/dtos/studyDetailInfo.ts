@@ -1,18 +1,14 @@
 import type { DayOfWeekType } from "types/entities/dayofweek";
+import type { PeriodType } from "types/entities/period";
 import type { TimeType } from "types/entities/time";
-
-interface Period {
-  startDate: string;
-  endDate: string;
-}
 
 export interface StudySession {
   studySessionId: number;
   title?: string;
   description?: string;
-  lessonPeriod?: Period;
+  lessonPeriod?: PeriodType;
   assignmentDescriptionLink: string;
-  assignmentPeriod: Period;
+  assignmentPeriod: PeriodType;
 }
 
 export interface CreateStudyDetailInfoApiRequestDto {

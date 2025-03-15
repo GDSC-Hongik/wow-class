@@ -24,7 +24,6 @@ const CreateStudyPage = () => {
   const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const formData = methods.getValues();
-    console.log(formData);
     const route = createQueryString(
       `${routerPath["created-study-check"].href}`,
       formData
