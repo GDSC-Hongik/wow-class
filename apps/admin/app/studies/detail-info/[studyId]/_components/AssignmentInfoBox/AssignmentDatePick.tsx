@@ -9,16 +9,15 @@ import {
   formatStringToDate,
 } from "@wow-class/utils";
 import useClickOutside from "hooks/useClickOutSide";
+import Image from "next/image";
 import { useRef, useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { DayPicker } from "react-day-picker";
 import { Controller, useFormContext } from "react-hook-form";
+import type { PeriodType } from "types/entities/period";
 
 interface AssignmentDatePickProps {
-  assignmentPeriod: {
-    startDate: string;
-    endDate: string;
-  };
+  assignmentPeriod: PeriodType;
   index: number;
 }
 
@@ -94,12 +93,13 @@ const AssignmentDatePick = ({
       borderBottom="1px solid"
       borderColor="outline"
       gap={52}
+      height={42}
       paddingX={8}
       paddingY={12}
       position="relative"
       width="100%"
     >
-      <Text className={textStyle} color="sub" typo="label2">
+      <Text className={textStyle} color="sub">
         과제 진행 기간
       </Text>
       <Controller
@@ -122,7 +122,7 @@ const AssignmentDatePick = ({
           required: true,
         }}
       />
-
+      <Image alt="calander" height={24} src="/images/calander.svg" width={24} />
       {isOpen && (
         <div ref={datepickerRef}>
           <DayPicker
@@ -142,7 +142,7 @@ const AssignmentDatePick = ({
             }
             style={{
               position: "absolute",
-              top: "80px",
+              top: "42px",
               zIndex: 99,
               backgroundColor: "white",
             }}

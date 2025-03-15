@@ -4,8 +4,8 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import type { StudySession } from "types/dtos/studyDetailInfo";
 
+import AssignmentInfoBox from "./AssignmentInfoBox";
 import StudyInfoBox from "./StudyInfoBox";
-import AssignmentInfoBox from "./StudyInfoBox/AssignmentInfoBox";
 interface CurriculumListProps {
   studySessions?: StudySession[] | undefined;
   isAssignmentStudy: boolean;
@@ -25,7 +25,7 @@ const StudyCurriculum = ({
         <Flex gap={30} key={`studyInfo-${index}`}>
           <span>{index + 1}회차</span>
           <Flex flexDirection="column" gap={15} style={{ flex: 1 }}>
-            {!isAssignmentStudy && (
+            {!isAssignmentStudy && lessonPeriod && (
               <StudyInfoBox
                 index={index}
                 key={`studyInfo-${index}-lesson`}

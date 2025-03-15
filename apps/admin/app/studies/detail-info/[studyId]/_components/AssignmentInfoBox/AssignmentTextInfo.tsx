@@ -36,14 +36,6 @@ const AssignemntTextInfo = ({ index }: { index: number }) => {
             maxLength: 100,
           })}
         />
-        <Text
-          color="sub"
-          style={{ position: "absolute", right: "8px" }}
-          typo="label3"
-        >
-          {watch(`studySessions.${index}.assignmentDescriptionLink`)?.length}
-          /100
-        </Text>
       </div>
     </>
   );

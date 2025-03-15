@@ -1,6 +1,5 @@
 "use client";
 import { css } from "@styled-system/css";
-import { Flex } from "@styled-system/jsx";
 
 import AssignmentDatePick from "./AssignmentDatePick";
 import AssignemntTextInfo from "./AssignmentTextInfo";
@@ -21,10 +20,9 @@ const AssignmentInfoBox = ({
       className={StudyInfoBoxStyle}
     >
       <div className={StudyInfoBoxWeekStyle}>과제 정보</div>
-      <Flex maxHeight={41} width="100%">
-        <AssignmentDatePick assignmentPeriod={assignmentPeriod} index={index} />
-        <div className={VerticalSectionStyle} />
-      </Flex>
+
+      <AssignmentDatePick assignmentPeriod={assignmentPeriod} index={index} />
+
       <AssignemntTextInfo index={index} />
     </section>
   );
@@ -50,10 +48,4 @@ const StudyInfoBoxWeekStyle = css({
   display: "flex",
   alignItems: "center",
   padding: "xs",
-});
-
-const VerticalSectionStyle = css({
-  width: "1px",
-  height: "41px",
-  backgroundColor: "outline",
 });
