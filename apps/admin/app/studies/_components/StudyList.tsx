@@ -12,14 +12,15 @@ const StudyList = () => {
   const { studyList, semesterList, adminStatus } = useFetchStudies();
   const router = useRouter();
 
+  if (studyList?.length === 0) {
+    return <EmptyStudyList />;
+  }
+
   useEffect(() => {
     if (semester && semesterList && !semesterList?.includes(semester))
       router.replace("/studies");
   }, [router, semester, semesterList, studyList]);
 
-  if (studyList?.length === 0) {
-    return <EmptyStudyList />;
-  }
   return (
     <section aria-label="study-list" className={SectionStyle}>
       {studyList?.map(
