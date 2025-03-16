@@ -1,42 +1,27 @@
 "use client";
 import { css } from "@styled-system/css";
-import { Flex } from "@styled-system/jsx";
-import { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import type { PeriodType } from "types/entities/period";
 
-import StudyInfoDifficulty from "./StudyInfoDifficulty";
-import StudyInfoStatus from "./StudyInfoStatus";
+import StudyDatePick from "./StudyDatePick";
 import StudyTextInfo from "./StudyTextInfo";
-import StudyTimeLine from "./StudyTimeline";
+import StudyTimePick from "./StudyTimePick";
 
 const StudyInfoBox = ({
-  week,
-  period,
+  lessonPeriod,
   index,
-  studyDetailId,
 }: {
-  week: number;
-  studyDetailId: number;
-  period: {
-    startDate: string;
-    endDate: string;
-    open: boolean;
-  };
+  lessonPeriod: PeriodType;
   index: number;
 }) => {
-  const { setValue } = useFormContext();
-  useEffect(() => {
-    setValue(`studyCurriculums.${index}.studyDetailId`, studyDetailId);
-  }, []);
   return (
-    <section aria-label="create-detailInfo-box" className={StudyInfoBoxStyle}>
-      <div className={StudyInfoBoxWeekStyle}>{week}주차</div>
-      <Flex maxHeight={41} width="100%">
-        <StudyTimeLine period={period} />
-        <div className={VerticalSectionStyle} />
-        <StudyInfoStatus index={index} />
-      </Flex>
-      <StudyInfoDifficulty index={index} />
+    <section
+      aria-label="create-detailInfo-lesson-box"
+      className={StudyInfoBoxStyle}
+    >
+      <div className={StudyInfoBoxWeekStyle}>수업정보</div>
+
+      <StudyDatePick index={index} lessonPeriod={lessonPeriod} />
+      <StudyTimePick index={index} />
       <StudyTextInfo index={index} />
     </section>
   );
@@ -57,15 +42,9 @@ const StudyInfoBoxStyle = css({
 const StudyInfoBoxWeekStyle = css({
   width: "100%",
   borderBottom: "1px solid",
-  borderColor: "sub",
+  borderColor: "outline",
   height: "42px",
   display: "flex",
   alignItems: "center",
   padding: "xs",
-});
-
-const VerticalSectionStyle = css({
-  width: "1px",
-  height: "41px",
-  backgroundColor: "outline",
 });

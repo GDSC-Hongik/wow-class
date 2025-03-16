@@ -1,34 +1,44 @@
-import { Flex } from "@styled-system/jsx";
+"use client";
+
 import { useFormContext } from "react-hook-form";
-import TextField from "wowds-ui/TextField";
+import type { DropDownProps } from "wowds-ui/DropDown";
+import DropDown from "wowds-ui/DropDown";
+import DropDownOption from "wowds-ui/DropDownOption";
+
+import { getUpcomingSemesters } from "./getUpcomingSemesters";
 
 const StudySemesterSelect = () => {
   const { setValue } = useFormContext();
+  const { semesters, semestersDict } = getUpcomingSemesters();
+
+  const handleChange: DropDownProps["onChange"] = (value) => {
+    const semester = semestersDict[value.selectedValue];
+    if (!semester) return;
+    setValue(
+      "semester",
+      {
+        academicYear: semester.academicYear,
+        semesterType: semester.semesterType,
+      },
+      { shouldValidate: true }
+    );
+  };
 
   return (
-    <Flex alignItems="center" gap={36} width="100%">
-      <TextField
-        label="진행연도"
-        placeholder="Ex.2024"
-        style={{ width: "358px" }}
-        onChange={(value) => {
-          setValue("academicYear", parseInt(value), {
-            shouldValidate: true,
-          });
-        }}
-      />
-      <TextField
-        label="진행학기"
-        placeholder="Ex.1학기"
-        style={{ width: "358px" }}
-        onChange={(value) => {
-          const semesterValue = parseInt(value.slice(0, 1), 10);
-          setValue("semesterType", semesterValue === 1 ? "FIRST" : "SECOND", {
-            shouldValidate: true,
-          });
-        }}
-      />
-    </Flex>
+    <DropDown
+      label="진행학기"
+      placeholder="선택하세요"
+      style={{ width: "358px" }}
+      onChange={handleChange}
+    >
+      {semesters.map((semester) => (
+        <DropDownOption
+          key={semester.valueKey}
+          text={semester.text}
+          value={semester.valueKey}
+        />
+      ))}
+    </DropDown>
   );
 };
 

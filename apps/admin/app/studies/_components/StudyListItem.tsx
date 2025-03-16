@@ -1,52 +1,67 @@
+"use client";
 import { Flex } from "@styled-system/jsx";
 import { Table, Text } from "@wow-class/ui";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import type { ComponentProps } from "react";
 import type { StudyListApiResponseDto } from "types/dtos/studyList";
-import type { StudyKoreanType } from "types/entities/study";
-import isAdmin from "utils/isAdmin";
+import type { StudyKoreanType, StudyType } from "types/entities/study";
 import { Link as WowLinkIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
-const StudyListItem = async ({ study }: { study: StudyListApiResponseDto }) => {
-  const adminStatus = await isAdmin();
-  const {
-    studyId,
-    title,
-    studyType,
-    notionLink,
-    mentorName,
-    academicYear,
-    semesterType,
-  } = study;
+const StudyListItem = ({
+  study,
+  adminStatus,
+}: {
+  study: StudyListApiResponseDto;
+  adminStatus: boolean;
+}) => {
+  const { studyId, title, type, descriptionNotionLink, mentorName, semester } =
+    study.study;
+  const querySemester = useSearchParams().get("semester");
+  const studyType: Record<StudyType, StudyKoreanType> = {
+    ASSIGNMENT: "과제 스터디",
+    OFFLINE: "오프라인 스터디",
+    ONLINE: "온라인 스터디",
+  };
 
   return (
     <Table>
       <Table.Left style={TableLeftStyle}>
         <Text typo="body1">
-          {academicYear}-{semesterType === "FIRST" ? "1" : "2"}
+          {semester.academicYear}-
+          {semester.semesterType === "FIRST" ? "1" : "2"}
         </Text>
         <Flex alignItems="center" gap="xs">
           <Text style={StudyNameStyle} typo="h3">
             {title}
           </Text>
-          <Tag color={studyTypeColorMap[studyType]} variant="solid1">
-            {studyType}
+          <Tag color={studyTypeColorMap[studyType[type]]} variant="solid1">
+            {studyType[type]}
           </Tag>
         </Flex>
       </Table.Left>
       <Table.Right style={TableRightStyle}>
         <Text typo="body1">{mentorName} 멘토</Text>
-        <Link href={notionLink || ""} style={LinkStyle} target="_blank">
+        <Link
+          href={descriptionNotionLink || ""}
+          style={LinkStyle}
+          target="_blank"
+        >
           <WowLinkIcon height={24} stroke="sub" width={24} />
           <TextButton style={{ padding: 0 }} text="스터디 소개 페이지" />
         </Link>
         <Flex alignItems="center" gap="sm">
           {adminStatus && (
-            <Button size="sm" variant="outline">
+            <Button
+              asProp={Link}
+              href={`${routerPath["delete-study-check"].href}/${studyId}?${querySemester ? `semester=${querySemester}&` : ""}title=${title}&academicYear=${semester.academicYear}&semesterType=${semester.semesterType}`}
+              size="sm"
+              variant="outline"
+            >
               스터디 삭제
             </Button>
           )}

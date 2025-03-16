@@ -1,15 +1,18 @@
 import { css } from "@styled-system/css";
 import { NavItem } from "@wow-class/ui";
 import { dashboardApi } from "apis/dashboardApi";
+import { studyHistoryApi } from "apis/studyHistoryApi";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "wowds-ui/Button";
 
-import { navMenu } from "../constants/navMenu";
 import adminImageUrl from "../public/images/administrator.svg";
+import folderImageUrl from "../public/images/folder.svg";
+import homeImageUrl from "../public/images/home.svg";
 import logoImageUrl from "../public/images/logo.svg";
-
+import personImageUrl from "../public/images/person.svg";
+import scheduleImageUrl from "../public/images/schedule.svg";
 /**
  * @description client 내비게이션 바 컴포넌트입니다.
  */
@@ -19,6 +22,37 @@ const Navbar = async () => {
 
   const showConvertToMentorPageButton =
     manageRole === "ADMIN" || studyRole === "MENTOR";
+
+  // const myStudyList = await studyHistoryApi.getMyAppliedStudyList();
+  const navMenu = [
+    // {
+    //   href: "/my-study",
+    //   imageUrl: homeImageUrl,
+    //   alt: "home-icon",
+    //   name: "나의 스터디",
+    //   items: myStudyList?.map((studyItem) => {
+    //     const { studyId, title } = studyItem.study;
+    //     return {
+    //       href: `${studyId}`,
+    //       imageUrl: folderImageUrl,
+    //       alt: title,
+    //       name: title,
+    //     };
+    //   }),
+    // },
+    {
+      href: "/study-apply",
+      imageUrl: scheduleImageUrl,
+      alt: "schedule-icon",
+      name: "수강 신청",
+    },
+    {
+      href: "/my-page",
+      imageUrl: personImageUrl,
+      alt: "person-icon",
+      name: "마이 페이지",
+    },
+  ];
 
   return (
     <aside aria-label="client navigation bar" className={navbarContainerStyle}>
@@ -47,7 +81,7 @@ const Navbar = async () => {
               alt={menu.alt}
               href={menu.href}
               imageUrl={menu.imageUrl}
-              items={menu.items}
+              // items={menu.items}
               key={menu.name}
               name={menu.name}
             />

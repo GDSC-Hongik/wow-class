@@ -10,16 +10,16 @@ import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: {
-    default: "와우클래스: 멘토 | GDSC Hongik 스터디 서비스",
+    default: "와우클래스: 멘토 | GDGoC Hongik 스터디 서비스",
     template: "%s | 와우클래스 멘토",
   },
-  description: "와우클래스는 GDSC Hongik이 제공하는 스터디 관리 플랫폼입니다.",
+  description: "와우클래스는 GDGoC Hongik이 제공하는 스터디 관리 플랫폼입니다.",
   openGraph: {
-    title: "와우클래스: 멘토 | GDSC Hongik 스터디 서비스",
+    title: "와우클래스: 멘토 | GDGoC Hongik 스터디 서비스",
     description:
-      "와우클래스는 GDSC Hongik이 제공하는 스터디 관리 플랫폼입니다.",
+      "와우클래스는 GDGoC Hongik이 제공하는 스터디 관리 플랫폼입니다.",
     images: ["/images/og-image.png"],
-    siteName: "와우클래스: 멘토 | GDSC Hongik 스터디 서비스",
+    siteName: "와우클래스: 멘토 | GDGoC Hongik 스터디 서비스",
     type: "website",
   },
   robots: {
