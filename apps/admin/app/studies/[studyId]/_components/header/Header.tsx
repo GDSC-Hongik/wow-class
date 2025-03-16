@@ -18,16 +18,27 @@ import { DownArrow } from "wowds-icons";
 import TextButton from "wowds-ui/TextButton";
 
 const Header = ({
-  studyBasicInfo,
-  studySessionsInfo,
+  studyId,
   isCompact = false,
 }: {
-  studyBasicInfo?: StudyApiResponseV2Dto;
-  studySessionsInfo?: StudySessionApiResponseV2Dto[];
+  studyId: string;
   isCompact?: boolean;
 }) => {
   const [showIntro, setShowIntro] = useState(true);
+  const [studyInfo, setStudyInfo] = useState<
+    StudyBasicInfoApiResponseDto | undefined
+  >(undefined);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (studyId) {
+        const data = await studyApi.getStudyBasicInfo(parseInt(studyId, 10));
+        if (data) setStudyInfo(data);
+      }
+    };
+
+    fetchData();
+  }, [studyId]);
   const handleClickShowIntro = () => {
     setShowIntro((prev) => !prev);
   };
@@ -39,7 +50,7 @@ const Header = ({
     ? "Collapse introduction icon"
     : "Expand introduction icon";
 
-  if (!studyBasicInfo) return null;
+  if (!studyInfo) return null;
   const {
     title,
     semester,
@@ -48,13 +59,12 @@ const Header = ({
     dayOfWeek,
     startTime,
     endTime,
-    totalRound,
     description,
     descriptionNotionLink,
-  } = studyBasicInfo;
+  } = studyInfo;
 
   const studySchedule = () => {
-    if (startTime && endDate) {
+    if (startTime) {
       const { hour: startHour, minute: startMinute } = startTime;
       const { hour: endHour, minute: endMinute } = endTime;
       return `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
@@ -64,12 +74,12 @@ const Header = ({
     }
   };
 
-  const { month: startMonth, day: startDay } = parseISODate(startDate);
-  const { month: endMonth, day: endDay } = parseISODate(endDate);
+  // const { month: startMonth, day: startDay } = parseISODate(startDate);
+  // const { month: endMonth, day: endDay } = parseISODate(endDate);
   const studySemester = `${semester.academicYear}-${semester.semesterType === "FIRST" ? 1 : 2}`;
 
-  const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
-  ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
+  // const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
+  // ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
   return (
     <header>
@@ -110,7 +120,11 @@ const Header = ({
           </Text>
           <ItemSeparator height={4} width={4} />
           <Text as="h5" color="sub">
-            {type}
+            {type === "ASSIGNMENT"
+              ? "과제 스터디"
+              : type === "ONLINE"
+                ? "온라인 스터디"
+                : "오프라인 스터디"}
           </Text>
         </Flex>
       </section>
@@ -132,7 +146,7 @@ const Header = ({
                   </Flex>
                 )}
                 <Text as="h5" color="sub">
-                  {studyPeriod}
+                  {/* {studyPeriod} */}
                 </Text>
               </Flex>
             </Flex>
@@ -143,6 +157,7 @@ const Header = ({
               <Text as="h2" typo="h2">
                 스터디 소개
               </Text>
+
               <Flex alignItems="center" gap="sm">
                 <Link
                   href={descriptionNotionLink || ""}

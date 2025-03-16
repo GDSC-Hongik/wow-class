@@ -14,29 +14,24 @@ import CurriculumList from "./_components/curriculum/CurriculumList";
 import Header from "./_components/header/Header";
 import StudyStatics from "./_components/statics/StudyStatics";
 
-export const generateMetadata = async ({
-  params: { studyId },
-}: {
-  params: { studyId: string };
-}) => {
-  const study = await studyApi.getStudyBasicInfo(+studyId);
-  return {
-    title: study ? study.title : "스터디",
-  };
-};
+// export const generateMetadata = async ({
+//   params: { studyId },
+// }: {
+//   params: { studyId: string };
+// }) => {
+//   const study = await studyApi.getStudyBasicInfo(+studyId);
+//   return {
+//     title: study ? study.title : "스터디",
+//   };
+// };
 
 const StudyPage = async ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
-  const myStudyList = await studyApiV2.getMyStudyList();
-  const study = myStudyList?.find((data) => data.study.studyId === +studyId);
-
-  const studyBasicInfo = study?.study;
-  const studySessionsInfo = study?.studySessions;
 
   return (
     <Flex direction="column" gap="64px">
       <div className={HeaderWrapper}>
-        <Header studyBasicInfo={studyBasicInfo} />
+        <Header studyId={studyId} />
         <Link
           href={`${routerPath.studyDetailInfo.href}/${studyId}`}
           style={{ ...EditIconStyle, position: "absolute" }}
@@ -44,15 +39,15 @@ const StudyPage = async ({ params }: { params: { studyId: string } }) => {
           <Edit height={24} stroke="black" width={24} />
         </Link>
       </div>
-      <AttendanceList studyId={studyId} />
+      {/* <AttendanceList studyId={studyId} /> */}
       {/* <Divider style={MinHeightFullDividerStyle} /> */}
       {/* <AssignmentList studyId={studyId} /> */}
-      <Divider style={MinHeightFullDividerStyle} />
+      {/* <Divider style={MinHeightFullDividerStyle} />
       <StudyAnnouncement studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
       <CurriculumList studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
-      <StudyStatics studyId={studyId} />
+      <StudyStatics studyId={studyId} /> */}
     </Flex>
   );
 };

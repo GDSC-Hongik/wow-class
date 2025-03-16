@@ -42,7 +42,7 @@ export const studyApi = {
   },
   getStudyBasicInfo: async (studyId: number) => {
     const response = await fetcher.get<StudyBasicInfoApiResponseDto>(
-      `/common/studies/${studyId}`,
+      `/v2/common/studies/${studyId}`,
       {
         next: { tags: [tags.studyBasicInfo] },
         cache: "force-cache",
