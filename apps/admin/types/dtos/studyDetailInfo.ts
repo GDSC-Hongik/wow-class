@@ -4,7 +4,8 @@ import type { TimeType } from "types/entities/time";
 
 export interface StudySession {
   studySessionId: number;
-  title?: string;
+  lessonTitle?: string;
+  assignmentTitle?: string;
   description?: string;
   lessonPeriod?: PeriodType;
   assignmentDescriptionLink: string;
