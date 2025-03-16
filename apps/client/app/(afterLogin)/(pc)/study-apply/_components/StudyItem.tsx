@@ -119,7 +119,7 @@ const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
         )}
         {isCancelable && (
           <Link href={`${routePath["study-cancellation-modal"]}/${studyId}`}>
-            <Button size="sm" style={tagButtonStyle} variant="solid">
+            <Button size="sm" style={tagButtonStyle} variant="sub">
               신청 취소
             </Button>
           </Link>
