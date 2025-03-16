@@ -20,6 +20,7 @@ const StudyList = () => {
   if (studyList?.length === 0) {
     return <EmptyStudyList />;
   }
+
   return (
     <section aria-label="study-list" className={SectionStyle}>
       {studyList?.map(
