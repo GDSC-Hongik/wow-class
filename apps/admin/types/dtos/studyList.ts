@@ -30,13 +30,14 @@ export interface StudyListApiResponseDto {
     {
       studySessionId: number;
       position: number;
-      title: string;
+      lessonTitle: string;
       description: string;
       lessonAttendanceNumber: string;
       lessonPeriod: {
         startDate: string;
         endDate: string;
       };
+      assignmentTitle?: string;
       assignmentDescriptionLink: string;
       assignmentPeriod: {
         startDate: string;

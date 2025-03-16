@@ -74,10 +74,11 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
             ...(isAssignmentStudy
               ? {}
               : {
-                  title: session.title || "",
+                  lessonTitle: session.lessonTitle || "",
                   description: session.description || "",
                   lessonPeriod: session.lessonPeriod || null,
                 }),
+            assignmentTitle: session.assignmentTitle || "",
             assignmentDescriptionLink: session.assignmentDescriptionLink || "",
             assignmentPeriod: session.assignmentPeriod || null,
           })) || [],

@@ -16,7 +16,8 @@ export const PeriodSchema = z.object({
 
 export const StudySessionSchema = z.object({
   studySessionId: z.number(),
-  title: z.string().optional(),
+  lessonTitle: z.string().optional(),
+  assignmentTitle: z.string().min(1),
   description: z.string().optional(),
   lessonPeriod: PeriodSchema.optional(),
   assignmentDescriptionLink: z.string().min(1, "과제 링크를 입력하세요"),

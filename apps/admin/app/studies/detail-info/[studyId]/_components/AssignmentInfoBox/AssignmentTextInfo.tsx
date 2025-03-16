@@ -7,12 +7,10 @@ const AssignemntTextInfo = ({ index }: { index: number }) => {
   return (
     <>
       <div className={CurriculumTitleStyle}>
-        {/* <Text color="sub" typo="body1">
-          과제 제목
-        </Text>
+        <Text color="sub">과제 제목</Text>
         <textarea
           maxLength={100}
-          placeholder={'ex) HTTP 통신 코드 작성하기'}
+          placeholder="ex) HTTP 통신 코드 작성하기"
           {...register(`studySessions.${index}.assignmentTitle`, {
             maxLength: 100,
           })}
@@ -23,7 +21,7 @@ const AssignemntTextInfo = ({ index }: { index: number }) => {
           typo="label3"
         >
           {watch(`studySessions.${index}.assignmentTitle`)?.length}/100
-        </Text> */}
+        </Text>
       </div>
       <div className={CurriculumDescriptionStyle}>
         <Text className={textStyle} color="sub" typo="body1">
@@ -62,7 +60,7 @@ const CurriculumTitleStyle = css({
     position: "absolute",
     top: "8px",
     height: "26px",
-    left: "45px",
+    left: "90px",
     resize: "none",
     _focus: {
       outline: "none",
