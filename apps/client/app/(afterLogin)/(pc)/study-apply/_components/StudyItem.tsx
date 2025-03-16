@@ -61,14 +61,6 @@ const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
   const isCancelable = isApplicableDate && isAppliedStudy;
   const isNotApplicable = !isApplicable && !isCancelable;
 
-  console.log(
-    applicationStartDateString,
-    applicationEndDateString,
-    isApplicableDate,
-    appliedStudyIds,
-    isAppliedStudy,
-    "check"
-  );
   return (
     <Table className={tableStyle}>
       <Flex direction="column" gap="xxs" justifyContent="center" width={334}>
