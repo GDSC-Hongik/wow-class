@@ -3,7 +3,12 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import { padWithZero, parseISODate } from "@wow-class/utils";
+import {
+  dateToFormatString,
+  getStudyEndDate,
+  padWithZero,
+  parseISODate,
+} from "@wow-class/utils";
 import { studyApi } from "apis/study/studyApi";
 import ItemSeparator from "components/ItemSeparator";
 import { dayToKorean } from "constants/dayToKorean";
@@ -61,6 +66,8 @@ const Header = ({
     endTime,
     description,
     descriptionNotionLink,
+    openingDate,
+    totalRound,
   } = studyInfo;
 
   const studySchedule = () => {
@@ -74,12 +81,15 @@ const Header = ({
     }
   };
 
-  // const { month: startMonth, day: startDay } = parseISODate(startDate);
-  // const { month: endMonth, day: endDay } = parseISODate(endDate);
+  const { month: startMonth, day: startDay } = parseISODate(openingDate);
+  console.log(openingDate);
+
+  const { month: endMonth, day: endDay } = parseISODate(
+    dateToFormatString(getStudyEndDate(new Date(openingDate), totalRound))
+  );
   const studySemester = `${semester.academicYear}-${semester.semesterType === "FIRST" ? 1 : 2}`;
 
-  // const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
-  // ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
+  const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
   return (
     <header>
@@ -146,7 +156,7 @@ const Header = ({
                   </Flex>
                 )}
                 <Text as="h5" color="sub">
-                  {/* {studyPeriod} */}
+                  {studyPeriod}
                 </Text>
               </Flex>
             </Flex>
