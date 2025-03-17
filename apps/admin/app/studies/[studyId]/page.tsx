@@ -4,6 +4,7 @@ import { studyApi } from "apis/study/studyApi";
 import { studyApiV2 } from "apis/study/v2/studyApi";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
+import isAdmin from "utils/isAdmin";
 import { Edit } from "wowds-icons";
 import Divider from "wowds-ui/Divider";
 
@@ -27,7 +28,11 @@ import StudyStatics from "./_components/statics/StudyStatics";
 
 const StudyPage = async ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
-
+  const adminStatus = await isAdmin();
+  const data = adminStatus
+    ? await studyApiV2.getStudyList()
+    : await studyApiV2.getMyStudyList();
+  const myStudy = data?.filter((study) => study.study.studyId === +studyId)[0];
   return (
     <Flex direction="column" gap="64px">
       <div className={HeaderWrapper}>
@@ -39,7 +44,7 @@ const StudyPage = async ({ params }: { params: { studyId: string } }) => {
           <Edit height={24} stroke="black" width={24} />
         </Link>
       </div>
-      {/* <AttendanceList studyId={studyId} /> */}
+      <AttendanceList studySessions={myStudy?.studySessions} />
       {/* <Divider style={MinHeightFullDividerStyle} /> */}
       {/* <AssignmentList studyId={studyId} /> */}
       {/* <Divider style={MinHeightFullDividerStyle} />
