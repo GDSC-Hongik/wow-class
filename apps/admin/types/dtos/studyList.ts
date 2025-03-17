@@ -1,18 +1,49 @@
 import type { DayOfWeekType } from "types/entities/dayofweek";
-import type { StudyKoreanType, StudySemesterType } from "types/entities/study";
+import type { StudySemesterType, StudyType } from "types/entities/study";
 import type { TimeType } from "types/entities/time";
 
 export interface StudyListApiResponseDto {
-  studyId: number;
-  academicYear: number;
-  semesterType: StudySemesterType;
-  title: string;
-  studyType: StudyKoreanType;
-  notionLink: string;
-  introduction: string;
-  mentorName: string;
-  dayOfWeek: DayOfWeekType;
-  startTime: TimeType;
-  totalWeek: number;
-  openingDate: string;
+  study: {
+    studyId: number;
+    type: StudyType;
+    title: string;
+    description?: string;
+    descriptionNotionLink?: string;
+    semester: {
+      academicYear: number;
+      semesterType: StudySemesterType;
+    };
+    totalRound: number;
+    dayOfWeek: DayOfWeekType;
+    startTime: TimeType;
+    endTime: TimeType;
+    applicationPeriod: {
+      startDate: string;
+      endDate: string;
+    };
+    discordChannelId: string;
+    discordRoleId: string;
+    mentorId: number;
+    mentorName: string;
+  };
+  studySessions: [
+    {
+      studySessionId: number;
+      position: number;
+      lessonTitle: string;
+      description: string;
+      lessonAttendanceNumber: string;
+      lessonPeriod: {
+        startDate: string;
+        endDate: string;
+      };
+      assignmentTitle?: string;
+      assignmentDescriptionLink: string;
+      assignmentPeriod: {
+        startDate: string;
+        endDate: string;
+      };
+      studyId: number;
+    },
+  ];
 }

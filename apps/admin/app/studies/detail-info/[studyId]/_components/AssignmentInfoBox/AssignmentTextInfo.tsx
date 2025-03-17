@@ -2,17 +2,16 @@ import { css } from "@styled-system/css";
 import { Text } from "@wow-class/ui";
 import { useFormContext } from "react-hook-form";
 
-const StudyTextInfo = ({ index }: { index: number }) => {
+const AssignemntTextInfo = ({ index }: { index: number }) => {
   const { register, watch } = useFormContext();
   return (
     <>
       <div className={CurriculumTitleStyle}>
-        <Text color="sub" typo="body1">
-          제목
-        </Text>
+        <Text color="sub">과제 제목</Text>
         <textarea
           maxLength={100}
-          {...register(`studySessions.${index}.lessonTitle`, {
+          placeholder="ex) HTTP 통신 코드 작성하기"
+          {...register(`studySessions.${index}.assignmentTitle`, {
             maxLength: 100,
           })}
         />
@@ -21,32 +20,30 @@ const StudyTextInfo = ({ index }: { index: number }) => {
           style={{ position: "absolute", right: "8px" }}
           typo="label3"
         >
-          {watch(`studySessions.${index}.lessonTitle`)?.length}/100
+          {watch(`studySessions.${index}.assignmentTitle`)?.length}/100
         </Text>
       </div>
       <div className={CurriculumDescriptionStyle}>
-        <Text color="sub" typo="body1">
-          설명
+        <Text className={textStyle} color="sub" typo="body1">
+          과제 명세 링크
         </Text>
         <textarea
           maxLength={100}
-          {...register(`studySessions.${index}.description`, {
+          placeholder="http://example.com"
+          {...register(`studySessions.${index}.assignmentDescriptionLink`, {
             maxLength: 100,
           })}
         />
-        <Text
-          color="sub"
-          style={{ position: "absolute", right: "8px" }}
-          typo="label3"
-        >
-          {watch(`studySessions.${index}.description`)?.length}/100
-        </Text>
       </div>
     </>
   );
 };
 
-export default StudyTextInfo;
+export default AssignemntTextInfo;
+
+const textStyle = css({
+  whiteSpace: "nowrap",
+});
 
 const CurriculumTitleStyle = css({
   position: "relative",
@@ -63,7 +60,7 @@ const CurriculumTitleStyle = css({
     position: "absolute",
     top: "8px",
     height: "26px",
-    left: "45px",
+    left: "90px",
     resize: "none",
     _focus: {
       outline: "none",
@@ -73,7 +70,7 @@ const CurriculumTitleStyle = css({
 });
 
 const CurriculumDescriptionStyle = css({
-  height: "120px",
+  height: "42px",
   position: "relative",
   width: "100%",
   display: "flex",
@@ -82,7 +79,7 @@ const CurriculumDescriptionStyle = css({
   padding: "xs",
   gap: "xs",
   "& textarea": {
-    height: "110px",
+    height: "42px",
     textAlign: "start",
     minWidth: "80%",
     resize: "none",

@@ -28,7 +28,8 @@ const Navbar = async () => {
       imageUrl: homeImageUrl,
       alt: "home-icon",
       name: "개설된 스터디",
-      items: studyList?.map(({ studyId, title }) => {
+      items: studyList?.map((studyItem) => {
+        const { studyId, title } = studyItem.study;
         return {
           href: `studies/${studyId}`,
           imageUrl: folderImageUrl,
