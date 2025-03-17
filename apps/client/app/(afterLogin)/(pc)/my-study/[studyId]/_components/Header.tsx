@@ -1,23 +1,33 @@
+"use client";
+
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero } from "@wow-class/utils";
-import { myStudyApi } from "apis/myStudyApi";
 import { dayToKorean } from "constants/dayToKorean";
 import { studyKoreanMap } from "constants/studyKoreanMap";
+import useFetchBasicStudyInfoData from "hooks/useFetchBasicStudyInfoData";
+import { useAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
-import type { ComponentProps } from "react";
+import { type ComponentProps, useEffect } from "react";
 import type { StudyType } from "types/entities/common/study";
 import { space } from "wowds-tokens";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
+import { studyTypeAtom } from "../_contexts/atoms";
+
 interface HeaderProps {
   studyId: number;
 }
-const Header = async ({ studyId }: HeaderProps) => {
-  const basicStudyInfo = await myStudyApi.getBasicStudyInfo(studyId);
+const Header = ({ studyId }: HeaderProps) => {
+  const { basicStudyInfo } = useFetchBasicStudyInfoData(studyId);
+  const [_, setStudyType] = useAtom(studyTypeAtom);
+
+  useEffect(() => {
+    setStudyType(basicStudyInfo?.type ?? "ONLINE");
+  });
 
   if (!basicStudyInfo) {
     return null;

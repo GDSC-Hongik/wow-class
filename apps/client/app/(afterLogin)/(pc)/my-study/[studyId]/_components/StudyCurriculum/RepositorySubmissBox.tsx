@@ -86,15 +86,17 @@ export const RepositorySubmissionBox = ({
 
   return (
     <Flex gap="50px">
-      <Text typo="body1">레포지토리</Text>
+      <Text style={textStyle} typo="body1">
+        레포지토리
+      </Text>
       <div style={{ width: "100%" }}>
         <Box
           style={boxStyle}
           variant="text"
           text={
             <Flex direction="column" width="100%">
-              <Flex alignItems="center" gap="xs">
-                <Flex flexDirection="column" justifyContent="space-between">
+              <Flex alignItems="center" justifyContent="space-between">
+                <Flex flexDirection="column" gap="xs">
                   <Text as="h2" typo="h2">
                     과제 제출을 위한 레포지토리 URL 입력
                   </Text>
@@ -164,6 +166,9 @@ export const RepositorySubmissionBox = ({
     </Flex>
   );
 };
+const textStyle = {
+  whiteSpace: "nowrap",
+};
 
 const overflowTextStyle = css({
   overflow: "hidden",
@@ -181,15 +186,6 @@ const urlBoxStyle = css({
   width: "436px",
 });
 
-const modalUrlBoxStyle = css({
-  backgroundColor: "backgroundAlternative",
-  borderRadius: "5px",
-  color: "sub",
-  paddingX: "lg",
-  paddingY: "sm",
-  textStyle: "h2",
-  width: "375px",
-});
 const boxStyle = {
   width: "100%",
   height: "fit-content",

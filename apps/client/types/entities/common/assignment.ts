@@ -6,3 +6,8 @@ export type AssignmentSubmissionFailureType =
   | "WORD_COUNT_INSUFFICIENT"
   | "LOCATION_UNIDENTIFIABLE"
   | "UNKNOWN";
+
+export type AssignmentHistoryStatusType =
+  | "BEFORE_SUBMISSION"
+  | "SUCCEEDED"
+  | "FAILED";
