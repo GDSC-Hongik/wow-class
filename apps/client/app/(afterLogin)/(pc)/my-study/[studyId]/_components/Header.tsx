@@ -1,10 +1,10 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import { padWithZero, parseISODate } from "@wow-class/utils";
+import { padWithZero } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import { dayToKorean } from "constants/dayToKorean";
-import useFetchBasicStudyInfoData from "hooks/useFetchBasicStudyInfoData";
+import { studyKoreanMap } from "constants/studyKoreanMap";
 import Image from "next/image";
 import Link from "next/link";
 import type { ComponentProps } from "react";
@@ -25,29 +25,22 @@ const Header = async ({ studyId }: HeaderProps) => {
 
   const {
     title,
-    academicYear,
-    semester,
+    semester: { academicYear, semesterType },
     mentorName,
-    studyType,
+    type: studyType,
     dayOfWeek,
     startTime,
     endTime,
-    totalWeek,
-    period: { startDate, endDate },
-    introduction,
-    notionLink,
+    totalRound,
+    description,
+    descriptionNotionLink,
   } = basicStudyInfo;
 
-  const { month: startMonth, day: startDay } = parseISODate(startDate);
-  const { month: endMonth, day: endDay } = parseISODate(endDate);
-
-  const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
+  const studySemester = `${academicYear}-${semesterType === "FIRST" ? 1 : 2}`;
   const studySchedule =
     startTime && endTime
       ? `${dayToKorean[dayOfWeek]} ${startTime.hour}:${padWithZero(startTime.minute)}-${endTime.hour}:${padWithZero(endTime.minute)}`
       : "";
-  const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
-  ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
   return (
     <header className={headerStyle}>
@@ -57,16 +50,16 @@ const Header = async ({ studyId }: HeaderProps) => {
             {title}
           </Text>
           <Tag color={curriculumColors[studyType] ?? "green"} variant="solid1">
-            {studyType}
+            {studyKoreanMap[studyType]}
           </Tag>
         </Flex>
         <Flex alignItems="center" gap="sm">
           <Text as="h5" color="sub">
-            {introduction}
+            {description}
           </Text>
           <Link
             className={introduceLinkStyle}
-            href={notionLink || ""}
+            href={descriptionNotionLink || ""}
             role="button"
             tabIndex={0}
             target="_blank"
@@ -101,7 +94,7 @@ const Header = async ({ studyId }: HeaderProps) => {
       <section id="intro-section">
         <section aria-labelledby="study-schedule-heading">
           <Space height={24} />
-          <Flex direction="column" gap="4">
+          <Flex gap="4">
             <Text as="h5">일정</Text>
             <Flex gap="xs">
               <Text as="h5" color="sub">
@@ -109,7 +102,7 @@ const Header = async ({ studyId }: HeaderProps) => {
               </Text>
               <ItemSeparator />
               <Text as="h5" color="sub">
-                {totalWeek}회차
+                {totalRound}회차
               </Text>
             </Flex>
           </Flex>
@@ -133,10 +126,6 @@ const curriculumColors: Record<StudyType, ComponentProps<typeof Tag>["color"]> =
 
 const headerStyle = css({
   minHeight: "65px",
-});
-
-const downArrowIconStyle = css({
-  cursor: "pointer",
 });
 
 const introduceLinkStyle = css({

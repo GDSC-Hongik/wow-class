@@ -1,3 +1,4 @@
+import { Space } from "@wow-class/ui";
 import Divider from "wowds-ui/Divider";
 
 import Header from "./_components/Header";
@@ -7,6 +8,7 @@ const StudyDetailPage = ({ params }: { params: { studyId: number } }) => {
   return (
     <>
       <Header studyId={studyId} />
+      <Space height={40} />
       <Divider />
     </>
   );
