@@ -7,13 +7,13 @@ import { studyApi } from "apis/study/studyApi";
 import { tags } from "constants/tags";
 import useResizeTextarea from "hooks/useResizeTextarea";
 import { useRef, useState } from "react";
-import type { StudyAnnouncementType } from "types/entities/study";
+import type { CreateStudyAnnouncementType } from "types/entities/study";
 import { revalidateTagByName } from "utils/revalidateTagByName";
 import Button from "wowds-ui/Button";
 
 const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
   const [studyAnnouncement, setStudyAnnouncement] =
-    useState<StudyAnnouncementType>({
+    useState<CreateStudyAnnouncementType>({
       studyId: parseInt(studyId, 10),
       title: "",
       link: "",

@@ -109,7 +109,7 @@ export const studyApi = {
   },
   publishStudyAnnouncement: async (announcement: StudyAnnouncementType) => {
     const response = await fetcher.post(
-      `v2/mentor/study-announcements`,
+      `/v2/mentor/study-announcements`,
       announcement
     );
     return { success: response.ok };
@@ -129,14 +129,14 @@ export const studyApi = {
     announcement: StudyAnnouncementType
   ) => {
     const response = await fetcher.put(
-      `/mentor/studies/announcements/${studyAnnouncementId}`,
+      `/v2/mentor/study-announcements/${studyAnnouncementId}`,
       announcement
     );
     return { success: response.ok };
   },
   deleteStudyAnnouncement: async (studyAnnouncementId: number) => {
     const response = await fetcher.delete(
-      `/mentor/studies/announcements/${studyAnnouncementId}`
+      `/v2/mentor/study-announcements/${studyAnnouncementId}`
     );
     return { success: response.ok };
   },

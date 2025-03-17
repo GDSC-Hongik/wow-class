@@ -22,8 +22,13 @@ export type StudyCurriculumType = {
   status?: StudyAssignmentStatusType;
 };
 
-export type StudyAnnouncementType = {
+export type CreateStudyAnnouncementType = {
   studyId: number;
+  title: string;
+  link: string;
+};
+
+export type StudyAnnouncementType = {
   title: string;
   link: string;
 };
