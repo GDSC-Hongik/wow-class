@@ -38,7 +38,7 @@ export interface AssignmentHistory {
   studySessionId: number;
   memberId: number;
 }
-interface SessionInfo {
+export interface SessionInfo {
   session: StudySession;
   attendanceStatus: AttendanceStatusType;
   assignmentHistoryStatus: AssignmentHistoryStatusType;
