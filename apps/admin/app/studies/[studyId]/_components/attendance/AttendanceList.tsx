@@ -1,6 +1,6 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import type { StudySessionApiResponseV2Dto } from "types/dtos/v2/myStudyList";
+import type { StudySessionApiResponseV2Dto } from "types/dtos/studyList";
 
 import AttendanceItem from "./AttendanceItem";
 
