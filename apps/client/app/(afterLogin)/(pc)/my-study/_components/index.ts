@@ -1,6 +1,6 @@
 export { default as AssignmentStatusBox } from "./AssignmentStatusBox";
 export { default as AttendanceStatusBox } from "./AttendanceStatusBox";
-export { default as DailyTaskCarousel } from "./DailyTaskCarousel";
+// export { default as DailyTaskCarousel } from "../[studyId]/_components/DailyTaskCarousel";
 export { default as DailyTaskItem } from "./DailyTaskItem";
 export { default as DailyTasks } from "./DailyTasks";
 export { default as EmptyStudy } from "./EmptyStudy";
