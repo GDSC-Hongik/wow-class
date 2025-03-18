@@ -9,10 +9,7 @@ import type {
 import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
 import type { StudyStatisticsApiResponseDto } from "types/dtos/studyStatistics";
-import type {
-  PaginatedStudyStudentResponseDto,
-  StudyStudentApiResponseDto,
-} from "types/dtos/studyStudent";
+import type { PaginatedStudyStudentResponseDto } from "types/dtos/studyStudent";
 import type { PageableType } from "types/entities/page";
 import type { StudyAnnouncementType } from "types/entities/study";
 
@@ -38,6 +35,10 @@ export const studyApi = {
       }
     );
     return response.data;
+  },
+  deleteStudy: async (studyId: number) => {
+    const response = await fetcher.delete(`/v2/admin/studies/${studyId}`);
+    return { success: response.ok };
   },
   getStudyBasicInfo: async (studyId: number) => {
     const response = await fetcher.get<StudyBasicInfoApiResponseDto>(

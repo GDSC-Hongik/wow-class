@@ -12,7 +12,7 @@ const StudyTextInfo = ({ index }: { index: number }) => {
         </Text>
         <textarea
           maxLength={100}
-          {...register(`studyCurriculums.${index}.title`, {
+          {...register(`studySessions.${index}.lessonTitle`, {
             maxLength: 100,
           })}
         />
@@ -21,7 +21,7 @@ const StudyTextInfo = ({ index }: { index: number }) => {
           style={{ position: "absolute", right: "8px" }}
           typo="label3"
         >
-          {watch(`studyCurriculums.${index}.title`)?.length}/100
+          {watch(`studySessions.${index}.lessonTitle`)?.length}/100
         </Text>
       </div>
       <div className={CurriculumDescriptionStyle}>
@@ -30,7 +30,7 @@ const StudyTextInfo = ({ index }: { index: number }) => {
         </Text>
         <textarea
           maxLength={100}
-          {...register(`studyCurriculums.${index}.description`, {
+          {...register(`studySessions.${index}.description`, {
             maxLength: 100,
           })}
         />
@@ -39,7 +39,7 @@ const StudyTextInfo = ({ index }: { index: number }) => {
           style={{ position: "absolute", right: "8px" }}
           typo="label3"
         >
-          {watch(`studyCurriculums.${index}.description`)?.length}/100
+          {watch(`studySessions.${index}.description`)?.length}/100
         </Text>
       </div>
     </>

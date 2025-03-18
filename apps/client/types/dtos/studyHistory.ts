@@ -5,6 +5,27 @@ import type {
 } from "types/entities/common/assignment";
 import type { AchievmentType, StudyType } from "types/entities/common/study";
 
+import type { StudyList } from "./applyStudy";
+
+interface StudyHistory {
+  studyHistoryId: number;
+  status: AssignmentStatusType;
+  memberId: number;
+  studyId: number;
+}
+interface Achievement {
+  studyAchievementId: number;
+  type: AchievmentType;
+  studentId: number;
+  studyId: number;
+}
+
+export interface MyAppliedStudyListApiResponseDto {
+  studyHistory: StudyHistory;
+  study: StudyList;
+  achievements: Achievement[];
+}
+
 export interface AssignmentHistoryDto {
   assignmentHistoryId: number;
   status: AssignmentStatusType;

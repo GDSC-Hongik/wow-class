@@ -22,7 +22,8 @@ const useSubmitStudyDetailInfo = (
       setIsSuccess(true);
       revalidateTagByName(tags.curriculums);
       const timerId = setTimeout(() => {
-        router.push(`${routerPath.root.href}/${studyId}`);
+        //TODO: 스터디 작성 페이지로 라우팅 되도록 수정
+        router.push(`${routerPath.root.href}`);
       }, 500);
       return () => clearTimeout(timerId);
     } else {

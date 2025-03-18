@@ -23,7 +23,7 @@ const StudyApplication = ({ params }: { params: { studyId: number } }) => {
     const fetchStudyData = async () => {
       const data = await studyApplyApi.getStudyList();
       if (!data) return;
-      const { studyResponses: studyList } = data;
+      const { applicableStudies: studyList } = data;
 
       const selectedStudy = studyList.find(
         (study) => study.studyId === Number(studyId)
@@ -75,8 +75,6 @@ const StudyApplication = ({ params }: { params: { studyId: number } }) => {
               신청하시겠습니까?
             </Text>
             <Space height={22} />
-            <Text color="sub">한 번에 하나의 강의만 수강할 수 있어요.</Text>
-            <Space height={28} />
             <Button onClick={handleClickApplyButton}>수강 신청하기</Button>
           </>
         )}
