@@ -18,7 +18,7 @@ import Button from "wowds-ui/Button";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
-import { studyTypeAtom } from "../../_contexts/atoms";
+import { studyTypeAtom } from "../../../_contexts/atoms";
 interface CurriculumItemProps {
   session: StudySession;
   attendanceStatus: AttendanceStatusType;
