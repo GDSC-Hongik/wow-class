@@ -65,6 +65,7 @@ const AttendanceCheckForm = ({
   const handleAttendanceSuccess = () => {
     setError(false);
     revalidateTagByName(tags.myStudyDetailDailyTask);
+    revalidateTagByName(tags.allStudyTaskList);
   };
 
   const attendanceButtonText = isAttendanceSucceded

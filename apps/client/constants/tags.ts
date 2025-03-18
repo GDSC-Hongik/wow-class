@@ -12,4 +12,5 @@ export const enum tags {
   myAccountInfo = "myAccountInfo",
   myAppliedStudyList = "myAppliedStudyList",
   myStudyDetailDailyTask = "myStudyDetailDailyTask",
+  allStudyTaskList = "allStudyTaskList",
 }

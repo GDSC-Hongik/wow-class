@@ -1,7 +1,7 @@
 import { Space } from "@wow-class/ui";
 import Divider from "wowds-ui/Divider";
 
-import DailyTasks from "./_components/DailyTask/DailyTaskList";
+import DailyTasksContainer from "./_components/DailyTasksContainer";
 import Header from "./_components/Header";
 import Curriculum from "./_components/StudyCurriculum/Curriclum";
 
@@ -13,7 +13,7 @@ const StudyDetailPage = ({ params }: { params: { studyId: number } }) => {
       <Space height={40} />
       <Divider />
       <Space height={40} />
-      <DailyTasks studyId={studyId} />
+      <DailyTasksContainer studyId={studyId} />
       {/* <Curriculum studyId={studyId} /> */}
       <Space height={100} />
     </>

@@ -30,4 +30,15 @@ export const studyDetailApi = {
 
     return response.data;
   },
+  getAllStudyTaskList: async () => {
+    const response = await fetcher.get<StudyDetailTaskDto<DailyTaskType>[]>(
+      `${apiPath.studyDetail}/me/todos`,
+      {
+        next: { tags: [tags.allStudyTaskList] },
+        cache: "no-store",
+      }
+    );
+
+    return response.data;
+  },
 };

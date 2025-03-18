@@ -21,7 +21,7 @@ import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
 
-import { githubLinkAtom } from "../../../_contexts/atoms";
+import { githubLinkAtom } from "@/(afterLogin)/(pc)/my-study/_contexts/atoms";
 
 interface AssignmentBoxButtonsProps {
   assignmentHistory: AssignmentHistory;
@@ -146,6 +146,7 @@ const SecondaryButton = ({
     const response = await studyHistoryApi.submitAssignment(studySessionId);
     if (response.success) {
       await revalidateTagByName(tags.myStudyDetailDailyTask);
+      revalidateTagByName(tags.allStudyTaskList);
       handleSubmissionToast();
     }
   };

@@ -1,6 +1,11 @@
+"use client";
+
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
+import ItemSeperator from "components/ItemSeperator";
 import { assignmentSubmissionMap } from "constants/assignmentSubmissionMap";
+import { routePath } from "constants/routePath";
+import { usePathname } from "next/navigation";
 import type { CSSProperties } from "react";
 import type { StudyDetailTaskDto } from "types/dtos/studyDetail";
 import type { DailyTaskType } from "types/entities/myStudy";
@@ -13,15 +18,21 @@ export const AssignmentBoxTitle = ({
 }) => {
   const { assignmentHistory, studySession, assignmentHistoryStatus } =
     studyDetailTaskInfo;
-  const { position, assignmentTitle } = studySession;
+  const { assignmentTitle } = studySession;
   const { submissionStatus: assignmentSubmissionStatus } = assignmentHistory;
   const { tagColor, tagText } =
     assignmentSubmissionMap[assignmentHistoryStatus];
+  const pathname = usePathname();
 
+  const isMyStudyPage = pathname === routePath["my-study"];
   return (
     <>
       <Text color="primary" typo="label2">
-        {position}회차
+        과제
+      </Text>
+      <ItemSeperator />
+      <Text color="primary" typo="label2">
+        {}
       </Text>
       <Space height={16} />
       <Flex gap="xs">

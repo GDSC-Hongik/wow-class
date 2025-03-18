@@ -1,32 +1,28 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import { myStudyApi } from "apis/myStudyApi";
 import Image from "next/image";
+import type { StudyDetailTaskDto } from "types/dtos/studyDetail";
+import type { DailyTaskType } from "types/entities/myStudy";
 
-import { DailyTaskCarousel, DailyTaskItem } from ".";
+import DailyTaskCarousel from "./DailyTaskCarousel";
+import DailyTaskItem from "./DailyTaskItem";
 
-const DailyTasks = async () => {
-  const myOngoingStudyData = await myStudyApi.getMyOngoingStudyInfo();
-
-  if (!myOngoingStudyData?.studyId) {
-    return null;
-  }
-
-  const dailyTaskData = await myStudyApi.getDailyTaskList(
-    myOngoingStudyData?.studyId
-  );
-
+const DailyTaskList = async ({
+  dailyTask,
+}: {
+  dailyTask: StudyDetailTaskDto<DailyTaskType>[];
+}) => {
   return (
     <section aria-label="daily-tasks">
       <Flex direction="column" gap="xl" position="relative">
         <Text typo="h2">오늘의 할 일</Text>
-        {dailyTaskData?.length ? (
+        {dailyTask?.length ? (
           <DailyTaskCarousel>
-            {dailyTaskData?.map((dailyTask, index) => (
+            {dailyTask?.map((dailyTask, index) => (
               <DailyTaskItem
                 dailyTask={dailyTask}
                 index={index}
-                key={dailyTask.studyDetailId}
+                key={dailyTask.studySession.studySessionId}
               />
             ))}
           </DailyTaskCarousel>
@@ -48,4 +44,4 @@ const DailyTasks = async () => {
   );
 };
 
-export default DailyTasks;
+export default DailyTaskList;
