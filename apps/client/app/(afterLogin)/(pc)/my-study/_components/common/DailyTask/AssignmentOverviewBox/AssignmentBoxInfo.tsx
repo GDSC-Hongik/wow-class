@@ -16,11 +16,7 @@ export const AssignmentBoxInfo = ({
 }) => {
   const { assignmentHistory, studySession, assignmentHistoryStatus, deadLine } =
     studyDetailTaskInfo;
-  const {
-    submissionStatus: assignmentSubmissionStatus,
-    submissionFailureType,
-    submissionLink,
-  } = assignmentHistory;
+  const { submissionFailureType, submissionLink } = assignmentHistory;
 
   const { position } = studySession;
   const { year, month, day, hours, minutes } = parseISODate(deadLine);
@@ -29,20 +25,17 @@ export const AssignmentBoxInfo = ({
     hours
   )}:${padWithZero(minutes)}까지`;
 
-  const isAssignmentSubmissionSuccess =
-    assignmentHistoryStatus === "SUCCEEDED" &&
-    assignmentSubmissionStatus === "SUCCESS";
-  const isAssignmentSubmissionFailure =
-    assignmentSubmissionStatus === "FAILURE";
+  const isAssignmentSubmissionSuccess = assignmentHistoryStatus === "SUCCEEDED";
+  const isAssignmentSubmissionFailure = assignmentHistoryStatus === "FAILED";
 
-  const isNotSubmitted =
+  const isNotSubmittedFailure =
     isAssignmentSubmissionFailure && submissionFailureType === "NOT_SUBMITTED";
 
   return (
     <>
       <Text color="sub">{deadlineText}</Text>
       {(isAssignmentSubmissionSuccess ||
-        (isAssignmentSubmissionFailure && !isNotSubmitted)) && (
+        (isAssignmentSubmissionFailure && !isNotSubmittedFailure)) && (
         <Flex alignItems="center" gap="xs">
           <Text as="div" color="sub">
             제출한 과제 :{" "}

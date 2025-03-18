@@ -16,10 +16,8 @@ export const AssignmentBoxTitle = ({
 }: {
   studyDetailTaskInfo: StudyDetailTaskDto<DailyTaskType>;
 }) => {
-  const { assignmentHistory, studySession, assignmentHistoryStatus } =
-    studyDetailTaskInfo;
+  const { studySession, assignmentHistoryStatus } = studyDetailTaskInfo;
   const { assignmentTitle } = studySession;
-  const { submissionStatus: assignmentSubmissionStatus } = assignmentHistory;
   const { tagColor, tagText } =
     assignmentSubmissionMap[assignmentHistoryStatus];
   const pathname = usePathname();
