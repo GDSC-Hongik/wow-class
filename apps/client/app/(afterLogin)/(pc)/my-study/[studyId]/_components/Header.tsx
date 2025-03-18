@@ -16,7 +16,7 @@ import { space } from "wowds-tokens";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
-import { studyTypeAtom } from "../_contexts/atoms";
+import { studyTypeAtom } from "../../_contexts/atoms";
 
 interface HeaderProps {
   studyId: number;

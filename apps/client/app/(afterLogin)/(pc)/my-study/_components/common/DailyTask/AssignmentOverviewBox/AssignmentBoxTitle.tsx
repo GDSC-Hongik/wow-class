@@ -27,13 +27,19 @@ export const AssignmentBoxTitle = ({
   const isMyStudyPage = pathname === routePath["my-study"];
   return (
     <>
-      <Text color="primary" typo="label2">
-        과제
-      </Text>
-      <ItemSeperator />
-      <Text color="primary" typo="label2">
-        {}
-      </Text>
+      <Flex gap="xs">
+        <Text color="primary" typo="label2">
+          과제
+        </Text>
+        {isMyStudyPage && (
+          <>
+            <ItemSeperator />
+            <Text color="sub" typo="label2">
+              스터디 이름
+            </Text>
+          </>
+        )}
+      </Flex>
       <Space height={16} />
       <Flex gap="xs">
         <Text as="h2" style={textStyle} typo="h2">

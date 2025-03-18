@@ -4,7 +4,10 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import ItemSeperator from "components/ItemSeperator";
 import { attendanceStatusMapV2 } from "constants/attendanceStatusMap";
+import { routePath } from "constants/routePath";
+import { usePathname } from "next/navigation";
 import type { CSSProperties } from "react";
 import type { StudyDetailTaskDto } from "types/dtos/studyDetail";
 import type { DailyTaskType } from "types/entities/myStudy";
@@ -33,7 +36,9 @@ const AttendanceCheckBox = ({
   const attendancePeriod = `${startYear}년 ${startMonth}월 ${startDay}일 00:00 - ${padWithZero(endHours)}:${padWithZero(endMinutes)}까지`;
   const { label: attendanceStatusLabel, color: attendanceStatusColor } =
     attendanceStatusMapV2[attendanceStatus];
+  const pathname = usePathname();
 
+  const isMyStudyPage = pathname === routePath["my-study"];
   return (
     <Box
       style={dailyTaskBoxStyle}
@@ -44,9 +49,19 @@ const AttendanceCheckBox = ({
           justifyContent="space-between"
         >
           <Flex direction="column" gap="16px">
-            <Text as="div" color="primary" typo="label2">
-              출석
-            </Text>
+            <Flex gap="xs">
+              <Text color="primary" typo="label2">
+                출석
+              </Text>
+              {isMyStudyPage && (
+                <>
+                  <ItemSeperator />
+                  <Text color="sub" typo="label2">
+                    스터디 이름
+                  </Text>
+                </>
+              )}
+            </Flex>
             <Flex direction="column" gap="4px">
               <Flex gap="8px">
                 <Text as="h2" typo="h2">
