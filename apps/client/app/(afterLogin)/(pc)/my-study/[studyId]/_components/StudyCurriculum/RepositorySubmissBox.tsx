@@ -15,7 +15,7 @@ import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
 
-import { githubLinkAtom } from "../../_contexts/atoms";
+import { githubLinkAtom } from "../../../_contexts/atoms";
 
 interface RepositorySubmissionBoxProps {
   studyId: number;
