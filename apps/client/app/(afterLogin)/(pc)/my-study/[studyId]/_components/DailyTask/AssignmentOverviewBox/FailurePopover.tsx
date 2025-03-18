@@ -1,6 +1,7 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import Popover from "components/Popover";
+import type { CSSProperties } from "react";
 import type { AssignmentSubmissionFailureType } from "types/entities/common/assignment";
 import { Help as HelpIcon } from "wowds-icons";
 
@@ -50,7 +51,7 @@ export const FailurePopover = ({
               <br />
               제대로 제출한 후에도 계속 글자수가 부족하다고 나온다면,
               <br />
-              GDSC Hongik 카카오톡 채널로 문의해주세요.
+              GDGoC Hongik 카카오톡 채널로 문의해주세요.
             </p>
           )}
           {submissionFailureType === "UNKNOWN" && (
@@ -59,7 +60,7 @@ export const FailurePopover = ({
               <br />
               이름, 학번과 함께 어떤 상황인지
               <br />
-              GDSC Hongik 카카오톡 채널로 전달해주세요.
+              GDGoC Hongik 카카오톡 채널로 전달해주세요.
             </p>
           )}
         </Text>
@@ -68,11 +69,11 @@ export const FailurePopover = ({
   );
 };
 
-const iconStyle = {
+const iconStyle: CSSProperties = {
   cursor: "pointer",
 };
 
-const ulStyle = {
+const ulStyle: CSSProperties = {
   listStyleType: "disc",
   paddingLeft: "15px",
 };

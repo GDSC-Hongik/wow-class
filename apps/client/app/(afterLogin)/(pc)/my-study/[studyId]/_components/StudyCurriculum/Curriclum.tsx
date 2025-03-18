@@ -40,7 +40,6 @@ const Curriculum = async ({ studyId }: { studyId: number }) => {
           </>
         )
       )}
-      <Space height={100} />
     </div>
   );
 };

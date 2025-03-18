@@ -9,7 +9,7 @@ import { getAssignmentGithubFolderName } from "utils/getAssignmentGithubFolderNa
 
 import { FailurePopover } from "./FailurePopover";
 
-export const AssignmentBoxInfo = async ({
+export const AssignmentBoxInfo = ({
   studyDetailTaskInfo,
 }: {
   studyDetailTaskInfo: StudyDetailTaskDto<DailyTaskType>;

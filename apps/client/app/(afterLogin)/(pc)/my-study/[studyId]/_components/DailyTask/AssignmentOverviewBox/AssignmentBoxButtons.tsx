@@ -7,16 +7,13 @@ import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import { useAtom } from "jotai";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { toast } from "react-toastify";
 import type {
   AssignmentHistory,
   StudyDetailTaskDto,
 } from "types/dtos/studyDetail";
-import type {
-  AssignmentHistoryStatusType,
-  AssignmentSubmissionStatusType,
-} from "types/entities/common/assignment";
-import type { PeriodType } from "types/entities/common/period";
+import type { AssignmentHistoryStatusType } from "types/entities/common/assignment";
 import type { DailyTaskType } from "types/entities/myStudy";
 import { isDeadlinePassed } from "utils/isDeadlinePassed";
 import { getNowIsAfterStartDate } from "utils/isValidDate";
@@ -128,19 +125,28 @@ const SecondaryButton = ({
   }
   const { secondaryButtonText } = buttonTextMap[assignmentHistoryStatus];
 
+  const handleSubmissionToast = async () => {
+    const dailyTaskData = await studyDetailApi.getStudyDetailTaskList(studyId);
+    if (!dailyTaskData) return;
+    const currentAssignmentTask = dailyTaskData.find(
+      (task) =>
+        task.studySession.studySessionId === studySessionId &&
+        task.todoType === "ASSIGNMENT"
+    );
+    const currentAssignmentSubmissionStatus =
+      currentAssignmentTask?.assignmentHistory.submissionStatus;
+    if (currentAssignmentSubmissionStatus === "SUCCESS") {
+      toast.success("과제 제출이 완료되었습니다.");
+    } else if (currentAssignmentSubmissionStatus === "FAILURE") {
+      toast.error("과제 제출에 실패했습니다.");
+    }
+  };
+
   const handleClickSubmissionComplete = async () => {
     const response = await studyHistoryApi.submitAssignment(studySessionId);
     if (response.success) {
       await revalidateTagByName(tags.myStudyDetailDailyTask);
-      // const dailyTaskData = await myStudyApi.getStudyDetailTaskList(studyId);
-      // const currentAssignmentTask = dasilyTaskData.find(
-      //   (task) => task.studySession.studySessionId === studySessionId && task.todoType === "ASSIGNMENT");
-      // const currentAssignmentSubmissionStatus = currentAssignmentTask?.assignmentHistory.submissionStatus;
-      // if (currentAssignmentSubmissionStatus === "SUCCESS") {
-      //   toast.success("과제 제출이 완료되었습니다.");
-      // } else if (currentAssignmentSubmissionStatus === "FAILURE") {
-      //   toast.error("과제 제출에 실패했습니다.");
-      // }
+      handleSubmissionToast();
     }
   };
 
@@ -166,7 +172,7 @@ const SecondaryButton = ({
   );
 };
 
-const buttonStyle = {
+const buttonStyle: CSSProperties = {
   maxWidth: "100%",
   height: "fit-content",
 };

@@ -1,6 +1,7 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { assignmentSubmissionMap } from "constants/assignmentSubmissionMap";
+import type { CSSProperties } from "react";
 import type { StudyDetailTaskDto } from "types/dtos/studyDetail";
 import type { DailyTaskType } from "types/entities/myStudy";
 import Tag from "wowds-ui/Tag";
@@ -37,7 +38,7 @@ export const AssignmentBoxTitle = ({
   );
 };
 
-const textStyle = {
+const textStyle: CSSProperties = {
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
   overflow: "hidden",
