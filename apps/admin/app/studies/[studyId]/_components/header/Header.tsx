@@ -12,13 +12,10 @@ import {
 import { studyApi } from "apis/study/studyApi";
 import ItemSeparator from "components/ItemSeparator";
 import { dayToKorean } from "constants/dayToKorean";
+import { studyToKoreanType } from "constants/study";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
-import type {
-  StudyApiResponseV2Dto,
-  StudySessionApiResponseV2Dto,
-} from "types/dtos/v2/myStudyList";
 import { DownArrow } from "wowds-icons";
 import TextButton from "wowds-ui/TextButton";
 
@@ -130,11 +127,7 @@ const Header = ({
           </Text>
           <ItemSeparator height={4} width={4} />
           <Text as="h5" color="sub">
-            {type === "ASSIGNMENT"
-              ? "과제 스터디"
-              : type === "ONLINE"
-                ? "온라인 스터디"
-                : "오프라인 스터디"}
+            {studyToKoreanType[type]}
           </Text>
         </Flex>
       </section>

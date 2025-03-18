@@ -1,7 +1,6 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { studyApi } from "apis/study/studyApi";
-import { studyApiV2 } from "apis/study/v2/studyApi";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
 import isAdmin from "utils/isAdmin";
@@ -15,23 +14,23 @@ import CurriculumList from "./_components/curriculum/CurriculumList";
 import Header from "./_components/header/Header";
 import StudyStatics from "./_components/statics/StudyStatics";
 
-// export const generateMetadata = async ({
-//   params: { studyId },
-// }: {
-//   params: { studyId: string };
-// }) => {
-//   const study = await studyApi.getStudyBasicInfo(+studyId);
-//   return {
-//     title: study ? study.title : "스터디",
-//   };
-// };
+export const generateMetadata = async ({
+  params: { studyId },
+}: {
+  params: { studyId: string };
+}) => {
+  const study = await studyApi.getStudyBasicInfo(+studyId);
+  return {
+    title: study ? study.title : "스터디",
+  };
+};
 
 const StudyPage = async ({ params }: { params: { studyId: string } }) => {
   const { studyId } = params;
   const adminStatus = await isAdmin();
   const data = adminStatus
-    ? await studyApiV2.getStudyList()
-    : await studyApiV2.getMyStudyList();
+    ? await studyApi.getStudyList()
+    : await studyApi.getMyStudyList();
   const myStudy = data?.filter((study) => study.study.studyId === +studyId)[0];
   return (
     <Flex direction="column" gap="64px">

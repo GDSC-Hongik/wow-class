@@ -23,84 +23,84 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
       <CreateStudyAnnouncement studyId={studyId} />
       {!announcementList ? null : (
         <>
-          {announcementList?.map(
-            ({ studyAnnounceId, title, link, createdDate }, index) => {
-              return (
-                <Table
-                  key={`${studyAnnounceId}-${index}`}
-                  style={{ width: "100%" }}
-                >
-                  <Table.Left style={{ flex: "4" }}>
-                    <Flex alignItems="center" width="100%">
-                      <Text
-                        typo="h3"
-                        style={{
-                          flex: "3",
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          maxWidth: "450px",
-                          minWidth: "450px",
-                        }}
+          {announcementList?.map((data, index) => {
+            const { studyAnnounceId, title, link, createdDate } =
+              data.studyAnnouncement;
+            return (
+              <Table
+                key={`${studyAnnounceId}-${index}`}
+                style={{ width: "100%" }}
+              >
+                <Table.Left style={{ flex: "4" }}>
+                  <Flex alignItems="center" width="100%">
+                    <Text
+                      typo="h3"
+                      style={{
+                        flex: "3",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: "450px",
+                        minWidth: "450px",
+                      }}
+                    >
+                      {title}
+                    </Text>
+                    <Flex alignItems="center" flexShrink={0} minWidth="300px">
+                      <Link
+                        className={linkStyle}
+                        href={link}
+                        role="button"
+                        tabIndex={0}
+                        target="_blank"
                       >
-                        {title}
+                        <Image
+                          alt="link-icon"
+                          height={24}
+                          src="/images/link.svg"
+                          width={24}
+                        />
+                        <TextButton
+                          size="lg"
+                          style={textButtonStyle}
+                          text="공지 링크 바로가기"
+                        />
+                      </Link>
+                      <Text style={{ flex: "1" }} typo="body1">
+                        {createdDate.replaceAll("-", ".")}
                       </Text>
-                      <Flex alignItems="center" flexShrink={0} minWidth="300px">
-                        <Link
-                          className={linkStyle}
-                          href={link}
-                          role="button"
-                          tabIndex={0}
-                          target="_blank"
-                        >
-                          <Image
-                            alt="link-icon"
-                            height={24}
-                            src="/images/link.svg"
-                            width={24}
-                          />
-                          <TextButton
-                            size="lg"
-                            style={textButtonStyle}
-                            text="공지 링크 바로가기"
-                          />
-                        </Link>
-                        <Text style={{ flex: "1" }} typo="body1">
-                          {createdDate.replaceAll("-", ".")}
-                        </Text>
-                      </Flex>
                     </Flex>
-                  </Table.Left>
-                  <Table.Right style={{ flex: "1" }}>
-                    <Flex gap="sm">
-                      <Link
-                        href={`${studyId}/${routerPath["announcement-delete"].href}?studyAnnouncementId=${studyAnnounceId}`}
+                  </Flex>
+                </Table.Left>
+                <Table.Right style={{ flex: "1" }}>
+                  <Flex gap="sm">
+                    <Link
+                      href={`${studyId}/${routerPath["announcement-delete"].href}?studyAnnouncementId=${studyAnnounceId}`}
+                    >
+                      <Button
+                        size="sm"
+                        style={{ minWidth: "81px" }}
+                        variant="outline"
                       >
-                        <Button
-                          size="sm"
-                          style={{ minWidth: "81px" }}
-                          variant="outline"
-                        >
-                          삭제
-                        </Button>
-                      </Link>
-                      <Link
-                        href={`${studyId}/${routerPath["announcement-modify"].href}?studyAnnouncementId=${studyAnnounceId}`}
+                        삭제
+                      </Button>
+                    </Link>
+                    <Link
+                      href={`${studyId}/${routerPath["announcement-modify"].href}?studyAnnouncementId=${studyAnnounceId}`}
+                    >
+                      <Button
+                        size="sm"
+                        style={{ minWidth: "81px" }}
+                        variant="outline"
                       >
-                        <Button
-                          size="sm"
-                          style={{ minWidth: "81px" }}
-                          variant="outline"
-                        >
-                          수정
-                        </Button>
-                      </Link>
-                    </Flex>
-                  </Table.Right>
-                </Table>
-              );
-            }
-          )}
+                        수정
+                      </Button>
+                    </Link>
+                  </Flex>
+                </Table.Right>
+              </Table>
+            );
+          })}
         </>
       )}
     </section>

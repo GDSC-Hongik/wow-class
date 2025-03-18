@@ -1,6 +1,11 @@
+import type { StudyApiResponseV2Dto } from "./studyList";
+
 export interface AnnouncementApiResponseDto {
-  studyAnnounceId: number;
-  title: string;
-  link: string;
-  createdDate: string;
+  study: StudyApiResponseV2Dto;
+  studyAnnouncement: {
+    studyAnnounceId: number;
+    title: string;
+    link: string;
+    createdDate: string;
+  };
 }

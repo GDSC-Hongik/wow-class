@@ -117,7 +117,7 @@ export const studyApi = {
   },
   getStudyAnnouncement: async (studyId: number) => {
     const response = await fetcher.get<AnnouncementApiResponseDto[]>(
-      `/common/studies/${studyId}/announcements`,
+      `/v2/study-announcements/${studyId}/me`,
       {
         next: { tags: [tags.announcements] },
         cache: "force-cache",
