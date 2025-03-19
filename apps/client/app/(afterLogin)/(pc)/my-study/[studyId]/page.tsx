@@ -14,7 +14,7 @@ const StudyDetailPage = ({ params }: { params: { studyId: number } }) => {
       <Divider />
       <Space height={40} />
       <DailyTasksContainer studyId={studyId} />
-      {/* <Curriculum studyId={studyId} /> */}
+      <Curriculum studyId={studyId} />
       <Space height={100} />
     </>
   );

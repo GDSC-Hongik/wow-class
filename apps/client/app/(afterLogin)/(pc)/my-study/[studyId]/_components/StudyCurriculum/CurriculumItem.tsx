@@ -73,9 +73,10 @@ export const CurriculumItem = ({
 
   const isAssignmentBeforeSubmission =
     assignmentHistoryStatus === "BEFORE_SUBMISSION";
-  const assignmentButtonHref = assignmentHistory
-    ? assignmentHistory.submissionLink
-    : "";
+  const assignmentButtonHref =
+    assignmentHistory?.submissionStatus === "SUCCESS"
+      ? assignmentHistory.submissionLink
+      : "";
   return (
     <Flex gap="50px">
       <section>
@@ -142,7 +143,7 @@ export const CurriculumItem = ({
                       aria-label="check-submitted-assignment"
                       asProp={Link}
                       disabled={isAssignmentBeforeSubmission}
-                      href={assignmentButtonHref}
+                      href={assignmentButtonHref ?? ""}
                       size="sm"
                       target="_blank"
                       variant="outline"

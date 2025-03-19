@@ -16,8 +16,9 @@ export const AssignmentBoxTitle = ({
 }: {
   studyDetailTaskInfo: StudyDetailTaskDto<DailyTaskType>;
 }) => {
-  const { studySession, assignmentHistoryStatus } = studyDetailTaskInfo;
+  const { studySession, assignmentHistoryStatus, study } = studyDetailTaskInfo;
   const { assignmentTitle } = studySession;
+  const { studyName } = study;
   const { tagColor, tagText } =
     assignmentSubmissionMap[assignmentHistoryStatus];
   const pathname = usePathname();
@@ -33,7 +34,7 @@ export const AssignmentBoxTitle = ({
           <>
             <ItemSeperator />
             <Text color="sub" typo="label2">
-              스터디 이름
+              {studyName}
             </Text>
           </>
         )}

@@ -52,10 +52,18 @@ export interface StudyDetailDashboardDto {
 }
 
 export interface StudyDetailTaskDto<T extends DailyTaskType> {
+  study: {
+    studyName: string;
+  };
+  studyHistory: {
+    repositoryLink: string;
+  };
   studySession: StudySession;
-  todoType: T; // 필요한 경우 확장
-  deadLine: string; // ISO 8601
+  todoType: T;
+  deadLine: string;
   attendanceStatus: T extends "ATTENDANCE" ? AttendanceStatusType : never;
-  assignmentHistory: AssignmentHistory;
-  assignmentHistoryStatus: AssignmentHistoryStatusType;
+  assignmentHistory: T extends "ASSIGNMENT" ? AssignmentHistory | null : never;
+  assignmentHistoryStatus: T extends "ASSIGNMENT"
+    ? AssignmentHistoryStatusType
+    : never;
 }

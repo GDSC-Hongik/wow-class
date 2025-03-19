@@ -10,7 +10,7 @@ import DailyTaskItem from "./DailyTaskItem";
 const DailyTaskList = async ({
   dailyTask,
 }: {
-  dailyTask: StudyDetailTaskDto<DailyTaskType>[];
+  dailyTask: StudyDetailTaskDto<DailyTaskType>[] | undefined;
 }) => {
   return (
     <section aria-label="daily-tasks">

@@ -41,7 +41,6 @@ export const RepositorySubmissionBox = ({
     errorMessage: "",
   });
 
-  const [_, setGithubLink] = useAtom(githubLinkAtom);
   const handleClickEditButton = useCallback(() => {
     setErrorState({
       isError: false,
@@ -64,10 +63,9 @@ export const RepositorySubmissionBox = ({
     );
     if (success) {
       revalidateTagByName(tags.studyDetailDashboard);
-      setGithubLink(repositoryUrl);
       setRepositorySubmissionStatus("SUBMITTED");
     }
-  }, [studyId, repositoryUrl, setGithubLink]);
+  }, [studyId, repositoryUrl]);
 
   const handleClickSubmitButton = useCallback(async () => {
     if (!repositoryUrl) {

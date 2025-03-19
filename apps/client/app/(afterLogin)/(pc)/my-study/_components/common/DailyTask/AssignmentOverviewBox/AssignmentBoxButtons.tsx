@@ -24,9 +24,10 @@ import Button from "wowds-ui/Button";
 import { githubLinkAtom } from "@/(afterLogin)/(pc)/my-study/_contexts/atoms";
 
 interface AssignmentBoxButtonsProps {
-  assignmentHistory: AssignmentHistory;
+  assignmentHistory: AssignmentHistory | null;
   assignmentHistoryStatus: AssignmentHistoryStatusType;
   buttonsDisabled: boolean;
+  repositoryLink: string;
 }
 
 export const AssignmentBoxButtons = ({
@@ -34,20 +35,22 @@ export const AssignmentBoxButtons = ({
 }: {
   studyDetailTaskInfo: StudyDetailTaskDto<DailyTaskType>;
 }) => {
-  const [githubLink] = useAtom(githubLinkAtom);
   const { assignmentHistory, studySession, assignmentHistoryStatus } =
     studyDetailTaskInfo;
   const { assignmentPeriod } = studySession;
+  const { repositoryLink } = studyDetailTaskInfo.studyHistory;
 
   const isAfterStartDate = getNowIsAfterStartDate(assignmentPeriod.startDate);
-  const buttonsDisabled = !isAfterStartDate || !githubLink;
+  const buttonsDisabled = !isAfterStartDate || !repositoryLink;
 
+  console.log(isAfterStartDate, repositoryLink);
   return (
     <>
       <PrimaryButton
         assignmentHistory={assignmentHistory}
         assignmentHistoryStatus={assignmentHistoryStatus}
         buttonsDisabled={buttonsDisabled}
+        repositoryLink={repositoryLink}
       />
       <Space height={8} />
       <SecondaryButton
@@ -61,17 +64,34 @@ const PrimaryButton = ({
   assignmentHistory,
   assignmentHistoryStatus,
   buttonsDisabled,
+  repositoryLink,
 }: Omit<
   AssignmentBoxButtonsProps,
   "deadline" | "studySessionId" | "assignmentPeriod"
 >) => {
-  const [githubLink] = useAtom(githubLinkAtom);
+  const iconStroke = buttonsDisabled ? "mono100" : "primary";
+  const { primaryButtonText } = buttonTextMap[assignmentHistoryStatus];
+
+  if (!assignmentHistory) {
+    return (
+      <Button
+        asProp={Link}
+        disabled={buttonsDisabled}
+        href={repositoryLink ?? ""}
+        icon={<LinkIcon height={20} stroke={iconStroke} width={20} />}
+        style={buttonStyle}
+        target="_blank"
+        variant="outline"
+      >
+        {primaryButtonText}
+      </Button>
+    );
+  }
   const {
     submissionStatus: assignmentSubmissionStatus,
     submissionFailureType,
     submissionLink,
   } = assignmentHistory;
-  const { primaryButtonText } = buttonTextMap[assignmentHistoryStatus];
 
   if (
     assignmentSubmissionStatus === "FAILURE" &&
@@ -80,9 +100,8 @@ const PrimaryButton = ({
     return;
   }
 
-  const iconStroke = buttonsDisabled ? "mono100" : "primary";
   const primaryButtonHref =
-    assignmentHistoryStatus === "SUCCEEDED" ? submissionLink : githubLink;
+    assignmentHistoryStatus === "SUCCEEDED" ? submissionLink : repositoryLink;
   return (
     <Button
       asProp={Link}
@@ -109,20 +128,7 @@ const SecondaryButton = ({
   const { assignmentHistory, studySession, assignmentHistoryStatus, deadLine } =
     studyDetailTaskInfo;
   const { studyId, studySessionId } = studySession;
-
-  const {
-    submissionStatus: assignmentSubmissionStatus,
-    committedAt,
-    submissionFailureType,
-  } = assignmentHistory;
-
-  if (isDeadlinePassed(deadLine) || submissionFailureType === "NOT_SUBMITTED") {
-    return (
-      <Button disabled={true} style={buttonStyle}>
-        마감
-      </Button>
-    );
-  }
+  const iconStroke = buttonsDisabled ? "mono100" : "backgroundNormal";
   const { secondaryButtonText } = buttonTextMap[assignmentHistoryStatus];
 
   const handleSubmissionToast = async () => {
@@ -134,7 +140,7 @@ const SecondaryButton = ({
         task.todoType === "ASSIGNMENT"
     );
     const currentAssignmentSubmissionStatus =
-      currentAssignmentTask?.assignmentHistory.submissionStatus;
+      currentAssignmentTask?.assignmentHistory?.submissionStatus;
     if (currentAssignmentSubmissionStatus === "SUCCESS") {
       toast.success("과제 제출이 완료되었습니다.");
     } else if (currentAssignmentSubmissionStatus === "FAILURE") {
@@ -151,7 +157,32 @@ const SecondaryButton = ({
     }
   };
 
-  const stroke = buttonsDisabled ? "mono100" : "backgroundNormal";
+  if (!assignmentHistory) {
+    return (
+      <Button
+        disabled={buttonsDisabled}
+        icon={<ReloadIcon height={20} stroke={iconStroke} width={20} />}
+        style={buttonStyle}
+        onClick={handleClickSubmissionComplete}
+      >
+        {secondaryButtonText}
+      </Button>
+    );
+  }
+  const {
+    submissionStatus: assignmentSubmissionStatus,
+    committedAt,
+    submissionFailureType,
+  } = assignmentHistory;
+
+  if (isDeadlinePassed(deadLine) || submissionFailureType === "NOT_SUBMITTED") {
+    return (
+      <Button disabled={true} style={buttonStyle}>
+        마감
+      </Button>
+    );
+  }
+
   const { year, month, day, hours, minutes } = parseISODate(
     committedAt as string
   );
@@ -160,7 +191,7 @@ const SecondaryButton = ({
   return (
     <Button
       disabled={buttonsDisabled}
-      icon={<ReloadIcon height={20} stroke={stroke} width={20} />}
+      icon={<ReloadIcon height={20} stroke={iconStroke} width={20} />}
       style={buttonStyle}
       {...(assignmentSubmissionStatus === "SUCCESS" &&
         committedAt && {

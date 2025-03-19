@@ -16,6 +16,7 @@ export const FailurePopover = ({
     submissionFailureType === "NOT_SUBMITTED"
   )
     return null;
+  console.log(submissionFailureType);
   return (
     <Popover
       triggerContent={<HelpIcon fill="sub" stroke="sub" style={iconStyle} />}

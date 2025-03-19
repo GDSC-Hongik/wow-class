@@ -1,6 +1,7 @@
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { studyHistoryApi } from "apis/studyHistoryApi";
 import Image from "next/image";
 import type { StudyDetailTaskDto } from "types/dtos/studyDetail";
 import type { AssignmentSubmissionFailureType } from "types/entities/common/assignment";
@@ -14,16 +15,25 @@ export const AssignmentBoxInfo = ({
 }: {
   studyDetailTaskInfo: StudyDetailTaskDto<DailyTaskType>;
 }) => {
-  const { assignmentHistory, studySession, assignmentHistoryStatus, deadLine } =
-    studyDetailTaskInfo;
-  const { submissionFailureType, submissionLink } = assignmentHistory;
+  const {
+    assignmentHistory,
+    studySession,
+    assignmentHistoryStatus,
+    deadLine,
+    studyHistory,
+  } = studyDetailTaskInfo;
 
-  const { position } = studySession;
   const { year, month, day, hours, minutes } = parseISODate(deadLine);
-
   const deadlineText = `종료일시: ${year}년 ${month}월 ${day}일 ${padWithZero(
     hours
   )}:${padWithZero(minutes)}까지`;
+
+  if (!assignmentHistory) {
+    return <Text color="sub">{deadlineText}</Text>;
+  }
+  const { submissionFailureType, submissionLink } = assignmentHistory;
+  const { repositoryLink } = studyHistory;
+  const { position } = studySession;
 
   const isAssignmentSubmissionSuccess = assignmentHistoryStatus === "SUCCEEDED";
   const isAssignmentSubmissionFailure = assignmentHistoryStatus === "FAILED";
@@ -31,29 +41,33 @@ export const AssignmentBoxInfo = ({
   const isNotSubmittedFailure =
     isAssignmentSubmissionFailure && submissionFailureType === "NOT_SUBMITTED";
 
+  const folderTitle = isAssignmentSubmissionSuccess
+    ? submissionLink
+    : repositoryLink;
   return (
     <>
       <Text color="sub">{deadlineText}</Text>
       {(isAssignmentSubmissionSuccess ||
-        (isAssignmentSubmissionFailure && !isNotSubmittedFailure)) && (
-        <Flex alignItems="center" gap="xs">
-          <Text as="div" color="sub">
-            제출한 과제 :{" "}
-            <Text as="span" color="textBlack">
-              {`${getAssignmentGithubFolderName(submissionLink)}/week${position}`}
+        (isAssignmentSubmissionFailure && !isNotSubmittedFailure)) &&
+        folderTitle && (
+          <Flex alignItems="center" gap="xs">
+            <Text as="div" color="sub">
+              제출한 과제 :{" "}
+              <Text as="span" color="textBlack">
+                {`${getAssignmentGithubFolderName(folderTitle)}/week${position}`}
+              </Text>
             </Text>
-          </Text>
-          <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
-          <styled.div
-            color={isAssignmentSubmissionFailure ? "red.500" : "primary"}
-          >
-            {isAssignmentSubmissionFailure
-              ? failMapping[submissionFailureType]
-              : "글자수 충족"}
-          </styled.div>
-          <FailurePopover submissionFailureType={submissionFailureType} />
-        </Flex>
-      )}
+            <Image alt="dot" height={6} src="/images/dot.svg" width={6} />
+            <styled.div
+              color={isAssignmentSubmissionFailure ? "red.500" : "primary"}
+            >
+              {isAssignmentSubmissionFailure
+                ? failMapping[submissionFailureType]
+                : "글자수 충족"}
+            </styled.div>
+            <FailurePopover submissionFailureType={submissionFailureType} />
+          </Flex>
+        )}
     </>
   );
 };
