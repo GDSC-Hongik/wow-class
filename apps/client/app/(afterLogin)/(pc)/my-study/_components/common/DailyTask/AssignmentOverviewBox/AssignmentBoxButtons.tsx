@@ -5,14 +5,10 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import { studyDetailApi } from "apis/studyDetailApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
-import { useAtom } from "jotai";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { toast } from "react-toastify";
-import type {
-  AssignmentHistory,
-  StudyDetailTaskDto,
-} from "types/dtos/studyDetail";
+import type { StudyDetailTaskDto } from "types/dtos/studyDetail";
 import type { AssignmentHistoryStatusType } from "types/entities/common/assignment";
 import type { DailyTaskType } from "types/entities/myStudy";
 import { isDeadlinePassed } from "utils/isDeadlinePassed";
@@ -21,11 +17,9 @@ import { revalidateTagByName } from "utils/revalidateTagByName";
 import { Link as LinkIcon, Reload as ReloadIcon } from "wowds-icons";
 import Button from "wowds-ui/Button";
 
-import { githubLinkAtom } from "@/(afterLogin)/(pc)/my-study/_contexts/atoms";
-
 interface AssignmentBoxButtonsProps {
-  assignmentHistory: AssignmentHistory | null;
-  assignmentHistoryStatus: AssignmentHistoryStatusType;
+  assignmentHistory: StudyDetailTaskDto<DailyTaskType>["assignmentHistory"];
+  assignmentHistoryStatus: StudyDetailTaskDto<DailyTaskType>["assignmentHistoryStatus"];
   buttonsDisabled: boolean;
   repositoryLink: string;
 }
@@ -43,7 +37,6 @@ export const AssignmentBoxButtons = ({
   const isAfterStartDate = getNowIsAfterStartDate(assignmentPeriod.startDate);
   const buttonsDisabled = !isAfterStartDate || !repositoryLink;
 
-  console.log(isAfterStartDate, repositoryLink);
   return (
     <>
       <PrimaryButton
@@ -72,6 +65,7 @@ const PrimaryButton = ({
   const iconStroke = buttonsDisabled ? "mono100" : "primary";
   const { primaryButtonText } = buttonTextMap[assignmentHistoryStatus];
 
+  //과제 제출 전 상태
   if (!assignmentHistory) {
     return (
       <Button
@@ -157,6 +151,7 @@ const SecondaryButton = ({
     }
   };
 
+  //과제 제출 전 상태
   if (!assignmentHistory) {
     return (
       <Button
