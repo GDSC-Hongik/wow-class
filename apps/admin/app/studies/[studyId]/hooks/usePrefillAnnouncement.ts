@@ -9,7 +9,7 @@ const usePrefillAnnouncement = (studyId: number, studyAnnounceId: number) => {
     const fetchData = async () => {
       const announcementList = await studyApi.getStudyAnnouncement(studyId);
       const prefillData = announcementList?.filter(
-        (data) => data.studyAnnouncement.studyAnnounceId === studyAnnounceId
+        (data) => data.studyAnnouncement.studyAnnouncementId === studyAnnounceId
       )[0];
       if (prefillData) {
         setPrefillAnnouncement({

@@ -37,5 +37,5 @@ export type StudySemesterType = "FIRST" | "SECOND";
 
 export type StudySemesterWithYearType = {
   academicYear: number;
-  semesterType: "FIRST" | "SECOND";
+  semesterType: StudySemesterType;
 };

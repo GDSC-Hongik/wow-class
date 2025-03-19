@@ -11,11 +11,3 @@ export const enum mentorApiPath {
   curriculums = "/mentor/study-details/curriculums",
   studyList = "/v2/mentor/studies/me",
 }
-
-export const enum apiPathV2 {
-  studyList = "/v2/admin/studies",
-}
-
-export const enum mentorApiV2Path {
-  studyList = "/v2/mentor/studies/me",
-}

@@ -79,7 +79,6 @@ const Header = ({
   };
 
   const { month: startMonth, day: startDay } = parseISODate(openingDate);
-  console.log(openingDate);
 
   const { month: endMonth, day: endDay } = parseISODate(
     dateToFormatString(getStudyEndDate(new Date(openingDate), totalRound))

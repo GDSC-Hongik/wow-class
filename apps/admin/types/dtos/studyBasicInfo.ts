@@ -1,12 +1,16 @@
 import type { DayOfWeekType } from "types/entities/dayofweek";
-import type { StudySemesterWithYearType } from "types/entities/study";
+import type { PeriodType } from "types/entities/period";
+import type {
+  StudySemesterWithYearType,
+  StudyType,
+} from "types/entities/study";
 import type { TimeType } from "types/entities/time";
 
 export interface StudyBasicInfoApiResponseDto {
   studyId: number;
   title: string;
   semester: StudySemesterWithYearType;
-  type: "ASSIGNMENT" | "ONLINE" | "OFFLINE";
+  type: StudyType;
   descriptionNotionLink: string;
   description: string;
   mentorId: number;
@@ -15,9 +19,6 @@ export interface StudyBasicInfoApiResponseDto {
   startTime: TimeType;
   endTime: TimeType;
   totalRound: number;
-  applicationPeriod: {
-    startDate: string;
-    endDate: string;
-  };
+  applicationPeriod: PeriodType;
   openingDate: string;
 }

@@ -24,11 +24,11 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
       {!announcementList ? null : (
         <>
           {announcementList?.map((data, index) => {
-            const { studyAnnounceId, title, link, createdDate } =
+            const { studyAnnouncementId, title, link, createdDate } =
               data.studyAnnouncement;
             return (
               <Table
-                key={`${studyAnnounceId}-${index}`}
+                key={`${studyAnnouncementId}-${index}`}
                 style={{ width: "100%" }}
               >
                 <Table.Left style={{ flex: "4" }}>
@@ -75,7 +75,7 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                 <Table.Right style={{ flex: "1" }}>
                   <Flex gap="sm">
                     <Link
-                      href={`${studyId}/${routerPath["announcement-delete"].href}?studyAnnouncementId=${studyAnnounceId}`}
+                      href={`${studyId}/${routerPath["announcement-delete"].href}?studyAnnouncementId=${studyAnnouncementId}`}
                     >
                       <Button
                         size="sm"
@@ -86,7 +86,7 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                       </Button>
                     </Link>
                     <Link
-                      href={`${studyId}/${routerPath["announcement-modify"].href}?studyAnnouncementId=${studyAnnounceId}`}
+                      href={`${studyId}/${routerPath["announcement-modify"].href}?studyAnnouncementId=${studyAnnouncementId}`}
                     >
                       <Button
                         size="sm"

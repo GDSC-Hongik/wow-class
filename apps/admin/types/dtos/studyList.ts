@@ -1,4 +1,5 @@
 import type { DayOfWeekType } from "types/entities/dayofweek";
+import type { PeriodType } from "types/entities/period";
 import type { StudySemesterType, StudyType } from "types/entities/study";
 import type { TimeType } from "types/entities/time";
 
@@ -37,15 +38,9 @@ export interface StudySessionApiResponseV2Dto {
   lessonTitle: string;
   description: string;
   lessonAttendanceNumber: string;
-  lessonPeriod: {
-    startDate: string;
-    endDate: string;
-  };
+  lessonPeriod: PeriodType;
   assignmentTitle?: string;
   assignmentDescriptionLink: string;
-  assignmentPeriod: {
-    startDate: string;
-    endDate: string;
-  };
+  assignmentPeriod: PeriodType;
   studyId: number;
 }
