@@ -5,7 +5,6 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
-import { useAtom } from "jotai";
 import { useCallback, useState } from "react";
 import type { RepositorySubmissionStatusType } from "types/entities/myAssignment";
 import { isGithubRepositoryUrl } from "utils/isGithubRepositoryUrl";
@@ -14,8 +13,6 @@ import { Edit } from "wowds-icons";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import TextField from "wowds-ui/TextField";
-
-import { githubLinkAtom } from "../../../_contexts/atoms";
 
 interface RepositorySubmissionBoxProps {
   studyId: number;

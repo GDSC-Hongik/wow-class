@@ -1,7 +1,6 @@
 import { Flex, styled } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import { studyHistoryApi } from "apis/studyHistoryApi";
 import Image from "next/image";
 import type { StudyDetailTaskDto } from "types/dtos/studyDetail";
 import type { AssignmentSubmissionFailureType } from "types/entities/common/assignment";
