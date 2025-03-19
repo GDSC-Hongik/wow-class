@@ -9,9 +9,10 @@ import { attendanceStatusMapV2 } from "constants/attendanceStatusMap";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
-import type { AssignmentHistory, StudySession } from "types/dtos/studyDetail";
-import type { AssignmentHistoryStatusType } from "types/entities/common/assignment";
-import type { AttendanceStatusType } from "types/entities/common/attendance";
+import type {
+  SessionInfo,
+  StudyDetailDashboardDto,
+} from "types/dtos/studyDetail";
 import { space } from "wowds-tokens";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
@@ -19,18 +20,16 @@ import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
 import { studyTypeAtom } from "../../../_contexts/atoms";
-interface CurriculumItemProps {
-  session: StudySession;
-  attendanceStatus: AttendanceStatusType;
-  assignmentHistoryStatus: AssignmentHistoryStatusType;
-  assignmentHistory: AssignmentHistory | null;
-}
+
 export const CurriculumItem = ({
   session,
   attendanceStatus,
   assignmentHistoryStatus,
   assignmentHistory,
-}: CurriculumItemProps) => {
+  studyHistory,
+}: SessionInfo & {
+  studyHistory: StudyDetailDashboardDto["studyHistory"];
+}) => {
   const [studyType] = useAtom(studyTypeAtom);
   const {
     position,
@@ -41,6 +40,8 @@ export const CurriculumItem = ({
     assignmentPeriod,
     assignmentDescriptionLink,
   } = session;
+
+  const repositoryLink = studyHistory.githubLink;
 
   const {
     month: lessonPeriodMonth,
@@ -76,7 +77,7 @@ export const CurriculumItem = ({
   const assignmentButtonHref =
     assignmentHistory?.submissionStatus === "SUCCESS"
       ? assignmentHistory.submissionLink
-      : "";
+      : repositoryLink;
   return (
     <Flex gap="50px">
       <section>

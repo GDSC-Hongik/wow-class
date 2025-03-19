@@ -35,6 +35,7 @@ const Curriculum = async ({ studyId }: { studyId: number }) => {
               attendanceStatus={attendanceStatus}
               key={session.studySessionId}
               session={session}
+              studyHistory={studyDashboard.studyHistory}
             />
             <Space height={50} />
           </>
