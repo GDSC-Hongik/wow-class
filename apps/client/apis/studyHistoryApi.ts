@@ -28,9 +28,9 @@ export const studyHistoryApi = {
     return { success: response.ok };
   },
 
-  submitAssignment: async (studyDetailId: number) => {
+  submitAssignment: async (studySessionId: number) => {
     const response = await fetcher.post(
-      `${apiPath.studyHistory}/submit?studyDetailId=${studyDetailId}`,
+      `${apiPath.assignmentHistory}/submit?studySessionId=${studySessionId}`,
       null
     );
 

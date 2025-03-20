@@ -1,36 +1,41 @@
 import { Space } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
 import Divider from "wowds-ui/Divider";
 import Tabs from "wowds-ui/Tabs";
 import TabsContent from "wowds-ui/TabsContent";
 import TabsItem from "wowds-ui/TabsItem";
 import TabsList from "wowds-ui/TabsList";
 
+import CurriculumTabs from "./_components/CurriculumTabs";
+import DailyTasksContainer from "./_components/DailyTasksContainer";
 import Header from "./_components/Header";
-import AnnouncementList from "./_components/StudyAnnouncement/AnnouncementList";
-import Curriculum from "./_components/StudyCurriculum/Curriclum";
 
-const StudyDetailPage = ({ params }: { params: { studyId: number } }) => {
+
+export const generateMetadata = async ({
+  params: { studyId },
+}: {
+  params: { studyId: string };
+}) => {
+  const study = await myStudyApi.getBasicStudyInfo(+studyId);
+  return {
+    title: study ? `${study.title} | 와우클래스` : "스터디 | 와우 클래스",
+  };
+};
+
+const MyStudyDetailPage = ({ params }: { params: { studyId: number } }) => {
   const { studyId } = params;
   return (
     <>
       <Header studyId={studyId} />
       <Space height={40} />
-      <Divider type="dark" />
-      <Tabs defaultValue="curriculum">
-        <TabsList>
-          <TabsItem value="curriculum">커리큘럼</TabsItem>
-          <TabsItem value="announcement">공지</TabsItem>
-        </TabsList>
-        <Divider style={{ marginTop: -3 }} type="dark" />
-        <TabsContent value="curriculum">
-          <Curriculum studyId={studyId} />
-        </TabsContent>
-        <TabsContent value="announcement">
-          <AnnouncementList studyId={studyId} />
-        </TabsContent>
-      </Tabs>
+      <Divider />
+      <Space height={40} />
+      <DailyTasksContainer studyId={studyId} />
+      <Space height={40} />
+      <CurriculumTabs studyId={studyId} />
+      <Space height={100} />
     </>
   );
 };
 
-export default StudyDetailPage;
+export default MyStudyDetailPage;

@@ -6,6 +6,7 @@ import type {
 import type { AttendanceStatusType } from "types/entities/common/attendance";
 import type { PeriodType } from "types/entities/common/period";
 import type { HistoryStatusType } from "types/entities/common/study";
+import type { DailyTaskType } from "types/entities/myStudy";
 
 interface StudyHistory {
   studyHistoryId: number;
@@ -48,4 +49,21 @@ export interface SessionInfo {
 export interface StudyDetailDashboardDto {
   studyHistory: StudyHistory;
   sessions: SessionInfo[];
+}
+
+export interface StudyDetailTaskDto<T extends DailyTaskType> {
+  study: {
+    studyName: string;
+  };
+  studyHistory: {
+    repositoryLink: string;
+  };
+  studySession: StudySession;
+  todoType: T;
+  deadLine: string;
+  attendanceStatus: T extends "ATTENDANCE" ? AttendanceStatusType : never;
+  assignmentHistory: T extends "ASSIGNMENT" ? AssignmentHistory | null : never;
+  assignmentHistoryStatus: T extends "ASSIGNMENT"
+    ? AssignmentHistoryStatusType
+    : never;
 }

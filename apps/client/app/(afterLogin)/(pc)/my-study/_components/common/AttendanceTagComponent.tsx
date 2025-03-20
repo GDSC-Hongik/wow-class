@@ -2,7 +2,7 @@ import { attendanceStatusMap } from "constants/attendanceStatusMap";
 import type { AttendanceStatusType } from "types/entities/common/attendance";
 import Tag from "wowds-ui/Tag";
 
-export const AttendanceTagComponent = ({
+const AttendanceTagComponent = ({
   attendanceStatus,
 }: {
   attendanceStatus: AttendanceStatusType;
@@ -19,3 +19,5 @@ export const AttendanceTagComponent = ({
     );
   }
 };
+
+export default AttendanceTagComponent;
