@@ -15,6 +15,7 @@ const DailyTaskItem = ({
   return todoType === "ATTENDANCE" ? (
     <AttendanceCheckBox
       attendanceStatus={dailyTask.attendanceStatus}
+      study={dailyTask.study}
       studySession={dailyTask.studySession}
     />
   ) : (

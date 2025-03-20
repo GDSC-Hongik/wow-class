@@ -66,7 +66,7 @@ const PrimaryButton = ({
   const { primaryButtonText } = buttonTextMap[assignmentHistoryStatus];
 
   //과제 제출 전 상태
-  if (!assignmentHistory) {
+  if (assignmentHistory === null) {
     return (
       <Button
         asProp={Link}
@@ -152,7 +152,7 @@ const SecondaryButton = ({
   };
 
   //과제 제출 전 상태
-  if (!assignmentHistory) {
+  if (assignmentHistory === null) {
     return (
       <Button
         disabled={buttonsDisabled}

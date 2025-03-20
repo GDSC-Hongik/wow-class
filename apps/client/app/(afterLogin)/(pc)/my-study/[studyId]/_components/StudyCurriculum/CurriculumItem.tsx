@@ -16,7 +16,7 @@ import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
 import TextButton from "wowds-ui/TextButton";
 
-import { AttendanceTagComponent } from "../../../_components/common/AttendanceTagComponent";
+import AttendanceTagComponent from "../../../_components/common/AttendanceTagComponent";
 import { studyTypeAtom } from "../../../_contexts/atoms";
 
 export const CurriculumItem = ({

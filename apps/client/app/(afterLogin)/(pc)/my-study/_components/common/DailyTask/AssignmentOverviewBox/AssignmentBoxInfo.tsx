@@ -27,7 +27,7 @@ export const AssignmentBoxInfo = ({
     hours
   )}:${padWithZero(minutes)}까지`;
 
-  if (!assignmentHistory) {
+  if (assignmentHistory === null) {
     return <Text color="sub">{deadlineText}</Text>;
   }
   const { submissionFailureType, submissionLink } = assignmentHistory;
