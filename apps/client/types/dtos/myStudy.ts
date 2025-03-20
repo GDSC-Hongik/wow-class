@@ -35,7 +35,7 @@ export interface BasicStudyInfoDto {
   mentorName: string;
 }
 interface StudyAnnouncementDto {
-  studyAnnounceId: number;
+  studyAnnouncementId: number;
   title: string;
   link: string;
   createdDate: string;
@@ -63,8 +63,6 @@ interface OngoingStydyInfo {
 }
 
 export type MyOngoingStudyInfoDtoV2 = OngoingStydyInfo[];
-
-export interface StudyAllTodosDto {}
 
 interface StudyCurriculumDto {
   studyDetailId: number;

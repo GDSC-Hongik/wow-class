@@ -33,7 +33,7 @@ export const myStudyApi = {
 
     return response.data;
   },
-  getStudyAllAnnouncementList: async () => {
+  getAllStudyAnnouncementList: async () => {
     const response = await fetcher.get<StudyAnnouncementListDtoV2Type>(
       apiPath.studyAnnouncementList,
       {

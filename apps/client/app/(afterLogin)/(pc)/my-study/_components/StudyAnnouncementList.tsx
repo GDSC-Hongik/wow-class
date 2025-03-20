@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const StudyAnnouncementList = async () => {
   const studyAnnouncementListData =
-    await myStudyApi.getStudyAllAnnouncementList();
+    await myStudyApi.getAllStudyAnnouncementList();
 
   return (
     <section aria-label="study-announcement-list">
@@ -20,7 +20,7 @@ const StudyAnnouncementList = async () => {
           <Link
             className={studyAnnouncementListBoxStyle}
             href={studyAnnouncement.link}
-            key={`announcemnt-${study.studyId}-${studyAnnouncement.studyAnnounceId}`}
+            key={`announcemnt-${study.studyId}-${studyAnnouncement.studyAnnouncementId}`}
             target="_blank"
           >
             <Text
