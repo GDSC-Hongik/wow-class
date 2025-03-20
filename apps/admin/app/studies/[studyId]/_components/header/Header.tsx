@@ -3,10 +3,16 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import { padWithZero, parseISODate } from "@wow-class/utils";
+import {
+  dateToFormatString,
+  getStudyEndDate,
+  padWithZero,
+  parseISODate,
+} from "@wow-class/utils";
 import { studyApi } from "apis/study/studyApi";
 import ItemSeparator from "components/ItemSeparator";
 import { dayToKorean } from "constants/dayToKorean";
+import { studyToKoreanType } from "constants/study";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
@@ -20,7 +26,7 @@ const Header = ({
   studyId: string;
   isCompact?: boolean;
 }) => {
-  const [showIntro, setShowIntro] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
   const [studyInfo, setStudyInfo] = useState<
     StudyBasicInfoApiResponseDto | undefined
   >(undefined);
@@ -35,7 +41,6 @@ const Header = ({
 
     fetchData();
   }, [studyId]);
-
   const handleClickShowIntro = () => {
     setShowIntro((prev) => !prev);
   };
@@ -50,21 +55,20 @@ const Header = ({
   if (!studyInfo) return null;
   const {
     title,
-    academicYear,
     semester,
     mentorName,
-    studyType,
+    type,
     dayOfWeek,
     startTime,
     endTime,
-    totalWeek,
-    period: { startDate, endDate },
-    introduction,
-    notionLink,
+    description,
+    descriptionNotionLink,
+    openingDate,
+    totalRound,
   } = studyInfo;
 
   const studySchedule = () => {
-    if (startTime && endDate) {
+    if (startTime) {
       const { hour: startHour, minute: startMinute } = startTime;
       const { hour: endHour, minute: endMinute } = endTime;
       return `${dayToKorean[dayOfWeek]} ${startHour}:${padWithZero(startMinute)}-
@@ -74,12 +78,14 @@ const Header = ({
     }
   };
 
-  const { month: startMonth, day: startDay } = parseISODate(startDate);
-  const { month: endMonth, day: endDay } = parseISODate(endDate);
-  const studySemester = `${academicYear}-${semester === "FIRST" ? 1 : 2}`;
+  const { month: startMonth, day: startDay } = parseISODate(openingDate);
 
-  const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-
-  ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
+  const { month: endMonth, day: endDay } = parseISODate(
+    dateToFormatString(getStudyEndDate(new Date(openingDate), totalRound))
+  );
+  const studySemester = `${semester.academicYear}-${semester.semesterType === "FIRST" ? 1 : 2}`;
+
+  const studyPeriod = `${padWithZero(startMonth)}.${padWithZero(startDay)}-${padWithZero(endMonth)}.${padWithZero(endDay)}`;
 
   return (
     <header>
@@ -120,7 +126,7 @@ const Header = ({
           </Text>
           <ItemSeparator height={4} width={4} />
           <Text as="h5" color="sub">
-            {studyType}
+            {studyToKoreanType[type]}
           </Text>
         </Flex>
       </section>
@@ -129,7 +135,7 @@ const Header = ({
           <section aria-labelledby="study-schedule-heading">
             <Space height={24} />
             <Flex direction="column" gap="4">
-              <Text as="h3" typo="h3">
+              <Text as="h2" typo="h2">
                 스터디 일정
               </Text>
               <Flex gap="xs">
@@ -142,10 +148,6 @@ const Header = ({
                   </Flex>
                 )}
                 <Text as="h5" color="sub">
-                  {totalWeek}주 코스
-                </Text>
-                <ItemSeparator height={4} width={4} />
-                <Text as="h5" color="sub">
                   {studyPeriod}
                 </Text>
               </Flex>
@@ -154,12 +156,13 @@ const Header = ({
           <section aria-labelledby="study-intro-heading">
             <Space height={28} />
             <Flex direction="column" gap="xs">
-              <Text as="h3" typo="h3">
+              <Text as="h2" typo="h2">
                 스터디 소개
               </Text>
+
               <Flex alignItems="center" gap="sm">
                 <Link
-                  href={notionLink || ""}
+                  href={descriptionNotionLink || ""}
                   role="button"
                   tabIndex={0}
                   target="_blank"
@@ -167,7 +170,7 @@ const Header = ({
                   <TextButton style={{ padding: "0px" }} text="스터디 소개" />
                 </Link>
                 <Text color="sub" typo="body1">
-                  {introduction}
+                  {description}
                 </Text>
               </Flex>
             </Flex>

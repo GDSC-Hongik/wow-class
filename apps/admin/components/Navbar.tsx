@@ -28,13 +28,12 @@ const Navbar = async () => {
       imageUrl: homeImageUrl,
       alt: "home-icon",
       name: "개설된 스터디",
-      items: studyList?.map((studyItem) => {
-        const { studyId, title } = studyItem.study;
+      items: studyList?.map(({ study }) => {
         return {
-          href: `studies/${studyId}`,
+          href: `studies/${study.studyId}`,
           imageUrl: folderImageUrl,
-          alt: title,
-          name: title,
+          alt: study.title,
+          name: study.title,
         };
       }),
     },

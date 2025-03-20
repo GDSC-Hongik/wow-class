@@ -6,7 +6,6 @@ import type {
   AssignmentApiRequestDto,
   AssignmentApiResponseDto,
 } from "types/dtos/assignmentList";
-import type { AttendanceApiResponseDto } from "types/dtos/attendance";
 import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudyBasicInfoApiResponseDto } from "types/dtos/studyBasicInfo";
 import type { StudyStatisticsApiResponseDto } from "types/dtos/studyStatistics";
@@ -43,7 +42,7 @@ export const studyApi = {
   },
   getStudyBasicInfo: async (studyId: number) => {
     const response = await fetcher.get<StudyBasicInfoApiResponseDto>(
-      `/common/studies/${studyId}`,
+      `/v2/common/studies/${studyId}`,
       {
         next: { tags: [tags.studyBasicInfo] },
         cache: "force-cache",
@@ -109,19 +108,16 @@ export const studyApi = {
     );
     return response.data;
   },
-  publishStudyAnnouncement: async (
-    studyId: number,
-    announcement: StudyAnnouncementType
-  ) => {
+  publishStudyAnnouncement: async (announcement: StudyAnnouncementType) => {
     const response = await fetcher.post(
-      `/mentor/studies/${studyId}/announcements`,
+      `/v2/mentor/study-announcements`,
       announcement
     );
     return { success: response.ok };
   },
   getStudyAnnouncement: async (studyId: number) => {
     const response = await fetcher.get<AnnouncementApiResponseDto[]>(
-      `/common/studies/${studyId}/announcements`,
+      `/v2/study-announcements/${studyId}/me`,
       {
         next: { tags: [tags.announcements] },
         cache: "force-cache",
@@ -134,26 +130,16 @@ export const studyApi = {
     announcement: StudyAnnouncementType
   ) => {
     const response = await fetcher.put(
-      `/mentor/studies/announcements/${studyAnnouncementId}`,
+      `/v2/mentor/study-announcements/${studyAnnouncementId}`,
       announcement
     );
     return { success: response.ok };
   },
   deleteStudyAnnouncement: async (studyAnnouncementId: number) => {
     const response = await fetcher.delete(
-      `/mentor/studies/announcements/${studyAnnouncementId}`
+      `/v2/mentor/study-announcements/${studyAnnouncementId}`
     );
     return { success: response.ok };
-  },
-  getStudyAttendances: async (studyId: number) => {
-    const response = await fetcher.get<AttendanceApiResponseDto[]>(
-      `/mentor/study-details/attendances?studyId=${studyId}`,
-      {
-        next: { tags: [tags.attendances] },
-        cache: "force-cache",
-      }
-    );
-    return response.data;
   },
   getStudyStudents: async (studyId: number, pageable: PageableType) => {
     const response = await fetcher.get<PaginatedStudyStudentResponseDto>(

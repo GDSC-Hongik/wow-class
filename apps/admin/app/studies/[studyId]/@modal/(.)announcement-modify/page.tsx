@@ -28,7 +28,10 @@ const AnnouncementModifyModal = ({
     studyAnnouncementId
   );
   const [studyAnnouncement, setStudyAnnouncement] =
-    useState<StudyAnnouncementType>({ title: "", link: "" });
+    useState<StudyAnnouncementType>({
+      title: "",
+      link: "",
+    });
   const titleTextareaRef = useRef<HTMLTextAreaElement>(null);
   const linkTextareaRef = useRef<HTMLTextAreaElement>(null);
   useResizeTextarea([titleTextareaRef, linkTextareaRef], studyAnnouncement);
