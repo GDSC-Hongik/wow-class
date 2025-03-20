@@ -5,6 +5,7 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
+import type { CSSProperties } from "react";
 import { useCallback, useState } from "react";
 import type { RepositorySubmissionStatusType } from "types/entities/myAssignment";
 import { isGithubRepositoryUrl } from "utils/isGithubRepositoryUrl";
@@ -62,7 +63,7 @@ export const RepositorySubmissionBox = ({
       revalidateTagByName(tags.studyDetailDashboard);
       setRepositorySubmissionStatus("SUBMITTED");
     }
-  }, [studyId, repositoryUrl, setRepositorySubmissionStatus]);
+  }, [studyId, repositoryUrl]);
 
   const handleClickSubmitButton = useCallback(async () => {
     if (!repositoryUrl) {
@@ -86,7 +87,7 @@ export const RepositorySubmissionBox = ({
 
   return (
     <Flex gap="50px">
-      <Text style={textStyle} typo="body1">
+      <Text as="span" style={textStyle} typo="body1">
         레포지토리
       </Text>
       <div style={{ width: "100%" }}>
@@ -97,7 +98,7 @@ export const RepositorySubmissionBox = ({
             <Flex direction="column" width="100%">
               <Flex alignItems="center" justifyContent="space-between">
                 <Flex flexDirection="column" gap="xs">
-                  <Text as="h2" typo="h2">
+                  <Text as="h3" typo="h3">
                     과제 제출을 위한 레포지토리 URL 입력
                   </Text>
                   {repositorySubmissionStatus === "SUBMITTED" && (
@@ -107,10 +108,10 @@ export const RepositorySubmissionBox = ({
                   )}
                   {repositorySubmissionStatus === "EDITING" && (
                     <div>
-                      <Text color="error" typo="body1">
+                      <Text color="error" typo="body2">
                         * 입력하지 않으면 앞으로의 과제를 제출할 수 없어요.
                       </Text>
-                      <Text color="sub" typo="body1">
+                      <Text color="sub" typo="body2">
                         * 레포지토리가 Private 상태면 입력할 수 없어요.
                       </Text>
                     </div>
@@ -150,7 +151,7 @@ export const RepositorySubmissionBox = ({
                       />
 
                       <Button
-                        style={buttonStyle}
+                        disabled={!repositoryUrl}
                         onClick={handleClickSubmitButton}
                       >
                         입력
@@ -166,7 +167,7 @@ export const RepositorySubmissionBox = ({
     </Flex>
   );
 };
-const textStyle = {
+const textStyle: CSSProperties = {
   whiteSpace: "nowrap",
 };
 
@@ -186,19 +187,17 @@ const urlBoxStyle = css({
   width: "436px",
 });
 
-const boxStyle = {
+const boxStyle: CSSProperties = {
   width: "100%",
   height: "fit-content",
   minWidth: "100%",
 };
 
-const iconStyle = {
+const iconStyle: CSSProperties = {
   cursor: "pointer",
 };
 
-const buttonStyle = {};
-
-const textFieldStyle = {
+const textFieldStyle: CSSProperties = {
   gap: "0px",
   height: "58px !important",
 };

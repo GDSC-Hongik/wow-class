@@ -1,4 +1,4 @@
-export type AssignmentSubmissionStatusType = "FAILURE" | "SUCCESS" | null;
+export type AssignmentSubmissionStatusType = "FAILURE" | "SUCCESS";
 export type AssignmentStatusType = "NONE" | "OPEN" | "CANCELED";
 export type AssignmentSubmissionFailureType =
   | "NONE"

@@ -15,7 +15,7 @@ const SocialLoginRedirectPage = async () => {
     await dashboardApi.getDashboardInfo();
 
   if (memberRole === "REGULAR") {
-    redirect(routePath["study-apply"]);
+    redirect(routePath["my-study"]);
   } else if (currentRecruitmentOpen) {
     redirect(routePath["auth-error-during-recruitment"]);
   } else {

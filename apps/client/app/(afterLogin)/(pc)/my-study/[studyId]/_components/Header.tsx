@@ -16,7 +16,7 @@ import { space } from "wowds-tokens";
 import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
-import { studyTypeAtom } from "../_contexts/atoms";
+import { studyTypeAtom } from "../../_contexts/atoms";
 
 interface HeaderProps {
   studyId: number;
@@ -88,7 +88,7 @@ const Header = ({ studyId }: HeaderProps) => {
           </Link>
         </Flex>
       </section>
-      <section>
+      <section id="study-basic-info">
         <Space height={9} />
         <Flex gap="xs">
           <Text as="h5">기본 정보</Text>
@@ -101,22 +101,20 @@ const Header = ({ studyId }: HeaderProps) => {
           </Text>
         </Flex>
       </section>
-      <section id="intro-section">
-        <section aria-labelledby="study-schedule-heading">
-          <Space height={24} />
-          <Flex gap="4">
-            <Text as="h5">일정</Text>
-            <Flex gap="xs">
-              <Text as="h5" color="sub">
-                {studySchedule}
-              </Text>
-              <ItemSeparator />
-              <Text as="h5" color="sub">
-                {totalRound}회차
-              </Text>
-            </Flex>
+      <section aria-labelledby="study-schedule">
+        <Space height={10} />
+        <Flex gap="4">
+          <Text as="h5">일정</Text>
+          <Flex gap="xs">
+            <Text as="h5" color="sub">
+              {studySchedule}
+            </Text>
+            <ItemSeparator />
+            <Text as="h5" color="sub">
+              {totalRound}회차
+            </Text>
           </Flex>
-        </section>
+        </Flex>
       </section>
     </header>
   );
