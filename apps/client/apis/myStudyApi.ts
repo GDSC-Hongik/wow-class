@@ -5,7 +5,7 @@ import type {
   BasicStudyInfoDto,
   DailyTaskListDtoType,
   MyOngoingStudyInfoDto,
-  StudyAnnouncementListDtoType,
+  StudyAnnouncemnetResponseDto,
   StudyCurriculumListDtoType,
 } from "types/dtos/myStudy";
 import type { DailyTaskType } from "types/entities/myStudy";
@@ -34,8 +34,8 @@ export const myStudyApi = {
     return response.data;
   },
   getStudyAnnouncementList: async (studyId: number) => {
-    const response = await fetcher.get<StudyAnnouncementListDtoType>(
-      `${apiPath.basicStudyInfo}/${studyId}/${apiPath.studyAnnouncementList}`,
+    const response = await fetcher.get<StudyAnnouncemnetResponseDto[]>(
+      `${apiPath.studyAnnouncementList}/${studyId}/me`,
       {
         next: { tags: [tags.studyAnnouncementList] },
         cache: "no-store",
