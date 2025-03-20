@@ -1,3 +1,4 @@
+import type { StudyList } from "types/dtos/applyStudy";
 import type {
   AssignmentStatusType,
   AssignmentSubmissionFailureType,
@@ -35,11 +36,16 @@ export interface BasicStudyInfoDto {
   mentorName: string;
 }
 
-interface StudyAnnouncementDto {
-  studyAnnounceId: number;
+export interface StudyAnnouncementDto {
+  studyAnnouncementId: number;
   title: string;
   link: string;
   createdDate: string;
+}
+
+export interface StudyAnnouncemnetResponseDto {
+  study: StudyList;
+  studyAnnouncement: StudyAnnouncementDto;
 }
 
 export type StudyAnnouncementListDtoType = StudyAnnouncementDto[];
