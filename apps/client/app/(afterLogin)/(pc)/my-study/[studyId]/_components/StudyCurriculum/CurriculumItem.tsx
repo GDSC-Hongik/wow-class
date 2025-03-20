@@ -7,6 +7,7 @@ import { padWithZero, parseISODate } from "@wow-class/utils";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import type {
   SessionInfo,
   StudyDetailDashboardDto,
@@ -77,7 +78,7 @@ export const CurriculumItem = ({
   const isAssignmentStudyType = studyType === "ASSIGNMENT";
   return (
     <Flex gap="50px">
-      <section>
+      <section id={`session-info-${position}`}>
         <Text>{position}회차</Text>
         <Text color="sub" style={textStyle} typo="body2">
           {lessonPeriodMonth}월 {lessonPeriodDay}일 <br />
@@ -88,7 +89,7 @@ export const CurriculumItem = ({
         {!isAssignmentStudyType && (
           <>
             <Flex alignItems="center" justifyContent="space-between">
-              <section>
+              <section id={`lesson-info-${position}`}>
                 <Text typo="h3">{lessonTitle}</Text>
                 <Text color="sub" typo="body2">
                   {description}
@@ -104,7 +105,7 @@ export const CurriculumItem = ({
           text={
             <>
               <Flex alignItems="center" justifyContent="space-between">
-                <section>
+                <section id={`assignment-info-${position}`}>
                   <Flex alignItems="center" gap="xs">
                     <Text>{assignmentTitle}</Text>
                     <Link
@@ -132,7 +133,7 @@ export const CurriculumItem = ({
                   </Text>
                 </section>
                 <section>
-                  <Flex alignItems="center" gap="xs">
+                  <Flex alignItems="center" gap={40}>
                     <Button
                       aria-label="check-submitted-assignment"
                       asProp={Link}
@@ -158,7 +159,7 @@ export const CurriculumItem = ({
   );
 };
 
-const textStyle = {
+const textStyle: CSSProperties = {
   whiteSpace: "no-wrap",
 };
 const introduceLinkStyle = css({
@@ -168,6 +169,6 @@ const introduceLinkStyle = css({
   gap: "4px",
 });
 
-const textButtonStyle = {
+const textButtonStyle: CSSProperties = {
   padding: `${space.sm} 0`,
 };
