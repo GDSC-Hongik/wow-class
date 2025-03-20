@@ -7,15 +7,15 @@ import Header from "./_components/Header";
 
 const MobileMyStudyPage = async () => {
   const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
-  return myOngoingStudyInfoData?.studyId ? (
-    <>
-      <Header studyId={myOngoingStudyInfoData?.studyId} />
-      <Space height={34} />
-      <DailyTasks />
-    </>
-  ) : (
-    <EmptyStudy />
-  );
+  // return myOngoingStudyInfoData?.studyId ? (
+  //   <>
+  //     <Header studyId={myOngoingStudyInfoData?.studyId} />
+  //     <Space height={34} />
+  //     <DailyTasks />
+  //   </>
+  // ) : (
+  return <EmptyStudy />;
+  // );
 };
 
 export default MobileMyStudyPage;
