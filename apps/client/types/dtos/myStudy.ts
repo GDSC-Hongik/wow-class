@@ -2,6 +2,8 @@ import type {
   AssignmentStatusType,
   AssignmentSubmissionFailureType,
 } from "types/entities/common/assignment";
+import type { PeriodType } from "types/entities/common/period";
+import type { StudyType } from "types/entities/common/study";
 import type {
   DayOfWeekType,
   SemesterType,
@@ -17,22 +19,20 @@ import type {
 
 export interface BasicStudyInfoDto {
   studyId: number;
-  title: string;
   academicYear: number;
-  semester: SemesterType;
-  studyType: string;
-  notionLink: string;
-  introduction: string;
-  mentorName: string;
+  semester: { academicYear: number; semesterType: SemesterType };
+  type: StudyType;
+  title: string;
+  description: string;
+  descriptionNotionLink: string;
+  totalRound: number;
   dayOfWeek: DayOfWeekType;
-  startTime: Time | null;
-  endTime: Time | null;
-  totalWeek: number;
-  period: {
-    startDate: string;
-    endDate: string;
-    open: boolean;
-  };
+  startTime: Time;
+  endTime: Time;
+  applicationPeriod: PeriodType;
+  openingDate: string;
+  mentorId: number;
+  mentorName: string;
 }
 
 interface StudyAnnouncementDto {
@@ -48,6 +48,9 @@ export interface MyOngoingStudyInfoDto {
   studyId: number;
 }
 
+export interface MyOngoingStudyInfoDtoV2 {
+  studyIds: number[];
+}
 interface StudyCurriculumDto {
   studyDetailId: number;
   period: {

@@ -23,23 +23,23 @@ const Navbar = async () => {
   const showConvertToMentorPageButton =
     manageRole === "ADMIN" || studyRole === "MENTOR";
 
-  // const myStudyList = await studyHistoryApi.getMyAppliedStudyList();
+  const myStudyList = await studyHistoryApi.getMyAppliedStudyList();
   const navMenu = [
-    // {
-    //   href: "/my-study",
-    //   imageUrl: homeImageUrl,
-    //   alt: "home-icon",
-    //   name: "나의 스터디",
-    //   items: myStudyList?.map((studyItem) => {
-    //     const { studyId, title } = studyItem.study;
-    //     return {
-    //       href: `${studyId}`,
-    //       imageUrl: folderImageUrl,
-    //       alt: title,
-    //       name: title,
-    //     };
-    //   }),
-    // },
+    {
+      href: "/my-study",
+      imageUrl: homeImageUrl,
+      alt: "home-icon",
+      name: "나의 스터디",
+      items: myStudyList?.map((studyItem) => {
+        const { studyId, title } = studyItem.study;
+        return {
+          href: `${studyId}`,
+          imageUrl: folderImageUrl,
+          alt: title,
+          name: title,
+        };
+      }),
+    },
     {
       href: "/study-apply",
       imageUrl: scheduleImageUrl,
@@ -81,7 +81,7 @@ const Navbar = async () => {
               alt={menu.alt}
               href={menu.href}
               imageUrl={menu.imageUrl}
-              // items={menu.items}
+              items={menu.items}
               key={menu.name}
               name={menu.name}
             />

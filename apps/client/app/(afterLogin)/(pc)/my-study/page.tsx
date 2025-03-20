@@ -3,7 +3,6 @@ import { myStudyApi } from "apis/myStudyApi";
 
 import {
   DailyTasks,
-  Header,
   StudyAnnouncementList,
   StudyCurriculum,
 } from "./_components";
@@ -14,7 +13,7 @@ const MyStudyPage = async () => {
 
   return myOngoingStudyInfoData?.studyId ? (
     <>
-      <Header />
+      {/* <Header /> */}
       <Space height={48} />
       <DailyTasks />
       <Space height={64} />
