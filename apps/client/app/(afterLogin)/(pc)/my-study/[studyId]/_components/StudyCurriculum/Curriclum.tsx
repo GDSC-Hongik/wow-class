@@ -13,7 +13,10 @@ const Curriculum = async ({ studyId }: { studyId: number }) => {
   }
   return (
     <div>
-      <Text typo="h2">스터디 커리큘럼</Text>
+      <Text as="h2" typo="h2">
+        스터디 커리큘럼
+      </Text>
+      <Space height={10} />
       <Description />
       <Space height={50} />
       <RepositorySubmissionBox
