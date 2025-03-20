@@ -74,7 +74,7 @@ const AttendanceCheckBox = ({
               </Text>
             </Flex>
           </Flex>
-          <Space height={30} />
+          <Space height={45} />
           <AttendanceCheckForm
             attendanceStatus={attendanceStatus}
             studySessionId={studySessionId}
