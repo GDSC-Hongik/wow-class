@@ -24,6 +24,8 @@ export const AssignmentBoxTitle = ({
   const pathname = usePathname();
 
   const isMyStudyPage = pathname === routePath["my-study"];
+  const isAssignmentBeforeSubmission =
+    assignmentHistoryStatus === "BEFORE_SUBMISSION";
   return (
     <>
       <Flex gap="xs">
@@ -44,7 +46,7 @@ export const AssignmentBoxTitle = ({
         <Text as="h2" style={textStyle} typo="h2">
           {assignmentTitle}
         </Text>
-        {assignmentHistoryStatus !== "BEFORE_SUBMISSION" && (
+        {!isAssignmentBeforeSubmission && (
           <Tag color={tagColor ?? "blue"} variant="solid2">
             {tagText}
           </Tag>

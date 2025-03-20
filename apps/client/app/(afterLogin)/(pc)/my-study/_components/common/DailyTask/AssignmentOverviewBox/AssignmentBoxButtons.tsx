@@ -6,7 +6,7 @@ import { studyDetailApi } from "apis/studyDetailApi";
 import { studyHistoryApi } from "apis/studyHistoryApi";
 import { tags } from "constants/tags";
 import Link from "next/link";
-import type { CSSProperties } from "react";
+import type { ComponentProps, CSSProperties } from "react";
 import { toast } from "react-toastify";
 import type { StudyDetailTaskDto } from "types/dtos/studyDetail";
 import type { AssignmentHistoryStatusType } from "types/entities/common/assignment";
@@ -65,37 +65,27 @@ const PrimaryButton = ({
   const iconStroke = buttonsDisabled ? "mono100" : "primary";
   const { primaryButtonText } = buttonTextMap[assignmentHistoryStatus];
 
-  //과제 제출 전 상태
-  if (assignmentHistory === null) {
-    return (
-      <Button
-        asProp={Link}
-        disabled={buttonsDisabled}
-        href={repositoryLink ?? ""}
-        icon={<LinkIcon height={20} stroke={iconStroke} width={20} />}
-        style={buttonStyle}
-        target="_blank"
-        variant="outline"
-      >
-        {primaryButtonText}
-      </Button>
-    );
-  }
-  const {
-    submissionStatus: assignmentSubmissionStatus,
-    submissionFailureType,
-    submissionLink,
-  } = assignmentHistory;
+  let primaryButtonHref = repositoryLink;
 
-  if (
-    assignmentSubmissionStatus === "FAILURE" &&
-    submissionFailureType === "NOT_SUBMITTED"
-  ) {
-    return;
+  if (assignmentHistory) {
+    const {
+      submissionStatus: assignmentSubmissionStatus,
+      submissionFailureType,
+      submissionLink,
+    } = assignmentHistory;
+
+    if (
+      assignmentSubmissionStatus === "FAILURE" &&
+      submissionFailureType === "NOT_SUBMITTED"
+    ) {
+      return null;
+    }
+
+    if (assignmentHistoryStatus === "SUCCEEDED") {
+      primaryButtonHref = submissionLink;
+    }
   }
 
-  const primaryButtonHref =
-    assignmentHistoryStatus === "SUCCEEDED" ? submissionLink : repositoryLink;
   return (
     <Button
       asProp={Link}
@@ -151,18 +141,17 @@ const SecondaryButton = ({
     }
   };
 
+  const commonButtonProps: ComponentProps<typeof Button> = {
+    style: buttonStyle,
+    disabled: buttonsDisabled,
+    icon: <ReloadIcon height={20} stroke={iconStroke} width={20} />,
+    onClick: handleClickSubmissionComplete,
+    children: secondaryButtonText,
+  };
+
   //과제 제출 전 상태
   if (assignmentHistory === null) {
-    return (
-      <Button
-        disabled={buttonsDisabled}
-        icon={<ReloadIcon height={20} stroke={iconStroke} width={20} />}
-        style={buttonStyle}
-        onClick={handleClickSubmissionComplete}
-      >
-        {secondaryButtonText}
-      </Button>
-    );
+    return <Button {...commonButtonProps} />;
   }
   const {
     submissionStatus: assignmentSubmissionStatus,
@@ -178,25 +167,12 @@ const SecondaryButton = ({
     );
   }
 
-  const { year, month, day, hours, minutes } = parseISODate(
-    committedAt as string
-  );
-  const commitText = `최종 수정 일시 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
+  if (assignmentSubmissionStatus === "SUCCESS" && committedAt) {
+    const { year, month, day, hours, minutes } = parseISODate(committedAt);
+    commonButtonProps.subText = `최종 수정 일시 : ${year}년 ${month}월 ${day}일 ${padWithZero(hours)}:${padWithZero(minutes)}`;
+  }
 
-  return (
-    <Button
-      disabled={buttonsDisabled}
-      icon={<ReloadIcon height={20} stroke={iconStroke} width={20} />}
-      style={buttonStyle}
-      {...(assignmentSubmissionStatus === "SUCCESS" &&
-        committedAt && {
-          subText: commitText,
-        })}
-      onClick={handleClickSubmissionComplete}
-    >
-      {secondaryButtonText}
-    </Button>
-  );
+  return <Button {...commonButtonProps} />;
 };
 
 const buttonStyle: CSSProperties = {

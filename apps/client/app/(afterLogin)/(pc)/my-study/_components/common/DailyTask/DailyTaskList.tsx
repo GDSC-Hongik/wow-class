@@ -22,7 +22,7 @@ const DailyTaskList = async ({
               <DailyTaskItem
                 dailyTask={dailyTask}
                 index={index}
-                key={dailyTask.studySession.studySessionId}
+                key={`${dailyTask.studySession.studySessionId}-${dailyTask.studySession.position}-${dailyTask.todoType}`}
               />
             ))}
           </DailyTaskCarousel>
