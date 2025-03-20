@@ -4,8 +4,6 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import { assignmentSubmissionMap } from "constants/assignmentSubmissionMap";
-import { attendanceStatusMapV2 } from "constants/attendanceStatusMap";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,17 +14,17 @@ import type {
 import { space } from "wowds-tokens";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
-import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
+import { AttendanceTagComponent } from "../../../_components/common/AttendanceTagComponent";
 import { studyTypeAtom } from "../../../_contexts/atoms";
 
 export const CurriculumItem = ({
   session,
   attendanceStatus,
-  assignmentHistoryStatus,
   assignmentHistory,
   studyHistory,
+  assignmentHistoryStatus,
 }: SessionInfo & {
   studyHistory: StudyDetailDashboardDto["studyHistory"];
 }) => {
@@ -69,15 +67,14 @@ export const CurriculumItem = ({
  ${assignmentEndPeriodDay}일 ${padWithZero(assignmentEndPeriodHours)}:
   ${padWithZero(assignmentEndPeriodMinutes)}`;
 
-  const { label: attendanceStatusLabel, color: attendanceStatusColor } =
-    attendanceStatusMapV2[attendanceStatus];
-
   const isAssignmentBeforeSubmission =
     assignmentHistoryStatus === "BEFORE_SUBMISSION";
   const assignmentButtonHref =
     assignmentHistory?.submissionStatus === "SUCCESS"
       ? assignmentHistory.submissionLink
       : repositoryLink;
+
+  const isAssignmentStudyType = studyType === "ASSIGNMENT";
   return (
     <Flex gap="50px">
       <section>
@@ -88,7 +85,7 @@ export const CurriculumItem = ({
         </Text>
       </section>
       <Flex flexDirection="column" width="100%">
-        {studyType !== "ASSIGNMENT" && (
+        {!isAssignmentStudyType && (
           <>
             <Flex alignItems="center" justifyContent="space-between">
               <section>
@@ -97,11 +94,7 @@ export const CurriculumItem = ({
                   {description}
                 </Text>
               </section>
-              {attendanceStatus !== "NOT_LIVE" && (
-                <Tag color={attendanceStatusColor} variant="solid2">
-                  {attendanceStatusLabel}
-                </Tag>
-              )}
+              <AttendanceTagComponent attendanceStatus={attendanceStatus} />
             </Flex>
             <Space height={18} />
           </>
@@ -151,15 +144,9 @@ export const CurriculumItem = ({
                     >
                       제출한 과제 확인
                     </Button>
-                    <Tag
-                      variant="solid2"
-                      color={
-                        assignmentSubmissionMap[assignmentHistoryStatus]
-                          .tagColor
-                      }
-                    >
-                      {assignmentSubmissionMap[assignmentHistoryStatus].tagText}
-                    </Tag>
+                    <AttendanceTagComponent
+                      attendanceStatus={attendanceStatus}
+                    />
                   </Flex>
                 </section>
               </Flex>
