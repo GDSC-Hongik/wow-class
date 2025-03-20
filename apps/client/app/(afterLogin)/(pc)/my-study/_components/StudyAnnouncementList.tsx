@@ -24,12 +24,14 @@ const StudyAnnouncementList = async () => {
         스터디 공지
       </Text>
       {studyAnnouncementListData?.length ? (
-        studyAnnouncementListData?.map(
-          ({ studyAnnounceId, title, link, createdDate }, index) => (
+        studyAnnouncementListData?.map(({ studyAnnouncement }, index) => {
+          const { studyAnnouncementId, title, link, createdDate } =
+            studyAnnouncement;
+          return (
             <Link
               className={studyAnnouncementListBoxStyle}
               href={link}
-              key={studyAnnounceId}
+              key={studyAnnouncementId}
               target="_blank"
               style={{
                 backgroundColor:
@@ -43,8 +45,8 @@ const StudyAnnouncementList = async () => {
                 {formatISODateWithDot(createdDate)}
               </Text>
             </Link>
-          )
-        )
+          );
+        })
       ) : (
         <Flex alignItems="center" direction="column" gap={24} paddingY={38}>
           <Image

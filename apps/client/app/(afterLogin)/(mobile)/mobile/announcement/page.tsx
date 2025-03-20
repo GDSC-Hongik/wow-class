@@ -26,12 +26,14 @@ const MobileStudyAnnouncementPage = async () => {
       </Text>
       <Flex direction="column" gap="12px" justifyContent="center">
         {studyAnnouncementListData?.length ? (
-          studyAnnouncementListData?.map(
-            ({ studyAnnounceId, title, createdDate, link }) => (
+          studyAnnouncementListData?.map(({ studyAnnouncement }) => {
+            const { studyAnnouncementId, title, createdDate, link } =
+              studyAnnouncement;
+            return (
               <Link
                 className={studyAnnouncementListBoxStyle}
                 href={link}
-                key={studyAnnounceId}
+                key={studyAnnouncementId}
                 target="_blank"
               >
                 <Text
@@ -45,8 +47,8 @@ const MobileStudyAnnouncementPage = async () => {
                   {formatISODateWithDot(createdDate)}
                 </Text>
               </Link>
-            )
-          )
+            );
+          })
         ) : (
           <Flex alignItems="center" direction="column" gap={24} paddingY={38}>
             <Image
