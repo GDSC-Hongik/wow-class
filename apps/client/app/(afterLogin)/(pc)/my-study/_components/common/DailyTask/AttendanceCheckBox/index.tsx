@@ -31,7 +31,7 @@ const AttendanceCheckBox = ({
     day: startDay,
     hours: endHours,
     minutes: endMinutes,
-  } = parseISODate(lessonPeriod?.startDate as string);
+  } = parseISODate(lessonPeriod?.endDate as string);
 
   const attendancePeriod = `${startYear}년 ${startMonth}월 ${startDay}일 00:00 - ${padWithZero(endHours)}:${padWithZero(endMinutes)}까지`;
   const pathname = usePathname();
