@@ -34,7 +34,7 @@ export interface BasicStudyInfoDto {
   mentorId: number;
   mentorName: string;
 }
-interface StudyAnnouncementDto {
+export interface StudyAnnouncementDto {
   studyAnnouncementId: number;
   title: string;
   link: string;
@@ -45,8 +45,6 @@ interface StudyAnnouncementDtoV2 {
   study: BasicStudyInfoDto;
   studyAnnouncement: StudyAnnouncementDto;
 }
-
-export type StudyAnnouncementListDtoType = StudyAnnouncementDto[];
 
 export type StudyAnnouncementListDtoV2Type = StudyAnnouncementDtoV2[];
 

@@ -35,9 +35,9 @@ export const myStudyApi = {
   },
   getAllStudyAnnouncementList: async () => {
     const response = await fetcher.get<StudyAnnouncementListDtoV2Type>(
-      apiPath.studyAnnouncementList,
+      apiPath.allStudyAnnouncementList,
       {
-        next: { tags: [tags.studyAnnouncementList] },
+        next: { tags: [tags.allStudyAnnouncementList] },
         cache: "no-store",
       }
     );

@@ -3,6 +3,7 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { formatISODateWithDot } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
+import { studyDetailApi } from "apis/studyDetailApi";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -31,7 +32,7 @@ const MobileStudyAnnouncementPage = async () => {
               <Link
                 className={studyAnnouncementListBoxStyle}
                 href={link}
-                key={studyAnnounceId}
+                key={studyAnnouncementId}
                 target="_blank"
               >
                 <Text
@@ -45,8 +46,8 @@ const MobileStudyAnnouncementPage = async () => {
                   {formatISODateWithDot(createdDate)}
                 </Text>
               </Link>
-            )
-          )
+            );
+          })
         ) : (
           <Flex alignItems="center" direction="column" gap={24} paddingY={38}>
             <Image

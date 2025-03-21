@@ -1,6 +1,7 @@
 import { fetcher } from "@wow-class/utils";
 import { apiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
+import type { StudyAnnouncementListDtoV2Type } from "types/dtos/myStudy";
 import type {
   StudyDetailDashboardDto,
   StudyDetailTaskDto,
@@ -19,6 +20,19 @@ export const studyDetailApi = {
 
     return response.data;
   },
+
+  getStudyDetailAnnouncementList: async (studyId: number) => {
+    const response = await fetcher.get<StudyAnnouncementListDtoV2Type>(
+      `${apiPath.studyDetailAnnouncementList}/${studyId}/me`,
+      {
+        next: { tags: [tags.studyDetailAnnouncementList] },
+        cache: "no-store",
+      }
+    );
+
+    return response.data;
+  },
+
   getStudyDetailTaskList: async (studyId: number) => {
     const response = await fetcher.get<StudyDetailTaskDto<DailyTaskType>[]>(
       `${apiPath.studyDetail}/${studyId}/me/todos`,

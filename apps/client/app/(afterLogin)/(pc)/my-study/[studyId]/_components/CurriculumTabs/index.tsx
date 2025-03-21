@@ -1,10 +1,10 @@
 import { Space } from "@wow-class/ui";
-import React from "react";
 import Tabs from "wowds-ui/Tabs";
 import TabsContent from "wowds-ui/TabsContent";
 import TabsItem from "wowds-ui/TabsItem";
 import TabsList from "wowds-ui/TabsList";
 
+import AnnouncementList from "../StudyAnnouncement/AnnouncementList";
 import Curriculum from "../StudyCurriculum/Curriclum";
 
 const CurriculumTabs = ({ studyId }: { studyId: number }) => {
@@ -18,7 +18,9 @@ const CurriculumTabs = ({ studyId }: { studyId: number }) => {
         <Space height={40} />
         <Curriculum studyId={studyId} />
       </TabsContent>
-      <TabsContent value="announcement">공지</TabsContent>
+      <TabsContent value="announcement">
+        <AnnouncementList studyId={studyId} />
+      </TabsContent>
     </Tabs>
   );
 };

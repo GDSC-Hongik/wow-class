@@ -1,3 +1,4 @@
+import { css } from "@styled-system/css";
 import { Space, Text } from "@wow-class/ui";
 import { studyDetailApi } from "apis/studyDetailApi";
 
@@ -12,7 +13,7 @@ const Curriculum = async ({ studyId }: { studyId: number }) => {
     return;
   }
   return (
-    <div>
+    <div className={containerStyle}>
       <Text as="h2" typo="h2">
         스터디 커리큘럼
       </Text>
@@ -47,4 +48,7 @@ const Curriculum = async ({ studyId }: { studyId: number }) => {
     </div>
   );
 };
+
+const containerStyle = css({ paddingLeft: "1rem" });
+
 export default Curriculum;
