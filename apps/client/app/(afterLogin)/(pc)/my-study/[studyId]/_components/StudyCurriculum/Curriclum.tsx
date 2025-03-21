@@ -13,8 +13,7 @@ const Curriculum = async ({ studyId }: { studyId: number }) => {
     return;
   }
   return (
-
-    <div>
+    <div className={containerStyle}>
       <Text as="h2" typo="h2">
         스터디 커리큘럼
       </Text>
@@ -50,6 +49,6 @@ const Curriculum = async ({ studyId }: { studyId: number }) => {
   );
 };
 
-const containerStyle = css({ paddingTop: "2.5rem", paddingLeft: "1rem" });
+const containerStyle = css({ paddingLeft: "1rem" });
 
 export default Curriculum;
