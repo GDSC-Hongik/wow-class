@@ -25,35 +25,35 @@ const AttendanceStatusBox = async ({
 }: AttendanceStatusBoxProps) => {
   const myOngoingStudyInfoResponse = await myStudyApi.getMyOngoingStudyInfo();
 
-  if (!myOngoingStudyInfoResponse?.studyId) {
-    return null;
-  }
+  // if (!myOngoingStudyInfoResponse?.studyId) {
+  //   return null;
+  // }
 
-  const basicStudyInfoResponse = await myStudyApi.getBasicStudyInfo(
-    myOngoingStudyInfoResponse?.studyId
-  );
-  const studyName = basicStudyInfoResponse?.title;
-  const mentorName = basicStudyInfoResponse?.mentorName;
-  const {
-    year: startYear,
-    month: startMonth,
-    day: startDay,
-    hours: endHours,
-    minutes: endMinutes,
-  } = parseISODate(deadLine);
+  // const basicStudyInfoResponse = await myStudyApi.getBasicStudyInfo(
+  //   myOngoingStudyInfoResponse?.studyId
+  // );
+  // const studyName = basicStudyInfoResponse?.title;
+  // const mentorName = basicStudyInfoResponse?.mentorName;
+  // const {
+  //   year: startYear,
+  //   month: startMonth,
+  //   day: startDay,
+  //   hours: endHours,
+  //   minutes: endMinutes,
+  // } = parseISODate(deadLine);
 
-  const attendancePeriod = `${startYear}년 ${startMonth}월 ${startDay}일 00:00 - ${padWithZero(endHours)}:${padWithZero(endMinutes)}까지`;
-  const { label: attendanceStatusLabel, color: attendanceStatusColor } =
-    attendanceStatusMap[attendanceStatus];
+  // const attendancePeriod = `${startYear}년 ${startMonth}월 ${startDay}일 00:00 - ${padWithZero(endHours)}:${padWithZero(endMinutes)}까지`;
+  // const { label: attendanceStatusLabel, color: attendanceStatusColor } =
+  //   attendanceStatusMap[attendanceStatus];
 
-  const attendanceButtonText =
-    attendanceStatus === "ATTENDED" ? "출석 체크 완료" : "출석 체크하기";
+  // const attendanceButtonText =
+  //   attendanceStatus === "ATTENDED" ? "출석 체크 완료" : "출석 체크하기";
   return (
     <Box
       style={dailyTaskBoxStyle}
       text={
         <Flex direction="column" gap="18px">
-          <Flex className={dailyTaskBoxContentContainerStyle} gap="18px">
+          {/* <Flex className={dailyTaskBoxContentContainerStyle} gap="18px">
             <Text
               as="span"
               className={attendanceTextStyle}
@@ -90,7 +90,7 @@ const AttendanceStatusBox = async ({
             style={attendanceButtonStyle}
           >
             {attendanceButtonText}
-          </Button>
+          </Button> */}
         </Flex>
       }
     />

@@ -8,20 +8,20 @@ import DailyTaskItem from "./DailyTaskItem";
 const DailyTasks = async () => {
   const myOngoingStudyData = await myStudyApi.getMyOngoingStudyInfo();
 
-  if (!myOngoingStudyData?.studyId) {
-    return null;
-  }
+  // if (!myOngoingStudyData?.studyId) {
+  //   return null;
+  // }
 
-  const dailyTaskData = await myStudyApi.getDailyTaskList(
-    myOngoingStudyData?.studyId
-  );
+  // const dailyTaskData = await myStudyApi.getDailyTaskList(
+  //   myOngoingStudyData?.studyId
+  // );
 
   return (
     <>
       <Text typo="h2">오늘의 할 일</Text>
       <Space height={14} />
       <Flex direction="column" gap="12px">
-        {dailyTaskData?.length ? (
+        {/* {dailyTaskData?.length ? (
           dailyTaskData.map((dailyTask, index) => (
             <DailyTaskItem
               dailyTask={dailyTask}
@@ -41,7 +41,7 @@ const DailyTasks = async () => {
               아직 할 일이 없어요.
             </Text>
           </Flex>
-        )}
+        )} */}
       </Flex>
     </>
   );

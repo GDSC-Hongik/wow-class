@@ -9,15 +9,15 @@ import Link from "next/link";
 import EmptyStudy from "../my-study/_components/EmptyStudy";
 
 const MobileStudyAnnouncementPage = async () => {
-  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+  // const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
-  if (!myOngoingStudyInfoData?.studyId) {
-    return <EmptyStudy />;
-  }
+  // if (!myOngoingStudyInfoData?.studyId) {
+  //   return <EmptyStudy />;
+  // }
 
-  const studyAnnouncementListData = await myStudyApi.getStudyAnnouncementList(
-    myOngoingStudyInfoData?.studyId
-  );
+  // const studyAnnouncementListData = await myStudyApi.getStudyAnnouncementList(
+  //   myOngoingStudyInfoData?.studyId
+  // );
 
   return (
     <section aria-label="study-announcement-list">
@@ -25,7 +25,7 @@ const MobileStudyAnnouncementPage = async () => {
         스터디 공지
       </Text>
       <Flex direction="column" gap="12px" justifyContent="center">
-        {studyAnnouncementListData?.length ? (
+        {/* {studyAnnouncementListData?.length ? (
           studyAnnouncementListData?.map(
             ({ studyAnnounceId, title, createdDate, link }) => (
               <Link
@@ -59,7 +59,7 @@ const MobileStudyAnnouncementPage = async () => {
               올라온 공지가 없어요.
             </Text>
           </Flex>
-        )}
+        )} */}
       </Flex>
     </section>
   );

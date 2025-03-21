@@ -34,23 +34,36 @@ export interface BasicStudyInfoDto {
   mentorId: number;
   mentorName: string;
 }
-
 interface StudyAnnouncementDto {
-  studyAnnounceId: number;
+  studyAnnouncementId: number;
   title: string;
   link: string;
   createdDate: string;
 }
 
+interface StudyAnnouncementDtoV2 {
+  study: BasicStudyInfoDto;
+  studyAnnouncement: StudyAnnouncementDto;
+}
+
 export type StudyAnnouncementListDtoType = StudyAnnouncementDto[];
 
-export interface MyOngoingStudyInfoDto {
+export type StudyAnnouncementListDtoV2Type = StudyAnnouncementDtoV2[];
+
+interface OngoingStydyInfo {
   studyId: number;
+  studyName: string;
+  studyType: StudyType;
+  semester: {
+    academicYear: number;
+    semesterType: SemesterType;
+  };
+  mentorId: number;
+  mentorName: string;
 }
 
-export interface MyOngoingStudyInfoDtoV2 {
-  studyIds: number[];
-}
+export type MyOngoingStudyInfoDtoV2 = OngoingStydyInfo[];
+
 interface StudyCurriculumDto {
   studyDetailId: number;
   period: {

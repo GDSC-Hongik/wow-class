@@ -5,18 +5,10 @@ import { formatISODateWithDot } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
 import Image from "next/image";
 import Link from "next/link";
-import { color } from "wowds-tokens";
 
 const StudyAnnouncementList = async () => {
-  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
-
-  if (!myOngoingStudyInfoData?.studyId) {
-    return;
-  }
-
-  const studyAnnouncementListData = await myStudyApi.getStudyAnnouncementList(
-    myOngoingStudyInfoData?.studyId
-  );
+  const studyAnnouncementListData =
+    await myStudyApi.getAllStudyAnnouncementList();
 
   return (
     <section aria-label="study-announcement-list">
@@ -24,27 +16,28 @@ const StudyAnnouncementList = async () => {
         스터디 공지
       </Text>
       {studyAnnouncementListData?.length ? (
-        studyAnnouncementListData?.map(
-          ({ studyAnnounceId, title, link, createdDate }, index) => (
-            <Link
-              className={studyAnnouncementListBoxStyle}
-              href={link}
-              key={studyAnnounceId}
-              target="_blank"
-              style={{
-                backgroundColor:
-                  index === 0 ? `${color.monoBackgroundPressed}` : "white",
-              }}
+        studyAnnouncementListData?.map(({ study, studyAnnouncement }) => (
+          <Link
+            className={studyAnnouncementListBoxStyle}
+            href={studyAnnouncement.link}
+            key={`announcemnt-${study.studyId}-${studyAnnouncement.studyAnnouncementId}`}
+            target="_blank"
+          >
+            <Text
+              as="h3"
+              color="sub"
+              style={{ flexShrink: 0, width: 128, wordBreak: "keep-all" }}
             >
-              <Text as="h3" className={studyAnnouncementTitleStyle} typo="h3">
-                {title}
-              </Text>
-              <Text as="h3" className={studyAnnouncementDateStyle} typo="h3">
-                {formatISODateWithDot(createdDate)}
-              </Text>
-            </Link>
-          )
-        )
+              {study.title}
+            </Text>
+            <Text as="h3" className={studyAnnouncementTitleStyle} typo="h3">
+              {studyAnnouncement.title}
+            </Text>
+            <Text as="h3" className={studyAnnouncementDateStyle} typo="h3">
+              {formatISODateWithDot(studyAnnouncement.createdDate)}
+            </Text>
+          </Link>
+        ))
       ) : (
         <Flex alignItems="center" direction="column" gap={24} paddingY={38}>
           <Image
