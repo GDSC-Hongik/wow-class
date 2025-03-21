@@ -10,7 +10,7 @@ const MyPage = () => {
       <Space height={16} />
       <MyInfoBox />
       <Space height={64} />
-      {/* <CompletedStudy /> */}
+      <CompletedStudy />
     </>
   );
 };
