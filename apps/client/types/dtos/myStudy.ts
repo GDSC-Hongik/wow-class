@@ -1,4 +1,3 @@
-import type { StudyList } from "types/dtos/applyStudy";
 import type {
   AssignmentStatusType,
   AssignmentSubmissionFailureType,
