@@ -1,5 +1,3 @@
-"use client";
-
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { AwardIcon, StarCheckIcon, Text } from "@wow-class/ui";
