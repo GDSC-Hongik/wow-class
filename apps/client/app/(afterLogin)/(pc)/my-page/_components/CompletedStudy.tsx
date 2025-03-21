@@ -1,3 +1,5 @@
+"use client";
+
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { AwardIcon, StarCheckIcon, Text } from "@wow-class/ui";
@@ -11,7 +13,7 @@ import Tag from "wowds-ui/Tag";
 
 export const CompletedStudy = async () => {
   const data = await studyHistoryApi.getMyAppliedStudyList();
-  if (!data) return null;
+  if (!data) return;
 
   return (
     <Table fullWidth>
