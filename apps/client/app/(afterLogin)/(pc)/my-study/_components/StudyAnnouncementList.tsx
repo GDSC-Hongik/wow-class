@@ -3,6 +3,7 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { formatISODateWithDot } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
+import { studyDetailApi } from "apis/studyDetailApi";
 import Image from "next/image";
 import Link from "next/link";
 import { color } from "wowds-tokens";
@@ -14,9 +15,10 @@ const StudyAnnouncementList = async () => {
     return;
   }
 
-  const studyAnnouncementListData = await myStudyApi.getStudyAnnouncementList(
-    myOngoingStudyInfoData?.studyId
-  );
+  const studyAnnouncementListData =
+    await studyDetailApi.getStudyDetailAnnouncementList(
+      myOngoingStudyInfoData?.studyId
+    );
 
   return (
     <section aria-label="study-announcement-list">
