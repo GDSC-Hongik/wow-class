@@ -4,6 +4,7 @@ import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
+import { assignmentSubmissionMap } from "constants/assignmentSubmissionMap";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,11 +16,11 @@ import type {
 import { space } from "wowds-tokens";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
+import Tag from "wowds-ui/Tag";
 import TextButton from "wowds-ui/TextButton";
 
 import AttendanceTagComponent from "../../../_components/common/AttendanceTagComponent";
 import { studyTypeAtom } from "../../../_contexts/atoms";
-
 export const CurriculumItem = ({
   session,
   attendanceStatus,
@@ -145,9 +146,15 @@ export const CurriculumItem = ({
                     >
                       제출한 과제 확인
                     </Button>
-                    <AttendanceTagComponent
-                      attendanceStatus={attendanceStatus}
-                    />
+                    <Tag
+                      variant="solid2"
+                      color={
+                        assignmentSubmissionMap[assignmentHistoryStatus]
+                          .tagColor
+                      }
+                    >
+                      {assignmentSubmissionMap[assignmentHistoryStatus].tagText}
+                    </Tag>
                   </Flex>
                 </section>
               </Flex>
