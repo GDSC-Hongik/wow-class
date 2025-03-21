@@ -1,15 +1,10 @@
 import { Space } from "@wow-class/ui";
 import { myStudyApi } from "apis/myStudyApi";
 import Divider from "wowds-ui/Divider";
-import Tabs from "wowds-ui/Tabs";
-import TabsContent from "wowds-ui/TabsContent";
-import TabsItem from "wowds-ui/TabsItem";
-import TabsList from "wowds-ui/TabsList";
 
 import CurriculumTabs from "./_components/CurriculumTabs";
 import DailyTasksContainer from "./_components/DailyTasksContainer";
 import Header from "./_components/Header";
-
 
 export const generateMetadata = async ({
   params: { studyId },
