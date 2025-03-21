@@ -3,7 +3,6 @@ import { apiPath } from "constants/apiPath";
 import { tags } from "constants/tags";
 import type {
   AssignmentHistoryDto,
-  CompletedStudyDto,
   MyAppliedStudyListApiResponseDto,
 } from "types/dtos/studyHistory";
 
@@ -36,23 +35,12 @@ export const studyHistoryApi = {
 
     return { success: response.ok };
   },
-  getMyCompletedStudy: async () => {
-    const response = await fetcher.get<CompletedStudyDto[]>(
-      `${apiPath.studyHistory}/me/complete`,
-      {
-        next: { tags: [tags.studyHistory] },
-        cache: "force-cache",
-      }
-    );
-
-    return response.data;
-  },
   getMyAppliedStudyList: async () => {
     const response = await fetcher.get<MyAppliedStudyListApiResponseDto[]>(
       apiPath.myAppliedStudy,
       {
         next: { tags: [tags.myAppliedStudyList] },
-        cache: "force-cache",
+        cache: "no-store",
       }
     );
 
