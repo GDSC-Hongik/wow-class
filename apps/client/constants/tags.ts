@@ -2,7 +2,8 @@ export const enum tags {
   dashboard = "dashboard",
   studyApply = "studyApply",
   basicStudyInfo = "basicStudyInfo",
-  studyAnnouncementList = "studyAnnouncementList",
+  studyDetailAnnouncementList = "studyAnnouncementList",
+  allStudyAnnouncementList = "allStudyAnnouncementList",
   myOngoingStudy = "myOngoingStudy",
   studyHistory = "studyHistory",
   studyDetailDashboard = "studyDetailDashboard",
@@ -11,4 +12,6 @@ export const enum tags {
   dailyTask = "dailyTask",
   myAccountInfo = "myAccountInfo",
   myAppliedStudyList = "myAppliedStudyList",
+  myStudyDetailDailyTask = "myStudyDetailDailyTask",
+  allStudyTaskList = "allStudyTaskList",
 }

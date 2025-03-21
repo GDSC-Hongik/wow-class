@@ -22,9 +22,20 @@ export type StudyCurriculumType = {
   status?: StudyAssignmentStatusType;
 };
 
+export type CreateStudyAnnouncementType = {
+  studyId: number;
+  title: string;
+  link: string;
+};
+
 export type StudyAnnouncementType = {
   title: string;
   link: string;
 };
 
 export type StudySemesterType = "FIRST" | "SECOND";
+
+export type StudySemesterWithYearType = {
+  academicYear: number;
+  semesterType: StudySemesterType;
+};

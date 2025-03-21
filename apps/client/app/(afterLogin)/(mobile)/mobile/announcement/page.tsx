@@ -3,21 +3,22 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { formatISODateWithDot } from "@wow-class/utils";
 import { myStudyApi } from "apis/myStudyApi";
+import { studyDetailApi } from "apis/studyDetailApi";
 import Image from "next/image";
 import Link from "next/link";
 
 import EmptyStudy from "../my-study/_components/EmptyStudy";
 
 const MobileStudyAnnouncementPage = async () => {
-  const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
+  // const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
-  if (!myOngoingStudyInfoData?.studyId) {
-    return <EmptyStudy />;
-  }
+  // if (!myOngoingStudyInfoData?.studyId) {
+  //   return <EmptyStudy />;
+  // }
 
-  const studyAnnouncementListData = await myStudyApi.getStudyAnnouncementList(
-    myOngoingStudyInfoData?.studyId
-  );
+  // const studyAnnouncementListData = await myStudyApi.getStudyAnnouncementList(
+  //   myOngoingStudyInfoData?.studyId
+  // );
 
   return (
     <section aria-label="study-announcement-list">
@@ -25,13 +26,13 @@ const MobileStudyAnnouncementPage = async () => {
         스터디 공지
       </Text>
       <Flex direction="column" gap="12px" justifyContent="center">
-        {studyAnnouncementListData?.length ? (
+        {/* {studyAnnouncementListData?.length ? (
           studyAnnouncementListData?.map(
             ({ studyAnnounceId, title, createdDate, link }) => (
               <Link
                 className={studyAnnouncementListBoxStyle}
                 href={link}
-                key={studyAnnounceId}
+                key={studyAnnouncementId}
                 target="_blank"
               >
                 <Text
@@ -45,8 +46,8 @@ const MobileStudyAnnouncementPage = async () => {
                   {formatISODateWithDot(createdDate)}
                 </Text>
               </Link>
-            )
-          )
+            );
+          })
         ) : (
           <Flex alignItems="center" direction="column" gap={24} paddingY={38}>
             <Image
@@ -59,7 +60,7 @@ const MobileStudyAnnouncementPage = async () => {
               올라온 공지가 없어요.
             </Text>
           </Flex>
-        )}
+        )} */}
       </Flex>
     </section>
   );

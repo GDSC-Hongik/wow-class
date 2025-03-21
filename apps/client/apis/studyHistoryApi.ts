@@ -19,20 +19,18 @@ export const studyHistoryApi = {
 
     return response.data;
   },
-  putRepository: async (studyHistoryId: number, repositoryLink: string) => {
+  putRepository: async (studyId: number, repositoryLink: string) => {
     const response = await fetcher.put(
-      `${apiPath.studyHistory}/${studyHistoryId}/repository`,
-      {
-        repositoryLink,
-      }
+      `${apiPath.studyHistory}/repositories/me`,
+      { studyId, repositoryLink }
     );
 
     return { success: response.ok };
   },
 
-  submitAssignment: async (studyDetailId: number) => {
+  submitAssignment: async (studySessionId: number) => {
     const response = await fetcher.post(
-      `${apiPath.studyHistory}/submit?studyDetailId=${studyDetailId}`,
+      `${apiPath.assignmentHistory}/submit?studySessionId=${studySessionId}`,
       null
     );
 

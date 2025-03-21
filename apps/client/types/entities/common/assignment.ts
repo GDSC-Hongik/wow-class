@@ -1,4 +1,4 @@
-export type AssignmentSubmissionStatusType = "FAILURE" | "SUCCESS" | null;
+export type AssignmentSubmissionStatusType = "FAILURE" | "SUCCESS";
 export type AssignmentStatusType = "NONE" | "OPEN" | "CANCELED";
 export type AssignmentSubmissionFailureType =
   | "NONE"
@@ -6,3 +6,8 @@ export type AssignmentSubmissionFailureType =
   | "WORD_COUNT_INSUFFICIENT"
   | "LOCATION_UNIDENTIFIABLE"
   | "UNKNOWN";
+
+export type AssignmentHistoryStatusType =
+  | "BEFORE_SUBMISSION"
+  | "SUCCEEDED"
+  | "FAILED";
