@@ -9,7 +9,7 @@ import type { StudyList } from "./applyStudy";
 
 interface StudyHistory {
   studyHistoryId: number;
-  status: AssignmentStatusType;
+  status: "NONE" | "COMPLETED";
   memberId: number;
   studyId: number;
 }
