@@ -4,14 +4,15 @@ import { tags } from "constants/tags";
 import type {
   BasicStudyInfoDto,
   DailyTaskListDtoType,
-  MyOngoingStudyInfoDto,
+  MyOngoingStudyInfoDtoV2,
+  StudyAnnouncementListDtoV2Type,
   StudyCurriculumListDtoType,
 } from "types/dtos/myStudy";
 import type { DailyTaskType } from "types/entities/myStudy";
 
 export const myStudyApi = {
   getMyOngoingStudyInfo: async () => {
-    const response = await fetcher.get<MyOngoingStudyInfoDto>(
+    const response = await fetcher.get<MyOngoingStudyInfoDtoV2>(
       apiPath.myOngoingStudy,
       {
         next: { tags: [tags.myOngoingStudy] },
@@ -32,8 +33,16 @@ export const myStudyApi = {
 
     return response.data;
   },
-
-
+  getAllStudyAnnouncementList: async () => {
+    const response = await fetcher.get<StudyAnnouncementListDtoV2Type>(
+      apiPath.allStudyAnnouncementList,
+      {
+        next: { tags: [tags.allStudyAnnouncementList] },
+        cache: "no-store",
+      }
+    );
+    return response.data;
+  },
   checkAttendance: async (studySessionId: number, attendanceNumber: string) => {
     const response = await fetcher.post(
       `${apiPath.attendance}?studySessionId=${studySessionId}`,

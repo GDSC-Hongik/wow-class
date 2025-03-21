@@ -8,27 +8,27 @@ import type {
   AssignmentSubmissionStatusType,
   StudyDifficultyType,
 } from "types/entities/myStudy";
-import Tag from "wowds-ui/Tag";
+import type Tag from "wowds-ui/Tag";
 
 import EmptyStudy from "../my-study/_components/EmptyStudy";
 
 const MobileStudyCurriculumPage = async () => {
   const myOngoingStudyInfoData = await myStudyApi.getMyOngoingStudyInfo();
 
-  if (!myOngoingStudyInfoData?.studyId) {
-    return <EmptyStudy />;
-  }
+  // if (!myOngoingStudyInfoData?.studyId) {
+  //   return <EmptyStudy />;
+  // }
 
-  const studyCurriculumData = await myStudyApi.getStudyCurriculumList(
-    myOngoingStudyInfoData?.studyId
-  );
+  // const studyCurriculumData = await myStudyApi.getStudyCurriculumList(
+  //   myOngoingStudyInfoData?.studyId
+  // );
 
   return (
     <section aria-label="study-curriculum">
       <Text typo="h1">커리큘럼</Text>
       <Space height={40} />
       <Flex direction="column" gap="12px">
-        {studyCurriculumData?.map(
+        {/* {studyCurriculumData?.map(
           (
             {
               week,
@@ -124,7 +124,7 @@ const MobileStudyCurriculumPage = async () => {
               </Flex>
             );
           }
-        )}
+        )} */}
       </Flex>
     </section>
   );
