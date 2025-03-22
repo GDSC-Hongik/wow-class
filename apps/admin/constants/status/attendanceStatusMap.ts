@@ -8,7 +8,7 @@ export const attendanceStatusMap: Record<
 > = {
   ONGOING_ATTENDANCE: { label: "진행중", color: "blue" },
   BEFORE_ATTENDANCE: { label: "진행전", color: "grey" },
-  AFTER_ATTENDANCE: { label: "진행완료", color: "green" },
+  AFTER_ATTENDANCE: { label: "진행완료", color: "grey" },
 };
 
 export const attendanceTaskStatusMap: Record<
