@@ -15,10 +15,10 @@ const MyOngoingStudy = async ({ myOngoingStudyData }: MyOngoingStudyProps) => {
       <Flex direction="column" gap="xl" position="relative">
         <Text typo="h2">수강 중인 스터디</Text>
         {myOngoingStudyData?.length ? (
-          <Flex flexWrap="nowrap" gap={20} overflowX="scroll">
+          <Flex flexWrap="nowrap" gap={20} overflowX="auto">
             {myOngoingStudyData.map(
               ({ studyId, mentorName, studyName, semester, studyType }) => (
-                <Link href={`my-study/${studyId}`}>
+                <Link href={`my-study/${studyId}`} key={studyId}>
                   <Box
                     key={studyId}
                     style={{ width: 376, flexShrink: 0 }}
