@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import { NavItem } from "@wow-class/ui";
 import { dashboardApi } from "apis/dashboardApi";
-import { studyHistoryApi } from "apis/studyHistoryApi";
+import { myStudyApi } from "apis/myStudyApi";
 import { routePath } from "constants/routePath";
 import Image from "next/image";
 import Link from "next/link";
@@ -23,7 +23,7 @@ const Navbar = async () => {
   const showConvertToMentorPageButton =
     manageRole === "ADMIN" || studyRole === "MENTOR";
 
-  const myStudyList = await studyHistoryApi.getMyAppliedStudyList();
+  const myStudyList = await myStudyApi.getMyOngoingStudyInfo();
   const navMenu = [
     {
       href: "/my-study",
@@ -31,12 +31,12 @@ const Navbar = async () => {
       alt: "home-icon",
       name: "나의 스터디",
       items: myStudyList?.map((studyItem) => {
-        const { studyId, title } = studyItem.study;
+        const { studyId, studyName } = studyItem;
         return {
           href: `${studyId}`,
           imageUrl: folderImageUrl,
-          alt: title,
-          name: title,
+          alt: studyName,
+          name: studyName,
         };
       }),
     },
