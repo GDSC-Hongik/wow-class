@@ -2,6 +2,7 @@ import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import { attendanceStatusMap } from "constants/status/attendanceStatusMap";
+import { getNowIsAfterDate } from "utils/geIsAfterDate";
 import getIsToday from "utils/getIsToday";
 import Box from "wowds-ui/Box";
 import Tag from "wowds-ui/Tag";
@@ -21,7 +22,9 @@ const AttendanceItem = ({
 
   const state = getIsToday(deadLine)
     ? "ONGOING_ATTENDANCE"
-    : "BEFORE_ATTENDANCE";
+    : getNowIsAfterDate(deadLine)
+      ? "AFTER_ATTENDANCE"
+      : "BEFORE_ATTENDANCE";
   const { label, color } = attendanceStatusMap[state];
 
   return (
