@@ -27,7 +27,7 @@ export const myStudyApi = {
       `${apiPath.basicStudyInfo}/${studyId}`,
       {
         next: { tags: [tags.basicStudyInfo] },
-        cache: "no-store",
+        cache: "force-cache",
       }
     );
 
@@ -38,7 +38,7 @@ export const myStudyApi = {
       apiPath.allStudyAnnouncementList,
       {
         next: { tags: [tags.allStudyAnnouncementList] },
-        cache: "no-store",
+        cache: "force-cache",
       }
     );
     return response.data;

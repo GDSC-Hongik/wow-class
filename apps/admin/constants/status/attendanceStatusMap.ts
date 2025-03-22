@@ -3,11 +3,12 @@ import type { AttendanceStatusType } from "types/entities/attendance";
 import type Tag from "wowds-ui/Tag";
 
 export const attendanceStatusMap: Record<
-  "ONGOING_ATTENDANCE" | "BEFORE_ATTENDANCE",
+  "ONGOING_ATTENDANCE" | "BEFORE_ATTENDANCE" | "AFTER_ATTENDANCE",
   { label: string; color: ComponentProps<typeof Tag>["color"] }
 > = {
   ONGOING_ATTENDANCE: { label: "진행중", color: "blue" },
   BEFORE_ATTENDANCE: { label: "진행전", color: "grey" },
+  AFTER_ATTENDANCE: { label: "진행완료", color: "green" },
 };
 
 export const attendanceTaskStatusMap: Record<
