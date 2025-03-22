@@ -27,7 +27,7 @@ export const myStudyApi = {
       `${apiPath.basicStudyInfo}/${studyId}`,
       {
         next: { tags: [tags.basicStudyInfo] },
-        cache: "no-store",
+        cache: "force-cache",
       }
     );
 
