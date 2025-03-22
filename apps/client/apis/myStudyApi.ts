@@ -38,7 +38,7 @@ export const myStudyApi = {
       apiPath.allStudyAnnouncementList,
       {
         next: { tags: [tags.allStudyAnnouncementList] },
-        cache: "no-store",
+        cache: "force-cache",
       }
     );
     return response.data;

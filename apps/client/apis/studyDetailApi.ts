@@ -26,7 +26,7 @@ export const studyDetailApi = {
       `${apiPath.studyDetailAnnouncementList}/${studyId}/me`,
       {
         next: { tags: [tags.studyDetailAnnouncementList] },
-        cache: "no-store",
+        cache: "force-cache",
       }
     );
 
