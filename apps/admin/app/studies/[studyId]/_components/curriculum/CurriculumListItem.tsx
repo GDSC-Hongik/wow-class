@@ -4,67 +4,98 @@ import { Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import type { ComponentProps } from "react";
 import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
+import type { StudySessionApiResponseV2Dto } from "types/dtos/studyList";
 import type { StudyDifficultyType } from "types/entities/study";
 import getIsCurrentWeek from "utils/getIsCurrentWeek";
-import Tag from "wowds-ui/Tag";
+import { color } from "wowds-tokens";
+import type Tag from "wowds-ui/Tag";
 
 const CurriculumListItem = ({
   curriculum,
 }: {
-  curriculum: CurriculumApiResponseDto;
+  curriculum: StudySessionApiResponseV2Dto;
 }) => {
   const {
+    studySessionId,
+    position,
+    lessonTitle,
     description = "",
-    period,
-    week,
-    title,
-    difficulty,
-    curriculumStatus,
+    lessonAttendanceNumber,
+    lessonPeriod,
+    assignmentTitle,
+    assignmentDescriptionLink,
+    assignmentPeriod,
+    studyId,
   } = curriculum;
-  const { startDate, endDate } = period;
-  const { month: startMonth, day: startDay } = parseISODate(startDate);
-  const { month: endMonth, day: endDay } = parseISODate(endDate);
+  const { startDate, endDate } = lessonPeriod;
+  const {
+    month: startMonth,
+    day: startDay,
+    hours: startHour,
+    minutes: startMinute,
+  } = parseISODate(startDate);
+  const {
+    month: endMonth,
+    day: endDay,
+    hours: endHour,
+    minutes: endMinute,
+  } = parseISODate(endDate);
 
-  const curriculumTimeLine = `${padWithZero(startMonth)}.${padWithZero(startDay)} - ${padWithZero(endMonth)}.${padWithZero(endDay)}`;
-  const thisWeekAssignment = getIsCurrentWeek(startDate);
+  const {
+    month: assignmentStartMonth,
+    day: assignmentStartDay,
+    hours: assignmentStartHour,
+    minutes: assignmentStartMinute,
+  } = parseISODate(assignmentPeriod.startDate);
+  const {
+    month: assignmentEndMonth,
+    day: assignmentEndDay,
+    hours: assignmentEndHour,
+    minutes: assignmentEndMinute,
+  } = parseISODate(assignmentPeriod.endDate);
+
+  const startTime = `${padWithZero(startHour)}:${padWithZero(startMinute)}`;
+  const endTime = `${padWithZero(endHour)}:${padWithZero(endMinute)}`;
+  const assignmentEndTime = `${padWithZero(assignmentEndHour)}:${padWithZero(assignmentEndMinute)}`;
 
   return (
     <Table>
+      {" "}
+      {/* height:80px => minHeight:80px 변경하거나 Flex로 변경하기 */}
       <Table.Left>
-        <Flex alignItems="center" gap="28px">
-          <Flex alignItems="center" gap="xxs">
-            <div
-              className={ThisWeekBarStyle({
-                type: thisWeekAssignment ? "thisWeek" : "notThisWeek",
-              })}
-            />
-            <Flex direction="column" minWidth={52}>
-              <Text typo="body1">{week}주차</Text>
-              {curriculumStatus === "CANCELED" && (
-                <Text color="sub" typo="body2">
-                  휴강 주차
-                </Text>
-              )}
-            </Flex>
+        <Flex alignItems="baseline" gap="28px">
+          <Flex direction="column" minWidth={52}>
+            <Text typo="body1">{position}회차</Text>
+            <Text color="sub" typo="body2">
+              {startMonth}월 {startDay}일
+            </Text>
+            <Text color="sub" typo="body2">
+              {startTime}-{endTime}
+            </Text>
           </Flex>
           <Flex direction="column" gap="xxs">
             <Flex alignItems="center" gap="xs">
-              <Text typo="h3">{title || "-"}</Text>
-              {difficulty && (
-                <Tag color={DifficultyMap[difficulty].color} variant="outline">
-                  {DifficultyMap[difficulty].text}
-                </Tag>
-              )}
+              <Text typo="h3">
+                {lessonTitle || "스터디 제목을 작성해주세요."}
+              </Text>
             </Flex>
             <Text color="sub" style={CurriculumDescriptionStyle} typo="body2">
               {description || "스터디 상세 설명을 작성해주세요."}
             </Text>
+            <Flex
+              direction="column"
+              gap="-md"
+              style={AssignmentDescriptionStyle}
+            >
+              <Text>{assignmentTitle}</Text>
+              <Text color="primary" typo="body2">
+                과제 기간: {assignmentStartMonth}월 {assignmentStartDay}일 ~{" "}
+                {assignmentEndMonth}월 {assignmentEndDay}일 {assignmentEndTime}
+              </Text>
+            </Flex>
           </Flex>
         </Flex>
       </Table.Left>
-      <Table.Right>
-        <Text typo="body1">{curriculumTimeLine}</Text>
-      </Table.Right>
     </Table>
   );
 };
@@ -113,3 +144,5 @@ const DifficultyMap: Record<
 const CurriculumDescriptionStyle = {
   maxWidth: "650px",
 };
+
+const AssignmentDescriptionStyle = {};
