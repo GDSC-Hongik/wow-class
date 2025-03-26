@@ -2,15 +2,8 @@ import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
-import type { ComponentProps } from "react";
-import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudySessionApiResponseV2Dto } from "types/dtos/studyList";
-import type { StudyDifficultyType } from "types/entities/study";
-import { displayPartsToString } from "typescript";
-import getIsCurrentWeek from "utils/getIsCurrentWeek";
-import { color } from "wowds-tokens";
 import Box from "wowds-ui/Box";
-import type Tag from "wowds-ui/Tag";
 
 const CurriculumListItem = ({
   curriculum,
@@ -102,7 +95,6 @@ const CurriculumListItem = ({
                 </Flex>
               }
             />
-            <Space height={50} />
           </Flex>
         </Flex>
       </Table.Left>

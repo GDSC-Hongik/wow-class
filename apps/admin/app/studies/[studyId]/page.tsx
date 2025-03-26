@@ -50,13 +50,9 @@ const StudyPage = async ({ params }: { params: { studyId: string } }) => {
       {/* <Divider style={MinHeightFullDividerStyle} /> */}
 
       <Divider style={MinHeightFullDividerStyle} />
-      <CurriculumList
-        studyId={studyId}
-        studySessions={myStudy?.studySessions}
-      />
-      {/*
+      <CurriculumList studySessions={myStudy?.studySessions} />
       <Divider style={MinHeightFullDividerStyle} />
-      <StudyStatics studyId={studyId} /> */}
+      <StudyStatics studyId={studyId} />
     </Flex>
   );
 };
