@@ -1,13 +1,15 @@
 import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
-import { Table, Text } from "@wow-class/ui";
+import { Space, Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import type { ComponentProps } from "react";
 import type { CurriculumApiResponseDto } from "types/dtos/curriculumList";
 import type { StudySessionApiResponseV2Dto } from "types/dtos/studyList";
 import type { StudyDifficultyType } from "types/entities/study";
+import { displayPartsToString } from "typescript";
 import getIsCurrentWeek from "utils/getIsCurrentWeek";
 import { color } from "wowds-tokens";
+import Box from "wowds-ui/Box";
 import type Tag from "wowds-ui/Tag";
 
 const CurriculumListItem = ({
@@ -60,10 +62,8 @@ const CurriculumListItem = ({
 
   return (
     <Table>
-      {" "}
-      {/* height:80px => minHeight:80px 변경하거나 Flex로 변경하기 */}
       <Table.Left>
-        <Flex alignItems="baseline" gap="28px">
+        <Flex alignItems="baseline" gap="48px">
           <Flex direction="column" minWidth={52}>
             <Text typo="body1">{position}회차</Text>
             <Text color="sub" typo="body2">
@@ -73,6 +73,7 @@ const CurriculumListItem = ({
               {startTime}-{endTime}
             </Text>
           </Flex>
+
           <Flex direction="column" gap="xxs">
             <Flex alignItems="center" gap="xs">
               <Text typo="h3">
@@ -82,17 +83,26 @@ const CurriculumListItem = ({
             <Text color="sub" style={CurriculumDescriptionStyle} typo="body2">
               {description || "스터디 상세 설명을 작성해주세요."}
             </Text>
-            <Flex
-              direction="column"
-              gap="-md"
+            <Space height={18.5} />
+            <Box
               style={AssignmentDescriptionStyle}
-            >
-              <Text>{assignmentTitle}</Text>
-              <Text color="primary" typo="body2">
-                과제 기간: {assignmentStartMonth}월 {assignmentStartDay}일 ~{" "}
-                {assignmentEndMonth}월 {assignmentEndDay}일 {assignmentEndTime}
-              </Text>
-            </Flex>
+              text={
+                <Flex
+                  direction="column"
+                  gap="xxs"
+                  style={AssignmentDescriptionStyle}
+                  width="100%"
+                >
+                  <Text>{assignmentTitle}</Text>
+                  <Text color="primary" typo="body2">
+                    과제 기간: {assignmentStartMonth}월 {assignmentStartDay}일 ~{" "}
+                    {assignmentEndMonth}월 {assignmentEndDay}일{" "}
+                    {assignmentEndTime}
+                  </Text>
+                </Flex>
+              }
+            />
+            <Space height={50} />
           </Flex>
         </Flex>
       </Table.Left>
@@ -102,47 +112,11 @@ const CurriculumListItem = ({
 
 export default CurriculumListItem;
 
-const ThisWeekBarStyle = cva({
-  base: {
-    width: "4px",
-    height: "18px",
-  },
-  variants: {
-    type: {
-      thisWeek: {
-        backgroundColor: "primary",
-      },
-      notThisWeek: {
-        backgroundColor: "transparent",
-      },
-    },
-  },
-});
-
-const DifficultyMap: Record<
-  StudyDifficultyType,
-  { text: string; color: ComponentProps<typeof Tag>["color"] }
-> = {
-  HIGH: {
-    text: "고급",
-    color: "red",
-  },
-  MEDIUM: {
-    text: "중급",
-    color: "green",
-  },
-  LOW: {
-    text: "기초",
-    color: "blue",
-  },
-  BASIC: {
-    text: "초급",
-    color: "yellow",
-  },
-};
-
 const CurriculumDescriptionStyle = {
   maxWidth: "650px",
 };
 
-const AssignmentDescriptionStyle = {};
+const AssignmentDescriptionStyle = {
+  flex: 1,
+  width: "100%",
+};
