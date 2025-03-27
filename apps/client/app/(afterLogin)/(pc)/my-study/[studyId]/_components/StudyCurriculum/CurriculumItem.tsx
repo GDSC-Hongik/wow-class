@@ -81,10 +81,12 @@ export const CurriculumItem = ({
     <Flex gap="50px">
       <section id={`session-info-${position}`}>
         <Text>{position}회차</Text>
-        <Text color="sub" style={textStyle} typo="body2">
-          {lessonPeriodMonth}월 {lessonPeriodDay}일 <br />
-          {lessonStartTime}-{lessonEndTime}
-        </Text>
+        {!isAssignmentStudyType && (
+          <Text color="sub" style={textStyle} typo="body2">
+            {lessonPeriodMonth}월 {lessonPeriodDay}일 <br />
+            {lessonStartTime}-{lessonEndTime}
+          </Text>
+        )}
       </section>
       <Flex flexDirection="column" width="100%">
         {!isAssignmentStudyType && (
