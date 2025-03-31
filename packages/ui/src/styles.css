@@ -441,8 +441,8 @@ progress {
 .h_20px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   height: 20px;
 }
-.h_80px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
-  height: 80px;
+.min-h_80px:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
+  min-height: 80px;
 }
 .w_100\%:not(#\#):not(#\#):not(#\#):not(#\#):not(#\#) {
   width: 100%;

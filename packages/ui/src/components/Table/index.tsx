@@ -14,9 +14,9 @@ const Table = ({ children, ...rest }: TableProps) => {
   return (
     <Flex
       alignItems="center"
-      height="80px"
       justifyContent="space-between"
       marginBottom="12px"
+      minHeight="80px"
       width="100%"
       {...rest}
     >
