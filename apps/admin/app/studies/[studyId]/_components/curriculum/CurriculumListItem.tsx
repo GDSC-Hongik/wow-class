@@ -11,16 +11,12 @@ const CurriculumListItem = ({
   curriculum: StudySessionApiResponseV2Dto;
 }) => {
   const {
-    studySessionId,
     position,
     lessonTitle,
     description = "",
-    lessonAttendanceNumber,
     lessonPeriod,
     assignmentTitle,
-    assignmentDescriptionLink,
     assignmentPeriod,
-    studyId,
   } = curriculum;
   const { startDate, endDate } = lessonPeriod;
   const {
@@ -55,20 +51,20 @@ const CurriculumListItem = ({
 
   return (
     <Table>
-      <Table.Left>
-        <Flex alignItems="baseline" gap="48px">
+      <Table.Left style={{ width: "100%" }}>
+        <Flex alignItems="baseline" gap="48px" width="100%">
           <Flex direction="column" minWidth={52}>
             <Text typo="body1">{position}회차</Text>
             <Text color="sub" typo="body2">
               {startMonth}월 {startDay}일
             </Text>
-            <Text color="sub" typo="body2">
+            <Text color="sub" style={{ whiteSpace: "nowrap" }} typo="body2">
               {startTime}-{endTime}
             </Text>
           </Flex>
 
-          <Flex direction="column" gap="xxs">
-            <Flex alignItems="center" gap="xs">
+          <Flex direction="column" gap="xxs" width="100%">
+            <Flex alignItems="center" gap="xs" width="100%">
               <Text typo="h3">
                 {lessonTitle || "스터디 제목을 작성해주세요."}
               </Text>
@@ -86,7 +82,7 @@ const CurriculumListItem = ({
                   style={AssignmentDescriptionStyle}
                   width="100%"
                 >
-                  <Text>{assignmentTitle}</Text>
+                  <Text>{assignmentTitle || "과제 제목을 입력해주세요"}</Text>
                   <Text color="primary" typo="body2">
                     과제 기간: {assignmentStartMonth}월 {assignmentStartDay}일 ~{" "}
                     {assignmentEndMonth}월 {assignmentEndDay}일{" "}
@@ -111,4 +107,5 @@ const CurriculumDescriptionStyle = {
 const AssignmentDescriptionStyle = {
   flex: 1,
   width: "100%",
+  minWidth: "100%",
 };

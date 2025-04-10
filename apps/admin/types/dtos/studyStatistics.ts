@@ -4,13 +4,11 @@ export interface StudyStatisticsApiResponseDto {
   averageAttendanceRate: number;
   averageAssignmentSubmissionRate: number;
   studyCompleteRate: number;
-  studyWeekStatisticsResponses: StudyWeekStatisticsApiResponseDto[];
+  studyRoundStatisticsDtos: studyRoundStatisticsDtos[];
 }
 
-export interface StudyWeekStatisticsApiResponseDto {
-  week: number;
+export interface studyRoundStatisticsDtos {
+  round: number;
   attendanceRate: number;
   assignmentSubmissionRate: number;
-  isAssignmentCanceled: boolean;
-  isCurriculumCanceled: boolean;
 }
