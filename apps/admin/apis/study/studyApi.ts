@@ -165,7 +165,7 @@ export const studyApi = {
   },
   getStudyStatistics: async (studyId: number) => {
     const response = await fetcher.get<StudyStatisticsApiResponseDto>(
-      `/mentor/study-details/statistics?studyId=${studyId}`,
+      `/v2/mentor/studies/${studyId}/statistics`,
       {
         next: { tags: [tags.statistics] },
       }

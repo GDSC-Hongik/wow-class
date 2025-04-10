@@ -1,7 +1,7 @@
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
-import type { StudyWeekStatisticsApiResponseDto } from "types/dtos/studyStatistics";
+import type { studyRoundStatisticsDtos } from "types/dtos/studyStatistics";
 
 import BarGraph from "./graph/BarGraph";
 
@@ -9,12 +9,12 @@ const StudyAnalyticsGraph = ({
   graphTitle,
   averageRate = 0,
   totalStudent,
-  studyWeekStatisticsResponses,
+  studyRoundStatisticsDtos,
 }: {
   graphTitle: string;
   averageRate?: number;
   totalStudent?: number;
-  studyWeekStatisticsResponses?: StudyWeekStatisticsApiResponseDto[];
+  studyRoundStatisticsDtos?: studyRoundStatisticsDtos[];
 }) => {
   return (
     <Flex direction="column" gap="md">
@@ -23,18 +23,18 @@ const StudyAnalyticsGraph = ({
       </Text>
       <Flex direction="column" gap="xs">
         <Flex alignItems="flex-start" direction="column" gap="md">
-          {studyWeekStatisticsResponses?.map((data) => (
-            <Flex direction="row" gap="lg" key={data.week} minWidth="340px">
+          {studyRoundStatisticsDtos?.map((data) => (
+            <Flex direction="row" gap="lg" key={data.round} minWidth="340px">
               <Text
                 as="div"
                 className={studyWeekStyle}
                 color="sub"
                 typo="body1"
               >
-                {data.week}주차
+                {data.round}회차
               </Text>
               <BarGraph
-                isCurriculumCanceled={data.isCurriculumCanceled}
+                isCurriculumCanceled={false}
                 percent={data.attendanceRate}
                 totalStudent={totalStudent}
               />
