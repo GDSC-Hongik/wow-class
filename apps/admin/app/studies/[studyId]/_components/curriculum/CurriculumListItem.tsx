@@ -25,19 +25,11 @@ const CurriculumListItem = ({
     hours: startHour,
     minutes: startMinute,
   } = parseISODate(startDate);
-  const {
-    month: endMonth,
-    day: endDay,
-    hours: endHour,
-    minutes: endMinute,
-  } = parseISODate(endDate);
+  const { hours: endHour, minutes: endMinute } = parseISODate(endDate);
 
-  const {
-    month: assignmentStartMonth,
-    day: assignmentStartDay,
-    hours: assignmentStartHour,
-    minutes: assignmentStartMinute,
-  } = parseISODate(assignmentPeriod.startDate);
+  const { month: assignmentStartMonth, day: assignmentStartDay } = parseISODate(
+    assignmentPeriod.startDate
+  );
   const {
     month: assignmentEndMonth,
     day: assignmentEndDay,
@@ -57,9 +49,6 @@ const CurriculumListItem = ({
             <Text typo="body1">{position}회차</Text>
             <Text color="sub" typo="body2">
               {startMonth}월 {startDay}일
-            </Text>
-            <Text color="sub" style={{ whiteSpace: "nowrap" }} typo="body2">
-              {startTime}-{endTime}
             </Text>
           </Flex>
 
@@ -83,7 +72,11 @@ const CurriculumListItem = ({
                   width="100%"
                 >
                   <Text>{assignmentTitle || "과제 제목을 입력해주세요"}</Text>
-                  <Text color="primary" typo="body2">
+                  <Text
+                    color="primary"
+                    style={{ whiteSpace: "nowrap" }}
+                    typo="body2"
+                  >
                     과제 기간: {assignmentStartMonth}월 {assignmentStartDay}일 ~{" "}
                     {assignmentEndMonth}월 {assignmentEndDay}일{" "}
                     {assignmentEndTime}

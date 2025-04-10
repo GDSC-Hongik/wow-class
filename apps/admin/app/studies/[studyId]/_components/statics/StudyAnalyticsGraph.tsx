@@ -31,7 +31,7 @@ const StudyAnalyticsGraph = ({
                 color="sub"
                 typo="body1"
               >
-                {data.round}주차
+                {data.round}회차
               </Text>
               <BarGraph
                 isCurriculumCanceled={false}

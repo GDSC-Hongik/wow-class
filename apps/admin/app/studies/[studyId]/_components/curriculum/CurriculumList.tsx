@@ -5,7 +5,7 @@ import type { StudySessionApiResponseV2Dto } from "types/dtos/studyList";
 import CurriculumListItem from "./CurriculumListItem";
 import EmptyCurriculumList from "./EmptyCurriculumList";
 
-const CurriculumList = async ({
+const CurriculumList = ({
   studySessions,
 }: {
   studySessions?: StudySessionApiResponseV2Dto[];
