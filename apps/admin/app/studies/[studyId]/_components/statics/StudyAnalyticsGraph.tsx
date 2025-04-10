@@ -16,7 +16,6 @@ const StudyAnalyticsGraph = ({
   totalStudent?: number;
   studyRoundStatisticsDtos?: studyRoundStatisticsDtos[];
 }) => {
-  console.log(studyRoundStatisticsDtos, "test");
   return (
     <Flex direction="column" gap="md">
       <Text className={staticsTitleStyle} typo="h3">
