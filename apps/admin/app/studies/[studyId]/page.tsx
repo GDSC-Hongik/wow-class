@@ -32,6 +32,8 @@ const StudyPage = async ({ params }: { params: { studyId: string } }) => {
     ? await studyApi.getStudyList()
     : await studyApi.getMyStudyList();
   const myStudy = data?.filter((study) => study.study.studyId === +studyId)[0];
+  const studyType = (await studyApi.getStudyBasicInfo(+studyId))?.type;
+
   return (
     <Flex direction="column" gap="64px">
       <div className={HeaderWrapper}>
@@ -47,7 +49,10 @@ const StudyPage = async ({ params }: { params: { studyId: string } }) => {
       <Divider style={MinHeightFullDividerStyle} />
       <StudyAnnouncement studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
-      <CurriculumList studySessions={myStudy?.studySessions} />
+      <CurriculumList
+        studySessions={myStudy?.studySessions}
+        studyType={studyType}
+      />
       <Divider style={MinHeightFullDividerStyle} />
       <StudyStatics studyId={studyId} />
     </Flex>

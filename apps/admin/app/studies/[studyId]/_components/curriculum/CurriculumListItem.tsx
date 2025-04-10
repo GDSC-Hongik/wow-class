@@ -7,8 +7,10 @@ import Box from "wowds-ui/Box";
 
 const CurriculumListItem = ({
   curriculum,
+  studyType,
 }: {
   curriculum: StudySessionApiResponseV2Dto;
+  studyType?: string;
 }) => {
   const {
     position,
@@ -49,6 +51,9 @@ const CurriculumListItem = ({
             <Text typo="body1">{position}회차</Text>
             <Text color="sub" typo="body2">
               {startMonth}월 {startDay}일
+            </Text>
+            <Text color="sub" style={TimeStyle} typo="body2">
+              {studyType !== "ASSIGNMENT" && `${startTime}-${endTime}`}
             </Text>
           </Flex>
 
@@ -102,3 +107,5 @@ const AssignmentDescriptionStyle = {
   width: "100%",
   minWidth: "100%",
 };
+
+const TimeStyle = { whiteSpace: "nowrap" };

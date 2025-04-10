@@ -7,8 +7,10 @@ import EmptyCurriculumList from "./EmptyCurriculumList";
 
 const CurriculumList = ({
   studySessions,
+  studyType,
 }: {
   studySessions?: StudySessionApiResponseV2Dto[];
+  studyType?: string;
 }) => {
   if (studySessions?.length === 0) {
     return <EmptyCurriculumList />;
@@ -23,6 +25,7 @@ const CurriculumList = ({
           <CurriculumListItem
             curriculum={curriculum}
             key={curriculum.studySessionId}
+            studyType={studyType}
           />
         ))}
       </Flex>
