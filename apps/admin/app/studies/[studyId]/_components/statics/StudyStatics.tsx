@@ -29,6 +29,7 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
         <StudyAnalyticsGraph
           averageRate={studyStatistics?.averageAssignmentSubmissionRate}
           graphTitle="과제 제출률"
+          isAttendanceGraph={false}
           studyRoundStatisticsDtos={studyStatistics?.studyRoundStatisticsDtos}
           totalStudent={studyStatistics?.totalStudentCount}
         />
