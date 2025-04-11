@@ -10,11 +10,13 @@ const StudyAnalyticsGraph = ({
   averageRate = 0,
   totalStudent,
   studyRoundStatisticsDtos,
+  isAttendanceGraph = true,
 }: {
   graphTitle: string;
   averageRate?: number;
   totalStudent?: number;
   studyRoundStatisticsDtos?: studyRoundStatisticsDtos[];
+  isAttendanceGraph?: boolean;
 }) => {
   return (
     <Flex direction="column" gap="md">
@@ -23,23 +25,29 @@ const StudyAnalyticsGraph = ({
       </Text>
       <Flex direction="column" gap="xs">
         <Flex alignItems="flex-start" direction="column" gap="md">
-          {studyRoundStatisticsDtos?.map((data) => (
-            <Flex direction="row" gap="lg" key={data.round} minWidth="340px">
-              <Text
-                as="div"
-                className={studyWeekStyle}
-                color="sub"
-                typo="body1"
-              >
-                {data.round}회차
-              </Text>
-              <BarGraph
-                isCurriculumCanceled={false}
-                percent={data.attendanceRate}
-                totalStudent={totalStudent}
-              />
-            </Flex>
-          ))}
+          {studyRoundStatisticsDtos?.map(
+            ({ round, attendanceRate, assignmentSubmissionRate }) => (
+              <Flex direction="row" gap="lg" key={round} minWidth="340px">
+                <Text
+                  as="div"
+                  className={studyWeekStyle}
+                  color="sub"
+                  typo="body1"
+                >
+                  {round}회차
+                </Text>
+                <BarGraph
+                  isCurriculumCanceled={false}
+                  totalStudent={totalStudent}
+                  percent={
+                    isAttendanceGraph
+                      ? attendanceRate
+                      : assignmentSubmissionRate
+                  }
+                />
+              </Flex>
+            )
+          )}
           <Flex direction="row" gap="lg">
             <Text className={studyWeekStyle} color="sub" typo="body1">
               평균
