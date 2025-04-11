@@ -55,7 +55,7 @@ const CurriculumListItem = ({
                   {startMonth}월 {startDay}일
                 </Text>
                 <Text color="sub" style={TimeStyle} typo="body2">
-                  {startTime}-${endTime}
+                  {startTime}-{endTime}
                 </Text>
               </>
             )}
