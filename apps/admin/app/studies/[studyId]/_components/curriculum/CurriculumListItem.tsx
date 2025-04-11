@@ -1,4 +1,3 @@
-import { cva } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
@@ -43,18 +42,23 @@ const CurriculumListItem = ({
   const endTime = `${padWithZero(endHour)}:${padWithZero(endMinute)}`;
   const assignmentEndTime = `${padWithZero(assignmentEndHour)}:${padWithZero(assignmentEndMinute)}`;
 
+  const isAssignmentStudyType = studyType === "ASSIGNMENT";
   return (
     <Table>
       <Table.Left style={{ width: "100%" }}>
         <Flex alignItems="baseline" gap="48px" width="100%">
           <Flex direction="column" minWidth={52}>
             <Text typo="body1">{position}회차</Text>
-            <Text color="sub" typo="body2">
-              {startMonth}월 {startDay}일
-            </Text>
-            <Text color="sub" style={TimeStyle} typo="body2">
-              {studyType !== "ASSIGNMENT" && `${startTime}-${endTime}`}
-            </Text>
+            {!isAssignmentStudyType && (
+              <>
+                <Text color="sub" typo="body2">
+                  {startMonth}월 {startDay}일
+                </Text>
+                <Text color="sub" style={TimeStyle} typo="body2">
+                  {startTime}-${endTime}
+                </Text>
+              </>
+            )}
           </Flex>
 
           <Flex direction="column" gap="xxs" width="100%">
