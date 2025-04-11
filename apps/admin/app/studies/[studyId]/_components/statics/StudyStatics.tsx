@@ -9,7 +9,6 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
   const studyStatistics = await studyApi.getStudyStatistics(
     parseInt(studyId, 10)
   );
-
   return (
     <section aria-label="study-statics">
       <Flex direction="column" gap="sm">
@@ -24,18 +23,14 @@ const StudyStatics = async ({ studyId }: { studyId: string }) => {
         <StudyAnalyticsGraph
           averageRate={studyStatistics?.averageAttendanceRate}
           graphTitle="출석률"
+          studyRoundStatisticsDtos={studyStatistics?.studyRoundStatisticsDtos}
           totalStudent={studyStatistics?.totalStudentCount}
-          studyWeekStatisticsResponses={
-            studyStatistics?.studyWeekStatisticsResponses
-          }
         />
         <StudyAnalyticsGraph
           averageRate={studyStatistics?.averageAssignmentSubmissionRate}
           graphTitle="과제 제출률"
+          studyRoundStatisticsDtos={studyStatistics?.studyRoundStatisticsDtos}
           totalStudent={studyStatistics?.totalStudentCount}
-          studyWeekStatisticsResponses={
-            studyStatistics?.studyWeekStatisticsResponses
-          }
         />
         <StudyCompleteRate
           studyCompleteCount={studyStatistics?.completeStudentCount}

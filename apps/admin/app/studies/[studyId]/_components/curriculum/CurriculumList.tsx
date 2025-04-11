@@ -1,28 +1,34 @@
+import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
-import { studyApi } from "apis/study/studyApi";
+import type { StudySessionApiResponseV2Dto } from "types/dtos/studyList";
 
 import CurriculumListItem from "./CurriculumListItem";
 import EmptyCurriculumList from "./EmptyCurriculumList";
 
-const CurriculumList = async ({ studyId }: { studyId: string }) => {
-  const curriculumList = await studyApi.getCurriculumList(
-    parseInt(studyId, 10)
-  );
-
-  if (curriculumList?.length === 0) {
+const CurriculumList = ({
+  studySessions,
+  studyType,
+}: {
+  studySessions?: StudySessionApiResponseV2Dto[];
+  studyType?: string;
+}) => {
+  if (studySessions?.length === 0) {
     return <EmptyCurriculumList />;
   }
 
   return (
     <section aria-label="curriculum-list">
       <Text typo="h2">스터디 커리큘럼</Text>
-      <Space height={24} />
-      {curriculumList?.map((curriculum) => (
-        <CurriculumListItem
-          curriculum={curriculum}
-          key={`curriculumItem-${curriculum.studyDetailId}`}
-        />
-      ))}
+      <Space height={50} />
+      <Flex direction="column" gap="50px">
+        {studySessions?.map((curriculum) => (
+          <CurriculumListItem
+            curriculum={curriculum}
+            key={curriculum.studySessionId}
+            studyType={studyType}
+          />
+        ))}
+      </Flex>
     </section>
   );
 };

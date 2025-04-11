@@ -85,6 +85,7 @@ const AttendanceCheckForm = ({
         value={attendanceNumber}
         textareaProps={{
           inputMode: "numeric",
+          ...(isAttendanceSucceded && { disabled: true }),
         }}
         onChange={handleChangeAttendanceNumber}
       />
