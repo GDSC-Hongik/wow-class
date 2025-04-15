@@ -41,8 +41,8 @@ const StudentList = ({
 
   const handleChangeSelectedStudents = (ids: number[]) => {
     const firstStudent = studentList.find(
-      (student) => student.memberId === ids[0]
-    )?.name;
+      (student) => student.member.memberId === ids[0]
+    )?.member.name;
 
     setSelectedStudents({
       firstStudentName: firstStudent,
@@ -53,16 +53,24 @@ const StudentList = ({
   const isDisabled = (student: StudyStudentApiResponseDto) => {
     if (achievement === "COMPLETE") {
       return type === "처리"
-        ? student.studyHistoryStatus === "COMPLETED"
-        : student.studyHistoryStatus !== "COMPLETED";
+        ? student.studyHistory.status === "COMPLETED"
+        : student.studyHistory.status !== "COMPLETED";
     } else if (achievement === "FIRST_ROUND_OUTSTANDING_STUDENT") {
       return type === "처리"
-        ? student.isFirstRoundOutstandingStudent
-        : !student.isFirstRoundOutstandingStudent;
+        ? student.achievements.some(
+            (item) => item.type === "FIRST_ROUND_OUTSTANDING_STUDENT"
+          )
+        : !student.achievements.some(
+            (item) => item.type === "FIRST_ROUND_OUTSTANDING_STUDENT"
+          );
     } else if (achievement === "SECOND_ROUND_OUTSTANDING_STUDENT") {
       return type === "처리"
-        ? student.isSecondRoundOutstandingStudent
-        : !student.isSecondRoundOutstandingStudent;
+        ? student.achievements.some(
+            (item) => item.type === "SECOND_ROUND_OUTSTANDING_STUDENT"
+          )
+        : !student.achievements.some(
+            (item) => item.type === "SECOND_ROUND_OUTSTANDING_STUDENT"
+          );
     }
   };
 
@@ -81,7 +89,7 @@ const StudentList = ({
     handleChangeSelectedStudents(
       studentList
         .filter((student) => !isDisabled(student))
-        .map((student) => student.memberId)
+        .map((student) => student.member.memberId)
     );
   };
 
@@ -123,7 +131,7 @@ const StudentList = ({
           <styled.tr
             color="textBlack"
             height="44px"
-            key={student.memberId}
+            key={student.member.memberId}
             minWidth="100%"
             role="row"
             textStyle="body2"
@@ -131,9 +139,13 @@ const StudentList = ({
             {enabled && (
               <Table.Td style={tableCheckBoxStyle}>
                 <Checkbox
-                  checked={selectedStudents.students.has(student.memberId)}
                   disabled={isDisabled(student)}
-                  onChange={() => handleChangeSingleChecked(student.memberId)}
+                  checked={selectedStudents.students.has(
+                    student.member.memberId
+                  )}
+                  onChange={() =>
+                    handleChangeSingleChecked(student.member.memberId)
+                  }
                 />
               </Table.Td>
             )}
