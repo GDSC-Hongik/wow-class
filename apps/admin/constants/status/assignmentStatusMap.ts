@@ -18,8 +18,7 @@ export const assignmentSubmissionStatusMap: Record<
   AssignmentSubmissionStatusType,
   { tagText: string; tagColor: ComponentProps<typeof Tag>["color"] }
 > = {
-  NOT_SUBMITTED: { tagText: "미제출", tagColor: "red" },
-  FAILURE: { tagText: "제출실패", tagColor: "red" },
-  SUCCESS: { tagText: "제출완료", tagColor: "blue" },
-  CANCELED: { tagText: "휴강", tagColor: "grey" },
+  BEFORE_SUBMISSION: { tagText: "미제출", tagColor: "red" },
+  FAILED: { tagText: "제출실패", tagColor: "red" },
+  SUCCEEDED: { tagText: "제출완료", tagColor: "blue" },
 };
