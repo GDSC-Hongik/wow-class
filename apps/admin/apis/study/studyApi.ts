@@ -143,7 +143,7 @@ export const studyApi = {
   },
   getStudyStudents: async (studyId: number, pageable: PageableType) => {
     const response = await fetcher.get<PaginatedStudyStudentResponseDto>(
-      `/mentor/studies/${studyId}/students`,
+      `/v2/mentor/studies/${studyId}/students`,
       {
         next: { tags: [tags.students] },
         cache: "force-cache",
@@ -154,7 +154,7 @@ export const studyApi = {
   },
   getStudyStudentsExcel: async (studyId: number) => {
     const response = await fetcher.get(
-      `/mentor/studies/${studyId}/students/excel`,
+      `/v2/mentor/studies/${studyId}/students/excel`,
       {
         next: { tags: [tags.studentsExcel] },
         cache: "force-cache",
