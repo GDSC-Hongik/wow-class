@@ -1,10 +1,9 @@
 import { assignmentSubmissionStatusMap } from "constants/status/assignmentStatusMap";
 import { attendanceTaskStatusMap } from "constants/status/attendanceStatusMap";
-import type { StudyTaskResponseDto } from "types/dtos/studyStudent";
-import type { TaskType } from "types/entities/task";
+import type { StudyTaskType } from "types/entities/student";
 import Tag from "wowds-ui/Tag";
 
-const TaskTag = ({ task }: { task: StudyTaskResponseDto<TaskType> }) => {
+const TaskTag = ({ task }: { task: StudyTaskType }) => {
   const formatTaskToTagInfo = () => {
     if (task.taskType === "ATTENDANCE") {
       return attendanceTaskStatusMap[task.attendanceStatus];
