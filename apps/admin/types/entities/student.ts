@@ -1,3 +1,8 @@
+import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
+import type { AttendanceStatusType } from "types/entities/attendance";
+import type { TaskType } from "types/entities/task";
+
+import type { AchievementType } from "./achievement";
 export type StudyMemberType = {
   memberId: number;
   name: string;
@@ -17,20 +22,16 @@ export type StudyHistoryType = {
 };
 export type StudyAchievementType = {
   studyAchievementId: number;
-  type: "FIRST_ROUND_OUTSTANDING_STUDENT" | "SECOND_ROUND_OUTSTANDING_STUDENT";
+  type: AchievementType;
   studentId: number;
   studyId: number;
 };
 export type StudyTaskType = {
   studySessionsId: number;
   round: number;
-  taskType: "ATTENDANCE" | "ASSIGNMENT";
+  taskType: TaskType;
   endDate: string;
-  attendanceStatus:
-    | "NOT_LIVE"
-    | "BEFORE_ATTENDANCE"
-    | "NOT_ATTENDED"
-    | "ATTENDED";
+  attendanceStatus: AttendanceStatusType;
   assignmentTitle: string;
-  assignmentSubmissionStatus: "BEFORE_SUBMISSION" | "FAILED" | "SUCCEEDED";
+  assignmentSubmissionStatus: AssignmentSubmissionStatusType;
 };

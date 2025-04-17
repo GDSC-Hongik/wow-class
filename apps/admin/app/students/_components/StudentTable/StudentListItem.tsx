@@ -20,6 +20,13 @@ const StudentListItem = ({
 }: StudyStudentApiResponseDto) => {
   const { name, studentId, discordUsername, nickname } = member;
   const { status, githubLink } = studyHistory;
+
+  const isFirstRoundOutstandingStudent = achievements.some(
+    (item) => item.type === "FIRST_ROUND_OUTSTANDING_STUDENT"
+  );
+  const isSecondRoundOutstandingStudent = achievements.some(
+    (item) => item.type === "SECOND_ROUND_OUTSTANDING_STUDENT"
+  );
   return (
     <>
       <Table.Td>
@@ -27,25 +34,13 @@ const StudentListItem = ({
       </Table.Td>
       <Table.Td>
         <Text style={awardTextStyle} typo="body2">
-          <AwardIcon
-            disabled={
-              !achievements.some(
-                (item) => item.type === "FIRST_ROUND_OUTSTANDING_STUDENT"
-              )
-            }
-          />
+          <AwardIcon disabled={!isFirstRoundOutstandingStudent} />
           1차
         </Text>
       </Table.Td>
       <Table.Td>
         <Text style={awardTextStyle} typo="body2">
-          <AwardIcon
-            disabled={
-              !achievements.some(
-                (item) => item.type === "SECOND_ROUND_OUTSTANDING_STUDENT"
-              )
-            }
-          />
+          <AwardIcon disabled={!isSecondRoundOutstandingStudent} />
           2차
         </Text>
       </Table.Td>

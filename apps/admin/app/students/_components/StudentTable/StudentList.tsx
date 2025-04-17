@@ -51,26 +51,24 @@ const StudentList = ({
   };
 
   const isDisabled = (student: StudyStudentApiResponseDto) => {
+    const isFirstRoundOutstandingStudent = student.achievements.some(
+      (item) => item.type === "FIRST_ROUND_OUTSTANDING_STUDENT"
+    );
+    const isSecondRoundOutstandingStudent = student.achievements.some(
+      (item) => item.type === "SECOND_ROUND_OUTSTANDING_STUDENT"
+    );
     if (achievement === "COMPLETE") {
       return type === "처리"
         ? student.studyHistory.status === "COMPLETED"
         : student.studyHistory.status !== "COMPLETED";
     } else if (achievement === "FIRST_ROUND_OUTSTANDING_STUDENT") {
       return type === "처리"
-        ? student.achievements.some(
-            (item) => item.type === "FIRST_ROUND_OUTSTANDING_STUDENT"
-          )
-        : !student.achievements.some(
-            (item) => item.type === "FIRST_ROUND_OUTSTANDING_STUDENT"
-          );
+        ? isFirstRoundOutstandingStudent
+        : !isFirstRoundOutstandingStudent;
     } else if (achievement === "SECOND_ROUND_OUTSTANDING_STUDENT") {
       return type === "처리"
-        ? student.achievements.some(
-            (item) => item.type === "SECOND_ROUND_OUTSTANDING_STUDENT"
-          )
-        : !student.achievements.some(
-            (item) => item.type === "SECOND_ROUND_OUTSTANDING_STUDENT"
-          );
+        ? isSecondRoundOutstandingStudent
+        : !isSecondRoundOutstandingStudent;
     }
   };
 
