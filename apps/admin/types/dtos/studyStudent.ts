@@ -1,22 +1,20 @@
 import type { AssignmentSubmissionStatusType } from "types/entities/assignment";
 import type { AttendanceStatusType } from "types/entities/attendance";
 import type { PageableObject, SortType } from "types/entities/page";
-import type { TaskType } from "types/entities/task";
+import type {
+  StudyAchievementType,
+  StudyHistoryType,
+  StudyMemberType,
+  StudyTaskType,
+} from "types/entities/student";
+
+import type { TaskType } from "./../entities/task";
 
 export interface StudyStudentApiResponseDto {
-  memberId: number;
-  name: string;
-  studentId: string;
-  discordUsername: string;
-  nickname: string;
-  githubLink: string;
-  studyHistoryStatus: "NONE" | "COMPLETED";
-  isFirstRoundOutstandingStudent: boolean;
-  isSecondRoundOutstandingStudent: boolean;
-  studyTasks: (
-    | StudyTaskResponseDto<"ASSIGNMENT">
-    | StudyTaskResponseDto<"ATTENDANCE">
-  )[];
+  member: StudyMemberType;
+  studyHistory: StudyHistoryType;
+  achievements: StudyAchievementType[];
+  studyTasks: StudyTaskType[];
   assignmentRate: number;
   attendanceRate: number;
 }

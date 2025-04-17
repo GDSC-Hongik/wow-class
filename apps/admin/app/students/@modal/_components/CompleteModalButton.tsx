@@ -19,11 +19,8 @@ const CompleteModalButton = () => {
   const { type } = useAtomValue(outstandingStudentsAtom);
   const { students } = useAtomValue(selectedStudentsAtom);
 
-  const {
-    handleClickCloseModal,
-    closeModalWithSuccess,
-    closeModalWithFailure,
-  } = useCloseStudentStatusModal();
+  const { closeModalWithSuccess, closeModalWithFailure } =
+    useCloseStudentStatusModal();
 
   const handleClickComplete = async () => {
     if (!study || !type) return;
@@ -48,7 +45,7 @@ const CompleteModalButton = () => {
   return enabled ? (
     <Button onClick={handleClickComplete}>선택한 회원 수료 {type}</Button>
   ) : (
-    <Button onClick={handleClickCloseModal}>확인하기</Button>
+    <Button>확인하기</Button>
   );
 };
 

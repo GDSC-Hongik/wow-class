@@ -18,5 +18,5 @@ export const attendanceTaskStatusMap: Record<
   BEFORE_ATTENDANCE: { tagText: "기간아님", tagColor: "grey" },
   NOT_ATTENDED: { tagText: "미출석", tagColor: "red" },
   ATTENDED: { tagText: "출석완료", tagColor: "blue" },
-  CANCELED: { tagText: "휴강", tagColor: "grey" },
+  NOT_LIVE: { tagText: "휴강", tagColor: "grey" },
 };
