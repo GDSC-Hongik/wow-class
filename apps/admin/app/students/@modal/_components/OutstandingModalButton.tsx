@@ -20,11 +20,8 @@ const OutstandingModalButton = () => {
   const { type, achievement } = useAtomValue(outstandingStudentsAtom);
   const { students } = useAtomValue(selectedStudentsAtom);
 
-  const {
-    handleClickCloseModal,
-    closeModalWithSuccess,
-    closeModalWithFailure,
-  } = useCloseStudentStatusModal();
+  const { closeModalWithSuccess, closeModalWithFailure } =
+    useCloseStudentStatusModal();
 
   const handleClickOutstanding = async () => {
     if (!study || !achievement || !type) return;
@@ -49,7 +46,7 @@ const OutstandingModalButton = () => {
   return enabled ? (
     <Button onClick={handleClickOutstanding}>선택한 회원 우수 {type}</Button>
   ) : (
-    <Button onClick={handleClickCloseModal}>확인하기</Button>
+    <Button>확인하기</Button>
   );
 };
 

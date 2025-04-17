@@ -6,25 +6,31 @@ import { formatNumberToPercent } from "utils/formatNumber";
 import Table from "wowds-ui/Table";
 import TextButton from "wowds-ui/TextButton";
 
+import BarGraph from "@/studies/[studyId]/_components/statics/graph/BarGraph";
+
 import { StudyTasksTds } from "./StudyTasks";
 
 const StudentListItem = ({
-  studyHistoryStatus,
-  isFirstRoundOutstandingStudent,
-  isSecondRoundOutstandingStudent,
-  name,
-  studentId,
-  discordUsername,
-  nickname,
-  githubLink,
+  member,
   studyTasks,
+  studyHistory,
+  achievements,
   assignmentRate,
   attendanceRate,
 }: StudyStudentApiResponseDto) => {
+  const { name, studentId, discordUsername, nickname } = member;
+  const { status, githubLink } = studyHistory;
+
+  const isFirstRoundOutstandingStudent = achievements.some(
+    (item) => item.type === "FIRST_ROUND_OUTSTANDING_STUDENT"
+  );
+  const isSecondRoundOutstandingStudent = achievements.some(
+    (item) => item.type === "SECOND_ROUND_OUTSTANDING_STUDENT"
+  );
   return (
     <>
       <Table.Td>
-        <StarCheckIcon checked={studyHistoryStatus === "COMPLETED"} />
+        <StarCheckIcon checked={status === "COMPLETED"} />
       </Table.Td>
       <Table.Td>
         <Text style={awardTextStyle} typo="body2">
@@ -51,8 +57,15 @@ const StudentListItem = ({
         />
       </Table.Td>
       <StudyTasksTds tasks={studyTasks} />
-      <Table.Td>{formatNumberToPercent(assignmentRate)}</Table.Td>
       <Table.Td>{formatNumberToPercent(attendanceRate)}</Table.Td>
+      <Table.Td>{formatNumberToPercent(assignmentRate)}</Table.Td>
+      <Table.Td>
+        <BarGraph
+          isToolTipActive={false}
+          percent={(attendanceRate + assignmentRate) / 2}
+          showPercent={false}
+        />
+      </Table.Td>
     </>
   );
 };

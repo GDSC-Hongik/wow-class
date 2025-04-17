@@ -10,6 +10,7 @@ const BarGraph = ({
   barColor = "default",
   totalStudent = 0,
   percent = 0,
+  showPercent = true,
   isCurriculumCanceled,
   isToolTipActive = true,
 }: {
@@ -17,6 +18,7 @@ const BarGraph = ({
   totalStudent?: number;
   isToolTipActive?: boolean;
   percent?: number;
+  showPercent?: boolean;
   isCurriculumCanceled?: boolean;
 }) => {
   return (
@@ -47,9 +49,11 @@ const BarGraph = ({
             )}
           >
             <div className={barGraphInnerStyle}>
-              <Text className={percentLabelStyle} color="white" typo="label2">
-                {percent}%
-              </Text>
+              {showPercent && (
+                <Text className={percentLabelStyle} color="white" typo="label2">
+                  {percent}%
+                </Text>
+              )}
               <GraphToolTip
                 studentCount={Math.ceil((percent / 100) * totalStudent)}
               />
@@ -57,7 +61,7 @@ const BarGraph = ({
           </div>
         ) : (
           <Text className={zeroPercentLabelStyle} color="sub" typo="label2">
-            0%
+            {showPercent && "0%"}
           </Text>
         )}
       </div>
