@@ -2,6 +2,8 @@ import { Flex } from "@styled-system/jsx";
 import { Space, Table, Text } from "@wow-class/ui";
 import { padWithZero, parseISODate } from "@wow-class/utils";
 import type { StudySessionApiResponseV2Dto } from "types/dtos/studyList";
+import type { StudyType } from "types/entities/study";
+import { isOnlineOfflineStudyType } from "utils/isOnlineOfflineStudyType";
 import Box from "wowds-ui/Box";
 
 const CurriculumListItem = ({
@@ -9,7 +11,7 @@ const CurriculumListItem = ({
   studyType,
 }: {
   curriculum: StudySessionApiResponseV2Dto;
-  studyType?: string;
+  studyType: StudyType;
 }) => {
   const {
     position,
@@ -42,14 +44,13 @@ const CurriculumListItem = ({
   const endTime = `${padWithZero(endHour)}:${padWithZero(endMinute)}`;
   const assignmentEndTime = `${padWithZero(assignmentEndHour)}:${padWithZero(assignmentEndMinute)}`;
 
-  const isAssignmentStudyType = studyType === "ASSIGNMENT";
   return (
     <Table>
       <Table.Left style={{ width: "100%" }}>
         <Flex alignItems="baseline" gap="48px" width="100%">
           <Flex direction="column" minWidth={52}>
             <Text typo="body1">{position}회차</Text>
-            {!isAssignmentStudyType && (
+            {isOnlineOfflineStudyType(studyType) && (
               <>
                 <Text color="sub" typo="body2">
                   {startMonth}월 {startDay}일
@@ -62,15 +63,21 @@ const CurriculumListItem = ({
           </Flex>
 
           <Flex direction="column" gap="xxs" width="100%">
-            <Flex alignItems="center" gap="xs" width="100%">
-              <Text typo="h3">
-                {lessonTitle || "스터디 제목을 작성해주세요."}
-              </Text>
-            </Flex>
-            <Text color="sub" style={CurriculumDescriptionStyle} typo="body2">
-              {description || "스터디 상세 설명을 작성해주세요."}
-            </Text>
-            <Space height={18.5} />
+            {isOnlineOfflineStudyType(studyType) && (
+              <>
+                <Text typo="h3">
+                  {lessonTitle || "스터디 제목을 작성해주세요."}
+                </Text>
+                <Text
+                  color="sub"
+                  style={CurriculumDescriptionStyle}
+                  typo="body2"
+                >
+                  {description || "스터디 상세 설명을 작성해주세요."}
+                </Text>
+                <Space height={18.5} />
+              </>
+            )}
             <Box
               style={AssignmentDescriptionStyle}
               text={
