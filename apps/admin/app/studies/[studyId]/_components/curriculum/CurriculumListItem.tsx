@@ -47,7 +47,7 @@ const CurriculumListItem = ({
   return (
     <Table>
       <Table.Left style={{ width: "100%" }}>
-        <Flex alignItems="baseline" gap="48px" width="100%">
+        <Flex gap="48px" width="100%">
           <Flex direction="column" minWidth={52}>
             <Text typo="body1">{position}회차</Text>
             {isOnlineOfflineStudyType(studyType) && (
