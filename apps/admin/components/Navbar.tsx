@@ -24,13 +24,13 @@ const Navbar = async () => {
 
   const navMenu = [
     {
-      href: "",
+      href: "/studies",
       imageUrl: homeImageUrl,
       alt: "home-icon",
       name: "개설된 스터디",
       items: studyList?.map(({ study }) => {
         return {
-          href: `studies/${study.studyId}`,
+          href: `${study.studyId}`,
           imageUrl: folderImageUrl,
           alt: study.title,
           name: study.title,
