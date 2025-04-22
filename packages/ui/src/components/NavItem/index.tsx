@@ -60,7 +60,10 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
         aria-controls={items ? `${name}-submenu` : undefined}
         aria-expanded={expanded ? "true" : "false"}
         aria-haspopup={items?.length && items.length > 1 ? "true" : undefined}
-        href={`${href}`}
+        href={href}
+        {...(navItemType === "active" && {
+          onClick: (e) => e.preventDefault(),
+        })}
         tabIndex={0}
         className={navItemStyle({
           type: navItemType,
@@ -99,6 +102,9 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
                 style={{ padding: "11px 36px" }}
                 className={navItemStyle({
                   type: segment[1] === item.href ? "active" : "inactive",
+                })}
+                {...(segment[1] === item.href && {
+                  onClick: (e) => e.preventDefault(),
                 })}
               >
                 <Image

@@ -1,6 +1,7 @@
 import { Flex } from "@styled-system/jsx";
 import { Space, Text } from "@wow-class/ui";
 import type { StudySessionApiResponseV2Dto } from "types/dtos/studyList";
+import type { StudyType } from "types/entities/study";
 
 import CurriculumListItem from "./CurriculumListItem";
 import EmptyCurriculumList from "./EmptyCurriculumList";
@@ -10,7 +11,7 @@ const CurriculumList = ({
   studyType,
 }: {
   studySessions?: StudySessionApiResponseV2Dto[];
-  studyType?: string;
+  studyType: StudyType;
 }) => {
   if (studySessions?.length === 0) {
     return <EmptyCurriculumList />;

@@ -13,6 +13,7 @@ import type {
   SessionInfo,
   StudyDetailDashboardDto,
 } from "types/dtos/studyDetail";
+import { isOnlineOfflineStudyType } from "utils/isOnlineOfflineStudyType";
 import { space } from "wowds-tokens";
 import Box from "wowds-ui/Box";
 import Button from "wowds-ui/Button";
@@ -66,8 +67,7 @@ export const CurriculumItem = ({
   const lessonEndTime = `${padWithZero(lessonPeriodEndHours)}:${padWithZero(lessonPeriodEndMinutes)}`;
   const assignmentDate = `과제 기간 : ${assignmentStartPeriodMonth}월
   ${assignmentStartPeriodDay}일 - ${assignmentEndPeriodMonth}월
- ${assignmentEndPeriodDay}일 ${padWithZero(assignmentEndPeriodHours)}:
-  ${padWithZero(assignmentEndPeriodMinutes)}`;
+ ${assignmentEndPeriodDay}일 ${padWithZero(assignmentEndPeriodHours)}:${padWithZero(assignmentEndPeriodMinutes)}`;
 
   const isAssignmentBeforeSubmission =
     assignmentHistoryStatus === "BEFORE_SUBMISSION";
@@ -76,12 +76,11 @@ export const CurriculumItem = ({
       ? assignmentHistory.submissionLink
       : repositoryLink;
 
-  const isAssignmentStudyType = studyType === "ASSIGNMENT";
   return (
     <Flex gap="50px">
       <section className={lessonTextStyle} id={`session-info-${position}`}>
         <Text>{position}회차</Text>
-        {!isAssignmentStudyType && (
+        {isOnlineOfflineStudyType(studyType) && (
           <Text color="sub" style={textStyle} typo="body2">
             {lessonPeriodMonth}월 {lessonPeriodDay}일 <br />
             {lessonStartTime}-{lessonEndTime}
@@ -89,7 +88,7 @@ export const CurriculumItem = ({
         )}
       </section>
       <Flex flexDirection="column" width="100%">
-        {!isAssignmentStudyType && (
+        {isOnlineOfflineStudyType(studyType) && (
           <>
             <Flex alignItems="center" justifyContent="space-between">
               <section id={`lesson-info-${position}`}>
