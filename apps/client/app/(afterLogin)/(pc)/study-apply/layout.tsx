@@ -12,10 +12,10 @@ const Layout = ({
   modal: React.ReactNode;
 }) => {
   return (
-    <main>
+    <>
       {children}
       {modal}
-    </main>
+    </>
   );
 };
 
