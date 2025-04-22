@@ -67,8 +67,7 @@ export const CurriculumItem = ({
   const lessonEndTime = `${padWithZero(lessonPeriodEndHours)}:${padWithZero(lessonPeriodEndMinutes)}`;
   const assignmentDate = `과제 기간 : ${assignmentStartPeriodMonth}월
   ${assignmentStartPeriodDay}일 - ${assignmentEndPeriodMonth}월
- ${assignmentEndPeriodDay}일 ${padWithZero(assignmentEndPeriodHours)}:
-  ${padWithZero(assignmentEndPeriodMinutes)}`;
+ ${assignmentEndPeriodDay}일 ${padWithZero(assignmentEndPeriodHours)}:${padWithZero(assignmentEndPeriodMinutes)}`;
 
   const isAssignmentBeforeSubmission =
     assignmentHistoryStatus === "BEFORE_SUBMISSION";
