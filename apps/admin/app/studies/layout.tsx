@@ -1,5 +1,4 @@
 import { css } from "@styled-system/css";
-import Navbar from "components/Navbar";
 
 const StudiesLayout = ({
   children,
@@ -10,7 +9,6 @@ const StudiesLayout = ({
 }>) => {
   return (
     <>
-      <Navbar />
       <main className={studiesLayoutStyle}>
         {children}
         {modal}

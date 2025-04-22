@@ -4,6 +4,7 @@ import "@wow-class/ui/styles.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import { JotaiProvider } from "components/JotaiProvider";
+import Navbar from "components/Navbar";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
@@ -56,6 +57,7 @@ const RootLayout = ({
             closeButton={false}
             limit={1}
           />
+          <Navbar />
           {children}
           {modal}
         </JotaiProvider>

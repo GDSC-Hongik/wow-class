@@ -13,10 +13,10 @@ const Layout = ({
   modal: React.ReactNode;
 }) => {
   return (
-    <main className={layoutContainerStyle}>
+    <div className={layoutContainerStyle}>
       {children}
       {modal}
-    </main>
+    </div>
   );
 };
 

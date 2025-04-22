@@ -4,11 +4,11 @@ import { studyApi } from "apis/study/studyApi";
 import { routerPath } from "constants/router/routerPath";
 import Link from "next/link";
 import isAdmin from "utils/isAdmin";
+import { isOnlineOfflineStudyType } from "utils/isOnlineOfflineStudyType";
 import { Edit } from "wowds-icons";
 import Divider from "wowds-ui/Divider";
 
 import StudyAnnouncement from "./_components/announcement/StudyAnnouncement";
-import AssignmentList from "./_components/assignment/AssignmentList";
 import AttendanceList from "./_components/attendance/AttendanceList";
 import CurriculumList from "./_components/curriculum/CurriculumList";
 import Header from "./_components/header/Header";
@@ -45,13 +45,15 @@ const StudyPage = async ({ params }: { params: { studyId: string } }) => {
           <Edit height={24} stroke="black" width={24} />
         </Link>
       </div>
-      <AttendanceList studySessions={myStudy?.studySessions} />
+      {isOnlineOfflineStudyType(studyType ?? "OFFLINE") && (
+        <AttendanceList studySessions={myStudy?.studySessions} />
+      )}
       <Divider style={MinHeightFullDividerStyle} />
       <StudyAnnouncement studyId={studyId} />
       <Divider style={MinHeightFullDividerStyle} />
       <CurriculumList
         studySessions={myStudy?.studySessions}
-        studyType={studyType}
+        studyType={studyType ?? "OFFLINE"}
       />
       <Divider style={MinHeightFullDividerStyle} />
       <StudyStatics studyId={studyId} />

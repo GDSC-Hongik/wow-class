@@ -1,5 +1,4 @@
 import { css } from "@styled-system/css";
-import Navbar from "components/Navbar";
 
 import { StudyProvider } from "./_contexts/StudyProvider";
 
@@ -12,7 +11,6 @@ const StudentsLayout = ({
 }>) => {
   return (
     <StudyProvider>
-      <Navbar />
       <main className={studentsLayoutStyle}>
         {children}
         {modal}
