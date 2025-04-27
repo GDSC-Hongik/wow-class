@@ -30,6 +30,7 @@ export interface StudyApiResponseV2Dto {
   discordRoleId: string;
   mentorId: number;
   mentorName: string;
+  minAssignmentLength?: number;
 }
 
 export interface StudySessionApiResponseV2Dto {
