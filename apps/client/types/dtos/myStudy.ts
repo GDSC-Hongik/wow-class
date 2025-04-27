@@ -33,6 +33,7 @@ export interface BasicStudyInfoDto {
   openingDate: string;
   mentorId: number;
   mentorName: string;
+  minAssignmentLength?: number;
 }
 export interface StudyAnnouncementDto {
   studyAnnouncementId: number;
@@ -48,7 +49,7 @@ interface StudyAnnouncementDtoV2 {
 
 export type StudyAnnouncementListDtoV2Type = StudyAnnouncementDtoV2[];
 
-interface OngoingStydyInfo {
+export interface OngoingStydyInfo {
   studyId: number;
   studyName: string;
   studyType: StudyType;

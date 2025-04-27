@@ -64,7 +64,10 @@ export const AssignmentBoxInfo = ({
                 ? failMapping[submissionFailureType]
                 : "글자수 충족"}
             </styled.div>
-            <FailurePopover submissionFailureType={submissionFailureType} />
+            <FailurePopover
+              studyId={studySession.studyId}
+              submissionFailureType={submissionFailureType}
+            />
           </Flex>
         )}
     </>
