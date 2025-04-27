@@ -9,7 +9,7 @@ interface MyOngoingStudyProps {
   myOngoingStudyData: MyOngoingStudyInfoDtoV2;
 }
 
-const MyOngoingStudy = async ({ myOngoingStudyData }: MyOngoingStudyProps) => {
+const MyOngoingStudy = ({ myOngoingStudyData }: MyOngoingStudyProps) => {
   return (
     <section aria-label="my-ongoing-study">
       <Flex direction="column" gap="xl" position="relative">

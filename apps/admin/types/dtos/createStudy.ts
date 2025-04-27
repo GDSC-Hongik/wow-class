@@ -21,4 +21,5 @@ export interface CreateStudyApiRequestDto {
   };
   discordChannelId?: string;
   discordRoleId?: string;
+  minAssignmentLength: number;
 }
