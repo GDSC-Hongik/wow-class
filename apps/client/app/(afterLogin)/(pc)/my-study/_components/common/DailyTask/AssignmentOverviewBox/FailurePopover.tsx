@@ -26,13 +26,14 @@ export const FailurePopover = async ({
   let detailContent: React.ReactNode = null;
 
   const basicInfo = await myStudyApi.getBasicStudyInfo(studyId);
+  const minimumLength = basicInfo?.minAssignmentLength ?? 300;
 
   switch (submissionFailureType) {
     case "WORD_COUNT_INSUFFICIENT":
       questionText = "Q. 글자수가 부족하다고 나와요.";
       detailContent = (
         <p>
-          wil.md 파일에 배운 내용을 최소 {basicInfo?.minAssignmentLength ?? 300}
+          wil.md 파일에 배운 내용을 최소 {minimumLength}
           자 이상 작성해야 해요. <br />
           <br />
           제대로 제출한 후에도 계속 글자수가 부족하다고 나온다면,

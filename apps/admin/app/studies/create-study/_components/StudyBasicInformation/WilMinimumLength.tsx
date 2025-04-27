@@ -14,6 +14,7 @@ const WilMinimumLength = () => {
           label="WIL 최소 글자 수 제한"
           placeholder="ex) 300"
           style={{ width: 358 }}
+          textareaProps={{ inputMode: "numeric" }}
         />
       )}
     />

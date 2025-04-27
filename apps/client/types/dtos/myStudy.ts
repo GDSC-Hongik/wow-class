@@ -49,7 +49,7 @@ interface StudyAnnouncementDtoV2 {
 
 export type StudyAnnouncementListDtoV2Type = StudyAnnouncementDtoV2[];
 
-export interface OngoingStydyInfo {
+export interface OngoingStudyInfo {
   studyId: number;
   studyName: string;
   studyType: StudyType;
@@ -61,7 +61,7 @@ export interface OngoingStydyInfo {
   mentorName: string;
 }
 
-export type MyOngoingStudyInfoDtoV2 = OngoingStydyInfo[];
+export type MyOngoingStudyInfoDtoV2 = OngoingStudyInfo[];
 
 interface StudyCurriculumDto {
   studyDetailId: number;

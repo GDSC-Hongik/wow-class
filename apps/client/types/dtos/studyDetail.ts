@@ -8,7 +8,7 @@ import type { PeriodType } from "types/entities/common/period";
 import type { HistoryStatusType } from "types/entities/common/study";
 import type { DailyTaskType } from "types/entities/myStudy";
 
-import type { OngoingStydyInfo } from "./myStudy";
+import type { OngoingStudyInfo } from "./myStudy";
 
 interface StudyHistory {
   studyHistoryId: number;
@@ -54,7 +54,7 @@ export interface StudyDetailDashboardDto {
 }
 
 export interface StudyDetailTaskDto<T extends DailyTaskType> {
-  study: OngoingStydyInfo;
+  study: OngoingStudyInfo;
   studyHistory: {
     repositoryLink: string;
   };
