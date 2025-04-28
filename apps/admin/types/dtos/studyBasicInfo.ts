@@ -21,4 +21,5 @@ export interface StudyBasicInfoApiResponseDto {
   totalRound: number;
   applicationPeriod: PeriodType;
   openingDate: string;
+  minAssignmentLength?: number;
 }

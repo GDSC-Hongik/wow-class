@@ -5,6 +5,7 @@ import { Text } from "@wow-class/ui";
 import StudyApplyDatePick from "./StudyApplyDatePick";
 import StudySemesterSelect from "./StudySemesterSelect";
 import StudyTotalRoundSelect from "./StudyTotalRoundSelect";
+import WilMinimumLength from "./WilMinimumLength";
 
 const StudyBasicInformation = () => {
   return (
@@ -16,6 +17,7 @@ const StudyBasicInformation = () => {
       </Flex>
       <Flex alignItems="center" gap="2.25rem" width="100%">
         <StudyTotalRoundSelect />
+        <WilMinimumLength />
       </Flex>
     </Flex>
   );

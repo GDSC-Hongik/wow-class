@@ -1,15 +1,20 @@
 import { Flex } from "@styled-system/jsx";
 import { Text } from "@wow-class/ui";
+import { myStudyApi } from "apis/myStudyApi";
 import Popover from "components/Popover";
 import type { CSSProperties } from "react";
+import type { StudyDetailTaskDto } from "types/dtos/studyDetail";
 import type { AssignmentSubmissionFailureType } from "types/entities/common/assignment";
+import type { DailyTaskType } from "types/entities/myStudy";
 import { Help as HelpIcon } from "wowds-icons";
 
 interface FailurePopoverProps {
   submissionFailureType: AssignmentSubmissionFailureType;
+  studyId: StudyDetailTaskDto<DailyTaskType>["studySession"]["studyId"];
 }
-export const FailurePopover = ({
+export const FailurePopover = async ({
   submissionFailureType,
+  studyId,
 }: FailurePopoverProps) => {
   if (
     submissionFailureType === "NONE" ||
@@ -20,12 +25,16 @@ export const FailurePopover = ({
   let questionText = "";
   let detailContent: React.ReactNode = null;
 
+  const basicInfo = await myStudyApi.getBasicStudyInfo(studyId);
+  const minimumLength = basicInfo?.minAssignmentLength ?? 300;
+
   switch (submissionFailureType) {
     case "WORD_COUNT_INSUFFICIENT":
       questionText = "Q. 글자수가 부족하다고 나와요.";
       detailContent = (
         <p>
-          wil.md 파일에 배운 내용을 최소 300자 이상 작성해야 해요. <br />
+          wil.md 파일에 배운 내용을 최소 {minimumLength}
+          자 이상 작성해야 해요. <br />
           <br />
           제대로 제출한 후에도 계속 글자수가 부족하다고 나온다면,
           <br />
