@@ -67,7 +67,7 @@ const usePrefillStudyDetailInfo = (studyId: number) => {
               nano: detailedStudy.study.endTime.nano,
             }
           : undefined,
-
+        minAssignmentLength: detailedStudy.study.minAssignmentLength,
         studySessions:
           detailedStudy.studySessions?.map((session) => ({
             studySessionId: session.studySessionId,
