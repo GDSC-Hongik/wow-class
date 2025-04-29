@@ -19,5 +19,6 @@ export interface CreateStudyDetailInfoApiRequestDto {
   dayOfWeek: DayOfWeekType;
   startTime?: TimeType;
   endTime?: TimeType;
+  minAssignmentLength?: number;
   studySessions: StudySession[];
 }
