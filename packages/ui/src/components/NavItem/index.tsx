@@ -57,9 +57,9 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
   return (
     <styled.div listStyle="none" role="presentation">
       <Link
-        aria-controls={items ? `${name}-submenu` : undefined}
+        {...(items && { "aria-controls": `${name}-submenu` })}
         aria-expanded={expanded ? "true" : "false"}
-        aria-haspopup={items?.length && items.length > 1 ? "true" : undefined}
+        {...(items?.length && items?.length > 1 && { "aria-haspopup": "true" })}
         href={href}
         {...(navItemType === "active" && {
           onClick: (e) => e.preventDefault(),
