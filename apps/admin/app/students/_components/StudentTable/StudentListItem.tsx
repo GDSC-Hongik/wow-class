@@ -54,6 +54,7 @@ const StudentListItem = ({
           href={githubLink || ""}
           style={textButtonStyle}
           text={githubLink}
+          {...(githubLink && { "aria-label": `${name}의 GitHub 프로필 열기` })}
         />
       </Table.Td>
       <StudyTasksTds tasks={studyTasks} />

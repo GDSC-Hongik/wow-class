@@ -163,11 +163,16 @@ const Header = ({
               <Flex alignItems="center" gap="sm">
                 <Link
                   href={descriptionNotionLink || ""}
+                  rel="noopener"
                   role="button"
                   tabIndex={0}
                   target="_blank"
                 >
-                  <TextButton style={{ padding: "0px" }} text="스터디 소개" />
+                  <TextButton
+                    aria-label="스터디 소개 페이지 열기"
+                    style={{ padding: "0px" }}
+                    text="스터디 소개"
+                  />
                 </Link>
                 <Text color="sub" typo="body1">
                   {description}

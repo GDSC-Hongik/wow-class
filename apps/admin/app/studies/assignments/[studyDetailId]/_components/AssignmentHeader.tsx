@@ -67,6 +67,7 @@ const AssignmentHeader = ({ assignment, disabled }: AssignmentHeaderProps) => {
         </Text>
       </Flex>
       <Button
+        aria-label="과제 저장하기"
         disabled={disabled}
         size="sm"
         style={{ height: "fit-content" }}

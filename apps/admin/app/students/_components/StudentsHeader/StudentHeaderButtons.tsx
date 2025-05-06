@@ -24,10 +24,16 @@ const StudentsHeaderButtons = () => {
 
   return enabled ? (
     <>
-      <Button size="sm" variant="outline" onClick={handleClickCancelButton}>
+      <Button
+        aria-label="수료 및 우수 처리 취소하기"
+        size="sm"
+        variant="outline"
+        onClick={handleClickCancelButton}
+      >
         취소하기
       </Button>
       <Button
+        aria-label={`${achievement && outstandingRoundMap[achievement]} ${type} 하기`}
         asProp={Link}
         disabled={!students.size}
         href={students.size ? "/students/status" : ""}

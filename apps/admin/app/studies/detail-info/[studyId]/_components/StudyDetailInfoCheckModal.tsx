@@ -95,10 +95,19 @@ const SubmitConfirmMessage = ({
         </Text>
         <Space height={28} />
         <Flex gap="sm" justify="center" width="21rem">
-          <Button variant="outline" onClick={closeModal}>
+          <Button
+            aria-label="상세 정보 저장 취소"
+            variant="outline"
+            onClick={closeModal}
+          >
             취소
           </Button>
-          <Button onClick={handleSubmitDetailInfo}>저장하기</Button>
+          <Button
+            aria-label="상세 정보 저장하기"
+            onClick={handleSubmitDetailInfo}
+          >
+            저장하기
+          </Button>
         </Flex>
       </Flex>
     );

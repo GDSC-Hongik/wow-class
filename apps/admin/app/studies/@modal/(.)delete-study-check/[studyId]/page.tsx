@@ -44,10 +44,19 @@ const DeleteStudyCheckModal = ({ params }: { params: { studyId: number } }) => {
         <Text typo="h1">스터디를 삭제하시겠어요?</Text>
         <Space height={28} />
         <Flex gap="sm" justify="center" width="21rem">
-          <Button variant="outline" onClick={onClose}>
+          <Button
+            aria-label="스터디 삭제 취소하기"
+            variant="outline"
+            onClick={onClose}
+          >
             취소
           </Button>
-          <Button onClick={handleClickDeleteButton}>삭제하기</Button>
+          <Button
+            aria-label="스터디 삭제하기"
+            onClick={handleClickDeleteButton}
+          >
+            삭제하기
+          </Button>
         </Flex>
       </Flex>
     </Modal>
