@@ -33,10 +33,16 @@ const AnnouncementDeleteModal = () => {
         <Space height={33} />
 
         <Flex gap="sm">
-          <Button variant="outline" onClick={onClose}>
+          <Button
+            aria-label="공지 삭제 취소하기"
+            variant="outline"
+            onClick={onClose}
+          >
             취소
           </Button>
-          <Button onClick={handleClickDeleteButton}>삭제하기</Button>
+          <Button aria-label="공지 삭제하기" onClick={handleClickDeleteButton}>
+            삭제하기
+          </Button>
         </Flex>
       </Flex>
     </Modal>

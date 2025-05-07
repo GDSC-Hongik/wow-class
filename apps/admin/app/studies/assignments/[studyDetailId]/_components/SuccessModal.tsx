@@ -28,7 +28,11 @@ const SuccessModal = ({
           <br />
           과제가 {type}되었어요
         </Text>
-        <Button asProp={Link} href={`/studies/assignments/${studyDetailId}`}>
+        <Button
+          aria-label={`${studyName} ${week}주차 과제 내용 보기`}
+          asProp={Link}
+          href={`/studies/assignments/${studyDetailId}`}
+        >
           과제 내용 보기
         </Button>
       </Flex>

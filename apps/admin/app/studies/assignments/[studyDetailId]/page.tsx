@@ -35,6 +35,7 @@ const AssignmentsPage = async ({
           </styled.span>
         </Text>
         <Button
+          aria-label="과제 수정 페이지로 이동"
           asProp={Link}
           href={routerPath["assignment-edit"].href(studyDetailId)}
           size="sm"
@@ -53,9 +54,11 @@ const AssignmentsPage = async ({
         <Flex direction="column" gap="xxs">
           <Text typo="h2">과제 명세 링크</Text>
           <TextButton
+            aria-label="과제 명세 링크 열기"
             asProp={Link}
             className={textButtonStyle}
             href={descriptionLink || ""}
+            rel="noopener"
             target="_blank"
             text={descriptionLink || ""}
           />

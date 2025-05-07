@@ -57,13 +57,14 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
   return (
     <styled.div listStyle="none" role="presentation">
       <Link
-        aria-controls={items ? `${name}-submenu` : undefined}
+        {...(items && { "aria-controls": `${name}-submenu` })}
         aria-expanded={expanded ? "true" : "false"}
-        aria-haspopup={items?.length && items.length > 1 ? "true" : undefined}
+        {...(items?.length && items?.length > 1 && { "aria-haspopup": "true" })}
         href={href}
         {...(navItemType === "active" && {
           onClick: (e) => e.preventDefault(),
         })}
+        aria-label={`${name} 네비게이션 아이템`}
         tabIndex={0}
         className={navItemStyle({
           type: navItemType,
@@ -96,7 +97,7 @@ const NavItem = ({ href, imageUrl, alt, name, items }: NavItemProps) => {
           {items.map((item) => (
             <li key={item.name} role="none">
               <Link
-                aria-label={item.name}
+                aria-label={`${item.name} 네비게이션 아이템`}
                 href={`${href}/${item.href}`}
                 role="menuitem"
                 style={{ padding: "11px 36px" }}

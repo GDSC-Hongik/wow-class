@@ -151,6 +151,7 @@ export const RepositorySubmissionBox = ({
                       />
 
                       <Button
+                        aria-label="레포지토리 URL 입력"
                         disabled={!repositoryUrl}
                         onClick={handleClickSubmitButton}
                       >

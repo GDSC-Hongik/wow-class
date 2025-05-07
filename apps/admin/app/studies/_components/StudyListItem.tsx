@@ -48,25 +48,36 @@ const StudyListItem = ({
         <Text typo="body1">{mentorName} 멘토</Text>
         <Link
           href={descriptionNotionLink || ""}
+          rel="noopener"
           style={LinkStyle}
           target="_blank"
         >
           <WowLinkIcon height={24} stroke="sub" width={24} />
-          <TextButton style={{ padding: 0 }} text="스터디 소개 페이지" />
+          <TextButton
+            aria-label={`${title} 스터디 소개 페이지 열기`}
+            style={{ padding: 0 }}
+            text="스터디 소개 페이지"
+          />
         </Link>
         <Flex alignItems="center" gap="sm">
           {adminStatus && (
             <Button
+              aria-label="스터디 삭제 확인 페이지로 이동"
               asProp={Link}
-              href={`${routerPath["delete-study-check"].href}/${studyId}?${querySemester ? `semester=${querySemester}&` : ""}title=${title}&academicYear=${semester.academicYear}&semesterType=${semester.semesterType}`}
               size="sm"
               variant="outline"
+              href={`${routerPath["delete-study-check"].href}/${studyId}?${
+                querySemester ? `semester=${querySemester}&` : ""
+              }title=${title}&academicYear=${semester.academicYear}&semesterType=${
+                semester.semesterType
+              }`}
             >
               스터디 삭제
             </Button>
           )}
 
           <Button
+            aria-label="스터디 상세 정보 입력 페이지로 이동"
             asProp={Link}
             href={`${routerPath.studyDetailInfo.href}${studyId}`}
             size="sm"

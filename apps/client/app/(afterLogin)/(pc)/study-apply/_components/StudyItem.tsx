@@ -77,7 +77,12 @@ const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
           </Tag>
         </Flex>
         {description && (
-          <Link href={descriptionNotionLink ?? ""} target="_blank">
+          <Link
+            href={descriptionNotionLink ?? ""}
+            rel="noopener"
+            role="button"
+            target="_blank"
+          >
             <Text
               className={introductionLinkTextStyle}
               color="sub"
@@ -111,21 +116,37 @@ const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
       </Flex>
       <styled.div paddingX="24px">
         {isApplicable && (
-          <Link href={`${routePath["study-application-modal"]}/${studyId}`}>
-            <Button size="sm" style={tagButtonStyle} variant="solid">
-              수강 신청
-            </Button>
-          </Link>
+          <Button
+            aria-label={`${title} 수강 신청하기`}
+            asProp={Link}
+            href={`${routePath["study-application-modal"]}/${studyId}`}
+            size="sm"
+            style={tagButtonStyle}
+            variant="solid"
+          >
+            수강 신청
+          </Button>
         )}
         {isCancelable && (
-          <Link href={`${routePath["study-cancellation-modal"]}/${studyId}`}>
-            <Button size="sm" style={tagButtonStyle} variant="sub">
-              신청 취소
-            </Button>
-          </Link>
+          <Button
+            aria-label={`${title} 수강 신청 취소하기`}
+            asProp={Link}
+            href={`${routePath["study-cancellation-modal"]}/${studyId}`}
+            size="sm"
+            style={tagButtonStyle}
+            variant="sub"
+          >
+            신청 취소
+          </Button>
         )}
         {isNotApplicable && (
-          <Button disabled size="sm" style={tagButtonStyle} variant="solid">
+          <Button
+            disabled
+            aria-label={`${title} 신청 불가`}
+            size="sm"
+            style={tagButtonStyle}
+            variant="solid"
+          >
             신청 불가
           </Button>
         )}

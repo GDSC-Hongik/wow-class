@@ -98,10 +98,16 @@ const AnnouncementModifyModal = ({
         </Flex>
         <Space height={28} />
         <Flex gap="sm">
-          <Button variant="outline" onClick={onClose}>
+          <Button
+            aria-label="공지 수정 취소하기"
+            variant="outline"
+            onClick={onClose}
+          >
             취소
           </Button>
-          <Button onClick={handleClickModifyButton}>수정하기</Button>
+          <Button aria-label="공지 수정하기" onClick={handleClickModifyButton}>
+            수정하기
+          </Button>
         </Flex>
       </Flex>
     </Modal>

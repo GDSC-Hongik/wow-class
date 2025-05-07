@@ -29,6 +29,7 @@ const AssignmentButtons = ({
   if (assignmentStatus === "OPEN") {
     return (
       <Button
+        aria-label="과제 내용 보기"
         asProp={Link}
         href={routerPath["assignment-detail"].href(studyDetailId)}
         size="sm"
@@ -42,10 +43,20 @@ const AssignmentButtons = ({
   if (assignmentStatus === "CANCELED") {
     return (
       <Flex gap="sm">
-        <Button size="sm" style={{ pointerEvents: "none" }} variant="sub">
+        <Button
+          aria-label="과제 휴강 완료"
+          size="sm"
+          style={{ pointerEvents: "none" }}
+          variant="sub"
+        >
           과제 휴강완료
         </Button>
-        <Button disabled size="sm" variant="solid">
+        <Button
+          disabled
+          aria-label="과제 개설하기 비활성화됨"
+          size="sm"
+          variant="solid"
+        >
           과제 개설하기
         </Button>
       </Flex>
@@ -54,10 +65,16 @@ const AssignmentButtons = ({
 
   return (
     <Flex gap="sm">
-      <Button size="sm" variant="sub" onClick={handleCancelAssignment}>
+      <Button
+        aria-label="과제 휴강 처리"
+        size="sm"
+        variant="sub"
+        onClick={handleCancelAssignment}
+      >
         과제 휴강처리
       </Button>
       <Button
+        aria-label="과제 개설하기"
         asProp={Link}
         href={routerPath["assignment-edit"].href(studyDetailId)}
         size="sm"

@@ -53,6 +53,7 @@ export const AttendanceCheckBox = () => {
       </Flex>
       <Space height={40} />
       <Button
+        aria-label={`${studyName} ${currentWeek}주차 출석 체크하기`}
         asProp={Link}
         href={`/mobile/attendance-check-input?study-detail-id=${studyDetailId}&week=${currentWeek}&study-name=${studyName}`}
       >

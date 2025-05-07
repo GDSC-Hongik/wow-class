@@ -42,6 +42,7 @@ export const CompletedStudy = async () => {
                 <Link
                   className={introductionLinkTextStyle}
                   href={study.descriptionNotionLink ?? ""}
+                  rel="noopener"
                   target="_blank"
                 >
                   <Text color="sub" typo="body2">

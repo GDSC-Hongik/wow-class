@@ -34,7 +34,12 @@ const MobileAttendanceCheckInputPage = () => {
       <Suspense fallback={<Spinner />}>
         <StudyInfo />
       </Suspense>
-      <Button asProp={Link} href="/my-study" style={buttonStyle}>
+      <Button
+        aria-label="메인 화면으로 돌아가기"
+        asProp={Link}
+        href="/my-study"
+        style={buttonStyle}
+      >
         메인 화면으로 돌아가기
       </Button>
     </Flex>

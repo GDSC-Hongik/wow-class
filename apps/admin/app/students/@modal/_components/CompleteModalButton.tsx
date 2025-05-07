@@ -43,9 +43,14 @@ const CompleteModalButton = () => {
   };
 
   return enabled ? (
-    <Button onClick={handleClickComplete}>선택한 회원 수료 {type}</Button>
+    <Button
+      aria-label={`선택한 회원을 수료 ${type} 하기`}
+      onClick={handleClickComplete}
+    >
+      선택한 회원 수료 {type}
+    </Button>
   ) : (
-    <Button>확인하기</Button>
+    <Button aria-label="수료 여부 확인하기">확인하기</Button>
   );
 };
 
