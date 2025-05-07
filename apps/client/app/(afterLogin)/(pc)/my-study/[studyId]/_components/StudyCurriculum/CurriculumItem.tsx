@@ -113,6 +113,7 @@ export const CurriculumItem = ({
                     <Link
                       className={introduceLinkStyle}
                       href={assignmentDescriptionLink || ""}
+                      rel="noopener"
                       role="button"
                       tabIndex={0}
                       target="_blank"
@@ -142,6 +143,7 @@ export const CurriculumItem = ({
                       asProp={Link}
                       disabled={isAssignmentBeforeSubmission}
                       href={assignmentButtonHref ?? ""}
+                      rel="noopener"
                       size="sm"
                       target="_blank"
                       variant="outline"

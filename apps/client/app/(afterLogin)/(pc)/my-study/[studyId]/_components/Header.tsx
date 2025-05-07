@@ -70,6 +70,7 @@ const Header = ({ studyId }: HeaderProps) => {
           <Link
             className={introduceLinkStyle}
             href={descriptionNotionLink || ""}
+            rel="noopener"
             role="button"
             tabIndex={0}
             target="_blank"

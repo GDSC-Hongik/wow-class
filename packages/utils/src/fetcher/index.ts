@@ -185,7 +185,10 @@ const fetcher = new Fetcher({
     process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
       ? process.env.NEXT_PUBLIC_PROD_BASE_URL
       : process.env.NEXT_PUBLIC_DEV_BASE_URL,
-  defaultHeaders: { "Content-Type": "application/json" },
+  defaultHeaders: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_DEV_AUTH_TOKEN} `,
+  },
 });
 
 if (!isClient) {
@@ -198,7 +201,7 @@ if (!isClient) {
     if (accessToken) {
       options.headers = {
         ...options.headers,
-        Authorization: `Bearer ${accessToken}`,
+        //Authorization: `Bearer ${accessToken}`,
       };
     }
 

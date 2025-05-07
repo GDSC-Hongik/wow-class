@@ -93,6 +93,7 @@ const PrimaryButton = ({
       disabled={buttonsDisabled}
       href={primaryButtonHref ?? ""}
       icon={<LinkIcon height={20} stroke={iconStroke} width={20} />}
+      rel="noopener"
       style={buttonStyle}
       target="_blank"
       variant="outline"

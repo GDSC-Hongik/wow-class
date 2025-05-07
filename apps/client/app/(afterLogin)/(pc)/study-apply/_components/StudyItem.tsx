@@ -77,7 +77,12 @@ const StudyItem = ({ study, appliedStudyIds }: StudyItemProps) => {
           </Tag>
         </Flex>
         {description && (
-          <Link href={descriptionNotionLink ?? ""} target="_blank">
+          <Link
+            href={descriptionNotionLink ?? ""}
+            rel="noopener"
+            role="button"
+            target="_blank"
+          >
             <Text
               className={introductionLinkTextStyle}
               color="sub"
