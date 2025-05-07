@@ -158,6 +158,7 @@ const AttendanceCheckModal = () => {
             onChange={handleChangeAttendanceNumber}
           />
           <Button
+            aria-label="출석 체크하기"
             style={attendanceButtonStyle}
             onClick={handleClickAttendanceCheckButton}
           >

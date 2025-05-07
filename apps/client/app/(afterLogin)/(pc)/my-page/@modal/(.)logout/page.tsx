@@ -38,6 +38,7 @@ const LogoutModal = () => {
         <Space height={26} />
         <Flex gap="xs">
           <Button
+            aria-label="로그아웃 취소"
             size="lg"
             style={buttonStyle}
             variant="outline"
@@ -46,6 +47,7 @@ const LogoutModal = () => {
             취소
           </Button>
           <Button
+            aria-label="로그아웃 하기"
             size="lg"
             style={buttonStyle}
             onClick={handleClickLogoutButton}

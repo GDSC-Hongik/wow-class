@@ -33,28 +33,30 @@ export const MyInfoBox = async () => {
                   계정 정보
                 </Button>
               </Link>
-              <Link
+              <Button
+                asProp={Link}
                 href={`${routePath["github"]}/${githubHandle}`}
+                rel="noopener"
+                size="sm"
                 target="_blank"
+                variant="outline"
+                icon={
+                  <Image
+                    alt="github-logo"
+                    height={14}
+                    src="/images/github-logo-black.svg"
+                    width={14}
+                  />
+                }
               >
-                <Button
-                  size="sm"
-                  variant="outline"
-                  icon={
-                    <Image
-                      alt="github-logo"
-                      height={14}
-                      src="/images/github-logo-black.svg"
-                      width={14}
-                    />
-                  }
-                >
-                  나의 Github
-                </Button>
-              </Link>
-              <Link href={routePath["my-page-logout"]}>
-                <TextButton text="로그아웃" />
-              </Link>
+                나의 Github
+              </Button>
+              <TextButton
+                aria-label="로그아웃"
+                asProp={Link}
+                href={routePath["my-page-logout"]}
+                text="로그아웃"
+              />
             </Flex>
           </>
         }

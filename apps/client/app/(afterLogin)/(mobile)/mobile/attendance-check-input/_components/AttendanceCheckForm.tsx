@@ -79,6 +79,7 @@ const AttendanceCheckForm = ({
         onChange={handleChangeAttendanceNumber}
       />
       <Button
+        aria-label="출석 체크하기"
         disabled={!isAttendanceNumberValid(attendanceNumber.trim())}
         style={{
           backgroundColor: !isAttendanceNumberValid(attendanceNumber.trim())

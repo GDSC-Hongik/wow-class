@@ -23,8 +23,10 @@ export const AssignmentOverviewBox = async ({
         <>
           <AssignmentBoxTitle studyDetailTaskInfo={dailyTask} />
           <TextButton
+            aria-label="과제 명세 확인 링크 열기"
             asProp={Link}
             href={studySession.assignmentDescriptionLink}
+            rel="noopener"
             style={textButtonstyle}
             target="_blank"
             text="과제 명세 확인"

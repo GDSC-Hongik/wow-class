@@ -91,6 +91,7 @@ const AttendanceCheckForm = ({
       />
       <Space height={20} />
       <Button
+        aria-label={attendanceButtonText}
         disabled={isAttendanceButtonDisabled}
         style={{
           backgroundColor: isAttendanceButtonDisabled

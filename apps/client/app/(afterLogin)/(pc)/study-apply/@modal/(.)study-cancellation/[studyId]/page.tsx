@@ -76,7 +76,12 @@ const StudyCancel = ({ params }: { params: { studyId: number } }) => {
               수강을 취소하시겠습니까?
             </Text>
             <Space height={38} />
-            <Button onClick={handleClickCancelButton}>신청 취소하기</Button>
+            <Button
+              aria-label={`${studyTitle} 수강 신청 취소하기`}
+              onClick={handleClickCancelButton}
+            >
+              신청 취소하기
+            </Button>
           </>
         )}
       </Flex>

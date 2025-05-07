@@ -88,6 +88,7 @@ const PrimaryButton = ({
 
   return (
     <Button
+      aria-label={primaryButtonText}
       asProp={Link}
       disabled={buttonsDisabled}
       href={primaryButtonHref ?? ""}
