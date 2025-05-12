@@ -80,6 +80,7 @@ const CreateStudyAnnouncement = ({ studyId }: { studyId: string }) => {
           </Flex>
         </Flex>
         <Button
+          aria-label="공지 발행하기"
           size="sm"
           style={{ minWidth: "92px", maxHeight: "38px", marginTop: "23px" }}
           variant="solid"

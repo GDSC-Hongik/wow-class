@@ -44,7 +44,12 @@ const OutstandingModalButton = () => {
   };
 
   return enabled ? (
-    <Button onClick={handleClickOutstanding}>선택한 회원 우수 {type}</Button>
+    <Button
+      aria-label={`선택한 회원을 우수 ${type} 하기`}
+      onClick={handleClickOutstanding}
+    >
+      선택한 회원 우수 {type}
+    </Button>
   ) : (
     <Button>확인하기</Button>
   );

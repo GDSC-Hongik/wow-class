@@ -3,7 +3,7 @@ import Button from "wowds-ui/Button";
 
 const DropDownTrigger = ({ type }: { type: OutstandingType }) => {
   return (
-    <Button size="sm" variant="outline">
+    <Button aria-label="우수 및 수료 처리하기" size="sm" variant="outline">
       우수 및 수료 {type}
     </Button>
   );

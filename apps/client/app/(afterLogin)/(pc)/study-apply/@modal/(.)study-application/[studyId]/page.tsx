@@ -75,7 +75,12 @@ const StudyApplication = ({ params }: { params: { studyId: number } }) => {
               신청하시겠습니까?
             </Text>
             <Space height={22} />
-            <Button onClick={handleClickApplyButton}>수강 신청하기</Button>
+            <Button
+              aria-label={`${studyTitle} 수강 신청하기`}
+              onClick={handleClickApplyButton}
+            >
+              수강 신청하기
+            </Button>
           </>
         )}
       </Flex>

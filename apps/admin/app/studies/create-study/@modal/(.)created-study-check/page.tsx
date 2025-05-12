@@ -54,10 +54,19 @@ const CreatedStudyCheckModal = () => {
         <Text typo="h1">새로운 스터디를 개설하시겠어요?</Text>
         <Space height={28} />
         <Flex gap="sm" justify="center" width="21rem">
-          <Button variant="outline" onClick={onClose}>
+          <Button
+            aria-label="스터디 개설 취소"
+            variant="outline"
+            onClick={onClose}
+          >
             취소
           </Button>
-          <Button onClick={handleClickSubmitButton}>개설하기</Button>
+          <Button
+            aria-label="스터디 개설하기"
+            onClick={handleClickSubmitButton}
+          >
+            개설하기
+          </Button>
         </Flex>
       </Flex>
     </Modal>

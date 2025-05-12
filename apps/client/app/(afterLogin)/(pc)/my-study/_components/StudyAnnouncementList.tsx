@@ -21,6 +21,8 @@ const StudyAnnouncementList = async () => {
             className={studyAnnouncementListBoxStyle}
             href={studyAnnouncement.link}
             key={`announcemnt-${study.studyId}-${studyAnnouncement.studyAnnouncementId}`}
+            rel="noopener"
+            role="button"
             target="_blank"
           >
             <Text

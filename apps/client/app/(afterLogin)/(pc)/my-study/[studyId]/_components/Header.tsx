@@ -70,6 +70,7 @@ const Header = ({ studyId }: HeaderProps) => {
           <Link
             className={introduceLinkStyle}
             href={descriptionNotionLink || ""}
+            rel="noopener"
             role="button"
             tabIndex={0}
             target="_blank"
@@ -81,6 +82,7 @@ const Header = ({ studyId }: HeaderProps) => {
               width={24}
             />
             <TextButton
+              aria-label="스터디 소개 링크 열기"
               size="lg"
               style={textButtonStyle}
               text="소개 링크 바로가기"

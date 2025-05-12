@@ -57,6 +57,7 @@ const Navbar = async () => {
   return (
     <aside aria-label="client navigation bar" className={navbarContainerStyle}>
       <Button
+        aria-label="와우클래스 홈으로 이동"
         asProp={Link}
         className={logoButtonStyle}
         href={routePath["my-study"]}

@@ -50,6 +50,7 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                       <Link
                         className={linkStyle}
                         href={link}
+                        rel="noopener"
                         role="button"
                         tabIndex={0}
                         target="_blank"
@@ -61,6 +62,7 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                           width={24}
                         />
                         <TextButton
+                          aria-label={`${title} 공지 링크 바로가기`}
                           size="lg"
                           style={textButtonStyle}
                           text="공지 링크 바로가기"
@@ -78,6 +80,7 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                       href={`${studyId}/${routerPath["announcement-delete"].href}?studyAnnouncementId=${studyAnnouncementId}`}
                     >
                       <Button
+                        aria-label={`${title} 공지 삭제하기`}
                         size="sm"
                         style={{ minWidth: "81px" }}
                         variant="outline"
@@ -89,6 +92,7 @@ const StudyAnnouncement = async ({ studyId }: { studyId: string }) => {
                       href={`${studyId}/${routerPath["announcement-modify"].href}?studyAnnouncementId=${studyAnnouncementId}`}
                     >
                       <Button
+                        aria-label={`${title} 공지 수정하기`}
                         size="sm"
                         style={{ minWidth: "81px" }}
                         variant="outline"

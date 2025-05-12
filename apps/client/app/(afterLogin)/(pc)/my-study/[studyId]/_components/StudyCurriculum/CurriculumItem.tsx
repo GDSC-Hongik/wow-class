@@ -113,6 +113,7 @@ export const CurriculumItem = ({
                     <Link
                       className={introduceLinkStyle}
                       href={assignmentDescriptionLink || ""}
+                      rel="noopener"
                       role="button"
                       tabIndex={0}
                       target="_blank"
@@ -124,6 +125,7 @@ export const CurriculumItem = ({
                         width={24}
                       />
                       <TextButton
+                        aria-label="과제 소개 링크 열기"
                         size="lg"
                         style={textButtonStyle}
                         text="소개 링크 바로가기"
@@ -137,10 +139,11 @@ export const CurriculumItem = ({
                 <section>
                   <Flex alignItems="center" gap={40}>
                     <Button
-                      aria-label="check-submitted-assignment"
+                      aria-label="제출한 과제 확인"
                       asProp={Link}
                       disabled={isAssignmentBeforeSubmission}
                       href={assignmentButtonHref ?? ""}
+                      rel="noopener"
                       size="sm"
                       target="_blank"
                       variant="outline"

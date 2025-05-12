@@ -69,6 +69,7 @@ const CreateStudyDetailInfo = ({ params }: { params: { studyId: string } }) => {
             studySessions={prefillStudyDetailInfo?.studySessions}
           />
           <Button
+            aria-label="스터디 상세 정보 저장하기"
             disabled={!methods.formState.isValid}
             role="button"
             size="sm"

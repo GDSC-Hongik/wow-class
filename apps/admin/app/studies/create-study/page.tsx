@@ -51,6 +51,7 @@ const CreateStudyPage = () => {
           <Space height={64} />
           <StudyTypeInformation />
           <Button
+            aria-label="스터디 개설하기"
             disabled={!methods.formState.isValid}
             role="button"
             size="sm"
