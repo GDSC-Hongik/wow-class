@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sentry/nextjs": "^9.24.0",
     "@wow-class/ui": "workspace:*",
     "jotai": "^2.9.2",
     "next": "^14.2.5",

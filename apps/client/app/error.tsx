@@ -1,12 +1,24 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import { css } from "@styled-system/css";
 import { Flex } from "@styled-system/jsx";
 import { Header, Text } from "@wow-class/ui";
 import Image from "next/image";
+import { useEffect } from "react";
 import Button from "wowds-ui/Button";
 
-const ErrorPage = ({ reset }: { reset: () => void }) => {
+const ErrorPage = ({
+  reset,
+  error,
+}: {
+  reset: () => void;
+  error: Error & { digest?: string };
+}) => {
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
+
   const handleClickResetButton = () => {
     reset();
   };
