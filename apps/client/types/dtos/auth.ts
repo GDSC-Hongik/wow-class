@@ -31,7 +31,7 @@ export interface DashboardApiResponseDto {
       open: boolean;
     };
     fee: number;
-    roundType: "FIRST" | "SECOND" | "THIRD";
+    roundType: "FIRST" | "SECOND";
     roundTypeValue: string;
   };
   currentMembership: {
